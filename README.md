@@ -34,71 +34,99 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
 
 ### Jesse
 
-1. **September 6**: Linear Algebra and Scientific Computing Tools
-   - https://intro.quantecon.org/linear_equations.html
-   - https://datascience.quantecon.org/scientific/applied_linalg.html
-   - https://datascience.quantecon.org/scientific/optimization.html
-   - https://python.quantecon.org/linear_algebra.html
-   - https://intro.quantecon.org/intro_supply_demand.html
-2. **September 11**: Difference Equations and Stability
-   - https://intro.quantecon.org/scalar_dynam.html
-   - https://intro.quantecon.org/solow.html
-   - https://python-programming.quantecon.org/python_oop.html#example-the-solow-growth-model
-4. **September 13**: Probability
-   - https://intro.quantecon.org/prob_dist.html
-   - https://python.quantecon.org/prob_matrix.html
-   - https://python.quantecon.org/prob_meaning.html
-5. **September 18**: Simulating Randomness
-   - https://datascience.quantecon.org/scientific/randomness.html
-   - https://python.quantecon.org/lln_clt.html
-   - https://intro.quantecon.org/inequality.html
+1. **September 6**: Applications of Linear Algebra
+   - **Material:**
+     - Systems of Equations: https://python.quantecon.org/linear_algebra.html#solving-systems-of-equations
+     - Eigenvectors and eigenvalues: https://python.quantecon.org/linear_algebra.html#eigenvalues-and-eigenvectors
+     - Matrix decompositions and other topics: https://python.quantecon.org/linear_algebra.html#further-topics
+     - Portfolio example: https://datascience.quantecon.org/scientific/applied_linalg.html#portfolios
+     - Supply and Demand: https://intro.quantecon.org/intro_supply_demand.html
+   - **Self-study:**
+     - Basics of linear algebra, matrices, norms, and linear independence: https://python.quantecon.org/linear_algebra.html
+     - Numerical optimization: https://datascience.quantecon.org/scientific/optimization.html
+   - **(Optional) Extra Material**:
+     - Introductory material on linear algebra: https://intro.quantecon.org/linear_equations.html and https://datascience.quantecon.org/scientific/applied_linalg.html
+     - More on Competitive Equilibrium: https://intro.quantecon.org/supply_demand_multiple_goods.html
 
-6. **September 20**: Markov Chains
-   - https://intro.quantecon.org/markov_chains_I.html
-   - https://intro.quantecon.org/markov_chains_II.html
-   - https://datascience.quantecon.org/scientific/randomness.html#loan-states
-   - https://intro.quantecon.org/lake_model.html
-   - https://python.quantecon.org/finite_markov.html
-8. **September 25**: Causality, Treatment and Potential Outcomes
-   - https://matheusfacure.github.io/python-causality-handbook/01-Introduction-To-Causality.html
-   - https://matheusfacure.github.io/python-causality-handbook/02-Randomised-Experiments.html
-9. **September 27**: Graphical Causal Models and Confounders
-    - https://matheusfacure.github.io/python-causality-handbook/04-Graphical-Causal-Models.html
-10. **October 2**: (Statutory holiday)
-11. **October 4** 
-    - **IN CLASS REVIEW SESSION**
-12. **October 9**: (Statutory holiday)
+2. **September 11**: Difference Equations, Dynamics, and Stability
+   - **Material:**
+     - Unemployment Dynamics example: https://datascience.quantecon.org/scientific/applied_linalg.html#unemployment-dynamics
+     - Solow-Swan Growth Model: https://intro.quantecon.org/solow.html
+     - Nonlinear Dynamics and Stability: https://intro.quantecon.org/scalar_dynam.html
+     - Eigenvalues and stability of linear systems
+   - **Self-study:**
+     - Geometric Series and Present Values: https://intro.quantecon.org/geom_series.html#example-interest-rates-and-present-values
+    - **(Optional) Extra Material**:
+     - More on the Solow Model and Python: https://python-programming.quantecon.org/python_oop.html#example-the-solow-growth-model
 
-13. **October 11** 
+3. **September 13**: Probability
+   - **Material:**
+     - https://intro.quantecon.org/prob_dist.html
+     - https://python.quantecon.org/prob_meaning.html
+     - Axioms of probability, conditional expectations, Bayes' rule, Law of Iterated Expectations
+   - **(Optional) Extra Material**:
+     - https://python.quantecon.org/prob_matrix.html
+
+4. **September 18**: Simulating Randomness and Stochastic Processes
+   - **Material:**
+     - https://python.quantecon.org/lln_clt.html
+     - https://intro.quantecon.org/inequality.html
+   - **(Optional) Extra Material**:
+     - https://datascience.quantecon.org/scientific/randomness.html     
+
+5. **September 20**: Markov Chains
+   - **Material:**
+     - https://intro.quantecon.org/markov_chains_I.html
+     - https://intro.quantecon.org/lake_model.html
+   - **(Optional) Extra Material**:
+     - https://intro.quantecon.org/markov_chains_II.html
+     - https://datascience.quantecon.org/scientific/randomness.html#loan-states
+     - https://python.quantecon.org/finite_markov.html
+
+    
+6. **September 25**: Introduction to Deep Learning (time-permitting)
+    - TBD
+
+7.  **September 27**: Causality, Treatment and Potential Outcomes
+   - **Material:**
+     - https://matheusfacure.github.io/python-causality-handbook/01-Introduction-To-Causality.html
+     - https://matheusfacure.github.io/python-causality-handbook/02-Randomised-Experiments.html
+
+8.  **October 2 (Statutory holiday)**
+
+9.  **October 4**: Graphical Causal Models and Confounders
+    - **Material:**
+      - https://matheusfacure.github.io/python-causality-handbook/04-Graphical-Causal-Models.html
+
+10. **October 9 (Statutory holiday)**
+
+11. **October 11** 
     - **IN CLASS MIDTERM #1**
-
 ### Phil
-
-12. **October 12** ("Make-up Monday")
+1.   **October 12** ("Make-up Monday")
     - TBD
-13. **October 16**
+2.   **October 16**
     - TBD
-14. **October 18**
+3.   **October 18**
     - TBD
-15. **October 23**
+4.   **October 23**
     - TBD
-16. **October 25**
+5.   **October 25**
     - TBD
-17. **October 30**
+6.   **October 30**
     - TBD
-18. **November 1**: 
+7.   **November 1**: 
     - TBD
-19. **November 6**
-    - **IN CLASS REVIEW SESSION**
-20. **November 8**
+8.   **November 6**
     - **IN CLASS MIDTERM #2**
 
 ### Paul
-
+20. **November 8**
+    - TBD
 21. **November 10**
     - TBD
-22. **November 13**: (Midterm Break)
-23. **November 15**: (Midterm Break)
+22. **November 13 (Midterm Break)** 
+23. **November 15 (Midterm Break)**
 24. **November 20**
     - TBD
 25. **November 22**
