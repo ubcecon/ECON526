@@ -1,9 +1,9 @@
-# ECON526 Fall 2023
+# ECON526 - Fall 2023
 
-This is a graduate course in quantitative economics, data science, and causal inference.
+This is a MA-level course in quantitative economics, data science, and causal inference in economics.
 
 
-This course will have a combination of coding and theoretical components.  All coding is done in Python.
+This course will have a combination of coding, theory, and development of mathematical background.  All coding is done in Python.
 
 # Course materials
 - Get a [GitHub](www.github.com) ID and apply for the [Student Developer Pack](https://education.github.com/pack) to get further free features
@@ -14,6 +14,19 @@ All materials will be on github, and canvas will be used to submit assignments/c
 There is no assigned physical textbook, but we will be using lecture notes from:
 - [Causal Inference for The Brave and True](https://matheusfacure.github.io/python-causality-handbook/landing-page.html)
 - [QuantEcon Python and DataScience Lectures](https://quantecon.org/projects/#filter=lecture)
+
+# Computing Environment
+While you can use the [UBC JupyterOpen](open.jupyter.ubc.ca) for this course, we strongly suggest installing Python on your local machine.  The easiest way to do this is:
+1. Install [Anaconda](https://www.anaconda.com/download) to install python and its packages for your operating system
+2. Install [git](https://git-scm.com/downloads) for your operating system
+3. Optionally: install (a) [Github Desktop](https://desktop.github.com/); (b) [VS Code](https://code.visualstudio.com/) to make it easier to manage downloaded notebooks.
+4. Then clone the following repositories onto your local machine using a terminal, using either git directly (e.g. in terminal go `git clone https://github.com/ubcecon/ECON526.git`), [GitHub Desktop](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/adding-and-cloning-repositories/cloning-a-repository-from-github-to-github-desktop), or [VS Code](https://code.visualstudio.com/docs/sourcecontrol/intro-to-git#_clone-a-repository-locally)
+    - https://github.com/ubcecon/ECON526
+    - https://github.com/QuantEcon/lecture-python-intro.notebooks
+    - https://github.com/QuantEcon/lecture-python.notebooks
+    - https://github.com/QuantEcon/lecture-datascience.notebooks
+
+For introductory users, we recommend using [GitHub Desktop](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/adding-and-cloning-repositories/cloning-a-repository-from-github-to-github-desktop) which allows cloning from a button on the public github repo directly.  For intermediate users, we recommend skipping the GitHub Desktop and instead using [VS Code](https://code.visualstudio.com/docs/sourcecontrol/intro-to-git#_clone-a-repository-locally) since you will likely begin using the VSCode editor as your primary Python (and latex) editor sooner than later.
 
 ## Syllabus
 See [Syllabus](syllabus.md) for more details
@@ -44,6 +57,7 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
    - **Self-study:**
      - Basics of linear algebra, matrices, norms, and linear independence: https://python.quantecon.org/linear_algebra.html
      - Numerical optimization: https://datascience.quantecon.org/scientific/optimization.html
+     - Downloading and manipulating data in Python: https://intro.quantecon.org/long_run_growth.html and https://intro.quantecon.org/business_cycle.html
    - **(Optional) Extra Material**:
      - Introductory material on linear algebra: https://intro.quantecon.org/linear_equations.html and https://datascience.quantecon.org/scientific/applied_linalg.html
      - More on Competitive Equilibrium: https://intro.quantecon.org/supply_demand_multiple_goods.html
