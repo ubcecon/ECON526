@@ -25,6 +25,7 @@ While you can use the [UBC JupyterOpen](open.jupyter.ubc.ca) for this course, we
     - https://github.com/QuantEcon/lecture-python-intro.notebooks
     - https://github.com/QuantEcon/lecture-python.notebooks
     - https://github.com/QuantEcon/lecture-datascience.notebooks
+    - In some cases you will need to manually install packages (by doing `pip install -r requirements.txt` within some of those repositories, or manually installing packages as required)
 
 For introductory users, we recommend using [GitHub Desktop](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/adding-and-cloning-repositories/cloning-a-repository-from-github-to-github-desktop) which allows cloning from a button on the public github repo directly.  For intermediate users, we recommend skipping the GitHub Desktop and instead using [VS Code](https://code.visualstudio.com/docs/sourcecontrol/intro-to-git#_clone-a-repository-locally) since you will likely begin using the VSCode editor as your primary Python (and latex) editor sooner than later.
 
@@ -35,10 +36,12 @@ See [Syllabus](syllabus.md) for more details
 
 The course has two midterms, weekly to bi-weekly problem sets, and a final data project due the last day of class.
 
-1. **September 10th Midnight:** Problem Set 1
+1. **September 10th Midnight:** [Problem Set 1](problem_sets/problem_set_1.ipynb)
 2. **October 11th:** IN CLASS MIDTERM #1
 3. **November 8th:** IN CLASS MIDTERM #2
 4. **December 8th Midnight:** Data Project Due
+
+See the `/problem_sets` folder within this repository for the problem sets as jupyter notebooks.  You should modify them directly as Jupyter notebooks, and the TA will explain how to submit them.
 
 ## Lectures
 This year the course will be taught in three parts where the later parts of the course will follow material in [Causal Inference for The Brave and True](https://matheusfacure.github.io/python-causality-handbook/landing-page.html).
