@@ -105,7 +105,7 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
     - TBD
 
 7.  **September 27**: Causality, Treatment and Potential Outcomes
-   - **Material:**
+    - **Material:**
      - https://matheusfacure.github.io/python-causality-handbook/01-Introduction-To-Causality.html
      - https://matheusfacure.github.io/python-causality-handbook/02-Randomised-Experiments.html
 
@@ -120,26 +120,29 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
 11. **October 11** 
     - **IN CLASS MIDTERM #1**
 ### Phil
-1.   **October 12** ("Make-up Monday")
+12.   **October 12** ("Make-up Monday")
     - TBD
-2.   **October 16**
+13.   **October 16**
     - TBD
-3.   **October 18**
+14.   **October 18**
     - TBD
-4.   **October 23**
+15.   **October 23**
     - TBD
-5.   **October 25**
+16.   **October 25**
     - TBD
-6.   **October 30**
+17.   **October 30**
     - TBD
-7.   **November 1**: 
+18.   **November 1**: 
     - TBD
-8.   **November 6**
-    - **IN CLASS MIDTERM #2**
 
 ### Paul
-20. **November 8**
+
+19.   **November 6**
     - TBD
+
+20. **November 8**
+    - **IN CLASS MIDTERM #2**
+
 21. **November 10**
     - TBD
 22. **November 13 (Midterm Break)** 
