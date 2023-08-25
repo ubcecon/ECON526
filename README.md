@@ -120,26 +120,26 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
 11. **October 11** 
     - **IN CLASS MIDTERM #1**
 ### Phil
-12.   **October 12** ("Make-up Monday") Linear Regression, Omitted Variable Bias
-      - **Material:**
-        - https://matheusfacure.github.io/python-causality-handbook/05-The-Unreasonable-Effectiveness-of-Linear-Regression.html
+12.   **October 12** ("Make-up Monday") Linear Regression, Omitted Variable Bias 
+    - **Material:**
+      - https://matheusfacure.github.io/python-causality-handbook/05-The-Unreasonable-Effectiveness-of-Linear-Regression.html
     
-14.   **October 16** Groups and Dummy Regression
+14.   **October 16** Groups and Dummy Regression 
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/06-Grouped-and-Dummy-Regression.html
-16.   **October 18** Beyond Confounders - Good and Bad Controls, Selection Bias
+16.   **October 18** Beyond Confounders - Good and Bad Controls, Selection Bias 
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/07-Beyond-Confounders.html
-18.   **October 23** Instrumental Variables
+18.   **October 23** Instrumental Variables 
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/08-Instrumental-Variables.html
-20.   **October 25** Matching
+20.   **October 25** Matching 
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/10-Matching.html
-22.   **October 30** Propensity Scores
+22.   **October 30** Propensity Scores 
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/11-Propensity-Score.html
-24.   **November 1**: Doubly Robust Estimation
+24.   **November 1**: Doubly Robust Estimation 
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/12-Doubly-Robust-Estimation.html
 ### Paul
