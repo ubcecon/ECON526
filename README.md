@@ -122,7 +122,7 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
 ### Phil
 12.   **October 12** ("Make-up Monday") Linear Regression, Omitted Variable Bias
       - **Material:**
-            - https://matheusfacure.github.io/python-causality-handbook/05-The-Unreasonable-Effectiveness-of-Linear-Regression.html
+        - https://matheusfacure.github.io/python-causality-handbook/05-The-Unreasonable-Effectiveness-of-Linear-Regression.html
     
 14.   **October 16** Groups and Dummy Regression
     - **Material:**
