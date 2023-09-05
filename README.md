@@ -89,7 +89,7 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
      - https://python.quantecon.org/lln_clt.html
      - https://intro.quantecon.org/inequality.html
    - **(Optional) Extra Material**:
-     - https://datascience.quantecon.org/scientific/randomness.html     
+     - https://datascience.quantecon.org/scientific/randomness.html
 
 5. **September 20**: Markov Chains
    - **Material:**
@@ -100,7 +100,7 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
      - https://datascience.quantecon.org/scientific/randomness.html#loan-states
      - https://python.quantecon.org/finite_markov.html
 
-    
+
 6. **September 25**: Introduction to Deep Learning (time-permitting)
     - TBD
 
@@ -117,53 +117,55 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
 
 10. **October 9 (Statutory holiday)**
 
-11. **October 11** 
+11. **October 11**
     - **IN CLASS MIDTERM #1**
 ### Phil
-12.  **October 12** ("Make-up Monday") Linear Regression, Omitted Variable Bias 
+12.  **October 12** ("Make-up Monday") Linear Regression, Omitted Variable Bias
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/05-The-Unreasonable-Effectiveness-of-Linear-Regression.html
 
-13.  **October 16** Groups and Dummy Regression 
+13.  **October 16** Groups and Dummy Regression
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/06-Grouped-and-Dummy-Regression.html
-14.  **October 18** Beyond Confounders - Good and Bad Controls, Selection Bias 
+14.  **October 18** Beyond Confounders - Good and Bad Controls, Selection Bias
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/07-Beyond-Confounders.html
-15.  **October 23** Instrumental Variables 
+15.  **October 23** Instrumental Variables
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/08-Instrumental-Variables.html
-16.  **October 25** Matching 
+16.  **October 25** Matching
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/10-Matching.html
-17.  **October 30** Propensity Scores 
+17.  **October 30** Propensity Scores
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/11-Propensity-Score.html
-18.  **November 1**: Doubly Robust Estimation 
+18.  **November 1**: Doubly Robust Estimation
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/12-Doubly-Robust-Estimation.html
 ### Paul
 
-19.   **November 6**
-    - TBD
-
+19.   **November 6**: Overview and begin difference in differences
+    - https://matheusfacure.github.io/python-causality-handbook/13-Difference-in-Differences.html
 20. **November 8**
     - **IN CLASS MIDTERM #2**
-
-21. **November 10**
-    - TBD
-22. **November 13 (Midterm Break)** 
+21. **November 10**: Difference in Differences
+    - https://matheusfacure.github.io/python-causality-handbook/13-Difference-in-Differences.html
+22. **November 13 (Midterm Break)**
 23. **November 15 (Midterm Break)**
-24. **November 20**
-    - TBD
-25. **November 22**
-    - TBD
-26. **November 27**
-    - TBD
-27. **November 29**
-    - TBD
-28. **December 4**
-    - TBD
-29. **December 6**
-    - TBD
+24. **November 20**: Panel Data and Fixed Effects
+    - https://matheusfacure.github.io/python-causality-handbook/14-Panel-Data-and-Fixed-Effects.html
+25. **November 22**: The Difference in Differences Saga
+    - https://matheusfacure.github.io/python-causality-handbook/24-The-Diff-in-Diff-Saga.html
+26. **November 27**: Synthetic Control
+    - https://matheusfacure.github.io/python-causality-handbook/15-Synthetic-Control.html
+    - https://matheusfacure.github.io/python-causality-handbook/25-Synthetic-Diff-in-Diff.html
+27. **November 29**: Predictive Models
+    - https://matheusfacure.github.io/python-causality-handbook/17-Predictive-Models-101.html
+    - https://datascience.quantecon.org/tools/regression.html
+28. **December 4**: Debiased/Orthogonal Machine Learning
+    - https://matheusfacure.github.io/python-causality-handbook/22-Debiased-Orthogonal-Machine-Learning.html
+    - https://datascience.quantecon.org/applications/ml_in_economics.html#estimation-of-nuisance-functions    -
+29. **December 6**: Regression Discontinuity
+    - https://matheusfacure.github.io/python-causality-handbook/16-Regression-Discontinuity-Design.html
+30. **December 8**
     - **DATA PROJECT DUE**
