@@ -13,7 +13,7 @@ All materials will be on github, and canvas will be used to submit assignments/c
 
 There is no assigned physical textbook, but we will be using lecture notes from:
 - [Causal Inference for The Brave and True](https://matheusfacure.github.io/python-causality-handbook/landing-page.html)
-- [QuantEcon Python and DataScience Lectures](https://quantecon.org/projects/#filter=lecture)
+- [QuantEcon Python and Data Science Lectures](https://quantecon.org/projects/#filter=lecture)
 
 # Computing Environment
 While you can use the [UBC JupyterOpen](open.jupyter.ubc.ca) for this course, we strongly suggest installing Python on your local machine.  The easiest way to do this is:
@@ -46,27 +46,31 @@ See the `/problem_sets` folder within this repository for the problem sets as ju
 ## Lectures
 This year the course will be taught in three parts where the later parts of the course will follow material in [Causal Inference for The Brave and True](https://matheusfacure.github.io/python-causality-handbook/landing-page.html).
 
-This lecture begins assuming you have completed the math/programming bootcamp for our masters students, or had an existing python-based programming course.  To refresh your knowledge, see basics in [QuantEcon DataScience Lectures](https://datascience.quantecon.org/) or [QuantEcon Python Programming for Economics and Finance](https://python-programming.quantecon.org/intro.html).
+This lecture begins assuming you have completed the math/programming bootcamp for our masters students, or had an existing python-based programming course.  To refresh your knowledge, see basics in [QuantEcon Data Science Lectures](https://datascience.quantecon.org/) or [QuantEcon Python Programming for Economics and Finance](https://python-programming.quantecon.org/intro.html).
 
 ### Jesse
 
-1. **September 6**: Applications of Linear Algebra
-   - **Material:**
-     - Systems of Equations: https://python.quantecon.org/linear_algebra.html#solving-systems-of-equations
-     - Eigenvectors and eigenvalues: https://python.quantecon.org/linear_algebra.html#eigenvalues-and-eigenvectors
-     - Matrix decompositions and other topics: https://python.quantecon.org/linear_algebra.html#further-topics
-     - Portfolio example: https://datascience.quantecon.org/scientific/applied_linalg.html#portfolios
-     - Supply and Demand: https://intro.quantecon.org/intro_supply_demand.html
+1. **September 6**: Introduction to Numerical Linear Algebra and its Applications in Data Science
+   - **Topics:** Overview of computational complexity and numerical precision, solving systems of equations, geometric interpretations of linear algebra, matrix decompositions, linear least squares, and eigenvalues and eigenvectors.  Preparation for applications.
+   - **Material:** 
+     - [Linear Algebra Foundations Slides](lectures/linear_algebra_foundations.pdf) (as [Jupyter Notebook](lectures/linear_algebra_foundations.ipynb))
    - **Self-study:**
      - Basics of linear algebra, matrices, norms, and linear independence: https://python.quantecon.org/linear_algebra.html
      - Numerical optimization: https://datascience.quantecon.org/scientific/optimization.html
+     - Systems of Equations: https://python.quantecon.org/linear_algebra.html#solving-systems-of-equations
+     - Eigenvectors and eigenvalues: https://python.quantecon.org/linear_algebra.html#eigenvalues-and-eigenvectors
      - Downloading and manipulating data in Python: https://intro.quantecon.org/long_run_growth.html and https://intro.quantecon.org/business_cycle.html
    - **(Optional) Extra Material**:
      - Introductory material on linear algebra: https://intro.quantecon.org/linear_equations.html and https://datascience.quantecon.org/scientific/applied_linalg.html
-     - More on Competitive Equilibrium: https://intro.quantecon.org/supply_demand_multiple_goods.html
+     - Matrix decompositions and other topics: https://python.quantecon.org/linear_algebra.html#further-topics
 
-2. **September 11**: Difference Equations, Dynamics, and Stability
+2. **September 11**: Applications of Linear Algebra
+   - **Topics:** Geometric series and present values, difference equations, steady states, and convergence, unemployment dynamics, latent variables and principle components, present discounted values, and valuing portfolios
+<!--
    - **Material:**
+     - Portfolio example: https://datascience.quantecon.org/scientific/applied_linalg.html#portfolios
+     - Supply and Demand: https://intro.quantecon.org/intro_supply_demand.html
+
      - Unemployment Dynamics example: https://datascience.quantecon.org/scientific/applied_linalg.html#unemployment-dynamics
      - Solow-Swan Growth Model: https://intro.quantecon.org/solow.html
      - Nonlinear Dynamics and Stability: https://intro.quantecon.org/scalar_dynam.html
@@ -75,23 +79,29 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
      - Geometric Series and Present Values: https://intro.quantecon.org/geom_series.html#example-interest-rates-and-present-values
     - **(Optional) Extra Material**:
      - More on the Solow Model and Python: https://python-programming.quantecon.org/python_oop.html#example-the-solow-growth-model
+     - More on Competitive Equilibrium: https://intro.quantecon.org/supply_demand_multiple_goods.html
+
+-->
 
 3. **September 13**: Probability
+<!--   
    - **Material:**
      - https://intro.quantecon.org/prob_dist.html
      - https://python.quantecon.org/prob_meaning.html
      - Axioms of probability, conditional expectations, Bayes' rule, Law of Iterated Expectations
    - **(Optional) Extra Material**:
      - https://python.quantecon.org/prob_matrix.html
-
+-->
 4. **September 18**: Simulating Randomness and Stochastic Processes
+<!--
    - **Material:**
      - https://python.quantecon.org/lln_clt.html
      - https://intro.quantecon.org/inequality.html
    - **(Optional) Extra Material**:
-     - https://datascience.quantecon.org/scientific/randomness.html
-
+     - https://datascience.quantecon.org/scientific/randomness.html     
+-->
 5. **September 20**: Markov Chains
+<!--
    - **Material:**
      - https://intro.quantecon.org/markov_chains_I.html
      - https://intro.quantecon.org/lake_model.html
@@ -99,16 +109,16 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
      - https://intro.quantecon.org/markov_chains_II.html
      - https://datascience.quantecon.org/scientific/randomness.html#loan-states
      - https://python.quantecon.org/finite_markov.html
-
-
-6. **September 25**: Introduction to Deep Learning (time-permitting)
-    - TBD
+-->
+    
+6. **September 25**: TBD
+    <!--Introduction to Deep Learning (time-permitting)
+    -->    
 
 7.  **September 27**: Causality, Treatment and Potential Outcomes
     - **Material:**
-     - https://matheusfacure.github.io/python-causality-handbook/01-Introduction-To-Causality.html
-     - https://matheusfacure.github.io/python-causality-handbook/02-Randomised-Experiments.html
-
+       - https://matheusfacure.github.io/python-causality-handbook/01-Introduction-To-Causality.html
+       - https://matheusfacure.github.io/python-causality-handbook/02-Randomised-Experiments.html
 8.  **October 2 (Statutory holiday)**
 
 9.  **October 4**: Graphical Causal Models and Confounders
