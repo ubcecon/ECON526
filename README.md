@@ -16,7 +16,7 @@ There is no assigned physical textbook, but we will be using lecture notes from:
 - [QuantEcon Python and Data Science Lectures](https://quantecon.org/projects/#filter=lecture)
 
 # Computing Environment
-While you can use the [UBC JupyterOpen](open.jupyter.ubc.ca) for this course, we strongly suggest installing Python on your local machine.  The easiest way to do this is:
+While you can use the [UBC JupyterOpen](https://open.jupyter.ubc.ca/) for this course, we strongly suggest installing Python on your local machine.  The easiest way to do this is:
 1. Install [Anaconda](https://www.anaconda.com/download) to install python and its packages for your operating system
 2. Install [git](https://git-scm.com/downloads) for your operating system
 3. Optionally: install (a) [Github Desktop](https://desktop.github.com/); (b) [VS Code](https://code.visualstudio.com/) to make it easier to manage downloaded notebooks.
