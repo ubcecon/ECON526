@@ -64,9 +64,10 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
      - Introductory material on linear algebra: https://intro.quantecon.org/linear_equations.html and https://datascience.quantecon.org/scientific/applied_linalg.html
      - Matrix decompositions and other topics: https://python.quantecon.org/linear_algebra.html#further-topics
 
-- **September 11**: Applications of Linear Algebra
-   - **Topics:** Geometric series and present values, difference equations, steady states, and convergence, unemployment dynamics, latent variables and principle components, present discounted values, and valuing portfolios
+- **September 11**: Applications of Linear Algebra (Eigenvalues)
+   - **Topics:** Geometric series and present values, difference equations, steady states, and convergence, unemployment dynamics, present discounted values
    - **Material:** 
+     - Finishing off [Linear Algebra Foundations Slides](lectures/linear_algebra_foundations.pdf)
      - [Linear Algebra Applications Slides](lectures/linear_algebra_applications.pdf) (as [Jupyter Notebook](lectures/linear_algebra_applications.ipynb))
    - **Self-study:**
      - Geometric Series and Present Values: https://intro.quantecon.org/geom_series.html#example-interest-rates-and-present-values
@@ -76,7 +77,14 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
      - Supply and Demand: https://intro.quantecon.org/intro_supply_demand.html
      - More on Competitive Equilibrium: https://intro.quantecon.org/supply_demand_multiple_goods.html
 
-- **September 13**: Dynamics and the Solow-Swan Model
+- **September 13**: Applications of Linear Algebra (Latent Variables)
+   - **Topics:** Latent variables and principle components, k-means clustering, and valuing portfolios
+   - **Material:** 
+     - [Linear Algebra Applications Slides](lectures/linear_algebra_applications.pdf) (as [Jupyter Notebook](lectures/linear_algebra_applications.ipynb))
+   - **Self-study:**
+     - [scikit-learn k-means docs](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html)
+     - [scikit-learn PCA docs](https://scikit-learn.org/stable/modules/decomposition.html#principal-component-analysis-pca)
+     - [seaborn tutorials](https://seaborn.pydata.org/tutorial/introduction.html)
 <!--
    - **Material:**
      - Solow-Swan Growth Model: https://intro.quantecon.org/solow.html
@@ -94,7 +102,7 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
    - **(Optional) Extra Material**:
      - https://python.quantecon.org/prob_matrix.html
 -->
-- **September 18**: Probability
+- **September 18**: Dynamics and the Solow-Swan Model
 <!--
    - **Material:**
      - https://python.quantecon.org/lln_clt.html
@@ -102,7 +110,7 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
    - **(Optional) Extra Material**:
      - https://datascience.quantecon.org/scientific/randomness.html     
 -->
-- **September 20**: Simulating Randomness and Stochastic Processes
+- **September 20**: Probability
 <!--
    - **Material:**
      - https://intro.quantecon.org/markov_chains_I.html
@@ -113,7 +121,7 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
      - https://python.quantecon.org/finite_markov.html
 -->
     
-- **September 25**: Markov Chains
+- **September 25**: Simulating Randomness and Stochastic Processes
     <!--Introduction to Deep Learning (time-permitting)
     -->    
 
