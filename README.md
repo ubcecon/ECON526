@@ -17,10 +17,10 @@ There is no assigned physical textbook, but we will be using lecture notes from:
 
 # Computing Environment
 While you can use the [UBC JupyterOpen](https://open.jupyter.ubc.ca/) for this course, we strongly suggest installing Python on your local machine.  The easiest way to do this is:
-1. Install [Anaconda](https://www.anaconda.com/download) to install python and its packages for your operating system
-2. Install [git](https://git-scm.com/downloads) for your operating system
-3. Optionally: install (a) [Github Desktop](https://desktop.github.com/); (b) [VS Code](https://code.visualstudio.com/) to make it easier to manage downloaded notebooks.
-4. Then clone the following repositories onto your local machine using a terminal, using either git directly (e.g. in terminal go `git clone https://github.com/ubcecon/ECON526.git`), [GitHub Desktop](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/adding-and-cloning-repositories/cloning-a-repository-from-github-to-github-desktop), or [VS Code](https://code.visualstudio.com/docs/sourcecontrol/intro-to-git#_clone-a-repository-locally)
+- Install [Anaconda](https://www.anaconda.com/download) to install python and its packages for your operating system
+- Install [git](https://git-scm.com/downloads) for your operating system
+- Optionally: install (a) [Github Desktop](https://desktop.github.com/); (b) [VS Code](https://code.visualstudio.com/) to make it easier to manage downloaded notebooks.
+- Then clone the following repositories onto your local machine using a terminal, using either git directly (e.g. in terminal go `git clone https://github.com/ubcecon/ECON526.git`), [GitHub Desktop](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/adding-and-cloning-repositories/cloning-a-repository-from-github-to-github-desktop), or [VS Code](https://code.visualstudio.com/docs/sourcecontrol/intro-to-git#_clone-a-repository-locally)
     - https://github.com/ubcecon/ECON526
     - https://github.com/QuantEcon/lecture-python-intro.notebooks
     - https://github.com/QuantEcon/lecture-python.notebooks
@@ -37,9 +37,10 @@ See [Syllabus](syllabus.md) for more details
 The course has two midterms, weekly to bi-weekly problem sets, and a final data project due the last day of class.
 
 1. **September 10th Midnight:** [Problem Set 1](problem_sets/problem_set_1.ipynb)
-2. **October 11th:** IN CLASS MIDTERM #1
-3. **November 8th:** IN CLASS MIDTERM #2
-4. **December 8th Midnight:** Data Project Due
+2. **September 17th Midnight:** [Problem Set 2](problem_sets/problem_set_2.ipynb)
+3. **October 11th:** IN CLASS MIDTERM #1
+4. **November 8th:** IN CLASS MIDTERM #2
+5. **December 8th Midnight:** Data Project Due
 
 See the `/problem_sets` folder within this repository for the problem sets as jupyter notebooks.  You should modify them directly as Jupyter notebooks, and the TA will explain how to submit them.
 
@@ -50,7 +51,7 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
 
 ### Jesse
 
-1. **September 6**: Introduction to Numerical Linear Algebra and its Applications in Data Science
+- **September 6**: Introduction to Numerical Linear Algebra and its Applications in Data Science
    - **Topics:** Overview of computational complexity and numerical precision, solving systems of equations, geometric interpretations of linear algebra, matrix decompositions, linear least squares, and eigenvalues and eigenvectors.  Preparation for applications.
    - **Material:** 
      - [Linear Algebra Foundations Slides](lectures/linear_algebra_foundations.pdf) (as [Jupyter Notebook](lectures/linear_algebra_foundations.ipynb))
@@ -64,26 +65,36 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
      - Introductory material on linear algebra: https://intro.quantecon.org/linear_equations.html and https://datascience.quantecon.org/scientific/applied_linalg.html
      - Matrix decompositions and other topics: https://python.quantecon.org/linear_algebra.html#further-topics
 
-2. **September 11**: Applications of Linear Algebra
-   - **Topics:** Geometric series and present values, difference equations, steady states, and convergence, unemployment dynamics, latent variables and principle components, present discounted values, and valuing portfolios
+- **September 11**: Applications of Linear Algebra (Eigenvalues)
+   - **Topics:** Geometric series and present values, difference equations, steady states, and convergence, unemployment dynamics, present discounted values
+   - **Material:** 
+     - Finishing off [Linear Algebra Foundations Slides](lectures/linear_algebra_foundations.pdf)
+     - [Linear Algebra Applications Slides](lectures/linear_algebra_applications.pdf) (as [Jupyter Notebook](lectures/linear_algebra_applications.ipynb))
+   - **Self-study:**
+     - Geometric Series and Present Values: https://intro.quantecon.org/geom_series.html#example-interest-rates-and-present-values
+     - Portfolio example: https://datascience.quantecon.org/scientific/applied_linalg.html#portfolios
+     - Unemployment Dynamics example: https://datascience.quantecon.org/scientific/applied_linalg.html#unemployment-dynamics
+   - **(Optional) Extra Material**:
+     - Supply and Demand: https://intro.quantecon.org/intro_supply_demand.html
+     - More on Competitive Equilibrium: https://intro.quantecon.org/supply_demand_multiple_goods.html
+
+- **September 13**: Applications of Linear Algebra (Latent Variables)
+   - **Topics:** Latent variables and principle components, k-means clustering, and valuing portfolios
+   - **Material:** 
+     - [Linear Algebra Applications Slides](lectures/linear_algebra_applications.pdf) (as [Jupyter Notebook](lectures/linear_algebra_applications.ipynb))
+   - **Self-study:**
+     - [scikit-learn k-means docs](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html)
+     - [scikit-learn PCA docs](https://scikit-learn.org/stable/modules/decomposition.html#principal-component-analysis-pca)
+     - [seaborn tutorials](https://seaborn.pydata.org/tutorial/introduction.html)
 <!--
    - **Material:**
-     - Portfolio example: https://datascience.quantecon.org/scientific/applied_linalg.html#portfolios
-     - Supply and Demand: https://intro.quantecon.org/intro_supply_demand.html
-
-     - Unemployment Dynamics example: https://datascience.quantecon.org/scientific/applied_linalg.html#unemployment-dynamics
      - Solow-Swan Growth Model: https://intro.quantecon.org/solow.html
      - Nonlinear Dynamics and Stability: https://intro.quantecon.org/scalar_dynam.html
      - Eigenvalues and stability of linear systems
-   - **Self-study:**
-     - Geometric Series and Present Values: https://intro.quantecon.org/geom_series.html#example-interest-rates-and-present-values
-    - **(Optional) Extra Material**:
+   - **(Optional) Extra Material**:
      - More on the Solow Model and Python: https://python-programming.quantecon.org/python_oop.html#example-the-solow-growth-model
-     - More on Competitive Equilibrium: https://intro.quantecon.org/supply_demand_multiple_goods.html
 
 -->
-
-3. **September 13**: Probability
 <!--   
    - **Material:**
      - https://intro.quantecon.org/prob_dist.html
@@ -92,7 +103,7 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
    - **(Optional) Extra Material**:
      - https://python.quantecon.org/prob_matrix.html
 -->
-4. **September 18**: Simulating Randomness and Stochastic Processes
+- **September 18**: Dynamics and the Solow-Swan Model
 <!--
    - **Material:**
      - https://python.quantecon.org/lln_clt.html
@@ -100,7 +111,7 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
    - **(Optional) Extra Material**:
      - https://datascience.quantecon.org/scientific/randomness.html     
 -->
-5. **September 20**: Markov Chains
+- **September 20**: Probability
 <!--
    - **Material:**
      - https://intro.quantecon.org/markov_chains_I.html
@@ -111,71 +122,71 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
      - https://python.quantecon.org/finite_markov.html
 -->
     
-6. **September 25**: TBD
+- **September 25**: Simulating Randomness and Stochastic Processes
     <!--Introduction to Deep Learning (time-permitting)
     -->    
 
-7.  **September 27**: Causality, Treatment and Potential Outcomes
+-  **September 27**: Causality, Treatment and Potential Outcomes
     - **Material:**
        - https://matheusfacure.github.io/python-causality-handbook/01-Introduction-To-Causality.html
        - https://matheusfacure.github.io/python-causality-handbook/02-Randomised-Experiments.html
-8.  **October 2 (Statutory holiday)**
+-  **October 2 (Statutory holiday)**
 
-9.  **October 4**: Graphical Causal Models and Confounders
+-  **October 4**: Graphical Causal Models and Confounders
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/04-Graphical-Causal-Models.html
 
-10. **October 9 (Statutory holiday)**
+-  **October 9 (Statutory holiday)**
 
-11. **October 11**
+-  **October 11**
     - **IN CLASS MIDTERM #1**
 ### Phil
-12.  **October 12** ("Make-up Monday") Linear Regression, Omitted Variable Bias
+-   **October 12** ("Make-up Monday") Linear Regression, Omitted Variable Bias
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/05-The-Unreasonable-Effectiveness-of-Linear-Regression.html
 
-13.  **October 16** Groups and Dummy Regression
+-   **October 16** Groups and Dummy Regression
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/06-Grouped-and-Dummy-Regression.html
-14.  **October 18** Beyond Confounders - Good and Bad Controls, Selection Bias
+-   **October 18** Beyond Confounders - Good and Bad Controls, Selection Bias
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/07-Beyond-Confounders.html
-15.  **October 23** Instrumental Variables
+-   **October 23** Instrumental Variables
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/08-Instrumental-Variables.html
-16.  **October 25** Matching
+-   **October 25** Matching
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/10-Matching.html
-17.  **October 30** Propensity Scores
+-   **October 30** Propensity Scores
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/11-Propensity-Score.html
-18.  **November 1**: Doubly Robust Estimation
+-   **November 1**: Doubly Robust Estimation
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/12-Doubly-Robust-Estimation.html
 ### Paul
 
-19.   **November 6**: Overview and begin difference in differences
+-    **November 6**: Overview and begin difference in differences
     - https://matheusfacure.github.io/python-causality-handbook/13-Difference-in-Differences.html
-20. **November 8**
+-  **November 8**
     - **IN CLASS MIDTERM #2**
-21. **November 10**: Difference in Differences
+-  **November 10**: Difference in Differences
     - https://matheusfacure.github.io/python-causality-handbook/13-Difference-in-Differences.html
-22. **November 13 (Midterm Break)**
-23. **November 15 (Midterm Break)**
-24. **November 20**: Panel Data and Fixed Effects
+-  **November 13 (Midterm Break)**
+-  **November 15 (Midterm Break)**
+-  **November 20**: Panel Data and Fixed Effects
     - https://matheusfacure.github.io/python-causality-handbook/14-Panel-Data-and-Fixed-Effects.html
-25. **November 22**: The Difference in Differences Saga
+-  **November 22**: The Difference in Differences Saga
     - https://matheusfacure.github.io/python-causality-handbook/24-The-Diff-in-Diff-Saga.html
-26. **November 27**: Synthetic Control
+-  **November 27**: Synthetic Control
     - https://matheusfacure.github.io/python-causality-handbook/15-Synthetic-Control.html
     - https://matheusfacure.github.io/python-causality-handbook/25-Synthetic-Diff-in-Diff.html
-27. **November 29**: Predictive Models
+-  **November 29**: Predictive Models
     - https://matheusfacure.github.io/python-causality-handbook/17-Predictive-Models-101.html
     - https://datascience.quantecon.org/tools/regression.html
-28. **December 4**: Debiased/Orthogonal Machine Learning
+- **December 4**: Debiased/Orthogonal Machine Learning
     - https://matheusfacure.github.io/python-causality-handbook/22-Debiased-Orthogonal-Machine-Learning.html
     - https://datascience.quantecon.org/applications/ml_in_economics.html#estimation-of-nuisance-functions    -
-29. **December 6**: Regression Discontinuity
+- **December 6**: Regression Discontinuity
     - https://matheusfacure.github.io/python-causality-handbook/16-Regression-Discontinuity-Design.html
-30. **December 8**
+- **December 8**
     - **DATA PROJECT DUE**
