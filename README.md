@@ -37,9 +37,10 @@ See [Syllabus](syllabus.md) for more details
 The course has two midterms, weekly to bi-weekly problem sets, and a final data project due the last day of class.
 
 1. **September 10th Midnight:** [Problem Set 1](problem_sets/problem_set_1.ipynb)
-2. **October 11th:** IN CLASS MIDTERM #1
-3. **November 8th:** IN CLASS MIDTERM #2
-4. **December 8th Midnight:** Data Project Due
+2. **September 17th Midnight:** [Problem Set 2](problem_sets/problem_set_2.ipynb)
+3. **October 11th:** IN CLASS MIDTERM #1
+4. **November 8th:** IN CLASS MIDTERM #2
+5. **December 8th Midnight:** Data Project Due
 
 See the `/problem_sets` folder within this repository for the problem sets as jupyter notebooks.  You should modify them directly as Jupyter notebooks, and the TA will explain how to submit them.
 
