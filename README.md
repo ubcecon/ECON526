@@ -78,16 +78,26 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
      - Supply and Demand: https://intro.quantecon.org/intro_supply_demand.html
      - More on Competitive Equilibrium: https://intro.quantecon.org/supply_demand_multiple_goods.html
 
-- **September 13**: Applications of Linear Algebra (Latent Variables)
-   - **Topics:** Latent variables and principle components, k-means clustering, and valuing portfolios
+- **September 13**: Applications of Linear Algebra (Continuous Latent Variables)
+   - **Topics:** Finished off eigenvalues and dynamics, principle components, and present discounted values
    - **Material:** 
      - [Linear Algebra Applications Slides](lectures/linear_algebra_applications.pdf) (as [Jupyter Notebook](lectures/linear_algebra_applications.ipynb))
    - **Self-study:**
-     - [scikit-learn k-means docs](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html)
      - [scikit-learn PCA docs](https://scikit-learn.org/stable/modules/decomposition.html#principal-component-analysis-pca)
      - [seaborn tutorials](https://seaborn.pydata.org/tutorial/introduction.html)
+
+- **September 18**: More on Latent Variables and Clustering 
+   - **Topics:** Finish off continuous latent variables, PCA, auto-encoders, clustering, and potentially start dynamics
+   - **Material:** 
+     - [Linear Algebra Applications Slides](lectures/linear_algebra_applications.pdf) (as [Jupyter Notebook](lectures/linear_algebra_applications.ipynb))
+     - Dynamics Slides
+   - **Self-study:**
+     - [scikit-learn PCA docs](https://scikit-learn.org/stable/modules/decomposition.html#principal-component-analysis-pca)
+
+- **September 20**: Dynamics and Start Probability
 <!--
    - **Material:**
+     - Solow-Swan Growth Model: https://intro.quantecon.org/solow.html
      - Solow-Swan Growth Model: https://intro.quantecon.org/solow.html
      - Nonlinear Dynamics and Stability: https://intro.quantecon.org/scalar_dynam.html
      - Eigenvalues and stability of linear systems
@@ -95,6 +105,19 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
      - More on the Solow Model and Python: https://python-programming.quantecon.org/python_oop.html#example-the-solow-growth-model
 
 -->
+
+<!--
+
+   - **Self-study:**
+     - [scikit-learn k-means docs](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html)
+   - **Material:**
+     - https://python.quantecon.org/lln_clt.html
+     - https://intro.quantecon.org/inequality.html
+   - **(Optional) Extra Material**:
+     - https://datascience.quantecon.org/scientific/randomness.html     
+
+
+--> 
 <!--   
    - **Material:**
      - https://intro.quantecon.org/prob_dist.html
@@ -103,15 +126,6 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
    - **(Optional) Extra Material**:
      - https://python.quantecon.org/prob_matrix.html
 -->
-- **September 18**: Dynamics and the Solow-Swan Model
-<!--
-   - **Material:**
-     - https://python.quantecon.org/lln_clt.html
-     - https://intro.quantecon.org/inequality.html
-   - **(Optional) Extra Material**:
-     - https://datascience.quantecon.org/scientific/randomness.html     
--->
-- **September 20**: Probability
 <!--
    - **Material:**
      - https://intro.quantecon.org/markov_chains_I.html
