@@ -38,6 +38,7 @@ The course has two midterms, weekly to bi-weekly problem sets, and a final data 
 
 1. **September 10th Midnight:** [Problem Set 1](problem_sets/problem_set_1.ipynb)
 2. **September 17th Midnight:** [Problem Set 2](problem_sets/problem_set_2.ipynb)
+3. **September 25th Midnight:** [Problem Set 3](problem_sets/problem_set_3.ipynb)
 3. **October 11th:** IN CLASS MIDTERM #1
 4. **November 8th:** IN CLASS MIDTERM #2
 5. **December 8th Midnight:** Data Project Due
