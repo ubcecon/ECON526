@@ -88,29 +88,24 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
      - [seaborn tutorials](https://seaborn.pydata.org/tutorial/introduction.html)
 
 - **September 18**: More on Latent Variables and Clustering 
-   - **Topics:** Finish off continuous latent variables, PCA, auto-encoders, clustering, and potentially start dynamics
+   - **Topics:** Finish off continuous latent variables, PCA, auto-encoders, clustering, and started dynamics
    - **Material:** 
      - [Linear Algebra Applications Slides](lectures/linear_algebra_applications.pdf) (as [Jupyter Notebook](lectures/linear_algebra_applications.ipynb))
-     - Dynamics Slides
    - **Self-study:**
-     - [scikit-learn PCA docs](https://scikit-learn.org/stable/modules/decomposition.html#principal-component-analysis-pca)
-
-- **September 20**: Dynamics and Start Probability
-<!--
+     - [scikit-learn k-means docs](https://scikit-learn.org/stable/modules/clustering.html#k-means)
+- **September 20**: Dynamics
+   - **Topics:** Dynamical systems, stability, fixed points, linearization, intro to the Solow-Swan growth model
    - **Material:**
-     - Solow-Swan Growth Model: https://intro.quantecon.org/solow.html
-     - Solow-Swan Growth Model: https://intro.quantecon.org/solow.html
+     - [Dynamics Slides](lectures/dynamics.pdf) (as [Jupyter Notebook](lectures/dynamics.ipynb))
+   - **Self-study:**
+     - Solow-Swan Growth Model Derivation: https://intro.quantecon.org/solow.html (skip 20.3)
      - Nonlinear Dynamics and Stability: https://intro.quantecon.org/scalar_dynam.html
-     - Eigenvalues and stability of linear systems
+     - Review [taylor series](https://en.wikipedia.org/wiki/Linearization#Multivariable_functions), just to first order
    - **(Optional) Extra Material**:
      - More on the Solow Model and Python: https://python-programming.quantecon.org/python_oop.html#example-the-solow-growth-model
 
--->
-
 <!--
 
-   - **Self-study:**
-     - [scikit-learn k-means docs](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html)
    - **Material:**
      - https://python.quantecon.org/lln_clt.html
      - https://intro.quantecon.org/inequality.html
