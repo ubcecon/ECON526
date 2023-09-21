@@ -103,38 +103,20 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
      - Review [taylor series](https://en.wikipedia.org/wiki/Linearization#Multivariable_functions), just to first order
    - **(Optional) Extra Material**:
      - More on the Solow Model and Python: https://python-programming.quantecon.org/python_oop.html#example-the-solow-growth-model
-
-<!--
-
-   - **Material:**
-     - https://python.quantecon.org/lln_clt.html
-     - https://intro.quantecon.org/inequality.html
-   - **(Optional) Extra Material**:
-     - https://datascience.quantecon.org/scientific/randomness.html     
-
-
---> 
-<!--   
-   - **Material:**
-     - https://intro.quantecon.org/prob_dist.html
-     - https://python.quantecon.org/prob_meaning.html
-     - Axioms of probability, conditional expectations, Bayes' rule, Law of Iterated Expectations
-   - **(Optional) Extra Material**:
-     - https://python.quantecon.org/prob_matrix.html
--->
-<!--
-   - **Material:**
-     - https://intro.quantecon.org/markov_chains_I.html
-     - https://intro.quantecon.org/lake_model.html
-   - **(Optional) Extra Material**:
-     - https://intro.quantecon.org/markov_chains_II.html
-     - https://datascience.quantecon.org/scientific/randomness.html#loan-states
-     - https://python.quantecon.org/finite_markov.html
--->
     
 - **September 25**: Simulating Randomness and Stochastic Processes
-    <!--Introduction to Deep Learning (time-permitting)
-    -->    
+   - **Topics:** Axioms of probability, conditional expectations, Bayes' rule, Law of Iterated Expectations, LLN and CLT, Markov Chains, and Simulation
+   - **Material:**
+     - [Probability and Stochastic Processes](https://cdn.jsdelivr.net/gh/ubcecon/ECON526/lectures/probability_stochastics.html) (as [Jupyter Notebook](lectures/probability_stochastics.ipynb))     
+   - **Self-study:**
+     - https://datascience.quantecon.org/scientific/randomness.html
+     - https://intro.quantecon.org/prob_dist.html
+     - https://intro.quantecon.org/markov_chains_I.html
+   - **(Optional) Extra Material**:
+     - https://python.quantecon.org/lln_clt.html
+     - https://python.quantecon.org/prob_meaning.html
+     - https://python.quantecon.org/prob_matrix.html
+     - https://python.quantecon.org/finite_markov.html for more on Markov Chains
 
 -  **September 27**: Causality, Treatment and Potential Outcomes
     - **Material:**
