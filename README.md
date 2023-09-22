@@ -38,6 +38,7 @@ The course has two midterms, weekly to bi-weekly problem sets, and a final data 
 
 1. **September 10th Midnight:** [Problem Set 1](problem_sets/problem_set_1.ipynb)
 2. **September 17th Midnight:** [Problem Set 2](problem_sets/problem_set_2.ipynb)
+3. **September 25th Midnight:** [Problem Set 3](problem_sets/problem_set_3.ipynb)
 3. **October 11th:** IN CLASS MIDTERM #1
 4. **November 8th:** IN CLASS MIDTERM #2
 5. **December 8th Midnight:** Data Project Due
@@ -78,53 +79,44 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
      - Supply and Demand: https://intro.quantecon.org/intro_supply_demand.html
      - More on Competitive Equilibrium: https://intro.quantecon.org/supply_demand_multiple_goods.html
 
-- **September 13**: Applications of Linear Algebra (Latent Variables)
-   - **Topics:** Latent variables and principle components, k-means clustering, and valuing portfolios
+- **September 13**: Applications of Linear Algebra (Continuous Latent Variables)
+   - **Topics:** Finished off eigenvalues and dynamics, principle components, and present discounted values
    - **Material:** 
      - [Linear Algebra Applications Slides](lectures/linear_algebra_applications.pdf) (as [Jupyter Notebook](lectures/linear_algebra_applications.ipynb))
    - **Self-study:**
-     - [scikit-learn k-means docs](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html)
      - [scikit-learn PCA docs](https://scikit-learn.org/stable/modules/decomposition.html#principal-component-analysis-pca)
      - [seaborn tutorials](https://seaborn.pydata.org/tutorial/introduction.html)
-<!--
+
+- **September 18**: More on Latent Variables and Clustering 
+   - **Topics:** Finish off continuous latent variables, PCA, auto-encoders, clustering, and started dynamics
+   - **Material:** 
+     - [Linear Algebra Applications Slides](lectures/linear_algebra_applications.pdf) (as [Jupyter Notebook](lectures/linear_algebra_applications.ipynb))
+   - **Self-study:**
+     - [scikit-learn k-means docs](https://scikit-learn.org/stable/modules/clustering.html#k-means)
+- **September 20**: Dynamics
+   - **Topics:** Dynamical systems, stability, fixed points, linearization, intro to the Solow-Swan growth model
    - **Material:**
-     - Solow-Swan Growth Model: https://intro.quantecon.org/solow.html
+     - [Dynamics Slides](lectures/dynamics.pdf) (as [Jupyter Notebook](lectures/dynamics.ipynb))
+   - **Self-study:**
+     - Solow-Swan Growth Model Derivation: https://intro.quantecon.org/solow.html (skip 20.3)
      - Nonlinear Dynamics and Stability: https://intro.quantecon.org/scalar_dynam.html
-     - Eigenvalues and stability of linear systems
+     - Review [taylor series](https://en.wikipedia.org/wiki/Linearization#Multivariable_functions), just to first order
    - **(Optional) Extra Material**:
      - More on the Solow Model and Python: https://python-programming.quantecon.org/python_oop.html#example-the-solow-growth-model
-
--->
-<!--   
-   - **Material:**
-     - https://intro.quantecon.org/prob_dist.html
-     - https://python.quantecon.org/prob_meaning.html
-     - Axioms of probability, conditional expectations, Bayes' rule, Law of Iterated Expectations
-   - **(Optional) Extra Material**:
-     - https://python.quantecon.org/prob_matrix.html
--->
-- **September 18**: Dynamics and the Solow-Swan Model
-<!--
-   - **Material:**
-     - https://python.quantecon.org/lln_clt.html
-     - https://intro.quantecon.org/inequality.html
-   - **(Optional) Extra Material**:
-     - https://datascience.quantecon.org/scientific/randomness.html     
--->
-- **September 20**: Probability
-<!--
-   - **Material:**
-     - https://intro.quantecon.org/markov_chains_I.html
-     - https://intro.quantecon.org/lake_model.html
-   - **(Optional) Extra Material**:
-     - https://intro.quantecon.org/markov_chains_II.html
-     - https://datascience.quantecon.org/scientific/randomness.html#loan-states
-     - https://python.quantecon.org/finite_markov.html
--->
     
 - **September 25**: Simulating Randomness and Stochastic Processes
-    <!--Introduction to Deep Learning (time-permitting)
-    -->    
+   - **Topics:** Axioms of probability, conditional expectations, Bayes' rule, Law of Iterated Expectations, LLN and CLT, Markov Chains, and Simulation
+   - **Material:**
+     - [Probability and Stochastic Processes](https://ubcecon.github.io/ECON526/lectures/probability_stochastics.html) (as [Jupyter Notebook](lectures/probability_stochastics.ipynb))     
+   - **Self-study:**
+     - https://datascience.quantecon.org/scientific/randomness.html
+     - https://intro.quantecon.org/prob_dist.html
+     - https://intro.quantecon.org/markov_chains_I.html
+   - **(Optional) Extra Material**:
+     - https://python.quantecon.org/lln_clt.html
+     - https://python.quantecon.org/prob_meaning.html
+     - https://python.quantecon.org/prob_matrix.html
+     - https://python.quantecon.org/finite_markov.html for more on Markov Chains
 
 -  **September 27**: Causality, Treatment and Potential Outcomes
     - **Material:**
