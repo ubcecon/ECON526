@@ -107,11 +107,10 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
 - **September 25**: Simulating Randomness and Stochastic Processes
    - **Topics:** Axioms of probability, conditional expectations, Bayes' rule, Law of Iterated Expectations, LLN and CLT, Markov Chains, and Simulation
    - **Material:**
-     - [Probability and Stochastic Processes](https://ubcecon.github.io/ECON526/lectures/probability_stochastics.html) (as [Jupyter Notebook](lectures/probability_stochastics.ipynb))     
+     - [Probability](https://ubcecon.github.io/ECON526/lectures/probability.html) (as [Jupyter Notebook](lectures/probability.ipynb))
    - **Self-study:**
      - https://datascience.quantecon.org/scientific/randomness.html
      - https://intro.quantecon.org/prob_dist.html
-     - https://intro.quantecon.org/markov_chains_I.html
    - **(Optional) Extra Material**:
      - https://python.quantecon.org/lln_clt.html
      - https://python.quantecon.org/prob_meaning.html
