@@ -39,6 +39,7 @@ The course has two midterms, weekly to bi-weekly problem sets, and a final data 
 1. **September 10th Midnight:** [Problem Set 1](problem_sets/problem_set_1.ipynb)
 2. **September 17th Midnight:** [Problem Set 2](problem_sets/problem_set_2.ipynb)
 3. **September 25th Midnight:** [Problem Set 3](problem_sets/problem_set_3.ipynb)
+4. **October 4th Midnight:** [Problem Set 4](problem_sets/problem_set_4.ipynb)
 3. **October 11th:** IN CLASS MIDTERM #1
 4. **November 8th:** IN CLASS MIDTERM #2
 5. **December 8th Midnight:** Data Project Due
@@ -104,8 +105,8 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
    - **(Optional) Extra Material**:
      - More on the Solow Model and Python: https://python-programming.quantecon.org/python_oop.html#example-the-solow-growth-model
     
-- **September 25**: Simulating Randomness and Stochastic Processes
-   - **Topics:** Axioms of probability, conditional expectations, Bayes' rule, Law of Iterated Expectations, LLN and CLT, Markov Chains, and Simulation
+- **September 25**: Probability, Randomness, and Independence
+   - **Topics:** Axioms of probability, LLN and CLT, and Conditional Independence
    - **Material:**
      - [Probability](https://ubcecon.github.io/ECON526/lectures/probability.html) (as [Jupyter Notebook](lectures/probability.ipynb))
    - **Self-study:**
@@ -115,17 +116,21 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
      - https://python.quantecon.org/lln_clt.html
      - https://python.quantecon.org/prob_meaning.html
      - https://python.quantecon.org/prob_matrix.html
+
+-  **September 27**: Stochastic Processes and Forecasts
+   - **Topics:** Conditional expectations, Bayes' rule, Law of Iterated Expectations, stochastic processes, Markov Chains
+    - **Material:**
+      - [Probability](https://ubcecon.github.io/ECON526/lectures/probability.html) (as [Jupyter Notebook](lectures/probability.ipynb))    
+      - [Stochastic Processes](https://ubcecon.github.io/ECON526/lectures/stochastic_processes.html) (as [Jupyter Notebook](lectures/stochastic_processes.ipynb))    
+   - **(Optional) Extra Material**:
      - https://python.quantecon.org/finite_markov.html for more on Markov Chains
 
--  **September 27**: Causality, Treatment and Potential Outcomes
+-  **October 2 (Statutory holiday)**
+
+-  **October 4**: Causality, Treatment and Potential Outcomes
     - **Material:**
        - https://matheusfacure.github.io/python-causality-handbook/01-Introduction-To-Causality.html
        - https://matheusfacure.github.io/python-causality-handbook/02-Randomised-Experiments.html
--  **October 2 (Statutory holiday)**
-
--  **October 4**: Graphical Causal Models and Confounders
-    - **Material:**
-      - https://matheusfacure.github.io/python-causality-handbook/04-Graphical-Causal-Models.html
 
 -  **October 9 (Statutory holiday)**
 
