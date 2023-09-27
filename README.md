@@ -124,6 +124,8 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
       - [Stochastic Processes](https://ubcecon.github.io/ECON526/lectures/stochastic_processes.html) (as [Jupyter Notebook](lectures/stochastic_processes.ipynb))    
    - **(Optional) Extra Material**:
      - https://python.quantecon.org/finite_markov.html for more on Markov Chains
+     - https://python.quantecon.org/ar1_processes.html for more on AR(1) processes
+     - https://datascience.quantecon.org/scientific/randomness.html#loan-states for a simple Markov Chain example
 
 -  **October 2 (Statutory holiday)**
 
