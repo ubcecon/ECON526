@@ -5,7 +5,7 @@
 - **Class Time** Monday & Wednesday 12:30PM-2:00PM
 - **Instructor:** Paul Schrimpf, schrimpf@mail.ubc.ca
 - **Instructor:** Jesse Perla, jesse.perla@ubc.ca
-- **Instructor:** Phil Solamine, philip.solimine@ubc.ca
+- **Instructor:** Phil Solimine, philip.solimine@ubc.ca
 - **Teaching Assistant:** Bruno Esposito
 
 ## Course Description
