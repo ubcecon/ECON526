@@ -40,9 +40,10 @@ The course has two midterms, weekly to bi-weekly problem sets, and a final data 
 2. **September 17th Midnight:** [Problem Set 2](problem_sets/problem_set_2.ipynb)
 3. **September 25th Midnight:** [Problem Set 3](problem_sets/problem_set_3.ipynb)
 4. **October 4th Midnight:** [Problem Set 4](problem_sets/problem_set_4.ipynb)
-3. **October 11th:** IN CLASS MIDTERM #1
-4. **November 8th:** IN CLASS MIDTERM #2
-5. **December 8th Midnight:** Data Project Due
+5. **October 5th:** Midterm Logistics Practice IN CLASS
+6. **October 11th:** IN CLASS MIDTERM #1
+7. **November 8th:** IN CLASS MIDTERM #2
+8. **December 8th Midnight:** Data Project Due
 
 See the `/problem_sets` folder within this repository for the problem sets as jupyter notebooks.  You should modify them directly as Jupyter notebooks, and the TA will explain how to submit them.
 
@@ -51,7 +52,7 @@ This year the course will be taught in three parts where the later parts of the 
 
 This lecture begins assuming you have completed the math/programming bootcamp for our masters students, or had an existing python-based programming course.  To refresh your knowledge, see basics in [QuantEcon Data Science Lectures](https://datascience.quantecon.org/) or [QuantEcon Python Programming for Economics and Finance](https://python-programming.quantecon.org/intro.html).
 
-Slides for the lectures can be found [here](ttps://ubcecon.github.io/ECON526/lectures/index.html)
+Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/lectures/index.html)
 
 ### Jesse
 
