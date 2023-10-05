@@ -40,9 +40,10 @@ The course has two midterms, weekly to bi-weekly problem sets, and a final data 
 2. **September 17th Midnight:** [Problem Set 2](problem_sets/problem_set_2.ipynb)
 3. **September 25th Midnight:** [Problem Set 3](problem_sets/problem_set_3.ipynb)
 4. **October 4th Midnight:** [Problem Set 4](problem_sets/problem_set_4.ipynb)
-3. **October 11th:** IN CLASS MIDTERM #1
-4. **November 8th:** IN CLASS MIDTERM #2
-5. **December 8th Midnight:** Data Project Due
+5. **October 5th:** Midterm Logistics Practice with [Midterm Practice Problems](problem_sets/midterm_practice_1.ipynb)
+6. **October 11th:** IN CLASS MIDTERM #1
+7. **November 8th:** IN CLASS MIDTERM #2
+8. **December 8th Midnight:** Data Project Due
 
 See the `/problem_sets` folder within this repository for the problem sets as jupyter notebooks.  You should modify them directly as Jupyter notebooks, and the TA will explain how to submit them.
 
@@ -51,12 +52,14 @@ This year the course will be taught in three parts where the later parts of the 
 
 This lecture begins assuming you have completed the math/programming bootcamp for our masters students, or had an existing python-based programming course.  To refresh your knowledge, see basics in [QuantEcon Data Science Lectures](https://datascience.quantecon.org/) or [QuantEcon Python Programming for Economics and Finance](https://python-programming.quantecon.org/intro.html).
 
+Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/lectures/index.html)
+
 ### Jesse
 
 - **September 6**: Introduction to Numerical Linear Algebra and its Applications in Data Science
    - **Topics:** Overview of computational complexity and numerical precision, solving systems of equations, geometric interpretations of linear algebra, matrix decompositions, linear least squares, and eigenvalues and eigenvectors.  Preparation for applications.
    - **Material:** 
-     - [Linear Algebra Foundations Slides](lectures/linear_algebra_foundations.pdf) (as [Jupyter Notebook](lectures/linear_algebra_foundations.ipynb))
+     - [Linear Algebra Foundations](https://ubcecon.github.io/ECON526/lectures/lectures/linear_algebra_foundations.html), [Jupyter](lectures/lectures/linear_algebra_foundations.ipynb), [PDF](lectures/lectures/linear_algebra_foundations.pdf)
    - **Self-study:**
      - Basics of linear algebra, matrices, norms, and linear independence: https://python.quantecon.org/linear_algebra.html
      - Numerical optimization: https://datascience.quantecon.org/scientific/optimization.html
@@ -67,11 +70,11 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
      - Introductory material on linear algebra: https://intro.quantecon.org/linear_equations.html and https://datascience.quantecon.org/scientific/applied_linalg.html
      - Matrix decompositions and other topics: https://python.quantecon.org/linear_algebra.html#further-topics
 
-- **September 11**: Applications of Linear Algebra (Eigenvalues)
+- **September 11**: Applications of Linear Algebra (Eigenvalues and Discounting)
    - **Topics:** Geometric series and present values, difference equations, steady states, and convergence, unemployment dynamics, present discounted values
    - **Material:** 
-     - Finishing off [Linear Algebra Foundations Slides](lectures/linear_algebra_foundations.pdf)
-     - [Linear Algebra Applications Slides](lectures/linear_algebra_applications.pdf) (as [Jupyter Notebook](lectures/linear_algebra_applications.ipynb))
+     - Finishing off [Linear Algebra Foundations](https://ubcecon.github.io/ECON526/lectures/lectures/linear_algebra_foundations.html)
+     - [Eigenvalues and Stability](https://ubcecon.github.io/ECON526/lectures/lectures/eigenvalue_applications.html), [Jupyter](lectures/lectures/eigenvalue_applications.ipynb), [PDF](lectures/lectures/eigenvalue_applications.pdf)
    - **Self-study:**
      - Geometric Series and Present Values: https://intro.quantecon.org/geom_series.html#example-interest-rates-and-present-values
      - Portfolio example: https://datascience.quantecon.org/scientific/applied_linalg.html#portfolios
@@ -80,10 +83,10 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
      - Supply and Demand: https://intro.quantecon.org/intro_supply_demand.html
      - More on Competitive Equilibrium: https://intro.quantecon.org/supply_demand_multiple_goods.html
 
-- **September 13**: Applications of Linear Algebra (Continuous Latent Variables)
+- **September 13**: Latent Variables and Intro to Unsupervised Learning
    - **Topics:** Finished off eigenvalues and dynamics, principle components, and present discounted values
    - **Material:** 
-     - [Linear Algebra Applications Slides](lectures/linear_algebra_applications.pdf) (as [Jupyter Notebook](lectures/linear_algebra_applications.ipynb))
+     -  [Latent Variables and Unsupervised Learning](https://ubcecon.github.io/ECON526/lectures/lectures/latent_variables.html), [Jupyter](lectures/lectures/latent_variables.ipynb), [PDF](lectures/lectures/latent_variables.pdf)
    - **Self-study:**
      - [scikit-learn PCA docs](https://scikit-learn.org/stable/modules/decomposition.html#principal-component-analysis-pca)
      - [seaborn tutorials](https://seaborn.pydata.org/tutorial/introduction.html)
@@ -91,13 +94,13 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
 - **September 18**: More on Latent Variables and Clustering 
    - **Topics:** Finish off continuous latent variables, PCA, auto-encoders, clustering, and started dynamics
    - **Material:** 
-     - [Linear Algebra Applications Slides](lectures/linear_algebra_applications.pdf) (as [Jupyter Notebook](lectures/linear_algebra_applications.ipynb))
+     - [Latent Variables and Unsupervised Learning](https://ubcecon.github.io/ECON526/lectures/lectures/latent_variables.html)
    - **Self-study:**
      - [scikit-learn k-means docs](https://scikit-learn.org/stable/modules/clustering.html#k-means)
 - **September 20**: Dynamics
    - **Topics:** Dynamical systems, stability, fixed points, linearization, intro to the Solow-Swan growth model
    - **Material:**
-     - [Dynamics Slides](lectures/dynamics.pdf) (as [Jupyter Notebook](lectures/dynamics.ipynb))
+     - [Linear and Nonlinear Dynamics](https://ubcecon.github.io/ECON526/lectures/lectures/dynamics.html), [Jupyter](lectures/lectures/dynamics.ipynb), [PDF](lectures/lectures/dynamics.pdf)
    - **Self-study:**
      - Solow-Swan Growth Model Derivation: https://intro.quantecon.org/solow.html (skip 20.3)
      - Nonlinear Dynamics and Stability: https://intro.quantecon.org/scalar_dynam.html
@@ -108,7 +111,7 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
 - **September 25**: Probability, Randomness, and Independence
    - **Topics:** Axioms of probability, LLN and CLT, and Conditional Independence
    - **Material:**
-     - [Probability](https://ubcecon.github.io/ECON526/lectures/probability.html) (as [Jupyter Notebook](lectures/probability.ipynb))
+     - [Probability, Conditioning, and Independence](https://ubcecon.github.io/ECON526/lectures/lectures/probability.html), [Jupyter](lectures/lectures/probability.ipynb), [PDF](lectures/lectures/probability.pdf)
    - **Self-study:**
      - https://datascience.quantecon.org/scientific/randomness.html
      - https://intro.quantecon.org/prob_dist.html
@@ -118,10 +121,10 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
      - https://python.quantecon.org/prob_matrix.html
 
 -  **September 27**: Stochastic Processes and Forecasts
-   - **Topics:** Conditional expectations, Bayes' rule, Law of Iterated Expectations, stochastic processes, Markov Chains
+   - **Topics:** Conditional expectations, Bayes' rule, Law of Iterated Expectations, stochastic processes
     - **Material:**
-      - [Probability](https://ubcecon.github.io/ECON526/lectures/probability.html) (as [Jupyter Notebook](lectures/probability.ipynb))    
-      - [Stochastic Processes](https://ubcecon.github.io/ECON526/lectures/stochastic_processes.html) (as [Jupyter Notebook](lectures/stochastic_processes.ipynb))    
+      - Finish [Probability, Conditioning, and Independence](https://ubcecon.github.io/ECON526/lectures/lectures/probability.html)
+      - [Stochastic Processes](https://ubcecon.github.io/ECON526/lectures/lectures/stochastic_processes.html), [Jupyter](lectures/lectures/stochastic_processes.ipynb), [PDF](lectures/lectures/stochastic_processes.pdf)  
    - **(Optional) Extra Material**:
      - https://python.quantecon.org/finite_markov.html for more on Markov Chains
      - https://python.quantecon.org/ar1_processes.html for more on AR(1) processes
@@ -129,10 +132,12 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
 
 -  **October 2 (Statutory holiday)**
 
--  **October 4**: Causality, Treatment and Potential Outcomes
-    - **Material:**
-       - https://matheusfacure.github.io/python-causality-handbook/01-Introduction-To-Causality.html
-       - https://matheusfacure.github.io/python-causality-handbook/02-Randomised-Experiments.html
+-  **October 4**: Markov Chains and Introduction to Causality and Counterfactuals
+   - **Topics:** Finish stochastic processes and Markov Chains and briefly setup causality and counterfactuals
+   - **Material:**
+     - Finish [Stochastic Processes](https://ubcecon.github.io/ECON526/lectures/lectures/stochastic_processes.html)
+   - **Self-Study:**
+     - https://matheusfacure.github.io/python-causality-handbook/01-Introduction-To-Causality.html
 
 -  **October 9 (Statutory holiday)**
 
