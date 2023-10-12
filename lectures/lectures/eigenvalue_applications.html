@@ -512,7 +512,7 @@ A \equiv \begin{bmatrix}
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>rho(A) = 1.079128784747792
-x_200 = [3406689.32410673 6102361.18640516]</code></pre>
+x_200 = [3406689.32410674 6102361.18640517]</code></pre>
 </div>
 </div>
 </div>
@@ -556,7 +556,7 @@ x_200 = [6.03450418e-06 2.08159603e-05]</code></pre>
 <span id="cb8-6"><a href="#cb8-6"></a><span class="bu">print</span>(<span class="ss">f"x_</span><span class="sc">{</span>t<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>matrix_power(A, t) <span class="op">@</span> x_0<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>check orthogonal: dot(x_1,x_2) approx 0: 0.0
-rho(A) = 1.0
+rho(A) = 1.0000000000000002
 x_200 = [ 0.27639321 -0.17082039]</code></pre>
 </div>
 </div>
@@ -622,7 +622,7 @@ U_{t+1} &amp;= \alpha E_t + (1-\phi) U_t
 <span id="cb12-8"><a href="#cb12-8"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-display">
-<p><img data-src="eigenvalue_applications_files/figure-revealjs/cell-8-output-1.png"></p>
+<p><img data-src="eigenvalue_applications_files/figure-revealjs/cell-8-output-1.png" width="842" height="449"></p>
 </div>
 </div>
 </div>
@@ -709,8 +709,12 @@ X_100 = [666666.66666667 333333.33333333]</code></pre>
 </section>
 <section id="convergence-dynamics-of-unemployment" class="slide level2">
 <h2>Convergence Dynamics of Unemployment</h2>
-
-<img data-src="eigenvalue_applications_files/figure-revealjs/cell-11-output-1.png" class="r-stretch"></section></section>
+<div class="cell" data-execution_count="11">
+<div class="cell-output cell-output-display">
+<p><img data-src="eigenvalue_applications_files/figure-revealjs/cell-11-output-1.png" width="544" height="376"></p>
+</div>
+</div>
+</section></section>
 <section>
 <section id="present-discounted-values" class="title-slide slide level1 center">
 <h1>Present Discounted Values</h1>
@@ -724,8 +728,8 @@ X_100 = [666666.66666667 333333.33333333]</code></pre>
 <li><p>More generally if <span class="math inline">\(x_{t+1} = A x_t\)</span>, <span class="math inline">\(x_t \in \mathbb{R}^N\)</span>, <span class="math inline">\(y_t = G x_t\)</span> and <span class="math inline">\(A \in \mathbb{R}^{N \times N}\)</span>, then</p>
 <p><span class="math display">\[
 \begin{aligned}
-p_t &amp;= y_t + \beta y_{t+1} + \beta^2 y_{t+2} + \ldots = G x_t + \beta G A x_t + \beta G A A  x_t + \ldots\\
-&amp;= \sum_{s=0}^{\infty} \beta^s A^s y_t\\
+p_t &amp;= y_t + \beta y_{t+1} + \beta^2 y_{t+2} + \ldots = G x_t + \beta G A x_t + \beta^2 G A A  x_t + \ldots\\
+&amp;= \sum_{s=0}^{\infty} \beta^s G A^s y_t\\
 &amp;= G (I - \beta A)^{-1} x_t\quad,\text{ if } \rho(A) &lt; 1/\beta
 \end{aligned}
 \]</span></p></li>
@@ -799,7 +803,7 @@ A^-1 =
 <span id="cb21-2"><a href="#cb21-2"></a><span class="bu">print</span>(<span class="ss">f"condition(A) = </span><span class="sc">{</span>cond(A)<span class="sc">}</span><span class="ss">, condition(A^(-1)) = </span><span class="sc">{</span>cond(inv(A))<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>condition(I) = 1.0
-condition(A) = 40000001.962777555, condition(A^(-1)) = 40000002.02779216</code></pre>
+condition(A) = 40000001.939191714, condition(A^(-1)) = 40000002.00307444</code></pre>
 </div>
 </div>
 </section>
@@ -855,8 +859,8 @@ A c = y
 <span id="cb23-8"><a href="#cb23-8"></a><span class="ss">error using inv(A) = </span><span class="sc">{</span>norm(A <span class="op">@</span> c_inv <span class="op">-</span> y, np.inf)<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb23-9"><a href="#cb23-9"></a><span class="bu">print</span>(<span class="ss">f"cond(A) = </span><span class="sc">{</span>cond(A)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>error = 1.574562702444382e-11, error using inv(A) = 1.1932570487260818e-09
-cond(A) = 564652.3214000753</code></pre>
+<pre><code>error = 5.820766091346741e-11, error using inv(A) = 1.3387762010097504e-09
+cond(A) = 564652.3214074654</code></pre>
 </div>
 </div>
 </section>
@@ -873,8 +877,8 @@ cond(A) = 564652.3214000753</code></pre>
 <span id="cb25-8"><a href="#cb25-8"></a><span class="ss">error using inv(A) = </span><span class="sc">{</span>norm(A <span class="op">@</span> c_inv <span class="op">-</span> y, np.inf)<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb25-9"><a href="#cb25-9"></a><span class="bu">print</span>(<span class="ss">f"cond(A) = </span><span class="sc">{</span>cond(A)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>error = 5.334186425898224e-10, error using inv(A) = 6.22717197984457e-06
-cond(A) = 4462824600234.486</code></pre>
+<pre><code>error = 1.280568540096283e-09, error using inv(A) = 6.463262252509594e-06
+cond(A) = 4462817558043.969</code></pre>
 </div>
 </div>
 </section>
@@ -891,8 +895,8 @@ cond(A) = 4462824600234.486</code></pre>
 <span id="cb27-8"><a href="#cb27-8"></a><span class="ss">error using inv(A) = </span><span class="sc">{</span>norm(A <span class="op">@</span> c_inv <span class="op">-</span> y, np.inf)<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb27-9"><a href="#cb27-9"></a><span class="bu">print</span>(<span class="ss">f"cond(A) = </span><span class="sc">{</span>cond(A)<span class="sc">:.4g}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>error = 6.784830475226045e-10, error using inv(A) = 31732.823760853855
-cond(A) = 1.697e+24</code></pre>
+<pre><code>error = 5.820766091346741e-10, error using inv(A) = 2460.8631448635133
+cond(A) = 5.771e+24</code></pre>
 </div>
 </div>
 </section>
@@ -913,7 +917,7 @@ cond(A) = 1.697e+24</code></pre>
 <span id="cb29-4"><a href="#cb29-4"></a>A_monomial <span class="op">=</span> np.array([[x_i<span class="op">**</span>n <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(N <span class="op">+</span> <span class="dv">1</span>)] <span class="cf">for</span> x_i <span class="kw">in</span> x])  <span class="co"># or np.vander</span></span>
 <span id="cb29-5"><a href="#cb29-5"></a><span class="bu">print</span>(<span class="ss">f"cond(A) = </span><span class="sc">{</span>cond(A)<span class="sc">:.4g}</span><span class="ss">, cond(A_monomial) = </span><span class="sc">{</span>cond(A_monomial)<span class="sc">:.4g}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>cond(A) = 3.64e+09, cond(A_monomial) = 2.926e+18</code></pre>
+<pre><code>cond(A) = 3.64e+09, cond(A_monomial) = 1.694e+17</code></pre>
 </div>
 </div>
 
