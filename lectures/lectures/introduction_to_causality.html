@@ -463,7 +463,7 @@ Phil Solimine
 <li><p>Material includes much adapted from <a href="https://matheusfacure.github.io/python-causality-handbook/01-Introduction-To-Causality.html">Causal Inference for the Brave and True: Introduction to Causality</a></p></li>
 <li><p>Using the following packages and definitions</p></li>
 </ul>
-<div class="cell" data-execution_count="1">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="im">from</span> scipy.special <span class="im">import</span> expit</span>
@@ -619,7 +619,7 @@ Phil Solimine
 <h2>A Stylized Example</h2>
 <p>Let’s say that we are interested in calculating the effect of providing a tablet on the academic performance of students, measured by their test scores.</p>
 <p>In some strange universe, imagine that we are actually able to observe the outcome for each unit under both treatment conditions. Suppose the data look like this:</p>
-<div class="cell columns column-output-location" data-execution_count="2">
+<div class="cell columns column-output-location" data-execution_count="3">
 <div class="column">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -703,7 +703,7 @@ Phil Solimine
 </section>
 <section id="a-stylized-example-1" class="slide level2">
 <h2>A Stylized Example</h2>
-<div class="cell columns column-output-location" data-execution_count="3">
+<div class="cell columns column-output-location" data-execution_count="4">
 <div class="column">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
@@ -775,7 +775,7 @@ Phil Solimine
 </div>
 </div>
 <p>Then we can simply calculate the average treatment effect directly:</p>
-<div class="cell columns column-output-location" data-execution_count="4">
+<div class="cell columns column-output-location" data-execution_count="5">
 <div class="column">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>df[<span class="st">"TE"</span>] <span class="op">=</span> df.Y1 <span class="op">-</span> df.Y0</span>
 <span id="cb4-2"><a href="#cb4-2"></a>df.TE.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -786,7 +786,7 @@ Phil Solimine
 </div>
 </div>
 <p>And the ATT would be the mean of the last column for units that receive the treatment:</p>
-<div class="cell columns column-output-location" data-execution_count="5">
+<div class="cell columns column-output-location" data-execution_count="6">
 <div class="column">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>treatment_rows <span class="op">=</span> df[<span class="st">"T"</span>] <span class="op">==</span> <span class="dv">1</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>df[treatment_rows].TE.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -806,7 +806,7 @@ Phil Solimine
 <h2>A More Realistic Example</h2>
 <p>In practice, we can’t really ever observe both potential outcomes for each unit. Instead, we can only observe the outcome for each unit under the treatment condition that they actually receive.</p>
 <p>Suppose that instead of what we had before, the data look like this:</p>
-<div class="cell columns column-output-location" data-execution_count="6">
+<div class="cell columns column-output-location" data-execution_count="7">
 <div class="column">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>df_real <span class="op">=</span> pd.DataFrame(<span class="bu">dict</span>(</span>
 <span id="cb8-2"><a href="#cb8-2"></a>    i<span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],</span>
@@ -887,7 +887,7 @@ Phil Solimine
 </section>
 <section id="a-more-realistic-example-1" class="slide level2">
 <h2>A More Realistic Example</h2>
-<div class="cell columns column-output-location" data-execution_count="7">
+<div class="cell columns column-output-location" data-execution_count="8">
 <div class="column">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>df_real.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
@@ -959,7 +959,7 @@ Phil Solimine
 </div>
 </div>
 <p>Let’s try to estimate the ATE again. We don’t observe the counterfactual outcomes, but we can try to estimate the ATE using the difference in means between the treatment and control groups:</p>
-<div class="cell columns column-output-location" data-execution_count="8">
+<div class="cell columns column-output-location" data-execution_count="9">
 <div class="column">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>group_averages <span class="op">=</span> df_real.groupby(<span class="st">"T"</span>).test_score.mean()</span>
 <span id="cb10-2"><a href="#cb10-2"></a>group_averages[<span class="dv">1</span>] <span class="op">-</span> group_averages[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1061,6 +1061,19 @@ Phil Solimine
 </section>
 <section id="estimating-treatment-effects-without-randomization-1" class="slide level2">
 <h2>Estimating Treatment Effects Without Randomization</h2>
+<ul>
+<li><p>Many identification assumptions are based on the idea of <strong>selection on observables</strong></p>
+<ul>
+<li>This means that the treatment assignment is independent of the potential outcomes <em>conditional</em> on the observed covariates</li>
+<li>In other words, <span class="math inline">\(Y_0\)</span> and <span class="math inline">\(Y_1\)</span> are independent of <span class="math inline">\(T\)</span> conditional on <span class="math inline">\(X\)</span></li>
+</ul></li>
+<li><p>This allows us to do things like <strong>match</strong> units in the treatment and control groups that are similar on average</p>
+<ul>
+<li>We can then estimate the treatment effect by comparing the outcomes of the matched units, assuming that the matched units are similar on average</li>
+</ul></li>
+<li><p>Another option is to use <strong>instrumental variables</strong> to estimate the treatment effect</p></li>
+<li><p>Alternatively, a <strong>structural model</strong> can be used to estimate the treatment effect by integrating a theoretical model to fill in the missing counterfactuals</p></li>
+</ul>
 
 <div class="footer footer-default">
 
