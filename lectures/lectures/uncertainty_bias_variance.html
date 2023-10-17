@@ -438,6 +438,7 @@ Phil Solimine
 <li><a href="#/confidence-intervals" id="/toc-confidence-intervals">Confidence Intervals</a></li>
 <li><a href="#/hypothesis-testing" id="/toc-hypothesis-testing">Hypothesis Testing</a></li>
 <li><a href="#/p-values" id="/toc-p-values">P-Values</a></li>
+<li><a href="#/monte-carlo-methods-and-bootstrapping" id="/toc-monte-carlo-methods-and-bootstrapping">Monte-Carlo Methods and Bootstrapping</a></li>
 <li><a href="#/the-bias-variance-tradeoff" id="/toc-the-bias-variance-tradeoff">The Bias-Variance Tradeoff</a></li>
 </ul>
 </nav>
@@ -527,7 +528,7 @@ Phil Solimine
 <li><p>To see why this might be important, let’s look at an example.</p></li>
 <li><p>For this, we will use a dataset that contains ENEM scores for students in Brazil, from different schools, over a three year time period.</p></li>
 </ul>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"./data/enem_scores.csv"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2"></a>df.sort_values(by<span class="op">=</span><span class="st">"avg_score"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -605,7 +606,7 @@ Phil Solimine
 <li>We want to discover if there is a relationship between school quality and student performance.</li>
 <li>As a first step, let’s split out the top 1% of schools by average score, and compare the number of students in those schools to the number of students in the rest of the schools.</li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="4">
+<div class="cell columns column-output-location" data-execution_count="3">
 <div class="column">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>plot_data <span class="op">=</span> (df</span>
 <span id="cb2-2"><a href="#cb2-2"></a>  .assign(top_school <span class="op">=</span> df[<span class="st">"avg_score"</span>] <span class="op">&gt;=</span> np.quantile(df[<span class="st">"avg_score"</span>], <span class="fl">.99</span>))</span>
@@ -624,7 +625,7 @@ Phil Solimine
 </section>
 <section id="standard-errors---example-1" class="slide level2">
 <h2>Standard Errors - Example</h2>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <p><img data-src="uncertainty_bias_variance_files/figure-revealjs/cell-5-output-1.png" width="642" height="331"></p>
 </div>
@@ -639,7 +640,7 @@ Phil Solimine
 <ul>
 <li>Now let’s take a look at the full distribution of scores by school size.</li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="6">
+<div class="cell columns column-output-location" data-execution_count="5">
 <div class="column">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>q_99 <span class="op">=</span> np.quantile(df[<span class="st">"avg_score"</span>], <span class="fl">.99</span>)</span>
 <span id="cb3-2"><a href="#cb3-2"></a>q_01 <span class="op">=</span> np.quantile(df[<span class="st">"avg_score"</span>], <span class="fl">.01</span>)</span>
@@ -660,7 +661,7 @@ Phil Solimine
 </section>
 <section id="standard-errors---example-3" class="slide level2">
 <h2>Standard Errors - Example</h2>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <p><img data-src="uncertainty_bias_variance_files/figure-revealjs/cell-7-output-1.png" width="910" height="254"></p>
 </div>
@@ -686,7 +687,7 @@ Phil Solimine
 <li>Alpert et al.&nbsp;2016 <em>AER</em>. A Randomized Assessment of Online Learning.</li>
 </ul></li>
 </ul>
-<div class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 <style scoped="">
@@ -771,7 +772,7 @@ Phil Solimine
 <ul>
 <li>Since these data come from an RCT, we can estimate the ATE by simply comparing the average scores of the different treatment groups.</li>
 </ul>
-<div class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>(data</span>
 <span id="cb4-2"><a href="#cb4-2"></a> .assign(class_format <span class="op">=</span> np.select(</span>
 <span id="cb4-3"><a href="#cb4-3"></a>  [data[<span class="st">"format_ol"</span>].astype(<span class="bu">bool</span>), data[<span class="st">"format_blended"</span>].astype(<span class="bu">bool</span>)],</span>
@@ -874,7 +875,7 @@ Phil Solimine
 </section>
 <section id="standard-errors-in-a-causal-context-2" class="slide level2">
 <h2>Standard Errors in a Causal Context</h2>
-<div class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 <style scoped="">
@@ -969,7 +970,7 @@ Phil Solimine
 <ul>
 <li>For reference, the averages of these variables are:</li>
 </ul>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 <style scoped="">
@@ -1028,7 +1029,7 @@ Phil Solimine
 <ul>
 <li>Now let’s take a closer look at the average scores by treatment group.</li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="12">
+<div class="cell columns column-output-location" data-execution_count="11">
 <div class="column">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>exam_scores <span class="op">=</span> (data</span>
 <span id="cb5-2"><a href="#cb5-2"></a> .assign(class_format <span class="op">=</span> np.select(</span>
@@ -1052,7 +1053,7 @@ Name: falsexam, dtype: float64</code></pre>
 <ul>
 <li>Since these data come from an RCT, we can estimate the ATE by simply comparing the average scores of the different treatment groups, relative to the control group (face-to-face).</li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="13">
+<div class="cell columns column-output-location" data-execution_count="12">
 <div class="column">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="bu">print</span>(<span class="ss">f"Online format changed test scores by </span><span class="sc">{</span>(exam_scores[<span class="st">'online'</span>] <span class="op">-</span> exam_scores[<span class="st">'face_to_face'</span>])<span class="sc">:.4}</span><span class="ss"> points."</span>)</span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="bu">print</span>(<span class="ss">f"Blended format changed test scores by </span><span class="sc">{</span>(exam_scores[<span class="st">'blended'</span>] <span class="op">-</span> exam_scores[<span class="st">'face_to_face'</span>])<span class="sc">:.4}</span><span class="ss"> points."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1077,7 +1078,7 @@ Blended format changed test scores by -1.454 points.</code></pre>
 <li>Having a low standard error (relative to the size of the effect) gives us more <em>confidence</em> that the estimate is correct.</li>
 </ul></li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="14">
+<div class="cell columns column-output-location" data-execution_count="13">
 <div class="column">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>online <span class="op">=</span> data.query(<span class="st">"format_ol==1"</span>)[<span class="st">"falsexam"</span>]</span>
 <span id="cb9-2"><a href="#cb9-2"></a>face_to_face <span class="op">=</span> data.query(<span class="st">"format_ol==0 &amp; format_blended==0"</span>)[<span class="st">"falsexam"</span>]</span>
@@ -1118,7 +1119,7 @@ SE for Face to Face: 0.872 points</code></pre>
 <li>Imagine it is a normal distribution with a true mean of 74 and a true standard deviation of 2.</li>
 <li>We can simulate a sample of 500 students from this distribution and calculate the sample average.</li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="15">
+<div class="cell columns column-output-location" data-execution_count="14">
 <div class="column">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">def</span> run_experiment(): </span>
 <span id="cb11-2"><a href="#cb11-2"></a>    <span class="cf">return</span> np.random.normal(<span class="dv">74</span>, <span class="dv">2</span>, <span class="dv">500</span>)</span>
@@ -1141,17 +1142,18 @@ SE for Face to Face: 0.872 points</code></pre>
 <ul>
 <li>Let’s try the same thing, but with the data coming from a uniform distribution.</li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="16">
+<div class="cell columns column-output-location" data-execution_count="15">
 <div class="column">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">def</span> run_experiment_unif(): </span>
-<span id="cb12-2"><a href="#cb12-2"></a>    <span class="cf">return</span> np.random.uniform(<span class="dv">64</span>, <span class="dv">84</span>, <span class="dv">500</span>)</span>
-<span id="cb12-3"><a href="#cb12-3"></a></span>
-<span id="cb12-4"><a href="#cb12-4"></a>np.random.seed(<span class="dv">42</span>)</span>
-<span id="cb12-5"><a href="#cb12-5"></a></span>
-<span id="cb12-6"><a href="#cb12-6"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="fl">2.5</span>))</span>
-<span id="cb12-7"><a href="#cb12-7"></a>freq, bins, img <span class="op">=</span> plt.hist([run_experiment_unif().mean() <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>)], bins<span class="op">=</span><span class="dv">40</span>, label<span class="op">=</span><span class="st">"Experiment Means"</span>)</span>
-<span id="cb12-8"><a href="#cb12-8"></a>plt.vlines(<span class="dv">74</span>, ymin<span class="op">=</span><span class="dv">0</span>, ymax<span class="op">=</span>freq.<span class="bu">max</span>(), linestyles<span class="op">=</span><span class="st">"dashed"</span>, label<span class="op">=</span><span class="st">"True Mean"</span>, color<span class="op">=</span><span class="st">"orange"</span>)</span>
-<span id="cb12-9"><a href="#cb12-9"></a>plt.legend()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># these numbers are not realistic, but they have average 74</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">def</span> run_experiment_unif(): </span>
+<span id="cb12-3"><a href="#cb12-3"></a>    <span class="cf">return</span> np.random.uniform(<span class="dv">64</span>, <span class="dv">84</span>, <span class="dv">500</span>)</span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
+<span id="cb12-5"><a href="#cb12-5"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="fl">2.5</span>))</span>
+<span id="cb12-8"><a href="#cb12-8"></a>freq, bins, img <span class="op">=</span> plt.hist([run_experiment_unif().mean() <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>)], bins<span class="op">=</span><span class="dv">40</span>, label<span class="op">=</span><span class="st">"Experiment Means"</span>)</span>
+<span id="cb12-9"><a href="#cb12-9"></a>plt.vlines(<span class="dv">74</span>, ymin<span class="op">=</span><span class="dv">0</span>, ymax<span class="op">=</span>freq.<span class="bu">max</span>(), linestyles<span class="op">=</span><span class="st">"dashed"</span>, label<span class="op">=</span><span class="st">"True Mean"</span>, color<span class="op">=</span><span class="st">"orange"</span>)</span>
+<span id="cb12-10"><a href="#cb12-10"></a>plt.legend()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-display">
 <p><img data-src="uncertainty_bias_variance_files/figure-revealjs/cell-16-output-1.png" width="728" height="236"></p>
@@ -1181,7 +1183,7 @@ SE for Face to Face: 0.872 points</code></pre>
 <ul>
 <li>These confidence intervals would look something like this:</li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="17">
+<div class="cell columns column-output-location" data-execution_count="16">
 <div class="column">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>np.random.seed(<span class="dv">321</span>)</span>
 <span id="cb13-2"><a href="#cb13-2"></a>exp_data <span class="op">=</span> run_experiment()</span>
@@ -1211,7 +1213,7 @@ SE for Face to Face: 0.872 points</code></pre>
 <ul>
 <li>Back to our classroom experiment, we can construct the confidence interval for the mean exam score in both online and face-to-face formats.</li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="18">
+<div class="cell columns column-output-location" data-execution_count="17">
 <div class="column">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">def</span> ci(y: pd.Series):</span>
 <span id="cb15-2"><a href="#cb15-2"></a>    <span class="cf">return</span> (y.mean() <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> se(y), y.mean() <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> se(y))</span>
@@ -1294,7 +1296,7 @@ SE for Face to Face: 0.872 points</code></pre>
 <ul>
 <li><span class="math inline">\(H_0: \mu_{online} - \mu_{face-to-face} = 0\)</span></li>
 </ul></li>
-<li><p>The alternative hypothesis is that the difference in means is not zero.</p>
+<li><p>The alternative hypothesis is that the difference in means is <em>not</em> zero.</p>
 <ul>
 <li><span class="math inline">\(H_1: \mu_{online} - \mu_{face-to-face} \neq 0\)</span></li>
 </ul></li>
@@ -1302,13 +1304,13 @@ SE for Face to Face: 0.872 points</code></pre>
 <ul>
 <li>This is because we are using a two-sided test.</li>
 <li>We are testing if the difference is <em>different</em> from zero, not if it is <em>greater</em> or <em>less</em> than zero.</li>
-<li>Also, notice that the hypotheses are mutually exclusive and collectively exhaustive.</li>
+<li>The hypotheses are mutually exclusive and collectively exhaustive.</li>
 </ul></li>
 </ul>
 </section>
 <section id="hypothesis-testing-4" class="slide level2">
 <h2>Hypothesis Testing</h2>
-<div class="cell" data-execution_count="19">
+<div class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>diff_mu <span class="op">=</span> online.mean() <span class="op">-</span> face_to_face.mean()</span>
 <span id="cb17-2"><a href="#cb17-2"></a>diff_se <span class="op">=</span> np.sqrt(face_to_face.var()<span class="op">/</span><span class="bu">len</span>(face_to_face) <span class="op">+</span> online.var()<span class="op">/</span><span class="bu">len</span>(online))</span>
 <span id="cb17-3"><a href="#cb17-3"></a>ci <span class="op">=</span> (diff_mu <span class="op">-</span> <span class="fl">1.96</span><span class="op">*</span>diff_se, diff_mu <span class="op">+</span> <span class="fl">1.96</span><span class="op">*</span>diff_se)</span>
@@ -1317,7 +1319,7 @@ SE for Face to Face: 0.872 points</code></pre>
 <pre><code>(-8.376410208363385, -1.4480327880905248)</code></pre>
 </div>
 </div>
-<div class="cell columns column-output-location" data-execution_count="20">
+<div class="cell columns column-output-location" data-execution_count="19">
 <div class="column">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>x <span class="op">=</span> np.linspace(diff_mu <span class="op">-</span> <span class="dv">4</span><span class="op">*</span>diff_se, diff_mu <span class="op">+</span> <span class="dv">4</span><span class="op">*</span>diff_se, <span class="dv">100</span>)</span>
 <span id="cb19-2"><a href="#cb19-2"></a>y <span class="op">=</span> stats.norm.pdf(x, diff_mu, diff_se)</span>
@@ -1387,8 +1389,8 @@ SE for Face to Face: 0.872 points</code></pre>
 </ul></li>
 <li><p>The p-value is calculated by taking the area under the normal distribution curve that is more extreme than the test statistic.</p>
 <ul>
-<li>The p-values is <em>not</em> the probability that the null hypothesis is true (<span class="math inline">\(P(H_0)\mid data\)</span>).</li>
-<li>Instead it is the probability of observing the data, under the null (<span class="math inline">\(P(data)\mid H_0\)</span>).</li>
+<li>The p-values is <em>not</em> the probability that the null hypothesis is true <span class="math inline">\(P(H_0\mid data)\)</span>.</li>
+<li>Instead it is the probability of observing the data, under the null <span class="math inline">\(P(data\mid H_0)\)</span>.</li>
 </ul></li>
 </ul>
 </section>
@@ -1397,7 +1399,7 @@ SE for Face to Face: 0.872 points</code></pre>
 <ul>
 <li>Let’s calculate the p-value for our classroom experiment.</li>
 </ul>
-<div class="cell" data-execution_count="21">
+<div class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a>z <span class="op">=</span> diff_mu <span class="op">/</span> diff_se</span>
 <span id="cb20-2"><a href="#cb20-2"></a>p_value <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> stats.norm.cdf(z))</span>
 <span id="cb20-3"><a href="#cb20-3"></a><span class="bu">print</span>(<span class="ss">f"z-statistic: </span><span class="sc">{</span>z<span class="sc">:.3}</span><span class="ss">"</span>)</span>
@@ -1417,6 +1419,171 @@ p-value: 1.99</code></pre>
 </ul>
 </section></section>
 <section>
+<section id="monte-carlo-methods-and-bootstrapping" class="title-slide slide level1 center">
+<h1>Monte-Carlo Methods and Bootstrapping</h1>
+
+</section>
+<section id="monte-carlo-methods" class="slide level2">
+<h2>Monte-Carlo Methods</h2>
+<ul>
+<li>We can use Monte-Carlo simulation to simulate the distribution of an estimator, and get some idea of how it will perform.
+<ul>
+<li>This is especially useful for estimators that are not asymptotically normal.</li>
+<li>For example the minimum or maximum of a uniform distribution is not asymptotically normal.</li>
+</ul></li>
+<li>Monte-Carlo simulations involve simulating the experiment many times, and calculating the estimator each time, similar to what we did with the <code>run_experiment</code> function before.
+<ul>
+<li>This knowledge can also be used to construct confidence intervals.</li>
+</ul></li>
+</ul>
+</section>
+<section id="monte-carlo-methods-1" class="slide level2">
+<h2>Monte-Carlo Methods</h2>
+<ul>
+<li>Let’s say that instead of the mean, we want to estimate the <code>maximum</code> parameter of a uniform distribution.
+<ul>
+<li><span class="math inline">\(X \sim U(0,\alpha)\)</span></li>
+<li><span class="math inline">\(\hat{\alpha} = \max_i(X_i)\)</span> (?)</li>
+</ul></li>
+<li>Note that this is an example of an estimator that is not based on a sample average.
+<ul>
+<li>Therefore, the CLT does not apply, and the estimator is <em>not</em> asymptotically normal.</li>
+</ul></li>
+<li>We can use the same type of simulations as before to get an idea of how this intuitive estimator is distributed.</li>
+</ul>
+</section>
+<section id="monte-carlo-methods-2" class="slide level2">
+<h2>Monte-Carlo Methods</h2>
+<div class="cell columns column-output-location" data-execution_count="21">
+<div class="column">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">def</span> run_experiment_unif(lb <span class="op">=</span> <span class="dv">0</span>, ub <span class="op">=</span> <span class="dv">100</span>): </span>
+<span id="cb22-2"><a href="#cb22-2"></a>    <span class="cf">return</span> np.random.uniform(lb, ub, <span class="dv">500</span>)</span>
+<span id="cb22-3"><a href="#cb22-3"></a></span>
+<span id="cb22-4"><a href="#cb22-4"></a>np.random.seed(<span class="dv">421</span>)</span>
+<span id="cb22-5"><a href="#cb22-5"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>))</span>
+<span id="cb22-6"><a href="#cb22-6"></a>max_estimates <span class="op">=</span> np.array([run_experiment_unif().<span class="bu">max</span>() <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>)])</span>
+<span id="cb22-7"><a href="#cb22-7"></a>freq, bins, img <span class="op">=</span> plt.hist(max_estimates, bins<span class="op">=</span><span class="dv">40</span>, label<span class="op">=</span><span class="st">"Experiment Minima"</span>)</span>
+<span id="cb22-8"><a href="#cb22-8"></a>plt.vlines(<span class="dv">100</span>, ymin<span class="op">=</span><span class="dv">0</span>, ymax<span class="op">=</span>freq.<span class="bu">max</span>(), label<span class="op">=</span><span class="st">"True Max"</span>, color<span class="op">=</span><span class="st">"green"</span>)</span>
+<span id="cb22-9"><a href="#cb22-9"></a>plt.vlines(np.mean(max_estimates), ymin<span class="op">=</span><span class="dv">0</span>, ymax<span class="op">=</span>freq.<span class="bu">max</span>(), linestyles<span class="op">=</span><span class="st">"dashed"</span>, label<span class="op">=</span><span class="st">"Expected Value of the Estimator"</span>, color<span class="op">=</span><span class="st">"orange"</span>)</span>
+<span id="cb22-10"><a href="#cb22-10"></a>plt.legend()<span class="op">;</span></span>
+<span id="cb22-11"><a href="#cb22-11"></a><span class="bu">print</span>(<span class="st">"The standard error of our estimator is approximately"</span>, np.std(max_estimates))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-stdout">
+<pre><code>The standard error of our estimator is approximately 0.20073906450653084</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img data-src="uncertainty_bias_variance_files/figure-revealjs/cell-22-output-2.png" width="497" height="431"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="monte-carlo-methods-3" class="slide level2">
+<h2>Monte-Carlo Methods</h2>
+<ul>
+<li>While the distribution of the estimator is not normal, we can still construct an empirical confidence interval by taking the quantiles of the distribution of the estimator.
+<ul>
+<li>This gives us some kind of measure of how uncertain we are about the true value of the parameter, given our estimate and the data we have.</li>
+</ul></li>
+<li>By looking at the graph, we can tell that this estimator is actually biased! Even though it is an intuitive (and consistent estimator), because we have a finite sample, the maximum of the sample is always going to be less than the true maximum.
+<ul>
+<li>What is the expected value of <span class="math inline">\(\max_i (X_i)\)</span>? (<em>it’s not <span class="math inline">\(\alpha\)</span>!</em>)</li>
+</ul></li>
+</ul>
+</section>
+<section id="monte-carlo-methods-4" class="slide level2">
+<h2>Monte-Carlo Methods</h2>
+<ul>
+<li>Another estimator that we could try is using <span class="math inline">\(\hat{\alpha}_2 = 2\bar{X}\)</span>
+<ul>
+<li>Since the lower bound is 0, the mean of the uniform distribution is <span class="math inline">\(\frac{\alpha}{2}\)</span>.</li>
+<li>The expected value <span class="math inline">\(E[\bar{X}] = \frac{\alpha}{2}\)</span>, so <span class="math inline">\(E[2\bar{X}] = \alpha\)</span>, and this estimator is actually unbiased.</li>
+</ul></li>
+<li>We can uses Monte-Carlo simulation to get an idea of how this estimator is distributed.</li>
+</ul>
+</section>
+<section id="monte-carlo-methods-5" class="slide level2">
+<h2>Monte-Carlo Methods</h2>
+<div class="cell columns column-output-location" data-execution_count="22">
+<div class="column">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>))</span>
+<span id="cb24-2"><a href="#cb24-2"></a>np.random.seed(<span class="dv">421</span>)</span>
+<span id="cb24-3"><a href="#cb24-3"></a>mean_estimates <span class="op">=</span> np.array([<span class="dv">2</span><span class="op">*</span>run_experiment_unif().mean() <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>)])</span>
+<span id="cb24-4"><a href="#cb24-4"></a>freq, bins, img <span class="op">=</span> plt.hist(mean_estimates, bins<span class="op">=</span><span class="dv">40</span>, label<span class="op">=</span><span class="st">"Mean-based Estimator"</span>)</span>
+<span id="cb24-5"><a href="#cb24-5"></a>plt.vlines(<span class="dv">100</span>, ymin<span class="op">=</span><span class="dv">0</span>, ymax<span class="op">=</span>freq.<span class="bu">max</span>(), label<span class="op">=</span><span class="st">"True Max"</span>, color<span class="op">=</span><span class="st">"green"</span>)</span>
+<span id="cb24-6"><a href="#cb24-6"></a>plt.vlines(np.mean(mean_estimates), ymin<span class="op">=</span><span class="dv">0</span>, ymax<span class="op">=</span>freq.<span class="bu">max</span>(), linestyles<span class="op">=</span><span class="st">"dashed"</span>, label<span class="op">=</span><span class="st">"Expected Value of the Mean-based Estimator"</span>, color<span class="op">=</span><span class="st">"orange"</span>)</span>
+<span id="cb24-7"><a href="#cb24-7"></a>plt.legend()<span class="op">;</span></span>
+<span id="cb24-8"><a href="#cb24-8"></a><span class="bu">print</span>(<span class="st">"The standard error of our mean-based estimator is approximately"</span>, np.std(mean_estimates))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-stdout">
+<pre><code>The standard error of our mean-based estimator is approximately 2.580268375420416</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img data-src="uncertainty_bias_variance_files/figure-revealjs/cell-23-output-2.png" width="524" height="431"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="bootstrapping" class="slide level2">
+<h2>Bootstrapping</h2>
+<ul>
+<li>Monte-carlo is a good option when we know the distribution of the estimator, but what if we don’t?</li>
+<li>In this case, we can use <strong>bootstrapping</strong> to construct confidence intervals.
+<ul>
+<li>Bootstrapping is a non-parametric method for estimating the distribution of an estimator.</li>
+<li>It is based on the idea of <strong>resampling</strong> the data.</li>
+</ul></li>
+<li>Resampling is to create a new sample by drawing observations from the original sample <em>with replacement</em>.
+<ul>
+<li>This means that some observations will be sampled more than once, and some will not be sampled at all.</li>
+<li>The new sample will be the same size as the original sample.</li>
+</ul></li>
+<li>Let’s see what this would look like in our uniform distribution example</li>
+</ul>
+</section>
+<section id="bootstrapping-1" class="slide level2">
+<h2>Bootstrapping</h2>
+<div class="cell columns column-output-location" data-execution_count="23">
+<div class="column">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>))</span>
+<span id="cb26-2"><a href="#cb26-2"></a>experiment <span class="op">=</span> run_experiment_unif(ub<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb26-3"><a href="#cb26-3"></a>resample <span class="op">=</span> <span class="kw">lambda</span> sample_size: np.random.choice(run_experiment_unif(), size<span class="op">=</span>sample_size, replace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb26-4"><a href="#cb26-4"></a>mean_estimates <span class="op">=</span> np.array([<span class="dv">2</span><span class="op">*</span>resample(<span class="dv">500</span>).mean() <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>)])</span>
+<span id="cb26-5"><a href="#cb26-5"></a>max_estimates <span class="op">=</span> np.array([resample(<span class="dv">500</span>).<span class="bu">max</span>() <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>)])</span>
+<span id="cb26-6"><a href="#cb26-6"></a>freq, bins, img <span class="op">=</span> plt.hist(mean_estimates, bins<span class="op">=</span><span class="dv">40</span>, label<span class="op">=</span><span class="st">"Mean-based Estimator"</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb26-7"><a href="#cb26-7"></a>freq2,bins2,img2 <span class="op">=</span> plt.hist(max_estimates, bins<span class="op">=</span><span class="dv">40</span>, label<span class="op">=</span><span class="st">"Max-based Estimator"</span>, color<span class="op">=</span><span class="st">"red"</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb26-8"><a href="#cb26-8"></a>plt.vlines(<span class="dv">100</span>, ymin<span class="op">=</span><span class="dv">0</span>, ymax<span class="op">=</span>freq2.<span class="bu">max</span>(), label<span class="op">=</span><span class="st">"True Max"</span>, color<span class="op">=</span><span class="st">"green"</span>)</span>
+<span id="cb26-9"><a href="#cb26-9"></a>plt.vlines(np.mean(mean_estimates), ymin<span class="op">=</span><span class="dv">0</span>, ymax<span class="op">=</span>freq2.<span class="bu">max</span>(), linestyles<span class="op">=</span><span class="st">"dashed"</span>, label<span class="op">=</span><span class="st">"Expected Value of the Mean-based Estimator"</span>, color<span class="op">=</span><span class="st">"blue"</span>)</span>
+<span id="cb26-10"><a href="#cb26-10"></a>plt.vlines(np.mean(max_estimates), ymin<span class="op">=</span><span class="dv">0</span>, ymax<span class="op">=</span>freq2.<span class="bu">max</span>(), linestyles<span class="op">=</span><span class="st">"dashed"</span>, label<span class="op">=</span><span class="st">"Expected Value of the Max-based Estimator"</span>, color<span class="op">=</span><span class="st">"red"</span>)</span>
+<span id="cb26-11"><a href="#cb26-11"></a>plt.legend()<span class="op">;</span></span>
+<span id="cb26-12"><a href="#cb26-12"></a><span class="bu">print</span>(<span class="st">"The bootstrap standard error of our mean-based estimator is approximately"</span>, np.std(mean_estimates))</span>
+<span id="cb26-13"><a href="#cb26-13"></a><span class="bu">print</span>(<span class="st">"The bootstrap standard error of our max-based estimator is approximately"</span>, np.std(max_estimates))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-stdout">
+<pre><code>The bootstrap standard error of our mean-based estimator is approximately 3.622011142890086
+The bootstrap standard error of our max-based estimator is approximately 0.31176197251081217</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img data-src="uncertainty_bias_variance_files/figure-revealjs/cell-24-output-2.png" width="516" height="431"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="bootstrapping-2" class="slide level2">
+<h2>Bootstrapping</h2>
+<ul>
+<li>Bootstrapping can be a good way to approximate the distribution of an estimator when we don’t have an analytical solution.
+<ul>
+<li>However, it can be computationally expensive, since we need to run the estimation many times.</li>
+</ul></li>
+<li>In practice, “not knowing the distribution of the estimator” means either that
+<ul>
+<li>We don’t know the distribution of the estimator because it comes from a complicated structural model, is not based on a sample average, or is not asymptotically normal.</li>
+<li>We don’t have enough data to reasonably expect the CLT to apply.</li>
+</ul></li>
+<li>Generally, we can think of bootstrap errors as being a “coarse” approximation to the true standard errors. That is, they are likely to be larger than the asymptotic standard errors.</li>
+</ul>
+</section></section>
+<section>
 <section id="the-bias-variance-tradeoff" class="title-slide slide level1 center">
 <h1>The Bias-Variance Tradeoff</h1>
 
@@ -1431,12 +1598,13 @@ p-value: 1.99</code></pre>
 <li>An estimator with low variance will have high bias.</li>
 </ul></li>
 <li><p>While we generally want to minimize both bias and variance, it can often be the case that introducing a little bias will reduce the variance of the estimator by a large amount.</p></li>
+<li><p>If you are choosing between estimators that are consistent, then it might be ok to introduce a little bias if it buys you a lot of reduction in the variance.</p></li>
 </ul>
 </section>
 <section id="the-bias-variance-tradeoff-2" class="slide level2">
 <h2>The Bias-Variance Tradeoff</h2>
 <ul>
-<li><p>Let’s look at an example.</p></li>
+<li><p>Let’s look at another example.</p></li>
 <li><p>Rembember our first example of a biased estimator, the sample variance.</p></li>
 <li><p>The simple sample variance (without the Bessel correction) is biased because <span class="math inline">\(E[\frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2] = \frac{n-1}{n}\sigma^2\)</span>.</p>
 <ul>
@@ -1478,7 +1646,7 @@ p-value: 1.99</code></pre>
 <li>(<span class="math inline">\(Var(\hat{\sigma}_c^2)\)</span> is the variance of the estimator, or the square of its standard error.)</li>
 <li>Plugging in our formula for the variance, <span class="math inline">\(MSE(\hat{\sigma}^2_c) = (c(n-1)-1)^2 \sigma^4 + 2c^2 \sigma^4 (n-1)\)</span>.</li>
 </ul></li>
-<li>If we wanted to minimize the standard error of the estimate, instead of the bias, minimizing this standard error would actually lead us to choose <span class="math inline">\(c = \frac{1}{n+1}\)</span>.</li>
+<li>If we wanted to minimize the standard error of the estimate, instead of the bias, minimizing this MSE would actually lead us to choose <span class="math inline">\(c = \frac{1}{n+1}\)</span>.</li>
 </ul>
 </section>
 <section id="the-bias-variance-tradeoff-5" class="slide level2">
@@ -1486,27 +1654,27 @@ p-value: 1.99</code></pre>
 <ul>
 <li>Let’s plot the bias and variance of the estimator for different values of <span class="math inline">\(c\)</span>.</li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="22">
+<div class="cell columns column-output-location" data-execution_count="24">
 <div class="column">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">def</span> bias_sq(c,sigma<span class="op">=</span><span class="dv">5</span>,n<span class="op">=</span><span class="dv">10</span>):</span>
-<span id="cb22-2"><a href="#cb22-2"></a>    <span class="cf">return</span> (c <span class="op">*</span> (n<span class="op">-</span><span class="dv">1</span>)<span class="op">-</span><span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> sigma<span class="op">**</span><span class="dv">4</span></span>
-<span id="cb22-3"><a href="#cb22-3"></a></span>
-<span id="cb22-4"><a href="#cb22-4"></a><span class="kw">def</span> mse(c,sigma<span class="op">=</span><span class="dv">5</span>,n<span class="op">=</span><span class="dv">10</span>):</span>
-<span id="cb22-5"><a href="#cb22-5"></a>    <span class="cf">return</span> (c<span class="op">*</span>(n<span class="op">-</span><span class="dv">1</span>)<span class="op">-</span><span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> sigma<span class="op">**</span><span class="dv">4</span> <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> c<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> sigma<span class="op">**</span><span class="dv">4</span> <span class="op">*</span> (n<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb22-6"><a href="#cb22-6"></a></span>
-<span id="cb22-7"><a href="#cb22-7"></a>n <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb22-8"><a href="#cb22-8"></a>sigma <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb22-9"><a href="#cb22-9"></a>c <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">100</span>)</span>
-<span id="cb22-10"><a href="#cb22-10"></a>plt.plot(c, bias_sq(c), label<span class="op">=</span><span class="st">"Bias Squared"</span>)</span>
-<span id="cb22-11"><a href="#cb22-11"></a>plt.plot(c, mse(c), label<span class="op">=</span><span class="st">"MSE"</span>, color <span class="op">=</span> <span class="st">"red"</span>)</span>
-<span id="cb22-12"><a href="#cb22-12"></a>plt.vlines(<span class="dv">1</span><span class="op">/</span>(n<span class="op">-</span><span class="dv">1</span>), ymin<span class="op">=</span><span class="dv">0</span>, ymax<span class="op">=</span><span class="dv">800</span>, linestyles<span class="op">=</span><span class="st">"dashed"</span>, label<span class="op">=</span><span class="st">"1/(n-1)"</span>)</span>
-<span id="cb22-13"><a href="#cb22-13"></a>plt.vlines(<span class="dv">1</span><span class="op">/</span>(n<span class="op">+</span><span class="dv">1</span>), ymin<span class="op">=</span><span class="dv">0</span>, ymax<span class="op">=</span><span class="dv">800</span>, linestyles<span class="op">=</span><span class="st">"dashed"</span>, color <span class="op">=</span> <span class="st">"red"</span>, label<span class="op">=</span><span class="st">"1/(n+1)"</span>)</span>
-<span id="cb22-14"><a href="#cb22-14"></a></span>
-<span id="cb22-15"><a href="#cb22-15"></a>plt.legend()</span>
-<span id="cb22-16"><a href="#cb22-16"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">def</span> bias_sq(c,sigma<span class="op">=</span><span class="dv">5</span>,n<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="cb28-2"><a href="#cb28-2"></a>    <span class="cf">return</span> (c <span class="op">*</span> (n<span class="op">-</span><span class="dv">1</span>)<span class="op">-</span><span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> sigma<span class="op">**</span><span class="dv">4</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a></span>
+<span id="cb28-4"><a href="#cb28-4"></a><span class="kw">def</span> mse(c,sigma<span class="op">=</span><span class="dv">5</span>,n<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="cb28-5"><a href="#cb28-5"></a>    <span class="cf">return</span> (c<span class="op">*</span>(n<span class="op">-</span><span class="dv">1</span>)<span class="op">-</span><span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> sigma<span class="op">**</span><span class="dv">4</span> <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> c<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> sigma<span class="op">**</span><span class="dv">4</span> <span class="op">*</span> (n<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb28-6"><a href="#cb28-6"></a></span>
+<span id="cb28-7"><a href="#cb28-7"></a>n <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb28-8"><a href="#cb28-8"></a>sigma <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb28-9"><a href="#cb28-9"></a>c <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">100</span>)</span>
+<span id="cb28-10"><a href="#cb28-10"></a>plt.plot(c, bias_sq(c), label<span class="op">=</span><span class="st">"Bias Squared"</span>)</span>
+<span id="cb28-11"><a href="#cb28-11"></a>plt.plot(c, mse(c), label<span class="op">=</span><span class="st">"MSE"</span>, color <span class="op">=</span> <span class="st">"red"</span>)</span>
+<span id="cb28-12"><a href="#cb28-12"></a>plt.vlines(<span class="dv">1</span><span class="op">/</span>(n<span class="op">-</span><span class="dv">1</span>), ymin<span class="op">=</span><span class="dv">0</span>, ymax<span class="op">=</span><span class="dv">800</span>, linestyles<span class="op">=</span><span class="st">"dashed"</span>, label<span class="op">=</span><span class="st">"1/(n-1)"</span>)</span>
+<span id="cb28-13"><a href="#cb28-13"></a>plt.vlines(<span class="dv">1</span><span class="op">/</span>(n<span class="op">+</span><span class="dv">1</span>), ymin<span class="op">=</span><span class="dv">0</span>, ymax<span class="op">=</span><span class="dv">800</span>, linestyles<span class="op">=</span><span class="st">"dashed"</span>, color <span class="op">=</span> <span class="st">"red"</span>, label<span class="op">=</span><span class="st">"1/(n+1)"</span>)</span>
+<span id="cb28-14"><a href="#cb28-14"></a></span>
+<span id="cb28-15"><a href="#cb28-15"></a>plt.legend(loc<span class="op">=</span><span class="st">"upper left"</span>)</span>
+<span id="cb28-16"><a href="#cb28-16"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-display">
-<p><img data-src="uncertainty_bias_variance_files/figure-revealjs/cell-22-output-1.png" width="895" height="431"></p>
+<p><img data-src="uncertainty_bias_variance_files/figure-revealjs/cell-25-output-1.png" width="895" height="431"></p>
 </div>
 </div>
 </div>

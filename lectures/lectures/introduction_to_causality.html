@@ -1061,6 +1061,19 @@ Phil Solimine
 </section>
 <section id="estimating-treatment-effects-without-randomization-1" class="slide level2">
 <h2>Estimating Treatment Effects Without Randomization</h2>
+<ul>
+<li><p>Many identification assumptions are based on the idea of <strong>selection on observables</strong></p>
+<ul>
+<li>This means that the treatment assignment is independent of the potential outcomes <em>conditional</em> on the observed covariates</li>
+<li>In other words, <span class="math inline">\(Y_0\)</span> and <span class="math inline">\(Y_1\)</span> are independent of <span class="math inline">\(T\)</span> conditional on <span class="math inline">\(X\)</span></li>
+</ul></li>
+<li><p>This allows us to do things like <strong>match</strong> units in the treatment and control groups that are similar on average</p>
+<ul>
+<li>We can then estimate the treatment effect by comparing the outcomes of the matched units, assuming that the matched units are similar on average</li>
+</ul></li>
+<li><p>Another option is to use <strong>instrumental variables</strong> to estimate the treatment effect</p></li>
+<li><p>Alternatively, a <strong>structural model</strong> can be used to estimate the treatment effect by integrating a theoretical model to fill in the missing counterfactuals</p></li>
+</ul>
 
 <div class="footer footer-default">
 
