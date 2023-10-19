@@ -10,7 +10,6 @@
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.450">
 
-  <meta name="author" content="Jesse Perla">
   <meta name="author" content="Phil Solimine">
   <title>ECON 526 Lectures - ECON526: Quantitative Economics with Data Science Applications</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -311,6 +310,7 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
+      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -387,9 +387,6 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
   <style>
   .reveal .custom3070 > div.column:first-child {
     width: 30%;
@@ -403,6 +400,14 @@
   .reveal .custom4060 div.column:not(:first-child) {
     width: 60%;
   }
+  .two-col {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .col {
+    flex-basis: 48%;
+  }
   </style>
 </head>
 <body class="quarto-light">
@@ -411,20 +416,9 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">ECON526: Quantitative Economics with Data Science Applications</h1>
-  <p class="subtitle">Introduction to Causality</p>
+  <p class="subtitle">Directed Graphical Models and Causality</p>
 
 <div class="quarto-title-authors">
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-Jesse Perla 
-</div>
-<div class="quarto-title-author-email">
-<a href="mailto:jesse.perla@ubc.ca">jesse.perla@ubc.ca</a>
-</div>
-        <p class="quarto-title-affiliation">
-            University of British Columbia
-          </p>
-    </div>
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
 Phil Solimine 
@@ -443,10 +437,11 @@ Phil Solimine
 <h2 id="toc-title">Table of contents</h2>
 <ul>
 <li><a href="#/overview" id="/toc-overview">Overview</a></li>
-<li><a href="#/introduction" id="/toc-introduction">Introduction</a></li>
-<li><a href="#/potential-outcomes-framework" id="/toc-potential-outcomes-framework">Potential Outcomes Framework</a></li>
-<li><a href="#/bias" id="/toc-bias">Bias</a></li>
-<li><a href="#/randomized-experiments" id="/toc-randomized-experiments">Randomized Experiments</a></li>
+<li><a href="#/directed-graphical-models" id="/toc-directed-graphical-models">Directed Graphical Models</a></li>
+<li><a href="#/dependence-flows" id="/toc-dependence-flows">Dependence Flows</a></li>
+<li><a href="#/viualizing-bias" id="/toc-viualizing-bias">Viualizing Bias</a></li>
+<li><a href="#/confounding" id="/toc-confounding">Confounding</a></li>
+<li><a href="#/selection" id="/toc-selection">Selection</a></li>
 </ul>
 </nav>
 </section>
@@ -458,626 +453,461 @@ Phil Solimine
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <ul>
-<li><p>Introduction and motivation for causal inference and randomization</p></li>
-<li><p>We will introduce the concepts of treatment effects, potential outcomes, and the fundamental problem of causal inference</p></li>
-<li><p>Material includes much adapted from <a href="https://matheusfacure.github.io/python-causality-handbook/01-Introduction-To-Causality.html">Causal Inference for the Brave and True: Introduction to Causality</a></p></li>
-<li><p>Using the following packages and definitions</p></li>
+<li><p>Previously in the course, we talked at a high level about some of the barriers to causal inference</p></li>
+<li><p>We used the potential outcomes framework to discuss the idea of a treatment effect</p></li>
+<li><p>Then we discussed the idea of a randomized experiment as a way to identify a treatment effect</p>
+<ul>
+<li>However, we mentioned that there are many situations where we cannot run a randomized experiment</li>
+</ul></li>
+<li><p>Today, we will discuss the idea of using a <strong>graphical model</strong> as a way to analyze whether you can truly identify a treatment effect</p></li>
 </ul>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="im">from</span> scipy.special <span class="im">import</span> expit</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="im">from</span> matplotlib <span class="im">import</span> style</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section>
+<section>
+<section id="directed-graphical-models" class="title-slide slide level1 center">
+<h1>Directed Graphical Models</h1>
+
+</section>
+<section id="conditional-independence" class="slide level2">
+<h2>Conditional Independence</h2>
+<ul>
+<li>Recall that two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>conditionally independent</strong> given a third random variable <span class="math inline">\(Z\)</span> if and only if the following holds:
+<ul>
+<li><span class="math inline">\(P(X|Z) = P(X|Z\cap Y)\)</span></li>
+<li>Equivalently, <span class="math inline">\(P(X\cap Y| Z) = P(X|Z)P(Y|Z)\)</span></li>
+<li>We will denote this as <span class="math inline">\(X \perp Y | Z\)</span></li>
+</ul></li>
+<li>In the context of potential outcomes, we require that <span class="math inline">\((Y_0, Y_1) \perp T | X\)</span>
+<ul>
+<li>This means that the potential outcomes are independent of the treatment assignment, given the covariates</li>
+</ul></li>
+</ul>
+</section>
+<section id="directed-graphical-models-1" class="slide level2">
+<h2>Directed Graphical Models</h2>
+<ul>
+<li><p>Complete independence is rare in complex systems. However, we can often find conditional independence relationships, that help inform our choice of statistical model.</p></li>
+<li><p>We can visualize conditional independence relationships using a <strong>Bayesian</strong> or <strong>directed graphical model</strong></p></li>
+<li><p>A Bayesian graphical model is a directed graph where:</p>
+<ul>
+<li>The nodes represent random variables</li>
+<li>The edges represent conditional independence relationships</li>
+</ul></li>
+</ul>
+</section>
+<section id="directed-graphical-models-2" class="slide level2">
+<h2>Directed Graphical Models</h2>
+<ul>
+<li>A directed graphical model might look something like this:</li>
+</ul>
+<div class="cell columns column-output-location" data-execution_count="2">
+<div class="column">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> graphviz <span class="im">as</span> gr</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a>g <span class="op">=</span> gr.Digraph()</span>
+<span id="cb1-4"><a href="#cb1-4"></a>g.node(<span class="st">'X'</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>g.node(<span class="st">'Y'</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a>g.node(<span class="st">'Z'</span>)</span>
+<span id="cb1-7"><a href="#cb1-7"></a>g.edge(<span class="st">'X'</span>, <span class="st">'Y'</span>)</span>
+<span id="cb1-8"><a href="#cb1-8"></a>g.edge(<span class="st">'Z'</span>, <span class="st">'Y'</span>)</span>
+<span id="cb1-9"><a href="#cb1-9"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-display" data-execution_count="1">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-2-output-1.svg"></p>
 </div>
-</section></section>
-<section>
-<section id="introduction" class="title-slide slide level1 center">
-<h1>Introduction</h1>
-
-</section>
-<section id="prediction-and-inference" class="slide level2">
-<h2>Prediction and Inference</h2>
+</div>
+</div>
 <ul>
-<li>Machine learning is often criticized as being only about “prediction” and sometimes “inference”
+<li>Here, we have three random variables: <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span>, and <span class="math inline">\(Z\)</span>
 <ul>
-<li>This isn’t quite true, but it provides a good starting point to ask what prediction really means</li>
-</ul></li>
-<li>“Inference” is used in different ways within ML and datascience
-<ul>
-<li>Sometimes the “point estimate” of some <span class="math inline">\(\hat{f}(X)\)</span> approximation even if we think <span class="math inline">\(y = f(X) + \epsilon\)</span> is the true model</li>
-<li>Other times means the entire distribution of <span class="math inline">\(y\)</span> given <span class="math inline">\(X\)</span> (e.g., Bayesian inference) or some approximation around the mean with normal covariance (confidence intervals)</li>
-</ul></li>
-<li>But prefer thinking in probabilities. If there was some true <span class="math inline">\(f(\cdot)\)</span> function,
-<ul>
-<li>Take some <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> and want to find the distribution <span class="math inline">\(y \sim \mathbb{P}(f(X_1, X_2)\,|\,X_2)\)</span></li>
+<li><span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span> are independent</li>
+<li><span class="math inline">\(Y\)</span> depends on both <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span></li>
 </ul></li>
 </ul>
 </section>
-<section id="forecasts-and-prediction" class="slide level2">
-<h2>Forecasts and Prediction</h2>
+<section id="directed-graphical-models-3" class="slide level2">
+<h2>Directed Graphical Models</h2>
 <ul>
-<li>The key becomes the distribution itself and what you can and can’t condition on. e.g.&nbsp;permissable <span class="math inline">\(X_2\)</span> values</li>
-<li>From this perspective, prediction is just an unconditional evaluation of the probability distribution, maybe the mean, a sample from it, or with confidence intervals - and not really special
-<ul>
-<li>The question is whether you have the right joint distribution!</li>
-</ul></li>
-<li>Forecasts typically just condition on the past observations, but could condition on future events
-<ul>
-<li>i.e., how might GDP grow if a tax cut is passed in 3 years</li>
-</ul></li>
+<li>Here is a more realistic example:</li>
 </ul>
-</section>
-<section id="counterfactuals-what-if" class="slide level2">
-<h2>Counterfactuals: “What If?”</h2>
-<ul>
-<li>Most interesting problems in economics are about counterfactuals in one way or another
-<ul>
-<li>What would have happened to the economy if the government had not intervened?</li>
-<li>What would have been her income if she had not gone to college, or if she wasn’t subjected to gender bias?</li>
-</ul></li>
-<li>By definition these are not observable. If we had the data we wouldn’t need to ponder “What if?”. How? One way or another….</li>
-</ul>
-<center>
-<strong>YOU HAVE TO MAKE $HIT UP</strong>
-</center>
-</section>
-<section id="the-role-of-theory" class="slide level2">
-<h2>The Role of Theory</h2>
-<ul>
-<li>There is no data interpretation without some theory - even if it is sometimes implicit</li>
-<li>The role of both data and theory is then to help constrain the set of possible counterfactual</li>
-<li>So any criticisms of ML as “merely prediction” are basically a statement on whether the theory makes sense
-<ul>
-<li>i.e., if you fit <span class="math inline">\(y = f(X) + \epsilon\)</span> on data to find a <span class="math inline">\(\hat{f}(X)\)</span> function, then theory tells you if you made the right assumptions (e.g., that the <span class="math inline">\(X\)</span> data is representative and wouldn’t change for your counterfactual of interest, etc)</li>
-</ul></li>
-<li>Some models (e.g., random assignment) have easier to swallow assumptions than others.</li>
-</ul>
-</section>
-<section id="approaches" class="slide level2">
-<h2>Approaches</h2>
-<ul>
-<li>Always remember: you need assumptions in one form or another because the counterfactuals are inherently not factual</li>
-<li>Broadly there are three approaches to conducting counterfactuals. They are not mutually exclusive
-<ol type="1">
-<li>Structural models: i.e.&nbsp;emphasize theory + data to put structure on the joint distribution of <span class="math inline">\(\mathbb{P}(X_1, X_2)\)</span></li>
-<li>Causal inference using matching, instrumental variables, etc. which use theoretical assumptions on independence to adjust for bias and missing latents</li>
-<li>Randomized Experiments/Treatment Effects where you can get good data which truly randomizes some sort of “treatment”.</li>
-</ol></li>
-</ul>
-</section>
-<section id="why-do-people-love-randomized-experiments" class="slide level2">
-<h2>Why do People Love Randomized Experiments?</h2>
-<ul>
-<li>Because the assumptions are often easy to believe if you trust your random assignment
-<ul>
-<li>It often requires fewer assumptions beyond random assignment - for better or worse</li>
-</ul></li>
-<li>However:
-<ul>
-<li>They are not always possible, and even when they are, they are not always ethical</li>
-<li>And even when possible and ethical, the inherent difficulty in randomization means it has limited scope and generalizability. i.e., you can learn an effect in one circumstance, but how common are those exact circumstances?</li>
-</ul></li>
-</ul>
-</section></section>
-<section>
-<section id="potential-outcomes-framework" class="title-slide slide level1 center">
-<h1>Potential Outcomes Framework</h1>
-
-</section>
-<section id="treatments" class="slide level2">
-<h2>Treatments</h2>
-<ul>
-<li>A coherent approach, which fits will with randomized trials, is to emphasize “treatment”. This means conditioning on binaries. Language/tools best thought of in terms of pharmaceutical trails
-<ul>
-<li>Call the value <span class="math inline">\(T_i \in \{0,1\}\)</span> as the treatment</li>
-<li>Let <span class="math inline">\(Y_i(T_i)\)</span> be the observed outcome</li>
-<li>Let <span class="math inline">\(Y_i(0)\)</span> be the outcome if <span class="math inline">\(T_i = 0\)</span></li>
-<li>Let <span class="math inline">\(Y_i(1)\)</span> be the outcome if <span class="math inline">\(T_i = 1\)</span></li>
-</ul></li>
-<li>The key: <strong>you never get to see both</strong>. One is always counterfactual</li>
-</ul>
-</section>
-<section id="potential-outcomes" class="slide level2">
-<h2>Potential Outcomes</h2>
-<ul>
-<li>Many economic questions posed as: what would have happened if <span class="math inline">\(T_i\)</span> was different for person <span class="math inline">\(i\)</span>? (or country <span class="math inline">\(i\)</span>, etc)</li>
-<li>A “structural” model might be able to help answer that question, but might require a lot of assumptions on the underlying structure of <span class="math inline">\(i\)</span></li>
-<li>Alternatively, maybe we can make fewer (or different) assumptions and ask:
-<ul>
-<li><strong>Average Treatment Effect</strong>: <span class="math inline">\(\mathbb{E}[Y_i(1) - Y_i(0)]\)</span></li>
-<li><strong>Average Treatment Effect on the Treated</strong>: <span class="math inline">\(\mathbb{E}[Y_i(1) - Y_i(0)\,|\,T_i = 1]\)</span></li>
-</ul></li>
-<li>Note here that we are taking expectations over the distribution of <span class="math inline">\(i\)</span>. Hides lots of probability.</li>
-</ul>
-</section>
-<section id="potential-outcomes-framework-1" class="slide level2">
-<h2>Potential Outcomes Framework</h2>
-<ul>
-<li>The potential outcomes framework is a way to formalize causal inference</li>
-<li>It involves defining potential outcomes <span class="math inline">\(Y_{0i}\)</span> and <span class="math inline">\(Y_{1i}\)</span> for each unit under different treatment conditions</li>
-<li>The treatment variable <span class="math inline">\(T_i\)</span> is a binary variable that indicates whether unit <span class="math inline">\(i\)</span> receives the treatment (<span class="math inline">\(T_i = 1\)</span>) or not (<span class="math inline">\(T_i = 0\)</span>)</li>
-<li>The treatment effect on a unit of type <span class="math inline">\(i\)</span> is the difference between the potential outcomes under different treatment conditions: <span class="math inline">\(\tau_i = Y_{1i} - Y_{0i}\)</span></li>
-</ul>
-</section>
-<section id="treatment-effects" class="slide level2">
-<h2>Treatment Effects</h2>
-<ul>
-<li>We are generally intersted in treatment effects of the form <span class="math inline">\(\tau_i = Y_{1i} - Y_{0i}\)</span>. However, we cannot observe <em>both</em> potential outcomes for a given unit. Instead, we can estimate
-<ul>
-<li>The <strong>average treatment effect (ATE)</strong>, which is the average of the treatment effects across all units: <span class="math inline">\(\tau = E[Y_{1i} - Y_{0i}]\)</span></li>
-<li>The <strong>average treatment effect on the treated (ATT)</strong>, which is the average of the treatment effects for units that receive the treatment: <span class="math inline">\(\tau_{T} = E[Y_{1i} - Y_{0i} | T_i = 1]\)</span></li>
-</ul></li>
-<li>In randomized experiments, we can estimate the ATE and ATT using the difference in means between the treatment and control groups
-<ul>
-<li>Why is randomization important? To find out, let’s look at a stylized example</li>
-</ul></li>
-</ul>
-</section>
-<section id="a-stylized-example" class="slide level2">
-<h2>A Stylized Example</h2>
-<p>Let’s say that we are interested in calculating the effect of providing a tablet on the academic performance of students, measured by their test scores.</p>
-<p>In some strange universe, imagine that we are actually able to observe the outcome for each unit under both treatment conditions. Suppose the data look like this:</p>
 <div class="cell columns column-output-location" data-execution_count="3">
 <div class="column">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a>df <span class="op">=</span> pd.DataFrame(<span class="bu">dict</span>(</span>
-<span id="cb2-5"><a href="#cb2-5"></a>    i<span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],</span>
-<span id="cb2-6"><a href="#cb2-6"></a>    Y0<span class="op">=</span>[<span class="dv">500</span>,<span class="dv">600</span>,<span class="dv">800</span>,<span class="dv">700</span>],</span>
-<span id="cb2-7"><a href="#cb2-7"></a>    Y1<span class="op">=</span>[<span class="dv">450</span>,<span class="dv">600</span>,<span class="dv">600</span>,<span class="dv">750</span>],</span>
-<span id="cb2-8"><a href="#cb2-8"></a>    T<span class="op">=</span> [<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>],</span>
-<span id="cb2-9"><a href="#cb2-9"></a>    test_score<span class="op">=</span> [<span class="dv">500</span>,<span class="dv">600</span>,<span class="dv">600</span>,<span class="dv">750</span>]</span>
-<span id="cb2-10"><a href="#cb2-10"></a>))</span>
-<span id="cb2-11"><a href="#cb2-11"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>g <span class="op">=</span> gr.Digraph()</span>
+<span id="cb2-2"><a href="#cb2-2"></a>g.edge(<span class="st">"medicine"</span>, <span class="st">"survived"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>g.edge(<span class="st">"severeness"</span>, <span class="st">"survived"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a>g.edge(<span class="st">"severeness"</span>, <span class="st">"medicine"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-display" data-execution_count="2">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">i</th>
-<th data-quarto-table-cell-role="th">Y0</th>
-<th data-quarto-table-cell-role="th">Y1</th>
-<th data-quarto-table-cell-role="th">T</th>
-<th data-quarto-table-cell-role="th">test_score</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>1</td>
-<td>500</td>
-<td>450</td>
-<td>0</td>
-<td>500</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2</td>
-<td>600</td>
-<td>600</td>
-<td>0</td>
-<td>600</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>3</td>
-<td>800</td>
-<td>600</td>
-<td>1</td>
-<td>600</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>4</td>
-<td>700</td>
-<td>750</td>
-<td>1</td>
-<td>750</td>
-</tr>
-</tbody>
-</table>
-
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-3-output-1.svg"></p>
 </div>
 </div>
 </div>
-</div>
+<ul>
+<li>We use arrows to indicate the direction of the conditional independence relationship
+<ul>
+<li>For example, <span class="math inline">\(medicine \rightarrow survived\)</span> means that <span class="math inline">\(survived\)</span> depends on <span class="math inline">\(medicine\)</span>, but not the other way around</li>
+</ul></li>
+</ul>
 </section>
-<section id="a-stylized-example-1" class="slide level2">
-<h2>A Stylized Example</h2>
+<section id="directed-graphical-models-4" class="slide level2">
+<h2>Directed Graphical Models</h2>
+<ul>
+<li><p>Directed graphical models are useful because they allow us to visualize conditional independence relationships, which are often difficult to keep track of</p></li>
+<li><p>However, they are also useful because they allow us to determine whether or not we can identify a treatment effect.</p></li>
+<li><p>There are three very common sub-structures that appear in graphical models, that inform how dependence will flow through the model.</p></li>
+</ul>
+</section>
+<section id="directed-graphical-models-5" class="slide level2">
+<h2>Directed Graphical Models</h2>
+<p>Let’s look at a really simple example, which we could call a directed path:</p>
 <div class="cell columns column-output-location" data-execution_count="4">
 <div class="column">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>g <span class="op">=</span> gr.Digraph()</span>
+<span id="cb3-2"><a href="#cb3-2"></a>g.edge(<span class="st">"A"</span>, <span class="st">"B"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a>g.edge(<span class="st">"B"</span>, <span class="st">"C"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a>g.edge(<span class="st">"X"</span>, <span class="st">"Y"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6"></a>g.edge(<span class="st">"Y"</span>, <span class="st">"Z"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7"></a>g.node(<span class="st">"Y"</span>, <span class="st">"Y"</span>, fillcolor<span class="op">=</span><span class="st">"#5f5f5f5f"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a></span>
+<span id="cb3-10"><a href="#cb3-10"></a>g.edge(<span class="st">"causal knowledge"</span>, <span class="st">"solve problems"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11"></a>g.edge(<span class="st">"solve problems"</span>, <span class="st">"job promotion"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12"></a></span>
+<span id="cb3-13"><a href="#cb3-13"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-display" data-execution_count="3">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">i</th>
-<th data-quarto-table-cell-role="th">Y0</th>
-<th data-quarto-table-cell-role="th">Y1</th>
-<th data-quarto-table-cell-role="th">T</th>
-<th data-quarto-table-cell-role="th">test_score</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>1</td>
-<td>500</td>
-<td>450</td>
-<td>0</td>
-<td>500</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2</td>
-<td>600</td>
-<td>600</td>
-<td>0</td>
-<td>600</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>3</td>
-<td>800</td>
-<td>600</td>
-<td>1</td>
-<td>600</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>4</td>
-<td>700</td>
-<td>750</td>
-<td>1</td>
-<td>750</td>
-</tr>
-</tbody>
-</table>
-
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-4-output-1.svg"></p>
 </div>
 </div>
 </div>
-</div>
-<p>Then we can simply calculate the average treatment effect directly:</p>
+<ul>
+<li>In this stylized example, we are postulating that knowing causal inference is the only way to solve business problems
+<ul>
+<li>This is obviously not true, but it is a useful example for our purposes</li>
+</ul></li>
+</ul>
+</section>
+<section id="directed-graphical-models-6" class="slide level2">
+<h2>Directed Graphical Models</h2>
+<ul>
+<li>This model highlights the following statistical process:
+<ul>
+<li>Knowing causal inference gives you the ability to solve business problems</li>
+<li>Solving business problems makes you more likely to get a job promotion</li>
+</ul></li>
+<li>Notice that this does not imply that causal knowledge is independent of job promotion
+<ul>
+<li>That is, if we know the value of job promotion, we can still learn something about causal knowledge</li>
+<li>If we observe that a promotion happens in this model, this tells us that it is more likely that the person knows causal inference</li>
+</ul></li>
+</ul>
+</section>
+<section id="directed-graphical-models-7" class="slide level2">
+<h2>Directed Graphical Models</h2>
+<ul>
+<li><p>Now let’s condition on the intermediate variable <span class="math inline">\(Y\)</span></p>
+<ul>
+<li>This is the variable that represents the ability to solve business problems</li>
+<li>In the graph, we have colored this variable grey to indicate that we are conditioning on it</li>
+</ul></li>
+<li><p>Conditioning on <span class="math inline">\(Y\)</span> means that we are assuming that we know whether or not the person solved a business problem</p></li>
+<li><p>In this case, conditioning on <span class="math inline">\(Y\)</span> breaks the dependence relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span></p>
+<ul>
+<li>That is, <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span> are now independent, given <span class="math inline">\(Y\)</span></li>
+<li>Mathematically, <span class="math inline">\(A \perp C\)</span>, but <span class="math inline">\(X \not\perp Z | Y\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="directed-graphical-models-8" class="slide level2">
+<h2>Directed Graphical Models</h2>
+<p>Now let’s look at another common structure:</p>
 <div class="cell columns column-output-location" data-execution_count="5">
 <div class="column">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>df[<span class="st">"TE"</span>] <span class="op">=</span> df.Y1 <span class="op">-</span> df.Y0</span>
-<span id="cb4-2"><a href="#cb4-2"></a>df.TE.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>g <span class="op">=</span> gr.Digraph()</span>
+<span id="cb4-2"><a href="#cb4-2"></a>g.edge(<span class="st">"C"</span>, <span class="st">"A"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3"></a>g.edge(<span class="st">"C"</span>, <span class="st">"B"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4"></a></span>
+<span id="cb4-5"><a href="#cb4-5"></a>g.edge(<span class="st">"X"</span>, <span class="st">"Y"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6"></a>g.edge(<span class="st">"X"</span>, <span class="st">"Z"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7"></a>g.node(<span class="st">"X"</span>, <span class="st">"X"</span>, fillcolor<span class="op">=</span><span class="st">"#5f5f5f5f"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8"></a></span>
+<span id="cb4-9"><a href="#cb4-9"></a>g.edge(<span class="st">"statistics"</span>, <span class="st">"causal inference"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10"></a>g.edge(<span class="st">"statistics"</span>, <span class="st">"machine learning"</span>)</span>
+<span id="cb4-11"><a href="#cb4-11"></a></span>
+<span id="cb4-12"><a href="#cb4-12"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>-50.0</code></pre>
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-5-output-1.svg"></p>
 </div>
 </div>
 </div>
-<p>And the ATT would be the mean of the last column for units that receive the treatment:</p>
-<div class="cell columns column-output-location" data-execution_count="6">
-<div class="column">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>treatment_rows <span class="op">=</span> df[<span class="st">"T"</span>] <span class="op">==</span> <span class="dv">1</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>df[treatment_rows].TE.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column">
-<div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>-75.0</code></pre>
-</div>
-</div>
-</div>
-</section></section>
-<section>
-<section id="bias" class="title-slide slide level1 center">
-<h1>Bias</h1>
-
+<ul>
+<li>In this model, we are postulating that statistics is a prerequisite for both causal inference and machine learning.</li>
+</ul>
 </section>
-<section id="a-more-realistic-example" class="slide level2">
-<h2>A More Realistic Example</h2>
-<p>In practice, we can’t really ever observe both potential outcomes for each unit. Instead, we can only observe the outcome for each unit under the treatment condition that they actually receive.</p>
-<p>Suppose that instead of what we had before, the data look like this:</p>
-<div class="cell columns column-output-location" data-execution_count="7">
-<div class="column">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>df_real <span class="op">=</span> pd.DataFrame(<span class="bu">dict</span>(</span>
-<span id="cb8-2"><a href="#cb8-2"></a>    i<span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],</span>
-<span id="cb8-3"><a href="#cb8-3"></a>    Y0<span class="op">=</span>[<span class="dv">500</span>,<span class="dv">600</span>,np.nan,np.nan],</span>
-<span id="cb8-4"><a href="#cb8-4"></a>    Y1<span class="op">=</span>[np.nan,np.nan,<span class="dv">600</span>,<span class="dv">750</span>],</span>
-<span id="cb8-5"><a href="#cb8-5"></a>    T<span class="op">=</span> [<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>],</span>
-<span id="cb8-6"><a href="#cb8-6"></a>    test_score<span class="op">=</span> [<span class="dv">500</span>,<span class="dv">600</span>,<span class="dv">600</span>,<span class="dv">750</span>]</span>
-<span id="cb8-7"><a href="#cb8-7"></a>))</span>
-<span id="cb8-8"><a href="#cb8-8"></a>df_real.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column">
-<div class="cell-output cell-output-display" data-execution_count="6">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<section id="directed-graphical-models-9" class="slide level2">
+<h2>Directed Graphical Models</h2>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">i</th>
-<th data-quarto-table-cell-role="th">Y0</th>
-<th data-quarto-table-cell-role="th">Y1</th>
-<th data-quarto-table-cell-role="th">T</th>
-<th data-quarto-table-cell-role="th">test_score</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>1</td>
-<td>500.0</td>
-<td>NaN</td>
-<td>0</td>
-<td>500</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2</td>
-<td>600.0</td>
-<td>NaN</td>
-<td>0</td>
-<td>600</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>3</td>
-<td>NaN</td>
-<td>600.0</td>
-<td>1</td>
-<td>600</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>4</td>
-<td>NaN</td>
-<td>750.0</td>
-<td>1</td>
-<td>750</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-</div>
+<img data-src="causal_graphical_models_files/figure-revealjs/cell-6-output-1.svg" class="r-stretch"><ul>
+<li>This model highlights the following statistical process:
+<ul>
+<li>Knowing statistics gives you the ability to do causal inference</li>
+<li>Knowing statistics gives you the ability to do machine learning</li>
+</ul></li>
+<li>When we don’t condition for the root node, <span class="math inline">\(C\)</span>, there is still a dependence relationship between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>
+<ul>
+<li>That is, if we know that an individual has causal knowledge, this tells us that they are more likely to know statistics, and thus to also know machine learning</li>
+</ul></li>
+</ul>
 </section>
-<section id="a-more-realistic-example-1" class="slide level2">
-<h2>A More Realistic Example</h2>
+<section id="directed-graphical-models-10" class="slide level2">
+<h2>Directed Graphical Models</h2>
+
+<img data-src="causal_graphical_models_files/figure-revealjs/cell-7-output-1.svg" class="r-stretch"><ul>
+<li>By conditioning on <span class="math inline">\(X\)</span>, we break the dependence relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(Z\)</span>
+<ul>
+<li>That is, <span class="math inline">\(A\not\perp B\)</span>, but <span class="math inline">\(Y \perp Z | X\)</span></li>
+</ul></li>
+<li>We would call this a <strong>fork</strong> structure</li>
+</ul>
+</section>
+<section id="directed-graphical-models-11" class="slide level2">
+<h2>Directed Graphical Models</h2>
+<p>Finally, let’s look at a third common structure, called a <strong>collider</strong>:</p>
 <div class="cell columns column-output-location" data-execution_count="8">
 <div class="column">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>df_real.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>g <span class="op">=</span> gr.Digraph()</span>
+<span id="cb5-2"><a href="#cb5-2"></a>g.edge(<span class="st">"B"</span>, <span class="st">"C"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3"></a>g.edge(<span class="st">"A"</span>, <span class="st">"C"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a>g.edge(<span class="st">"Y"</span>, <span class="st">"X"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6"></a>g.edge(<span class="st">"Z"</span>, <span class="st">"X"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7"></a>g.node(<span class="st">"X"</span>, <span class="st">"X"</span>, fillcolor<span class="op">=</span><span class="st">"#5f5f5f5f"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a>g.edge(<span class="st">"statistics"</span>, <span class="st">"job promotion"</span>)</span>
+<span id="cb5-10"><a href="#cb5-10"></a>g.edge(<span class="st">"flatter"</span>, <span class="st">"job promotion"</span>)</span>
+<span id="cb5-11"><a href="#cb5-11"></a></span>
+<span id="cb5-12"><a href="#cb5-12"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-display" data-execution_count="7">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">i</th>
-<th data-quarto-table-cell-role="th">Y0</th>
-<th data-quarto-table-cell-role="th">Y1</th>
-<th data-quarto-table-cell-role="th">T</th>
-<th data-quarto-table-cell-role="th">test_score</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>1</td>
-<td>500.0</td>
-<td>NaN</td>
-<td>0</td>
-<td>500</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2</td>
-<td>600.0</td>
-<td>NaN</td>
-<td>0</td>
-<td>600</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>3</td>
-<td>NaN</td>
-<td>600.0</td>
-<td>1</td>
-<td>600</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>4</td>
-<td>NaN</td>
-<td>750.0</td>
-<td>1</td>
-<td>750</td>
-</tr>
-</tbody>
-</table>
-
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-8-output-1.svg"></p>
 </div>
 </div>
 </div>
-</div>
-<p>Let’s try to estimate the ATE again. We don’t observe the counterfactual outcomes, but we can try to estimate the ATE using the difference in means between the treatment and control groups:</p>
-<div class="cell columns column-output-location" data-execution_count="9">
-<div class="column">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>group_averages <span class="op">=</span> df_real.groupby(<span class="st">"T"</span>).test_score.mean()</span>
-<span id="cb10-2"><a href="#cb10-2"></a>group_averages[<span class="dv">1</span>] <span class="op">-</span> group_averages[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column">
-<div class="cell-output cell-output-display" data-execution_count="8">
-<pre><code>125.0</code></pre>
-</div>
-</div>
-</div>
-<p>This is <strong>not</strong> the correct answer! Why not?</p>
-</section>
-<section id="bias-1" class="slide level2">
-<h2>Bias</h2>
 <ul>
-<li>In this case, the <span class="math inline">\(\bar{Y}_0\)</span> for the treated is different than the <span class="math inline">\(\bar{Y}_0\)</span> for the control group, (which is what we are using in the calculation)</li>
-<li>In the example of schools adopting a tablet program, the <span class="math inline">\(\bar{Y}_0\)</span> for the treated is higher than the <span class="math inline">\(\bar{Y}_0\)</span> for the control group
-<ul>
-<li>This is because the schools that adopt the tablet program would have had higher test scores even if they had not adopted the program</li>
-<li>However, once they adopt the program, their test scores drop</li>
-</ul></li>
-<li>Blindly taking the difference in means between the treatment and control groups will give us a biased estimate of the ATE
-<ul>
-<li>In other words, the expected value of our estimator is not equal to the true value of the parameter we are trying to estimate</li>
-</ul></li>
-<li><strong>Bias</strong> is measured as the difference between the <strong>expected value of our estimator</strong> and the <strong>true value of the parameter</strong> we are trying to estimate</li>
-</ul>
-</section>
-<section id="bias-2" class="slide level2">
-<h2>Bias</h2>
-<ul>
-<li><p>Using potential outcome notation, we can write the conditional mean calculation (from the previous example) as: <span class="math display">\[E[Y \mid T=1] - E[Y\mid T=0] = E[Y_1\mid T=1] - E[Y_0\mid T=0]\]</span></p></li>
-<li><p>Then adding and subtracting <span class="math inline">\(E[Y_0\mid T=1]\)</span>, and rearranging gives: <span class="math display">\[\begin{align}E[Y\mid T=1] - E[Y\mid T=0] = &amp;\underbrace{E[Y_1 - Y_0\mid T=1]}_{ATT}+\\&amp; \underbrace{ E[Y_0\mid T=1] - E[Y_0\mid T=0]}_{BIAS}\end{align}\]</span></p></li>
+<li>In this model, we are postulating that statistics and flattery are both determinants of getting a job promotion</li>
 </ul>
 </section></section>
 <section>
-<section id="randomized-experiments" class="title-slide slide level1 center">
-<h1>Randomized Experiments</h1>
+<section id="dependence-flows" class="title-slide slide level1 center">
+<h1>Dependence Flows</h1>
 
 </section>
-<section id="randomization" class="slide level2">
-<h2>Randomization</h2>
+<section id="the-rules-of-bayes-ball" class="slide level2">
+<h2>The Rules of Bayes-Ball</h2>
 <ul>
-<li>Earlier, we said that randomization is important for estimating treatment effects. Why is that?</li>
-<li>Randomization is the easiest way to ensure that the treatment and control groups are similar on average
+<li>We can think about the flow of dependence as a game of “Bayes-ball”</li>
+<li>The rules of Bayes-ball are reasonably simple. A dependence path is blocked if and only if:
+<ol type="1">
+<li>It contains a <em>non-collider</em> that is conditioned on</li>
+<li>It contains a <em>collider</em> that is not conditioned on, and neither are any of its descendants</li>
+</ol></li>
+</ul>
+
+<img data-src="./data/fig/graph-flow.png" class="r-stretch"></section>
+<section id="directed-graphical-models-12" class="slide level2">
+<h2>Directed Graphical Models</h2>
+<p>Turning back to our collider example:</p>
+
+<img data-src="causal_graphical_models_files/figure-revealjs/cell-9-output-1.svg" class="r-stretch"><ul>
+<li>Notice that when we do not condition on <span class="math inline">\(C\)</span>, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent.</li>
+<li>However, somewhat unintuitively, when we condition on <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span> and <span class="math inline">\(Z\)</span> become dependent.
 <ul>
-<li>If the treatment and control groups have the same counterfactual average outcome, then the bias term is zero</li>
+<li>This is because conditioning on <span class="math inline">\(X\)</span> opens the flow of dependence from <span class="math inline">\(Y\)</span> to <span class="math inline">\(Z\)</span>.</li>
+<li>In any case that is not a collider, conditioning on a node blocks the flow of dependence.</li>
 </ul></li>
-<li>To see why, note that if the treatment and control groups are similar on average, then <span class="math inline">\(E[Y_0\mid T=1] = E[Y_0\mid T=0] = E[Y_0]\)</span>, the population average of the potential outcome under the control condition
+</ul>
+</section></section>
+<section>
+<section id="viualizing-bias" class="title-slide slide level1 center">
+<h1>Viualizing Bias</h1>
+
+</section>
+<section id="bias-and-causality" class="slide level2">
+<h2>Bias and Causality</h2>
 <ul>
-<li>The bias term is <span class="math inline">\(E[Y_0\mid T=1] - E[Y_0\mid T=0] = E[Y_0] - E[Y_0] = 0\)</span></li>
-<li>Therefore, the difference in means between the treatment and control groups is equal to the ATT</li>
+<li><p>In a causal inference framework, we can use graphical models to determine whether or not we can identify a treatment effect, and which covariates we need to condition on.</p></li>
+<li><p>Typically, drawing out a graphical model is not necessary, but it can be a useful exercise to help you think through the problem.</p>
+<ul>
+<li>The links you draw represent the assumptions you are making about the data generating process</li>
 </ul></li>
 </ul>
 </section>
-<section id="randomized-experiments-1" class="slide level2">
-<h2>Randomized Experiments</h2>
+<section id="bias-and-causality-1" class="slide level2">
+<h2>Bias and Causality</h2>
 <ul>
-<li>Experimental randomization is the gold standard for estimating treatment effects</li>
-<li>In a randomized experiment, the treatment assignment is independent of the potential outcomes
+<li>There are two major types of bias that we need to worry about in causal inference:
 <ul>
-<li>This means that the treatment assignment is independent of the outcome under both treatment conditions</li>
-<li>In other words, <span class="math inline">\(Y_0\)</span> and <span class="math inline">\(Y_1\)</span> are independent of <span class="math inline">\(T\)</span></li>
+<li><strong>Confounding</strong>: When there is an unobserved variable that is a common cause of both the treatment and the outcome</li>
+<li><strong>Selection</strong>: When there is an unobserved variable that is a common cause of both the treatment and the selection into the sample</li>
 </ul></li>
-<li>These randomized experiments are also called <strong>randomized controlled trials (RCTs)</strong></li>
+<li>Both of these types of bias can be represented using a graphical model</li>
+</ul>
+</section></section>
+<section>
+<section id="confounding" class="title-slide slide level1 center">
+<h1>Confounding</h1>
+
+</section>
+<section id="confounding-1" class="slide level2">
+<h2>Confounding</h2>
+<ul>
+<li>Let’s look at an example of confounding:</li>
+</ul>
+<div class="cell columns column-output-location" data-execution_count="10">
+<div class="column">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>g <span class="op">=</span> gr.Digraph()</span>
+<span id="cb6-2"><a href="#cb6-2"></a>g.edge(<span class="st">"X"</span>, <span class="st">"T"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3"></a>g.edge(<span class="st">"X"</span>, <span class="st">"Y"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4"></a>g.edge(<span class="st">"T"</span>, <span class="st">"Y"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a>g.edge(<span class="st">"rain"</span>, <span class="st">"umbrella"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7"></a>g.edge(<span class="st">"rain"</span>, <span class="st">"wet"</span>)</span>
+<span id="cb6-8"><a href="#cb6-8"></a>g.edge(<span class="st">"umbrella"</span>, <span class="st">"wet"</span>)</span>
+<span id="cb6-9"><a href="#cb6-9"></a></span>
+<span id="cb6-10"><a href="#cb6-10"></a>g.edge(<span class="st">"severeness"</span>, <span class="st">"medicine"</span>)</span>
+<span id="cb6-11"><a href="#cb6-11"></a>g.edge(<span class="st">"severeness"</span>, <span class="st">"survived"</span>)</span>
+<span id="cb6-12"><a href="#cb6-12"></a>g.edge(<span class="st">"medicine"</span>, <span class="st">"survived"</span>)</span>
+<span id="cb6-13"><a href="#cb6-13"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-display" data-execution_count="9">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-10-output-1.svg"></p>
+</div>
+</div>
+</div>
+<ul>
+<li>To control for confounding, we need to condition on all of the common causes of the treatment and the outcome.</li>
 </ul>
 </section>
-<section id="randomized-experiments---the-difficulties" class="slide level2">
-<h2>Randomized Experiments - The Difficulties</h2>
+<section id="confounding-2" class="slide level2">
+<h2>Confounding</h2>
+<div class="cell columns column-output-location" data-execution_count="11">
+<div class="column">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>g <span class="op">=</span> gr.Digraph()</span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a>g.node(<span class="st">"Family Income"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4"></a>g.edge(<span class="st">"Family Income"</span>, <span class="st">"Educ"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5"></a>g.edge(<span class="st">"Educ"</span>, <span class="st">"Wage"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6"></a></span>
+<span id="cb7-7"><a href="#cb7-7"></a>g.node(<span class="st">"SAT"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8"></a>g.edge(<span class="st">"SAT"</span>, <span class="st">"Educ"</span>)</span>
+<span id="cb7-9"><a href="#cb7-9"></a></span>
+<span id="cb7-10"><a href="#cb7-10"></a>g.node(<span class="st">"Family Income"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11"></a>g.edge(<span class="st">"Family Income"</span>, <span class="st">"Wage"</span>)</span>
+<span id="cb7-12"><a href="#cb7-12"></a></span>
+<span id="cb7-13"><a href="#cb7-13"></a>g.edge(<span class="st">"Intelligence"</span>, <span class="st">"SAT"</span>)</span>
+<span id="cb7-14"><a href="#cb7-14"></a>g.edge(<span class="st">"Intelligence"</span>, <span class="st">"Wage"</span>)</span>
+<span id="cb7-15"><a href="#cb7-15"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-display" data-execution_count="10">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-11-output-1.svg"></p>
+</div>
+</div>
+</div>
 <ul>
-<li><p>RCTs are the gold standard for estimating treatment effects because they ensure that the treatment and control groups are similar on average</p></li>
-<li><p>However, RCTs are not always ethical or feasible. For example, it would be unethical to</p>
+<li>Often, there are confounding variables that we cannot observe
 <ul>
-<li>Randomly assign people to smoke cigarettes</li>
-<li>Randomly assign people to be exposed to a deadly virus</li>
+<li>For example, we cannot observe intelligence, but it is a common cause of both education (the treatment) and wages</li>
 </ul></li>
-<li><p>Throughout (recent) history, there have been many examples of unethical experiments</p>
-<ul>
-<li>The Tuskegee experiment (1932-1972)</li>
-<li>The Stanford prison experiment (1971)</li>
-<li>The Milgram experiment (1961-1962)</li>
-</ul></li>
-<li><p>These experiments have led to the development of ethical guidelines for conducting experiments on humans and animals</p></li>
 </ul>
 </section>
-<section id="estimating-treatment-effects-without-randomization" class="slide level2">
-<h2>Estimating Treatment Effects Without Randomization</h2>
+<section id="confounding-3" class="slide level2">
+<h2>Confounding</h2>
+<div class="cell columns column-output-location" data-execution_count="12">
+<div class="column">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>g <span class="op">=</span> gr.Digraph()</span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a>g.node(<span class="st">"Family Income"</span>, fillcolor<span class="op">=</span><span class="st">"#5f5f5f5f"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4"></a>g.edge(<span class="st">"Family Income"</span>, <span class="st">"Educ"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5"></a>g.edge(<span class="st">"Educ"</span>, <span class="st">"Wage"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a>g.node(<span class="st">"SAT"</span>, fillcolor<span class="op">=</span><span class="st">"#5f5f5f5f"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
+<span id="cb8-8"><a href="#cb8-8"></a>g.edge(<span class="st">"SAT"</span>, <span class="st">"Educ"</span>)</span>
+<span id="cb8-9"><a href="#cb8-9"></a></span>
+<span id="cb8-10"><a href="#cb8-10"></a>g.node(<span class="st">"Family Income"</span>, fillcolor<span class="op">=</span><span class="st">"#5f5f5f5f"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
+<span id="cb8-11"><a href="#cb8-11"></a>g.edge(<span class="st">"Family Income"</span>, <span class="st">"Wage"</span>)</span>
+<span id="cb8-12"><a href="#cb8-12"></a></span>
+<span id="cb8-13"><a href="#cb8-13"></a>g.edge(<span class="st">"Intelligence"</span>, <span class="st">"SAT"</span>)</span>
+<span id="cb8-14"><a href="#cb8-14"></a>g.edge(<span class="st">"Intelligence"</span>, <span class="st">"Wage"</span>)</span>
+<span id="cb8-15"><a href="#cb8-15"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-display" data-execution_count="11">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-12-output-1.svg"></p>
+</div>
+</div>
+</div>
 <ul>
-<li>While many RCTs, especially to answer economic questions, are not unethical, they are often not feasible
+<li>Often, there are confounding variables that we cannot observe
 <ul>
-<li>For example, it would be difficult to randomly assign people to be born in different countries</li>
-<li>It could also be very expensive to randomly assign people to receive a house or to supplement their income</li>
-</ul></li>
-<li>Due to the ethical and practical constraints, we often have to rely on observational data to estimate treatment effects
-<ul>
-<li>In this case, we have to make assumptions about the data-generating process to estimate treatment effects</li>
-<li>These assumptions are called <strong>identification assumptions</strong></li>
+<li>For example, we cannot observe intelligence, but it is a common cause of both education (the treatment) and wages</li>
+<li>But we can use SAT as a <strong>surrogate</strong> or <strong>proxy</strong> for intelligence.</li>
 </ul></li>
 </ul>
+</section></section>
+<section>
+<section id="selection" class="title-slide slide level1 center">
+<h1>Selection</h1>
+
 </section>
-<section id="estimating-treatment-effects-without-randomization-1" class="slide level2">
-<h2>Estimating Treatment Effects Without Randomization</h2>
+<section id="selection-1" class="slide level2">
+<h2>Selection</h2>
 <ul>
-<li><p>Many identification assumptions are based on the idea of <strong>selection on observables</strong></p>
-<ul>
-<li>This means that the treatment assignment is independent of the potential outcomes <em>conditional</em> on the observed covariates</li>
-<li>In other words, <span class="math inline">\(Y_0\)</span> and <span class="math inline">\(Y_1\)</span> are independent of <span class="math inline">\(T\)</span> conditional on <span class="math inline">\(X\)</span></li>
-</ul></li>
-<li><p>This allows us to do things like <strong>match</strong> units in the treatment and control groups that are similar on average</p>
-<ul>
-<li>We can then estimate the treatment effect by comparing the outcomes of the matched units, assuming that the matched units are similar on average</li>
-</ul></li>
-<li><p>Another option is to use <strong>instrumental variables</strong> to estimate the treatment effect</p></li>
-<li><p>Alternatively, a <strong>structural model</strong> can be used to estimate the treatment effect by integrating a theoretical model to fill in the missing counterfactuals</p></li>
+<li><p>Selection bias is the other fundamental type of bias that we need to worry about in causal inference</p></li>
+<li><p>Selection bias occurs when there is an unobserved variable that is a common cause of both the treatment and the selection into the sample</p></li>
 </ul>
+<div class="cell columns column-output-location" data-execution_count="13">
+<div class="column">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>g <span class="op">=</span> gr.Digraph()</span>
+<span id="cb9-2"><a href="#cb9-2"></a>g.node(<span class="st">"X"</span>, fillcolor<span class="op">=</span><span class="st">"#5f5f5f5f"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a>g.edge(<span class="st">"T"</span>, <span class="st">"X"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4"></a>g.edge(<span class="st">"T"</span>, <span class="st">"Y"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5"></a>g.edge(<span class="st">"Y"</span>, <span class="st">"X"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a>g.edge(<span class="st">"Educ"</span>, <span class="st">"Investments"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8"></a>g.edge(<span class="st">"Educ"</span>, <span class="st">"Wage"</span>)</span>
+<span id="cb9-9"><a href="#cb9-9"></a>g.edge(<span class="st">"Wage"</span>, <span class="st">"Investments"</span>)</span>
+<span id="cb9-10"><a href="#cb9-10"></a></span>
+<span id="cb9-11"><a href="#cb9-11"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-display" data-execution_count="12">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-13-output-1.svg"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="selection-2" class="slide level2">
+<h2>Selection</h2>
+<ul>
+<li>Selection bias can also occur when controlling for a <strong>mediator</strong> between the treatment and the outcome</li>
+</ul>
+<div class="two-col">
+<div class="col">
+<div class="cell" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="13">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-14-output-1.svg"></p>
+</div>
+</div>
+</div>
+<div class="col">
+<p><img src="./data/fig/airplane.svg" alt="airplane.svg" width="500"> Source: By Martin Grandjean (vector), McGeddon (picture), Cameron Moll (concept) - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=102017718</p>
+</div>
+</div>
 </section>
 <section id="credits" class="slide level2">
 <h2>Credits</h2>
-<p>This lecture draws heavily from <a href="https://matheusfacure.github.io/python-causality-handbook/01-Introduction-To-Causality.html">Causal Inference for the Brave and True: Introduction to Causality</a> by Matheus Facure</p>
+<p>This lecture draws heavily from <a href="https://matheusfacure.github.io/python-causality-handbook/03-Stats-Review-The-Most-Dangerous-Equation.html.html">Causal Inference for the Brave and True: Chapter 1 - Introduction to Causality</a> by Matheus Facure.</p>
+<p>There is also material from <a href="http://ai.stanford.edu/~paskin/gm-short-course/">A Short Course on Graphical Models Chapter 2: Structured Representations</a> by Mark Paskin</p>
 
 <div class="footer footer-default">
 

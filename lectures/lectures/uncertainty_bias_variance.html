@@ -528,7 +528,7 @@ Phil Solimine
 <li><p>To see why this might be important, let’s look at an example.</p></li>
 <li><p>For this, we will use a dataset that contains ENEM scores for students in Brazil, from different schools, over a three year time period.</p></li>
 </ul>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"./data/enem_scores.csv"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2"></a>df.sort_values(by<span class="op">=</span><span class="st">"avg_score"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -606,7 +606,7 @@ Phil Solimine
 <li>We want to discover if there is a relationship between school quality and student performance.</li>
 <li>As a first step, let’s split out the top 1% of schools by average score, and compare the number of students in those schools to the number of students in the rest of the schools.</li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="3">
+<div class="cell columns column-output-location" data-execution_count="4">
 <div class="column">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>plot_data <span class="op">=</span> (df</span>
 <span id="cb2-2"><a href="#cb2-2"></a>  .assign(top_school <span class="op">=</span> df[<span class="st">"avg_score"</span>] <span class="op">&gt;=</span> np.quantile(df[<span class="st">"avg_score"</span>], <span class="fl">.99</span>))</span>
@@ -625,7 +625,7 @@ Phil Solimine
 </section>
 <section id="standard-errors---example-1" class="slide level2">
 <h2>Standard Errors - Example</h2>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <p><img data-src="uncertainty_bias_variance_files/figure-revealjs/cell-5-output-1.png" width="642" height="331"></p>
 </div>
@@ -640,7 +640,7 @@ Phil Solimine
 <ul>
 <li>Now let’s take a look at the full distribution of scores by school size.</li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="5">
+<div class="cell columns column-output-location" data-execution_count="6">
 <div class="column">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>q_99 <span class="op">=</span> np.quantile(df[<span class="st">"avg_score"</span>], <span class="fl">.99</span>)</span>
 <span id="cb3-2"><a href="#cb3-2"></a>q_01 <span class="op">=</span> np.quantile(df[<span class="st">"avg_score"</span>], <span class="fl">.01</span>)</span>
@@ -661,7 +661,7 @@ Phil Solimine
 </section>
 <section id="standard-errors---example-3" class="slide level2">
 <h2>Standard Errors - Example</h2>
-<div class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <p><img data-src="uncertainty_bias_variance_files/figure-revealjs/cell-7-output-1.png" width="910" height="254"></p>
 </div>
@@ -687,7 +687,7 @@ Phil Solimine
 <li>Alpert et al.&nbsp;2016 <em>AER</em>. A Randomized Assessment of Online Learning.</li>
 </ul></li>
 </ul>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 <style scoped="">
@@ -772,7 +772,7 @@ Phil Solimine
 <ul>
 <li>Since these data come from an RCT, we can estimate the ATE by simply comparing the average scores of the different treatment groups.</li>
 </ul>
-<div class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>(data</span>
 <span id="cb4-2"><a href="#cb4-2"></a> .assign(class_format <span class="op">=</span> np.select(</span>
 <span id="cb4-3"><a href="#cb4-3"></a>  [data[<span class="st">"format_ol"</span>].astype(<span class="bu">bool</span>), data[<span class="st">"format_blended"</span>].astype(<span class="bu">bool</span>)],</span>
@@ -875,7 +875,7 @@ Phil Solimine
 </section>
 <section id="standard-errors-in-a-causal-context-2" class="slide level2">
 <h2>Standard Errors in a Causal Context</h2>
-<div class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 <style scoped="">
@@ -970,7 +970,7 @@ Phil Solimine
 <ul>
 <li>For reference, the averages of these variables are:</li>
 </ul>
-<div class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 <style scoped="">
@@ -1029,7 +1029,7 @@ Phil Solimine
 <ul>
 <li>Now let’s take a closer look at the average scores by treatment group.</li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="11">
+<div class="cell columns column-output-location" data-execution_count="12">
 <div class="column">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>exam_scores <span class="op">=</span> (data</span>
 <span id="cb5-2"><a href="#cb5-2"></a> .assign(class_format <span class="op">=</span> np.select(</span>
@@ -1053,7 +1053,7 @@ Name: falsexam, dtype: float64</code></pre>
 <ul>
 <li>Since these data come from an RCT, we can estimate the ATE by simply comparing the average scores of the different treatment groups, relative to the control group (face-to-face).</li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="12">
+<div class="cell columns column-output-location" data-execution_count="13">
 <div class="column">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="bu">print</span>(<span class="ss">f"Online format changed test scores by </span><span class="sc">{</span>(exam_scores[<span class="st">'online'</span>] <span class="op">-</span> exam_scores[<span class="st">'face_to_face'</span>])<span class="sc">:.4}</span><span class="ss"> points."</span>)</span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="bu">print</span>(<span class="ss">f"Blended format changed test scores by </span><span class="sc">{</span>(exam_scores[<span class="st">'blended'</span>] <span class="op">-</span> exam_scores[<span class="st">'face_to_face'</span>])<span class="sc">:.4}</span><span class="ss"> points."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1078,7 +1078,7 @@ Blended format changed test scores by -1.454 points.</code></pre>
 <li>Having a low standard error (relative to the size of the effect) gives us more <em>confidence</em> that the estimate is correct.</li>
 </ul></li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="13">
+<div class="cell columns column-output-location" data-execution_count="14">
 <div class="column">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>online <span class="op">=</span> data.query(<span class="st">"format_ol==1"</span>)[<span class="st">"falsexam"</span>]</span>
 <span id="cb9-2"><a href="#cb9-2"></a>face_to_face <span class="op">=</span> data.query(<span class="st">"format_ol==0 &amp; format_blended==0"</span>)[<span class="st">"falsexam"</span>]</span>
@@ -1119,7 +1119,7 @@ SE for Face to Face: 0.872 points</code></pre>
 <li>Imagine it is a normal distribution with a true mean of 74 and a true standard deviation of 2.</li>
 <li>We can simulate a sample of 500 students from this distribution and calculate the sample average.</li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="14">
+<div class="cell columns column-output-location" data-execution_count="15">
 <div class="column">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">def</span> run_experiment(): </span>
 <span id="cb11-2"><a href="#cb11-2"></a>    <span class="cf">return</span> np.random.normal(<span class="dv">74</span>, <span class="dv">2</span>, <span class="dv">500</span>)</span>
@@ -1142,7 +1142,7 @@ SE for Face to Face: 0.872 points</code></pre>
 <ul>
 <li>Let’s try the same thing, but with the data coming from a uniform distribution.</li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="15">
+<div class="cell columns column-output-location" data-execution_count="16">
 <div class="column">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># these numbers are not realistic, but they have average 74</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="kw">def</span> run_experiment_unif(): </span>
@@ -1183,7 +1183,7 @@ SE for Face to Face: 0.872 points</code></pre>
 <ul>
 <li>These confidence intervals would look something like this:</li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="16">
+<div class="cell columns column-output-location" data-execution_count="17">
 <div class="column">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>np.random.seed(<span class="dv">321</span>)</span>
 <span id="cb13-2"><a href="#cb13-2"></a>exp_data <span class="op">=</span> run_experiment()</span>
@@ -1213,7 +1213,7 @@ SE for Face to Face: 0.872 points</code></pre>
 <ul>
 <li>Back to our classroom experiment, we can construct the confidence interval for the mean exam score in both online and face-to-face formats.</li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="17">
+<div class="cell columns column-output-location" data-execution_count="18">
 <div class="column">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">def</span> ci(y: pd.Series):</span>
 <span id="cb15-2"><a href="#cb15-2"></a>    <span class="cf">return</span> (y.mean() <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> se(y), y.mean() <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> se(y))</span>
@@ -1267,7 +1267,7 @@ SE for Face to Face: 0.872 points</code></pre>
 <ul>
 <li>Therefore, we can use the CLT to construct a test statistic that is normally distributed.</li>
 </ul></li>
-<li>The resulting mean will be the sum or difference between the two distributions, while the variance will always be the sum of the variance:
+<li>The resulting mean will be the sum or difference between the two distributions, while the variance will always be the sum of their variances:
 <ul>
 <li><span class="math inline">\(N(\mu_1, \sigma_1^2) - N(\mu_2, \sigma_2^2) = N(\mu_1 - \mu_2, \sigma_1^2 + \sigma_2^2)\)</span></li>
 <li><span class="math inline">\(N(\mu_1, \sigma_1^2) + N(\mu_2, \sigma_2^2) = N(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)\)</span></li>
@@ -1310,7 +1310,7 @@ SE for Face to Face: 0.872 points</code></pre>
 </section>
 <section id="hypothesis-testing-4" class="slide level2">
 <h2>Hypothesis Testing</h2>
-<div class="cell" data-execution_count="18">
+<div class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>diff_mu <span class="op">=</span> online.mean() <span class="op">-</span> face_to_face.mean()</span>
 <span id="cb17-2"><a href="#cb17-2"></a>diff_se <span class="op">=</span> np.sqrt(face_to_face.var()<span class="op">/</span><span class="bu">len</span>(face_to_face) <span class="op">+</span> online.var()<span class="op">/</span><span class="bu">len</span>(online))</span>
 <span id="cb17-3"><a href="#cb17-3"></a>ci <span class="op">=</span> (diff_mu <span class="op">-</span> <span class="fl">1.96</span><span class="op">*</span>diff_se, diff_mu <span class="op">+</span> <span class="fl">1.96</span><span class="op">*</span>diff_se)</span>
@@ -1319,7 +1319,7 @@ SE for Face to Face: 0.872 points</code></pre>
 <pre><code>(-8.376410208363385, -1.4480327880905248)</code></pre>
 </div>
 </div>
-<div class="cell columns column-output-location" data-execution_count="19">
+<div class="cell columns column-output-location" data-execution_count="20">
 <div class="column">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>x <span class="op">=</span> np.linspace(diff_mu <span class="op">-</span> <span class="dv">4</span><span class="op">*</span>diff_se, diff_mu <span class="op">+</span> <span class="dv">4</span><span class="op">*</span>diff_se, <span class="dv">100</span>)</span>
 <span id="cb19-2"><a href="#cb19-2"></a>y <span class="op">=</span> stats.norm.pdf(x, diff_mu, diff_se)</span>
@@ -1399,7 +1399,7 @@ SE for Face to Face: 0.872 points</code></pre>
 <ul>
 <li>Let’s calculate the p-value for our classroom experiment.</li>
 </ul>
-<div class="cell" data-execution_count="20">
+<div class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a>z <span class="op">=</span> diff_mu <span class="op">/</span> diff_se</span>
 <span id="cb20-2"><a href="#cb20-2"></a>p_value <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> stats.norm.cdf(z))</span>
 <span id="cb20-3"><a href="#cb20-3"></a><span class="bu">print</span>(<span class="ss">f"z-statistic: </span><span class="sc">{</span>z<span class="sc">:.3}</span><span class="ss">"</span>)</span>
@@ -1454,7 +1454,7 @@ p-value: 1.99</code></pre>
 </section>
 <section id="monte-carlo-methods-2" class="slide level2">
 <h2>Monte-Carlo Methods</h2>
-<div class="cell columns column-output-location" data-execution_count="21">
+<div class="cell columns column-output-location" data-execution_count="22">
 <div class="column">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">def</span> run_experiment_unif(lb <span class="op">=</span> <span class="dv">0</span>, ub <span class="op">=</span> <span class="dv">100</span>): </span>
 <span id="cb22-2"><a href="#cb22-2"></a>    <span class="cf">return</span> np.random.uniform(lb, ub, <span class="dv">500</span>)</span>
@@ -1462,7 +1462,7 @@ p-value: 1.99</code></pre>
 <span id="cb22-4"><a href="#cb22-4"></a>np.random.seed(<span class="dv">421</span>)</span>
 <span id="cb22-5"><a href="#cb22-5"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>))</span>
 <span id="cb22-6"><a href="#cb22-6"></a>max_estimates <span class="op">=</span> np.array([run_experiment_unif().<span class="bu">max</span>() <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>)])</span>
-<span id="cb22-7"><a href="#cb22-7"></a>freq, bins, img <span class="op">=</span> plt.hist(max_estimates, bins<span class="op">=</span><span class="dv">40</span>, label<span class="op">=</span><span class="st">"Experiment Minima"</span>)</span>
+<span id="cb22-7"><a href="#cb22-7"></a>freq, bins, img <span class="op">=</span> plt.hist(max_estimates, bins<span class="op">=</span><span class="dv">40</span>, label<span class="op">=</span><span class="st">"Experiment Maxima"</span>)</span>
 <span id="cb22-8"><a href="#cb22-8"></a>plt.vlines(<span class="dv">100</span>, ymin<span class="op">=</span><span class="dv">0</span>, ymax<span class="op">=</span>freq.<span class="bu">max</span>(), label<span class="op">=</span><span class="st">"True Max"</span>, color<span class="op">=</span><span class="st">"green"</span>)</span>
 <span id="cb22-9"><a href="#cb22-9"></a>plt.vlines(np.mean(max_estimates), ymin<span class="op">=</span><span class="dv">0</span>, ymax<span class="op">=</span>freq.<span class="bu">max</span>(), linestyles<span class="op">=</span><span class="st">"dashed"</span>, label<span class="op">=</span><span class="st">"Expected Value of the Estimator"</span>, color<span class="op">=</span><span class="st">"orange"</span>)</span>
 <span id="cb22-10"><a href="#cb22-10"></a>plt.legend()<span class="op">;</span></span>
@@ -1503,7 +1503,7 @@ p-value: 1.99</code></pre>
 </section>
 <section id="monte-carlo-methods-5" class="slide level2">
 <h2>Monte-Carlo Methods</h2>
-<div class="cell columns column-output-location" data-execution_count="22">
+<div class="cell columns column-output-location" data-execution_count="23">
 <div class="column">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>))</span>
 <span id="cb24-2"><a href="#cb24-2"></a>np.random.seed(<span class="dv">421</span>)</span>
@@ -1542,7 +1542,7 @@ p-value: 1.99</code></pre>
 </section>
 <section id="bootstrapping-1" class="slide level2">
 <h2>Bootstrapping</h2>
-<div class="cell columns column-output-location" data-execution_count="23">
+<div class="cell columns column-output-location" data-execution_count="24">
 <div class="column">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>))</span>
 <span id="cb26-2"><a href="#cb26-2"></a>experiment <span class="op">=</span> run_experiment_unif(ub<span class="op">=</span><span class="dv">100</span>)</span>
@@ -1575,12 +1575,13 @@ The bootstrap standard error of our max-based estimator is approximately 0.31176
 <ul>
 <li>However, it can be computationally expensive, since we need to run the estimation many times.</li>
 </ul></li>
-<li>In practice, “not knowing the distribution of the estimator” means either that
+<li>Generally, we can think of bootstrap errors as being a “coarse” approximation to the true standard errors. That is, they are likely to be different than the asymptotic standard errors.
 <ul>
-<li>We don’t know the distribution of the estimator because it comes from a complicated structural model, is not based on a sample average, or is not asymptotically normal.</li>
-<li>We don’t have enough data to reasonably expect the CLT to apply.</li>
+<li>They may be either larger or smaller than the asymptotic standard errors.</li>
+<li>They are likely to be larger when the sample size is small, and smaller when the sample size is large.</li>
+<li>This is not a hard-and-fast rule, and it depends on the estimator.</li>
+<li>Even though we don’t have to make any assumptions about the distribution of the estimator, we still do have to make an assumption about our sample, (i.e.&nbsp;that it is representative of the population).</li>
 </ul></li>
-<li>Generally, we can think of bootstrap errors as being a “coarse” approximation to the true standard errors. That is, they are likely to be larger than the asymptotic standard errors.</li>
 </ul>
 </section></section>
 <section>
@@ -1654,7 +1655,7 @@ The bootstrap standard error of our max-based estimator is approximately 0.31176
 <ul>
 <li>Let’s plot the bias and variance of the estimator for different values of <span class="math inline">\(c\)</span>.</li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="24">
+<div class="cell columns column-output-location" data-execution_count="25">
 <div class="column">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">def</span> bias_sq(c,sigma<span class="op">=</span><span class="dv">5</span>,n<span class="op">=</span><span class="dv">10</span>):</span>
 <span id="cb28-2"><a href="#cb28-2"></a>    <span class="cf">return</span> (c <span class="op">*</span> (n<span class="op">-</span><span class="dv">1</span>)<span class="op">-</span><span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> sigma<span class="op">**</span><span class="dv">4</span></span>
@@ -1686,8 +1687,12 @@ The bootstrap standard error of our max-based estimator is approximately 0.31176
 <section id="the-bias-variance-tradeoff-7" class="slide level2">
 <h2>The Bias-Variance Tradeoff</h2>
 
+<img data-src="./data/fig/bias_good.png" class="r-stretch quarto-figure-center"><p class="caption">Source: https://www.shiksha.com/online-courses/articles/bias-and-variance/</p></section>
+<section id="credits" class="slide level2">
+<h2>Credits</h2>
+<p>This lecture draws heavily from <a href="https://matheusfacure.github.io/python-causality-handbook/03-Stats-Review-The-Most-Dangerous-Equation.html.html">Causal Inference for the Brave and True: Stats Review - The Most Dangerous Equation</a> by Matheus Facure.</p>
 
-<img data-src="./data/fig/bias_good.png" class="r-stretch quarto-figure-center"><p class="caption">Source: https://www.shiksha.com/online-courses/articles/bias-and-variance/</p><div class="footer footer-default">
+<div class="footer footer-default">
 
 </div>
 </section></section>
