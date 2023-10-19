@@ -611,9 +611,9 @@ X \approx \sum_{m=1}^L \sigma_m u_m v_m^T
 <span id="cb4-5"><a href="#cb4-5"></a>  <span class="bu">print</span>(<span class="ss">f"Explained Variance (ordered):</span><span class="ch">\n</span><span class="sc">{</span>pca<span class="sc">.</span>explained_variance_ratio_<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Singular Values (sqrt eigenvalues):
-[26.0863  0.8233  0.6916]
+[21.5216  0.8732  0.7096]
 Explained Variance (ordered):
-[0.9983 0.001  0.0007]</code></pre>
+[0.9973 0.0016 0.0011]</code></pre>
 </div>
 </div>
 </section>
@@ -626,8 +626,8 @@ Explained Variance (ordered):
 <span id="cb6-4"><a href="#cb6-4"></a><span class="bu">print</span>(<span class="ss">f"Correlation of Z_1 to Z_hat_1 = </span><span class="sc">{</span>np<span class="sc">.</span>corrcoef(Z.T, Z_hat.T)[<span class="dv">0</span>,<span class="dv">2</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb6-5"><a href="#cb6-5"></a><span class="bu">print</span>(<span class="ss">f"Correlation of Z_2 to Z_hat_2 = </span><span class="sc">{</span>np<span class="sc">.</span>corrcoef(Z.T, Z_hat.T)[<span class="dv">1</span>,<span class="dv">3</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Correlation of Z_1 to Z_hat_1 = -0.9991910948940889
-Correlation of Z_2 to Z_hat_2 = -0.1894085947160488</code></pre>
+<pre><code>Correlation of Z_1 to Z_hat_1 = 0.9987396670122092
+Correlation of Z_2 to Z_hat_2 = -0.6413512732572132</code></pre>
 </div>
 </div>
 </section>
@@ -813,7 +813,7 @@ g(f(x; \theta_e); \theta_d) \approx x
 <span id="cb9-6"><a href="#cb9-6"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-display">
-<p><img data-src="latent_variables_files/figure-revealjs/cell-7-output-1.png"></p>
+<p><img data-src="latent_variables_files/figure-revealjs/cell-7-output-1.png" width="823" height="449"></p>
 </div>
 </div>
 </div>
@@ -832,7 +832,7 @@ g(f(x; \theta_e); \theta_d) \approx x
 <span id="cb10-4"><a href="#cb10-4"></a>corr <span class="op">=</span> df[<span class="st">"k"</span>].corr(df[<span class="st">"k_hat"</span>])</span>
 <span id="cb10-5"><a href="#cb10-5"></a><span class="bu">print</span>(<span class="ss">f"Correlation between k and k_hat:</span><span class="sc">{</span>corr<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Correlation between k and k_hat:-0.88</code></pre>
+<pre><code>Correlation between k and k_hat:-0.93</code></pre>
 </div>
 </div>
 </section>
@@ -853,7 +853,7 @@ g(f(x; \theta_e); \theta_d) \approx x
 <span id="cb12-11"><a href="#cb12-11"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-display">
-<p><img data-src="latent_variables_files/figure-revealjs/cell-9-output-1.png"></p>
+<p><img data-src="latent_variables_files/figure-revealjs/cell-9-output-1.png" width="737" height="449"></p>
 </div>
 </div>
 </div>
@@ -870,7 +870,7 @@ g(f(x; \theta_e); \theta_d) \approx x
 <span id="cb13-6"><a href="#cb13-6"></a>                         <span class="cf">if</span> x[<span class="st">'k'</span>] <span class="op">==</span> x[<span class="st">'k_hat'</span>] <span class="cf">else</span> <span class="vs">r'$k \neq \hat</span><span class="sc">{k}</span><span class="vs">$'</span>,</span>
 <span id="cb13-7"><a href="#cb13-7"></a>                         axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Correlation now 0.8815882896709472</code></pre>
+<pre><code>Correlation now 0.9300465034877902</code></pre>
 </div>
 </div>
 </section>
@@ -886,7 +886,7 @@ g(f(x; \theta_e); \theta_d) \approx x
 <span id="cb15-6"><a href="#cb15-6"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-display">
-<p><img data-src="latent_variables_files/figure-revealjs/cell-11-output-1.png"></p>
+<p><img data-src="latent_variables_files/figure-revealjs/cell-11-output-1.png" width="526" height="376"></p>
 </div>
 </div>
 </div>
@@ -930,8 +930,12 @@ g(f(x; \theta_e); \theta_d) \approx x
 </section>
 <section id="dividends-seem-to-grow-at-a-similar-rate" class="slide level2">
 <h2>Dividends Seem to Grow at a Similar Rate?</h2>
-
-<img data-src="latent_variables_files/figure-revealjs/cell-14-output-1.png" class="r-stretch"></section>
+<div class="cell" data-execution_count="14">
+<div class="cell-output cell-output-display">
+<p><img data-src="latent_variables_files/figure-revealjs/cell-14-output-1.png" width="505" height="376"></p>
+</div>
+</div>
+</section>
 <section id="digging-deeper" class="slide level2">
 <h2>Digging Deeper</h2>
 <ul>
@@ -1001,9 +1005,13 @@ A = Q \Lambda Q^{-1} = Q \begin{bmatrix} \lambda_1 &amp; 0 \\ 0 &amp; 0 \end{bma
 </section>
 <section id="total-dividends-and-the-latent-variable" class="slide level2">
 <h2>Total Dividends and the Latent Variable</h2>
+<div class="cell" data-execution_count="18">
+<div class="cell-output cell-output-display">
+<p><img data-src="latent_variables_files/figure-revealjs/cell-18-output-1.png" width="496" height="376"></p>
+</div>
+</div>
 
-
-<img data-src="latent_variables_files/figure-revealjs/cell-18-output-1.png" class="r-stretch"><div class="footer footer-default">
+<div class="footer footer-default">
 
 </div>
 </section></section>

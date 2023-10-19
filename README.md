@@ -41,9 +41,10 @@ The course has two midterms, weekly to bi-weekly problem sets, and a final data 
 3. **September 25th Midnight:** [Problem Set 3](problem_sets/problem_set_3.ipynb)
 4. **October 4th Midnight:** [Problem Set 4](problem_sets/problem_set_4.ipynb)
 5. **October 5th:** Midterm Logistics Practice with [Midterm Practice Problems](problem_sets/midterm_practice_1.ipynb)
-6. **October 11th:** IN CLASS MIDTERM #1
-7. **November 8th:** IN CLASS MIDTERM #2
-8. **December 8th Midnight:** Data Project Due
+6. **October 11th:** IN CLASS MIDTERM #1'
+7. **October 25th:** [Problem Set 5](problem_sets/problem_set_5.ipynb)
+8. **November 8th:** IN CLASS MIDTERM #2
+9. **December 8th Midnight:** Data Project Due
 
 See the `/problem_sets` folder within this repository for the problem sets as jupyter notebooks.  You should modify them directly as Jupyter notebooks, and the TA will explain how to submit them.
 
@@ -144,16 +145,24 @@ Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/le
 -  **October 11**
     - **IN CLASS MIDTERM #1**
 ### Phil
--   **October 12** ("Make-up Monday") Linear Regression, Omitted Variable Bias
+-   **October 12** ("Make-up Monday") Introduction to Causality, continued
     - **Material:**
-      - https://matheusfacure.github.io/python-causality-handbook/05-The-Unreasonable-Effectiveness-of-Linear-Regression.html
+      - [Introduction to Causality and Randomized Experiments](https://ubcecon.github.io/ECON526/lectures/lectures/introduction_to_causality.html)
+    - **Self-study:**
+      - https://matheusfacure.github.io/python-causality-handbook/01-Introduction-To-Causality.html
+      - https://matheusfacure.github.io/python-causality-handbook/02-Randomised-Experiments.html
 
--   **October 16** Groups and Dummy Regression
+-   **October 16** Stats Review: Quantifying Uncertainty in Causal Inference
     - **Material:**
-      - https://matheusfacure.github.io/python-causality-handbook/06-Grouped-and-Dummy-Regression.html
--   **October 18** Beyond Confounders - Good and Bad Controls, Selection Bias
+      - [Stats Review: Quantifying Uncertainty in Applied Economics](https://ubcecon.github.io/ECON526/lectures/lectures/uncertainty_bias_variance.html)
+    - **Self-study:**
+      - https://matheusfacure.github.io/python-causality-handbook/03-Stats-Review-The-Most-Dangerous-Equation.html
+        
+-   **October 18** Causal Graphical Models
     - **Material:**
-      - https://matheusfacure.github.io/python-causality-handbook/07-Beyond-Confounders.html
+      - Finish [Stats Review: Quantifying Uncertainty in Applied Economics](https://ubcecon.github.io/ECON526/lectures/lectures/uncertainty_bias_variance.html)
+      - Causal Graphical Models
+
 -   **October 23** Instrumental Variables
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/08-Instrumental-Variables.html

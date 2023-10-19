@@ -622,7 +622,7 @@ U_{t+1} &amp;= \alpha E_t + (1-\phi) U_t
 <span id="cb12-8"><a href="#cb12-8"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-display">
-<p><img data-src="eigenvalue_applications_files/figure-revealjs/cell-8-output-1.png"></p>
+<p><img data-src="eigenvalue_applications_files/figure-revealjs/cell-8-output-1.png" width="842" height="449"></p>
 </div>
 </div>
 </div>
@@ -709,8 +709,12 @@ X_100 = [666666.66666667 333333.33333333]</code></pre>
 </section>
 <section id="convergence-dynamics-of-unemployment" class="slide level2">
 <h2>Convergence Dynamics of Unemployment</h2>
-
-<img data-src="eigenvalue_applications_files/figure-revealjs/cell-11-output-1.png" class="r-stretch"></section></section>
+<div class="cell" data-execution_count="11">
+<div class="cell-output cell-output-display">
+<p><img data-src="eigenvalue_applications_files/figure-revealjs/cell-11-output-1.png" width="544" height="376"></p>
+</div>
+</div>
+</section></section>
 <section>
 <section id="present-discounted-values" class="title-slide slide level1 center">
 <h1>Present Discounted Values</h1>
@@ -724,8 +728,8 @@ X_100 = [666666.66666667 333333.33333333]</code></pre>
 <li><p>More generally if <span class="math inline">\(x_{t+1} = A x_t\)</span>, <span class="math inline">\(x_t \in \mathbb{R}^N\)</span>, <span class="math inline">\(y_t = G x_t\)</span> and <span class="math inline">\(A \in \mathbb{R}^{N \times N}\)</span>, then</p>
 <p><span class="math display">\[
 \begin{aligned}
-p_t &amp;= y_t + \beta y_{t+1} + \beta^2 y_{t+2} + \ldots = G x_t + \beta G A x_t + \beta G A A  x_t + \ldots\\
-&amp;= \sum_{s=0}^{\infty} \beta^s A^s y_t\\
+p_t &amp;= y_t + \beta y_{t+1} + \beta^2 y_{t+2} + \ldots = G x_t + \beta G A x_t + \beta^2 G A A  x_t + \ldots\\
+&amp;= \sum_{s=0}^{\infty} \beta^s G A^s y_t\\
 &amp;= G (I - \beta A)^{-1} x_t\quad,\text{ if } \rho(A) &lt; 1/\beta
 \end{aligned}
 \]</span></p></li>
