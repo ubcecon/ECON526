@@ -310,7 +310,6 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
-      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -438,10 +437,13 @@ Phil Solimine
 <ul>
 <li><a href="#/overview" id="/toc-overview">Overview</a></li>
 <li><a href="#/directed-graphical-models" id="/toc-directed-graphical-models">Directed Graphical Models</a></li>
+<li><a href="#/building-a-causal-graph" id="/toc-building-a-causal-graph">Building a Causal Graph</a></li>
+<li><a href="#/aside-cycles" id="/toc-aside-cycles">Aside: Cycles</a></li>
 <li><a href="#/dependence-flows" id="/toc-dependence-flows">Dependence Flows</a></li>
 <li><a href="#/viualizing-bias" id="/toc-viualizing-bias">Viualizing Bias</a></li>
 <li><a href="#/confounding" id="/toc-confounding">Confounding</a></li>
 <li><a href="#/selection" id="/toc-selection">Selection</a></li>
+<li><a href="#/choosing-covariates" id="/toc-choosing-covariates">Choosing Covariates</a></li>
 </ul>
 </nav>
 </section>
@@ -489,12 +491,25 @@ Phil Solimine
 <li><p>We can visualize conditional independence relationships using a <strong>Bayesian</strong> or <strong>directed graphical model</strong></p></li>
 <li><p>A Bayesian graphical model is a directed graph where:</p>
 <ul>
-<li>The nodes represent random variables</li>
-<li>The edges represent conditional independence relationships</li>
+<li>The nodes or vertices represent random variables</li>
+<li>The links or edges represent conditional independence relationships</li>
 </ul></li>
 </ul>
 </section>
 <section id="directed-graphical-models-2" class="slide level2">
+<h2>Directed Graphical Models</h2>
+<ul>
+<li><p>Fundamentally, a graphical model is a way to represent how a joint probability distribution factorizes into a product of conditional distributions.</p></li>
+<li><p>For our purposes, we will usually interpret the edges as causal relationships.</p></li>
+<li><p>Furthermore, the graphs we draw will be <strong>acyclic</strong>, meaning that there are no loops in the graph.</p>
+<ul>
+<li>In other words, there is no way to start at a node and follow the arrows to get back to the same node</li>
+<li>This is because we are interested in <strong>causal</strong> relationships, and a cycle would imply that there is a feedback loop where a variable causes itself</li>
+</ul></li>
+<li><p>Since these graphs are both directed and acyclic, we call them <strong>directed acyclic graphs</strong> or <strong>DAGs</strong></p></li>
+</ul>
+</section>
+<section id="directed-graphical-models-3" class="slide level2">
 <h2>Directed Graphical Models</h2>
 <ul>
 <li>A directed graphical model might look something like this:</li>
@@ -524,11 +539,8 @@ Phil Solimine
 </ul></li>
 </ul>
 </section>
-<section id="directed-graphical-models-3" class="slide level2">
+<section id="directed-graphical-models-4" class="slide level2">
 <h2>Directed Graphical Models</h2>
-<ul>
-<li>Here is a more realistic example:</li>
-</ul>
 <div class="cell columns column-output-location" data-execution_count="3">
 <div class="column">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>g <span class="op">=</span> gr.Digraph()</span>
@@ -549,17 +561,16 @@ Phil Solimine
 </ul></li>
 </ul>
 </section>
-<section id="directed-graphical-models-4" class="slide level2">
+<section id="directed-graphical-models-5" class="slide level2">
 <h2>Directed Graphical Models</h2>
 <ul>
-<li><p>Directed graphical models are useful because they allow us to visualize conditional independence relationships, which are often difficult to keep track of</p></li>
+<li><p>Directed graphical models are useful because they allow us to visualize conditional independence relationships, which can often be difficult to keep track of</p></li>
 <li><p>However, they are also useful because they allow us to determine whether or not we can identify a treatment effect.</p></li>
 <li><p>There are three very common sub-structures that appear in graphical models, that inform how dependence will flow through the model.</p></li>
 </ul>
 </section>
-<section id="directed-graphical-models-5" class="slide level2">
+<section id="directed-graphical-models-6" class="slide level2">
 <h2>Directed Graphical Models</h2>
-<p>Let’s look at a really simple example, which we could call a directed path:</p>
 <div class="cell columns column-output-location" data-execution_count="4">
 <div class="column">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>g <span class="op">=</span> gr.Digraph()</span>
@@ -568,7 +579,7 @@ Phil Solimine
 <span id="cb3-4"><a href="#cb3-4"></a></span>
 <span id="cb3-5"><a href="#cb3-5"></a>g.edge(<span class="st">"X"</span>, <span class="st">"Y"</span>)</span>
 <span id="cb3-6"><a href="#cb3-6"></a>g.edge(<span class="st">"Y"</span>, <span class="st">"Z"</span>)</span>
-<span id="cb3-7"><a href="#cb3-7"></a>g.node(<span class="st">"Y"</span>, <span class="st">"Y"</span>, fillcolor<span class="op">=</span><span class="st">"#5f5f5f5f"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7"></a>g.node(<span class="st">"Y"</span>, <span class="st">"Y"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
 <span id="cb3-8"><a href="#cb3-8"></a></span>
 <span id="cb3-9"><a href="#cb3-9"></a></span>
 <span id="cb3-10"><a href="#cb3-10"></a>g.edge(<span class="st">"causal knowledge"</span>, <span class="st">"solve problems"</span>)</span>
@@ -582,13 +593,13 @@ Phil Solimine
 </div>
 </div>
 <ul>
-<li>In this stylized example, we are postulating that knowing causal inference is the only way to solve business problems
+<li>In this stylized example of a <strong>directed path</strong>, we are postulating that knowing causal inference is the only way to solve business problems
 <ul>
 <li>This is obviously not true, but it is a useful example for our purposes</li>
 </ul></li>
 </ul>
 </section>
-<section id="directed-graphical-models-6" class="slide level2">
+<section id="directed-graphical-models-7" class="slide level2">
 <h2>Directed Graphical Models</h2>
 <ul>
 <li>This model highlights the following statistical process:
@@ -603,7 +614,7 @@ Phil Solimine
 </ul></li>
 </ul>
 </section>
-<section id="directed-graphical-models-7" class="slide level2">
+<section id="directed-graphical-models-8" class="slide level2">
 <h2>Directed Graphical Models</h2>
 <ul>
 <li><p>Now let’s condition on the intermediate variable <span class="math inline">\(Y\)</span></p>
@@ -619,7 +630,7 @@ Phil Solimine
 </ul></li>
 </ul>
 </section>
-<section id="directed-graphical-models-8" class="slide level2">
+<section id="directed-graphical-models-9" class="slide level2">
 <h2>Directed Graphical Models</h2>
 <p>Now let’s look at another common structure:</p>
 <div class="cell columns column-output-location" data-execution_count="5">
@@ -630,7 +641,7 @@ Phil Solimine
 <span id="cb4-4"><a href="#cb4-4"></a></span>
 <span id="cb4-5"><a href="#cb4-5"></a>g.edge(<span class="st">"X"</span>, <span class="st">"Y"</span>)</span>
 <span id="cb4-6"><a href="#cb4-6"></a>g.edge(<span class="st">"X"</span>, <span class="st">"Z"</span>)</span>
-<span id="cb4-7"><a href="#cb4-7"></a>g.node(<span class="st">"X"</span>, <span class="st">"X"</span>, fillcolor<span class="op">=</span><span class="st">"#5f5f5f5f"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7"></a>g.node(<span class="st">"X"</span>, <span class="st">"X"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
 <span id="cb4-8"><a href="#cb4-8"></a></span>
 <span id="cb4-9"><a href="#cb4-9"></a>g.edge(<span class="st">"statistics"</span>, <span class="st">"causal inference"</span>)</span>
 <span id="cb4-10"><a href="#cb4-10"></a>g.edge(<span class="st">"statistics"</span>, <span class="st">"machine learning"</span>)</span>
@@ -646,7 +657,7 @@ Phil Solimine
 <li>In this model, we are postulating that statistics is a prerequisite for both causal inference and machine learning.</li>
 </ul>
 </section>
-<section id="directed-graphical-models-9" class="slide level2">
+<section id="directed-graphical-models-10" class="slide level2">
 <h2>Directed Graphical Models</h2>
 
 <img data-src="causal_graphical_models_files/figure-revealjs/cell-6-output-1.svg" class="r-stretch"><ul>
@@ -661,7 +672,7 @@ Phil Solimine
 </ul></li>
 </ul>
 </section>
-<section id="directed-graphical-models-10" class="slide level2">
+<section id="directed-graphical-models-11" class="slide level2">
 <h2>Directed Graphical Models</h2>
 
 <img data-src="causal_graphical_models_files/figure-revealjs/cell-7-output-1.svg" class="r-stretch"><ul>
@@ -672,7 +683,7 @@ Phil Solimine
 <li>We would call this a <strong>fork</strong> structure</li>
 </ul>
 </section>
-<section id="directed-graphical-models-11" class="slide level2">
+<section id="directed-graphical-models-12" class="slide level2">
 <h2>Directed Graphical Models</h2>
 <p>Finally, let’s look at a third common structure, called a <strong>collider</strong>:</p>
 <div class="cell columns column-output-location" data-execution_count="8">
@@ -683,7 +694,7 @@ Phil Solimine
 <span id="cb5-4"><a href="#cb5-4"></a></span>
 <span id="cb5-5"><a href="#cb5-5"></a>g.edge(<span class="st">"Y"</span>, <span class="st">"X"</span>)</span>
 <span id="cb5-6"><a href="#cb5-6"></a>g.edge(<span class="st">"Z"</span>, <span class="st">"X"</span>)</span>
-<span id="cb5-7"><a href="#cb5-7"></a>g.node(<span class="st">"X"</span>, <span class="st">"X"</span>, fillcolor<span class="op">=</span><span class="st">"#5f5f5f5f"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7"></a>g.node(<span class="st">"X"</span>, <span class="st">"X"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
 <span id="cb5-8"><a href="#cb5-8"></a></span>
 <span id="cb5-9"><a href="#cb5-9"></a>g.edge(<span class="st">"statistics"</span>, <span class="st">"job promotion"</span>)</span>
 <span id="cb5-10"><a href="#cb5-10"></a>g.edge(<span class="st">"flatter"</span>, <span class="st">"job promotion"</span>)</span>
@@ -696,13 +707,271 @@ Phil Solimine
 </div>
 </div>
 <ul>
-<li>In this model, we are postulating that statistics and flattery are both determinants of getting a job promotion</li>
+<li>In this model, we are postulating that statistics and flattery are both determinants of getting a job promotion.</li>
 </ul>
+</section></section>
+<section>
+<section id="building-a-causal-graph" class="title-slide slide level1 center">
+<h1>Building a Causal Graph</h1>
+
+</section>
+<section id="building-a-causal-graph-1" class="slide level2">
+<h2>Building a Causal Graph</h2>
+<ul>
+<li><p>Now that we have seen some examples of causal graphs, we should think about how to draw a causal graph for a problem in practice.</p></li>
+<li><p>Drawing a causal graph is a way of encoding the assumptions that you are making about the data generating process.</p></li>
+<li><p>The first step is to identify the variables that are relevant to the problem at hand.</p>
+<ul>
+<li>Do your research!</li>
+</ul></li>
+</ul>
+</section>
+<section id="building-a-causal-graph-2" class="slide level2">
+<h2>Building a Causal Graph</h2>
+<ul>
+<li><p>In reality, there are many variables that are relevant to a problem.</p></li>
+<li><p>Real data-generating processes are therefore extremely large and complex.</p></li>
+<li><p>Think about what the data generating process might look like for something similar the online class example we have been using</p>
+<ul>
+<li>(if we didn’t have a randomized experiment)</li>
+</ul></li>
+</ul>
+</section>
+<section id="building-a-causal-graph-3" class="slide level2">
+<h2>Building a Causal Graph</h2>
+<ul>
+<li>Let’s say we were interested in the effect of online classes on college dropout rates. The treatment effect we want to identify is:</li>
+</ul>
+
+<img data-src="causal_graphical_models_files/figure-revealjs/cell-9-output-1.svg" class="r-stretch"></section>
+<section id="building-a-causal-graph-4" class="slide level2">
+<h2>Building a Causal Graph</h2>
+<ul>
+<li>In addition to <code>OnlineClass</code>, there are <strong>many</strong> variables that might cause a student to drop out of college.</li>
+</ul>
+
+<img data-src="causal_graphical_models_files/figure-revealjs/cell-10-output-1.svg" class="r-stretch"></section>
+<section id="building-a-causal-graph-5" class="slide level2">
+<h2>Building a Causal Graph</h2>
+<ul>
+<li>Some of these variables might <strong>also</strong> determine whether or not a student takes an online class.</li>
+</ul>
+
+<img data-src="causal_graphical_models_files/figure-revealjs/cell-11-output-1.svg" class="r-stretch"></section>
+<section id="building-a-causal-graph-6" class="slide level2">
+<h2>Building a Causal Graph</h2>
+<ul>
+<li>Then there are some other variables that affect just <code>OnlineClass</code> and not <code>Dropout</code></li>
+</ul>
+
+<img data-src="causal_graphical_models_files/figure-revealjs/cell-12-output-1.svg" class="r-stretch"></section>
+<section id="building-a-causal-graph-7" class="slide level2">
+<h2>Building a Causal Graph</h2>
+<ul>
+<li>There are relationships between some of these variables as well</li>
+</ul>
+
+<img data-src="causal_graphical_models_files/figure-revealjs/cell-13-output-1.svg" class="r-stretch"></section>
+<section id="building-a-causal-graph-8" class="slide level2">
+<h2>Building a Causal Graph</h2>
+<ul>
+<li>Even if there is not a direct causal relationship between two variables, there might be an indirect relationship through a third variable</li>
+</ul>
+
+<img data-src="causal_graphical_models_files/figure-revealjs/cell-14-output-1.svg" class="r-stretch"></section>
+<section id="building-a-causal-graph-9" class="slide level2">
+<h2>Building a Causal Graph</h2>
+<ul>
+<li>And then there are some variables that we know are correlated, but due to some other combination of unknown factors</li>
+</ul>
+
+<img data-src="causal_graphical_models_files/figure-revealjs/cell-15-output-1.svg" class="r-stretch"></section>
+<section id="building-a-causal-graph-10" class="slide level2">
+<h2>Building a Causal Graph</h2>
+<div class="two-col">
+<div class="col">
+<div class="cell" data-execution_count="16">
+<div class="cell-output cell-output-display" data-execution_count="15">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-16-output-1.svg"></p>
+</div>
+</div>
+</div>
+<div class="col">
+<ul>
+<li>As we can see, this graph got very complex, very quickly.</li>
+<li>It is clearly not capturing all of the relevant variables</li>
+<li>What else might be missing?</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="building-a-causal-graph-11" class="slide level2">
+<h2>Building a Causal Graph</h2>
+<div class="two-col">
+<div class="col">
+<div class="cell" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="16">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-17-output-1.svg"></p>
+</div>
+</div>
+</div>
+<div class="col">
+<ul>
+<li>As we can see, this graph got very complex, very quickly.</li>
+<li>It is clearly not capturing all of the relevant variables</li>
+<li>What else might be missing?
+<ul>
+<li>CommunityCollege vs.&nbsp;University</li>
+<li><em>Income</em></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="simplifying-the-graph" class="slide level2">
+<h2>Simplifying the Graph</h2>
+<ul>
+<li>In practice, we will not be able to draw a graph that captures everything. How can we choose which relationships to include, and which to ignore?</li>
+</ul>
+<ol type="1">
+<li><p><strong>Unimportance</strong> - If the arrows coming in and out of a variable all represent small or negligible effects, we can ignore them.</p></li>
+<li><p><strong>Redundancy</strong> - If there are variables on the diagram that occupy the same space (i.e.&nbsp;they both have incoming and outgoing links from the same variables) then we can probably combine them into a single variable.</p></li>
+<li><p><strong>Mediators</strong> - If a variable is <strong>only</strong> included as a way to connect two other variables, we can probably remove it.</p></li>
+<li><p><strong>Irrelevance</strong> - If a variable is important to the DGP, but isn’t part of a <strong>dependence path</strong> between the treatment and the outcome, we can ignore it.</p></li>
+</ol>
+</section>
+<section id="building-a-causal-graph-12" class="slide level2">
+<h2>Building a Causal Graph</h2>
+<div class="two-col">
+<div class="col">
+<div class="cell" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="17">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-18-output-1.svg"></p>
+</div>
+</div>
+</div>
+<div class="col">
+<ul>
+<li><strong>Unimportance</strong> was already necessarily applied in the creation of the graph.</li>
+<li>We can also apply <strong>redundancy</strong> by combining <code>Age</code> and <code>Gender</code> into a single variable, <code>Demographics</code></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="building-a-causal-graph-13" class="slide level2">
+<h2>Building a Causal Graph</h2>
+<div class="two-col">
+<div class="col">
+<div class="cell" data-execution_count="19">
+<div class="cell-output cell-output-display" data-execution_count="18">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-19-output-1.svg"></p>
+</div>
+</div>
+</div>
+<div class="col">
+<ul>
+<li>There are also quite a few <strong>Mediators</strong>
+<ul>
+<li>The most prevelant is <code>Preferences</code>, (we can just have <code>Demographics</code>, etc. directly affect <code>OnlineClass</code>).</li>
+<li>We can throw out <code>InternetAccess</code> without losing anything.</li>
+</ul></li>
+<li>There is one more. Can you find it?</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="building-a-causal-graph-14" class="slide level2">
+<h2>Building a Causal Graph</h2>
+<div class="two-col">
+<div class="col">
+<div class="cell" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="19">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-20-output-1.svg"></p>
+</div>
+</div>
+</div>
+<div class="col">
+<ul>
+<li><p>Notice that all of the variables that cause <code>AvailableTime</code> are also causes of <code>WorkHours</code>.</p></li>
+<li><p>We can therefore throw out <code>AvailableTime</code>, and just have <code>WorkHours</code> directly affect <code>OnlineClass</code>, rather than through <code>AvailableTime</code>.</p></li>
+<li><p><code>AvailableTime</code> is also a mediator.</p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="building-a-causal-graph-15" class="slide level2">
+<h2>Building a Causal Graph</h2>
+<ul>
+<li><p>We are left with a much simpler (although still messy) model, that still captures most of the relevant relationships.</p></li>
+<li><p>Even though the simplified model is nicer to work with, these rules are just heuristics and shouldn’t be applied blindly.</p></li>
+</ul>
+
+<img data-src="causal_graphical_models_files/figure-revealjs/cell-21-output-1.svg" class="r-stretch"></section></section>
+<section>
+<section id="aside-cycles" class="title-slide slide level1 center">
+<h1>Aside: Cycles</h1>
+
+</section>
+<section id="cycles" class="slide level2">
+<h2>Cycles</h2>
+<ul>
+<li><p>There is one thing that a causal diagram cannot have: a <strong>cycle</strong>.</p></li>
+<li><p>A cycle is a directed path that starts and ends at the same node.</p>
+<ul>
+<li>This would mean that a variable causes itself, which is impossible.</li>
+</ul></li>
+<li><p>The simplest cycles look like this:</p></li>
+</ul>
+
+<img data-src="causal_graphical_models_files/figure-revealjs/cell-22-output-1.svg" class="r-stretch"></section>
+<section id="cycles-1" class="slide level2">
+<h2>Cycles</h2>
+<ul>
+<li>Why can’t we have cycles? Surely there are feedback loops in the real world.</li>
+</ul>
+
+<img data-src="causal_graphical_models_files/figure-revealjs/cell-23-output-1.svg" class="r-stretch"><ul>
+<li>If we have a cycle, then our causal problem is ill-specified.
+<ul>
+<li>We can’t identify the effect of <code>PrivateSchool</code> on <code>Wealth</code>, because <code>Wealth</code> also causes <code>PrivateSchool</code>… or does it?</li>
+</ul></li>
+</ul>
+</section>
+<section id="cycles-2" class="slide level2">
+<h2>Cycles</h2>
+<div class="two-col">
+<div class="col">
+<div class="cell" data-execution_count="24">
+<div class="cell-output cell-output-display" data-execution_count="23">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-24-output-1.svg"></p>
+</div>
+</div>
+</div>
+<div class="col">
+<ul>
+<li><p>We can solve this problem by introducing the <strong>time</strong> dimension.</p></li>
+<li><p>By creating a new variable to represent the lagged value, we can break the cycle.</p>
+<ul>
+<li>This also loosely corresponds with the physicists view of causality, where the arrow of time is fundamental.</li>
+<li>Similar to the time-series concept of <strong>Granger Causality</strong>.</li>
+</ul></li>
+</ul>
+</div>
+</div>
 </section></section>
 <section>
 <section id="dependence-flows" class="title-slide slide level1 center">
 <h1>Dependence Flows</h1>
 
+</section>
+<section id="dependence-flows-1" class="slide level2">
+<h2>Dependence Flows</h2>
+<ul>
+<li><p>In order to determine whether or not we can identify a treatment effect, we need to understand how dependence <strong>flows</strong> through a graphical model.</p></li>
+<li><p>We have seen that conditioning on a node can either make or break the dependence relationship between two other nodes</p></li>
+<li><p>To identify the treatment effect, we want the <em>link between the treatment and the outcome to be unblocked</em>.</p></li>
+<li><p>However, we also need to make sure that there is <em>no other dependence path</em> between the treatment and the outcome that is unblocked.</p></li>
+</ul>
 </section>
 <section id="the-rules-of-bayes-ball" class="slide level2">
 <h2>The Rules of Bayes-Ball</h2>
@@ -711,21 +980,20 @@ Phil Solimine
 <li>The rules of Bayes-ball are reasonably simple. A dependence path is blocked if and only if:
 <ol type="1">
 <li>It contains a <em>non-collider</em> that is conditioned on</li>
-<li>It contains a <em>collider</em> that is not conditioned on, and neither are any of its descendants</li>
+<li>It contains a <em>collider</em> that is not conditioned on, and neither are <em>any of its descendants</em></li>
 </ol></li>
 </ul>
 
 <img data-src="./data/fig/graph-flow.png" class="r-stretch"></section>
-<section id="directed-graphical-models-12" class="slide level2">
+<section id="directed-graphical-models-13" class="slide level2">
 <h2>Directed Graphical Models</h2>
-<p>Turning back to our collider example:</p>
-
-<img data-src="causal_graphical_models_files/figure-revealjs/cell-9-output-1.svg" class="r-stretch"><ul>
+<p>Turning back to our <strong>collider</strong> example:</p>
+<ul>
 <li>Notice that when we do not condition on <span class="math inline">\(C\)</span>, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent.</li>
 <li>However, somewhat unintuitively, when we condition on <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span> and <span class="math inline">\(Z\)</span> become dependent.
 <ul>
 <li>This is because conditioning on <span class="math inline">\(X\)</span> opens the flow of dependence from <span class="math inline">\(Y\)</span> to <span class="math inline">\(Z\)</span>.</li>
-<li>In any case that is not a collider, conditioning on a node blocks the flow of dependence.</li>
+<li>In any case that is <em>not</em> a collider, conditioning on a node <em>blocks</em> the flow of dependence.</li>
 </ul></li>
 </ul>
 </section></section>
@@ -765,7 +1033,7 @@ Phil Solimine
 <ul>
 <li>Let’s look at an example of confounding:</li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="10">
+<div class="cell columns column-output-location" data-execution_count="26">
 <div class="column">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>g <span class="op">=</span> gr.Digraph()</span>
 <span id="cb6-2"><a href="#cb6-2"></a>g.edge(<span class="st">"X"</span>, <span class="st">"T"</span>)</span>
@@ -781,8 +1049,8 @@ Phil Solimine
 <span id="cb6-12"><a href="#cb6-12"></a>g.edge(<span class="st">"medicine"</span>, <span class="st">"survived"</span>)</span>
 <span id="cb6-13"><a href="#cb6-13"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
-<div class="cell-output cell-output-display" data-execution_count="9">
-<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-10-output-1.svg"></p>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-26-output-1.svg"></p>
 </div>
 </div>
 </div>
@@ -792,7 +1060,7 @@ Phil Solimine
 </section>
 <section id="confounding-2" class="slide level2">
 <h2>Confounding</h2>
-<div class="cell columns column-output-location" data-execution_count="11">
+<div class="cell columns column-output-location" data-execution_count="27">
 <div class="column">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>g <span class="op">=</span> gr.Digraph()</span>
 <span id="cb7-2"><a href="#cb7-2"></a></span>
@@ -810,8 +1078,8 @@ Phil Solimine
 <span id="cb7-14"><a href="#cb7-14"></a>g.edge(<span class="st">"Intelligence"</span>, <span class="st">"Wage"</span>)</span>
 <span id="cb7-15"><a href="#cb7-15"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
-<div class="cell-output cell-output-display" data-execution_count="10">
-<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-11-output-1.svg"></p>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-27-output-1.svg"></p>
 </div>
 </div>
 </div>
@@ -824,26 +1092,26 @@ Phil Solimine
 </section>
 <section id="confounding-3" class="slide level2">
 <h2>Confounding</h2>
-<div class="cell columns column-output-location" data-execution_count="12">
+<div class="cell columns column-output-location" data-execution_count="28">
 <div class="column">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>g <span class="op">=</span> gr.Digraph()</span>
 <span id="cb8-2"><a href="#cb8-2"></a></span>
-<span id="cb8-3"><a href="#cb8-3"></a>g.node(<span class="st">"Family Income"</span>, fillcolor<span class="op">=</span><span class="st">"#5f5f5f5f"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3"></a>g.node(<span class="st">"Family Income"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
 <span id="cb8-4"><a href="#cb8-4"></a>g.edge(<span class="st">"Family Income"</span>, <span class="st">"Educ"</span>)</span>
 <span id="cb8-5"><a href="#cb8-5"></a>g.edge(<span class="st">"Educ"</span>, <span class="st">"Wage"</span>)</span>
 <span id="cb8-6"><a href="#cb8-6"></a></span>
-<span id="cb8-7"><a href="#cb8-7"></a>g.node(<span class="st">"SAT"</span>, fillcolor<span class="op">=</span><span class="st">"#5f5f5f5f"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7"></a>g.node(<span class="st">"SAT"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
 <span id="cb8-8"><a href="#cb8-8"></a>g.edge(<span class="st">"SAT"</span>, <span class="st">"Educ"</span>)</span>
 <span id="cb8-9"><a href="#cb8-9"></a></span>
-<span id="cb8-10"><a href="#cb8-10"></a>g.node(<span class="st">"Family Income"</span>, fillcolor<span class="op">=</span><span class="st">"#5f5f5f5f"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10"></a>g.node(<span class="st">"Family Income"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
 <span id="cb8-11"><a href="#cb8-11"></a>g.edge(<span class="st">"Family Income"</span>, <span class="st">"Wage"</span>)</span>
 <span id="cb8-12"><a href="#cb8-12"></a></span>
 <span id="cb8-13"><a href="#cb8-13"></a>g.edge(<span class="st">"Intelligence"</span>, <span class="st">"SAT"</span>)</span>
 <span id="cb8-14"><a href="#cb8-14"></a>g.edge(<span class="st">"Intelligence"</span>, <span class="st">"Wage"</span>)</span>
 <span id="cb8-15"><a href="#cb8-15"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
-<div class="cell-output cell-output-display" data-execution_count="11">
-<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-12-output-1.svg"></p>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-28-output-1.svg"></p>
 </div>
 </div>
 </div>
@@ -863,25 +1131,30 @@ Phil Solimine
 <section id="selection-1" class="slide level2">
 <h2>Selection</h2>
 <ul>
-<li><p>Selection bias is the other fundamental type of bias that we need to worry about in causal inference</p></li>
-<li><p>Selection bias occurs when there is an unobserved variable that is a common cause of both the treatment and the selection into the sample</p></li>
+<li>Selection bias often occurs when there is an unobserved variable that is a common cause of both the treatment and the selection into the sample</li>
 </ul>
-<div class="cell columns column-output-location" data-execution_count="13">
+<div class="cell columns column-output-location" data-execution_count="29">
 <div class="column">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>g <span class="op">=</span> gr.Digraph()</span>
-<span id="cb9-2"><a href="#cb9-2"></a>g.node(<span class="st">"X"</span>, fillcolor<span class="op">=</span><span class="st">"#5f5f5f5f"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2"></a>g.node(<span class="st">"X"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
 <span id="cb9-3"><a href="#cb9-3"></a>g.edge(<span class="st">"T"</span>, <span class="st">"X"</span>)</span>
 <span id="cb9-4"><a href="#cb9-4"></a>g.edge(<span class="st">"T"</span>, <span class="st">"Y"</span>)</span>
 <span id="cb9-5"><a href="#cb9-5"></a>g.edge(<span class="st">"Y"</span>, <span class="st">"X"</span>)</span>
-<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a>g.node(<span class="st">"Investments"</span>, <span class="st">"Investments"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
 <span id="cb9-7"><a href="#cb9-7"></a>g.edge(<span class="st">"Educ"</span>, <span class="st">"Investments"</span>)</span>
 <span id="cb9-8"><a href="#cb9-8"></a>g.edge(<span class="st">"Educ"</span>, <span class="st">"Wage"</span>)</span>
 <span id="cb9-9"><a href="#cb9-9"></a>g.edge(<span class="st">"Wage"</span>, <span class="st">"Investments"</span>)</span>
-<span id="cb9-10"><a href="#cb9-10"></a></span>
-<span id="cb9-11"><a href="#cb9-11"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-10"><a href="#cb9-10"></a>g.node(<span class="st">"Educ2"</span>, <span class="st">"Educ"</span>)</span>
+<span id="cb9-11"><a href="#cb9-11"></a>g.node(<span class="st">"Wage2"</span>, <span class="st">"Wage"</span>)</span>
+<span id="cb9-12"><a href="#cb9-12"></a>g.node(<span class="st">"Investments2"</span>, <span class="st">"Investments"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
+<span id="cb9-13"><a href="#cb9-13"></a>g.edge(<span class="st">"Educ2"</span>, <span class="st">"Wage2"</span>)</span>
+<span id="cb9-14"><a href="#cb9-14"></a>g.edge(<span class="st">"Wage2"</span>, <span class="st">"Investments2"</span>)</span>
+<span id="cb9-15"><a href="#cb9-15"></a>g.edge(<span class="st">"Educ2"</span>, <span class="st">"Investments2"</span>)</span>
+<span id="cb9-16"><a href="#cb9-16"></a>g.edge(<span class="st">"Investments2"</span>, <span class="st">"CapitalGains"</span>)</span>
+<span id="cb9-17"><a href="#cb9-17"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
-<div class="cell-output cell-output-display" data-execution_count="12">
-<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-13-output-1.svg"></p>
+<div class="cell-output cell-output-display" data-execution_count="28">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-29-output-1.svg"></p>
 </div>
 </div>
 </div>
@@ -891,23 +1164,181 @@ Phil Solimine
 <ul>
 <li>Selection bias can also occur when controlling for a <strong>mediator</strong> between the treatment and the outcome</li>
 </ul>
-<div class="two-col">
-<div class="col">
-<div class="cell" data-execution_count="14">
-<div class="cell-output cell-output-display" data-execution_count="13">
-<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-14-output-1.svg"></p>
+<div class="cell columns column-output-location" data-execution_count="30">
+<div class="column">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>g <span class="op">=</span> gr.Digraph()</span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a>g <span class="op">=</span> gr.Digraph()</span>
+<span id="cb10-4"><a href="#cb10-4"></a>g.edge(<span class="st">"T"</span>, <span class="st">"X"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5"></a>g.edge(<span class="st">"T"</span>, <span class="st">"Y"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6"></a>g.edge(<span class="st">"X"</span>, <span class="st">"Y"</span>)</span>
+<span id="cb10-7"><a href="#cb10-7"></a>g.node(<span class="st">"X"</span>, <span class="st">"X"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
+<span id="cb10-8"><a href="#cb10-8"></a></span>
+<span id="cb10-9"><a href="#cb10-9"></a>g.edge(<span class="st">'Educ'</span>, <span class="st">'WhiteCollar'</span>)</span>
+<span id="cb10-10"><a href="#cb10-10"></a>g.edge(<span class="st">'Educ'</span>, <span class="st">'Wage'</span>)</span>
+<span id="cb10-11"><a href="#cb10-11"></a>g.edge(<span class="st">'WhiteCollar'</span>, <span class="st">'Wage'</span>)</span>
+<span id="cb10-12"><a href="#cb10-12"></a>g.node(<span class="st">'WhiteCollar'</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
+<span id="cb10-13"><a href="#cb10-13"></a></span>
+<span id="cb10-14"><a href="#cb10-14"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-display" data-execution_count="29">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-30-output-1.svg"></p>
 </div>
 </div>
 </div>
-<div class="col">
-<p><img src="./data/fig/airplane.svg" alt="airplane.svg" width="500"> Source: By Martin Grandjean (vector), McGeddon (picture), Cameron Moll (concept) - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=102017718</p>
+</section></section>
+<section>
+<section id="choosing-covariates" class="title-slide slide level1 center">
+<h1>Choosing Covariates</h1>
+
+</section>
+<section id="choosing-covariates-1" class="slide level2">
+<h2>Choosing Covariates</h2>
+<ul>
+<li><p>With these types of bias in mind, we can think about how to choose which covariates to condition on.</p></li>
+<li><p>Notice that some controls will reduce bias, as in the case of confounding,</p></li>
+<li><p>But <em>not all controls are good!</em> Some controls will actually create bias, as in the case of selection.</p></li>
+<li><p>This means that we don’t want to just “throw the kitchen sink” at the problem, and include every variable we can think of.</p></li>
+</ul>
+</section>
+<section id="choosing-covariates-2" class="slide level2">
+<h2>Choosing Covariates</h2>
+<ul>
+<li><p>We want to choose covariates that will close any unblocked secondary dependence paths between the treatment and the outcome, but not open any new ones.</p></li>
+<li><p>To do this, we can use the “front door criterion” and the “back door criterion”</p></li>
+</ul>
+</section>
+<section id="the-front-door-criterion" class="slide level2">
+<h2>The Front Door Criterion</h2>
+<ul>
+<li>The <strong>front door criterion</strong> is one way to isolate the effect of a treatment on an outcome, when there is a confounder and a mediator between the treatment and the outcome.</li>
+</ul>
+<div class="cell columns column-output-location" data-execution_count="31">
+<div class="column">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>g <span class="op">=</span> gr.Digraph()</span>
+<span id="cb11-2"><a href="#cb11-2"></a>g.edge(<span class="st">"LotsOfStuff"</span>, <span class="st">"Smoking"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3"></a>g.edge(<span class="st">"LotsOfStuff"</span>, <span class="st">"LungCancer"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4"></a>g.edge(<span class="st">"Smoking"</span>, <span class="st">"Tar"</span>, style<span class="op">=</span><span class="st">"dashed"</span>)</span>
+<span id="cb11-5"><a href="#cb11-5"></a>g.edge(<span class="st">"Tar"</span>, <span class="st">"LungCancer"</span>, style<span class="op">=</span><span class="st">"dashed"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6"></a></span>
+<span id="cb11-7"><a href="#cb11-7"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-display" data-execution_count="30">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-31-output-1.svg"></p>
+</div>
 </div>
 </div>
 </section>
+<section id="the-front-door-criterion-1" class="slide level2">
+<h2>The Front Door Criterion</h2>
+<div class="two-col">
+<div class="col">
+<div class="cell columns column-output-location" data-execution_count="32">
+<div class="column">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>g <span class="op">=</span> gr.Digraph()</span>
+<span id="cb12-2"><a href="#cb12-2"></a>g.edge(<span class="st">"LotsOfStuff"</span>, <span class="st">"Smoking"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3"></a>g.edge(<span class="st">"LotsOfStuff"</span>, <span class="st">"LungCancer"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4"></a>g.edge(<span class="st">"Smoking"</span>, <span class="st">"Tar"</span>, style<span class="op">=</span><span class="st">"dashed"</span>)</span>
+<span id="cb12-5"><a href="#cb12-5"></a>g.edge(<span class="st">"Tar"</span>, <span class="st">"LungCancer"</span>, style<span class="op">=</span><span class="st">"dashed"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-display" data-execution_count="31">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-32-output-1.svg"></p>
+</div>
+</div>
+</div>
+</div>
+<div class="col">
+<ul>
+<li><p>In this example, we want to know the effect of smoking on lung cancer, but we also know that there are lots of variables (like stress), that cause both the treatment and the outcome.</p></li>
+<li><p>However, stress does not cause tar, so we can condition on tar.</p>
+<ul>
+<li>This works by first measuring the effect of tar on lung cancer, and <em>then</em> the effect of smoking on tar.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="the-back-door-criterion" class="slide level2">
+<h2>The Back Door Criterion</h2>
+<ul>
+<li><p>It’s pretty rare that we’ll actually be able to use the front door criterion, because we usually don’t have a mediator that we can condition on.</p></li>
+<li><p>Instead, we can close all of the “back door paths” from treatment to outcome. We have already seen an example of this.</p></li>
+</ul>
+
+<img data-src="causal_graphical_models_files/figure-revealjs/cell-33-output-1.svg" class="r-stretch"></section>
+<section id="choosing-covariates-two-examples" class="slide level2">
+<h2>Choosing Covariates: Two Examples</h2>
+<div class="cell columns column-output-location" data-execution_count="34">
+<div class="column">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>g <span class="op">=</span> gr.Digraph()</span>
+<span id="cb13-2"><a href="#cb13-2"></a>g.edge(<span class="st">"T"</span>, <span class="st">"Y"</span>, style<span class="op">=</span><span class="st">"dashed"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3"></a>g.edge(<span class="st">"X"</span>, <span class="st">"Y"</span>)</span>
+<span id="cb13-4"><a href="#cb13-4"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-display" data-execution_count="33">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-34-output-1.svg"></p>
+</div>
+</div>
+</div>
+<ul>
+<li>Do we need to condition on <span class="math inline">\(X\)</span>?</li>
+</ul>
+</section>
+<section id="choosing-covariates-two-examples-1" class="slide level2">
+<h2>Choosing Covariates: Two Examples</h2>
+<div class="cell columns column-output-location" data-execution_count="35">
+<div class="column">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>g <span class="op">=</span> gr.Digraph()</span>
+<span id="cb14-2"><a href="#cb14-2"></a>g.edge(<span class="st">"T"</span>, <span class="st">"Y"</span>, style<span class="op">=</span><span class="st">"dashed"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3"></a>g.edge(<span class="st">"X"</span>, <span class="st">"Y"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-display" data-execution_count="34">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-35-output-1.svg"></p>
+</div>
+</div>
+</div>
+<ul>
+<li>Do we need to condition on <span class="math inline">\(X\)</span>?
+<ul>
+<li>No, not necessarily. There is no unblocked dependence path between <span class="math inline">\(T\)</span> and <span class="math inline">\(Y\)</span> that goes through <span class="math inline">\(X\)</span>.</li>
+<li>However, conditioning on <span class="math inline">\(X\)</span> will reduce the variance of our estimate!</li>
+<li>If we didn’t condition on <span class="math inline">\(X\)</span>, it would become part of our estimation error. But since <span class="math inline">\(X \propto T\)</span>, it won’t bias our estimate.</li>
+</ul></li>
+</ul>
+</section>
+<section id="choosing-covariates-two-examples-2" class="slide level2">
+<h2>Choosing Covariates: Two Examples</h2>
+<div class="cell columns column-output-location" data-execution_count="36">
+<div class="column">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>g <span class="op">=</span> gr.Digraph()</span>
+<span id="cb15-2"><a href="#cb15-2"></a>g.edge(<span class="st">"R"</span>, <span class="st">"T"</span>)</span>
+<span id="cb15-3"><a href="#cb15-3"></a>g.edge(<span class="st">"C"</span>, <span class="st">"T"</span>)</span>
+<span id="cb15-4"><a href="#cb15-4"></a>g.edge(<span class="st">"C"</span>, <span class="st">"Y"</span>)</span>
+<span id="cb15-5"><a href="#cb15-5"></a>g.edge(<span class="st">"T"</span>, <span class="st">"Y"</span>, style<span class="op">=</span><span class="st">"dashed"</span>)</span>
+<span id="cb15-6"><a href="#cb15-6"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-display" data-execution_count="35">
+<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-36-output-1.svg"></p>
+</div>
+</div>
+</div>
+<ul>
+<li>Suppose we don’t have any data on <span class="math inline">\(C\)</span>. Can we identify the treatment effect?
+<ul>
+<li>Yes! If we look at the effect of <span class="math inline">\(R\)</span> on <span class="math inline">\(Y\)</span>, we can see that it is unblocked.</li>
+<li>Furthermore, since <span class="math inline">\(R\)</span> only affects <span class="math inline">\(Y\)</span> through <span class="math inline">\(T\)</span>, the effect of <span class="math inline">\(R\)</span> on <span class="math inline">\(Y\)</span> is the same as the effect of <span class="math inline">\(T\)</span> on <span class="math inline">\(Y\)</span>.</li>
+<li>This is called an <strong>instrumental variable</strong>.</li>
+</ul></li>
+</ul>
+</section>
 <section id="credits" class="slide level2">
 <h2>Credits</h2>
-<p>This lecture draws heavily from <a href="https://matheusfacure.github.io/python-causality-handbook/03-Stats-Review-The-Most-Dangerous-Equation.html.html">Causal Inference for the Brave and True: Chapter 1 - Introduction to Causality</a> by Matheus Facure.</p>
-<p>There is also material from <a href="http://ai.stanford.edu/~paskin/gm-short-course/">A Short Course on Graphical Models Chapter 2: Structured Representations</a> by Mark Paskin</p>
+<p>This lecture draws heavily from <a href="https://matheusfacure.github.io/python-causality-handbook/03-Stats-Review-The-Most-Dangerous-Equation.html.html">Causal Inference for the Brave and True: Chapter 04 - Graphical Causal Models</a> by Matheus Facure.</p>
+<p>There is also material from <a href="http://ai.stanford.edu/~paskin/gm-short-course/">A Short Course on Graphical Models Chapter 2: Structured Representations</a> by Mark Paskin.</p>
+<p>As well as <a href="https://theeffectbook.net/">The Effect: Chapter 7 - Drawing Graphical Diagrams</a> by Nick Huntington-Klein.</p>
 
 <div class="footer footer-default">
 

@@ -47,7 +47,7 @@
 <!-- X -->
 <g id="node5" class="node">
 <title>X</title>
-<ellipse fill="#5f5f5f" fill-opacity="0.372549" stroke="black" cx="196" cy="-18" rx="27" ry="18"/>
+<ellipse fill="lightgrey" stroke="black" cx="196" cy="-18" rx="27" ry="18"/>
 <text text-anchor="middle" x="196" y="-14.3" font-family="Times New Roman,serif" font-size="14.00">X</text>
 </g>
 <!-- Y&#45;&gt;X -->
