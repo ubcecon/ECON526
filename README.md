@@ -164,6 +164,7 @@ Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/le
 
 -   **October 23** Causal Graphical Models
     - **Material:**
+      - [Causal Graphical Models](https://ubcecon.github.io/ECON526/lectures/lectures/causal_graphical_models.html#/title-slide)
       - https://matheusfacure.github.io/python-causality-handbook/04-Graphical-Causal-Models.html
     - **Self-study:**
       - https://theeffectbook.net/ch-DrawingCausalDiagrams.html
