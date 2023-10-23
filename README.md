@@ -158,23 +158,32 @@ Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/le
     - **Self-study:**
       - https://matheusfacure.github.io/python-causality-handbook/03-Stats-Review-The-Most-Dangerous-Equation.html
         
--   **October 18** Causal Graphical Models
+-   **October 18** Uncertainty Quantification II
     - **Material:**
       - Finish [Stats Review: Quantifying Uncertainty in Applied Economics](https://ubcecon.github.io/ECON526/lectures/lectures/uncertainty_bias_variance.html)
-      - Causal Graphical Models
 
--   **October 23** Instrumental Variables
+-   **October 23** Causal Graphical Models
+    - **Material:**
+      - https://matheusfacure.github.io/python-causality-handbook/04-Graphical-Causal-Models.html
+    - **Self-study:**
+      - https://theeffectbook.net/ch-DrawingCausalDiagrams.html
+        
+-   **October 25** Regression, Confounders
+    - **Material:**
+      - https://matheusfacure.github.io/python-causality-handbook/05-The-Unreasonable-Effectiveness-of-Linear-Regression.html
+      - https://matheusfacure.github.io/python-causality-handbook/06-Grouped-and-Dummy-Regression.html
+      - https://matheusfacure.github.io/python-causality-handbook/07-Beyond-Confounders.html
+        
+-   **October 30** Instrumental Variables, Noncompliance, LATE
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/08-Instrumental-Variables.html
--   **October 25** Matching
+      - https://matheusfacure.github.io/python-causality-handbook/09-Non-Compliance-and-LATE.html
+     
+-   **November 1**: Matching
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/10-Matching.html
--   **October 30** Propensity Scores
-    - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/11-Propensity-Score.html
--   **November 1**: Doubly Robust Estimation
-    - **Material:**
-      - https://matheusfacure.github.io/python-causality-handbook/12-Doubly-Robust-Estimation.html
+     
 ### Paul
 
 -    **November 6**: Overview and begin difference in differences
