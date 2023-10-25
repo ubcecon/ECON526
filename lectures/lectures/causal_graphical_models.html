@@ -444,6 +444,7 @@ Phil Solimine
 <li><a href="#/confounding" id="/toc-confounding">Confounding</a></li>
 <li><a href="#/selection" id="/toc-selection">Selection</a></li>
 <li><a href="#/choosing-covariates" id="/toc-choosing-covariates">Choosing Covariates</a></li>
+<li><a href="#/factorizing-the-joint-distribution" id="/toc-factorizing-the-joint-distribution">Factorizing the Joint Distribution</a></li>
 </ul>
 </nav>
 </section>
@@ -853,7 +854,7 @@ Phil Solimine
 <div class="col">
 <ul>
 <li><strong>Unimportance</strong> was already necessarily applied in the creation of the graph.</li>
-<li>We can also apply <strong>redundancy</strong> by combining <code>Age</code> and <code>Gender</code> into a single variable, <code>Demographics</code></li>
+<li>We can also apply <strong>redundancy</strong> by combining <code>Race</code> and <code>Gender</code> into a single variable, <code>Demographics</code></li>
 </ul>
 </div>
 </div>
@@ -996,7 +997,11 @@ Phil Solimine
 <li>In any case that is <em>not</em> a collider, conditioning on a node <em>blocks</em> the flow of dependence.</li>
 </ul></li>
 </ul>
-</section></section>
+</section>
+<section id="two-games-of-bayes-ball" class="slide level2">
+<h2>Two Games of Bayes Ball</h2>
+
+<img data-src="./data/fig/two-games.png" class="r-stretch"></section></section>
 <section>
 <section id="viualizing-bias" class="title-slide slide level1 center">
 <h1>Viualizing Bias</h1>
@@ -1131,7 +1136,7 @@ Phil Solimine
 <section id="selection-1" class="slide level2">
 <h2>Selection</h2>
 <ul>
-<li>Selection bias often occurs when there is an unobserved variable that is a common cause of both the treatment and the selection into the sample</li>
+<li>Selection bias often occurs when there is an unobserved variable that is a common cause of both the treatment and the selection into the sample, in other words, by conditioning on a variable that you shouldn’t.</li>
 </ul>
 <div class="cell columns column-output-location" data-execution_count="29">
 <div class="column">
@@ -1146,12 +1151,13 @@ Phil Solimine
 <span id="cb9-9"><a href="#cb9-9"></a>g.edge(<span class="st">"Wage"</span>, <span class="st">"Investments"</span>)</span>
 <span id="cb9-10"><a href="#cb9-10"></a>g.node(<span class="st">"Educ2"</span>, <span class="st">"Educ"</span>)</span>
 <span id="cb9-11"><a href="#cb9-11"></a>g.node(<span class="st">"Wage2"</span>, <span class="st">"Wage"</span>)</span>
-<span id="cb9-12"><a href="#cb9-12"></a>g.node(<span class="st">"Investments2"</span>, <span class="st">"Investments"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
+<span id="cb9-12"><a href="#cb9-12"></a>g.node(<span class="st">"Investments2"</span>, <span class="st">"Investments"</span>)</span>
 <span id="cb9-13"><a href="#cb9-13"></a>g.edge(<span class="st">"Educ2"</span>, <span class="st">"Wage2"</span>)</span>
 <span id="cb9-14"><a href="#cb9-14"></a>g.edge(<span class="st">"Wage2"</span>, <span class="st">"Investments2"</span>)</span>
 <span id="cb9-15"><a href="#cb9-15"></a>g.edge(<span class="st">"Educ2"</span>, <span class="st">"Investments2"</span>)</span>
-<span id="cb9-16"><a href="#cb9-16"></a>g.edge(<span class="st">"Investments2"</span>, <span class="st">"CapitalGains"</span>)</span>
-<span id="cb9-17"><a href="#cb9-17"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-16"><a href="#cb9-16"></a>g.node(<span class="st">"CapitalGainsTax"</span>, <span class="st">"CapitalGainsTax"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
+<span id="cb9-17"><a href="#cb9-17"></a>g.edge(<span class="st">"Investments2"</span>, <span class="st">"CapitalGainsTax"</span>)</span>
+<span id="cb9-18"><a href="#cb9-18"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-display" data-execution_count="28">
 <p><img data-src="causal_graphical_models_files/figure-revealjs/cell-29-output-1.svg"></p>
@@ -1305,7 +1311,7 @@ Phil Solimine
 <ul>
 <li>No, not necessarily. There is no unblocked dependence path between <span class="math inline">\(T\)</span> and <span class="math inline">\(Y\)</span> that goes through <span class="math inline">\(X\)</span>.</li>
 <li>However, conditioning on <span class="math inline">\(X\)</span> will reduce the variance of our estimate!</li>
-<li>If we didn’t condition on <span class="math inline">\(X\)</span>, it would become part of our estimation error. But since <span class="math inline">\(X \propto T\)</span>, it won’t bias our estimate.</li>
+<li>If we didn’t condition on <span class="math inline">\(X\)</span>, it would become part of our estimation error. But since <span class="math inline">\(X \perp T\)</span>, it won’t bias our estimate.</li>
 </ul></li>
 </ul>
 </section>
@@ -1332,6 +1338,174 @@ Phil Solimine
 <li>Furthermore, since <span class="math inline">\(R\)</span> only affects <span class="math inline">\(Y\)</span> through <span class="math inline">\(T\)</span>, the effect of <span class="math inline">\(R\)</span> on <span class="math inline">\(Y\)</span> is the same as the effect of <span class="math inline">\(T\)</span> on <span class="math inline">\(Y\)</span>.</li>
 <li>This is called an <strong>instrumental variable</strong>.</li>
 </ul></li>
+</ul>
+</section></section>
+<section>
+<section id="factorizing-the-joint-distribution" class="title-slide slide level1 center">
+<h1>Factorizing the Joint Distribution</h1>
+
+</section>
+<section id="factorizing-the-joint-distribution-1" class="slide level2">
+<h2>Factorizing the Joint Distribution</h2>
+<ul>
+<li><p>We have seen how these graphical models can be used to determine whether or not we can identify a treatment effect.</p></li>
+<li><p>However, we can also use them as a computational tool, to help us find the simplest representation of the joint distribution of the data.</p></li>
+<li><p>This is useful because it allows us to find the simplest model that is consistent with our assumptions about conditional independence.</p></li>
+</ul>
+</section>
+<section id="factorizing-the-joint-distribution-2" class="slide level2">
+<h2>Factorizing the Joint Distribution</h2>
+<ul>
+<li><p>To understand why this is useful, we’ll follow this example (from <a href="http://ai.stanford.edu/~paskin/gm-short-course/lec2.pdf">Mark Paskin</a>).</p></li>
+<li><p>Suppose we have a DGP with five variables:</p>
+<ol type="1">
+<li><span class="math inline">\(E\in\{true, false\}\)</span> - Has an earthquake happened? <em>Earthquakes are unlikely</em></li>
+<li><span class="math inline">\(B\in\{true, false\}\)</span> - Has a burglary happened? <em>Burglaries are unlikely, but more likely than earthquakes</em></li>
+<li><span class="math inline">\(A\in\{true, false\}\)</span> - Is the alarm going off? <em>The alarm is triggered by both earthquakes and burglaries</em></li>
+<li><span class="math inline">\(J\in\{true, false\}\)</span> - Is John calling? <em>John calls when he hears the alarm, but he often misses it</em></li>
+<li><span class="math inline">\(M\in\{true, false\}\)</span> - Is Mary calling? <em>Mary calls when she hears the alarm, but she also calls to chat</em></li>
+</ol></li>
+</ul>
+</section>
+<section id="factorizing-the-joint-distribution-3" class="slide level2">
+<h2>Factorizing the Joint Distribution</h2>
+<ul>
+<li>The goal is to compute <span class="math inline">\(P(B|J=true)\)</span> from the joint distribution <span class="math inline">\(P(E,B,A,J,M)\)</span>. We’ll start by drawing the graphical model, to understand the conditional independence relationships.</li>
+</ul>
+
+<img data-src="causal_graphical_models_files/figure-revealjs/cell-37-output-1.svg" class="r-stretch"></section>
+<section id="factorizing-the-joint-distribution-4" class="slide level2">
+<h2>Factorizing the Joint Distribution</h2>
+
+<img data-src="causal_graphical_models_files/figure-revealjs/cell-38-output-1.svg" class="r-stretch"><ul>
+<li>In order to represent the full joint distribution, we could use the chain rule of probabilities:</li>
+</ul>
+<p><span class="math display">\[
+P(E,B,A,J,M) = P(E)P(B|E)P(A|E,B)P(J|E,B,A)P(M|E,B,A,J)
+\]</span></p>
+<ul>
+<li>Q: How many probabilities would we need to compute to represent the joint distribution this way?</li>
+</ul>
+</section>
+<section id="factorizing-the-joint-distribution-5" class="slide level2">
+<h2>Factorizing the Joint Distribution</h2>
+
+<img data-src="causal_graphical_models_files/figure-revealjs/cell-39-output-1.svg" class="r-stretch"><ul>
+<li>In order to represent the full joint distribution, we could use the chain rule of probabilities:</li>
+</ul>
+<p><span class="math display">\[
+\underbrace{P(E,B,A,J,M)}_{31} = \underbrace{P(E)}_{1} \underbrace{P(B|E)}_{2} \underbrace{P(A|E,B)}_{4} \underbrace{P(J|E,B,A)}_{8} \underbrace{P(M|E,B,A,J)}_{16}
+\]</span></p>
+<ul>
+<li>Q: How many probabilities would we need to store to represent the joint distribution this way?
+<ul>
+<li>A: There are <span class="math inline">\(2^5\)</span> possible outcomes. We need 31 probabilities. (why not 32?)</li>
+</ul></li>
+</ul>
+</section>
+<section id="factorizing-the-joint-distribution-6" class="slide level2">
+<h2>Factorizing the Joint Distribution</h2>
+
+<img data-src="causal_graphical_models_files/figure-revealjs/cell-40-output-1.svg" class="r-stretch"><ul>
+<li>However, we can use the conditional independence relationships to simplify this representation.
+<ul>
+<li>For example, we know that <span class="math inline">\(P(B|E) = P(B)\)</span>, because <span class="math inline">\(B\)</span> and <span class="math inline">\(E\)</span> are independent.</li>
+<li>We also know that <span class="math inline">\(P(A|E,B) = P(A|B)\)</span>, because <span class="math inline">\(A\)</span> is independent of <span class="math inline">\(E\)</span>, given <span class="math inline">\(B\)</span>.</li>
+</ul></li>
+<li>This means that we can simplify the joint distribution to:</li>
+</ul>
+<p><span class="math display">\[
+\underbrace{P(E,B,A,J,M)}_{10} = \underbrace{P(E)}_1 \underbrace{P(B)}_1 \underbrace{P(A|E,B)}_4 \underbrace{P(J|A)}_2 \underbrace{P(M|A)}_2
+\]</span></p>
+</section>
+<section id="factorizing-the-joint-distribution-7" class="slide level2">
+<h2>Factorizing the Joint Distribution</h2>
+<ul>
+<li><p>Beyond causal inference, graphical models are a useful tool for computing all kinds of conditional probabilities.</p></li>
+<li><p>This is useful in many inference problems, and in structural econometrics</p>
+<ul>
+<li>The <strong>likelihood function</strong> is the conditional probability of the data, given the parameter values</li>
+<li>In Bayesian inference the <strong>posterior</strong> is the conditional probability of the parameters, given the data (and our priors)</li>
+</ul></li>
+</ul>
+</section>
+<section id="variable-elimination" class="slide level2">
+<h2>Variable Elimination</h2>
+<ul>
+<li><p>In order to simplify a conditional distribution, we can use <strong>variable elimination</strong>.</p></li>
+<li><p>For example, let’s say we want to compute the probability of a burglary, given that John calls.</p></li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;p_{B \mid J}(b, \text { true })  \propto \sum_e \sum_a \sum_m p_{E B A J M}(e, b, a, \text { true }, m) \\
+&amp; =\sum_e \sum_a \sum_m p_E(e) \cdot p_B(b) \cdot p_{A \mid E B}(a, e, b) \cdot p_{J \mid A}(\text { true }, a) \cdot p_{M \mid A}(m, a)
+\end{aligned}
+\]</span></p>
+<ul>
+<li>Then, we can reduce the computational complexity by eliminating variables one at a time, exploiting the distributive property of multiplication
+<ul>
+<li><span class="math inline">\(xy + xz = x(y + z)\)</span>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="variable-elimination-1" class="slide level2">
+<h2>Variable Elimination</h2>
+<ul>
+<li>Variable elimination works like this:
+<ul>
+<li>Repeat the following steps:</li>
+</ul>
+<ol type="1">
+<li>choose a variable to eliminate</li>
+<li>push in its sum as far as possible</li>
+<li>compute the sum, resulting in a new factor</li>
+</ol></li>
+</ul>
+</section>
+<section id="variable-elimination-2" class="slide level2">
+<h2>Variable Elimination</h2>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;\sum_e \sum_a \sum_m p_E(e) \cdot p_B(b) \cdot p_{A \mid E B}(a, e, b) \cdot p_{J \mid A}(\text { true }, a) \cdot p_{M \mid A}(m, a) \\
+&amp; =\sum_e \sum_a p_E(e) \cdot p_B(b) \cdot p_{A \mid E B}(a, e, b) \cdot p_{J \mid A}(\text { true }, a) \cdot \sum_m p_{M \mid A}(m, a) \\
+&amp; =\sum_e \sum_a p_E(e) \cdot p_B(b) \cdot p_{A \mid E B}(a, e, b) \cdot p_{J \mid A}(\text { true }, a) \cdot \psi_A(a) \\
+&amp; =\sum_e p_E(e) \cdot p_B(b) \cdot \sum_a p_{A \mid E B}(a, e, b) \cdot p_{J \mid A}(\text { true }, a) \cdot \psi_A(a) \\
+&amp; =\sum_e p_E(e) \cdot p_B(b) \cdot \psi_{E B}(e, b) \\
+&amp; =p_B(b) \cdot \sum_e p_E(e) \cdot \psi_{E B}(e, b) \\
+&amp; =p_B(b) \cdot \psi_B(b)
+\end{aligned}
+\]</span></p>
+</section>
+<section id="variable-elimination-3" class="slide level2">
+<h2>Variable Elimination</h2>
+<ul>
+<li>That’s a lot of math! But let’s focus on the first step: <span class="math display">\[
+\begin{aligned}
+&amp; p_{B \mid J}(b, \text { true }) \propto \\
+&amp;\underbrace{\underbrace{\sum_e \sum_a \sum_m}_{2^3 = 8\text{ iterations}} \underbrace{p_E(e) \cdot p_B(b) \cdot p_{A \mid E B}(a, e, b) \cdot p_{J \mid A}(\text { true }, a) \cdot p_{M \mid A}(m, a)}_{4\text{ multiplications}}}_{8*4=32\text{ multiplications }+7\text{ additions}=39\text{ total operations}}
+\end{aligned}
+\]</span></li>
+</ul>
+</section>
+<section id="variable-elimination-4" class="slide level2">
+<h2>Variable Elimination</h2>
+<ul>
+<li>That’s a lot of math! But let’s focus on the first step: <span class="math display">\[
+\begin{aligned}
+&amp; p_{B \mid J}(b, \text { true }) \propto \\
+&amp;\underbrace{\underbrace{\sum_e \sum_a \sum_m}_{2^3 = 8\text{ iterations}} \underbrace{p_E(e) \cdot p_B(b) \cdot p_{A \mid E B}(a, e, b) \cdot p_{J \mid A}(\text { true }, a) \cdot p_{M \mid A}(m, a)}_{4\text{ multiplications}}}_{8*4=32\text{ multiplications }+7\text{ additions}=39\text{ total operations}} \\\\
+&amp; =\underbrace{\underbrace{\sum_e \sum_a}_{2^2 = 4\text{ iterations}} \underbrace{p_E(e) \cdot p_B(b) \cdot p_{A \mid E B}(a, e, b) \cdot p_{J \mid A}(\text { true }, a) \cdot }_{4\text{ multiplications}} \underbrace{\sum_m p_{M \mid A}(m, a)}_{1\text{ addition}}}_{4*(4\text{ multiplications} + 1\text{ addition}) + 3\text{ additions} = 23\text{ total operations}} \\
+\end{aligned}
+\]</span></li>
+</ul>
+</section>
+<section id="variable-elimination-5" class="slide level2">
+<h2>Variable Elimination</h2>
+<ul>
+<li><p>Variable elimination is an algorithm that exploits our conditional independence assumptions to reduce the computational complexity of conditional probabilities.</p></li>
+<li><p>In this case, we were able to reduce the number of operations from 39 to 23 operations in just one step, each further step will continue to reduce the complexity.</p></li>
+<li><p>This is a very simple example, because we only have 5 variables. In practice, we might have hundreds or thousands of variables, and the computational complexity can become very large.</p></li>
+<li><p>Systematic patterns of conditional independence can be exploited to reduce the complexity of inference problems in some large models.</p></li>
 </ul>
 </section>
 <section id="credits" class="slide level2">
