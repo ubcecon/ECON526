@@ -5,6 +5,8 @@ This is a MA-level course in quantitative economics, data science, and causal in
 
 This course will have a combination of coding, theory, and development of mathematical background.  All coding is done in Python.
 
+[Link to Lecture Slides](https://ubcecon.github.io/ECON526/lectures/index.html)
+
 # Course materials
 - Get a [GitHub](www.github.com) ID and apply for the [Student Developer Pack](https://education.github.com/pack) to get further free features
 - Consider clicking `Watch` at the top of this repository to see file changes
@@ -158,23 +160,33 @@ Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/le
     - **Self-study:**
       - https://matheusfacure.github.io/python-causality-handbook/03-Stats-Review-The-Most-Dangerous-Equation.html
         
--   **October 18** Causal Graphical Models
+-   **October 18** Uncertainty Quantification II
     - **Material:**
       - Finish [Stats Review: Quantifying Uncertainty in Applied Economics](https://ubcecon.github.io/ECON526/lectures/lectures/uncertainty_bias_variance.html)
-      - Causal Graphical Models
 
--   **October 23** Instrumental Variables
+-   **October 23** Causal Graphical Models
+    - **Material:**
+      - [Causal Graphical Models](https://ubcecon.github.io/ECON526/lectures/lectures/causal_graphical_models.html#/title-slide)
+      - https://matheusfacure.github.io/python-causality-handbook/04-Graphical-Causal-Models.html
+    - **Self-study:**
+      - https://theeffectbook.net/ch-DrawingCausalDiagrams.html
+        
+-   **October 25** Regression, Confounders
+    - **Material:**
+      - https://matheusfacure.github.io/python-causality-handbook/05-The-Unreasonable-Effectiveness-of-Linear-Regression.html
+      - https://matheusfacure.github.io/python-causality-handbook/06-Grouped-and-Dummy-Regression.html
+      - https://matheusfacure.github.io/python-causality-handbook/07-Beyond-Confounders.html
+        
+-   **October 30** Instrumental Variables, Noncompliance, LATE
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/08-Instrumental-Variables.html
--   **October 25** Matching
+      - https://matheusfacure.github.io/python-causality-handbook/09-Non-Compliance-and-LATE.html
+     
+-   **November 1**: Matching
     - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/10-Matching.html
--   **October 30** Propensity Scores
-    - **Material:**
       - https://matheusfacure.github.io/python-causality-handbook/11-Propensity-Score.html
--   **November 1**: Doubly Robust Estimation
-    - **Material:**
-      - https://matheusfacure.github.io/python-causality-handbook/12-Doubly-Robust-Estimation.html
+     
 ### Paul
 
 -    **November 6**: Overview and begin difference in differences
