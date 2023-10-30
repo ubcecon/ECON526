@@ -386,26 +386,29 @@
       margin-right: 0; 
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
   <style>
   .reveal .custom3070 > div.column:first-child {
-    width: 30%;
+      width: 30%;
   }
   .reveal .custom3070 div.column:not(:first-child) {
-    width: 70%;
+      width: 70%;
   }
   .reveal .custom4060 > div.column:first-child {
-    width: 40%;
+      width: 40%;
   }
   .reveal .custom4060 div.column:not(:first-child) {
-    width: 60%;
+      width: 60%;
   }
   .two-col {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
   }
   .col {
-    flex-basis: 48%;
+      flex-basis: 48%;
   }
   </style>
 </head>
@@ -415,7 +418,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">ECON526: Quantitative Economics with Data Science Applications</h1>
-  <p class="subtitle">Introduction to Directed Acyclic Graphs</p>
+  <p class="subtitle">Regression Analysis</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -436,9 +439,11 @@ Phil Solimine
 <h2 id="toc-title">Table of contents</h2>
 <ul>
 <li><a href="#/overview" id="/toc-overview">Overview</a></li>
-<li><a href="#/directed-graphical-models" id="/toc-directed-graphical-models">Directed Graphical Models</a></li>
-<li><a href="#/building-a-causal-graph" id="/toc-building-a-causal-graph">Building a Causal Graph</a></li>
-<li><a href="#/aside-cycles" id="/toc-aside-cycles">Aside: Cycles</a></li>
+<li><a href="#/linear-regression" id="/toc-linear-regression">Linear Regression</a></li>
+<li><a href="#/treatment-effects" id="/toc-treatment-effects">Treatment Effects</a></li>
+<li><a href="#/regression-with-nonlinearities" id="/toc-regression-with-nonlinearities">Regression with Nonlinearities</a></li>
+<li><a href="#/interactions" id="/toc-interactions">Interactions</a></li>
+<li><a href="#/translating-causal-diagrams-to-regression" id="/toc-translating-causal-diagrams-to-regression">Translating Causal Diagrams to Regression</a></li>
 </ul>
 </nav>
 </section>
@@ -450,517 +455,535 @@ Phil Solimine
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <ul>
-<li><p>Previously in the course, we talked at a high level about some of the barriers to causal inference</p></li>
-<li><p>We used the potential outcomes framework to discuss the idea of a treatment effect</p></li>
-<li><p>Then we discussed the idea of a randomized experiment as a way to identify a treatment effect</p>
-<ul>
-<li>However, we mentioned that there are many situations where we cannot run a randomized experiment</li>
-</ul></li>
-<li><p>Today, we will discuss the idea of using a <strong>graphical model</strong> as a way to analyze whether you can truly identify a treatment effect</p></li>
+<li><p>Previously we have discussed estimating treatment effects using the difference in means.</p></li>
+<li><p>In this lecture we will discuss how to estimate treatment effects using regression.</p></li>
+<li><p>I assume that you are familiar with the basics of linear regression, including the assumptions underlying OLS and the interpretation of regression coefficients.</p></li>
 </ul>
 </section></section>
 <section>
-<section id="directed-graphical-models" class="title-slide slide level1 center">
-<h1>Directed Graphical Models</h1>
+<section id="linear-regression" class="title-slide slide level1 center">
+<h1>Linear Regression</h1>
 
 </section>
-<section id="conditional-independence" class="slide level2">
-<h2>Conditional Independence</h2>
+<section id="review-of-linear-regression" class="slide level2">
+<h2>Review of Linear Regression</h2>
 <ul>
-<li>Recall that two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>conditionally independent</strong> given a third random variable <span class="math inline">\(Z\)</span> if and only if the following holds:
+<li><p>Simple linear regression is a statistical method that allows us to model the relationship between two variables: a dependent variable and an independent variable.</p></li>
+<li><p>The goal of simple linear regression is to find the line of best fit that describes the relationship between the two variables.</p></li>
+<li><p>The line of best fit is defined as the line that minimizes the sum of the squared differences between the observed values and the predicted values.</p></li>
+<li><p>Mathematically, the linear regression equation is the <em>least-norm</em> solution to an overdetermined system of linear equations.</p>
 <ul>
-<li><span class="math inline">\(P(X|Z) = P(X|Z\cap Y)\)</span></li>
-<li>Equivalently, <span class="math inline">\(P(X\cap Y| Z) = P(X|Z)P(Y|Z)\)</span></li>
-<li>We will denote this as <span class="math inline">\(X \perp Y | Z\)</span></li>
-</ul></li>
-<li>In the context of potential outcomes, we require that <span class="math inline">\((Y_0, Y_1) \perp T | X\)</span>
-<ul>
-<li>This means that the potential outcomes are independent of the treatment assignment, given the covariates</li>
-</ul></li>
-</ul>
-</section>
-<section id="directed-graphical-models-1" class="slide level2">
-<h2>Directed Graphical Models</h2>
-<ul>
-<li><p>Complete independence is rare in complex systems. However, we can often find conditional independence relationships, that help inform our choice of statistical model.</p></li>
-<li><p>We can visualize conditional independence relationships using a <strong>Bayesian</strong> or <strong>directed graphical model</strong></p></li>
-<li><p>A Bayesian graphical model is a directed graph where:</p>
-<ul>
-<li>The nodes or vertices represent random variables</li>
-<li>The links or edges represent conditional independence relationships</li>
+<li><span class="math inline">\(y = X\beta + \epsilon \longrightarrow \epsilon = y - X\beta\)</span></li>
+<li><span class="math inline">\(\min_{\beta} ||\epsilon||_2^2 = \min_\beta \epsilon'\epsilon = \min_{\beta} (y - X\beta)'(y - X\beta)\)</span></li>
+<li><span class="math inline">\(\hat{\beta} = \arg \min_{\beta} (y - X\beta)'(y - X\beta) = (X'X)^{-1}X'y\)</span></li>
 </ul></li>
 </ul>
 </section>
-<section id="directed-graphical-models-2" class="slide level2">
-<h2>Directed Graphical Models</h2>
+<section id="review-of-linear-regression-1" class="slide level2">
+<h2>Review of Linear Regression</h2>
 <ul>
-<li><p>Fundamentally, a graphical model is a way to represent how a joint probability distribution factorizes into a product of conditional distributions.</p></li>
-<li><p>For our purposes, we will usually interpret the edges as causal relationships.</p></li>
-<li><p>Furthermore, the graphs we draw will be <strong>acyclic</strong>, meaning that there are no loops in the graph.</p>
-<ul>
-<li>In other words, there is no way to start at a node and follow the arrows to get back to the same node</li>
-<li>This is because we are interested in <strong>causal</strong> relationships, and a cycle would imply that there is a feedback loop where a variable causes itself</li>
-</ul></li>
-<li><p>Since these graphs are both directed and acyclic, we call them <strong>directed acyclic graphs</strong> or <strong>DAGs</strong></p></li>
+<li><p>Aside: Computational complexity of OLS</p></li>
+<li><p>We could solve for the OLS coefficient in a number of ways. However, some ways will be substantially faster than others.</p></li>
 </ul>
-</section>
-<section id="directed-graphical-models-3" class="slide level2">
-<h2>Directed Graphical Models</h2>
-<ul>
-<li>A directed graphical model might look something like this:</li>
-</ul>
-<div class="cell columns column-output-location" data-execution_count="2">
-<div class="column">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> graphviz <span class="im">as</span> gr</span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>g <span class="op">=</span> gr.Digraph()</span>
-<span id="cb1-4"><a href="#cb1-4"></a>g.node(<span class="st">'X'</span>)</span>
-<span id="cb1-5"><a href="#cb1-5"></a>g.node(<span class="st">'Y'</span>)</span>
-<span id="cb1-6"><a href="#cb1-6"></a>g.node(<span class="st">'Z'</span>)</span>
-<span id="cb1-7"><a href="#cb1-7"></a>g.edge(<span class="st">'X'</span>, <span class="st">'Y'</span>)</span>
-<span id="cb1-8"><a href="#cb1-8"></a>g.edge(<span class="st">'Z'</span>, <span class="st">'Y'</span>)</span>
-<span id="cb1-9"><a href="#cb1-9"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column">
-<div class="cell-output cell-output-display" data-execution_count="1">
-<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-2-output-1.svg"></p>
-</div>
-</div>
-</div>
-<ul>
-<li>Here, we have three random variables: <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span>, and <span class="math inline">\(Z\)</span>
-<ul>
-<li><span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span> are independent</li>
-<li><span class="math inline">\(Y\)</span> depends on both <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span></li>
-</ul></li>
-</ul>
-</section>
-<section id="directed-graphical-models-4" class="slide level2">
-<h2>Directed Graphical Models</h2>
 <div class="cell columns column-output-location" data-execution_count="3">
 <div class="column">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>g <span class="op">=</span> gr.Digraph()</span>
-<span id="cb2-2"><a href="#cb2-2"></a>g.edge(<span class="st">"medicine"</span>, <span class="st">"survived"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3"></a>g.edge(<span class="st">"severeness"</span>, <span class="st">"survived"</span>)</span>
-<span id="cb2-4"><a href="#cb2-4"></a>g.edge(<span class="st">"severeness"</span>, <span class="st">"medicine"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="im">import</span> timeit</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co"># Generate data</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>np.random.seed(<span class="dv">123</span>)</span>
+<span id="cb1-7"><a href="#cb1-7"></a>n <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>X <span class="op">=</span> np.random.normal(size<span class="op">=</span>(n, <span class="dv">10</span>))</span>
+<span id="cb1-9"><a href="#cb1-9"></a>y <span class="op">=</span> np.random.normal(size<span class="op">=</span>n)</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co"># Define some different OLS functions</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="co"># Most naive way - never do this!</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="kw">def</span> ols_lstsq(X, y):</span>
+<span id="cb1-15"><a href="#cb1-15"></a>    <span class="cf">return</span> minimize(<span class="kw">lambda</span> beta: np.linalg.norm(X <span class="op">@</span> beta <span class="op">-</span> y)<span class="op">**</span><span class="dv">2</span>, np.zeros(X.shape[<span class="dv">1</span>])).x</span>
+<span id="cb1-16"><a href="#cb1-16"></a></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="co"># Using the closed-form solution directly</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a><span class="kw">def</span> ols_inv(X, y):</span>
+<span id="cb1-19"><a href="#cb1-19"></a>    <span class="cf">return</span> np.linalg.inv(X.T <span class="op">@</span> X) <span class="op">@</span> X.T <span class="op">@</span> y</span>
+<span id="cb1-20"><a href="#cb1-20"></a></span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="co"># Using the closed-form solution as a linear system</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a><span class="kw">def</span> ols_solve(X, y):</span>
+<span id="cb1-23"><a href="#cb1-23"></a>    <span class="cf">return</span> np.linalg.solve(X.T <span class="op">@</span> X, X.T <span class="op">@</span> y)</span>
+<span id="cb1-24"><a href="#cb1-24"></a></span>
+<span id="cb1-25"><a href="#cb1-25"></a><span class="bu">print</span>(<span class="st">"Time to compute OLS coefficients numerically:"</span>)</span>
+<span id="cb1-26"><a href="#cb1-26"></a><span class="op">%</span>timeit beta_min <span class="op">=</span> ols_lstsq(X, y)</span>
+<span id="cb1-27"><a href="#cb1-27"></a></span>
+<span id="cb1-28"><a href="#cb1-28"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Time to compute OLS coefficients with a matrix inverse:"</span>)</span>
+<span id="cb1-29"><a href="#cb1-29"></a><span class="op">%</span>timeit beta_inv <span class="op">=</span> ols_inv(X, y)</span>
+<span id="cb1-30"><a href="#cb1-30"></a></span>
+<span id="cb1-31"><a href="#cb1-31"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Time to compute OLS coefficients by solving a linear system:"</span>)</span>
+<span id="cb1-32"><a href="#cb1-32"></a><span class="op">%</span>timeit beta_solve <span class="op">=</span> ols_solve(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
-<div class="cell-output cell-output-display" data-execution_count="2">
-<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-3-output-1.svg"></p>
-</div>
-</div>
-</div>
-<ul>
-<li>We use arrows to indicate the direction of the conditional independence relationship
-<ul>
-<li>For example, <span class="math inline">\(medicine \rightarrow survived\)</span> means that <span class="math inline">\(survived\)</span> depends on <span class="math inline">\(medicine\)</span>, but not the other way around</li>
-</ul></li>
-</ul>
-</section>
-<section id="directed-graphical-models-5" class="slide level2">
-<h2>Directed Graphical Models</h2>
-<ul>
-<li><p>Directed graphical models are useful because they allow us to visualize conditional independence relationships, which can often be difficult to keep track of</p></li>
-<li><p>However, they are also useful because they allow us to determine whether or not we can identify a treatment effect.</p></li>
-<li><p>There are three very common sub-structures that appear in graphical models, that inform how dependence will flow through the model.</p></li>
-</ul>
-</section>
-<section id="directed-graphical-models-6" class="slide level2">
-<h2>Directed Graphical Models</h2>
-<div class="cell columns column-output-location" data-execution_count="4">
-<div class="column">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>g <span class="op">=</span> gr.Digraph()</span>
-<span id="cb3-2"><a href="#cb3-2"></a>g.edge(<span class="st">"A"</span>, <span class="st">"B"</span>)</span>
-<span id="cb3-3"><a href="#cb3-3"></a>g.edge(<span class="st">"B"</span>, <span class="st">"C"</span>)</span>
-<span id="cb3-4"><a href="#cb3-4"></a></span>
-<span id="cb3-5"><a href="#cb3-5"></a>g.edge(<span class="st">"X"</span>, <span class="st">"Y"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6"></a>g.edge(<span class="st">"Y"</span>, <span class="st">"Z"</span>)</span>
-<span id="cb3-7"><a href="#cb3-7"></a>g.node(<span class="st">"Y"</span>, <span class="st">"Y"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
-<span id="cb3-8"><a href="#cb3-8"></a></span>
-<span id="cb3-9"><a href="#cb3-9"></a></span>
-<span id="cb3-10"><a href="#cb3-10"></a>g.edge(<span class="st">"causal knowledge"</span>, <span class="st">"solve problems"</span>)</span>
-<span id="cb3-11"><a href="#cb3-11"></a>g.edge(<span class="st">"solve problems"</span>, <span class="st">"job promotion"</span>)</span>
-<span id="cb3-12"><a href="#cb3-12"></a></span>
-<span id="cb3-13"><a href="#cb3-13"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column">
-<div class="cell-output cell-output-display" data-execution_count="3">
-<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-4-output-1.svg"></p>
-</div>
-</div>
-</div>
-<ul>
-<li>In this stylized example of a <strong>directed path</strong>, we are postulating that knowing causal inference is the only way to solve business problems
-<ul>
-<li>This is obviously not true, but it is a useful example for our purposes</li>
-</ul></li>
-</ul>
-</section>
-<section id="directed-graphical-models-7" class="slide level2">
-<h2>Directed Graphical Models</h2>
-<ul>
-<li>This model highlights the following statistical process:
-<ul>
-<li>Knowing causal inference gives you the ability to solve business problems</li>
-<li>Solving business problems makes you more likely to get a job promotion</li>
-</ul></li>
-<li>Notice that this does not imply that causal knowledge is independent of job promotion
-<ul>
-<li>That is, if we know the value of job promotion, we can still learn something about causal knowledge</li>
-<li>If we observe that a promotion happens in this model, this tells us that it is more likely that the person knows causal inference</li>
-</ul></li>
-</ul>
-</section>
-<section id="directed-graphical-models-8" class="slide level2">
-<h2>Directed Graphical Models</h2>
-<ul>
-<li><p>Now let’s condition on the intermediate variable <span class="math inline">\(Y\)</span></p>
-<ul>
-<li>This is the variable that represents the ability to solve business problems</li>
-<li>In the graph, we have colored this variable grey to indicate that we are conditioning on it</li>
-</ul></li>
-<li><p>Conditioning on <span class="math inline">\(Y\)</span> means that we are assuming that we know whether or not the person solved a business problem</p></li>
-<li><p>In this case, conditioning on <span class="math inline">\(Y\)</span> breaks the dependence relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span></p>
-<ul>
-<li>That is, <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span> are now independent, given <span class="math inline">\(Y\)</span></li>
-<li>Mathematically, <span class="math inline">\(A \perp C\)</span>, but <span class="math inline">\(X \not\perp Z | Y\)</span></li>
-</ul></li>
-</ul>
-</section>
-<section id="directed-graphical-models-9" class="slide level2">
-<h2>Directed Graphical Models</h2>
-<p>Now let’s look at another common structure:</p>
-<div class="cell columns column-output-location" data-execution_count="5">
-<div class="column">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>g <span class="op">=</span> gr.Digraph()</span>
-<span id="cb4-2"><a href="#cb4-2"></a>g.edge(<span class="st">"C"</span>, <span class="st">"A"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3"></a>g.edge(<span class="st">"C"</span>, <span class="st">"B"</span>)</span>
-<span id="cb4-4"><a href="#cb4-4"></a></span>
-<span id="cb4-5"><a href="#cb4-5"></a>g.edge(<span class="st">"X"</span>, <span class="st">"Y"</span>)</span>
-<span id="cb4-6"><a href="#cb4-6"></a>g.edge(<span class="st">"X"</span>, <span class="st">"Z"</span>)</span>
-<span id="cb4-7"><a href="#cb4-7"></a>g.node(<span class="st">"X"</span>, <span class="st">"X"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
-<span id="cb4-8"><a href="#cb4-8"></a></span>
-<span id="cb4-9"><a href="#cb4-9"></a>g.edge(<span class="st">"statistics"</span>, <span class="st">"causal inference"</span>)</span>
-<span id="cb4-10"><a href="#cb4-10"></a>g.edge(<span class="st">"statistics"</span>, <span class="st">"machine learning"</span>)</span>
-<span id="cb4-11"><a href="#cb4-11"></a></span>
-<span id="cb4-12"><a href="#cb4-12"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column">
-<div class="cell-output cell-output-display" data-execution_count="4">
-<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-5-output-1.svg"></p>
-</div>
-</div>
-</div>
-<ul>
-<li>In this model, we are postulating that statistics is a prerequisite for both causal inference and machine learning.</li>
-</ul>
-</section>
-<section id="directed-graphical-models-10" class="slide level2">
-<h2>Directed Graphical Models</h2>
+<div class="cell-output cell-output-stdout">
+<pre><code>Time to compute OLS coefficients numerically:
+12 ms ± 259 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 
-<img data-src="causal_graphical_models_files/figure-revealjs/cell-6-output-1.svg" class="r-stretch"><ul>
-<li>This model highlights the following statistical process:
-<ul>
-<li>Knowing statistics gives you the ability to do causal inference</li>
-<li>Knowing statistics gives you the ability to do machine learning</li>
-</ul></li>
-<li>When we don’t condition for the root node, <span class="math inline">\(C\)</span>, there is still a dependence relationship between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>
-<ul>
-<li>That is, if we know that an individual has causal knowledge, this tells us that they are more likely to know statistics, and thus to also know machine learning</li>
-</ul></li>
-</ul>
-</section>
-<section id="directed-graphical-models-11" class="slide level2">
-<h2>Directed Graphical Models</h2>
+Time to compute OLS coefficients with a matrix inverse:
+221 µs ± 10.1 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
 
-<img data-src="causal_graphical_models_files/figure-revealjs/cell-7-output-1.svg" class="r-stretch"><ul>
-<li>By conditioning on <span class="math inline">\(X\)</span>, we break the dependence relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(Z\)</span>
+Time to compute OLS coefficients by solving a linear system:
+120 µs ± 2.09 µs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="review-of-linear-regression-2" class="slide level2">
+<h2>Review of Linear Regression</h2>
 <ul>
-<li>That is, <span class="math inline">\(A\not\perp B\)</span>, but <span class="math inline">\(Y \perp Z | X\)</span></li>
+<li><p>Aside: Computational complexity of OLS</p></li>
+<li><p>Solving a matrix inverse involves computing the inverse of a matrix, which is a computationally expensive operation.</p>
+<ul>
+<li>The most common way to find the inverse of a matrix is to solve <span class="math inline">\(n\)</span> linear systems, where <span class="math inline">\(n\)</span> is the number of columns in the matrix.</li>
+<li>Each linear system is of the form <span class="math inline">\((X'X) \beta = e_i\)</span>, where <span class="math inline">\(X\)</span> is a matrix and <span class="math inline">\(e_i\)</span> is a vector of zeros with a 1 in the <span class="math inline">\(i_{\text{th}}\)</span> position.</li>
+<li>Solved this way, it would take <span class="math inline">\(O(n^3)\)</span> operations to find the full inverse.</li>
+<li>The fastest known way to take a matrix inverse is ~<span class="math inline">\(O(n^{2.375})\)</span>.</li>
 </ul></li>
-<li>We would call this a <strong>fork</strong> structure</li>
+<li><p>On the other hand, we don’t need to know the full inverse of <span class="math inline">\((X'X)\)</span>. We only need to know the solution to the linear system <span class="math inline">\((X'X) \beta = X'y\)</span>.</p>
+<ul>
+<li>This can be solved in just one set of <span class="math inline">\(O(n^2)\)</span> operations.</li>
+</ul></li>
 </ul>
 </section>
-<section id="directed-graphical-models-12" class="slide level2">
-<h2>Directed Graphical Models</h2>
-<p>Finally, let’s look at a third common structure, called a <strong>collider</strong>:</p>
-<div class="cell columns column-output-location" data-execution_count="8">
-<div class="column">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>g <span class="op">=</span> gr.Digraph()</span>
-<span id="cb5-2"><a href="#cb5-2"></a>g.edge(<span class="st">"B"</span>, <span class="st">"C"</span>)</span>
-<span id="cb5-3"><a href="#cb5-3"></a>g.edge(<span class="st">"A"</span>, <span class="st">"C"</span>)</span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a>g.edge(<span class="st">"Y"</span>, <span class="st">"X"</span>)</span>
-<span id="cb5-6"><a href="#cb5-6"></a>g.edge(<span class="st">"Z"</span>, <span class="st">"X"</span>)</span>
-<span id="cb5-7"><a href="#cb5-7"></a>g.node(<span class="st">"X"</span>, <span class="st">"X"</span>, style<span class="op">=</span><span class="st">"filled"</span>)</span>
-<span id="cb5-8"><a href="#cb5-8"></a></span>
-<span id="cb5-9"><a href="#cb5-9"></a>g.edge(<span class="st">"statistics"</span>, <span class="st">"job promotion"</span>)</span>
-<span id="cb5-10"><a href="#cb5-10"></a>g.edge(<span class="st">"flatter"</span>, <span class="st">"job promotion"</span>)</span>
-<span id="cb5-11"><a href="#cb5-11"></a></span>
-<span id="cb5-12"><a href="#cb5-12"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column">
-<div class="cell-output cell-output-display" data-execution_count="7">
-<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-8-output-1.svg"></p>
-</div>
-</div>
-</div>
+<section id="review-of-linear-regression-3" class="slide level2">
+<h2>Review of Linear Regression</h2>
 <ul>
-<li>In this model, we are postulating that statistics and flattery are both determinants of getting a job promotion.</li>
+<li>In this course, we will use the <code>statsmodels</code> package to estimate linear regression models.
+<ul>
+<li>It may not be the fastest, but it gets us a whole lot more information.</li>
+</ul></li>
+</ul>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a>sm_results <span class="op">=</span> sm.OLS(y, X).fit()</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="bu">print</span>(sm_results.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                 OLS Regression Results                                
+=======================================================================================
+Dep. Variable:                      y   R-squared (uncentered):                   0.001
+Model:                            OLS   Adj. R-squared (uncentered):              0.000
+Method:                 Least Squares   F-statistic:                              1.198
+Date:                Sun, 29 Oct 2023   Prob (F-statistic):                       0.286
+Time:                        23:27:59   Log-Likelihood:                         -14130.
+No. Observations:               10000   AIC:                                  2.828e+04
+Df Residuals:                    9990   BIC:                                  2.835e+04
+Df Model:                          10                                                  
+Covariance Type:            nonrobust                                                  
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+x1             0.0116      0.010      1.178      0.239      -0.008       0.031
+x2             0.0110      0.010      1.111      0.267      -0.008       0.030
+x3             0.0121      0.010      1.210      0.226      -0.007       0.032
+x4            -0.0014      0.010     -0.136      0.892      -0.021       0.018
+x5            -0.0067      0.010     -0.679      0.497      -0.026       0.013
+x6             0.0044      0.010      0.441      0.659      -0.015       0.024
+x7            -0.0104      0.010     -1.052      0.293      -0.030       0.009
+x8            -0.0206      0.010     -2.076      0.038      -0.040      -0.001
+x9            -0.0122      0.010     -1.221      0.222      -0.032       0.007
+x10           -0.0052      0.010     -0.516      0.606      -0.025       0.015
+==============================================================================
+Omnibus:                        0.427   Durbin-Watson:                   1.973
+Prob(Omnibus):                  0.808   Jarque-Bera (JB):                0.460
+Skew:                           0.000   Prob(JB):                        0.795
+Kurtosis:                       2.967   Cond. No.                         1.05
+==============================================================================
+
+Notes:
+[1] R² is computed without centering (uncentered) since the model does not contain a constant.
+[2] Standard Errors assume that the covariance matrix of the errors is correctly specified.</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="treatment-effects" class="title-slide slide level1 center">
+<h1>Treatment Effects</h1>
+
+</section>
+<section id="treatment-effects-1" class="slide level2">
+<h2>Treatment Effects</h2>
+<ul>
+<li>When estimating “treatment effects” with linear regression, we run into exactly the same problem as when we estimate using the difference in means.
+<ul>
+<li><span class="math inline">\(Y_i = Y_{0i}(1-T_i) + Y_{1i}T_i\)</span></li>
+<li>If we don’t know both potential outcomes, we can’t estimate the treatment effect.</li>
+</ul></li>
+<li>However, we can estimate the treatment effect if we make some assumptions about the data generating process.
+<ul>
+<li>The best case scenario is that we have an RCT.</li>
+<li>Otherwise, we have to make sure that we close off all other channels through which the treatment could affect the outcome.</li>
+</ul></li>
+</ul>
+</section>
+<section id="treatment-effects-2" class="slide level2">
+<h2>Treatment Effects</h2>
+<ul>
+<li><p>For starters, let’s assume that we have an RCT.</p></li>
+<li><p>We’ll compute the treatment effect both using the difference in means we used before, and also using regression.</p></li>
+</ul>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data/online_classroom.csv"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>df_no_blended <span class="op">=</span> df[df[<span class="st">"format_blended"</span>] <span class="op">==</span> <span class="dv">0</span>]</span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co"># Difference in means</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>te <span class="op">=</span> df_no_blended.groupby(<span class="st">"format_ol"</span>)[<span class="st">"falsexam"</span>].mean().diff()</span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="bu">print</span>(<span class="ss">f"Estimated treatment effect: </span><span class="sc">{</span>te[<span class="dv">1</span>]<span class="sc">:.3f}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co"># Regression</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>sm_results <span class="op">=</span> smf.ols(<span class="st">"falsexam ~ format_ol"</span>, data<span class="op">=</span>df_no_blended).fit()</span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="bu">print</span>(sm_results.summary().tables[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Estimated treatment effect: -4.912
+
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept     78.5475      1.113     70.563      0.000      76.353      80.742
+format_ol     -4.9122      1.680     -2.925      0.004      -8.223      -1.601
+==============================================================================</code></pre>
+</div>
+</div>
+</section>
+<section id="treatment-effects-3" class="slide level2">
+<h2>Treatment Effects</h2>
+<ul>
+<li>Because we just have a binary treatment, the difference in means and the regression coefficient are the same.
+<ul>
+<li><span class="math inline">\(E[Y_i\mid T_i] = \beta_0 + \beta_1 T_i + \epsilon_i\)</span></li>
+<li><span class="math inline">\(\bar\tau = E[Y_i\mid T_i=1] - E[Y_i\mid T_i=0] = (\beta_0 + \beta_1*1)-(\beta_0 + \beta_1 * 0) = \beta_1\)</span></li>
+</ul></li>
+<li>With only one (binary) variable, it may not be clear why we (usually) prefer regression over the difference in means.
+<ul>
+<li>However, regression makes it much easier to control for other variables.</li>
+</ul></li>
+</ul>
+</section>
+<section id="treatment-effects-4" class="slide level2">
+<h2>Treatment Effects</h2>
+<ul>
+<li>For example, suppose we want to control for the student’s gender.
+<ul>
+<li>In this example, gender is not a confounder because we have an RCT.</li>
+<li>However, we can still control for it in the regression, and it should improve the precision of our estimate.</li>
+</ul></li>
+<li>To “control for” a covariate using the difference in means, we have to create subsamples of the data that have no variation in that variable
+<ul>
+<li>In other words, we look at <em>conditional</em> differences in means.</li>
+</ul></li>
+<li>With regression, controlling for a variable is as simple as including it on the right hand side.</li>
 </ul>
 </section></section>
 <section>
-<section id="building-a-causal-graph" class="title-slide slide level1 center">
-<h1>Building a Causal Graph</h1>
+<section id="regression-with-nonlinearities" class="title-slide slide level1 center">
+<h1>Regression with Nonlinearities</h1>
 
 </section>
-<section id="building-a-causal-graph-1" class="slide level2">
-<h2>Building a Causal Graph</h2>
+<section id="regression-with-nonlinearities-1" class="slide level2">
+<h2>Regression with Nonlinearities</h2>
 <ul>
-<li><p>Now that we have seen some examples of causal graphs, we should think about how to draw a causal graph for a problem in practice.</p></li>
-<li><p>Drawing a causal graph is a way of encoding the assumptions that you are making about the data generating process.</p></li>
-<li><p>The first step is to identify the variables that are relevant to the problem at hand.</p>
+<li><p>What if we don’t think that there is a linear relationship between the treatment and the outcome?</p></li>
+<li><p>We can still use linear regression, but we need to be careful about how we interpret the coefficients.</p></li>
+<li><p>For example, if we think that the treatment effect is nonlinear, we can include a quadratic term for the treatment.</p>
 <ul>
-<li>Do your research!</li>
+<li><span class="math inline">\(Y_i = \beta_0 + \beta_1 T_i + \beta_2 T_i^2 + \epsilon_i\)</span></li>
+<li>This works simply by creating a new column in the data that is the square of the treatment variable.</li>
 </ul></li>
 </ul>
 </section>
-<section id="building-a-causal-graph-2" class="slide level2">
-<h2>Building a Causal Graph</h2>
+<section id="regression-with-nonlinearities-2" class="slide level2">
+<h2>Regression with Nonlinearities</h2>
 <ul>
-<li><p>In reality, there are many variables that are relevant to a problem.</p></li>
-<li><p>Real data-generating processes are therefore extremely large and complex.</p></li>
-<li><p>Think about what the data generating process might look like for something similar the online class example we have been using</p>
+<li>We can also include other nonlinear transformations of the treatment variable.
 <ul>
-<li>(if we didn’t have a randomized experiment)</li>
+<li><span class="math inline">\(Y_i = \beta_0 + \beta_1 T_i + \beta_2 \log(T_i) + \epsilon_i\)</span></li>
+<li><span class="math inline">\(Y_i = \beta_0 + \beta_1 T_i + \beta_2 T_i^2 + \beta_3 \log(T_i) + \epsilon_i\)</span></li>
+<li><span class="math inline">\(Y_i = \beta_0 + \beta_1 T_i + \beta_2 T_i^2 + \beta_3 \log(T_i) + \beta_4 \log(T_i)^2 + \epsilon_i\)</span></li>
+</ul></li>
+<li>But we should be careful doing stuff like this. It’s easy to overfit the data.
+<ul>
+<li>In fact, if we have <span class="math inline">\(k\)</span> data points and specify a <span class="math inline">\(k-1\)</span>-th order polynomial, we can always fit the data perfectly.</li>
 </ul></li>
 </ul>
 </section>
-<section id="building-a-causal-graph-3" class="slide level2">
-<h2>Building a Causal Graph</h2>
-<ul>
-<li>Let’s say we were interested in the effect of online classes on college dropout rates. The treatment effect we want to identify is:</li>
-</ul>
+<section id="regression-with-nonlinearities-3" class="slide level2">
+<h2>Regression with Nonlinearities</h2>
 
-<img data-src="causal_graphical_models_files/figure-revealjs/cell-9-output-1.svg" class="r-stretch"></section>
-<section id="building-a-causal-graph-4" class="slide level2">
-<h2>Building a Causal Graph</h2>
+<img data-src="data/fig/polynomial_regression.png" style="width:100.0%" class="r-stretch"></section>
+<section id="regression-with-nonlinearities-4" class="slide level2">
+<h2>Regression with Nonlinearities</h2>
 <ul>
-<li>In addition to <code>OnlineClass</code>, there are <strong>many</strong> variables that might cause a student to drop out of college.</li>
-</ul>
-
-<img data-src="causal_graphical_models_files/figure-revealjs/cell-10-output-1.svg" class="r-stretch"></section>
-<section id="building-a-causal-graph-5" class="slide level2">
-<h2>Building a Causal Graph</h2>
+<li>We could also transform the dependent variable, rather than the treatment variable.</li>
+<li>For example, let’s imagine we wanted to estimate a Cobb-Douglas function.
 <ul>
-<li>Some of these variables might <strong>also</strong> determine whether or not a student takes an online class.</li>
-</ul>
-
-<img data-src="causal_graphical_models_files/figure-revealjs/cell-11-output-1.svg" class="r-stretch"></section>
-<section id="building-a-causal-graph-6" class="slide level2">
-<h2>Building a Causal Graph</h2>
+<li><span class="math inline">\(Y = z K^\alpha L^\beta\)</span> where <span class="math inline">\(z\)</span> is productivity, <span class="math inline">\(K\)</span> is capital, and <span class="math inline">\(L\)</span> is labor.</li>
+<li>This equation is nonlinear in the parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>.</li>
+<li>However, we can transform it to be linear using the log.</li>
+<li><span class="math inline">\(\ln Y = \ln z + \alpha \ln K + \beta \ln L\)</span></li>
+</ul></li>
+<li>This trick works whenever the dependent variable is an invertible function of an equation that is linear in parameters.
 <ul>
-<li>Then there are some other variables that affect just <code>OnlineClass</code> and not <code>Dropout</code></li>
-</ul>
-
-<img data-src="causal_graphical_models_files/figure-revealjs/cell-12-output-1.svg" class="r-stretch"></section>
-<section id="building-a-causal-graph-7" class="slide level2">
-<h2>Building a Causal Graph</h2>
-<ul>
-<li>There are relationships between some of these variables as well</li>
-</ul>
-
-<img data-src="causal_graphical_models_files/figure-revealjs/cell-13-output-1.svg" class="r-stretch"></section>
-<section id="building-a-causal-graph-8" class="slide level2">
-<h2>Building a Causal Graph</h2>
-<ul>
-<li>Even if there is not a direct causal relationship between two variables, there might be an indirect relationship through a third variable</li>
-</ul>
-
-<img data-src="causal_graphical_models_files/figure-revealjs/cell-14-output-1.svg" class="r-stretch"></section>
-<section id="building-a-causal-graph-9" class="slide level2">
-<h2>Building a Causal Graph</h2>
-<ul>
-<li>And then there are some variables that we know are correlated, but due to some other combination of unknown factors</li>
-</ul>
-
-<img data-src="causal_graphical_models_files/figure-revealjs/cell-15-output-1.svg" class="r-stretch"></section>
-<section id="building-a-causal-graph-10" class="slide level2">
-<h2>Building a Causal Graph</h2>
-<div class="two-col">
-<div class="col">
-<div class="cell" data-execution_count="16">
-<div class="cell-output cell-output-display" data-execution_count="15">
-<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-16-output-1.svg"></p>
-</div>
-</div>
-</div>
-<div class="col">
-<ul>
-<li>As we can see, this graph got very complex, very quickly.</li>
-<li>It is clearly not capturing all of the relevant variables</li>
-<li>What else might be missing?</li>
-</ul>
-</div>
-</div>
-</section>
-<section id="building-a-causal-graph-11" class="slide level2">
-<h2>Building a Causal Graph</h2>
-<div class="two-col">
-<div class="col">
-<div class="cell" data-execution_count="17">
-<div class="cell-output cell-output-display" data-execution_count="16">
-<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-17-output-1.svg"></p>
-</div>
-</div>
-</div>
-<div class="col">
-<ul>
-<li>As we can see, this graph got very complex, very quickly.</li>
-<li>It is clearly not capturing all of the relevant variables</li>
-<li>What else might be missing?
-<ul>
-<li>CommunityCollege vs.&nbsp;University</li>
-<li><em>Income</em></li>
+<li><span class="math inline">\(Y = f(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_k X_k)\)</span></li>
+<li><span class="math inline">\(f^{-1}(Y) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_k X_k\)</span></li>
 </ul></li>
 </ul>
-</div>
-</div>
 </section>
-<section id="simplifying-the-graph" class="slide level2">
-<h2>Simplifying the Graph</h2>
+<section id="limited-dependent-variables" class="slide level2">
+<h2>Limited Dependent Variables</h2>
 <ul>
-<li>In practice, we will not be able to draw a graph that captures everything. How can we choose which relationships to include, and which to ignore?</li>
-</ul>
-<ol type="1">
-<li><p><strong>Unimportance</strong> - If the arrows coming in and out of a variable all represent small or negligible effects, we can ignore them.</p></li>
-<li><p><strong>Redundancy</strong> - If there are variables on the diagram that occupy the same space (i.e.&nbsp;they both have incoming and outgoing links from the same variables) then we can probably combine them into a single variable.</p></li>
-<li><p><strong>Mediators</strong> - If a variable is <strong>only</strong> included as a way to connect two other variables, we can probably remove it.</p></li>
-<li><p><strong>Irrelevance</strong> - If a variable is important to the DGP, but isn’t part of a <strong>dependence path</strong> between the treatment and the outcome, we can ignore it.</p></li>
-</ol>
-</section>
-<section id="building-a-causal-graph-12" class="slide level2">
-<h2>Building a Causal Graph</h2>
-<div class="two-col">
-<div class="col">
-<div class="cell" data-execution_count="18">
-<div class="cell-output cell-output-display" data-execution_count="17">
-<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-18-output-1.svg"></p>
-</div>
-</div>
-</div>
-<div class="col">
+<li>Sometimes the dependent variable is not continuous.
 <ul>
-<li><strong>Unimportance</strong> was already necessarily applied in the creation of the graph.</li>
-<li>We can also apply <strong>redundancy</strong> by combining <code>Race</code> and <code>Gender</code> into a single variable, <code>Demographics</code></li>
-</ul>
-</div>
-</div>
-</section>
-<section id="building-a-causal-graph-13" class="slide level2">
-<h2>Building a Causal Graph</h2>
-<div class="two-col">
-<div class="col">
-<div class="cell" data-execution_count="19">
-<div class="cell-output cell-output-display" data-execution_count="18">
-<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-19-output-1.svg"></p>
-</div>
-</div>
-</div>
-<div class="col">
-<ul>
-<li>There are also quite a few <strong>Mediators</strong>
-<ul>
-<li>The most prevelant is <code>Preferences</code>, (we can just have <code>Demographics</code>, etc. directly affect <code>OnlineClass</code>).</li>
-<li>We can throw out <code>InternetAccess</code> without losing anything.</li>
+<li>For example, it might be binary (did the student pass the exam?)</li>
+<li>Or it might be a count (how many times did the student log in canvas?)</li>
 </ul></li>
-<li>There is one more. Can you find it?</li>
-</ul>
-</div>
-</div>
-</section>
-<section id="building-a-causal-graph-14" class="slide level2">
-<h2>Building a Causal Graph</h2>
-<div class="two-col">
-<div class="col">
-<div class="cell" data-execution_count="20">
-<div class="cell-output cell-output-display" data-execution_count="19">
-<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-20-output-1.svg"></p>
-</div>
-</div>
-</div>
-<div class="col">
+<li>In these cases, we shouldn’t just apply OLS blindly
 <ul>
-<li><p>Notice that all of the variables that cause <code>AvailableTime</code> are also causes of <code>WorkHours</code>.</p></li>
-<li><p>We can therefore throw out <code>AvailableTime</code>, and just have <code>WorkHours</code> directly affect <code>OnlineClass</code>, rather than through <code>AvailableTime</code>.</p></li>
-<li><p><code>AvailableTime</code> is also a mediator.</p></li>
-</ul>
-</div>
-</div>
-</section>
-<section id="building-a-causal-graph-15" class="slide level2">
-<h2>Building a Causal Graph</h2>
+<li>Often we can work around this by transforming the dependent variable.</li>
+<li>For example, we can use a logistic regression to estimate the <em>probability</em> of passing the exam.</li>
+</ul></li>
+<li>Let <span class="math inline">\(F(x) = \frac{e^x}{1+e^x}\)</span> be the logistic function and
 <ul>
-<li><p>We are left with a much simpler (although still messy) model, that still captures most of the relevant relationships.</p></li>
-<li><p>Even though the simplified model is nicer to work with, these rules are just heuristics and shouldn’t be applied blindly.</p></li>
+<li><span class="math inline">\(P(Y_i = 1) = F(\beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \dots + \beta_k X_{ki})\)</span></li>
+<li><span class="math inline">\(Y_i \sim \text{Bernoulli}(P(Y_i = 1))\)</span></li>
+</ul></li>
 </ul>
+</section>
+<section id="limited-dependent-variables-1" class="slide level2">
+<h2>Limited Dependent Variables</h2>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="im">from</span> causaldata <span class="im">import</span> restaurant_inspections</span>
+<span id="cb7-2"><a href="#cb7-2"></a>df <span class="op">=</span> restaurant_inspections.load_pandas().data</span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<img data-src="causal_graphical_models_files/figure-revealjs/cell-21-output-1.svg" class="r-stretch"></section></section>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">business_name</th>
+<th data-quarto-table-cell-role="th">inspection_score</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">NumberofLocations</th>
+<th data-quarto-table-cell-role="th">Weekend</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>MCGINLEYS PUB</td>
+<td>94</td>
+<td>2017</td>
+<td>9</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>VILLAGE INN #1</td>
+<td>86</td>
+<td>2015</td>
+<td>66</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>RONNIE SUSHI 2</td>
+<td>80</td>
+<td>2016</td>
+<td>79</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>FRED MEYER - RETAIL FISH</td>
+<td>96</td>
+<td>2003</td>
+<td>86</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>PHO GRILL</td>
+<td>83</td>
+<td>2017</td>
+<td>53</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="limited-dependent-variables-2" class="slide level2">
+<h2>Limited Dependent Variables</h2>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Statsmodels wants the dependent variable to be numeric</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>df[<span class="st">"Weekend"</span>] <span class="op">=</span> <span class="dv">1</span><span class="op">*</span>df[<span class="st">"Weekend"</span>]</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co"># How is the frequency of weekend inspections changing over time?</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>m1 <span class="op">=</span> smf.logit(formula <span class="op">=</span> <span class="st">"Weekend ~ Year"</span>, data <span class="op">=</span> df).fit()</span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="bu">print</span>(m1.summary().tables[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Optimization terminated successfully.
+         Current function value: 0.045192
+         Iterations 10
+==============================================================================
+                 coef    std err          z      P&gt;|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept     44.2360     23.502      1.882      0.060      -1.828      90.300
+Year          -0.0244      0.012     -2.088      0.037      -0.047      -0.002
+==============================================================================</code></pre>
+</div>
+</div>
+</section>
+<section id="limited-dependent-variables-3" class="slide level2">
+<h2>Limited Dependent Variables</h2>
+<ul>
+<li>The coefficient on <code>Year</code> is negative, which indicates that the frequency of weekend inspections is decreasing over time.</li>
+<li>Notice that we have a new message: “Optimization terminated successfully”
+<ul>
+<li>Since this GLM is nonlinear, we can’t use the formula for OLS</li>
+</ul></li>
+</ul>
+</section>
+<section id="limited-dependent-variables-4" class="slide level2">
+<h2>Limited Dependent Variables</h2>
+<ul>
+<li>In order to actually interpret this coefficient, we prefer to know the <strong>marginal effect</strong> of <code>Year</code> rather than the coefficient value itself.</li>
+</ul>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Compute the marginal effect of Year</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="bu">print</span>(m1.get_margeff(at<span class="op">=</span><span class="st">"mean"</span>).summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Logit Marginal Effects       
+=====================================
+Dep. Variable:                Weekend
+Method:                          dydx
+At:                              mean
+==============================================================================
+                dy/dx    std err          z      P&gt;|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+Year          -0.0002   8.79e-05     -2.110      0.035      -0.000   -1.32e-05
+==============================================================================</code></pre>
+</div>
+</div>
+</section></section>
 <section>
-<section id="aside-cycles" class="title-slide slide level1 center">
-<h1>Aside: Cycles</h1>
+<section id="interactions" class="title-slide slide level1 center">
+<h1>Interactions</h1>
 
 </section>
-<section id="cycles" class="slide level2">
-<h2>Cycles</h2>
+<section id="interactions-1" class="slide level2">
+<h2>Interactions</h2>
 <ul>
-<li><p>There is one thing that a causal diagram cannot have: a <strong>cycle</strong>.</p></li>
-<li><p>A cycle is a directed path that starts and ends at the same node.</p>
+<li><p>What if the treatment effect itself is heterogeneous?</p>
 <ul>
-<li>This would mean that a variable causes itself, which is impossible.</li>
+<li>For example, maybe the treatment effect is larger for students who are more engaged in the class.</li>
 </ul></li>
-<li><p>The simplest cycles look like this:</p></li>
-</ul>
-
-<img data-src="causal_graphical_models_files/figure-revealjs/cell-22-output-1.svg" class="r-stretch"></section>
-<section id="cycles-1" class="slide level2">
-<h2>Cycles</h2>
+<li><p>When comparing means, we would have to create subsamples of the data and estimate the treatment effect separately for each subsample.</p></li>
+<li><p>In a regression equation, we can incorporate heterogeneous treatment effects using <strong>interaction terms</strong>.</p>
 <ul>
-<li>Why can’t we have cycles? Surely there are feedback loops in the real world.</li>
-</ul>
-
-<img data-src="causal_graphical_models_files/figure-revealjs/cell-23-output-1.svg" class="r-stretch"><ul>
-<li>If we have a cycle, then our causal problem is ill-specified.
-<ul>
-<li>We can’t identify the effect of <code>PrivateSchool</code> on <code>Wealth</code>, because <code>Wealth</code> also causes <code>PrivateSchool</code>… or does it?</li>
+<li><span class="math inline">\(Y_i = \beta_0 + \beta_1 T_i + \beta_2 X_i + \beta_3 T_i X_i + \epsilon_i\)</span></li>
+<li><span class="math inline">\(E[Y_i\mid T_i, X_i] = \beta_0 + \beta_1 T_i + \beta_2 X_i + \beta_3 T_i X_i\)</span></li>
 </ul></li>
 </ul>
 </section>
-<section id="cycles-2" class="slide level2">
-<h2>Cycles</h2>
-<div class="two-col">
-<div class="col">
-<div class="cell" data-execution_count="24">
-<div class="cell-output cell-output-display" data-execution_count="23">
-<p><img data-src="causal_graphical_models_files/figure-revealjs/cell-24-output-1.svg"></p>
+<section id="interactions-2" class="slide level2">
+<h2>Interactions</h2>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Use * to include two variables independently</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="co"># plus their interaction</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co"># (: is interaction-only, we rarely use it)</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>m1 <span class="op">=</span> smf.ols(formula <span class="op">=</span> <span class="st">"inspection_score ~ NumberofLocations*Weekend + Year"</span>, data <span class="op">=</span> df).fit()</span>
+<span id="cb12-5"><a href="#cb12-5"></a></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="bu">print</span>(m1.summary().tables[<span class="dv">1</span>])</span>
+<span id="cb12-7"><a href="#cb12-7"></a>m1.t_test(<span class="st">"NumberofLocations + NumberofLocations:Weekend = 0"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>=============================================================================================
+                                coef    std err          t      P&gt;|t|      [0.025      0.975]
+---------------------------------------------------------------------------------------------
+Intercept                   225.1260     12.415     18.134      0.000     200.793     249.460
+NumberofLocations            -0.0191      0.000    -43.759      0.000      -0.020      -0.018
+Weekend                       1.7592      0.488      3.606      0.000       0.803       2.715
+NumberofLocations:Weekend    -0.0098      0.008     -1.307      0.191      -0.025       0.005
+Year                         -0.0648      0.006    -10.494      0.000      -0.077      -0.053
+=============================================================================================</code></pre>
 </div>
-</div>
-</div>
-<div class="col">
-<ul>
-<li><p>We can solve this problem by introducing the <strong>time</strong> dimension.</p></li>
-<li><p>By creating a new variable to represent the lagged value, we can break the cycle.</p>
-<ul>
-<li>This also loosely corresponds with the physicists view of causality, where the arrow of time is fundamental.</li>
-<li>Similar to the time-series concept of <strong>Granger Causality</strong>.</li>
-</ul></li>
-</ul>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>&lt;class 'statsmodels.stats.contrast.ContrastResults'&gt;
+                             Test for Constraints                             
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+c0            -0.0289      0.008     -3.851      0.000      -0.044      -0.014
+==============================================================================</code></pre>
 </div>
 </div>
 </section>
-<section id="credits" class="slide level2">
-<h2>Credits</h2>
-<p>This lecture draws heavily from <a href="https://matheusfacure.github.io/python-causality-handbook/03-Stats-Review-The-Most-Dangerous-Equation.html.html">Causal Inference for the Brave and True: Chapter 04 - Graphical Causal Models</a> by Matheus Facure.</p>
-<p>There is also material from <a href="http://ai.stanford.edu/~paskin/gm-short-course/">A Short Course on Graphical Models Chapter 2: Structured Representations</a> by Mark Paskin.</p>
-<p>As well as <a href="https://theeffectbook.net/">The Effect: Chapter 7 - Drawing Graphical Diagrams</a> by Nick Huntington-Klein.</p>
+<section id="interactions-3" class="slide level2">
+<h2>Interactions</h2>
+<ul>
+<li><p>In this example, it looks like the effect of the number of locations on the inspection score is strengthened on the weekend.</p>
+<ul>
+<li>(Assuming we have some causal model to justify that this is unbiased)</li>
+</ul></li>
+<li><p>Interactions are easiest to interpret when they are categorical; each group has their own treatment effect.</p></li>
+<li><p>However, they also work with continuous variables.</p>
+<ul>
+<li>In this case, the treatment effect is a function of the other variable.</li>
+<li>We could say that a certain variable “moderates” the treatment effect.</li>
+</ul></li>
+</ul>
+</section>
+<section id="interactions-4" class="slide level2">
+<h2>Interactions</h2>
+<ul>
+<li>Why not just make everything interact with everything else?
+<ul>
+<li>We could, but it would be hard to interpret the coefficients.</li>
+<li>It would also be easy to overfit the data.</li>
+<li>In order to identify the interaction terms, we want lots of variation across both variables.</li>
+</ul></li>
+<li>Interactions are most useful when we have a <em>theory</em> about how the treatment effect varies with other variables.
+<ul>
+<li>For example, we might think that the treatment effect of online class is larger for students who are more engaged in the class, or vice versa</li>
+</ul></li>
+<li>Generally, it’s good to include interactions if they are a primary focus of the analysis.</li>
+</ul>
+</section></section>
+<section>
+<section id="translating-causal-diagrams-to-regression" class="title-slide slide level1 center">
+<h1>Translating Causal Diagrams to Regression</h1>
 
-<div class="footer footer-default">
+</section>
+<section id="translating-causal-diagrams-to-regression-1" class="slide level2">
+<h2>Translating Causal Diagrams to Regression</h2>
+
+
+<img data-src="data/fig/flowchart.png" style="width:150.0%" class="r-stretch"><div class="footer footer-default">
 
 </div>
 </section></section>
