@@ -4,75 +4,75 @@
     "href": "feed.html",
     "title": "Slides",
     "section": "",
-    "text": "No matching items"
+    "text": "ECON 526: Quantitative Economics with Data Science Applications\n\n\n\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nMatching\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "ECON 526: Quantitative Economics with Data Science Applications",
     "section": "",
-    "text": "Course schedule\nSlides from Jesse and Phil\n\nSlides\n\nMatching slides, notebook\n\nReading: chapters 10-12 of Facure (2022) and chapter 14 of Huntington-Klein (2021)\n\n\n\n\n\n\n\n\nReferences\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/."
+    "text": "Slides\n\nMatching slides, notebook\n\nReading: chapters 10-12 of Facure (2022) and chapter 14 of Huntington-Klein (2021)\n\nDifference in differences, notebook\n\n\n\n\n\n\nReferences\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/."
   },
   {
     "objectID": "matching.html#setting",
     "href": "matching.html#setting",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Setting",
     "text": "Setting\n\nPotential outcomes \\((Y_0, Y_1)\\)\nTreatment \\(T\\)\nObserve \\(Y = Y_0(1-T) + T Y_1\\)\nCovariates \\(X\\)\nAssume conditional independence \\((Y_0,Y_1) \\perp T | X\\)\n\n\\[\n\\def\\Er{{\\mathrm{E}}}\n\\def\\En{{\\mathbb{En}}}\n\\def\\cov{{\\mathrm{Cov}}}\n\\def\\var{{\\mathrm{Var}}}\n\\def\\R{{\\mathbb{R}}}\n\\newcommand\\norm[1]{\\left\\lVert#1\\right\\rVert}\n\\def\\rank{{\\mathrm{rank}}}\n\\newcommand{\\inpr}{ \\overset{p^*_{\\scriptscriptstyle n}}{\\longrightarrow}}\n\\def\\inprob{{\\,{\\buildrel p \\over \\rightarrow}\\,}}\n\\def\\indist{\\,{\\buildrel d \\over \\rightarrow}\\,}\n\\DeclareMathOperator*{\\plim}{plim}\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\]"
   },
   {
     "objectID": "matching.html#why-not-regression",
     "href": "matching.html#why-not-regression",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Why not regression?",
     "text": "Why not regression?\n\nAverage treatment effect \\[\nATE = \\int \\Er[Y|T=1,X=x] - \\Er[Y|T=0,X=x] dP(x)\n\\]\nRegression gives the best linear approximation to \\(\\Er[Y|T,X]\\), so why not just estimate linear regression \\[\nY_i = \\hat{\\alpha} T_i + X_i'\\hat{\\beta} + \\hat{\\epsilon}_i\n\\] and, and then use \\(\\hat{\\alpha}\\) as an estimate of the ATE?"
   },
   {
     "objectID": "matching.html#why-not-regression-1",
     "href": "matching.html#why-not-regression-1",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Why not regression?",
     "text": "Why not regression?\n\nPartial out (Frish-Waugh-Lovell theorem) \\[\n\\begin{align*}\n\\hat{\\alpha} = & \\frac{\\frac{1}{n} \\sum_{i=1}^n Y_i (T_i - X_i'(X'X)^{-1}X'T)}\n  {\\frac{1}{n} \\sum_{i=1}^n (T_i - X_i'(X'X)^{-1}X'T)^2} \\\\\n  \\inprob & \\Er\\left[Y_i \\underbrace{\\frac{T_i - X_i'\\pi}{\\Er[(T_i - X_i'\\pi)^2]}}_{\\equiv \\omega(T_i,X_i)}\\right] \\\\\n  = & \\Er\\left[Y_{0,i} \\omega(T_i,X_i)\\right] + \\Er\\left[(Y_{1,i}-Y_{0,i}) \\omega(T_i,X_i)T_i\\right]\n\\end{align*}\n\\] where \\(\\pi = \\argmin_{\\tilde{\\pi}} \\Er[(T_i - X_i'\\tilde{\\pi})^2]\\)\nNote: \\(\\Er[\\omega(T,X)] = 0\\), \\(\\Er[T\\omega(T,X)] = 1\\)"
   },
   {
     "objectID": "matching.html#why-not-regression-2",
     "href": "matching.html#why-not-regression-2",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Why not regression?",
     "text": "Why not regression?\n\n\\(\\plim \\hat{\\alpha} = \\Er\\left[Y_{0,i} \\omega(T_i,X_i)\\right] + \\Er\\left[(Y_{1,i}-Y_{0,i}) \\omega(T_i,X_i)T_i\\right]\\)\nWhat can be in the range of \\(\\omega(T,X) = \\frac{T - X'\\pi}{\\Er[(T_i - X_i'\\pi)^2]}\\)?"
   },
   {
     "objectID": "matching.html#why-not-regression-3",
     "href": "matching.html#why-not-regression-3",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Why not regression?",
     "text": "Why not regression?\n\n\nimports\nimport numpy as np\nfrom matplotlib import style\nfrom matplotlib import pyplot as plt\nstyle.use(\"fivethirtyeight\")\n\n\n\nnp.random.seed(1234)\n\ndef simulate(n, pi=np.array([0,1])):\n    X = np.random.randn(n, len(pi))\n    X[:,0] = 1\n    T = 1*((X @ pi + np.random.randn(n))&gt;0)\n    y0 = np.random.randn(n)\n    y1 = np.exp(3*(X[:,1]-2)) + np.random.randn(n)\n    y = T*y1 + (1-T)*y0\n    return(X,T,y,y0,y1)\n\nX,T,y,y0,y1 = simulate(1000)\n\npihat = np.linalg.solve(X.T @ X, X.T @ T)\nw = T - X @ pihat\nw = w/np.mean(w**2);"
   },
   {
     "objectID": "matching.html#why-not-regression-4",
     "href": "matching.html#why-not-regression-4",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
-    "section": "Why not regression?",
-    "text": "Why not regression?\n\n\nplot\nplt.scatter(X[:,1],w*T)\nplt.xlabel(\"X\")\nplt.ylabel(\"ωT\")\nplt.show()"
-  },
-  {
-    "objectID": "matching.html#why-not-regression-5",
-    "href": "matching.html#why-not-regression-5",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Why not regression?",
     "text": "Why not regression?\n\nTX = np.hstack((T.reshape(len(T),1),X))\nabhat = np.linalg.solve(TX.T @ TX, TX.T @ y)\nahat = abhat[0]\ndisplay(ahat)\n\n-0.06414016921951447\n\n\n\nnp.mean(y1-y0)\n\n0.22383059765273303\n\n\n\nWeights, \\(\\omega(T,X)\\), are not all positive, so the regression estimate can be negative even if \\(\\Er[Y_1 | X] - \\Er[Y_0|X]\\) is positive everywhere"
   },
   {
+    "objectID": "matching.html#why-not-regression-5",
+    "href": "matching.html#why-not-regression-5",
+    "title": "Matching",
+    "section": "Why not regression?",
+    "text": "Why not regression?\n\n\nplot\nimport matplotlib.cm as cm\nfig, axes = plt.subplots(2, 1, figsize=(6, 6))\n\n# Create a scatter plot for the first panel (left)\naxes[0].scatter(X[:,1], w, c=T, cmap=cm.Dark2)\naxes[0].set_xlabel(\"X\")\naxes[0].set_ylabel(\"ωT\")\naxes[0].set_title(\"Weights\")\n\naxes[1].scatter(X[:,1], y1-y0, label=\"TE\")\naxes[1].set_xlabel(\"X\")\naxes[1].set_ylabel(\"Y₁ - Y₀\")\naxes[1].set_title(\"Treatment effects\")\n\n\n# Display the plot\nplt.tight_layout()  # Ensure proper layout spacing\nplt.show()"
+  },
+  {
     "objectID": "matching.html#matching-1",
     "href": "matching.html#matching-1",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Matching",
     "text": "Matching\n\nIf not regression, then what? \\[\nATE = \\int \\Er[Y|T=1,X=x] - \\Er[Y|T=0,X=x] dP(x)\n\\]"
   },
   {
     "objectID": "matching.html#propensity-score",
     "href": "matching.html#propensity-score",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Propensity Score",
     "text": "Propensity Score\n\nLet \\(e(X) = P(T=1|X=X)\\)\nNote: \\[\n\\begin{align*}\n\\Er[Y|X,T=1] - \\Er[Y|X,T=0] = & E\\left[\\frac{Y T}{e(X)}|X \\right] - E\\left[\\frac{Y(1-T)}{1-e(X)}|X \\right] \\\\\n= & E\\left[ Y \\frac{T - e(X)}{e(X)(1-e(X))} | X \\right]\n\\end{align*}\n\\]"
   },
@@ -86,14 +86,14 @@
   {
     "objectID": "matching.html#doubly-robust-estimator",
     "href": "matching.html#doubly-robust-estimator",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Doubly Robust Estimator",
     "text": "Doubly Robust Estimator\n\nEstimator \\[\n\\begin{align*}\n\\widehat{ATE}^{DR} = & \\frac{1}{n} \\sum_{i=1}^n \\hat{E}[Y|T=1,X=X_i] - \\hat{E}[Y|T=0,X=X_i] + \\\\\n& + \\frac{1}{n} \\sum_{i=1}^n  \\frac{T_i(Y_i - \\hat{E}[Y|T=1,X=X_i])}{\\hat{e}(X_i)} - \\\\\n& - \\frac{(1-T_i)(Y_i - \\hat{E}[Y|T=0,X=X_i])} {1-\\hat{e}(X_i)}\n\\end{align*}\n\\]"
   },
   {
     "objectID": "matching.html#software",
     "href": "matching.html#software",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Software",
     "text": "Software\n\nAdvice: use the doubly robust estimator with nonparametric estimates for \\(\\hat{E}[Y|T,X]\\) and \\(\\hat{e}(X)\\)\nRecommended package:\n\neconml has the correct estimator and examples of using it with nonparametric estimates\n\nfocuses on conditional instead of unconditional average treatment effects, but can be used for both"
   },
@@ -107,7 +107,7 @@
   {
     "objectID": "matching.html#references",
     "href": "matching.html#references",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "References",
     "text": "References\n\n\n\n\n\n\nAbadie, Alberto, and Guido W. Imbens. 2008. “On the Failure of the Bootstrap for Matching Estimators.” Econometrica 76 (6): 1537–57. https://doi.org/https://doi.org/10.3982/ECTA6474.\n\n\nAthey, Susan, and Stefan Wager. 2019. “Estimating Treatment Effects with Causal Forests: An Application.”\n\n\nBorusyak, Kirill, and Xavier Jaravel. 2018. “Revisiting Event Study Designs.” https://scholar.harvard.edu/files/borusyak/files/borusyak_jaravel_event_studies.pdf.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/.\n\n\nYeager, David S., Paul Hanselman, Gregory M. Walton, Jared S. Murray, Robert Crosnoe, Chandra Muller, Elizabeth Tipton, et al. 2019. “A National Experiment Reveals Where a Growth Mindset Improves Achievement.” Nature 573 (7774): 364–69. https://doi.org/10.1038/s41586-019-1466-y."
   },
@@ -121,14 +121,14 @@
   {
     "objectID": "matching.html#plug-in-estimator",
     "href": "matching.html#plug-in-estimator",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Plug-in estimator",
     "text": "Plug-in estimator\n\nPlug in estimator: \\[\n\\widehat{ATE} = \\frac{1}{n} \\sum_{i=1}^n \\left(\\hat{E}[Y|T=1,X=X_i] - \\hat{E}[Y|T=0,X=X_i] \\right)\n\\] where \\(\\hat{E}[Y|T,X]\\) is some flexible estimator for \\(\\Er[Y|T,X]\\)\n\nif \\(X\\) is discrete, \\(\\hat{E}\\) can be conditional averages or equivalently, “saturated” regression\nif \\(X\\) continuous, \\(\\hat{E}\\) can be some nonparametric regression estimator\nOriginal approaches to this problem used nearest neighbor matching to estimate \\(\\hat{E}[Y|T,X]\\)\n\nDownside:\n\nDifficult statistical properties — choice of tuning parameters, strong assumptions needed, failure of bootstrap for nearest neighbors Abadie and Imbens (2008)"
   },
   {
     "objectID": "matching.html#doubly-robust-estimator-1",
     "href": "matching.html#doubly-robust-estimator-1",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Doubly Robust Estimator",
     "text": "Doubly Robust Estimator\n\nDoubly robust in that:\n\nConsistent as long as either \\(\\hat{e}(X) \\inprob e(X)\\) or \\(\\hat{E}[Y|T,X] \\inprob \\Er[Y|T,X]\\)\nInsensitive to small changes in \\(\\hat{e}(X)\\) or \\(\\hat{E}[Y|T,X]\\)\n\nAllows: nicer statistical properties\n\nWeaker assumptions needed\nAsymptotic distribution is the same as if \\(e(X)\\) and \\(\\Er[Y|T,X]\\) were known"
   },
@@ -142,140 +142,140 @@
   {
     "objectID": "matching.html#sources-and-further-reading",
     "href": "matching.html#sources-and-further-reading",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Sources and Further Reading",
-    "text": "Sources and Further Reading\n\nUseful additional reading is chapters 10-12 of Facure (2022) and chapter 14 of Huntington-Klein (2021).\nThe representation of the estimate from a linear model as a weighted average is based on Borusyak and Jaravel (2018)\nThe growth mindset example is take from Facure (2022)"
+    "text": "Sources and Further Reading\n\nUseful additional reading is chapters 10-12 of Facure (2022) and chapter 14 of Huntington-Klein (2021).1\nThe representation of the estimate from a linear model as a weighted average is based on Borusyak and Jaravel (2018)\nThe growth mindset example is take from Facure (2022)\n\nThese slides do not mention the importance of overlap/balance, but hopefully I emphasized it during lecture. Overlap is very important in practice. The reading, especially Huntington-Klein (2021), cover it pretty well."
   },
   {
     "objectID": "matching.html#example-simulation",
     "href": "matching.html#example-simulation",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Example: simulation",
     "text": "Example: simulation\n\nInfeasible estimator: average of \\(Y_1 - Y_0\\)\n\n\nse = np.sqrt(np.var(y1-y0)/len(y1))\nate = np.mean(y1-y0)\ndisplay(ate-1.96*se, ate, ate+1.96*se)\n\n0.10010844404085255\n\n\n0.22383059765273303\n\n\n0.3475527512646135"
   },
   {
     "objectID": "matching.html#example-simulation-1",
     "href": "matching.html#example-simulation-1",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Example: simulation",
-    "text": "Example: simulation\n\nfrom econml.dr import DRLearner, LinearDRLearner, SparseLinearDRLearner\nfrom econml.sklearn_extensions.linear_model import StatsModelsLinearRegression\nfrom sklearn.ensemble import GradientBoostingRegressor, GradientBoostingClassifier\nfrom sklearn.linear_model import LassoCV, LogisticRegressionCV, ElasticNetCV\nfrom sklearn.preprocessing import PolynomialFeatures#\n\nest = LinearDRLearner(featurizer=PolynomialFeatures(degree=20, include_bias=False),\n                model_regression=LassoCV(),\n                model_propensity=LogisticRegressionCV(),\n                #model_final=StatsModelsLinearRegression(),\n                cv=10)\nest.fit(y, T, X=None, W=X)\n\n&lt;econml.dr._drlearner.LinearDRLearner at 0x7f2b3c301cd0&gt;\n\n\n\npoint = est.const_marginal_effect(None)\nlb, ub = est.const_marginal_effect_interval(None, alpha=0.05)\ndisplay(lb,point,ub)\n\narray([[-0.03922896]])\n\n\narray([[0.12089912]])\n\n\narray([[0.28102719]])"
+    "text": "Example: simulation\n\nfrom econml.dr import DRLearner, LinearDRLearner, SparseLinearDRLearner\nfrom econml.sklearn_extensions.linear_model import StatsModelsLinearRegression\nfrom sklearn.ensemble import GradientBoostingRegressor, GradientBoostingClassifier\nfrom sklearn.linear_model import LassoCV, LogisticRegressionCV, ElasticNetCV\nfrom sklearn.preprocessing import PolynomialFeatures#\n\nest = LinearDRLearner(featurizer=PolynomialFeatures(degree=20, include_bias=False),\n                model_regression=LassoCV(),\n                model_propensity=LogisticRegressionCV(),\n                #model_final=StatsModelsLinearRegression(),\n                cv=10)\nest.fit(y, T, X=None, W=X)\n\n&lt;econml.dr._drlearner.LinearDRLearner at 0x7fb31a3f81d0&gt;\n\n\n\npoint = est.const_marginal_effect(None)\nlb, ub = est.const_marginal_effect_interval(None, alpha=0.05)\nprint(lb,point,ub)\n\n[[-0.03922896]] [[0.12089912]] [[0.28102719]]"
   },
   {
     "objectID": "matching.html#national-study-of-learning-mindsets",
     "href": "matching.html#national-study-of-learning-mindsets",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "National Study of Learning Mindsets",
     "text": "National Study of Learning Mindsets\n\nOriginal study by Yeager et al. (2019)\nSynthetic data created by Athey and Wager (2019), downloaded from Facure (2022)"
   },
   {
     "objectID": "matching.html#data",
     "href": "matching.html#data",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Data",
-    "text": "Data\n\n\nimports\nimport pandas as pd\nimport numpy as np\nfrom matplotlib import style\nfrom matplotlib import pyplot as plt\nimport seaborn as sns\nimport statsmodels.formula.api as smf\nfrom causalinference import CausalModel\nstyle.use(\"fivethirtyeight\")\npd.set_option(\"display.max_columns\", 20)\ndatadir=\"/home/paul/526/python-causality-handbook/causal-inference-for-the-brave-and-true/data\"\n\n\n\ndata = pd.read_csv(datadir+\"/learning_mindset.csv\")\ndata.sample(5, random_state=431)\n\n\n\n\n\n\n\n\nschoolid\nintervention\nachievement_score\nsuccess_expect\nethnicity\ngender\nfrst_in_family\nschool_urbanicity\nschool_mindset\nschool_achievement\nschool_ethnic_minority\nschool_poverty\nschool_size\n\n\n\n\n9366\n9\n0\n1.137192\n6\n1\n1\n1\n4\n1.324323\n-1.311438\n1.930281\n0.281143\n0.362031\n\n\n7810\n27\n0\n-0.554268\n5\n2\n1\n1\n1\n0.240267\n-0.785287\n0.611807\n0.612568\n-0.116284\n\n\n7532\n29\n0\n-0.462576\n6\n1\n1\n1\n1\n-0.373087\n0.113096\n-0.833417\n-1.924778\n-1.147314\n\n\n10381\n1\n0\n-0.402644\n5\n2\n2\n1\n3\n1.185986\n-1.129889\n1.009875\n1.005063\n-1.174702\n\n\n1244\n57\n1\n1.528680\n6\n4\n1\n1\n2\n0.097162\n-0.292353\n-1.030865\n-0.813799\n0.184716"
+    "text": "Data\n\n\nimports\nimport pandas as pd\nimport numpy as np\nfrom matplotlib import style\nfrom matplotlib import pyplot as plt\nimport seaborn as sns\nimport statsmodels.formula.api as smf\nfrom causalinference import CausalModel\nstyle.use(\"fivethirtyeight\")\npd.set_option(\"display.max_columns\", 20)\ndatadir=\"./data\"\n\n\n\ndata = pd.read_csv(datadir+\"/learning_mindset.csv\")\ndata.sample(5, random_state=431)\n\n\n\n\n\n\n\n\nschoolid\nintervention\nachievement_score\nsuccess_expect\nethnicity\ngender\nfrst_in_family\nschool_urbanicity\nschool_mindset\nschool_achievement\nschool_ethnic_minority\nschool_poverty\nschool_size\n\n\n\n\n9366\n9\n0\n1.137192\n6\n1\n1\n1\n4\n1.324323\n-1.311438\n1.930281\n0.281143\n0.362031\n\n\n7810\n27\n0\n-0.554268\n5\n2\n1\n1\n1\n0.240267\n-0.785287\n0.611807\n0.612568\n-0.116284\n\n\n7532\n29\n0\n-0.462576\n6\n1\n1\n1\n1\n-0.373087\n0.113096\n-0.833417\n-1.924778\n-1.147314\n\n\n10381\n1\n0\n-0.402644\n5\n2\n2\n1\n3\n1.185986\n-1.129889\n1.009875\n1.005063\n-1.174702\n\n\n1244\n57\n1\n1.528680\n6\n4\n1\n1\n2\n0.097162\n-0.292353\n-1.030865\n-0.813799\n0.184716"
   },
   {
     "objectID": "matching.html#evidence-of-confounding",
     "href": "matching.html#evidence-of-confounding",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Evidence of Confounding",
     "text": "Evidence of Confounding\n\n\nCode\ndef std_error(x):\n    return np.std(x, ddof=1) / np.sqrt(len(x))\n\ngrouped = data.groupby('success_expect')['intervention'].agg(['mean', std_error])\ngrouped = grouped.reset_index()\n\nfig, ax = plt.subplots()\nplt.errorbar(grouped['success_expect'],grouped['mean'],yerr=1.96*grouped['std_error'],fmt=\"o\")\nax.set_xlabel('student expectation of success')\nax.set_ylabel('P(treatment)')\nplt.show()"
   },
   {
     "objectID": "matching.html#unadjusted-estimate-of-ate",
     "href": "matching.html#unadjusted-estimate-of-ate",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Unadjusted estimate of ATE",
     "text": "Unadjusted estimate of ATE\n\nprint(smf.ols(\"achievement_score ~ intervention\", data=data).fit().summary().tables[1])\n\n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nIntercept       -0.1538      0.012    -13.201      0.000      -0.177      -0.131\nintervention     0.4723      0.020     23.133      0.000       0.432       0.512\n================================================================================"
   },
   {
     "objectID": "matching.html#regression-estimate-of-ate",
     "href": "matching.html#regression-estimate-of-ate",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Regression estimate of ATE",
     "text": "Regression estimate of ATE\n\nols = smf.ols(\"achievement_score ~ intervention + success_expect + ethnicity + gender + frst_in_family + school_urbanicity + school_mindset + school_achievement + school_ethnic_minority + school_poverty + school_size\",data=data).fit()\nprint(ols.summary().tables[1])\n\n==========================================================================================\n                             coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------------------\nIntercept                 -1.7786      0.056    -31.880      0.000      -1.888      -1.669\nintervention               0.3964      0.018     22.192      0.000       0.361       0.431\nsuccess_expect             0.3746      0.008     49.514      0.000       0.360       0.389\nethnicity                  0.0043      0.002      2.049      0.040       0.000       0.008\ngender                    -0.2684      0.017    -16.060      0.000      -0.301      -0.236\nfrst_in_family            -0.1310      0.018     -7.248      0.000      -0.166      -0.096\nschool_urbanicity          0.0573      0.007      8.240      0.000       0.044       0.071\nschool_mindset            -0.1484      0.011    -13.083      0.000      -0.171      -0.126\nschool_achievement        -0.0253      0.013     -1.902      0.057      -0.051       0.001\nschool_ethnic_minority     0.1197      0.011     11.178      0.000       0.099       0.141\nschool_poverty            -0.0154      0.011     -1.466      0.143      -0.036       0.005\nschool_size               -0.0467      0.011     -4.326      0.000      -0.068      -0.026\n=========================================================================================="
   },
   {
     "objectID": "matching.html#regression-estimate-of-ate-weights",
     "href": "matching.html#regression-estimate-of-ate-weights",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Regression estimate of ATE: weights",
     "text": "Regression estimate of ATE: weights\n\nlpm = smf.ols(\"intervention ~ success_expect + ethnicity + gender + frst_in_family + school_urbanicity + school_mindset + school_achievement + school_ethnic_minority + school_poverty + school_size\",data=data).fit()\nw = lpm.resid / np.var(lpm.resid)\nprint(np.mean(data.achievement_score*w))\n\n0.39640236033389553"
   },
   {
     "objectID": "matching.html#propensity-score-matching",
     "href": "matching.html#propensity-score-matching",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Propensity Score Matching",
     "text": "Propensity Score Matching\n\ncateg = [\"ethnicity\", \"gender\", \"school_urbanicity\",\"success_expect\"]\ncont = [\"school_mindset\", \"school_achievement\", \"school_ethnic_minority\", \"school_poverty\", \"school_size\"]\n\ndata_with_categ = pd.concat([\n    data.drop(columns=categ), # dataset without the categorical features\n    pd.get_dummies(data[categ], columns=categ, drop_first=False)# categorical features converted to dummies\n], axis=1)\n\nprint(data_with_categ.shape)\nT = 'intervention'\nY = 'achievement_score'\nX = data_with_categ.columns.drop(['schoolid', T, Y])\n\n(10391, 38)"
   },
   {
     "objectID": "matching.html#inverse-propensity-weighting",
     "href": "matching.html#inverse-propensity-weighting",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Inverse propensity weighting",
     "text": "Inverse propensity weighting\n\nEstimator \\[\n\\widehat{ATE}^{IPW} = \\frac{1}{n} \\sum_{i=1}^n \\frac{Y_iT_i}{\\hat{e}(X_i)} - \\frac{Y_i(1-T_i)}{1-\\hat{e}(X_i)}\n\\] where \\(\\hat{e}(X)\\) is some flexible estimator for \\(P(T=1|X)\\)\nDownside:\n\nDifficult statistical properties — choice of tuning parameters, strong assumptions needed"
   },
   {
     "objectID": "matching.html#doubly-robust",
     "href": "matching.html#doubly-robust",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Doubly Robust",
     "text": "Doubly Robust\n\nfrom sklearn.ensemble import GradientBoostingRegressor, GradientBoostingClassifier\nfrom sklearn.linear_model import LassoCV, LogisticRegressionCV, ElasticNetCV\nfrom sklearn.preprocessing import PolynomialFeatures\n\ndef robustate(T,Y,X,psmodel=LogisticRegression(),ymodel=LassoCV()):\n    pfit = psmodel.fit(X,T)\n    ps = pfit.predict_proba(X)[:,1]\n    ey1fit = ymodel.fit(X[T==1],Y[T==1])\n    ey0fit = sklearn.base.clone(ymodel).fit(X[T==0],Y[T==0])\n    ey1 = ey1fit.predict(X)\n    ey0 = ey0fit.predict(X)\n    ate_terms = ey1 - ey0 + T*(Y- ey1)/ps - (1-T)*(Y-ey0)/(1-ps)\n    ate = np.mean(ate_terms)\n    ate_se = np.sqrt(np.var(ate_terms)/len(ate_terms))\n    return(ate, ate_se, ps, ey1,ey0)\n\nate,se,ps,ey1,ey0 = robustate(data_with_categ[T],data_with_categ[Y],data_with_categ[X])\nprint(ate-1.96*se, ate, ate+1.96*se)\n\n0.3483779363790256 0.3819481843351684 0.41551843229131125"
   },
   {
     "objectID": "matching.html#doubly-robust-1",
     "href": "matching.html#doubly-robust-1",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Doubly Robust",
-    "text": "Doubly Robust\n\nbetter to use the econml package\n\n\nfrom econml.dr import DRLearner, LinearDRLearner, SparseLinearDRLearner\nfrom econml.sklearn_extensions.linear_model import StatsModelsLinearRegression\n\nest = LinearDRLearner(#featurizer=PolynomialFeatures(degree=20, include_bias=False),\n                model_regression=LassoCV(),\n                model_propensity=LogisticRegressionCV(),\n                cv=5)\n\nest.fit(data_with_categ[Y], data_with_categ[T], X=None, W=data_with_categ[X])\npoint = est.const_marginal_effect(None)\nlb, ub = est.const_marginal_effect_interval(None, alpha=0.05)\nprint(lb,point,ub)\n\n[[0.35515763]] [[0.38856831]] [[0.42197899]]"
+    "text": "Doubly Robust\n\nbetter to use the econml package\n\n\nfrom econml.dr import DRLearner, LinearDRLearner, SparseLinearDRLearner\nfrom econml.sklearn_extensions.linear_model import StatsModelsLinearRegression\n\nest = LinearDRLearner(#featurizer=PolynomialFeatures(degree=2, include_bias=False),\n                model_regression=LassoCV(),\n                model_propensity=LogisticRegressionCV(),\n                cv=5)\n\nest.fit(data_with_categ[Y], data_with_categ[T], X=None, W=data_with_categ[X])\npoint = est.const_marginal_effect(None)\nlb, ub = est.const_marginal_effect_interval(None, alpha=0.05)\nprint(lb,point,ub)\n\n[[0.35515763]] [[0.38856831]] [[0.42197899]]"
   },
   {
     "objectID": "matching.html#propensity-score-1",
     "href": "matching.html#propensity-score-1",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Propensity Score",
     "text": "Propensity Score\n\nso \\[\nATE = \\Er\\left[ \\frac{Y T}{e(X)} -  \\frac{Y(1-T)}{1-e(X)}\\right] = \\Er\\left[ Y \\frac{T - e(X)}{e(X)(1-e(X))} \\right]\n\\]"
   },
   {
     "objectID": "matching.html#software-1",
     "href": "matching.html#software-1",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Software",
     "text": "Software\n\nOther packages:\n\ncausalinference has a double robust estimator, but it estimates \\(\\hat{E}[Y|T,X]\\) via linear regression and \\(\\hat{e}(X)\\) via logit (maybe probit, not sure)\n\ncan make nonparametric by adding e.g. powers of \\(x\\) to \\(X\\), but need to manage manually\n\nzEpid is similiar to causalinference, but has a formula interface, so slightly easier to make model more flexible"
   },
   {
     "objectID": "matching.html#unadjusted-estimate-of-ate-1",
     "href": "matching.html#unadjusted-estimate-of-ate-1",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Unadjusted estimate of ATE",
     "text": "Unadjusted estimate of ATE\n\n\nCode\nfig,ax=plt.subplots()\nplt.hist(data.query(\"intervention==0\")[\"achievement_score\"], bins=20, alpha=0.3, color=\"C2\")\nplt.hist(data.query(\"intervention==1\")[\"achievement_score\"], bins=20, alpha=0.3, color=\"C3\")\nplt.vlines(-0.1538, 0, 300, label=\"Untreated\", color=\"C2\")\nplt.vlines(-0.1538+0.4723, 0, 300, label=\"Treated\", color=\"C3\")\nax.set_xlabel(\"Achievement Score\")\nax.set_ylabel(\"N\")\nplt.legend()\nplt.show();"
   },
   {
     "objectID": "matching.html#regression-estimate-of-ate-weights-1",
     "href": "matching.html#regression-estimate-of-ate-weights-1",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Regression estimate of ATE: weights",
     "text": "Regression estimate of ATE: weights\n\n\nCode\nfig,ax=plt.subplots()\nplt.hist(w[data.intervention==0], bins=20, alpha=0.3, color=\"C2\", label=\"Untreated\")\nplt.hist(w[data.intervention==1], bins=20, alpha=0.3, color=\"C3\", label=\"Treated\")\nax.set_xlabel(\"w\")\nax.set_ylabel(\"N\")\nplt.legend()\nplt.show();"
   },
   {
     "objectID": "matching.html#propensity-score-matching-1",
     "href": "matching.html#propensity-score-matching-1",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Propensity Score Matching",
     "text": "Propensity Score Matching\n\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.neighbors import KNeighborsRegressor\nimport sklearn\n\ndef propensitymatching(T,Y,X,psmodel=LogisticRegression(),neighbormodel=KNeighborsRegressor(n_neighbors=1,algorithm='auto',weights='uniform')):\n    pfit = psmodel.fit(X,T)\n    ps = pfit.predict_proba(X)[:,1]\n    ey1 = neighbormodel.fit(ps[T==1].reshape(-1,1),Y[T==1])\n    ey0 = sklearn.base.clone(neighbormodel).fit(ps[T==0].reshape(-1,1),Y[T==0])\n    tex = ey1.predict(ps.reshape(-1,1)) - ey0.predict(ps.reshape(-1,1))\n    ate = np.mean(tex)\n    return(ate, tex,ps)\n\nate,tex,ps=propensitymatching(data_with_categ[T],data_with_categ[Y],data_with_categ[X])\nprint(ate)\n\n0.40585790392606436"
   },
   {
     "objectID": "matching.html#propensity-score-matching-2",
     "href": "matching.html#propensity-score-matching-2",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Propensity Score Matching",
     "text": "Propensity Score Matching\n\n\nCode\nfig, ax = plt.subplots(2,1)\ntreat = data.intervention\nax[0].scatter(ps[treat==0],tex[treat==0],color=\"C2\")\nax[0].scatter(ps[treat==1],tex[treat==1],color=\"C3\")\nax[1].hist(ps[treat==0],bins=20,color=\"C2\",label=\"Untreated\")\nax[1].hist(ps[treat==1],bins=20,color=\"C3\",label=\"Treated\")\nax[1].set_xlabel(\"P(Treatment)\")\nax[1].set_ylabel(\"N\")\nax[0].set_ylabel(\"E[Y|T=1,P(X)] - E[Y|T=0,P(X)]\")\nplt.legend()\nplt.show()"
   },
   {
     "objectID": "matching.html#inverse-propensity-weighting-1",
     "href": "matching.html#inverse-propensity-weighting-1",
-    "title": "ECON526: Quantitative Economics with Data Science Applications",
+    "title": "Matching",
     "section": "Inverse Propensity Weighting",
     "text": "Inverse Propensity Weighting\n\ndef ipw(T,Y,X,psmodel=LogisticRegression()):\n    pfit = psmodel.fit(X,T)\n    ps = pfit.predict_proba(X)[:,1]\n    ate=np.mean(Y*(T - ps)/(ps*(1-ps)))\n    return(ate,ps)\n\nate,ps = ipw(data_with_categ[T],data_with_categ[Y],data_with_categ[X])\nprint(ate)\n\n0.3836399175277028"
   }
