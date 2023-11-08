@@ -38,3 +38,5 @@ The objective of the final project is to analyze the causal effect of some polic
 - Similarly, there are no specific formatting requirements (e.g. double-spaced, APA style, etc.), but the report should be well-formatted and easy to read.
 
 - The first deadline is November 27, when you should submit a first draft of the code and report. You may make changes to the code and report until December 15.
+
+- You are free to use data from previously published studies. However, all sources should be cited. Further, you must explain what you do that is new or different from the previous work.
