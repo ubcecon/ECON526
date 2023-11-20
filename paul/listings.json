@@ -2,6 +2,7 @@
   {
     "listing": "/feed.html",
     "items": [
+      "/did.html",
       "/index.html",
       "/matching.html"
     ]
