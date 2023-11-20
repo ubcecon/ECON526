@@ -7,8 +7,8 @@ This course will have a combination of coding, theory, and development of mathem
 
 [Link to Lecture Slides](https://ubcecon.github.io/ECON526/lectures/index.html)
 
-and 
-[Paul's HTML Slides](https://ubcecon.github.io/ECON526/paul/), [source](https://ubcecon.github.io/ECON526/paul/)
+and
+[Paul's HTML Slides](https://ubcecon.github.io/ECON526/paul/), [source](https://github.com/ubcecon/526)
 
 
 # Course materials
@@ -62,7 +62,7 @@ This lecture begins assuming you have completed the math/programming bootcamp fo
 
 Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/lectures/index.html) and
 
-[Paul's HTML Slides](https://ubcecon.github.io/ECON526/paul/), [source](https://ubcecon.github.io/ECON526/paul/)
+[Paul's HTML Slides](https://ubcecon.github.io/ECON526/paul/), [source](https://github.com/ubcecon/526)
 
 ### Jesse
 
@@ -196,17 +196,17 @@ Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/le
 
 ### Paul
 
-[HTML Slides](https://ubcecon.github.io/ECON526/paul/), [source](https://ubcecon.github.io/ECON526/paul/)
+[HTML Slides](https://ubcecon.github.io/ECON526/paul/), [source](https://github.com/ubcecon/526)
 
--  **November 6**: Matching
+-  **November 6**: [Matching](https://ubcecon.github.io/ECON526/paul/matching.html)
 -  **November 8**
     - **IN CLASS MIDTERM #2**
 -  **November 13 (Midterm Break)**
 -  **November 15 (Midterm Break)**
--  **November 20**:  Difference in Differences, Panel Data and Fixed Effects
+-  **November 20**:  Finish [Matching](https://ubcecon.github.io/ECON526/paul/matching.html), start [Difference in Differences](https://ubcecon.github.io/ECON526/paul/did.html)
     - https://matheusfacure.github.io/python-causality-handbook/13-Difference-in-Differences.html
+-  **November 22**: [Panel Data and Fixed Effects](https://ubcecon.github.io/ECON526/paul/matching.html), [The Difference in Differences Saga](https://ubcecon.github.io/ECON526/paul/moredid.html)
     - https://matheusfacure.github.io/python-causality-handbook/14-Panel-Data-and-Fixed-Effects.html
--  **November 22**: The Difference in Differences Saga
     - https://matheusfacure.github.io/python-causality-handbook/24-The-Diff-in-Diff-Saga.html
 -  **November 27**: Synthetic Control
     - https://matheusfacure.github.io/python-causality-handbook/15-Synthetic-Control.html
