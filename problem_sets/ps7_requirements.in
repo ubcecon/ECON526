@@ -1,0 +1,11 @@
+jupyter-cache
+numpy
+pandas
+statsmodels
+seaborn
+matplotlib
+scikit-learn
+econml
+gr
+ipython
+ipykernel
