@@ -4,7 +4,7 @@
     "href": "feed.html",
     "title": "Slides",
     "section": "",
-    "text": "Difference in Differences\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nECON 526: Quantitative Economics with Data Science Applications\n\n\n\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nMatching\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\nNo matching items"
+    "text": "Difference in Differences II\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nECON 526: Quantitative Economics with Data Science Applications\n\n\n\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nFixed Effects\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nIntroduction to Difference in Differences\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nMatching\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -53,7 +53,7 @@
     "href": "matching.html#why-not-regression-4",
     "title": "Matching",
     "section": "Why not regression?",
-    "text": "Why not regression?\n\nTX = np.hstack((T.reshape(len(T),1),X))\nabhat = np.linalg.solve(TX.T @ TX, TX.T @ y)\nahat = abhat[0]\ndisplay(ahat)\n\n-0.06414016921951447\n\n\n\nnp.mean(y1-y0)\n\n0.22383059765273303\n\n\n\nWeights, \\(\\omega(T,X)\\), are not all positive, so the regression estimate can be negative even if \\(\\Er[Y_1 | X] - \\Er[Y_0|X]\\) is positive everywhere"
+    "text": "Why not regression?\n\nTX = np.hstack((T.reshape(len(T),1),X))\nabhat = np.linalg.solve(TX.T @ TX, TX.T @ y)\nahat = abhat[0]\nprint(ahat)\n\n-0.06414016921951447\n\n\n\nnp.mean(y1-y0)\n\n0.22383059765273303\n\n\n\nWeights, \\(\\omega(T,X)\\), are not all positive, so the regression estimate can be negative even if \\(\\Er[Y_1 | X] - \\Er[Y_0|X]\\) is positive everywhere"
   },
   {
     "objectID": "matching.html#why-not-regression-5",
@@ -151,14 +151,14 @@
     "href": "matching.html#example-simulation",
     "title": "Matching",
     "section": "Example: simulation",
-    "text": "Example: simulation\n\nInfeasible estimator: average of \\(Y_1 - Y_0\\)\n\n\nse = np.sqrt(np.var(y1-y0)/len(y1))\nate = np.mean(y1-y0)\ndisplay(ate-1.96*se, ate, ate+1.96*se)\n\n0.10010844404085255\n\n\n0.22383059765273303\n\n\n0.3475527512646135"
+    "text": "Example: simulation\n\nInfeasible estimator: average of \\(Y_1 - Y_0\\)\n\n\nse = np.sqrt(np.var(y1-y0)/len(y1))\nate = np.mean(y1-y0)\nprint(ate-1.96*se, ate, ate+1.96*se)\n\n0.10010844404085255 0.22383059765273303 0.3475527512646135"
   },
   {
     "objectID": "matching.html#example-simulation-1",
     "href": "matching.html#example-simulation-1",
     "title": "Matching",
     "section": "Example: simulation",
-    "text": "Example: simulation\n\nfrom econml.dr import DRLearner, LinearDRLearner, SparseLinearDRLearner\nfrom econml.sklearn_extensions.linear_model import StatsModelsLinearRegression\nfrom sklearn.ensemble import GradientBoostingRegressor, GradientBoostingClassifier\nfrom sklearn.linear_model import LassoCV, LogisticRegressionCV, ElasticNetCV\nfrom sklearn.preprocessing import PolynomialFeatures#\n\nest = LinearDRLearner(featurizer=PolynomialFeatures(degree=20, include_bias=False),\n                model_regression=LassoCV(),\n                model_propensity=LogisticRegressionCV(),\n                #model_final=StatsModelsLinearRegression(),\n                cv=10)\nest.fit(y, T, X=None, W=X)\n\n&lt;econml.dr._drlearner.LinearDRLearner at 0x7f76dda00090&gt;\n\n\n\npoint = est.const_marginal_effect(None)\nlb, ub = est.const_marginal_effect_interval(None, alpha=0.05)\nprint(lb,point,ub)\n\n[[-0.03922896]] [[0.12089912]] [[0.28102719]]"
+    "text": "Example: simulation\n\nfrom econml.dr import DRLearner, LinearDRLearner, SparseLinearDRLearner\nfrom econml.sklearn_extensions.linear_model import StatsModelsLinearRegression\nfrom sklearn.ensemble import GradientBoostingRegressor, GradientBoostingClassifier\nfrom sklearn.linear_model import LassoCV, LogisticRegressionCV, ElasticNetCV\nfrom sklearn.preprocessing import PolynomialFeatures#\n\nest = LinearDRLearner(featurizer=PolynomialFeatures(degree=20, include_bias=False),\n                model_regression=LassoCV(),\n                model_propensity=LogisticRegressionCV(),\n                #model_final=StatsModelsLinearRegression(),\n                cv=10)\nest.fit(y, T, X=None, W=X)\n\n&lt;econml.dr._drlearner.LinearDRLearner at 0x7f4d353b5250&gt;\n\n\n\npoint = est.const_marginal_effect(None)\nlb, ub = est.const_marginal_effect_interval(None, alpha=0.05)\nprint(lb,point,ub)\n\n[[-0.03922896]] [[0.12089912]] [[0.28102719]]"
   },
   {
     "objectID": "matching.html#national-study-of-learning-mindsets",
@@ -228,7 +228,7 @@
     "href": "matching.html#doubly-robust-1",
     "title": "Matching",
     "section": "Doubly Robust",
-    "text": "Doubly Robust\n\nbetter to use the econml package\n\n\nfrom econml.dr import DRLearner, LinearDRLearner, SparseLinearDRLearner\nfrom econml.sklearn_extensions.linear_model import StatsModelsLinearRegression\n\nest = LinearDRLearner(#featurizer=PolynomialFeatures(degree=2, include_bias=False),\n                model_regression=LassoCV(),\n                model_propensity=LogisticRegressionCV(),\n                cv=5)\n\nest.fit(data_with_categ[Y], data_with_categ[T], X=None, W=data_with_categ[X])\npoint = est.const_marginal_effect(None)\nlb, ub = est.const_marginal_effect_interval(None, alpha=0.05)\nprint(lb,point,ub)\n\n[[0.35515763]] [[0.38856831]] [[0.42197899]]"
+    "text": "Doubly Robust\n\nbetter to use the econml package\n\n\nfrom econml.dr import DRLearner, LinearDRLearner, SparseLinearDRLearner\n\nest = LinearDRLearner(#featurizer=PolynomialFeatures(degree=2, include_bias=False),\n                model_regression=LassoCV(),\n                model_propensity=LogisticRegressionCV(),\n                cv=5)\n\nest.fit(data_with_categ[Y], data_with_categ[T], X=None, W=data_with_categ[X])\npoint = est.const_marginal_effect(None)\nlb, ub = est.const_marginal_effect_interval(None, alpha=0.05)\nprint(lb,point,ub)\n\n[[0.35515763]] [[0.38856831]] [[0.42197899]]"
   },
   {
     "objectID": "matching.html#propensity-score-1",
@@ -282,92 +282,337 @@
   {
     "objectID": "did.html#introduction-1",
     "href": "did.html#introduction-1",
-    "title": "Difference in Differences",
+    "title": "Introduction to Difference in Differences",
     "section": "Introduction",
     "text": "Introduction\n\nHave some policy applied to some observations but not others, and observe outcome before and after policy\nIdea: compare outcome before and after policy in treated and untreated group\nChange in outcome in treated group reflects both effect of policy and time trend, change in untreated group captures time trend"
   },
   {
     "objectID": "did.html#example-impact-of-billboards",
     "href": "did.html#example-impact-of-billboards",
-    "title": "Difference in Differences",
+    "title": "Introduction to Difference in Differences",
     "section": "Example: Impact of Billboards",
     "text": "Example: Impact of Billboards\n\nFrom Facure (2022) chapter 13\nBank placed billboards advertising savings accounts in Porto Alegre in July\nData on deposits in May and July in Porto Alegre and Florianopolis"
   },
   {
     "objectID": "did.html#example-impact-of-billboards-1",
     "href": "did.html#example-impact-of-billboards-1",
-    "title": "Difference in Differences",
+    "title": "Introduction to Difference in Differences",
     "section": "Example: Impact of Billboards",
     "text": "Example: Impact of Billboards\n\n\nCode\nimport warnings\nwarnings.filterwarnings('ignore')\n\nimport pandas as pd\nimport numpy as np\nfrom matplotlib import style\nfrom matplotlib import pyplot as plt\nimport seaborn as sns\nimport statsmodels.formula.api as smf\n\ndatadir=\"./data\"\n\n\n\ndata = pd.read_csv(datadir + \"/billboard_impact.csv\")\ndata.head()\n\n\n\n\n\n\n\n\ndeposits\npoa\njul\n\n\n\n\n0\n42\n1\n0\n\n\n1\n0\n1\n0\n\n\n2\n52\n1\n0\n\n\n3\n119\n1\n0\n\n\n4\n21\n1\n0"
   },
   {
     "objectID": "did.html#means-and-differences",
     "href": "did.html#means-and-differences",
-    "title": "Difference in Differences",
+    "title": "Introduction to Difference in Differences",
     "section": "Means and Differences",
     "text": "Means and Differences\n\ntbl = data.groupby(['jul','poa']).mean().unstack()\ntbl\n\n\n\n\n\n\n\n\ndeposits\n\n\npoa\n0\n1\n\n\njul\n\n\n\n\n\n\n0\n171.642308\n46.01600\n\n\n1\n206.165500\n87.06375\n\n\n\n\n\n\n\n\ntbl.diff(axis=0).iloc[1,:]\n\n          poa\ndeposits  0      34.523192\n          1      41.047750\nName: 1, dtype: float64\n\n\n\ntbl.diff(axis=1).iloc[:,1]\n\njul\n0   -125.626308\n1   -119.101750\nName: (deposits, 1), dtype: float64\n\n\n\ntbl.diff(axis=0).diff(axis=1).iloc[1,1]\n\n6.524557692307688"
   },
   {
     "objectID": "did.html#setup",
     "href": "did.html#setup",
-    "title": "Difference in Differences",
+    "title": "Introduction to Difference in Differences",
     "section": "Setup",
     "text": "Setup\n\nTwo periods, binary treatment in second period\nPotential outcomes \\(\\{y_{it}(0),y_{it}(1)\\}_{t=0}^1\\) for \\(i=1,...,N\\)\nTreatment \\(D_{it} \\in \\{0,1\\}\\),\n\n\\(D_{i0} = 0\\) \\(\\forall i\\)\n\\(D_{i1} = 1\\) for some, \\(0\\) for others\n\nObserve \\(y_{it} = y_{it}(0)(1-D_{it}) + D_{it} y_{it}(1)\\)"
   },
   {
     "objectID": "did.html#identification",
     "href": "did.html#identification",
-    "title": "Difference in Differences",
+    "title": "Introduction to Difference in Differences",
     "section": "Identification",
     "text": "Identification\n\nAverage treatment effect on the treated: \\[\n\\begin{align*}\nATT & = \\Er[y_{i1}(1) - \\color{red}{y_{i1}(0)} | D_{i1} = 1] \\\\\n& = \\Er[y_{i1}(1) - y_{i0}(0) | D_{i1} = 1] - \\Er[\\color{red}{y_{i1}(0)} - y_{i0}(0) | D_{i1}=1] \\\\\n& \\text{ assume } \\Er[\\color{red}{y_{i1}(0)} - y_{i0}(0) | D_{i1}=1] =  \\Er[y_{i1}(0) - y_{i0}(0) | D_{i1}=0] \\\\\n& = \\Er[y_{i1}(1) - y_{i0}(0) | D_{i1} = 1] - \\Er[y_{i1}(0) - y_{i0}(0) | D_{i1}=0] \\\\\n& = \\Er[y_{i1} - y_{i0} | D_{i1}=1, D_{i0}=0] - \\Er[y_{i1} - y_{i0} | D_{i1}=0, D_{i0}=0]\n\\end{align*}\n\\]"
   },
   {
     "objectID": "did.html#important-assumptions",
     "href": "did.html#important-assumptions",
-    "title": "Difference in Differences",
+    "title": "Introduction to Difference in Differences",
     "section": "Important Assumptions",
     "text": "Important Assumptions\n\nNo anticipation: \\(D_{i1}=1\\) does not affect \\(y_{i0}\\)\n\nbuilt into the potential outcomes notation we used, relax by allowing potential outcomes given sequence of \\(D\\), i.e. \\(y_{it}(D_{i0},D_{i1})\\)\n\nParallel trends: \\(\\Er[\\color{red}{y_{i1}(0)} - y_{i0}(0) |D_{i1}=1,D_{i0}=0] = \\Er[y_{i1}(0) - y_{i0}(0) | D_{i1}=0], D_{i0}=0]\\)\n\nnot invariant to tranformations of \\(y\\)"
   },
   {
     "objectID": "did.html#estimation",
     "href": "did.html#estimation",
-    "title": "Difference in Differences",
+    "title": "Introduction to Difference in Differences",
     "section": "Estimation",
     "text": "Estimation\n\n\nPlugin: \\[\n\\widehat{ATT} = \\frac{ \\sum_{i=1}^n (y_{i1} - y_{i0})D_{i1}(1-D_{i0})}{\\sum_{i=1}^n D_{i1}(1-D_{i0})} -  \\frac{ \\sum_{i=1}^n (y_{i1} - y_{i0})(1-D_{i1})(1-D_{i0})}{\\sum_{i=1}^n (1-D_{i1})(1-D_{i0})}\n\\]\nRegression: \\[\ny_{it} = \\delta_t + \\alpha 1\\{D_{i1}=1\\} + \\beta D_{it} + \\epsilon_{it}\n\\] then \\(\\hat{\\beta} = \\widehat{ATT}\\)"
   },
   {
     "objectID": "did.html#visualizing-difference-in-differences",
     "href": "did.html#visualizing-difference-in-differences",
-    "title": "Difference in Differences",
+    "title": "Introduction to Difference in Differences",
     "section": "Visualizing Difference in Differences",
     "text": "Visualizing Difference in Differences\n\npoa_before = data.query(\"poa==1 & jul==0\")[\"deposits\"].mean()\npoa_after = data.query(\"poa==1 & jul==1\")[\"deposits\"].mean()\nfl_before = data.query(\"poa==0 & jul==0\")[\"deposits\"].mean()\nfl_after = data.query(\"poa==0 & jul==1\")[\"deposits\"].mean()\nplt.figure(figsize=(10,5))\nplt.plot([\"May\", \"Jul\"], [fl_before, fl_after], label=\"FL\", lw=2)\nplt.plot([\"May\", \"Jul\"], [poa_before, poa_after], label=\"POA\", lw=2)\n\nplt.plot([\"May\", \"Jul\"], [poa_before, poa_before+(fl_after-fl_before)],\n         label=\"Counterfactual\", lw=2, color=\"C2\", ls=\"-.\")\n\nplt.legend();"
   },
   {
     "objectID": "did.html#estimation-via-regression",
     "href": "did.html#estimation-via-regression",
-    "title": "Difference in Differences",
+    "title": "Introduction to Difference in Differences",
     "section": "Estimation via Regression",
     "text": "Estimation via Regression\n\nsmf.ols('deposits ~ poa*jul', data=data).fit().summary().tables[1]\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n[0.025\n0.975]\n\n\nIntercept\n171.6423\n2.363\n72.625\n0.000\n167.009\n176.276\n\n\npoa\n-125.6263\n4.484\n-28.015\n0.000\n-134.418\n-116.835\n\n\njul\n34.5232\n3.036\n11.372\n0.000\n28.571\n40.475\n\n\npoa:jul\n6.5246\n5.729\n1.139\n0.255\n-4.706\n17.755"
   },
   {
     "objectID": "did.html#further-topics",
     "href": "did.html#further-topics",
-    "title": "Difference in Differences",
+    "title": "Introduction to Difference in Differences",
     "section": "Further Topics",
     "text": "Further Topics\n\nMore periods, more groups\nCovariates\nPre-trends"
   },
   {
     "objectID": "did.html#reading",
     "href": "did.html#reading",
-    "title": "Difference in Differences",
+    "title": "Introduction to Difference in Differences",
     "section": "Reading",
     "text": "Reading\n\nChapter 13 of Facure (2022)"
   },
   {
     "objectID": "did.html#references",
     "href": "did.html#references",
-    "title": "Difference in Differences",
+    "title": "Introduction to Difference in Differences",
     "section": "References",
     "text": "References\n\n\n\n\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html."
+  },
+  {
+    "objectID": "fe.html#panel-data",
+    "href": "fe.html#panel-data",
+    "title": "Fixed Effects",
+    "section": "Panel Data",
+    "text": "Panel Data\n\nUnits \\(i=1,..., n\\)\n\nEx: people, firms, cities, countries\n\nTime \\(t=1,..., T\\)\nObserve \\(\\left\\{(y_{it}, X_{it})\\right\\}_{i=1,t=1}^{n,T}\\)"
+  },
+  {
+    "objectID": "fe.html#linear-model",
+    "href": "fe.html#linear-model",
+    "title": "Fixed Effects",
+    "section": "Linear Model",
+    "text": "Linear Model\n\n\nModel \\[\ny_{it} = X_{it}'\\beta + \\overbrace{U_i'\\gamma + \\epsilon_{it}}^{\\text{unobserved}}\n\\]\n\nTime invariant confounders \\(U_i\\)\n\nSubtract individual averages \\[\n\\begin{align*}\ny_{it} - \\bar{y}_i & = (X_{it} - \\bar{X}_i)'\\beta + (\\epsilon_{it} -\n                   \\bar{\\epsilon}_i) \\\\\n\\ddot{y}_{it} & = \\ddot{X}_{it}' \\beta + \\ddot{\\epsilon}_{it}\n\\end{align*}\n\\]\nEquivalent to estimating with individual dummies \\[\ny_{it} = X_{it}'\\beta + \\alpha_i + \\epsilon_{it}\n\\]\n\n\n\n\nEliminates \\(U_i\\) and any time invariant observed \\(X_i\\)"
+  },
+  {
+    "objectID": "fe.html#ols",
+    "href": "fe.html#ols",
+    "title": "Fixed Effects",
+    "section": "OLS",
+    "text": "OLS\n\n\nimports\nimport warnings\nwarnings.filterwarnings('ignore')\n\nimport pandas as pd\nimport numpy as np\nfrom matplotlib import style\nfrom matplotlib import pyplot as plt\nimport statsmodels.formula.api as smf\nstyle.use(\"fivethirtyeight\")\n\n\n1\n\n\nCode\ntoy_panel = pd.DataFrame({\n    \"mkt_costs\":[5,4,3.5,3, 10,9.5,9,8, 4,3,2,1, 8,7,6,4],\n    \"purchase\":[12,9,7.5,7, 9,7,6.5,5, 15,14.5,14,13, 11,9.5,8,5],\n    \"city\":[\"C0\",\"C0\",\"C0\",\"C0\", \"C2\",\"C2\",\"C2\",\"C2\", \"C1\",\"C1\",\"C1\",\"C1\", \"C3\",\"C3\",\"C3\",\"C3\"]\n})\n\nm = smf.ols(\"purchase ~ mkt_costs\", data=toy_panel).fit()\n\nplt.scatter(toy_panel.mkt_costs, toy_panel.purchase)\nplt.plot(toy_panel.mkt_costs, m.fittedvalues, c=\"C5\", label=\"Regression Line\")\nplt.xlabel(\"Marketing Costs (in 1000)\")\nplt.ylabel(\"In-app Purchase (in 1000)\")\nplt.title(\"Simple OLS Model\")\nplt.legend();\n\n\n\n\n\nCode from Facure (2022)"
+  },
+  {
+    "objectID": "fe.html#fixed-effects-within",
+    "href": "fe.html#fixed-effects-within",
+    "title": "Fixed Effects",
+    "section": "Fixed Effects / Within",
+    "text": "Fixed Effects / Within\n1\n\n\nCode\nfe = smf.ols(\"purchase ~ mkt_costs + C(city)\", data=toy_panel).fit()\n\nfe_toy = toy_panel.assign(y_hat = fe.fittedvalues)\n\nplt.scatter(toy_panel.mkt_costs, toy_panel.purchase, c=toy_panel.city)\nfor city in fe_toy[\"city\"].unique():\n    plot_df = fe_toy.query(f\"city=='{city}'\")\n    plt.plot(plot_df.mkt_costs, plot_df.y_hat, c=\"C5\")\n\nplt.title(\"Fixed Effect Model\")\nplt.xlabel(\"Marketing Costs (in 1000)\")\nplt.ylabel(\"In-app Purchase (in 1000)\");\n\n\n\n\n\nCode from Facure (2022)"
+  },
+  {
+    "objectID": "fe.html#large-n-small-t",
+    "href": "fe.html#large-n-small-t",
+    "title": "Fixed Effects",
+    "section": "Large \\(n\\), Small \\(T\\)",
+    "text": "Large \\(n\\), Small \\(T\\)\n\nOften \\(n&gt;&gt;T\\)\nUsual analysis of fixed effects uses asymptotics with \\(n \\to \\infty\\), \\(T\\) fixed\n\nWe will mostly stick to that, but if you have data with \\(n \\approx T\\), other approaches can be better"
+  },
+  {
+    "objectID": "fe.html#strict-exogeneity",
+    "href": "fe.html#strict-exogeneity",
+    "title": "Fixed Effects",
+    "section": "Strict Exogeneity",
+    "text": "Strict Exogeneity\n\nIn fixed effect model \\[\ny_{it} - \\bar{y}_i  = (X_{it} - \\bar{X}_i)'\\beta + (\\epsilon_{it} - \\bar{\\epsilon}_i)\n\\] for \\(\\hat{\\beta}^{FE} \\inprob \\beta\\), need \\(\\Er[(X_{it} - \\bar{X}_i)(\\epsilon_{it} - \\bar{\\epsilon}_i)]=0\\)\nI.e. \\(\\Er[X_{it} \\epsilon_{is}] = 0\\) for all \\(t, s\\)"
+  },
+  {
+    "objectID": "fe.html#strict-exogeneity-1",
+    "href": "fe.html#strict-exogeneity-1",
+    "title": "Fixed Effects",
+    "section": "Strict Exogeneity",
+    "text": "Strict Exogeneity\n\nProblematic with dynamics, e.g.\n\n\\(X_{it}\\) including lagged \\(y_{it-1}\\)\n\\(X_{it}\\) affected by past \\(y\\)\n“Nickell bias”\n\nSee Chen, Chernozhukov, and Fernández-Val (2019) for bias correction under weak exogeneity, \\(\\Er[X_{it} \\epsilon_{is}] = 0\\) for \\(t \\leq s\\)"
+  },
+  {
+    "objectID": "fe.html#standard-errors",
+    "href": "fe.html#standard-errors",
+    "title": "Fixed Effects",
+    "section": "Standard Errors",
+    "text": "Standard Errors\n\nGenerally, good idea to use clustered standard errors, clustered on \\(i\\)\nSee MacKinnon, Nielsen, and Webb (2023) for guide to clustered standard errors"
+  },
+  {
+    "objectID": "fe.html#sources-and-further-reading",
+    "href": "fe.html#sources-and-further-reading",
+    "title": "Fixed Effects",
+    "section": "Sources and Further Reading",
+    "text": "Sources and Further Reading\n\nFacure (2022) chapter 14\nHuntington-Klein (2021) chapter 16"
+  },
+  {
+    "objectID": "fe.html#references",
+    "href": "fe.html#references",
+    "title": "Fixed Effects",
+    "section": "References",
+    "text": "References\n\n\n\n\n\n\nChen, Shuowen, Victor Chernozhukov, and Iván Fernández-Val. 2019. “Mastering Panel Metrics: Causal Impact of Democracy on Growth.” AEA Papers and Proceedings 109 (May): 77–82. https://doi.org/10.1257/pandp.20191071.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/.\n\n\nMacKinnon, James G., Morten Ørregaard Nielsen, and Matthew D. Webb. 2023. “Cluster-Robust Inference: A Guide to Empirical Practice.” Journal of Econometrics 232 (2): 272–99. https://doi.org/https://doi.org/10.1016/j.jeconom.2022.04.001."
+  },
+  {
+    "objectID": "moredid.html#setup",
+    "href": "moredid.html#setup",
+    "title": "Difference in Differences II",
+    "section": "Setup",
+    "text": "Setup\n\nTwo Many periods, binary treatment in second some periods\nPotential outcomes \\(\\{y_{it}(0),y_{it}(1)\\}_{t=1}^T\\) for \\(i=1,...,N\\)\nTreatment \\(D_{it} \\in \\{0,1\\}\\),\n\n\\(D_{i0} = 0\\) \\(\\forall i\\)\n\\(D_{i1} = 1\\) for some, \\(0\\) for others\n\nObserve \\(y_{it} = y_{it}(0)(1-D_{it}) + D_{it} y_{it}(1)\\)"
+  },
+  {
+    "objectID": "moredid.html#identification",
+    "href": "moredid.html#identification",
+    "title": "Difference in Differences II",
+    "section": "Identification",
+    "text": "Identification\n\nSame logic as before, \\[\n\\begin{align*}\nATT_{t,t-s} & = \\Er[y_{it}(1) - \\color{red}{y_{it}(0)} | D_{it} = 1, D_{it-s}=0] \\\\\n& = \\Er[y_{it}(1) - y_{it-s}(0) | D_{it} = 1, D_{it-s}=0] - \\\\\n& \\;\\; -  \\Er[\\color{red}{y_{it}(0)} - y_{t-s}(0) | D_{it}=1, D_{it-s}=0]\n\\end{align*}\n\\]\n\nassume \\(\\Er[\\color{red}{y_{it}(0)} - y_{it-s}(0) | D_{it}=1, D_{it-s}=0] = \\Er[y_{it}(0) - y_{it-s}(0) | D_{it}=0, D_{it-s}=0]\\)\n\n\n\\[\n\\begin{align*}\nATT_{t,t-s}& = \\Er[y_{it} - y_{it-s} | D_{it}=1, D_{it-s}=0] - \\Er[y_{it} - y_{it-s} | D_{it}=0, D_{it-s}=0]\n\\end{align*}\n\\] - Similarly, can identify various other interpretable average treatment effects conditional on being treated at some times and not others"
+  },
+  {
+    "objectID": "moredid.html#estimation",
+    "href": "moredid.html#estimation",
+    "title": "Difference in Differences II",
+    "section": "Estimation",
+    "text": "Estimation\n\nPlugin\nFixed effects? \\[\ny_{it} = \\beta D_{it} + \\alpha_i + \\delta_t + \\epsilon_{it}\n\\] When will \\(\\hat{\\beta}^{FE}\\) consistently estimate some interpretable conditional average of treatment effects?"
+  },
+  {
+    "objectID": "moredid.html#fixed-effects",
+    "href": "moredid.html#fixed-effects",
+    "title": "Difference in Differences II",
+    "section": "Fixed Effects",
+    "text": "Fixed Effects\n\nAs with matching, \\[\n\\begin{align*}\n\\hat{\\beta} = & \\sum_{i=1,t=1}^{n,T} y_{it} \\overbrace{\\frac{\\tilde{D}_{it}}{ \\sum_{i,t} \\tilde{D}_{it}^2 }}^{\\hat{\\omega}_{it}} = \\sum_{i=1,t=1}^{n,T} y_{it}(0) \\hat{\\omega}_{it} + \\sum_{i=1,t=1}^{n,T} D_{it} (y_{it}(1) - y_{it}(0)) \\hat{\\omega}_{it}\n\\end{align*}\n\\] where \\[\n\\begin{align*}\n\\tilde{D}_{it} & = D_{it} - \\frac{1}{n} \\sum_{j=1}^n (D_{jt} - \\frac{1}{T} \\sum_{s=1}^T D_{js}) - \\frac{1}{T} \\sum_{s=1}^T D_{is} \\\\\n& = D_{it} - \\frac{1}{n} \\sum_{j=1}^n D_{jt} - \\frac{1}{T} \\sum_{s=1}^T D_{is} + \\frac{1}{nT} \\sum_{j,s} D_{js}\n\\end{align*}\n\\]\n\n\n\nimports\nimport warnings\nwarnings.filterwarnings('ignore')\n\nimport pandas as pd\nimport numpy as np\nfrom matplotlib import style\nfrom matplotlib import pyplot as plt\nstyle.use(\"fivethirtyeight\")"
+  },
+  {
+    "objectID": "moredid.html#weights",
+    "href": "moredid.html#weights",
+    "title": "Difference in Differences II",
+    "section": "Weights",
+    "text": "Weights\n\n\nCode\ndef assigntreat(n, T, portiontreated):\n    treated = np.zeros((n, T), dtype=bool)\n    for t in range(1, T):\n        treated[:, t] = treated[:, t - 1]\n        if portiontreated[t] &gt; 0:\n            treated[:, t] = np.logical_or(treated[:, t-1], np.random.rand(n) &lt; portiontreated[t])\n    return treated\n\ndef weights(D):\n    D̈ = D - np.mean(D, axis=0) - np.mean(D, axis=1)[:, np.newaxis] + np.mean(D)\n    ω = D̈ / np.sum(D̈**2)\n    return ω\n\nn = 100\nT = 9\npt = np.zeros(T)\npt[T//2 + 1] = 0.5\nD = assigntreat(n, T,pt)\ny = np.random.randn(n, T)\nweighted_sum = np.sum(y * weights(D))\nprint(weighted_sum)\n\n\n-0.21363520721210053\n\n\n\n\nCode\n# check that it matches fixed effect estimate from a package\nfrom linearmodels.panel import PanelOLS\n\ndf = pd.DataFrame({\n    'id': np.repeat(np.arange(1, n + 1), T),\n    't': np.tile(np.arange(1, T + 1), n),\n    'y': y.flatten(),\n    'D': D.flatten()\n})\ndf.set_index(['id', 't'], inplace=True)\nmodel = PanelOLS(df['y'], df[['D']], entity_effects=True, time_effects=True)\nresult = model.fit()\nprint(result)\n\n\n                          PanelOLS Estimation Summary                           \n================================================================================\nDep. Variable:                      y   R-squared:                        0.0032\nEstimator:                   PanelOLS   R-squared (Between):             -0.0250\nNo. Observations:                 900   R-squared (Within):              -0.0019\nDate:                Wed, Nov 22 2023   R-squared (Overall):             -0.0038\nTime:                        10:11:04   Log-likelihood                   -1218.1\nCov. Estimator:            Unadjusted                                           \n                                        F-statistic:                      2.5314\nEntities:                         100   P-value                           0.1120\nAvg Obs:                       9.0000   Distribution:                   F(1,791)\nMin Obs:                       9.0000                                           \nMax Obs:                       9.0000   F-statistic (robust):             2.5314\n                                        P-value                           0.1120\nTime periods:                       9   Distribution:                   F(1,791)\nAvg Obs:                      100.000                                           \nMin Obs:                      100.000                                           \nMax Obs:                      100.000                                           \n                                                                                \n                             Parameter Estimates                              \n==============================================================================\n            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI\n------------------------------------------------------------------------------\nD             -0.2136     0.1343    -1.5910     0.1120     -0.4772      0.0499\n==============================================================================\n\nF-test for Poolability: 0.7553\nP-value: 0.9657\nDistribution: F(107,791)\n\nIncluded effects: Entity, Time"
+  },
+  {
+    "objectID": "moredid.html#weights-with-single-treatment-time",
+    "href": "moredid.html#weights-with-single-treatment-time",
+    "title": "Difference in Differences II",
+    "section": "Weights with Single Treatment Time",
+    "text": "Weights with Single Treatment Time\n\n\nCode\ndef plotD(D,ax):\n    n, T = D.shape\n    ax.set(xlabel='time',ylabel='portiontreated')\n    ax.plot(range(1,T+1),D.mean(axis=0))\n    ax\n\ndef plotweights(D, ax):\n    n, T = D.shape\n    ω = weights(D)\n    groups = np.unique(D, axis=0)\n    ax.set(xlabel='time', ylabel='weight')\n\n    for g in groups:\n        i = np.where(np.all(D == g, axis=1))[0][0]\n        wt = ω[i, :]\n        ax.plot(range(1, T+1), wt, marker='o', label=f'Treated {np.sum(g)} times')\n\n    ax.legend()\n    ax\n\ndef plotwd(D):\n    fig, ax = plt.subplots(2,1)\n    ax[0]=plotD(D,ax[0])\n    ax[1]=plotweights(D,ax[1])\n    plt.show()\n\nplotwd(D)"
+  },
+  {
+    "objectID": "moredid.html#weights-with-early-and-late-treated",
+    "href": "moredid.html#weights-with-early-and-late-treated",
+    "title": "Difference in Differences II",
+    "section": "Weights with Early and Late Treated",
+    "text": "Weights with Early and Late Treated\n\n\nCode\npt = np.zeros(T)\npt[1] = 0.3\npt[T-2] = 0.6\nD = assigntreat(n,T,pt)\nplotwd(D)"
+  },
+  {
+    "objectID": "moredid.html#sign-reversal",
+    "href": "moredid.html#sign-reversal",
+    "title": "Difference in Differences II",
+    "section": "Sign Reversal",
+    "text": "Sign Reversal\n\n\nCode\ndvals = np.unique(D,axis=0)\ndvals.sort()\nATT = np.ones(T)\nATT[0] = 0.0\nATT[T-2:T] = 6.0\n\ndef simulate(n,T,pt,ATT,sigma=0.01):\n    D = assigntreat(n,T,pt)\n    y = np.random.randn(n,T)*sigma + ATT[np.cumsum(D, axis=1)]\n    df = pd.DataFrame({\n        'id': np.repeat(np.arange(1, n + 1), T),\n        't': np.tile(np.arange(1, T + 1), n),\n        'y': y.flatten(),\n        'D': D.flatten()\n    })\n    df.set_index(['id', 't'], inplace=True)\n    return(df)\n\ndf = simulate(n,T,pt,ATT)\nmodel = PanelOLS(df['y'], df[['D']], entity_effects=True, time_effects=True)\nresult = model.fit()\nprint(result)\n\n\n                          PanelOLS Estimation Summary                           \n================================================================================\nDep. Variable:                      y   R-squared:                        0.0301\nEstimator:                   PanelOLS   R-squared (Between):             -0.6710\nNo. Observations:                 900   R-squared (Within):              -0.1571\nDate:                Wed, Nov 22 2023   R-squared (Overall):             -0.3896\nTime:                        10:11:05   Log-likelihood                   -1150.1\nCov. Estimator:            Unadjusted                                           \n                                        F-statistic:                      24.548\nEntities:                         100   P-value                           0.0000\nAvg Obs:                       9.0000   Distribution:                   F(1,791)\nMin Obs:                       9.0000                                           \nMax Obs:                       9.0000   F-statistic (robust):             24.548\n                                        P-value                           0.0000\nTime periods:                       9   Distribution:                   F(1,791)\nAvg Obs:                      100.000                                           \nMin Obs:                      100.000                                           \nMax Obs:                      100.000                                           \n                                                                                \n                             Parameter Estimates                              \n==============================================================================\n            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI\n------------------------------------------------------------------------------\nD             -0.6416     0.1295    -4.9546     0.0000     -0.8958     -0.3874\n==============================================================================\n\nF-test for Poolability: 5.9944\nP-value: 0.0000\nDistribution: F(107,791)\n\nIncluded effects: Entity, Time"
+  },
+  {
+    "objectID": "moredid.html#when-to-worry",
+    "href": "moredid.html#when-to-worry",
+    "title": "Difference in Differences II",
+    "section": "When to worry",
+    "text": "When to worry\n\nIf multiple treatment times and treatment heterogeneity\nEven if weights do not have wrong sign, the fixed effects estimate is hard to interpret\nSame logic applies more generally – not just to time\n\nE.g. if have group effects, some treated units in multiple groups, and \\(E[y(1) - y(0) | group]\\) varies"
+  },
+  {
+    "objectID": "moredid.html#what-to-do",
+    "href": "moredid.html#what-to-do",
+    "title": "Difference in Differences II",
+    "section": "What to Do?",
+    "text": "What to Do?\n\nFollow identification \\[\n\\begin{align*}\nATT_{t,t-s}& = \\Er[y_{it} - y_{it-s} | D_{it}=1, D_{it-s}=0] - \\Er[y_{it} - y_{it-s} | D_{it}=0, D_{it-s}=0]\n\\end{align*}\n\\] and estimate \\[\n\\begin{align*}\n\\widehat{ATT}_{t,t-s} = & \\frac{\\sum_i y_{it} D_{it}(1-D_{it-s})}{\\sum_i D_{it}(1-D_{it-s})} \\\\\n& - \\frac{\\sum_i y_{it} (1-D_{it})(1-D_{it-s})}{\\sum_i (1-D_{it})(1-D_{it-s})}\n\\end{align*}\n\\] and perhaps some average, e.g. (there are other reasonable weighted averages) \\[\n\\sum_{t=1}^T \\frac{\\sum_i D_{it}}{\\sum_{i,s} D_{i,s}} \\frac{1}{t-1} \\sum_{s=1}^{t-1} \\widehat{ATT}_{t,t-s}\n\\]\n\nCode? Inference? Optimal? (could create it, but there’s an easier way)"
+  },
+  {
+    "objectID": "moredid.html#what-to-do-1",
+    "href": "moredid.html#what-to-do-1",
+    "title": "Difference in Differences II",
+    "section": "What to Do?",
+    "text": "What to Do?\n\nUse an appropriate package\n\ndifferences\nsee https://asjadnaqvi.github.io/DiD/ for more options (but none are python)\n\nProblem is possible correlation of \\((y_{it}(1) - y_{it}(0))D_{it}\\) with \\(\\tilde{D}_{it}\\)\n\n\\(\\tilde{D}_{it}\\) is function of \\(t\\) and \\((D_{i1}, ..., D_{iT})\\)\nEstimating separate coefficient for each combination of \\(t\\) and \\((D_{i1}, ..., D_{iT})\\) will eliminate correlation / flexibly model treatment effect heterogeneity"
+  },
+  {
+    "objectID": "moredid.html#what-to-do-2",
+    "href": "moredid.html#what-to-do-2",
+    "title": "Difference in Differences II",
+    "section": "What to Do?",
+    "text": "What to Do?\n\nCohorts = unique sequences of \\((D_{i1}, ..., D_{iT})\\)\n\nIn current simulated example, three cohorts\n\n\\((0, 0, 0, 0, 0, 0, 0, 0, 0)\\)\n\\((0, 0, 0, 0, 0, 0, 0, 1, 1)\\)\n\\((0, 1, 1, 1, 1, 1, 1, 1, 1)\\)"
+  },
+  {
+    "objectID": "moredid.html#regression-with-cohort-interactions",
+    "href": "moredid.html#regression-with-cohort-interactions",
+    "title": "Difference in Differences II",
+    "section": "Regression with Cohort Interactions",
+    "text": "Regression with Cohort Interactions\n\ndef definecohort(df):\n    # convert dummies into categorical\n    n = len(df.index.levels[0])\n    T = len(df.index.levels[1])\n    dmat=np.array(df.sort_index().D)\n    dmat=np.array(df.D).reshape(n,T)\n    cohort=dmat.dot(1 &lt;&lt; np.arange(dmat.shape[-1] - 1, -1, -1))\n    cdf = pd.DataFrame({\"id\":np.array(df.index.levels[0]), \"cohort\":pd.Categorical(cohort)})\n    cdf.set_index(['id'],inplace=True)\n    df=pd.merge(df, cdf, left_index=True, right_index=True)\n    return(df)\n\ndf = definecohort(df)\n\ndef defineinteractions(df):\n    df = df.reset_index()\n    df['dct'] = 'untreated'\n    df['dct'] = df.apply(lambda x: f\"t{x['t']},c{x['cohort']}\" if x['D'] else f\"untreated\", axis=1)\n    return(df.set_index(['id','t']))\n\ndf = defineinteractions(df)\n\nPanelOLS.from_formula(\"y ~ -1 + dct + EntityEffects + TimeEffects\", df).fit()\n\n\nPanelOLS Estimation Summary\n\n\nDep. Variable:\ny\nR-squared:\n0.9999\n\n\nEstimator:\nPanelOLS\nR-squared (Between):\n1.0000\n\n\nNo. Observations:\n900\nR-squared (Within):\n0.9999\n\n\nDate:\nWed, Nov 22 2023\nR-squared (Overall):\n1.0000\n\n\nTime:\n09:38:30\nLog-likelihood\n2946.7\n\n\nCov. Estimator:\nUnadjusted\n\n\n\n\n\n\nF-statistic:\n7.047e+05\n\n\nEntities:\n100\nP-value\n0.0000\n\n\nAvg Obs:\n9.0000\nDistribution:\nF(10,782)\n\n\nMin Obs:\n9.0000\n\n\n\n\nMax Obs:\n9.0000\nF-statistic (robust):\n1.081e+06\n\n\n\n\nP-value\n0.0000\n\n\nTime periods:\n9\nDistribution:\nF(10,782)\n\n\nAvg Obs:\n100.000\n\n\n\n\nMin Obs:\n100.000\n\n\n\n\nMax Obs:\n100.000\n\n\n\n\n\n\n\n\n\n\n\n\nParameter Estimates\n\n\n\nParameter\nStd. Err.\nT-stat\nP-value\nLower CI\nUpper CI\n\n\ndct[T.t2,c255]\n1.0026\n0.0028\n362.81\n0.0000\n0.9971\n1.0080\n\n\ndct[T.t3,c255]\n1.0028\n0.0028\n362.91\n0.0000\n0.9974\n1.0083\n\n\ndct[T.t4,c255]\n0.9988\n0.0028\n361.45\n0.0000\n0.9934\n1.0042\n\n\ndct[T.t5,c255]\n1.0001\n0.0028\n361.93\n0.0000\n0.9947\n1.0055\n\n\ndct[T.t6,c255]\n1.0015\n0.0028\n362.42\n0.0000\n0.9961\n1.0069\n\n\ndct[T.t7,c255]\n0.9988\n0.0028\n361.46\n0.0000\n0.9934\n1.0043\n\n\ndct[T.t8,c255]\n6.0006\n0.0030\n1971.9\n0.0000\n5.9947\n6.0066\n\n\ndct[T.t8,c3]\n0.9962\n0.0024\n413.34\n0.0000\n0.9915\n1.0010\n\n\ndct[T.t9,c255]\n5.9996\n0.0030\n1971.5\n0.0000\n5.9936\n6.0056\n\n\ndct[T.t9,c3]\n0.9988\n0.0024\n414.40\n0.0000\n0.9940\n1.0035\n\n\ndct[T.untreated]\n-0.0001\n0.0007\n-0.1491\n0.8815\n-0.0015\n0.0013\n\n\n\nF-test for Poolability: 0.9022P-value: 0.7452Distribution: F(107,782)Included effects: Entity, Timeid: 0x7fd24f4af910"
+  },
+  {
+    "objectID": "moredid.html#regression-with-cohort-interactions-1",
+    "href": "moredid.html#regression-with-cohort-interactions-1",
+    "title": "Difference in Differences II",
+    "section": "Regression with Cohort Interactions",
+    "text": "Regression with Cohort Interactions\n\nIf just want to assume parallel trends at treatment times, instead of parallel trends everywhere, can estimate \\[\ny_{it} = \\sum_{c=1}^C 1\\{C_i=c\\} \\delta_{c,t} + \\alpha_i + \\epsilon_{it}\n\\]\n\\(\\hat{\\delta}_{c,t} + \\frac{\\sum \\alpha_i 1\\{C_i=c\\}}{\\sum 1\\{C_i = c\\}}\\) consistently estimates \\(\\Er[y_{it} | C_{i} = c]\\)\n\\(\\hat{\\delta}_{c,t} -\\hat{\\delta}_{c,t-s}\\) consistently estimates \\(\\Er[y_{it} - y_{i,t-s}| C_{i} = c]\\)\nIf \\(c\\) treated at \\(t\\), not at \\(t-s\\), and \\(c'\\) not treated at either and assume parallel trends, \\[\n\\hat{\\delta}_{c,t} -\\hat{\\delta}_{c,t-s} - (\\hat{\\delta}_{c',t} -\\hat{\\delta}_{c',t-s}) \\inprob \\Er[y_{it}(1)-y{it}(0)| C_i =c]\n\\]"
+  },
+  {
+    "objectID": "moredid.html#pre-trends-1",
+    "href": "moredid.html#pre-trends-1",
+    "title": "Difference in Differences II",
+    "section": "Pre-trends",
+    "text": "Pre-trends\n\nParallel trends assumption\n\n\\[\n\\Er[\\color{red}{y_{it}(0)} - y_{it-s}(0) | D_{it}=1,  D_{it-s}=0] = \\Er[y_{it}(0) - y_{it-s}(0) | D_{it}=0, D_{it-s}=0]\n\\]\n\nMore plausible if there are parallel pre-trends\n\n\\[\n\\begin{align*}\n& \\Er[y_{it-r}(0) - y_{it-s}(0) | D_{it}=1, D_{it-r}=0,  D_{it-s}=0] = \\\\\n& = \\Er[y_{it-r}(0) - y_{it-s}(0) | D_{it}=0, D_{it-r}=0, D_{it-s}=0]\n\\end{align*}\n\\]\n\nAlways at least plot pre-trends"
+  },
+  {
+    "objectID": "moredid.html#testing-for-pre-trends",
+    "href": "moredid.html#testing-for-pre-trends",
+    "title": "Difference in Differences II",
+    "section": "Testing for Pre-trends",
+    "text": "Testing for Pre-trends\n\nIs it a good idea to test\n\n\\[\n\\begin{align*}\nH_0 : & \\Er[y_{it-r} - y_{it-s} | D_{it}=1, D_{it-r}=0,  D_{it-s}=0] = \\\\\n& = \\Er[y_{it-r} - y_{it-s} | D_{it}=0, D_{it-r}=0, D_{it-s}=0]?\n\\end{align*}\n\\] - Even if not testing formally, we do it informally by plotting"
+  },
+  {
+    "objectID": "moredid.html#testing-for-pre-trends-1",
+    "href": "moredid.html#testing-for-pre-trends-1",
+    "title": "Difference in Differences II",
+    "section": "Testing for Pre-trends",
+    "text": "Testing for Pre-trends\n\nDistribution of \\(\\hat{ATT}\\) conditional on fail to reject parallel pre-trends is not normal\nRoth (2022) : test can have low power, and in plausible violations, \\(\\widehat{ATT}_{3,2}\\) conditional on failing to reject is biased"
+  },
+  {
+    "objectID": "moredid.html#bounds-from-pre-trends",
+    "href": "moredid.html#bounds-from-pre-trends",
+    "title": "Difference in Differences II",
+    "section": "Bounds from Pre-trends",
+    "text": "Bounds from Pre-trends\n\nLet \\(\\Delta\\) be violation of parallel trends \\[\n\\Delta = \\Er[\\color{red}{y_{it}(0)} - y_{it-1}(0) | D_{it}=1,  D_{it-1}=0] - \\Er[y_{it}(0) - y_{it-1}(0) | D_{it}=0, D_{it-1}=0]\n\\]\nAssume \\(\\Delta\\) is bounded by deviation from parallel of pre-trends \\[\n|\\Delta| \\leq M \\max_{r} \\left\\vert \\tau^{1t}_{t-r,t-r-1} - \\tau^{0t}_{t-r,t-r-1} \\right\\vert\n\\] for some chosen \\(M\\)\nSee Rambachan and Roth (2023)"
+  },
+  {
+    "objectID": "moredid.html#doubly-robust-difference-in-differences",
+    "href": "moredid.html#doubly-robust-difference-in-differences",
+    "title": "Difference in Differences II",
+    "section": "Doubly Robust Difference in Differences",
+    "text": "Doubly Robust Difference in Differences\n\nLinear covariates could lead to same problem as with matching\nDoubly robust estimator Sant’Anna and Zhao (2020)\n\ndoubleml package implements it"
+  },
+  {
+    "objectID": "moredid.html#sources-and-further-reading",
+    "href": "moredid.html#sources-and-further-reading",
+    "title": "Difference in Differences II",
+    "section": "Sources and Further Reading",
+    "text": "Sources and Further Reading\n\nFacure (2022, chap. 1)\nHuntington-Klein (2021, chap. 16)\nRecent reviews: Roth et al. (2023), Chaisemartin and D’Haultfœuille (2022)\nEarly work pointing to problems with fixed effects:\n\nLaporte and Windmeijer (2005), Wooldridge (2005)\n\nExplosion of papers written just before 2020, published just after:\n\nBorusyak and Jaravel (2018)\nChaisemartin and D’Haultfœuille (2020)\nCallaway and Sant’Anna (2021)\nGoodman-Bacon (2021)\nSun and Abraham (2021)"
+  },
+  {
+    "objectID": "moredid.html#references",
+    "href": "moredid.html#references",
+    "title": "Difference in Differences II",
+    "section": "References",
+    "text": "References\n\n\n\n\n\n\nBorusyak, Kirill, and Xavier Jaravel. 2018. “Revisiting Event Study Designs.” https://scholar.harvard.edu/files/borusyak/files/borusyak_jaravel_event_studies.pdf.\n\n\nCallaway, Brantly, and Pedro H. C. Sant’Anna. 2021. “Difference-in-Differences with Multiple Time Periods.” Journal of Econometrics 225 (2): 200–230. https://doi.org/https://doi.org/10.1016/j.jeconom.2020.12.001.\n\n\nChaisemartin, Clément de, and Xavier D’Haultfœuille. 2020. “Two-Way Fixed Effects Estimators with Heterogeneous Treatment Effects.” American Economic Review 110 (9): 2964–96. https://doi.org/10.1257/aer.20181169.\n\n\n———. 2022. “Two-way fixed effects and differences-in-differences with heterogeneous treatment effects: a survey.” The Econometrics Journal 26 (3): C1–30. https://doi.org/10.1093/ectj/utac017.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nGoodman-Bacon, Andrew. 2021. “Difference-in-Differences with Variation in Treatment Timing.” Journal of Econometrics 225 (2): 254–77. https://doi.org/https://doi.org/10.1016/j.jeconom.2021.03.014.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/.\n\n\nLaporte, Audrey, and Frank Windmeijer. 2005. “Estimation of Panel Data Models with Binary Indicators When Treatment Effects Are Not Constant over Time.” Economics Letters 88 (3): 389–96. https://doi.org/https://doi.org/10.1016/j.econlet.2005.04.002.\n\n\nRambachan, Ashesh, and Jonathan Roth. 2023. “A More Credible Approach to Parallel Trends.” The Review of Economic Studies 90 (5): 2555–91. https://doi.org/10.1093/restud/rdad018.\n\n\nRoth, Jonathan. 2022. “Pretest with Caution: Event-Study Estimates After Testing for Parallel Trends.” American Economic Review: Insights 4 (3): 305–22. https://doi.org/10.1257/aeri.20210236.\n\n\nRoth, Jonathan, Pedro H. C. Sant’Anna, Alyssa Bilinski, and John Poe. 2023. “What’s Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature.” Journal of Econometrics 235 (2): 2218–44. https://doi.org/https://doi.org/10.1016/j.jeconom.2023.03.008.\n\n\nSant’Anna, Pedro H. C., and Jun Zhao. 2020. “Doubly Robust Difference-in-Differences Estimators.” Journal of Econometrics 219 (1): 101–22. https://doi.org/https://doi.org/10.1016/j.jeconom.2020.06.003.\n\n\nSun, Liyang, and Sarah Abraham. 2021. “Estimating Dynamic Treatment Effects in Event Studies with Heterogeneous Treatment Effects.” Journal of Econometrics 225 (2): 175–99. https://doi.org/https://doi.org/10.1016/j.jeconom.2020.09.006.\n\n\nWooldridge, Jeffrey M. 2005. “Fixed-Effects and Related Estimators for Correlated Random-Coefficient and Treatment-Effect Panel Data Models.” The Review of Economics and Statistics 87 (2): 385–90. https://doi.org/10.1162/0034653053970320."
+  },
+  {
+    "objectID": "moredid.html#regression-with-cohort-time-interactions",
+    "href": "moredid.html#regression-with-cohort-time-interactions",
+    "title": "Difference in Differences II",
+    "section": "Regression with Cohort-time Interactions",
+    "text": "Regression with Cohort-time Interactions\n\nEstimate: \\[\ny_{it} = \\sum_{c=1}^C D_{it} 1\\{C_i=c\\} \\beta_{ct} + \\alpha_i + \\delta_t + \\epsilon_{it}\n\\]\n\\(\\hat{\\beta}_{ct}\\) consistently estimates \\(\\Er[y_{it}(1) - y_{it}(0) | C_{i}=c, D_{it}=1]\\) is parallel trends holds for all periods \\[\n\\Er[y_{it}(0) - y_{it-s}(0) | C_i=c] = \\Er[y_{it}(0) - y_{it-s}(0) | C_i=c']\n\\] for all \\(t, s, c, c'\\)"
+  },
+  {
+    "objectID": "moredid.html#regression-with-cohort-treat-time-interactions",
+    "href": "moredid.html#regression-with-cohort-treat-time-interactions",
+    "title": "Difference in Differences II",
+    "section": "Regression with Cohort-Treat-Time Interactions",
+    "text": "Regression with Cohort-Treat-Time Interactions\n\n\nCode\ndef definecohort(df):\n    # convert dummies into categorical\n    n = len(df.index.levels[0])\n    T = len(df.index.levels[1])\n    dmat=np.array(df.sort_index().D)\n    dmat=np.array(df.D).reshape(n,T)\n    cohort=dmat.dot(1 &lt;&lt; np.arange(dmat.shape[-1] - 1, -1, -1))\n    cdf = pd.DataFrame({\"id\":np.array(df.index.levels[0]), \"cohort\":pd.Categorical(cohort)})\n    cdf.set_index(['id'],inplace=True)\n    df=pd.merge(df, cdf, left_index=True, right_index=True)\n    return(df)\n\ndf = definecohort(df)\n\ndef defineinteractions(df):\n    df = df.reset_index()\n    df['dct'] = 'untreated'\n    df['dct'] = df.apply(lambda x: f\"t{x['t']},c{x['cohort']}\" if x['D'] else f\"untreated\", axis=1)\n    return(df.set_index(['id','t']))\n\ndf = defineinteractions(df)\n\nPanelOLS.from_formula(\"y ~ -1 + dct + EntityEffects + TimeEffects\", df).fit()\n\n\n\nPanelOLS Estimation Summary\n\n\nDep. Variable:\ny\nR-squared:\n0.9999\n\n\nEstimator:\nPanelOLS\nR-squared (Between):\n1.0000\n\n\nNo. Observations:\n900\nR-squared (Within):\n0.9999\n\n\nDate:\nWed, Nov 22 2023\nR-squared (Overall):\n1.0000\n\n\nTime:\n10:11:05\nLog-likelihood\n2904.1\n\n\nCov. Estimator:\nUnadjusted\n\n\n\n\n\n\nF-statistic:\n6.594e+05\n\n\nEntities:\n100\nP-value\n0.0000\n\n\nAvg Obs:\n9.0000\nDistribution:\nF(10,782)\n\n\nMin Obs:\n9.0000\n\n\n\n\nMax Obs:\n9.0000\nF-statistic (robust):\n1.077e+06\n\n\n\n\nP-value\n0.0000\n\n\nTime periods:\n9\nDistribution:\nF(10,782)\n\n\nAvg Obs:\n100.000\n\n\n\n\nMin Obs:\n100.000\n\n\n\n\nMax Obs:\n100.000\n\n\n\n\n\n\n\n\n\n\n\n\nParameter Estimates\n\n\n\nParameter\nStd. Err.\nT-stat\nP-value\nLower CI\nUpper CI\n\n\ndct[T.t2,c255]\n0.9976\n0.0028\n359.77\n0.0000\n0.9922\n1.0030\n\n\ndct[T.t3,c255]\n0.9997\n0.0028\n360.52\n0.0000\n0.9942\n1.0051\n\n\ndct[T.t4,c255]\n0.9996\n0.0028\n360.50\n0.0000\n0.9942\n1.0050\n\n\ndct[T.t5,c255]\n0.9980\n0.0028\n359.90\n0.0000\n0.9925\n1.0034\n\n\ndct[T.t6,c255]\n0.9944\n0.0028\n358.63\n0.0000\n0.9890\n0.9999\n\n\ndct[T.t7,c255]\n0.9980\n0.0028\n359.91\n0.0000\n0.9925\n1.0034\n\n\ndct[T.t8,c255]\n5.9981\n0.0032\n1880.0\n0.0000\n5.9919\n6.0044\n\n\ndct[T.t8,c3]\n1.0012\n0.0027\n377.34\n0.0000\n0.9960\n1.0064\n\n\ndct[T.t9,c255]\n5.9996\n0.0032\n1880.5\n0.0000\n5.9933\n6.0058\n\n\ndct[T.t9,c3]\n1.0029\n0.0027\n377.98\n0.0000\n0.9977\n1.0081\n\n\ndct[T.untreated]\n0.0006\n0.0008\n0.7037\n0.4819\n-0.0010\n0.0021\n\n\n\nF-test for Poolability: 0.9401P-value: 0.6493Distribution: F(107,782)Included effects: Entity, Timeid: 0x7f44e4de6e90"
+  },
+  {
+    "objectID": "moredid.html#regression-with-cohort-time-interactions-1",
+    "href": "moredid.html#regression-with-cohort-time-interactions-1",
+    "title": "Difference in Differences II",
+    "section": "Regression with Cohort-Time Interactions",
+    "text": "Regression with Cohort-Time Interactions\n\nIf just want to assume parallel trends at treatment times, instead of parallel trends everywhere, can estimate \\[\ny_{it} = \\sum_{c=1}^C 1\\{C_i=c\\} \\delta_{c,t} + \\alpha_i + \\epsilon_{it}\n\\]\n\\(\\hat{\\delta}_{c,t} + \\frac{\\sum \\alpha_i 1\\{C_i=c\\}}{\\sum 1\\{C_i = c\\}}\\) consistently estimates \\(\\Er[y_{it} | C_{i} = c]\\)\n\\(\\hat{\\delta}_{c,t} -\\hat{\\delta}_{c,t-s}\\) consistently estimates \\(\\Er[y_{it} - y_{i,t-s}| C_{i} = c]\\)\nIf \\(c\\) treated at \\(t\\), not at \\(t-s\\), and \\(c'\\) not treated at either and assume parallel trends, \\[\n\\hat{\\delta}_{c,t} -\\hat{\\delta}_{c,t-s} - (\\hat{\\delta}_{c',t} -\\hat{\\delta}_{c',t-s}) \\inprob \\Er[y_{it}(1)-y{it}(0)| C_i =c]\n\\]"
+  },
+  {
+    "objectID": "moredid.html#regression-with-cohort-time-interactions-2",
+    "href": "moredid.html#regression-with-cohort-time-interactions-2",
+    "title": "Difference in Differences II",
+    "section": "Regression with Cohort-Time Interactions",
+    "text": "Regression with Cohort-Time Interactions\n\ndfi=df.reset_index()\ndfi['time'] = dfi['t']\ndfi=dfi.set_index(['id','t'])\nPanelOLS.from_formula(\"y ~ -1 + C(cohort)*C(time) + EntityEffects\",dfi, drop_absorbed=True).fit()\n\n\nPanelOLS Estimation Summary\n\n\nDep. Variable:\ny\nR-squared:\n0.9999\n\n\nEstimator:\nPanelOLS\nR-squared (Between):\n1.0000\n\n\nNo. Observations:\n900\nR-squared (Within):\n0.9999\n\n\nDate:\nWed, Nov 22 2023\nR-squared (Overall):\n1.0000\n\n\nTime:\n10:11:05\nLog-likelihood\n2905.8\n\n\nCov. Estimator:\nUnadjusted\n\n\n\n\n\n\nF-statistic:\n5.209e+05\n\n\nEntities:\n100\nP-value\n0.0000\n\n\nAvg Obs:\n9.0000\nDistribution:\nF(24,776)\n\n\nMin Obs:\n9.0000\n\n\n\n\nMax Obs:\n9.0000\nF-statistic (robust):\n6.934e+05\n\n\n\n\nP-value\n0.0000\n\n\nTime periods:\n9\nDistribution:\nF(24,776)\n\n\nAvg Obs:\n100.000\n\n\n\n\nMin Obs:\n100.000\n\n\n\n\nMax Obs:\n100.000\n\n\n\n\n\n\n\n\n\n\n\n\nParameter Estimates\n\n\n\nParameter\nStd. Err.\nT-stat\nP-value\nLower CI\nUpper CI\n\n\nC(cohort)[T.0]\n0.0028\n0.0043\n0.6503\n0.5157\n-0.0056\n0.0112\n\n\nC(time)[T.2]\n-0.0030\n0.0030\n-0.9999\n0.3177\n-0.0088\n0.0029\n\n\nC(time)[T.3]\n-0.0030\n0.0030\n-1.0100\n0.3128\n-0.0089\n0.0028\n\n\nC(time)[T.4]\n-0.0011\n0.0030\n-0.3631\n0.7166\n-0.0069\n0.0048\n\n\nC(time)[T.5]\n3.129e-05\n0.0030\n0.0105\n0.9916\n-0.0058\n0.0059\n\n\nC(time)[T.6]\n-0.0030\n0.0030\n-1.0033\n0.3160\n-0.0088\n0.0029\n\n\nC(time)[T.7]\n-0.0020\n0.0030\n-0.6801\n0.4966\n-0.0079\n0.0038\n\n\nC(time)[T.8]\n-0.0005\n0.0030\n-0.1739\n0.8620\n-0.0064\n0.0053\n\n\nC(time)[T.9]\n-0.0028\n0.0030\n-0.9534\n0.3407\n-0.0087\n0.0030\n\n\nC(cohort)[T.3]:C(time)[T.2]\n0.0043\n0.0037\n1.1755\n0.2401\n-0.0029\n0.0115\n\n\nC(cohort)[T.255]:C(time)[T.2]\n0.9999\n0.0040\n250.12\n0.0000\n0.9920\n1.0077\n\n\nC(cohort)[T.3]:C(time)[T.3]\n0.0028\n0.0037\n0.7644\n0.4448\n-0.0044\n0.0100\n\n\nC(cohort)[T.255]:C(time)[T.3]\n1.0010\n0.0040\n250.39\n0.0000\n0.9931\n1.0088\n\n\nC(cohort)[T.3]:C(time)[T.4]\n0.0041\n0.0037\n1.1102\n0.2672\n-0.0031\n0.0113\n\n\nC(cohort)[T.255]:C(time)[T.4]\n1.0017\n0.0040\n250.59\n0.0000\n0.9939\n1.0096\n\n\nC(cohort)[T.3]:C(time)[T.5]\n0.0010\n0.0037\n0.2846\n0.7760\n-0.0062\n0.0083\n\n\nC(cohort)[T.255]:C(time)[T.5]\n0.9981\n0.0040\n249.68\n0.0000\n0.9902\n1.0059\n\n\nC(cohort)[T.3]:C(time)[T.6]\n0.0040\n0.0037\n1.0869\n0.2774\n-0.0032\n0.0112\n\n\nC(cohort)[T.255]:C(time)[T.6]\n0.9965\n0.0040\n249.28\n0.0000\n0.9886\n1.0043\n\n\nC(cohort)[T.3]:C(time)[T.7]\n0.0007\n0.0037\n0.1949\n0.8455\n-0.0065\n0.0079\n\n\nC(cohort)[T.255]:C(time)[T.7]\n0.9979\n0.0040\n249.62\n0.0000\n0.9900\n1.0057\n\n\nC(cohort)[T.3]:C(time)[T.8]\n1.0031\n0.0037\n272.91\n0.0000\n0.9959\n1.0103\n\n\nC(cohort)[T.255]:C(time)[T.8]\n5.9992\n0.0040\n1500.7\n0.0000\n5.9913\n6.0070\n\n\nC(cohort)[T.3]:C(time)[T.9]\n1.0048\n0.0037\n273.37\n0.0000\n0.9976\n1.0120\n\n\nC(cohort)[T.255]:C(time)[T.9]\n6.0006\n0.0040\n1501.1\n0.0000\n5.9928\n6.0085\n\n\n\nF-test for Poolability: 0.9390P-value: 0.6458Distribution: F(99,776)Included effects: Entityid: 0x7f44e40e9010"
   }
 ]
