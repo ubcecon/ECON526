@@ -201,19 +201,20 @@ Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/le
 -  **November 6**: [Matching](https://ubcecon.github.io/ECON526/paul/matching.html)
 -  **November 8**
     - **IN CLASS MIDTERM #2**
+-  **November 9 (TA session)**: Predictive Models
+    - https://matheusfacure.github.io/python-causality-handbook/17-Predictive-Models-101.html
+    - https://datascience.quantecon.org/tools/regression.html
 -  **November 13 (Midterm Break)**
 -  **November 15 (Midterm Break)**
 -  **November 20**:  Finish [Matching](https://ubcecon.github.io/ECON526/paul/matching.html), start [Difference in Differences](https://ubcecon.github.io/ECON526/paul/did.html)
     - https://matheusfacure.github.io/python-causality-handbook/13-Difference-in-Differences.html
--  **November 22**: [Panel Data and Fixed Effects](https://ubcecon.github.io/ECON526/paul/matching.html), [The Difference in Differences Saga](https://ubcecon.github.io/ECON526/paul/moredid.html)
+-  **November 22**: [Panel Data and Fixed Effects](https://ubcecon.github.io/ECON526/paul/fe.html), [The Difference in Differences Saga](https://ubcecon.github.io/ECON526/paul/moredid.html)
     - https://matheusfacure.github.io/python-causality-handbook/14-Panel-Data-and-Fixed-Effects.html
     - https://matheusfacure.github.io/python-causality-handbook/24-The-Diff-in-Diff-Saga.html
--  **November 27**: Synthetic Control
+-  **November 27**: Start [Synthetic Control](https://ubcecon.github.io/ECON526/paul/syntheticcontrol.html)
     - https://matheusfacure.github.io/python-causality-handbook/15-Synthetic-Control.html
+-  **November 27**: Finish [Synthetic Control](https://ubcecon.github.io/ECON526/paul/syntheticcontrol.html)
     - https://matheusfacure.github.io/python-causality-handbook/25-Synthetic-Diff-in-Diff.html
--  **November 29**: Predictive Models
-    - https://matheusfacure.github.io/python-causality-handbook/17-Predictive-Models-101.html
-    - https://datascience.quantecon.org/tools/regression.html
 - **December 4**: Debiased/Orthogonal Machine Learning
     - https://matheusfacure.github.io/python-causality-handbook/22-Debiased-Orthogonal-Machine-Learning.html
     - https://datascience.quantecon.org/applications/ml_in_economics.html#estimation-of-nuisance-functions    -
