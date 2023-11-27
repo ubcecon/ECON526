@@ -627,7 +627,7 @@
     "href": "syntheticcontrol.html#example-california-tobacco-control-program",
     "title": "Synthetic Control",
     "section": "Example: California Tobacco Control Program",
-    "text": "Example: California Tobacco Control Program\n\nCode and copy of data from Facure (2022)\nData used in Alberto Abadie and Hainmueller (2010)\n\n\n\nCode\nimport warnings\nwarnings.filterwarnings('ignore')\n\nimport pandas as pd\nimport numpy as np\nfrom matplotlib import style\nfrom matplotlib import pyplot as plt\nimport seaborn as sns\nimport statsmodels.formula.api as smf\n\n%matplotlib inline\n\npd.set_option(\"display.max_columns\", 20)\nstyle.use(\"fivethirtyeight\")"
+    "text": "Example: California Tobacco Control Program\n\nCode and copy of data from Facure (2022)\nData used in Abadie, Diamond, and Hainmueller (2010)\n\n\n\nCode\nimport warnings\nwarnings.filterwarnings('ignore')\n\nimport pandas as pd\nimport numpy as np\nfrom matplotlib import style\nfrom matplotlib import pyplot as plt\nimport seaborn as sns\nimport statsmodels.formula.api as smf\n\n#if 'ipykernel' in sys.modules:\n#    %matplotlib inline\n\npd.set_option(\"display.max_columns\", 20)\nstyle.use(\"fivethirtyeight\")"
   },
   {
     "objectID": "syntheticcontrol.html#data-california-tobacco-control-program",
@@ -669,14 +669,14 @@
     "href": "syntheticcontrol.html#weights",
     "title": "Synthetic Control",
     "section": "Weights",
-    "text": "Weights\n\nVector of pretreatment variables for treated unit \\[\n\\mathbf{X}_1 = \\left(Y_{11}, \\cdots Y_{1T_0}, z_{11}, \\cdots, z_1K \\right)^T\n\\]\nMatrix of same variabels for untreated \\[\n\\mathbf{X}_0 = \\begin{pmatrix}\nY_{21} & \\cdots & Y_{2T_0} & z_{21} & \\cdots & z_{2K} \\\\\n\\vdots &        &          &        &        & \\vdots \\\\\nY_{J+1,1} & \\cdots & Y_{J+1,T_0} & z_{J+1,1} & \\cdots & z_{J+1,K}\n\\end{pmatrix}^T\n\\]\nWeights minimize difference \\[\n\\begin{align*}\n\\hat{W} = & \\textrm{arg}\\min_{W \\in \\R^J} \\Vert \\mathbf{X}_1 - \\mathbf{X}_0 W \\Vert_V \\\\\n& s.t. \\sum_{j=2}^{J+1} w_j = 1 \\\\\n& \\;\\;\\; 0 \\leq w_j \\leq 1 \\;\\; \\forall j\n\\end{align*}\n\\]\n\n\n\n\\(\\Vert x \\Vert_V = x' V x\\) is a weighted norm. Choose \\(V\\) to e.g. weight by inverse variance"
+    "text": "Weights\n\nWeights minimize difference \\[\n\\begin{align*}\n\\hat{W} = & \\textrm{arg}\\min_{W \\in \\R^J} \\Vert \\mathbf{X}_1 - \\mathbf{X}_0 W \\Vert_V \\\\\n& s.t. \\sum_{j=2}^{J+1} w_j = 1 \\\\\n& \\;\\;\\; 0 \\leq w_j \\leq 1 \\;\\; \\forall j\n\\end{align*}\n\\]\n\n\n\n\\(\\Vert x \\Vert_V = x' V x\\) is a weighted norm. Choose \\(V\\) to e.g. weight by inverse variance"
   },
   {
     "objectID": "syntheticcontrol.html#computing-weights",
     "href": "syntheticcontrol.html#computing-weights",
     "title": "Synthetic Control",
     "section": "Computing Weights",
-    "text": "Computing Weights\n\nfeatures = [\"cigsale\", \"retprice\"]\ninverted = (cigar.query(\"~after_treatment\") # filter pre-intervention period\n            .pivot(index='state', columns=\"year\")[features] # make one column per year and one row per state\n            .T) # flip the table to have one column per state\ninverted.head()\n\n\n\n\n\n\n\n\nstate\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n...\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n\n\n\nyear\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncigsale\n1970\n89.800003\n100.300003\n123.000000\n124.800003\n120.000000\n155.000000\n109.900002\n102.400002\n124.800003\n134.600006\n...\n103.599998\n92.699997\n99.800003\n106.400002\n65.500000\n122.599998\n124.300003\n114.500000\n106.400002\n132.199997\n\n\n1971\n95.400002\n104.099998\n121.000000\n125.500000\n117.599998\n161.100006\n115.699997\n108.500000\n125.599998\n139.300003\n...\n115.000000\n96.699997\n106.300003\n108.900002\n67.699997\n124.400002\n128.399994\n111.500000\n105.400002\n131.699997\n\n\n1972\n101.099998\n103.900002\n123.500000\n134.300003\n110.800003\n156.300003\n117.000000\n126.099998\n126.599998\n149.199997\n...\n118.699997\n103.000000\n111.500000\n108.599998\n71.300003\n138.000000\n137.000000\n117.500000\n108.800003\n140.000000\n\n\n1973\n102.900002\n108.000000\n124.400002\n137.899994\n109.300003\n154.699997\n119.800003\n121.800003\n124.400002\n156.000000\n...\n125.500000\n103.500000\n109.699997\n110.400002\n72.699997\n146.800003\n143.100006\n116.599998\n109.500000\n141.199997\n\n\n1974\n108.199997\n109.699997\n126.699997\n132.800003\n112.400002\n151.300003\n123.699997\n125.599998\n131.899994\n159.600006\n...\n129.699997\n108.400002\n114.800003\n114.699997\n75.599998\n151.800003\n149.600006\n119.900002\n111.800003\n145.800003\n\n\n\n\n5 rows × 39 columns\n\n\n\n\nX1 = inverted[3].values # state of california\nX0 = inverted.drop(columns=3).values  # other states\n\ndef loss_w(W, X0, X1) -&gt; float:\n    return np.sqrt(np.mean((X1 - X0.dot(W))**2))\n\n\nfrom scipy.optimize import fmin_slsqp\nfrom toolz import reduce, partial\n\ndef get_w(X0, X1):\n    w_start = [1/X0.shape[1]]*X0.shape[1]\n    weights = fmin_slsqp(partial(loss_w, X0=X0, X1=X1),\n                         np.array(w_start),\n                         f_eqcons=lambda x: np.sum(x) - 1,\n                         bounds=[(0.0, 1.0)]*len(w_start),\n                         disp=False)\n    return weights"
+    "text": "Computing Weights\n\nfeatures = [\"cigsale\", \"retprice\"]\ninverted = (cigar.query(\"~after_treatment\") # filter pre-intervention period\n            .pivot(index='state', columns=\"year\")[features] # make one column per year and one row per state\n            .T) # flip the table to have one column per state\ninverted.head()\n\n\n\n\n\n\n\n\nstate\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n...\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n\n\n\nyear\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncigsale\n1970\n89.800003\n100.300003\n123.000000\n124.800003\n120.000000\n155.000000\n109.900002\n102.400002\n124.800003\n134.600006\n...\n103.599998\n92.699997\n99.800003\n106.400002\n65.500000\n122.599998\n124.300003\n114.500000\n106.400002\n132.199997\n\n\n1971\n95.400002\n104.099998\n121.000000\n125.500000\n117.599998\n161.100006\n115.699997\n108.500000\n125.599998\n139.300003\n...\n115.000000\n96.699997\n106.300003\n108.900002\n67.699997\n124.400002\n128.399994\n111.500000\n105.400002\n131.699997\n\n\n1972\n101.099998\n103.900002\n123.500000\n134.300003\n110.800003\n156.300003\n117.000000\n126.099998\n126.599998\n149.199997\n...\n118.699997\n103.000000\n111.500000\n108.599998\n71.300003\n138.000000\n137.000000\n117.500000\n108.800003\n140.000000\n\n\n1973\n102.900002\n108.000000\n124.400002\n137.899994\n109.300003\n154.699997\n119.800003\n121.800003\n124.400002\n156.000000\n...\n125.500000\n103.500000\n109.699997\n110.400002\n72.699997\n146.800003\n143.100006\n116.599998\n109.500000\n141.199997\n\n\n1974\n108.199997\n109.699997\n126.699997\n132.800003\n112.400002\n151.300003\n123.699997\n125.599998\n131.899994\n159.600006\n...\n129.699997\n108.400002\n114.800003\n114.699997\n75.599998\n151.800003\n149.600006\n119.900002\n111.800003\n145.800003\n\n\n\n\n5 rows × 39 columns"
   },
   {
     "objectID": "syntheticcontrol.html#examining-weights",
@@ -711,7 +711,7 @@
     "href": "syntheticcontrol.html#inference-1",
     "title": "Synthetic Control",
     "section": "Inference",
-    "text": "Inference\n\nEstimator \\[\n\\hat{\\tau}_{1t} = Y_{1t} -\n\\underbrace{\\sum_{j=2}^{J+1} \\hat{w}_j Y_{jt}}_{\\hat{Y}_{1t}(0)}\n\\]\n\nsingle observation of \\(Y_{1t}\\)\n\\(\\hat{w}_j\\) depends on pre-treatment variables \\(\\mathbf{X}_1, \\mathbf{X}_0\\), \\(J+1 \\times (T_0 + K)\\)\n\\(J\\) values of \\(Y_{jt}\\)\n\nUsual asymptotics not applicable"
+    "text": "Inference\n\nEstimator \\[\n\\hat{\\tau}_{1t} = Y_{1t} -\n\\underbrace{\\sum_{j=2}^{J+1} \\hat{w}_j Y_{jt}}_{\\hat{Y}_{1t}(0)}\n\\]\n\nsingle observation of \\(Y_{1t}\\)\n\\(\\hat{w}_j\\) depends on pre-treatment variables \\(\\underbrace{\\mathbf{X}_1, \\mathbf{X}_0}_{(J+1) \\times (T_0 + K)}\\)\n\\(J\\) values of \\(Y_{jt}\\)\n\nUsual asymptotics not applicable"
   },
   {
     "objectID": "syntheticcontrol.html#treatment-permutation",
@@ -725,7 +725,7 @@
     "href": "syntheticcontrol.html#treatment-permutation-1",
     "title": "Synthetic Control",
     "section": "Treatment Permutation",
-    "text": "Treatment Permutation\n\n\nCode\ndef synthetic_control(state: int, data: pd.DataFrame) -&gt; np.array:\n    features = [\"cigsale\", \"retprice\"]\n    inverted = (data.query(\"~after_treatment\")\n                .pivot(index='state', columns=\"year\")[features]\n                .T)\n    X1 = inverted[state].values # treated\n    X0 = inverted.drop(columns=state).values # donor pool\n\n    weights = get_w(X0, X1)\n    synthetic = (data.query(f\"~(state=={state})\")\n                 .pivot(index='year', columns=\"state\")[\"cigsale\"]\n                 .values.dot(weights))\n    return (data\n            .query(f\"state=={state}\")[[\"state\", \"year\", \"cigsale\", \"after_treatment\"]]\n            .assign(synthetic=synthetic))\n\n\n\n\nCode\nfrom joblib import Parallel, delayed\n\ncontrol_pool = cigar[\"state\"].unique()\nparallel_fn = delayed(partial(synthetic_control, data=cigar))\nsynthetic_states = Parallel(n_jobs=20)(parallel_fn(state) for state in control_pool)\n\n\n\n\nCode\nplt.figure(figsize=(12,7))\nfor state in synthetic_states:\n    plt.plot(state[\"year\"], state[\"cigsale\"] - state[\"synthetic\"], color=\"C5\",alpha=0.4)\n\nplt.plot(cigar.query(\"california\")[\"year\"], cigar.query(\"california\")[\"cigsale\"] - calif_synth,\n        label=\"California\");\n\nplt.vlines(x=1988, ymin=-50, ymax=120, linestyle=\":\", lw=2, label=\"Proposition 99\")\nplt.hlines(y=0, xmin=1970, xmax=2000, lw=3)\nplt.ylabel(\"Gap in per-capita cigarette sales (in packs)\")\nplt.title(\"State - Synthetic Across Time\")\nplt.legend()\nplt.show()"
+    "text": "Treatment Permutation\n\ndef synthetic_control(state: int, data: pd.DataFrame) -&gt; np.array:\n    features = [\"cigsale\", \"retprice\"]\n    inverted = (data.query(\"~after_treatment\")\n                .pivot(index='state', columns=\"year\")[features]\n                .T)\n    X1 = inverted[state].values # treated\n    X0 = inverted.drop(columns=state).values # donor pool\n\n    weights = get_w(X0, X1)\n    synthetic = (data.query(f\"~(state=={state})\")\n                 .pivot(index='year', columns=\"state\")[\"cigsale\"]\n                 .values.dot(weights))\n    return (data\n            .query(f\"state=={state}\")[[\"state\", \"year\", \"cigsale\", \"after_treatment\"]]\n            .assign(synthetic=synthetic))\n\nfrom joblib import Parallel, delayed\n\ncontrol_pool = cigar[\"state\"].unique()\nparallel_fn = delayed(partial(synthetic_control, data=cigar))\nsynthetic_states = Parallel(n_jobs=20)(parallel_fn(state) for state in control_pool);"
   },
   {
     "objectID": "syntheticcontrol.html#treatment-permutation-inference",
@@ -753,7 +753,7 @@
     "href": "syntheticcontrol.html#design-based-treatment-permutation-inference",
     "title": "Synthetic Control",
     "section": "Design Based / Treatment Permutation Inference",
-    "text": "Design Based / Treatment Permutation Inference\n\nPros:\n\nEasy to implement and explain\nIntuitive appeal, similar to placebo tests\nMinimal assumptions about DGP\n\nCons:\n\nAssumption about randomized treatment assignment is generally false\nHard to test hypotheses other than \\(H_0: \\tau=0\\) & hard to construct confidence intervals"
+    "text": "Design Based / Treatment Permutation Inference\n\nPros:\n\nEasy to implement and explain\nIntuitive appeal, similar to placebo tests\nMinimal assumptions about DGP\n\nCons:\n\nAssumption about randomized treatment assignment is generally false\nNeeds modification to test hypotheses other than \\(H_0: \\tau=0\\) & to construct confidence intervals"
   },
   {
     "objectID": "syntheticcontrol.html#prediction-intervals",
@@ -767,21 +767,21 @@
     "href": "syntheticcontrol.html#prediction-intervals-1",
     "title": "Synthetic Control",
     "section": "Prediction Intervals",
-    "text": "Prediction Intervals\n\nModern approaches accomodate high-dimensionality and give non-asymptotic results\nVictor Chernozhukov and Zhu (2021) : construct prediction intervals by permuting residuals (conformal inference)\nMatias D. Cattaneo and Titiunik (2021) : divide prediction error into two pieces: estimation of \\(\\hat{w}\\) and unpredictable randomness in \\(Y_{1t}(0)\\)"
+    "text": "Prediction Intervals\n\nModern approaches accomodate high-dimensionality and give non-asymptotic results\nChernozhukov, Wüthrich, and Zhu (2021) : construct prediction intervals by permuting residuals (conformal inference)\nCattaneo, Feng, and Titiunik (2021) : divide prediction error into two pieces: estimation of \\(\\hat{w}\\) and unpredictable randomness in \\(Y_{1t}(0)\\)"
   },
   {
     "objectID": "syntheticcontrol.html#catteneo-feng-titiunik",
     "href": "syntheticcontrol.html#catteneo-feng-titiunik",
     "title": "Synthetic Control",
     "section": "Catteneo, Feng, & Titiunik",
-    "text": "Catteneo, Feng, & Titiunik\n\nGiven coverage level \\(\\alpha\\), gives interval \\(\\mathcal{I}_{1-\\alpha}\\) such that \\[\nP\\left[ P\\left(\\tau_{1t} \\in \\mathcal{I}_{1-\\alpha} | \\mathbf{X}_0, \\{y_{jt}\\}_{j=1}^J\\right) &gt; 1-\\alpha-\\epsilon(T_0) \\right] &gt; 1 - \\pi(T_0)\n\\] where \\(\\epsilon(T_0) \\to 0\\) and \\(pi(T_0) \\to 0\\) as \\(T_0 \\to \\infty\\)\nprediction error comes from\n\nestimation of \\(\\hat{w}\\), options refer to u_ in scpi_pkg\nunobservable stochastic error in \\(Y_{1t}(0)\\), options begin with e_ in scpi_pkg\n\nvalid under broad range of DGPs, but appropriate interval does depend on dependence of data over time, stationarity, assumptions about distribution of error given predictors"
+    "text": "Catteneo, Feng, & Titiunik\n\nGiven coverage level \\(\\alpha\\), gives interval \\(\\mathcal{I}_{1-\\alpha}\\) such that \\[\nP\\left[ P\\left(\\tau_{1t} \\in \\mathcal{I}_{1-\\alpha} | \\mathbf{X}_0, \\{y_{jt}\\}_{j=1}^J\\right) &gt; 1-\\alpha-\\epsilon(T_0) \\right] &gt; 1 - \\pi(T_0)\n\\] where \\(\\epsilon(T_0) \\to 0\\) and \\(\\pi(T_0) \\to 0\\) as \\(T_0 \\to \\infty\\)\nprediction error comes from\n\nestimation of \\(\\hat{w}\\), options refer to u_ in scpi_pkg\nunobservable stochastic error in \\(Y_{1t}(0)\\), options begin with e_ in scpi_pkg\n\nvalid under broad range of DGPs, but appropriate interval does depend on dependence of data over time, stationarity, assumptions about distribution of error given predictors"
   },
   {
     "objectID": "syntheticcontrol.html#software",
     "href": "syntheticcontrol.html#software",
     "title": "Synthetic Control",
     "section": "Software",
-    "text": "Software\n\nscpi_pkg recommended, created by leading econometricians\npysyncon actively maintained, well-documented, but appears not popular\nSpareSC created by researchers at Microsoft, uses particular variant\nscinference R package accompanying Victor Chernozhukov and Zhu (2021)"
+    "text": "Software\n\nscpi_pkg recommended, created by leading econometricians\npysyncon actively maintained, well-documented, but appears not popular\nSpareSC created by researchers at Microsoft, uses particular variant\nscinference R package accompanying Chernozhukov, Wüthrich, and Zhu (2021)"
   },
   {
     "objectID": "syntheticcontrol.html#data-preparation",
@@ -809,13 +809,34 @@
     "href": "syntheticcontrol.html#sources-and-further-reading",
     "title": "Synthetic Control",
     "section": "Sources and Further Reading",
-    "text": "Sources and Further Reading\n\nexample code from Facure (2022) chapter 15\nnotation and theory follows Abadie (2021)\nHuntington-Klein (2021) chapter 21.2\nMore technical:\n\nCattaneo et al. (2022) user guide for scpi_pkg\nAlberto Abadie and Hainmueller (2010) important paper popularizing synthetic control and permutation inference\nAbadie and Cattaneo (2021) lists recent statistical advances in synthetic control"
+    "text": "Sources and Further Reading\n\nexample code from Facure (2022) chapter 15\nnotation and theory follows Abadie (2021)\nHuntington-Klein (2021) chapter 21.2\nMore technical:\n\nCattaneo et al. (2022) user guide for scpi_pkg\nAbadie, Diamond, and Hainmueller (2010) important paper popularizing synthetic control and permutation inference\nAbadie and Cattaneo (2021) lists recent statistical advances in synthetic control"
   },
   {
     "objectID": "syntheticcontrol.html#references",
     "href": "syntheticcontrol.html#references",
     "title": "Synthetic Control",
     "section": "References",
-    "text": "References\n\n\n\n\n\n\nAbadie, Alberto. 2021. “Using Synthetic Controls: Feasibility, Data Requirements, and Methodological Aspects.” Journal of Economic Literature 59 (2): 391–425. https://doi.org/10.1257/jel.20191450.\n\n\nAbadie, Alberto, Susan Athey, Guido W. Imbens, and Jeffrey M. Wooldridge. 2020. “Sampling-Based Versus Design-Based Uncertainty in Regression Analysis.” Econometrica 88 (1): 265–96. https://doi.org/https://doi.org/10.3982/ECTA12675.\n\n\nAbadie, Alberto, and Matias D. Cattaneo. 2021. “Introduction to the Special Section on Synthetic Control Methods.” Journal of the American Statistical Association 116 (536): 1713–15. https://doi.org/10.1080/01621459.2021.2002600.\n\n\nAlberto Abadie, Alexis Diamond, and Jens Hainmueller. 2010. “Synthetic Control Methods for Comparative Case Studies: Estimating the Effect of California’s Tobacco Control Program.” Journal of the American Statistical Association 105 (490): 493–505. https://doi.org/10.1198/jasa.2009.ap08746.\n\n\nCattaneo, Matias D., Yingjie Feng, Filippo Palomba, and Rocio Titiunik. 2022. “Scpi: Uncertainty Quantification for Synthetic Control Methods.”\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/.\n\n\nMatias D. Cattaneo, Yingjie Feng, and Rocio Titiunik. 2021. “Prediction Intervals for Synthetic Control Methods.” Journal of the American Statistical Association 116 (536): 1865–80. https://doi.org/10.1080/01621459.2021.1979561.\n\n\nVictor Chernozhukov, Kaspar Wüthrich, and Yinchu Zhu. 2021. “An Exact and Robust Conformal Inference Method for Counterfactual and Synthetic Controls.” Journal of the American Statistical Association 116 (536): 1849–64. https://doi.org/10.1080/01621459.2021.1920957."
+    "text": "References\n\n\n\n\n\n\nAbadie, Alberto. 2021. “Using Synthetic Controls: Feasibility, Data Requirements, and Methodological Aspects.” Journal of Economic Literature 59 (2): 391–425. https://doi.org/10.1257/jel.20191450.\n\n\nAbadie, Alberto, Susan Athey, Guido W. Imbens, and Jeffrey M. Wooldridge. 2020. “Sampling-Based Versus Design-Based Uncertainty in Regression Analysis.” Econometrica 88 (1): 265–96. https://doi.org/https://doi.org/10.3982/ECTA12675.\n\n\nAbadie, Alberto, and Matias D. Cattaneo. 2021. “Introduction to the Special Section on Synthetic Control Methods.” Journal of the American Statistical Association 116 (536): 1713–15. https://doi.org/10.1080/01621459.2021.2002600.\n\n\nAbadie, Alberto, Alexis Diamond, and Jens Hainmueller. 2010. “Synthetic Control Methods for Comparative Case Studies: Estimating the Effect of California’s Tobacco Control Program.” Journal of the American Statistical Association 105 (490): 493–505. https://doi.org/10.1198/jasa.2009.ap08746.\n\n\nCattaneo, Matias D., Yingjie Feng, Filippo Palomba, and Rocio Titiunik. 2022. “Scpi: Uncertainty Quantification for Synthetic Control Methods.”\n\n\nCattaneo, Matias D., Yingjie Feng, and Rocio Titiunik. 2021. “Prediction Intervals for Synthetic Control Methods.” Journal of the American Statistical Association 116 (536): 1865–80. https://doi.org/10.1080/01621459.2021.1979561.\n\n\nChernozhukov, Victor, Kaspar Wüthrich, and Yinchu Zhu. 2021. “An Exact and Robust Conformal Inference Method for Counterfactual and Synthetic Controls.” Journal of the American Statistical Association 116 (536): 1849–64. https://doi.org/10.1080/01621459.2021.1920957.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/."
+  },
+  {
+    "objectID": "syntheticcontrol.html#variables-to-match",
+    "href": "syntheticcontrol.html#variables-to-match",
+    "title": "Synthetic Control",
+    "section": "Variables to Match",
+    "text": "Variables to Match\n\nVector of pretreatment variables for treated unit \\[\n\\mathbf{X}_1 = \\left(Y_{11}, \\cdots Y_{1T_0}, z_{11}, \\cdots, z_1K \\right)^T\n\\]\nMatrix of same variabels for untreated \\[\n\\mathbf{X}_0 = \\begin{pmatrix}\nY_{21} & \\cdots & Y_{2T_0} & z_{21} & \\cdots & z_{2K} \\\\\n\\vdots &        &          &        &        & \\vdots \\\\\nY_{J+1,1} & \\cdots & Y_{J+1,T_0} & z_{J+1,1} & \\cdots & z_{J+1,K}\n\\end{pmatrix}^T\n\\]"
+  },
+  {
+    "objectID": "syntheticcontrol.html#computing-weights-1",
+    "href": "syntheticcontrol.html#computing-weights-1",
+    "title": "Synthetic Control",
+    "section": "Computing Weights",
+    "text": "Computing Weights\n\nfrom scipy.optimize import fmin_slsqp\nfrom toolz import reduce, partial\n\nX1 = inverted[3].values # state of california\nX0 = inverted.drop(columns=3).values  # other states\n\ndef loss_w(W, X0, X1) -&gt; float:\n    return np.sqrt(np.mean((X1 - X0.dot(W))**2))\n\n\ndef get_w(X0, X1):\n    w_start = [1/X0.shape[1]]*X0.shape[1]\n    weights = fmin_slsqp(partial(loss_w, X0=X0, X1=X1),\n                         np.array(w_start),\n                         f_eqcons=lambda x: np.sum(x) - 1,\n                         bounds=[(0.0, 1.0)]*len(w_start),\n                         disp=False)\n    return weights"
+  },
+  {
+    "objectID": "syntheticcontrol.html#treatment-permutation-2",
+    "href": "syntheticcontrol.html#treatment-permutation-2",
+    "title": "Synthetic Control",
+    "section": "Treatment Permutation",
+    "text": "Treatment Permutation\n\n\nCode\nplt.figure(figsize=(12,7))\nfor state in synthetic_states:\n    plt.plot(state[\"year\"], state[\"cigsale\"] - state[\"synthetic\"], color=\"C5\",alpha=0.4)\n\nplt.plot(cigar.query(\"california\")[\"year\"], cigar.query(\"california\")[\"cigsale\"] - calif_synth,\n        label=\"California\");\n\nplt.vlines(x=1988, ymin=-50, ymax=120, linestyle=\":\", lw=2, label=\"Proposition 99\")\nplt.hlines(y=0, xmin=1970, xmax=2000, lw=3)\nplt.ylabel(\"Gap in per-capita cigarette sales (in packs)\")\nplt.title(\"State - Synthetic Across Time\")\nplt.legend()\nplt.show()"
   }
 ]

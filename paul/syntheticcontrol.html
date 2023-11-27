@@ -413,7 +413,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="" data-background-size="contain" class="quarto-title-block center">
+<section id="title-slide" data-background-image="athelstan-lillooet.jpg" data-background-size="contain" class="quarto-title-block center">
   <h1 class="title">Synthetic Control</h1>
   <p class="subtitle">ECON526</p>
 
@@ -468,9 +468,9 @@ Paul Schrimpf
 <h2>Example: California Tobacco Control Program</h2>
 <ul>
 <li>Code and copy of data from <span class="citation" data-cites="facure2022">Facure (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></li>
-<li>Data used in <span class="citation" data-cites="abadie2010">Alberto Abadie and Hainmueller (<a href="#/references" role="doc-biblioref" onclick="">2010</a>)</span></li>
+<li>Data used in <span class="citation" data-cites="abadie2010">Abadie, Diamond, and Hainmueller (<a href="#/references" role="doc-biblioref" onclick="">2010</a>)</span></li>
 </ul>
-<div class="cell" data-code-summry="imports" data-execution_count="2">
+<div class="cell" data-code-summry="imports" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> warnings</span>
@@ -483,16 +483,17 @@ Paul Schrimpf
 <span id="cb1-8"><a href="#cb1-8"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb1-9"><a href="#cb1-9"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
 <span id="cb1-10"><a href="#cb1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="op">%</span>matplotlib inline</span>
-<span id="cb1-12"><a href="#cb1-12"></a></span>
-<span id="cb1-13"><a href="#cb1-13"></a>pd.set_option(<span class="st">"display.max_columns"</span>, <span class="dv">20</span>)</span>
-<span id="cb1-14"><a href="#cb1-14"></a>style.use(<span class="st">"fivethirtyeight"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co">#if 'ipykernel' in sys.modules:</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co">#    %matplotlib inline</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14"></a>pd.set_option(<span class="st">"display.max_columns"</span>, <span class="dv">20</span>)</span>
+<span id="cb1-15"><a href="#cb1-15"></a>style.use(<span class="st">"fivethirtyeight"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
 <section id="data-california-tobacco-control-program" class="slide level2">
 <h2>Data: California Tobacco Control Program</h2>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>cigar <span class="op">=</span> pd.read_csv(<span class="st">"data/smoking.csv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2"></a>cigar.query(<span class="st">"california"</span>).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -596,7 +597,7 @@ Paul Schrimpf
 </section>
 <section id="cigarette-sales-trends" class="slide level2">
 <h2>Cigarette Sales Trends</h2>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>ax <span class="op">=</span> plt.subplot(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="cf">for</span> gdf <span class="kw">in</span> cigar.groupby(<span class="st">"state"</span>):</span>
 <span id="cb3-3"><a href="#cb3-3"></a>    ax.plot(gdf[<span class="dv">1</span>][<span class="st">'year'</span>],gdf[<span class="dv">1</span>][<span class="st">'cigsale'</span>], alpha<span class="op">=</span><span class="fl">0.2</span>, lw<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">"k"</span>)</span>
@@ -642,8 +643,8 @@ Paul Schrimpf
 <li><span class="math inline">\(\hat{w}_j\)</span> chosen to make synthetic control close to treated unit in before treatment</li>
 </ul>
 </section>
-<section id="weights" class="slide level2">
-<h2>Weights</h2>
+<section id="variables-to-match" class="slide level2">
+<h2>Variables to Match</h2>
 <ul>
 <li>Vector of pretreatment variables for treated unit <span class="math display">\[
 \mathbf{X}_1 = \left(Y_{11}, \cdots Y_{1T_0}, z_{11}, \cdots, z_1K \right)^T
@@ -655,6 +656,11 @@ Y_{21} &amp; \cdots &amp; Y_{2T_0} &amp; z_{21} &amp; \cdots &amp; z_{2K} \\
 Y_{J+1,1} &amp; \cdots &amp; Y_{J+1,T_0} &amp; z_{J+1,1} &amp; \cdots &amp; z_{J+1,K}
 \end{pmatrix}^T
 \]</span></li>
+</ul>
+</section>
+<section id="weights" class="slide level2">
+<h2>Weights</h2>
+<ul>
 <li>Weights minimize difference <span class="math display">\[
 \begin{align*}
 \hat{W} = &amp; \textrm{arg}\min_{W \in \R^J} \Vert \mathbf{X}_1 - \mathbf{X}_0 W \Vert_V \\
@@ -681,7 +687,7 @@ Y_{J+1,1} &amp; \cdots &amp; Y_{J+1,T_0} &amp; z_{J+1,1} &amp; \cdots &amp; z_{J
 </section>
 <section id="computing-weights" class="slide level2">
 <h2>Computing Weights</h2>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>features <span class="op">=</span> [<span class="st">"cigsale"</span>, <span class="st">"retprice"</span>]</span>
 <span id="cb4-2"><a href="#cb4-2"></a>inverted <span class="op">=</span> (cigar.query(<span class="st">"~after_treatment"</span>) <span class="co"># filter pre-intervention period</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a>            .pivot(index<span class="op">=</span><span class="st">'state'</span>, columns<span class="op">=</span><span class="st">"year"</span>)[features] <span class="co"># make one column per year and one row per state</span></span>
@@ -885,25 +891,28 @@ Y_{J+1,1} &amp; \cdots &amp; Y_{J+1,T_0} &amp; z_{J+1,1} &amp; \cdots &amp; z_{J
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>X1 <span class="op">=</span> inverted[<span class="dv">3</span>].values <span class="co"># state of california</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>X0 <span class="op">=</span> inverted.drop(columns<span class="op">=</span><span class="dv">3</span>).values  <span class="co"># other states</span></span>
+</section>
+<section id="computing-weights-1" class="slide level2">
+<h2>Computing Weights</h2>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> fmin_slsqp</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="im">from</span> toolz <span class="im">import</span> <span class="bu">reduce</span>, partial</span>
 <span id="cb5-3"><a href="#cb5-3"></a></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">def</span> loss_w(W, X0, X1) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
-<span id="cb5-5"><a href="#cb5-5"></a>    <span class="cf">return</span> np.sqrt(np.mean((X1 <span class="op">-</span> X0.dot(W))<span class="op">**</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> fmin_slsqp</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="im">from</span> toolz <span class="im">import</span> <span class="bu">reduce</span>, partial</span>
-<span id="cb6-3"><a href="#cb6-3"></a></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">def</span> get_w(X0, X1):</span>
-<span id="cb6-5"><a href="#cb6-5"></a>    w_start <span class="op">=</span> [<span class="dv">1</span><span class="op">/</span>X0.shape[<span class="dv">1</span>]]<span class="op">*</span>X0.shape[<span class="dv">1</span>]</span>
-<span id="cb6-6"><a href="#cb6-6"></a>    weights <span class="op">=</span> fmin_slsqp(partial(loss_w, X0<span class="op">=</span>X0, X1<span class="op">=</span>X1),</span>
-<span id="cb6-7"><a href="#cb6-7"></a>                         np.array(w_start),</span>
-<span id="cb6-8"><a href="#cb6-8"></a>                         f_eqcons<span class="op">=</span><span class="kw">lambda</span> x: np.<span class="bu">sum</span>(x) <span class="op">-</span> <span class="dv">1</span>,</span>
-<span id="cb6-9"><a href="#cb6-9"></a>                         bounds<span class="op">=</span>[(<span class="fl">0.0</span>, <span class="fl">1.0</span>)]<span class="op">*</span><span class="bu">len</span>(w_start),</span>
-<span id="cb6-10"><a href="#cb6-10"></a>                         disp<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb6-11"><a href="#cb6-11"></a>    <span class="cf">return</span> weights</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4"><a href="#cb5-4"></a>X1 <span class="op">=</span> inverted[<span class="dv">3</span>].values <span class="co"># state of california</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>X0 <span class="op">=</span> inverted.drop(columns<span class="op">=</span><span class="dv">3</span>).values  <span class="co"># other states</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="kw">def</span> loss_w(W, X0, X1) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb5-8"><a href="#cb5-8"></a>    <span class="cf">return</span> np.sqrt(np.mean((X1 <span class="op">-</span> X0.dot(W))<span class="op">**</span><span class="dv">2</span>))</span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="kw">def</span> get_w(X0, X1):</span>
+<span id="cb5-12"><a href="#cb5-12"></a>    w_start <span class="op">=</span> [<span class="dv">1</span><span class="op">/</span>X0.shape[<span class="dv">1</span>]]<span class="op">*</span>X0.shape[<span class="dv">1</span>]</span>
+<span id="cb5-13"><a href="#cb5-13"></a>    weights <span class="op">=</span> fmin_slsqp(partial(loss_w, X0<span class="op">=</span>X0, X1<span class="op">=</span>X1),</span>
+<span id="cb5-14"><a href="#cb5-14"></a>                         np.array(w_start),</span>
+<span id="cb5-15"><a href="#cb5-15"></a>                         f_eqcons<span class="op">=</span><span class="kw">lambda</span> x: np.<span class="bu">sum</span>(x) <span class="op">-</span> <span class="dv">1</span>,</span>
+<span id="cb5-16"><a href="#cb5-16"></a>                         bounds<span class="op">=</span>[(<span class="fl">0.0</span>, <span class="fl">1.0</span>)]<span class="op">*</span><span class="bu">len</span>(w_start),</span>
+<span id="cb5-17"><a href="#cb5-17"></a>                         disp<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-18"><a href="#cb5-18"></a>    <span class="cf">return</span> weights</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="examining-weights" class="slide level2">
@@ -913,14 +922,14 @@ Y_{J+1,1} &amp; \cdots &amp; Y_{J+1,T_0} &amp; z_{J+1,1} &amp; \cdots &amp; z_{J
 <li>Good idea to examine which untreated units get positive weight</li>
 <li>Should look at state names, but the data does not have them, and the <code>state</code> variable is not FIPs code or any standard identifier</li>
 </ul>
-<div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>calif_weights <span class="op">=</span> get_w(X0, X1)</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="bu">print</span>(<span class="st">"Sum:"</span>, calif_weights.<span class="bu">sum</span>())</span>
-<span id="cb7-3"><a href="#cb7-3"></a>np.<span class="bu">round</span>(calif_weights, <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>calif_weights <span class="op">=</span> get_w(X0, X1)</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="bu">print</span>(<span class="st">"Sum:"</span>, calif_weights.<span class="bu">sum</span>())</span>
+<span id="cb6-3"><a href="#cb6-3"></a>np.<span class="bu">round</span>(calif_weights, <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Sum: 1.000000000000424</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>array([0.    , 0.    , 0.    , 0.0852, 0.    , 0.    , 0.    , 0.    ,
        0.    , 0.    , 0.    , 0.    , 0.    , 0.    , 0.    , 0.    ,
        0.    , 0.    , 0.    , 0.113 , 0.1051, 0.4566, 0.    , 0.    ,
@@ -931,17 +940,17 @@ Y_{J+1,1} &amp; \cdots &amp; Y_{J+1,T_0} &amp; z_{J+1,1} &amp; \cdots &amp; z_{J
 </section>
 <section id="effect-of-california-tobacco-control-program" class="slide level2">
 <h2>Effect of California Tobacco Control Program</h2>
-<div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>calif_synth <span class="op">=</span> cigar.query(<span class="st">"~california"</span>).pivot(index<span class="op">=</span><span class="st">'year'</span>, columns<span class="op">=</span><span class="st">"state"</span>)[<span class="st">"cigsale"</span>].values.dot(calif_weights)</span>
-<span id="cb10-2"><a href="#cb10-2"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">6</span>))</span>
-<span id="cb10-3"><a href="#cb10-3"></a>plt.plot(cigar.query(<span class="st">"california"</span>)[<span class="st">"year"</span>], cigar.query(<span class="st">"california"</span>)[<span class="st">"cigsale"</span>], label<span class="op">=</span><span class="st">"California"</span>)</span>
-<span id="cb10-4"><a href="#cb10-4"></a>plt.plot(cigar.query(<span class="st">"california"</span>)[<span class="st">"year"</span>], calif_synth, label<span class="op">=</span><span class="st">"Synthetic Control"</span>)</span>
-<span id="cb10-5"><a href="#cb10-5"></a>plt.vlines(x<span class="op">=</span><span class="dv">1988</span>, ymin<span class="op">=</span><span class="dv">40</span>, ymax<span class="op">=</span><span class="dv">140</span>, linestyle<span class="op">=</span><span class="st">":"</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"Proposition 99"</span>)</span>
-<span id="cb10-6"><a href="#cb10-6"></a>plt.ylabel(<span class="st">"Per-capita cigarette sales (in packs)"</span>)</span>
-<span id="cb10-7"><a href="#cb10-7"></a>plt.legend()</span>
-<span id="cb10-8"><a href="#cb10-8"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>calif_synth <span class="op">=</span> cigar.query(<span class="st">"~california"</span>).pivot(index<span class="op">=</span><span class="st">'year'</span>, columns<span class="op">=</span><span class="st">"state"</span>)[<span class="st">"cigsale"</span>].values.dot(calif_weights)</span>
+<span id="cb9-2"><a href="#cb9-2"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">6</span>))</span>
+<span id="cb9-3"><a href="#cb9-3"></a>plt.plot(cigar.query(<span class="st">"california"</span>)[<span class="st">"year"</span>], cigar.query(<span class="st">"california"</span>)[<span class="st">"cigsale"</span>], label<span class="op">=</span><span class="st">"California"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4"></a>plt.plot(cigar.query(<span class="st">"california"</span>)[<span class="st">"year"</span>], calif_synth, label<span class="op">=</span><span class="st">"Synthetic Control"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5"></a>plt.vlines(x<span class="op">=</span><span class="dv">1988</span>, ymin<span class="op">=</span><span class="dv">40</span>, ymax<span class="op">=</span><span class="dv">140</span>, linestyle<span class="op">=</span><span class="st">":"</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"Proposition 99"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6"></a>plt.ylabel(<span class="st">"Per-capita cigarette sales (in packs)"</span>)</span>
+<span id="cb9-7"><a href="#cb9-7"></a>plt.legend()</span>
+<span id="cb9-8"><a href="#cb9-8"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img data-src="syntheticcontrol_files/figure-revealjs/cell-9-output-1.png" width="922" height="509"></p>
+<p><img data-src="syntheticcontrol_files/figure-revealjs/cell-8-output-1.png" width="922" height="509"></p>
 </div>
 </div>
 </section>
@@ -992,7 +1001,7 @@ Y_{jt}(0) = \delta_t + \theta_t Z_j + \lambda_t \mu_j + \epsilon_{jt}
 \]</span>
 <ul>
 <li>single observation of <span class="math inline">\(Y_{1t}\)</span></li>
-<li><span class="math inline">\(\hat{w}_j\)</span> depends on pre-treatment variables <span class="math inline">\(\mathbf{X}_1, \mathbf{X}_0\)</span>, <span class="math inline">\(J+1 \times (T_0 + K)\)</span></li>
+<li><span class="math inline">\(\hat{w}_j\)</span> depends on pre-treatment variables <span class="math inline">\(\underbrace{\mathbf{X}_1, \mathbf{X}_0}_{(J+1) \times (T_0 + K)}\)</span></li>
 <li><span class="math inline">\(J\)</span> values of <span class="math inline">\(Y_{jt}\)</span></li>
 </ul></li>
 <li>Usual asymptotics not applicable</li>
@@ -1007,110 +1016,106 @@ Y_{jt}(0) = \delta_t + \theta_t Z_j + \lambda_t \mu_j + \epsilon_{jt}
 </section>
 <section id="treatment-permutation-1" class="slide level2">
 <h2>Treatment Permutation</h2>
-<div class="cell" data-execution_count="10">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">def</span> synthetic_control(state: <span class="bu">int</span>, data: pd.DataFrame) <span class="op">-&gt;</span> np.array:</span>
-<span id="cb11-2"><a href="#cb11-2"></a>    features <span class="op">=</span> [<span class="st">"cigsale"</span>, <span class="st">"retprice"</span>]</span>
-<span id="cb11-3"><a href="#cb11-3"></a>    inverted <span class="op">=</span> (data.query(<span class="st">"~after_treatment"</span>)</span>
-<span id="cb11-4"><a href="#cb11-4"></a>                .pivot(index<span class="op">=</span><span class="st">'state'</span>, columns<span class="op">=</span><span class="st">"year"</span>)[features]</span>
-<span id="cb11-5"><a href="#cb11-5"></a>                .T)</span>
-<span id="cb11-6"><a href="#cb11-6"></a>    X1 <span class="op">=</span> inverted[state].values <span class="co"># treated</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a>    X0 <span class="op">=</span> inverted.drop(columns<span class="op">=</span>state).values <span class="co"># donor pool</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a></span>
-<span id="cb11-9"><a href="#cb11-9"></a>    weights <span class="op">=</span> get_w(X0, X1)</span>
-<span id="cb11-10"><a href="#cb11-10"></a>    synthetic <span class="op">=</span> (data.query(<span class="ss">f"~(state==</span><span class="sc">{</span>state<span class="sc">}</span><span class="ss">)"</span>)</span>
-<span id="cb11-11"><a href="#cb11-11"></a>                 .pivot(index<span class="op">=</span><span class="st">'year'</span>, columns<span class="op">=</span><span class="st">"state"</span>)[<span class="st">"cigsale"</span>]</span>
-<span id="cb11-12"><a href="#cb11-12"></a>                 .values.dot(weights))</span>
-<span id="cb11-13"><a href="#cb11-13"></a>    <span class="cf">return</span> (data</span>
-<span id="cb11-14"><a href="#cb11-14"></a>            .query(<span class="ss">f"state==</span><span class="sc">{</span>state<span class="sc">}</span><span class="ss">"</span>)[[<span class="st">"state"</span>, <span class="st">"year"</span>, <span class="st">"cigsale"</span>, <span class="st">"after_treatment"</span>]]</span>
-<span id="cb11-15"><a href="#cb11-15"></a>            .assign(synthetic<span class="op">=</span>synthetic))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">def</span> synthetic_control(state: <span class="bu">int</span>, data: pd.DataFrame) <span class="op">-&gt;</span> np.array:</span>
+<span id="cb10-2"><a href="#cb10-2"></a>    features <span class="op">=</span> [<span class="st">"cigsale"</span>, <span class="st">"retprice"</span>]</span>
+<span id="cb10-3"><a href="#cb10-3"></a>    inverted <span class="op">=</span> (data.query(<span class="st">"~after_treatment"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4"></a>                .pivot(index<span class="op">=</span><span class="st">'state'</span>, columns<span class="op">=</span><span class="st">"year"</span>)[features]</span>
+<span id="cb10-5"><a href="#cb10-5"></a>                .T)</span>
+<span id="cb10-6"><a href="#cb10-6"></a>    X1 <span class="op">=</span> inverted[state].values <span class="co"># treated</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>    X0 <span class="op">=</span> inverted.drop(columns<span class="op">=</span>state).values <span class="co"># donor pool</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a></span>
+<span id="cb10-9"><a href="#cb10-9"></a>    weights <span class="op">=</span> get_w(X0, X1)</span>
+<span id="cb10-10"><a href="#cb10-10"></a>    synthetic <span class="op">=</span> (data.query(<span class="ss">f"~(state==</span><span class="sc">{</span>state<span class="sc">}</span><span class="ss">)"</span>)</span>
+<span id="cb10-11"><a href="#cb10-11"></a>                 .pivot(index<span class="op">=</span><span class="st">'year'</span>, columns<span class="op">=</span><span class="st">"state"</span>)[<span class="st">"cigsale"</span>]</span>
+<span id="cb10-12"><a href="#cb10-12"></a>                 .values.dot(weights))</span>
+<span id="cb10-13"><a href="#cb10-13"></a>    <span class="cf">return</span> (data</span>
+<span id="cb10-14"><a href="#cb10-14"></a>            .query(<span class="ss">f"state==</span><span class="sc">{</span>state<span class="sc">}</span><span class="ss">"</span>)[[<span class="st">"state"</span>, <span class="st">"year"</span>, <span class="st">"cigsale"</span>, <span class="st">"after_treatment"</span>]]</span>
+<span id="cb10-15"><a href="#cb10-15"></a>            .assign(synthetic<span class="op">=</span>synthetic))</span>
+<span id="cb10-16"><a href="#cb10-16"></a></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="im">from</span> joblib <span class="im">import</span> Parallel, delayed</span>
+<span id="cb10-18"><a href="#cb10-18"></a></span>
+<span id="cb10-19"><a href="#cb10-19"></a>control_pool <span class="op">=</span> cigar[<span class="st">"state"</span>].unique()</span>
+<span id="cb10-20"><a href="#cb10-20"></a>parallel_fn <span class="op">=</span> delayed(partial(synthetic_control, data<span class="op">=</span>cigar))</span>
+<span id="cb10-21"><a href="#cb10-21"></a>synthetic_states <span class="op">=</span> Parallel(n_jobs<span class="op">=</span><span class="dv">20</span>)(parallel_fn(state) <span class="cf">for</span> state <span class="kw">in</span> control_pool)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="11">
+</section>
+<section id="treatment-permutation-2" class="slide level2">
+<h2>Treatment Permutation</h2>
+<div class="cell" data-execution_count="9">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="im">from</span> joblib <span class="im">import</span> Parallel, delayed</span>
-<span id="cb12-2"><a href="#cb12-2"></a></span>
-<span id="cb12-3"><a href="#cb12-3"></a>control_pool <span class="op">=</span> cigar[<span class="st">"state"</span>].unique()</span>
-<span id="cb12-4"><a href="#cb12-4"></a>parallel_fn <span class="op">=</span> delayed(partial(synthetic_control, data<span class="op">=</span>cigar))</span>
-<span id="cb12-5"><a href="#cb12-5"></a>synthetic_states <span class="op">=</span> Parallel(n_jobs<span class="op">=</span><span class="dv">20</span>)(parallel_fn(state) <span class="cf">for</span> state <span class="kw">in</span> control_pool)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell" data-execution_count="12">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">7</span>))</span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="cf">for</span> state <span class="kw">in</span> synthetic_states:</span>
-<span id="cb13-3"><a href="#cb13-3"></a>    plt.plot(state[<span class="st">"year"</span>], state[<span class="st">"cigsale"</span>] <span class="op">-</span> state[<span class="st">"synthetic"</span>], color<span class="op">=</span><span class="st">"C5"</span>,alpha<span class="op">=</span><span class="fl">0.4</span>)</span>
-<span id="cb13-4"><a href="#cb13-4"></a></span>
-<span id="cb13-5"><a href="#cb13-5"></a>plt.plot(cigar.query(<span class="st">"california"</span>)[<span class="st">"year"</span>], cigar.query(<span class="st">"california"</span>)[<span class="st">"cigsale"</span>] <span class="op">-</span> calif_synth,</span>
-<span id="cb13-6"><a href="#cb13-6"></a>        label<span class="op">=</span><span class="st">"California"</span>)<span class="op">;</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a></span>
-<span id="cb13-8"><a href="#cb13-8"></a>plt.vlines(x<span class="op">=</span><span class="dv">1988</span>, ymin<span class="op">=-</span><span class="dv">50</span>, ymax<span class="op">=</span><span class="dv">120</span>, linestyle<span class="op">=</span><span class="st">":"</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"Proposition 99"</span>)</span>
-<span id="cb13-9"><a href="#cb13-9"></a>plt.hlines(y<span class="op">=</span><span class="dv">0</span>, xmin<span class="op">=</span><span class="dv">1970</span>, xmax<span class="op">=</span><span class="dv">2000</span>, lw<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb13-10"><a href="#cb13-10"></a>plt.ylabel(<span class="st">"Gap in per-capita cigarette sales (in packs)"</span>)</span>
-<span id="cb13-11"><a href="#cb13-11"></a>plt.title(<span class="st">"State - Synthetic Across Time"</span>)</span>
-<span id="cb13-12"><a href="#cb13-12"></a>plt.legend()</span>
-<span id="cb13-13"><a href="#cb13-13"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">7</span>))</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="cf">for</span> state <span class="kw">in</span> synthetic_states:</span>
+<span id="cb11-3"><a href="#cb11-3"></a>    plt.plot(state[<span class="st">"year"</span>], state[<span class="st">"cigsale"</span>] <span class="op">-</span> state[<span class="st">"synthetic"</span>], color<span class="op">=</span><span class="st">"C5"</span>,alpha<span class="op">=</span><span class="fl">0.4</span>)</span>
+<span id="cb11-4"><a href="#cb11-4"></a></span>
+<span id="cb11-5"><a href="#cb11-5"></a>plt.plot(cigar.query(<span class="st">"california"</span>)[<span class="st">"year"</span>], cigar.query(<span class="st">"california"</span>)[<span class="st">"cigsale"</span>] <span class="op">-</span> calif_synth,</span>
+<span id="cb11-6"><a href="#cb11-6"></a>        label<span class="op">=</span><span class="st">"California"</span>)<span class="op">;</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a></span>
+<span id="cb11-8"><a href="#cb11-8"></a>plt.vlines(x<span class="op">=</span><span class="dv">1988</span>, ymin<span class="op">=-</span><span class="dv">50</span>, ymax<span class="op">=</span><span class="dv">120</span>, linestyle<span class="op">=</span><span class="st">":"</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"Proposition 99"</span>)</span>
+<span id="cb11-9"><a href="#cb11-9"></a>plt.hlines(y<span class="op">=</span><span class="dv">0</span>, xmin<span class="op">=</span><span class="dv">1970</span>, xmax<span class="op">=</span><span class="dv">2000</span>, lw<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb11-10"><a href="#cb11-10"></a>plt.ylabel(<span class="st">"Gap in per-capita cigarette sales (in packs)"</span>)</span>
+<span id="cb11-11"><a href="#cb11-11"></a>plt.title(<span class="st">"State - Synthetic Across Time"</span>)</span>
+<span id="cb11-12"><a href="#cb11-12"></a>plt.legend()</span>
+<span id="cb11-13"><a href="#cb11-13"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img data-src="syntheticcontrol_files/figure-revealjs/cell-12-output-1.png" width="1092" height="615"></p>
+<p><img data-src="syntheticcontrol_files/figure-revealjs/cell-10-output-1.png" width="1092" height="615"></p>
 </div>
 </div>
 </section>
 <section id="treatment-permutation-inference" class="slide level2">
 <h2>Treatment Permutation Inference</h2>
-<div class="cell" data-execution_count="13">
+<div class="cell" data-execution_count="10">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">def</span> pre_treatment_error(state):</span>
-<span id="cb14-2"><a href="#cb14-2"></a>    pre_treat_error <span class="op">=</span> (state.query(<span class="st">"~after_treatment"</span>)[<span class="st">"cigsale"</span>]</span>
-<span id="cb14-3"><a href="#cb14-3"></a>                       <span class="op">-</span> state.query(<span class="st">"~after_treatment"</span>)[<span class="st">"synthetic"</span>]) <span class="op">**</span> <span class="dv">2</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a>    <span class="cf">return</span> pre_treat_error.mean()</span>
-<span id="cb14-5"><a href="#cb14-5"></a></span>
-<span id="cb14-6"><a href="#cb14-6"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">7</span>))</span>
-<span id="cb14-7"><a href="#cb14-7"></a><span class="cf">for</span> state <span class="kw">in</span> synthetic_states:</span>
-<span id="cb14-8"><a href="#cb14-8"></a></span>
-<span id="cb14-9"><a href="#cb14-9"></a>    <span class="co"># remove units with mean error above 80.</span></span>
-<span id="cb14-10"><a href="#cb14-10"></a>    <span class="cf">if</span> pre_treatment_error(state) <span class="op">&lt;</span> <span class="dv">80</span>:</span>
-<span id="cb14-11"><a href="#cb14-11"></a>        plt.plot(state[<span class="st">"year"</span>], state[<span class="st">"cigsale"</span>] <span class="op">-</span> state[<span class="st">"synthetic"</span>], color<span class="op">=</span><span class="st">"C5"</span>,alpha<span class="op">=</span><span class="fl">0.4</span>)</span>
-<span id="cb14-12"><a href="#cb14-12"></a></span>
-<span id="cb14-13"><a href="#cb14-13"></a>plt.plot(cigar.query(<span class="st">"california"</span>)[<span class="st">"year"</span>], cigar.query(<span class="st">"california"</span>)[<span class="st">"cigsale"</span>] <span class="op">-</span> calif_synth,</span>
-<span id="cb14-14"><a href="#cb14-14"></a>        label<span class="op">=</span><span class="st">"California"</span>)<span class="op">;</span></span>
-<span id="cb14-15"><a href="#cb14-15"></a></span>
-<span id="cb14-16"><a href="#cb14-16"></a>plt.vlines(x<span class="op">=</span><span class="dv">1988</span>, ymin<span class="op">=-</span><span class="dv">50</span>, ymax<span class="op">=</span><span class="dv">120</span>, linestyle<span class="op">=</span><span class="st">":"</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"Proposition 99"</span>)</span>
-<span id="cb14-17"><a href="#cb14-17"></a>plt.hlines(y<span class="op">=</span><span class="dv">0</span>, xmin<span class="op">=</span><span class="dv">1970</span>, xmax<span class="op">=</span><span class="dv">2000</span>, lw<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb14-18"><a href="#cb14-18"></a>plt.ylabel(<span class="st">"Gap in per-capita cigarette sales (in packs)"</span>)</span>
-<span id="cb14-19"><a href="#cb14-19"></a>plt.title(<span class="st">"Distribution of Effects"</span>)</span>
-<span id="cb14-20"><a href="#cb14-20"></a>plt.title(<span class="st">"State - Synthetic Across Time (Large Pre-Treatment Errors Removed)"</span>)</span>
-<span id="cb14-21"><a href="#cb14-21"></a>plt.legend()</span>
-<span id="cb14-22"><a href="#cb14-22"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">def</span> pre_treatment_error(state):</span>
+<span id="cb12-2"><a href="#cb12-2"></a>    pre_treat_error <span class="op">=</span> (state.query(<span class="st">"~after_treatment"</span>)[<span class="st">"cigsale"</span>]</span>
+<span id="cb12-3"><a href="#cb12-3"></a>                       <span class="op">-</span> state.query(<span class="st">"~after_treatment"</span>)[<span class="st">"synthetic"</span>]) <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>    <span class="cf">return</span> pre_treat_error.mean()</span>
+<span id="cb12-5"><a href="#cb12-5"></a></span>
+<span id="cb12-6"><a href="#cb12-6"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">7</span>))</span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="cf">for</span> state <span class="kw">in</span> synthetic_states:</span>
+<span id="cb12-8"><a href="#cb12-8"></a></span>
+<span id="cb12-9"><a href="#cb12-9"></a>    <span class="co"># remove units with mean error above 80.</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>    <span class="cf">if</span> pre_treatment_error(state) <span class="op">&lt;</span> <span class="dv">80</span>:</span>
+<span id="cb12-11"><a href="#cb12-11"></a>        plt.plot(state[<span class="st">"year"</span>], state[<span class="st">"cigsale"</span>] <span class="op">-</span> state[<span class="st">"synthetic"</span>], color<span class="op">=</span><span class="st">"C5"</span>,alpha<span class="op">=</span><span class="fl">0.4</span>)</span>
+<span id="cb12-12"><a href="#cb12-12"></a></span>
+<span id="cb12-13"><a href="#cb12-13"></a>plt.plot(cigar.query(<span class="st">"california"</span>)[<span class="st">"year"</span>], cigar.query(<span class="st">"california"</span>)[<span class="st">"cigsale"</span>] <span class="op">-</span> calif_synth,</span>
+<span id="cb12-14"><a href="#cb12-14"></a>        label<span class="op">=</span><span class="st">"California"</span>)<span class="op">;</span></span>
+<span id="cb12-15"><a href="#cb12-15"></a></span>
+<span id="cb12-16"><a href="#cb12-16"></a>plt.vlines(x<span class="op">=</span><span class="dv">1988</span>, ymin<span class="op">=-</span><span class="dv">50</span>, ymax<span class="op">=</span><span class="dv">120</span>, linestyle<span class="op">=</span><span class="st">":"</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"Proposition 99"</span>)</span>
+<span id="cb12-17"><a href="#cb12-17"></a>plt.hlines(y<span class="op">=</span><span class="dv">0</span>, xmin<span class="op">=</span><span class="dv">1970</span>, xmax<span class="op">=</span><span class="dv">2000</span>, lw<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb12-18"><a href="#cb12-18"></a>plt.ylabel(<span class="st">"Gap in per-capita cigarette sales (in packs)"</span>)</span>
+<span id="cb12-19"><a href="#cb12-19"></a>plt.title(<span class="st">"Distribution of Effects"</span>)</span>
+<span id="cb12-20"><a href="#cb12-20"></a>plt.title(<span class="st">"State - Synthetic Across Time (Large Pre-Treatment Errors Removed)"</span>)</span>
+<span id="cb12-21"><a href="#cb12-21"></a>plt.legend()</span>
+<span id="cb12-22"><a href="#cb12-22"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img data-src="syntheticcontrol_files/figure-revealjs/cell-13-output-1.png" width="1092" height="615"></p>
+<p><img data-src="syntheticcontrol_files/figure-revealjs/cell-11-output-1.png" width="1092" height="615"></p>
 </div>
 </div>
 </section>
 <section id="treatment-permutation-inference-testing-h_0-tau0" class="slide level2">
 <h2>Treatment Permutation Inference: Testing <span class="math inline">\(H_0: \tau=0\)</span></h2>
-<div class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>calif_number <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a></span>
-<span id="cb15-3"><a href="#cb15-3"></a>effects <span class="op">=</span> [state.query(<span class="st">"year==2000"</span>).iloc[<span class="dv">0</span>][<span class="st">"cigsale"</span>] <span class="op">-</span> state.query(<span class="st">"year==2000"</span>).iloc[<span class="dv">0</span>][<span class="st">"synthetic"</span>]</span>
-<span id="cb15-4"><a href="#cb15-4"></a>           <span class="cf">for</span> state <span class="kw">in</span> synthetic_states</span>
-<span id="cb15-5"><a href="#cb15-5"></a>           <span class="cf">if</span> pre_treatment_error(state) <span class="op">&lt;</span> <span class="dv">80</span>] <span class="co"># filter out noise</span></span>
-<span id="cb15-6"><a href="#cb15-6"></a></span>
-<span id="cb15-7"><a href="#cb15-7"></a>calif_effect <span class="op">=</span> cigar.query(<span class="st">"california &amp; year==2000"</span>).iloc[<span class="dv">0</span>][<span class="st">"cigsale"</span>] <span class="op">-</span> calif_synth[<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb15-8"><a href="#cb15-8"></a></span>
-<span id="cb15-9"><a href="#cb15-9"></a><span class="bu">print</span>(<span class="st">"California Treatment Effect for the Year 2000:"</span>, calif_effect)</span>
-<span id="cb15-10"><a href="#cb15-10"></a>np.array(effects)</span>
-<span id="cb15-11"><a href="#cb15-11"></a></span>
-<span id="cb15-12"><a href="#cb15-12"></a>np.mean(np.array(effects) <span class="op">&lt;</span> calif_effect)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>calif_number <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a>effects <span class="op">=</span> [state.query(<span class="st">"year==2000"</span>).iloc[<span class="dv">0</span>][<span class="st">"cigsale"</span>] <span class="op">-</span> state.query(<span class="st">"year==2000"</span>).iloc[<span class="dv">0</span>][<span class="st">"synthetic"</span>]</span>
+<span id="cb13-4"><a href="#cb13-4"></a>           <span class="cf">for</span> state <span class="kw">in</span> synthetic_states</span>
+<span id="cb13-5"><a href="#cb13-5"></a>           <span class="cf">if</span> pre_treatment_error(state) <span class="op">&lt;</span> <span class="dv">80</span>] <span class="co"># filter out noise</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a></span>
+<span id="cb13-7"><a href="#cb13-7"></a>calif_effect <span class="op">=</span> cigar.query(<span class="st">"california &amp; year==2000"</span>).iloc[<span class="dv">0</span>][<span class="st">"cigsale"</span>] <span class="op">-</span> calif_synth[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb13-8"><a href="#cb13-8"></a></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="bu">print</span>(<span class="st">"California Treatment Effect for the Year 2000:"</span>, calif_effect)</span>
+<span id="cb13-10"><a href="#cb13-10"></a>np.array(effects)</span>
+<span id="cb13-11"><a href="#cb13-11"></a></span>
+<span id="cb13-12"><a href="#cb13-12"></a>np.mean(np.array(effects) <span class="op">&lt;</span> calif_effect)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>California Treatment Effect for the Year 2000: -24.83015975607075</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>0.02857142857142857</code></pre>
 </div>
 </div>
@@ -1154,7 +1159,7 @@ Y_{jt}(0) = \delta_t + \theta_t Z_j + \lambda_t \mu_j + \epsilon_{jt}
 <li>Cons:
 <ul>
 <li>Assumption about randomized treatment assignment is generally false</li>
-<li>Hard to test hypotheses other than <span class="math inline">\(H_0: \tau=0\)</span> &amp; hard to construct confidence intervals</li>
+<li>Needs modification to test hypotheses other than <span class="math inline">\(H_0: \tau=0\)</span> &amp; to construct confidence intervals</li>
 </ul></li>
 </ul>
 </section>
@@ -1185,8 +1190,8 @@ Y_{jt}(0) = \delta_t + \theta_t Z_j + \lambda_t \mu_j + \epsilon_{jt}
 <h2>Prediction Intervals</h2>
 <ul>
 <li>Modern approaches accomodate high-dimensionality and give non-asymptotic results</li>
-<li><span class="citation" data-cites="cwz2021">Victor Chernozhukov and Zhu (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span> : construct prediction intervals by permuting residuals (conformal inference)</li>
-<li><span class="citation" data-cites="cattaneo2021">Matias D. Cattaneo and Titiunik (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span> : divide prediction error into two pieces: estimation of <span class="math inline">\(\hat{w}\)</span> and unpredictable randomness in <span class="math inline">\(Y_{1t}(0)\)</span></li>
+<li><span class="citation" data-cites="cwz2021">Chernozhukov, Wüthrich, and Zhu (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span> : construct prediction intervals by permuting residuals (conformal inference)</li>
+<li><span class="citation" data-cites="cattaneo2021">Cattaneo, Feng, and Titiunik (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span> : divide prediction error into two pieces: estimation of <span class="math inline">\(\hat{w}\)</span> and unpredictable randomness in <span class="math inline">\(Y_{1t}(0)\)</span></li>
 </ul>
 </section>
 <section id="catteneo-feng-titiunik" class="slide level2">
@@ -1194,7 +1199,7 @@ Y_{jt}(0) = \delta_t + \theta_t Z_j + \lambda_t \mu_j + \epsilon_{jt}
 <ul>
 <li><p>Given coverage level <span class="math inline">\(\alpha\)</span>, gives interval <span class="math inline">\(\mathcal{I}_{1-\alpha}\)</span> such that <span class="math display">\[
 P\left[ P\left(\tau_{1t} \in \mathcal{I}_{1-\alpha} | \mathbf{X}_0, \{y_{jt}\}_{j=1}^J\right) &gt; 1-\alpha-\epsilon(T_0) \right] &gt; 1 - \pi(T_0)
-\]</span> where <span class="math inline">\(\epsilon(T_0) \to 0\)</span> and <span class="math inline">\(pi(T_0) \to 0\)</span> as <span class="math inline">\(T_0 \to \infty\)</span></p></li>
+\]</span> where <span class="math inline">\(\epsilon(T_0) \to 0\)</span> and <span class="math inline">\(\pi(T_0) \to 0\)</span> as <span class="math inline">\(T_0 \to \infty\)</span></p></li>
 <li><p>prediction error comes from</p>
 <ol type="1">
 <li>estimation of <span class="math inline">\(\hat{w}\)</span>, options refer to <code>u_</code> in <code>scpi_pkg</code></li>
@@ -1209,7 +1214,7 @@ P\left[ P\left(\tau_{1t} \in \mathcal{I}_{1-\alpha} | \mathbf{X}_0, \{y_{jt}\}_{
 <li><a href="https://github.com/nppackages/scpi">scpi_pkg</a> recommended, created by leading econometricians</li>
 <li><a href="https://github.com/sdfordham/pysyncon?tab=readme-ov-file">pysyncon</a> actively maintained, well-documented, but appears not popular</li>
 <li><a href="https://github.com/microsoft/SparseSC">SpareSC</a> created by researchers at Microsoft, uses particular variant</li>
-<li><a href="https://github.com/kwuthrich/scinference">scinference</a> R package accompanying <span class="citation" data-cites="cwz2021">Victor Chernozhukov and Zhu (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></li>
+<li><a href="https://github.com/kwuthrich/scinference">scinference</a> R package accompanying <span class="citation" data-cites="cwz2021">Chernozhukov, Wüthrich, and Zhu (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></li>
 </ul>
 </section></section>
 <section>
@@ -1219,31 +1224,31 @@ P\left[ P\left(\tau_{1t} \in \mathcal{I}_{1-\alpha} | \mathbf{X}_0, \{y_{jt}\}_{
 </section>
 <section id="data-preparation" class="slide level2">
 <h2>Data Preparation</h2>
-<div class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a><span class="im">import</span> random</span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="im">from</span> scpi_pkg.scdata <span class="im">import</span> scdata</span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="im">from</span> scpi_pkg.scest <span class="im">import</span> scest</span>
-<span id="cb18-4"><a href="#cb18-4"></a><span class="im">from</span> scpi_pkg.scplot <span class="im">import</span> scplot</span>
-<span id="cb18-5"><a href="#cb18-5"></a>scdf <span class="op">=</span> scdata(df<span class="op">=</span>cigar, id_var<span class="op">=</span><span class="st">"state"</span>, time_var<span class="op">=</span><span class="st">"year"</span>, outcome_var<span class="op">=</span><span class="st">"cigsale"</span>,</span>
-<span id="cb18-6"><a href="#cb18-6"></a>              period_pre<span class="op">=</span>cigar.query(<span class="st">"not after_treatment"</span>).year.unique(),</span>
-<span id="cb18-7"><a href="#cb18-7"></a>              period_post<span class="op">=</span>cigar.query(<span class="st">"after_treatment"</span>).year.unique(),</span>
-<span id="cb18-8"><a href="#cb18-8"></a>              unit_tr<span class="op">=</span>calif_number,</span>
-<span id="cb18-9"><a href="#cb18-9"></a>              unit_co<span class="op">=</span>cigar.query(<span class="st">"not california"</span>).state.unique(),</span>
-<span id="cb18-10"><a href="#cb18-10"></a>              features<span class="op">=</span>[<span class="st">"cigsale"</span>,<span class="st">"retprice"</span>],</span>
-<span id="cb18-11"><a href="#cb18-11"></a>              cov_adj<span class="op">=</span><span class="va">None</span>, cointegrated_data<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb18-12"><a href="#cb18-12"></a>              constant<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a><span class="im">import</span> random</span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="im">from</span> scpi_pkg.scdata <span class="im">import</span> scdata</span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="im">from</span> scpi_pkg.scest <span class="im">import</span> scest</span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="im">from</span> scpi_pkg.scplot <span class="im">import</span> scplot</span>
+<span id="cb16-5"><a href="#cb16-5"></a>scdf <span class="op">=</span> scdata(df<span class="op">=</span>cigar, id_var<span class="op">=</span><span class="st">"state"</span>, time_var<span class="op">=</span><span class="st">"year"</span>, outcome_var<span class="op">=</span><span class="st">"cigsale"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6"></a>              period_pre<span class="op">=</span>cigar.query(<span class="st">"not after_treatment"</span>).year.unique(),</span>
+<span id="cb16-7"><a href="#cb16-7"></a>              period_post<span class="op">=</span>cigar.query(<span class="st">"after_treatment"</span>).year.unique(),</span>
+<span id="cb16-8"><a href="#cb16-8"></a>              unit_tr<span class="op">=</span>calif_number,</span>
+<span id="cb16-9"><a href="#cb16-9"></a>              unit_co<span class="op">=</span>cigar.query(<span class="st">"not california"</span>).state.unique(),</span>
+<span id="cb16-10"><a href="#cb16-10"></a>              features<span class="op">=</span>[<span class="st">"cigsale"</span>,<span class="st">"retprice"</span>],</span>
+<span id="cb16-11"><a href="#cb16-11"></a>              cov_adj<span class="op">=</span><span class="va">None</span>, cointegrated_data<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb16-12"><a href="#cb16-12"></a>              constant<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="point-estimation" class="slide level2">
 <h2>Point Estimation</h2>
-<div class="cell" data-execution_count="16">
+<div class="cell" data-execution_count="13">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>est_si <span class="op">=</span> scest(scdf, w_constr<span class="op">=</span>{<span class="st">'name'</span>: <span class="st">"simplex"</span>})</span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="bu">print</span>(est_si)</span>
-<span id="cb19-3"><a href="#cb19-3"></a>est_si2 <span class="op">=</span> scest(scdf, w_constr<span class="op">=</span>{<span class="st">'p'</span>: <span class="st">'L1'</span>, <span class="st">'dir'</span>: <span class="st">'=='</span>, <span class="st">'Q'</span>: <span class="dv">1</span>, <span class="st">'lb'</span>: <span class="dv">0</span>})</span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="bu">print</span>(est_si2)</span>
-<span id="cb19-5"><a href="#cb19-5"></a>scplot(est_si)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>est_si <span class="op">=</span> scest(scdf, w_constr<span class="op">=</span>{<span class="st">'name'</span>: <span class="st">"simplex"</span>})</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="bu">print</span>(est_si)</span>
+<span id="cb17-3"><a href="#cb17-3"></a>est_si2 <span class="op">=</span> scest(scdf, w_constr<span class="op">=</span>{<span class="st">'p'</span>: <span class="st">'L1'</span>, <span class="st">'dir'</span>: <span class="st">'=='</span>, <span class="st">'Q'</span>: <span class="dv">1</span>, <span class="st">'lb'</span>: <span class="dv">0</span>})</span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="bu">print</span>(est_si2)</span>
+<span id="cb17-5"><a href="#cb17-5"></a>scplot(est_si)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>-----------------------------------------------------------------------
@@ -1378,36 +1383,36 @@ Treated Unit Donor
 </code></pre>
 </div>
 
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
 </div>
 </div>
-<img data-src="syntheticcontrol_files/figure-revealjs/cell-16-output-2.png" class="r-stretch"></section>
+<img data-src="syntheticcontrol_files/figure-revealjs/cell-14-output-2.png" class="r-stretch"></section>
 <section id="inference-2" class="slide level2">
 <h2>Inference</h2>
-<div class="cell" data-execution_count="17">
+<div class="cell" data-execution_count="14">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a><span class="im">from</span> scpi_pkg.scpi <span class="im">import</span> scpi</span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="im">import</span> random</span>
-<span id="cb22-3"><a href="#cb22-3"></a>w_constr <span class="op">=</span> {<span class="st">'name'</span>: <span class="st">'simplex'</span>, <span class="st">'Q'</span>: <span class="dv">1</span>}</span>
-<span id="cb22-4"><a href="#cb22-4"></a>u_missp <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb22-5"><a href="#cb22-5"></a>u_sigma <span class="op">=</span> <span class="st">"HC1"</span></span>
-<span id="cb22-6"><a href="#cb22-6"></a>u_order <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb22-7"><a href="#cb22-7"></a>u_lags <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb22-8"><a href="#cb22-8"></a>e_method <span class="op">=</span> <span class="st">"gaussian"</span></span>
-<span id="cb22-9"><a href="#cb22-9"></a>e_order <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb22-10"><a href="#cb22-10"></a>e_lags <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb22-11"><a href="#cb22-11"></a>e_alpha <span class="op">=</span> <span class="fl">0.05</span></span>
-<span id="cb22-12"><a href="#cb22-12"></a>u_alpha <span class="op">=</span> <span class="fl">0.05</span></span>
-<span id="cb22-13"><a href="#cb22-13"></a>sims <span class="op">=</span> <span class="dv">200</span></span>
-<span id="cb22-14"><a href="#cb22-14"></a>cores <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb22-15"><a href="#cb22-15"></a></span>
-<span id="cb22-16"><a href="#cb22-16"></a>random.seed(<span class="dv">8894</span>)</span>
-<span id="cb22-17"><a href="#cb22-17"></a>result <span class="op">=</span> scpi(scdf, sims<span class="op">=</span>sims, w_constr<span class="op">=</span>w_constr, u_order<span class="op">=</span>u_order, u_lags<span class="op">=</span>u_lags,</span>
-<span id="cb22-18"><a href="#cb22-18"></a>              e_order<span class="op">=</span>e_order, e_lags<span class="op">=</span>e_lags, e_method<span class="op">=</span>e_method, u_missp<span class="op">=</span>u_missp,</span>
-<span id="cb22-19"><a href="#cb22-19"></a>              u_sigma<span class="op">=</span>u_sigma, cores<span class="op">=</span>cores, e_alpha<span class="op">=</span>e_alpha, u_alpha<span class="op">=</span>u_alpha)</span>
-<span id="cb22-20"><a href="#cb22-20"></a>scplot(result, e_out<span class="op">=</span><span class="va">True</span>, x_lab<span class="op">=</span><span class="st">"year"</span>, y_lab<span class="op">=</span><span class="st">"per-capita cigarette sales (in packs)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a><span class="im">from</span> scpi_pkg.scpi <span class="im">import</span> scpi</span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="im">import</span> random</span>
+<span id="cb20-3"><a href="#cb20-3"></a>w_constr <span class="op">=</span> {<span class="st">'name'</span>: <span class="st">'simplex'</span>, <span class="st">'Q'</span>: <span class="dv">1</span>}</span>
+<span id="cb20-4"><a href="#cb20-4"></a>u_missp <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>u_sigma <span class="op">=</span> <span class="st">"HC1"</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a>u_order <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a>u_lags <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a>e_method <span class="op">=</span> <span class="st">"gaussian"</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a>e_order <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a>e_lags <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a>e_alpha <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb20-12"><a href="#cb20-12"></a>u_alpha <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb20-13"><a href="#cb20-13"></a>sims <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb20-14"><a href="#cb20-14"></a>cores <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb20-15"><a href="#cb20-15"></a></span>
+<span id="cb20-16"><a href="#cb20-16"></a>random.seed(<span class="dv">8894</span>)</span>
+<span id="cb20-17"><a href="#cb20-17"></a>result <span class="op">=</span> scpi(scdf, sims<span class="op">=</span>sims, w_constr<span class="op">=</span>w_constr, u_order<span class="op">=</span>u_order, u_lags<span class="op">=</span>u_lags,</span>
+<span id="cb20-18"><a href="#cb20-18"></a>              e_order<span class="op">=</span>e_order, e_lags<span class="op">=</span>e_lags, e_method<span class="op">=</span>e_method, u_missp<span class="op">=</span>u_missp,</span>
+<span id="cb20-19"><a href="#cb20-19"></a>              u_sigma<span class="op">=</span>u_sigma, cores<span class="op">=</span>cores, e_alpha<span class="op">=</span>e_alpha, u_alpha<span class="op">=</span>u_alpha)</span>
+<span id="cb20-20"><a href="#cb20-20"></a>scplot(result, e_out<span class="op">=</span><span class="va">True</span>, x_lab<span class="op">=</span><span class="st">"year"</span>, y_lab<span class="op">=</span><span class="st">"per-capita cigarette sales (in packs)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>-----------------------------------------------
@@ -1428,11 +1433,11 @@ Maximum expected execution time: 2 minutes.
 200/200 iterations completed (100%)</code></pre>
 </div>
 
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
 </div>
 </div>
-<img data-src="syntheticcontrol_files/figure-revealjs/cell-17-output-2.png" class="r-stretch"></section>
+<img data-src="syntheticcontrol_files/figure-revealjs/cell-15-output-2.png" class="r-stretch"></section>
 <section id="sources-and-further-reading" class="slide level2">
 <h2>Sources and Further Reading</h2>
 <ul>
@@ -1442,7 +1447,7 @@ Maximum expected execution time: 2 minutes.
 <li>More technical:
 <ul>
 <li><span class="citation" data-cites="cattaneo2022">Cattaneo et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> user guide for <code>scpi_pkg</code></li>
-<li><span class="citation" data-cites="abadie2010">Alberto Abadie and Hainmueller (<a href="#/references" role="doc-biblioref" onclick="">2010</a>)</span> important paper popularizing synthetic control and permutation inference</li>
+<li><span class="citation" data-cites="abadie2010">Abadie, Diamond, and Hainmueller (<a href="#/references" role="doc-biblioref" onclick="">2010</a>)</span> important paper popularizing synthetic control and permutation inference</li>
 <li><span class="citation" data-cites="ac2021">Abadie and Cattaneo (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span> lists recent statistical advances in synthetic control</li>
 </ul></li>
 </ul>
@@ -1464,22 +1469,22 @@ Abadie, Alberto, Susan Athey, Guido W. Imbens, and Jeffrey M. Wooldridge. 2020. 
 Abadie, Alberto, and Matias D. Cattaneo. 2021. <span>“Introduction to the Special Section on Synthetic Control Methods.”</span> <em>Journal of the American Statistical Association</em> 116 (536): 1713–15. <a href="https://doi.org/10.1080/01621459.2021.2002600">https://doi.org/10.1080/01621459.2021.2002600</a>.
 </div>
 <div id="ref-abadie2010" class="csl-entry" role="listitem">
-Alberto Abadie, Alexis Diamond, and Jens Hainmueller. 2010. <span>“Synthetic Control Methods for Comparative Case Studies: Estimating the Effect of California’s Tobacco Control Program.”</span> <em>Journal of the American Statistical Association</em> 105 (490): 493–505. <a href="https://doi.org/10.1198/jasa.2009.ap08746">https://doi.org/10.1198/jasa.2009.ap08746</a>.
+Abadie, Alberto, Alexis Diamond, and Jens Hainmueller. 2010. <span>“Synthetic Control Methods for Comparative Case Studies: Estimating the Effect of California’s Tobacco Control Program.”</span> <em>Journal of the American Statistical Association</em> 105 (490): 493–505. <a href="https://doi.org/10.1198/jasa.2009.ap08746">https://doi.org/10.1198/jasa.2009.ap08746</a>.
 </div>
 <div id="ref-cattaneo2022" class="csl-entry" role="listitem">
 Cattaneo, Matias D., Yingjie Feng, Filippo Palomba, and Rocio Titiunik. 2022. <span>“Scpi: Uncertainty Quantification for Synthetic Control Methods.”</span>
+</div>
+<div id="ref-cattaneo2021" class="csl-entry" role="listitem">
+Cattaneo, Matias D., Yingjie Feng, and Rocio Titiunik. 2021. <span>“Prediction Intervals for Synthetic Control Methods.”</span> <em>Journal of the American Statistical Association</em> 116 (536): 1865–80. <a href="https://doi.org/10.1080/01621459.2021.1979561">https://doi.org/10.1080/01621459.2021.1979561</a>.
+</div>
+<div id="ref-cwz2021" class="csl-entry" role="listitem">
+Chernozhukov, Victor, Kaspar Wüthrich, and Yinchu Zhu. 2021. <span>“An Exact and Robust Conformal Inference Method for Counterfactual and Synthetic Controls.”</span> <em>Journal of the American Statistical Association</em> 116 (536): 1849–64. <a href="https://doi.org/10.1080/01621459.2021.1920957">https://doi.org/10.1080/01621459.2021.1920957</a>.
 </div>
 <div id="ref-facure2022" class="csl-entry" role="listitem">
 Facure, Matheus. 2022. <em>Causal Inference for the Brave and True</em>. <a href="https://matheusfacure.github.io/python-causality-handbook/landing-page.html">https://matheusfacure.github.io/python-causality-handbook/landing-page.html</a>.
 </div>
 <div id="ref-hk2021" class="csl-entry" role="listitem">
 Huntington-Klein, Nick. 2021. <em>The Effect: An Introduction to Research Design and Causality</em>. CRC Press. <a href="https://theeffectbook.net/">https://theeffectbook.net/</a>.
-</div>
-<div id="ref-cattaneo2021" class="csl-entry" role="listitem">
-Matias D. Cattaneo, Yingjie Feng, and Rocio Titiunik. 2021. <span>“Prediction Intervals for Synthetic Control Methods.”</span> <em>Journal of the American Statistical Association</em> 116 (536): 1865–80. <a href="https://doi.org/10.1080/01621459.2021.1979561">https://doi.org/10.1080/01621459.2021.1979561</a>.
-</div>
-<div id="ref-cwz2021" class="csl-entry" role="listitem">
-Victor Chernozhukov, Kaspar Wüthrich, and Yinchu Zhu. 2021. <span>“An Exact and Robust Conformal Inference Method for Counterfactual and Synthetic Controls.”</span> <em>Journal of the American Statistical Association</em> 116 (536): 1849–64. <a href="https://doi.org/10.1080/01621459.2021.1920957">https://doi.org/10.1080/01621459.2021.1920957</a>.
 </div>
 </div>
 </section></section>
