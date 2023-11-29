@@ -4,14 +4,14 @@
     "href": "feed.html",
     "title": "Slides",
     "section": "",
-    "text": "Difference in Differences II\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nECON 526: Quantitative Economics with Data Science Applications\n\n\n\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nFixed Effects\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nIntroduction to Difference in Differences\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nMatching\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nSynthetic Control\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\nNo matching items"
+    "text": "Difference in Differences II\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nDouble / Debiased Machine Learning\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nECON 526: Quantitative Economics with Data Science Applications\n\n\n\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nFixed Effects\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nIntroduction to Difference in Differences\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nMatching\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nSynthetic Control\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "ECON 526: Quantitative Economics with Data Science Applications",
     "section": "",
-    "text": "Slides\n\nMatching slides, notebook\n\nReading: chapters 10-12 of Facure (2022) and chapter 14 of Huntington-Klein (2021)\n\nIntroduction to difference in differences, notebook\n\nReading: chapter 13 of Facure (2022)\n\nFixed Effects, notebook\n\nReading: chapter 14 of Facure (2022)\n\nAdvanced difference in differences, notebook\n\nReading: chapter 24 of Facure (2022), Roth et al. (2023), Chaisemartin and D’Haultfœuille (2022)\n\nSynthetic Control, notebook\n\nReading: Abadie (2021),chapter 15 of Facure (2022)\n\n\n\n\n\n\n\nReferences\n\nAbadie, Alberto. 2021. “Using Synthetic Controls: Feasibility, Data Requirements, and Methodological Aspects.” Journal of Economic Literature 59 (2): 391–425. https://doi.org/10.1257/jel.20191450.\n\n\nChaisemartin, Clément de, and Xavier D’Haultfœuille. 2022. “Two-way fixed effects and differences-in-differences with heterogeneous treatment effects: a survey.” The Econometrics Journal 26 (3): C1–30. https://doi.org/10.1093/ectj/utac017.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/.\n\n\nRoth, Jonathan, Pedro H. C. Sant’Anna, Alyssa Bilinski, and John Poe. 2023. “What’s Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature.” Journal of Econometrics 235 (2): 2218–44. https://doi.org/https://doi.org/10.1016/j.jeconom.2023.03.008."
+    "text": "Slides\n\nMatching slides, notebook\n\nReading: chapters 10-12 of Facure (2022) and chapter 14 of Huntington-Klein (2021)\n\nIntroduction to difference in differences, notebook\n\nReading: chapter 13 of Facure (2022)\n\nFixed Effects, notebook\n\nReading: chapter 14 of Facure (2022)\n\nAdvanced difference in differences, notebook\n\nReading: chapter 24 of Facure (2022), Roth et al. (2023), Chaisemartin and D’Haultfœuille (2022)\n\nSynthetic Control, notebook\n\nReading: Abadie (2021),chapter 15 of Facure (2022)\n\nDouble/Debiased Machine Learning, notebook\n\nReading: QuantEcon ML in Economics\n\n\n\n\n\n\n\nReferences\n\nAbadie, Alberto. 2021. “Using Synthetic Controls: Feasibility, Data Requirements, and Methodological Aspects.” Journal of Economic Literature 59 (2): 391–425. https://doi.org/10.1257/jel.20191450.\n\n\nChaisemartin, Clément de, and Xavier D’Haultfœuille. 2022. “Two-way fixed effects and differences-in-differences with heterogeneous treatment effects: a survey.” The Econometrics Journal 26 (3): C1–30. https://doi.org/10.1093/ectj/utac017.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/.\n\n\nRoth, Jonathan, Pedro H. C. Sant’Anna, Alyssa Bilinski, and John Poe. 2023. “What’s Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature.” Journal of Econometrics 235 (2): 2218–44. https://doi.org/https://doi.org/10.1016/j.jeconom.2023.03.008."
   },
   {
     "objectID": "matching.html#setting",
@@ -838,5 +838,243 @@
     "title": "Synthetic Control",
     "section": "Treatment Permutation",
     "text": "Treatment Permutation\n\n\nCode\nplt.figure(figsize=(12,7))\nfor state in synthetic_states:\n    plt.plot(state[\"year\"], state[\"cigsale\"] - state[\"synthetic\"], color=\"C5\",alpha=0.4)\n\nplt.plot(cigar.query(\"california\")[\"year\"], cigar.query(\"california\")[\"cigsale\"] - calif_synth,\n        label=\"California\");\n\nplt.vlines(x=1988, ymin=-50, ymax=120, linestyle=\":\", lw=2, label=\"Proposition 99\")\nplt.hlines(y=0, xmin=1970, xmax=2000, lw=3)\nplt.ylabel(\"Gap in per-capita cigarette sales (in packs)\")\nplt.title(\"State - Synthetic Across Time\")\nplt.legend()\nplt.show()"
+  },
+  {
+    "objectID": "doubleml.html#introduction-1",
+    "href": "doubleml.html#introduction-1",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Introduction",
+    "text": "Introduction\n\nMany estimation tasks involve:\n\nLow dimensional parameter of interest\nHigh dimensional nuisance parameters needed to recover parameter of interest\n\nExample: in matching\n\nInterested in \\(ATE = \\Er[Y(1) - Y(0)]\\)\nNuisance parameters \\(\\Er[Y|D,X]\\) and/or \\(P(D=1|X)\\)"
+  },
+  {
+    "objectID": "doubleml.html#machine-learning-for-nuisance-parameters",
+    "href": "doubleml.html#machine-learning-for-nuisance-parameters",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Machine Learning for Nuisance Parameters",
+    "text": "Machine Learning for Nuisance Parameters\n\nIn matching we said that we could use flexible machine learning estimators for \\(\\Er[Y|D,X]\\) and \\(P(D=1|X)\\) and plug them into the doubly robust estimator\nWe will cover:\n\nSome of the technical details behind this idea\nHow this idea can be applied to other estimators\n\n\n\nThese notes will examine the incorportion of machine learning methods in classic econometric techniques for estimating causal effects. More specifally, we will focus on estimating treatment effects using matching and instrumental variables. In these estimators (and many others) there is a low-dimensional parameter of interest, such as the average treatment effect, but estimating it requires also estimating a potentially high dimensional nuisance parameter, such as the propensity score. Machine learning methods were developed for prediction with high dimensional data. It is then natural to try to use machine learning for estimating high dimensional nuisance parameters. Care must be taken when doing so though because the flexibility and complexity that make machine learning so good at prediction also pose challenges for inference."
+  },
+  {
+    "objectID": "doubleml.html#example-partially-linear-model",
+    "href": "doubleml.html#example-partially-linear-model",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Example: partially linear model",
+    "text": "Example: partially linear model\n\\[\n    y_i = \\theta d_i + f(x_i) + \\epsilon_i\n\\]\n\nInterested in \\(\\theta\\)\nAssume \\(\\Er[\\epsilon|d,x] = 0\\)\nNuisance parameter \\(f()\\)"
+  },
+  {
+    "objectID": "doubleml.html#example-matching",
+    "href": "doubleml.html#example-matching",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Example: Matching",
+    "text": "Example: Matching\n\nBinary treatment \\(d_i \\in \\{0,1\\}\\)\nPotential outcomes \\(y_i(0), y_i(1)\\), observe \\(y_i = y_i(d_i)\\)\nInterested in average treatment effect : \\(\\theta = \\Er[y_i(1) - y_i(0)]\\)\nCovariates \\(x_i\\)\nAssume unconfoundedness : \\(d_i \\indep y_i(1), y_i(0) | x_i\\)\n\n\nThe partially linear and matching models are closely related. If the conditional mean independence assumption of the partially linear model is strengthing to conditional indepence then the partially linear model is a special case of the matching model with constant treatment effects, \\(y_i(1) - y_i(0) = \\theta\\). Thus the matching model can be viewed as a generalization of the partially linear model that allows for treatment effect heterogeneity."
+  },
+  {
+    "objectID": "doubleml.html#example-matching-1",
+    "href": "doubleml.html#example-matching-1",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Example: Matching",
+    "text": "Example: Matching\n\nEstimatable formulae for ATE : \\[\n\\begin{align*}\n\\theta = & \\Er\\left[\\frac{y_i d_i}{\\Pr(d = 1 | x_i)} - \\frac{y_i\n    (1-d_i)}{1-\\Pr(d=1|x_i)} \\right] \\\\\n\\theta = & \\Er\\left[\\Er[y_i | d_i = 1, x_i] - \\Er[y_i | d_i = 0 , x_i]\\right] \\\\\n\\theta = & \\Er\\left[ \\begin{array}{l} d_i \\frac{y_i - \\Er[y_i | d_i = 1,\n    x_i]}{\\Pr(d=1|x_i)} - (1-d_i)\\frac{y_i - \\Er[y_i | d_i = 0,\n    x_i]}{1-\\Pr(d=1|x_i)} + \\\\ + \\Er[y_i | d_i = 1, x_i] - \\Er[y_i | d_i = 0 ,\n    x_i]\\end{array}\\right]\n\\end{align*}\n\\]"
+  },
+  {
+    "objectID": "doubleml.html#example-iv",
+    "href": "doubleml.html#example-iv",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Example: IV",
+    "text": "Example: IV\n\\[\n\\begin{align*}\ny_i = & \\theta d_i + f(x_i) + \\epsilon_i \\\\\nd_i = & g(x_i, z_i) + u_i\n\\end{align*}\n\\]\n\nInterested in \\(\\theta\\)\nAssume \\(\\Er[\\epsilon|x,z] = 0\\), \\(\\Er[u|x,z]=0\\)\nNuisance parameters \\(f()\\), \\(g()\\)"
+  },
+  {
+    "objectID": "doubleml.html#example-late",
+    "href": "doubleml.html#example-late",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Example: LATE",
+    "text": "Example: LATE\n\nBinary instrumet \\(z_i \\in \\{0,1\\}\\)\nPotential treatments \\(d_i(0), d_i(1) \\in \\{0,1\\}\\), \\(d_i = d_i(Z_i)\\)\nPotential outcomes \\(y_i(0), y_i(1)\\), observe \\(y_i = y_i(d_i)\\)\nCovariates \\(x_i\\)\n\\((y_i(1), y_i(0), d_i(1), d_i(0)) \\indep z_i | x_i\\)\nLocal average treatment effect: \\[\n\\begin{align*}\n\\theta = & \\Er\\left[\\Er[y_i(1) - y_i(0) | x, d_i(1) &gt; d_i(0)]\\right] \\\\\n     = & \\Er\\left[\\frac{\\Er[y|z=1,x] - \\Er[y|z=0,x]}\n                    {\\Er[d|z=1,x]-\\Er[d|z=0,x]} \\right]\n\\end{align*}\n\\]"
+  },
+  {
+    "objectID": "doubleml.html#general-setup",
+    "href": "doubleml.html#general-setup",
+    "title": "Double / Debiased Machine Learning",
+    "section": "General setup",
+    "text": "General setup\n\nParameter of interest \\(\\theta \\in \\R^{d_\\theta}\\)\nNuisance parameter \\(\\eta \\in T\\)\nMoment conditions \\[\n\\Er[\\psi(W;\\theta_0,\\eta_0) ] = 0 \\in \\R^{d_\\theta}\n\\] with \\(\\psi\\) known\nEstimate \\(\\hat{\\eta}\\) using some machine learning method\nEstimate \\(\\hat{\\theta}\\) from \\[\n\\En[\\psi(w_i;\\hat{\\theta},\\hat{\\eta}) ] = 0\n\\]\n\n\nWe are following the setup and notation of Chernozhukov et al. (2018). As in the examples, the dimension of \\(\\theta\\) is fixed and small. The dimension of \\(\\eta\\) is large and might be increasing with sample size. \\(T\\) is some normed vector space."
+  },
+  {
+    "objectID": "doubleml.html#example-partially-linear-model-1",
+    "href": "doubleml.html#example-partially-linear-model-1",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Example: partially linear model",
+    "text": "Example: partially linear model\n\\[\n    y_i = \\theta_0 d_i + f_0(x_i) + \\epsilon_i\n\\]\n\nCompare the estimates from\n\n\\(\\En[d_i(y_i - \\tilde{\\theta} d_i - \\hat{f}(x_i)) ] = 0\\)\n\nand\n\n\\(\\En[(d_i - \\hat{m}(x_i))(y_i - \\hat{\\mu}(x_i) - \\theta (d_i - \\hat{m}(x_i)))] = 0\\)\n\nwhere \\(m(x) = \\Er[d|x]\\) and \\(\\mu(y) = \\Er[y|x]\\)\n\n\nExample: partially linear model In the partially linear model,\n\\[\n    y_i = \\theta_0 d_i + f_0(x_i) + \\epsilon_i\n\\]\nwe can let \\(w_i = (y_i, x_i)\\) and \\(\\eta = f\\). There are a variety of candidates for \\(\\psi\\). An obvious (but flawed) one is \\(\\psi(w_i; \\theta, \\eta) = (y_i - \\theta_0 d_i - f_0(x_i))d_i\\). With this choice of \\(\\psi\\), we have\n\\[\n\\begin{align*}\n0 = & \\En[d_i(y_i - \\hat{\\theta} d_i - \\hat{f}(x_i)) ] \\\\\n\\hat{\\theta} = & \\En[d_i^2]^{-1} \\En[d_i (y_i - \\hat{f}(x_i))] \\\\\n(\\hat{\\theta} - \\theta_0) = &  \\En[d_i^2]^{-1} \\En[d_i \\epsilon_i] +\n    \\En[d_i^2]^{-1} \\En[d_i (f_0(x_i) - \\hat{f}(x_i))]\n\\end{align*}\n\\]\nThe first term of this expression is quite promising. \\(d_i\\) and \\(\\epsilon_i\\) are both finite dimensional random variables, so a law of large numbers will apply to \\(\\En[d_i^2]\\), and a central limit theorem would apply to \\(\\sqrt{n} \\En[d_i \\epsilon_i]\\). Unfortunately, the second expression is problematic. To accomodate high dimensional \\(x\\) and allow for flexible \\(f()\\), machine learning estimators must introduce some sort of regularization to control variance. This regularization also introduces some bias. The bias generally vanishes, but at a slower than \\(\\sqrt{n}\\) rate. Hence\n\\[\n\\sqrt{n} \\En[d_i (f_0(x_i) - \\hat{f}(x_i))] \\to \\infty.\n\\]\nTo get around this problem, we must modify our estimate of \\(\\theta\\). Let \\(m(x) = \\Er[d|x]\\) and \\(\\mu(y) = \\Er[y|x]\\). Let \\(\\hat{m}()\\) and \\(\\hat{\\mu}()\\) be some estimates. Then we can estimate \\(\\theta\\) by partialling out:\n\\[\n\\begin{align*}\n0 = & \\En[(d_i - \\hat{m}(x_i))(y_i - \\hat{\\mu}(x_i) -  \\theta (d_i - \\hat{m}(x_i)))] \\\\\n\\hat{\\theta} = & \\En[(d_i -\\hat{m}(x_i))^2]^{-1} \\En[(d_i -\n\\hat{m}(x_i))(y_i - \\hat{\\mu}(x_i))] \\\\\n(\\hat{\\theta} - \\theta_0) = & \\En[(d_i -\\hat{m}(x_i))^2]^{-1} \\left(\\En[(d_i -\n\\hat{m}(x_i))\\epsilon_i] + \\En[(d_i - \\hat{m}(x_i))(\\mu(x_i) -\n\\hat{\\mu}(x_i))] \\right) \\\\\n= & \\En[(d_i -\\hat{m}(x_i))^2]^{-1} \\left( a + b +c + d \\right)\n\\end{align*}\n\\]\nwhere\n\\[\n\\begin{align*}\na = & \\En[(d_i -m(x_i))\\epsilon_i] \\\\\nb = & \\En[(m(x_i)-\\hat{m}(x_i))\\epsilon_i] \\\\\nc = & \\En[v_i(\\mu(x_i) - \\hat{\\mu}(x_i))] \\\\\nd = & \\En[(m(x_i) - \\hat{m}(x_i))(\\mu(x_i) - \\hat{\\mu}(x_i))]\n\\end{align*}\n\\]\nwith \\(v_i = d_i - \\Er[d_i | x_i]\\). The term \\(a\\) is well behaved and \\(\\sqrt{n}a \\leadsto N(0,\\Sigma)\\) under standard conditions. Although terms \\(b\\) and \\(c\\) appear similar to the problematic term in the initial estimator, they are better behaved because \\(\\Er[v|x] = 0\\) and \\(\\Er[\\epsilon|x] = 0\\). This makes it possible, but difficult to show that \\(\\sqrt{n}b \\to_p = 0\\) and \\(\\sqrt{n} c \\to_p = 0\\), see e.g. (belloni2014?). However, the conditions on \\(\\hat{m}\\) and \\(\\hat{\\mu}\\) needed to show this are slightly restrictive, and appropriate conditions might not be known for all estimators. Chernozhukov et al. (2018) describe a sample splitting modification to \\(\\hat{\\theta}\\) that allows \\(\\sqrt{n} b\\) and \\(\\sqrt{n} c\\) to vanish under weaker conditions (essentially the same rate condition as needed for \\(\\sqrt{n} d\\) to vanish.)\nThe last term, \\(d\\), is a considerable improvement upon the first estimator. Instead of involving the error in one estimate, it now involes the product of the error in two estimates. By the Cauchy-Schwarz inequality, \\[\nd \\leq \\sqrt{\\En[(m(x_i) - \\hat{m}(x_i))^2]} \\sqrt{\\En[(\\mu(x_i) - \\hat{\\mu}(x_i))^2]}.\n\\] So if the estimates of \\(m\\) and \\(\\mu\\) converge at rates faster than \\(n^{-1/4}\\), then \\(\\sqrt{n} d \\to_p 0\\). This \\(n^{-1/4}\\) rate is reached by many machine learning estimators."
+  },
+  {
+    "objectID": "doubleml.html#lessons-from-the-example",
+    "href": "doubleml.html#lessons-from-the-example",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Lessons from the example",
+    "text": "Lessons from the example\n\nNeed an extra condition on moments – Neyman orthogonality \\[\n\\partial \\eta \\Er[\\psi(W;\\theta_0,\\eta_0)](\\eta-\\eta_0) = 0\n\\]\nWant estimators faster than \\(n^{-1/4}\\) in the prediction norm, \\[\n\\sqrt{\\En[(\\hat{\\eta}(x_i) - \\eta(x_i))^2]} \\lesssim_P n^{-1/4}\n\\]\nAlso want estimators that satisfy something like \\[ \\sqrt{n} \\En[(\\eta(x_i)-\\hat{\\eta}(x_i))\\epsilon_i] = o_p(1) \\]\n\nSample splitting / cross-fitting will make this easier"
+  },
+  {
+    "objectID": "doubleml.html#cross-fitting",
+    "href": "doubleml.html#cross-fitting",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Cross-fitting",
+    "text": "Cross-fitting\n\nRandomly partition into \\(K\\) subsets \\((I_k)_{k=1}^K\\)\n\\(I^c_k = \\{1, ..., n\\} \\setminus I_k\\)\n\\(\\hat{\\eta}_k =\\) estimate of \\(\\eta\\) using \\(I^c_k\\)\nEstimator: \\[\n\\begin{align*}\n0 = & \\frac{1}{K} \\sum_{k=1}^K \\frac{K}{n} \\sum_{i \\in I_k}\n\\psi(w_i;\\hat{\\theta}^{DML},\\hat{\\eta}_k) \\\\\n0 = & \\frac{1}{K} \\sum_{k=1}^K \\En_k[\n\\psi(w_i;\\hat{\\theta}^{DML},\\hat{\\eta}_k)]\n\\end{align*}\n\\]"
+  },
+  {
+    "objectID": "doubleml.html#assumptions",
+    "href": "doubleml.html#assumptions",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Assumptions",
+    "text": "Assumptions\n\nNeyman Orthogonality \\[\n\\partial \\eta \\Er[\\psi(W;\\theta_0,\\eta_0)](\\eta-\\eta_0) \\approx 0\n\\]\nFast enough convergence of \\(\\hat{\\eta}\\) \\[\n\\sqrt{\\Er[(\\hat{\\eta}_k(x_i) - \\eta(x_i))^2|I_k^c]} \\lesssim_P n^{-1/4}\n\\]\nVarious moments exist and other regularity conditions\nMoment condition linear in \\(\\theta\\) (to simplify notation only) \\[\n\\psi(w;\\theta,\\eta) = \\psi^a(w;\\eta) \\theta + \\psi^b(w;\\eta)\n\\]\n\n1\nThese are stated loosely, see Chernozhukov et al. (2018) for precise conditions."
+  },
+  {
+    "objectID": "doubleml.html#asymptotic-normality",
+    "href": "doubleml.html#asymptotic-normality",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Asymptotic Normality",
+    "text": "Asymptotic Normality\n\\[\n\\sqrt{n} \\sigma^{-1} (\\hat{\\theta} - \\theta_0) = \\frac{1}{\\sqrt{n}}\n\\sum_{i=1}^n \\bar{\\psi}(w_i) + o_p(1) \\indist N(0,1)\n\\] - Variance \\[\\sigma^2 = \\Er[\\psi^a(w_i;\\eta_0)]^{-1}  \\Er\\left[ \\psi(w;\\theta_0,\\eta_0)\n  \\psi(w;\\theta_0,\\eta_0)'\\right]  \\Er[\\psi^a(w_i;\\eta_0)]^{-1}\n\\] - Influence function \\[\\bar{\\psi}(w) = -\\sigma^{-1} \\Er[\\psi^a(w_i;\\eta_0)]^{-1} \\psi(w;\\theta_0,\\eta_0)\\]"
+  },
+  {
+    "objectID": "doubleml.html#creating-orthogonal-moments-1",
+    "href": "doubleml.html#creating-orthogonal-moments-1",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Creating orthogonal moments",
+    "text": "Creating orthogonal moments\n\nNeed \\[\n\\partial \\eta\\Er\\left[\\psi(W;\\theta_0,\\eta_0)[\\eta-\\eta_0] \\right]  \\approx 0\n\\]\nGiven an some model, how do we find a suitable \\(\\psi\\)?\nRelated to finding the efficient influence function, see Oliver Hines and Vansteelandt (2022)"
+  },
+  {
+    "objectID": "doubleml.html#orthogonal-scores-via-concentrating-out",
+    "href": "doubleml.html#orthogonal-scores-via-concentrating-out",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Orthogonal scores via concentrating-out",
+    "text": "Orthogonal scores via concentrating-out\n\nOriginal model: \\[\n(\\theta_0, \\beta_0) = \\argmax_{\\theta, \\beta} \\Er[\\ell(W;\\theta,\\beta)]\n\\]\nDefine \\[\n\\eta(\\theta) = \\beta(\\theta) = \\argmax_\\beta \\Er[\\ell(W;\\theta,\\beta)]\n\\]\nFirst order condition from \\(\\max_\\theta \\Er[\\ell(W;\\theta,\\beta(\\theta))]\\) is \\[\n0 = \\Er\\left[ \\underbrace{\\frac{\\partial \\ell}{\\partial \\theta} + \\frac{\\partial \\ell}{\\partial \\beta} \\frac{d \\beta}{d \\theta}}_{\\psi(W;\\theta,\\beta(\\theta))} \\right]\n\\]"
+  },
+  {
+    "objectID": "doubleml.html#example-average-derivative",
+    "href": "doubleml.html#example-average-derivative",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Example: average derivative",
+    "text": "Example: average derivative\n\n\\(x,y \\in \\R^1\\), \\(\\Er[y|x] = f_0(x)\\), \\(p(x) =\\) density of \\(x\\)\n\\(\\theta_0 = \\Er[f_0'(x)]\\)\nJoint objective \\[\n\\min_{\\theta,f} \\Er\\left[ (y - f(x))^2 + (\\theta - f'(x)^2) \\right]\n\\]\nSolve for minimizing \\(f\\) given \\(\\theta\\) \\[\nf_\\theta(x) = \\Er[y|x] - \\theta \\partial_x \\log p(x) + f''(x) + f'(x) \\partial_x \\log p(x)\n\\]"
+  },
+  {
+    "objectID": "doubleml.html#example-average-derivative-1",
+    "href": "doubleml.html#example-average-derivative-1",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Example: average derivative",
+    "text": "Example: average derivative\n\nConcentrated objective: \\[\n\\min_\\theta \\Er\\left[ (y - f_\\theta(x))^2 + (\\theta - f_\\theta'(x)^2)\n\\right]\n\\]\nFirst order condition at \\(f_\\theta = f_0\\) gives \\[\n0 = \\Er\\left[ (y - f_0(x))\\partial_x \\log p(x) + (\\theta - f_0'(x)) \\right]\n\\]"
+  },
+  {
+    "objectID": "doubleml.html#orthogonal-scores-via-projection",
+    "href": "doubleml.html#orthogonal-scores-via-projection",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Orthogonal scores via projection",
+    "text": "Orthogonal scores via projection\n\nOriginal model: \\(m: \\mathcal{W} \\times \\R^{d_\\theta} \\times \\R^{d_h} \\to \\R^{d_m}\\) \\[\n\\Er[m(W;\\theta_0,h_0(Z))|R] = 0\n\\]\nLet \\(A(R)\\) be \\(d_\\theta \\times d_m\\) moment selection matrix, \\(\\Omega(R)\\) \\(d_m \\times d_m\\) weighting matrix, and \\[\n\\begin{align*}\n\\Gamma(R) = & \\partial_{v'} \\Er[m(W;\\theta_0,v)|R]|_{v=h_0(Z)} \\\\\nG(Z) = & \\Er[A(R)'\\Omega(R)^{-1} \\Gamma(R)|Z]\n\\Er[\\Gamma(R)'\\Omega(R)^{-1} \\Gamma(R) |Z]^{-1} \\\\\n\\mu_0(R) = & A(R)'\\Omega(R)^{-1} - G(Z) \\Gamma(R)'\\Omega(R)^{-1}\n\\end{align*}\n\\]\n\\(\\eta = (\\mu, h)\\) and \\[ \\psi(W;\\theta, \\eta) = \\mu(R) m(W;\\theta, h(Z)) \\]\n\n\nChernozhukov et al. (2018) show how to construct orthogonal scores in a few examples via concentrating out and projection. (chernozhukov2015?) also discusses creating orthogonal scores."
+  },
+  {
+    "objectID": "doubleml.html#data",
+    "href": "doubleml.html#data",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Data",
+    "text": "Data\n\n\nimports\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport pandas as pd\n\nfrom sklearn.model_selection import cross_val_predict\nfrom sklearn import linear_model\nfrom sklearn.preprocessing import PolynomialFeatures\nimport statsmodels as sm\nimport statsmodels.formula.api as smf\nfrom statsmodels.iolib.summary2 import summary_col\n\n\n\ncpsall = pd.read_stata(\"https://www.nber.org/morg/annual/morg20.dta\")\n# take subset of data just to reduce computation time\ncps = cpsall.sample(30000, replace=False, random_state=0)\ncps.describe()\n\n\n\n\n\n\n\n\nhurespli\nhhnum\ncbsafips\ncounty\ncentcity\nsmsastat\nicntcity\nsmsa04\nrelref95\nage\n...\nrecnum\nyear\nym_file\nym\nch02\nch35\nch613\nch1417\nch05\nihigrdc\n\n\n\n\ncount\n29998.000000\n30000.000000\n30000.000000\n30000.000000\n24785.000000\n29699.000000\n3775.000000\n30000.000000\n30000.000000\n30000.000000\n...\n30000.000000\n30000.0\n30000.000000\n30000.000000\n30000.000000\n30000.000000\n30000.000000\n30000.000000\n30000.000000\n20929.000000\n\n\nmean\n1.248017\n1.050267\n22794.213667\n25.579267\n1.926811\n1.186942\n1.399735\n3.691300\n42.792200\n48.781800\n...\n200364.281250\n2020.0\n725.461367\n716.238567\n0.053967\n0.064967\n0.136967\n0.081267\n0.099833\n12.443547\n\n\nstd\n0.617033\n0.238765\n16456.328404\n61.435104\n0.718238\n0.389872\n0.987978\n2.592906\n3.830515\n18.922986\n...\n116372.054688\n0.0\n3.498569\n6.903731\n0.225956\n0.246471\n0.343818\n0.273249\n0.299783\n2.441900\n\n\nmin\n0.000000\n1.000000\n0.000000\n0.000000\n1.000000\n1.000000\n1.000000\n0.000000\n40.000000\n16.000000\n...\n23.000000\n2020.0\n720.000000\n705.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n\n\n25%\n1.000000\n1.000000\n0.000000\n0.000000\n1.000000\n1.000000\n1.000000\n0.000000\n40.000000\n33.000000\n...\n98957.250000\n2020.0\n722.000000\n710.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n12.000000\n\n\n50%\n1.000000\n1.000000\n25540.000000\n0.000000\n2.000000\n1.000000\n1.000000\n4.000000\n41.000000\n49.000000\n...\n200032.500000\n2020.0\n725.000000\n716.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n12.000000\n\n\n75%\n1.000000\n1.000000\n37340.000000\n27.000000\n2.000000\n1.000000\n1.000000\n6.000000\n42.000000\n64.000000\n...\n302111.750000\n2020.0\n729.000000\n722.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n14.000000\n\n\nmax\n13.000000\n4.000000\n49740.000000\n810.000000\n3.000000\n2.000000\n7.000000\n7.000000\n59.000000\n85.000000\n...\n401132.000000\n2020.0\n731.000000\n728.000000\n1.000000\n1.000000\n1.000000\n1.000000\n1.000000\n18.000000\n\n\n\n\n8 rows × 62 columns"
+  },
+  {
+    "objectID": "doubleml.html#partial-linear-model",
+    "href": "doubleml.html#partial-linear-model",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Partial Linear Model",
+    "text": "Partial Linear Model\n\ndef partial_linear(y, d, X, yestimator, destimator, folds=3):\n    \"\"\"Estimate the partially linear model y = d*C + f(x) + e\n\n    Parameters\n    ----------\n    y : array_like\n        vector of outcomes\n    d : array_like\n        vector or matrix of regressors of interest\n    X : array_like\n        matrix of controls\n    mlestimate : Estimator object for partialling out X. Must have ‘fit’\n        and ‘predict’ methods.\n    folds : int\n        Number of folds for cross-fitting\n\n    Returns\n    -------\n    ols : statsmodels regression results containing estimate of coefficient on d.\n    yhat : cross-fitted predictions of y\n    dhat : cross-fitted predictions of d\n    \"\"\"\n\n    # we want predicted probabilities if y or d is discrete\n    ymethod = \"predict\" if False==getattr(yestimator, \"predict_proba\",False) else \"predict_proba\"\n    dmethod = \"predict\" if False==getattr(destimator, \"predict_proba\",False) else \"predict_proba\"\n    # get the predictions\n    yhat = cross_val_predict(yestimator,X,y,cv=folds,method=ymethod)\n    dhat = cross_val_predict(destimator,X,d,cv=folds,method=dmethod)\n    ey = np.array(y - yhat)\n    ed = np.array(d - dhat)\n    ols = sm.regression.linear_model.OLS(ey,ed).fit(cov_type='HC0')\n\n    return(ols, yhat, dhat)"
+  },
+  {
+    "objectID": "doubleml.html#unconditional-gap",
+    "href": "doubleml.html#unconditional-gap",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Unconditional Gap",
+    "text": "Unconditional Gap\n\ncps[\"female\"] = (cps.sex==2)\ncps[\"log_earn\"] = np.log(cps.earnwke)\ncps.loc[np.isinf(cps.log_earn), \"log_earn\"] = np.nan\ncps[\"log_uhours\"] = np.log(cps.uhourse)\ncps.loc[np.isinf(cps.log_uhours), \"log_uhours\"] = np.nan\ncps[\"log_hourslw\"] = np.log(cps.hourslw)\ncps.loc[np.isinf(cps.log_hourslw),\"log_hourslw\"] = np.nan\ncps[\"log_wageu\"] = cps.log_earn - cps.log_uhours\ncps[\"log_wagelw\"] = cps.log_earn - cps.log_hourslw\n\nlm = list()\nlm.append(smf.ols(formula=\"log_earn ~ female\", data=cps,\n                  missing=\"drop\").fit(cov_type='HC0'))\nlm.append( smf.ols(formula=\"log_wageu ~ female\", data=cps,\n                   missing=\"drop\").fit(cov_type='HC0'))\nlm.append(smf.ols(formula=\"log_wagelw ~ female\", data=cps,\n                  missing=\"drop\").fit(cov_type='HC0'))\nlm.append(smf.ols(formula=\"log_earn ~ female + log_hourslw + log_uhours\", data=cps,\n                  missing=\"drop\").fit(cov_type='HC0'))\nsummary_col(lm, stars=True)\n\n\n\n\n\nlog_earn I\nlog_wageu I\nlog_wagelw I\nlog_earn II\n\n\nIntercept\n6.8607***\n3.2022***\n3.2366***\n2.0104***\n\n\n\n(0.0091)\n(0.0080)\n(0.0088)\n(0.0945)\n\n\nR-squared\n0.0323\n0.0166\n0.0136\n0.3367\n\n\nR-squared Adj.\n0.0323\n0.0165\n0.0135\n0.3366\n\n\nfemale[T.True]\n-0.2965***\n-0.1729***\n-0.1746***\n-0.1363***\n\n\n\n(0.0133)\n(0.0112)\n(0.0124)\n(0.0115)\n\n\nlog_hourslw\n\n\n\n0.0227\n\n\n\n\n\n\n(0.0223)\n\n\nlog_uhours\n\n\n\n1.3025***\n\n\n\n\n\n\n(0.0372)\n\n\n\n\nStandard errors in parentheses.\n* p&lt;.1, ** p&lt;.05, ***p&lt;.01"
+  },
+  {
+    "objectID": "doubleml.html#adding-controls",
+    "href": "doubleml.html#adding-controls",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Adding Controls",
+    "text": "Adding Controls\n\nfrom patsy import dmatrices\nfmla  = \"log_earn + female ~ log_uhours + log_hourslw + I(age**2) + age + C(grade92) + C(race) + C(smsastat) + C(unionmme) + C(unioncov) + C(ind02) + C(occ2012)\"\nyd, X = dmatrices(fmla,cps)\nfemale = yd[:,1]\nlogearn = yd[:,2]"
+  },
+  {
+    "objectID": "doubleml.html#estimating-eta",
+    "href": "doubleml.html#estimating-eta",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Estimating \\(\\eta\\)",
+    "text": "Estimating \\(\\eta\\)\n\nalphas = np.exp(np.linspace(-2, -12, 20))\nlassoy = linear_model.LassoCV(cv=4, alphas=alphas, max_iter=5000).fit(X,logearn)\nlassod = linear_model.LassoCV(cv=4, alphas=alphas, max_iter=5000).fit(X,female)"
+  },
+  {
+    "objectID": "doubleml.html#estimating-eta-1",
+    "href": "doubleml.html#estimating-eta-1",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Estimating \\(\\eta\\)",
+    "text": "Estimating \\(\\eta\\)\n\n\nCode\nfig, ax = plt.subplots(1,2)\n\ndef plotlassocv(l, ax) :\n    alphas = l.alphas_\n    mse = l.mse_path_.mean(axis=1)\n    std_error = l.mse_path_.std(axis=1)\n    ax.plot(alphas,mse)\n    ax.fill_between(alphas, mse + std_error, mse - std_error, alpha=0.2)\n\n    ax.set_ylabel('MSE +/- std error')\n    ax.set_xlabel('alpha')\n    ax.set_xlim([alphas[0], alphas[-1]])\n    ax.set_xscale(\"log\")\n    return(ax)\n\nax[0] = plotlassocv(lassoy,ax[0])\nax[0].set_title(\"MSE for log(earn)\")\nax[1] = plotlassocv(lassod,ax[1])\nax[1].set_title(\"MSE for female\")\nfig.tight_layout()\nfig.show()"
+  },
+  {
+    "objectID": "doubleml.html#estimating-eta-2",
+    "href": "doubleml.html#estimating-eta-2",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Estimating \\(\\eta\\)",
+    "text": "Estimating \\(\\eta\\)\n\n# there are theoretical reasons to choose a smaller regularization\n# than the one that minimizes cv. BUT THIS WAY OF CHOOSING IS ARBITRARY AND MIGHT BE WRONG\ndef pickalpha(lassocv) :\n    imin = np.argmin(lassocv.mse_path_.mean(axis=1))\n    msemin = lassocv.mse_path_.mean(axis=1)[imin]\n    se = lassocv.mse_path_.std(axis=1)[imin]\n    alpha= min([alpha for (alpha, mse) in zip(lassocv.alphas_, lassocv.mse_path_.mean(axis=1)) if mse&lt;msemin+se])\n    #alpha = lassocv.alphas_[imin+2]\n    return(alpha)\n\nalphay = pickalpha(lassoy)\nalphad = pickalpha(lassod)"
+  },
+  {
+    "objectID": "doubleml.html#estimate-theta",
+    "href": "doubleml.html#estimate-theta",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Estimate \\(\\theta\\)",
+    "text": "Estimate \\(\\theta\\)\n\npl_lasso = partial_linear(logearn, female, X,\n                          linear_model.Lasso(alpha=alphay),\n                          linear_model.Lasso(alpha=alphad))\npl_lasso[0].summary()\n\n\nOLS Regression Results\n\n\nDep. Variable:\ny\nR-squared (uncentered):\n0.009\n\n\nModel:\nOLS\nAdj. R-squared (uncentered):\n0.009\n\n\nMethod:\nLeast Squares\nF-statistic:\n92.32\n\n\nDate:\nTue, 28 Nov 2023\nProb (F-statistic):\n8.84e-22\n\n\nTime:\n17:32:01\nLog-Likelihood:\n-10527.\n\n\nNo. Observations:\n12038\nAIC:\n2.106e+04\n\n\nDf Residuals:\n12037\nBIC:\n2.106e+04\n\n\nDf Model:\n1\n\n\n\n\nCovariance Type:\nHC0\n\n\n\n\n\n\n\n\n\ncoef\nstd err\nz\nP&gt;|z|\n[0.025\n0.975]\n\n\nx1\n-0.1329\n0.014\n-9.608\n0.000\n-0.160\n-0.106\n\n\n\n\n\n\nOmnibus:\n11831.651\nDurbin-Watson:\n1.991\n\n\nProb(Omnibus):\n0.000\nJarque-Bera (JB):\n2287686.033\n\n\nSkew:\n-4.321\nProb(JB):\n0.00\n\n\nKurtosis:\n69.979\nCond. No.\n1.00\n\n\n\nNotes:[1] R² is computed without centering (uncentered) since the model does not contain a constant.[2] Standard Errors are heteroscedasticity robust (HC0)"
+  },
+  {
+    "objectID": "doubleml.html#software",
+    "href": "doubleml.html#software",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Software",
+    "text": "Software\n\ndoubleml\neconml"
+  },
+  {
+    "objectID": "doubleml.html#using-doubleml",
+    "href": "doubleml.html#using-doubleml",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Using doubleml",
+    "text": "Using doubleml\n\nimport doubleml\nfrom sklearn.preprocessing import PolynomialFeatures\nfrom sklearn.linear_model import LassoCV, LogisticRegressionCV\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.pipeline import make_pipeline\n\ndml_data = doubleml.DoubleMLData.from_arrays(X,logearn,female)\n# Initialize learners\nCs = 0.0001*np.logspace(0, 4, 10)\nlasso = make_pipeline(StandardScaler(), LassoCV(cv=5, max_iter=10000))\nlasso_class = make_pipeline(StandardScaler(),\n                            LogisticRegressionCV(cv=5, penalty='l1', solver='liblinear',\n                                                 Cs = Cs, max_iter=1000))\n\nnp.random.seed(123)\ndml_plr_lasso = doubleml.DoubleMLPLR(dml_data,\n                                     ml_l = lasso,\n                                     ml_m = lasso_class,\n                                     n_folds = 3)\ndml_plr_lasso.fit(store_predictions=True)\nprint(dml_plr_lasso.summary)\n\n       coef   std err         t         P&gt;|t|    2.5 %    97.5 %\nd -0.128653  0.013499 -9.530684  1.562503e-21 -0.15511 -0.102196"
+  },
+  {
+    "objectID": "doubleml.html#with-gradient-boosted-trees",
+    "href": "doubleml.html#with-gradient-boosted-trees",
+    "title": "Double / Debiased Machine Learning",
+    "section": "With Gradient Boosted Trees",
+    "text": "With Gradient Boosted Trees\n\nfrom lightgbm import LGBMClassifier, LGBMRegressor\nylearner = LGBMRegressor(force_col_wise=True)\ndlearner = LGBMClassifier(force_col_wise=True)\ndml_plr_gbt = doubleml.DoubleMLPLR(dml_data, ylearner, dlearner)\ndml_plr_gbt.fit(store_predictions=True)\nprint(dml_plr_gbt.summary)\n\n[LightGBM] [Info] Total Bins 754\n[LightGBM] [Info] Number of data points in the train set: 9630, number of used features: 259\n[LightGBM] [Info] Start training from score 6.719951\n[LightGBM] [Info] Total Bins 752\n[LightGBM] [Info] Number of data points in the train set: 9630, number of used features: 259\n[LightGBM] [Info] Start training from score 6.715158\n[LightGBM] [Info] Total Bins 750\n[LightGBM] [Info] Number of data points in the train set: 9630, number of used features: 257\n[LightGBM] [Info] Start training from score 6.719371\n[LightGBM] [Info] Total Bins 749\n[LightGBM] [Info] Number of data points in the train set: 9631, number of used features: 258\n[LightGBM] [Info] Start training from score 6.719395\n[LightGBM] [Info] Total Bins 751\n[LightGBM] [Info] Number of data points in the train set: 9631, number of used features: 259\n[LightGBM] [Info] Start training from score 6.714159\n[LightGBM] [Info] Number of positive: 4711, number of negative: 4919\n[LightGBM] [Info] Total Bins 754\n[LightGBM] [Info] Number of data points in the train set: 9630, number of used features: 259\n[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.489200 -&gt; initscore=-0.043205\n[LightGBM] [Info] Start training from score -0.043205\n[LightGBM] [Info] Number of positive: 4647, number of negative: 4983\n[LightGBM] [Info] Total Bins 752\n[LightGBM] [Info] Number of data points in the train set: 9630, number of used features: 259\n[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.482555 -&gt; initscore=-0.069810\n[LightGBM] [Info] Start training from score -0.069810\n[LightGBM] [Info] Number of positive: 4701, number of negative: 4929\n[LightGBM] [Info] Total Bins 750\n[LightGBM] [Info] Number of data points in the train set: 9630, number of used features: 257\n[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.488162 -&gt; initscore=-0.047361\n[LightGBM] [Info] Start training from score -0.047361\n[LightGBM] [Info] Number of positive: 4678, number of negative: 4953\n[LightGBM] [Info] Total Bins 749\n[LightGBM] [Info] Number of data points in the train set: 9631, number of used features: 258\n[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.485723 -&gt; initscore=-0.057123\n[LightGBM] [Info] Start training from score -0.057123\n[LightGBM] [Info] Number of positive: 4703, number of negative: 4928\n[LightGBM] [Info] Total Bins 751\n[LightGBM] [Info] Number of data points in the train set: 9631, number of used features: 259\n[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.488319 -&gt; initscore=-0.046733\n[LightGBM] [Info] Start training from score -0.046733\n       coef   std err          t         P&gt;|t|     2.5 %    97.5 %\nd -0.135613  0.012436 -10.905181  1.088760e-27 -0.159986 -0.111239"
+  },
+  {
+    "objectID": "doubleml.html#interactive-regression-model",
+    "href": "doubleml.html#interactive-regression-model",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Interactive Regression Model",
+    "text": "Interactive Regression Model\n\nSimilar to matching, the partially linear regression model can suffer from misspecification bias if the effect of \\(D\\) varies with \\(X\\)\nInteractive regression model: \\[\n\\begin{align*}\nY & = g_0(D,X) + U \\\\\nD & = m_0(X) + V\n\\]\nMechanics same as matching heterogeneous effects\nOrthogonal moment condition is same as doubly robust matching"
+  },
+  {
+    "objectID": "doubleml.html#interactive-regression-model---lasso",
+    "href": "doubleml.html#interactive-regression-model---lasso",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Interactive Regression Model - Lasso",
+    "text": "Interactive Regression Model - Lasso\n\nnp.random.seed(123)\ndml_irm_lasso = doubleml.DoubleMLIRM(dml_data,\n                                ml_g = lasso,\n                                ml_m = lasso_class,\n                                trimming_threshold = 0.01,\n                                n_folds = 3)\ndml_irm_lasso.fit()\ndml_irm_lasso.summary\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n2.5 %\n97.5 %\n\n\n\n\nd\n-0.127679\n0.016486\n-7.744853\n9.569245e-15\n-0.15999\n-0.095368"
+  },
+  {
+    "objectID": "doubleml.html#interactive-regression-model---trees",
+    "href": "doubleml.html#interactive-regression-model---trees",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Interactive Regression Model - Trees",
+    "text": "Interactive Regression Model - Trees\n\nnp.random.seed(123)\ndml_irm_gbt = doubleml.DoubleMLIRM(dml_data,\n                                     ml_g = ylearner,\n                                     ml_m = dlearner,\n                                     trimming_threshold = 0.01,\n                                     n_folds = 3)\ndml_irm_gbt.fit()\ndml_irm_gbt.summary\n\n[LightGBM] [Info] Total Bins 475\n[LightGBM] [Info] Number of data points in the train set: 4138, number of used features: 134\n[LightGBM] [Info] Start training from score 6.859763\n[LightGBM] [Info] Total Bins 486\n[LightGBM] [Info] Number of data points in the train set: 4078, number of used features: 139\n[LightGBM] [Info] Start training from score 6.872932\n[LightGBM] [Info] Total Bins 477\n[LightGBM] [Info] Number of data points in the train set: 4140, number of used features: 136\n[LightGBM] [Info] Start training from score 6.852149\n[LightGBM] [Info] Total Bins 453\n[LightGBM] [Info] Number of data points in the train set: 3887, number of used features: 119\n[LightGBM] [Info] Start training from score 6.580928\n[LightGBM] [Info] Total Bins 467\n[LightGBM] [Info] Number of data points in the train set: 3947, number of used features: 127\n[LightGBM] [Info] Start training from score 6.565177\n[LightGBM] [Info] Total Bins 455\n[LightGBM] [Info] Number of data points in the train set: 3886, number of used features: 123\n[LightGBM] [Info] Start training from score 6.551432\n[LightGBM] [Info] Number of positive: 3887, number of negative: 4138\n[LightGBM] [Info] Total Bins 697\n[LightGBM] [Info] Number of data points in the train set: 8025, number of used features: 232\n[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.484361 -&gt; initscore=-0.062575\n[LightGBM] [Info] Start training from score -0.062575\n[LightGBM] [Info] Number of positive: 3947, number of negative: 4078\n[LightGBM] [Info] Total Bins 703\n[LightGBM] [Info] Number of data points in the train set: 8025, number of used features: 236\n[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.491838 -&gt; initscore=-0.032651\n[LightGBM] [Info] Start training from score -0.032651\n[LightGBM] [Info] Number of positive: 3886, number of negative: 4140\n[LightGBM] [Info] Total Bins 680\n[LightGBM] [Info] Number of data points in the train set: 8026, number of used features: 226\n[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.484176 -&gt; initscore=-0.063315\n[LightGBM] [Info] Start training from score -0.063315\n\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n2.5 %\n97.5 %\n\n\n\n\nd\n-0.136216\n0.014963\n-9.103829\n8.720166e-20\n-0.165542\n-0.10689"
+  },
+  {
+    "objectID": "doubleml.html#sources-and-further-reading",
+    "href": "doubleml.html#sources-and-further-reading",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Sources and Further Reading",
+    "text": "Sources and Further Reading\n\nThese slides borrow heavily from my notes on machine learning in economics\nThe example is from my chapter on machine learning in QuantEcon: DataScience\nChernozhukov et al. (2017) : short introduction to main idea\nChernozhukov et al. (2018) : underlying theory\nKnaus (2022) : approachable review of DML for doubly robust matching"
+  },
+  {
+    "objectID": "doubleml.html#references",
+    "href": "doubleml.html#references",
+    "title": "Double / Debiased Machine Learning",
+    "section": "References",
+    "text": "References\n\n\n\n\n\n\nChernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, and Whitney Newey. 2017. “Double/Debiased/Neyman Machine Learning of Treatment Effects.” American Economic Review 107 (5): 261–65. https://doi.org/10.1257/aer.p20171038.\n\n\nChernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins. 2018. “Double/Debiased Machine Learning for Treatment and Structural Parameters.” The Econometrics Journal 21 (1): C1–68. https://doi.org/10.1111/ectj.12097.\n\n\nKnaus, Michael C. 2022. “Double machine learning-based programme evaluation under unconfoundedness.” The Econometrics Journal 25 (3): 602–27. https://doi.org/10.1093/ectj/utac015.\n\n\nOliver Hines, Karla Diaz-Ordaz, Oliver Dukes, and Stijn Vansteelandt. 2022. “Demystifying Statistical Learning Based on Efficient Influence Functions.” The American Statistician 76 (3): 292–304. https://doi.org/10.1080/00031305.2021.2021984."
   }
 ]

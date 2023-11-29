@@ -211,13 +211,13 @@ Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/le
 -  **November 22**: [Panel Data and Fixed Effects](https://ubcecon.github.io/ECON526/paul/fe.html), [The Difference in Differences Saga](https://ubcecon.github.io/ECON526/paul/moredid.html)
     - https://matheusfacure.github.io/python-causality-handbook/14-Panel-Data-and-Fixed-Effects.html
     - https://matheusfacure.github.io/python-causality-handbook/24-The-Diff-in-Diff-Saga.html
--  **November 27**: Start [Synthetic Control](https://ubcecon.github.io/ECON526/paul/syntheticcontrol.html)
+-  **November 27**: [Synthetic Control](https://ubcecon.github.io/ECON526/paul/syntheticcontrol.html)
     - https://matheusfacure.github.io/python-causality-handbook/15-Synthetic-Control.html
--  **November 27**: Finish [Synthetic Control](https://ubcecon.github.io/ECON526/paul/syntheticcontrol.html)
     - https://matheusfacure.github.io/python-causality-handbook/25-Synthetic-Diff-in-Diff.html
-- **December 4**: Debiased/Orthogonal Machine Learning
-    - https://matheusfacure.github.io/python-causality-handbook/22-Debiased-Orthogonal-Machine-Learning.html
-    - https://datascience.quantecon.org/applications/ml_in_economics.html#estimation-of-nuisance-functions    -
+-  **November 29**: [Debiased/Orthogonal Machine Learning](https://ubcecon.github.io/ECON526/paul/doubleml.html)
+    - https://datascience.quantecon.org/applications/ml_in_economics.html#estimation-of-nuisance-functions
+- **December 4**:
+    - https://datascience.quantecon.org/applications/heterogeneity.html
 - **December 6**: Regression Discontinuity
     - https://matheusfacure.github.io/python-causality-handbook/16-Regression-Discontinuity-Design.html
 - **December 8**
