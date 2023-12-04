@@ -216,7 +216,7 @@ Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/le
     - https://matheusfacure.github.io/python-causality-handbook/25-Synthetic-Diff-in-Diff.html
 -  **November 29**: [Debiased/Orthogonal Machine Learning](https://ubcecon.github.io/ECON526/paul/doubleml.html)
     - https://datascience.quantecon.org/applications/ml_in_economics.html#estimation-of-nuisance-functions
-- **December 4**:
+- **December 4**: [Treatment Heterogeneity and Conditional Effects](https://ubcecon.github.io/ECON526/paul/conditionaleffect.html)
     - https://datascience.quantecon.org/applications/heterogeneity.html
 - **December 6**: Regression Discontinuity
     - https://matheusfacure.github.io/python-causality-handbook/16-Regression-Discontinuity-Design.html

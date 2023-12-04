@@ -4,14 +4,14 @@
     "href": "feed.html",
     "title": "Slides",
     "section": "",
-    "text": "Difference in Differences II\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nDouble / Debiased Machine Learning\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nECON 526: Quantitative Economics with Data Science Applications\n\n\n\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nFixed Effects\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nIntroduction to Difference in Differences\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nMatching\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nSynthetic Control\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\nNo matching items"
+    "text": "Difference in Differences II\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nDouble / Debiased Machine Learning\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nECON 526: Quantitative Economics with Data Science Applications\n\n\n\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nFixed Effects\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nIntroduction to Difference in Differences\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nMatching\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nSynthetic Control\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nTreatment Heterogeneity and Conditional Effects\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "ECON 526: Quantitative Economics with Data Science Applications",
     "section": "",
-    "text": "Slides\n\nMatching slides, notebook\n\nReading: chapters 10-12 of Facure (2022) and chapter 14 of Huntington-Klein (2021)\n\nIntroduction to difference in differences, notebook\n\nReading: chapter 13 of Facure (2022)\n\nFixed Effects, notebook\n\nReading: chapter 14 of Facure (2022)\n\nAdvanced difference in differences, notebook\n\nReading: chapter 24 of Facure (2022), Roth et al. (2023), Chaisemartin and D’Haultfœuille (2022)\n\nSynthetic Control, notebook\n\nReading: Abadie (2021),chapter 15 of Facure (2022)\n\nDouble/Debiased Machine Learning, notebook\n\nReading: QuantEcon ML in Economics\n\n\n\n\n\n\n\nReferences\n\nAbadie, Alberto. 2021. “Using Synthetic Controls: Feasibility, Data Requirements, and Methodological Aspects.” Journal of Economic Literature 59 (2): 391–425. https://doi.org/10.1257/jel.20191450.\n\n\nChaisemartin, Clément de, and Xavier D’Haultfœuille. 2022. “Two-way fixed effects and differences-in-differences with heterogeneous treatment effects: a survey.” The Econometrics Journal 26 (3): C1–30. https://doi.org/10.1093/ectj/utac017.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/.\n\n\nRoth, Jonathan, Pedro H. C. Sant’Anna, Alyssa Bilinski, and John Poe. 2023. “What’s Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature.” Journal of Econometrics 235 (2): 2218–44. https://doi.org/https://doi.org/10.1016/j.jeconom.2023.03.008."
+    "text": "Slides\n\nMatching slides, notebook\n\nReading: chapters 10-12 of Facure (2022) and chapter 14 of Huntington-Klein (2021)\n\nIntroduction to difference in differences, notebook\n\nReading: chapter 13 of Facure (2022)\n\nFixed Effects, notebook\n\nReading: chapter 14 of Facure (2022)\n\nAdvanced difference in differences, notebook\n\nReading: chapter 24 of Facure (2022), Roth et al. (2023), Chaisemartin and D’Haultfœuille (2022)\n\nSynthetic Control, notebook\n\nReading: Abadie (2021),chapter 15 of Facure (2022)\n\nDouble/Debiased Machine Learning, notebook\n\nReading: QuantEcon: ML in Economics\n\nTreatment Heterogeneity and Conditional Effects, notebook\n\nReading: QuantEcon: Heterogeneity\n\n\n\n\n\n\n\nReferences\n\nAbadie, Alberto. 2021. “Using Synthetic Controls: Feasibility, Data Requirements, and Methodological Aspects.” Journal of Economic Literature 59 (2): 391–425. https://doi.org/10.1257/jel.20191450.\n\n\nChaisemartin, Clément de, and Xavier D’Haultfœuille. 2022. “Two-way fixed effects and differences-in-differences with heterogeneous treatment effects: a survey.” The Econometrics Journal 26 (3): C1–30. https://doi.org/10.1093/ectj/utac017.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/.\n\n\nRoth, Jonathan, Pedro H. C. Sant’Anna, Alyssa Bilinski, and John Poe. 2023. “What’s Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature.” Journal of Econometrics 235 (2): 2218–44. https://doi.org/https://doi.org/10.1016/j.jeconom.2023.03.008."
   },
   {
     "objectID": "matching.html#setting",
@@ -1104,5 +1104,215 @@
     "title": "Double / Debiased Machine Learning",
     "section": "Visualizing Predictions: Trees",
     "text": "Visualizing Predictions: Trees\n\n\nCode\nplotpredictions(dmlpreddf(dml_plr_gbt)).show()\n\n\n\n\n\n&lt;Figure size 960x480 with 0 Axes&gt;"
+  },
+  {
+    "objectID": "conditionaleffect.html",
+    "href": "conditionaleffect.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "title: “Treatment Heterogeneity and Conditional Effects” subtitle: “ECON526” author: - name: Paul Schrimpf affiliations: University of British Columbia format: revealjs: width: 1600 height: 900 min-scale: 0.1 toc: true toc-depth: 1 progress: true chalkboard: theme: whiteboard boardmarker-width: 2 chalk-width: 2 chalk-effect: 0.0 title-slide-attributes: data-background-image: “green.jpg” data-background-size: contain execute: cache: true echo: true bibliography: 526.bib\n\\[\n\\def\\indep{\\perp\\!\\!\\!\\perp}\n\\def\\Er{\\mathrm{E}}\n\\def\\R{\\mathbb{R}}\n\\def\\En{{\\mathbb{E}_n}}\n\\def\\Pr{\\mathrm{P}}\n\\newcommand{\\norm}[1]{\\left\\Vert {#1} \\right\\Vert}\n\\newcommand{\\abs}[1]{\\left\\vert {#1} \\right\\vert}\n\\def\\inprob{{\\,{\\buildrel p \\over \\rightarrow}\\,}}\n\\def\\indist{\\,{\\buildrel d \\over \\rightarrow}\\,}\n\\DeclareMathOperator*{\\plim}{plim}\n\\DeclareMathOperator*{\\argmax}{arg\\,max}\n\\DeclareMathOperator*{\\argmin}{arg\\,min}\n\\]"
+  },
+  {
+    "objectID": "conditionaleffect.html#conditional-average-effecst",
+    "href": "conditionaleffect.html#conditional-average-effecst",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Conditional Average Effecst",
+    "text": "Conditional Average Effecst\n\n\nPreviously, mostly focused on average effects, e.g. \\[\nATE = \\Er[Y_i(1) - Y_i(0)]\n\\]\nAlso care about conditional average effects, e.g. \\[\nCATE(x) = \\Er[Y_i(1) - Y_i(0)|X_i = x]\n\\]\n\nMore detailed description\nSuggest mechanism for how treatment affects outcome\nGive treatment assignment rule, e.g. \\[\nD_i = 1\\{CATE(X_i) &gt; 0 \\}\n\\]"
+  },
+  {
+    "objectID": "conditionaleffect.html#conditional-average-effects-challenges",
+    "href": "conditionaleffect.html#conditional-average-effects-challenges",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Conditional Average Effects: Challenges",
+    "text": "Conditional Average Effects: Challenges\n\\[\nCATE(x) = \\Er[Y_i(1) - Y_i(0)|X_i = x]\n\\]\n\nHard to communicate, espeically when \\(x\\) high dimensional\nWorse statistical properties, especially when \\(x\\) high dimensional and/or continuous\nMore demanding of data\nFocus on useful summaries of \\(CATE(x)\\)"
+  },
+  {
+    "objectID": "conditionaleffect.html#program-keluarga-harapan",
+    "href": "conditionaleffect.html#program-keluarga-harapan",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Program Keluarga Harapan",
+    "text": "Program Keluarga Harapan\n\nAlatas et al. (2011) , Triyana (2016)\nRandomized experiment in Indonesia\nConditional cash transfer for pregnant women\n\n60-220USD (15-20% quarterly consumption)\nConditions: 4 pre, 2 post natal medical visits, baby delivered by doctor or midwife\n\nRandomly assigned at kecamatan (district) level\n\n\n\nimports\nimport pandas as pd\nimport numpy as np\nimport patsy\nfrom sklearn import linear_model, ensemble, base, neural_network\nimport statsmodels.formula.api as smf\nimport statsmodels.api as sm\n#from sklearn.utils._testing import ignore_warnings\n#from sklearn.exceptions import ConvergenceWarning\n\nimport matplotlib.pyplot as plt\nimport seaborn as sns"
+  },
+  {
+    "objectID": "conditionaleffect.html#data",
+    "href": "conditionaleffect.html#data",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Data",
+    "text": "Data\n\nurl = \"https://datascience.quantecon.org/assets/data/Triyana_2016_price_women_clean.csv\"\ndf = pd.read_csv(url)\ndf.describe()\n\n\n\n\n\n\n\n\nrid_panel\nprov\nLocation_ID\ndist\nwave\nedu\nagecat\nlog_xp_percap\nrhr031\nrhr032\n...\nhh_xp_all\ntv\nparabola\nfridge\nmotorbike\ncar\npig\ngoat\ncow\nhorse\n\n\n\n\ncount\n1.225100e+04\n22768.000000\n2.277100e+04\n22771.000000\n22771.000000\n22771.000000\n22771.000000\n22771.000000\n22771.000000\n22771.000000\n...\n22771.000000\n22771.000000\n22771.000000\n22771.000000\n22771.000000\n22771.000000\n22771.000000\n22771.00000\n22771.000000\n22771.000000\n\n\nmean\n3.406884e+12\n42.761156\n4.286882e+06\n431842.012033\n1.847174\n52.765799\n4.043081\n13.420404\n0.675157\n0.754908\n...\n3.839181\n0.754908\n0.482148\n0.498661\n0.594792\n0.470511\n0.536691\n0.53858\n0.515041\n0.470247\n\n\nstd\n1.944106e+12\n14.241982\n1.423541e+06\n143917.353784\n0.875323\n45.833778\n1.280589\n1.534089\n0.468326\n0.430151\n...\n1.481982\n0.430151\n0.499692\n0.500009\n0.490943\n0.499141\n0.498663\n0.49852\n0.499785\n0.499125\n\n\nmin\n1.100103e+10\n31.000000\n3.175010e+06\n3524.000000\n1.000000\n6.000000\n0.000000\n7.461401\n0.000000\n0.000000\n...\n1.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.00000\n0.000000\n0.000000\n\n\n25%\n1.731008e+12\n32.000000\n3.210180e+06\n323210.000000\n1.000000\n6.000000\n3.000000\n11.972721\n0.000000\n1.000000\n...\n3.000000\n1.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.00000\n0.000000\n0.000000\n\n\n50%\n3.491004e+12\n35.000000\n3.517171e+06\n353517.000000\n2.000000\n12.000000\n5.000000\n12.851639\n1.000000\n1.000000\n...\n5.000000\n1.000000\n0.000000\n0.000000\n1.000000\n0.000000\n1.000000\n1.00000\n1.000000\n0.000000\n\n\n75%\n5.061008e+12\n53.000000\n5.307020e+06\n535307.000000\n3.000000\n99.000000\n5.000000\n15.018967\n1.000000\n1.000000\n...\n5.000000\n1.000000\n1.000000\n1.000000\n1.000000\n1.000000\n1.000000\n1.00000\n1.000000\n1.000000\n\n\nmax\n6.681013e+12\n75.000000\n7.571030e+06\n757571.000000\n3.000000\n99.000000\n5.000000\n15.018967\n1.000000\n1.000000\n...\n5.000000\n1.000000\n1.000000\n1.000000\n1.000000\n1.000000\n1.000000\n1.00000\n1.000000\n1.000000\n\n\n\n\n8 rows × 121 columns"
+  },
+  {
+    "objectID": "conditionaleffect.html#average-treatment-effects",
+    "href": "conditionaleffect.html#average-treatment-effects",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Average Treatment Effects",
+    "text": "Average Treatment Effects\n\n\ndata prep\n# some data prep for later\nformula = \"\"\"\nbw ~ pkh_kec_ever +\n  C(edu)*C(agecat) + log_xp_percap + hh_land + hh_home + C(dist) +\n  hh_phone + hh_rf_tile + hh_rf_shingle + hh_rf_fiber +\n  hh_wall_plaster + hh_wall_brick + hh_wall_wood + hh_wall_fiber +\n  hh_fl_tile + hh_fl_plaster + hh_fl_wood + hh_fl_dirt +\n  hh_water_pam + hh_water_mechwell + hh_water_well + hh_water_spring + hh_water_river +\n  hh_waterhome +\n  hh_toilet_own + hh_toilet_pub + hh_toilet_none +\n  hh_waste_tank + hh_waste_hole + hh_waste_river + hh_waste_field +\n  hh_kitchen +\n  hh_cook_wood + hh_cook_kerosene + hh_cook_gas +\n  tv + fridge + motorbike + car + goat + cow + horse\n\"\"\"\nbw, X = patsy.dmatrices(formula, df, return_type=\"dataframe\")\n# some categories are empty after dropping rows with Null, drop now\nX = X.loc[:, X.sum() &gt; 0]\nbw = bw.iloc[:, 0]\ntreatment_variable = \"pkh_kec_ever\"\ntreatment = X[\"pkh_kec_ever\"]\nXl = X.drop([\"Intercept\", \"pkh_kec_ever\", \"C(dist)[T.313175]\"], axis=1)\nloc_id = df.loc[X.index, \"Location_ID\"].astype(\"category\")\n\nimport re\n# remove [ ] from names for compatibility with lightgbm\nXl = Xl.rename(columns = lambda x:re.sub('[^A-Za-z0-9_]+', '', x))\n\n\n\nfrom statsmodels.iolib.summary2 import summary_col\ntmp = pd.DataFrame(dict(birthweight=bw,treatment=treatment,assisted_delivery=df.loc[X.index, \"good_assisted_delivery\"]))\nusage = smf.ols(\"assisted_delivery ~ treatment\", data=tmp).fit(cov_type=\"cluster\", cov_kwds={'groups':loc_id})\nhealth= smf.ols(\"bw ~ treatment\", data=tmp).fit(cov_type=\"cluster\", cov_kwds={'groups':loc_id})\nsummary_col([usage, health])\n\n\n\n\n\nassisted_delivery\nbw\n\n\nIntercept\n0.7827\n3173.4067\n\n\n\n(0.0124)\n(10.2323)\n\n\ntreatment\n0.0235\n-14.8992\n\n\n\n(0.0192)\n(24.6304)\n\n\nR-squared\n0.0004\n0.0001\n\n\nR-squared Adj.\n0.0002\n-0.0001\n\n\n\n\nStandard errors in parentheses."
+  },
+  {
+    "objectID": "conditionaleffect.html#conditional-average-treatment-effects",
+    "href": "conditionaleffect.html#conditional-average-treatment-effects",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Conditional Average Treatment Effects",
+    "text": "Conditional Average Treatment Effects\n\nCan never recover individual treatment effect, \\(y_i(1)- y_i(0)\\)\nCan estimate conditional averages: \\[\n\\begin{align*}\nE[y_i(1) - y_i(0) |X_i=x] = & E[y_i(1)|X_i = x] - E[y_i(0)|X_i=x] \\\\\n& \\text{random assignment } \\\\\n= & E[y_i(1) | d_i = 1, X_i=x] - E[y_i(0) | d_i = 0, X_i=x] \\\\\n= & E[y_i | d_i = 1, X_i = x] - E[y_i | d_i = 0, X_i=x ]\n\\end{align*}\n\\]\nBut, inference and communication difficult"
+  },
+  {
+    "objectID": "conditionaleffect.html#generic-machine-learning-for-heterogeneous-effects-in-randomized-experiments",
+    "href": "conditionaleffect.html#generic-machine-learning-for-heterogeneous-effects-in-randomized-experiments",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Generic Machine Learning for Heterogeneous Effects in Randomized Experiments",
+    "text": "Generic Machine Learning for Heterogeneous Effects in Randomized Experiments\n\nChernozhukov et al. (2023)\nDesigned based inference Imai and Li (2022)\nIdea: use any machine learning estimator for \\(E[y_i | d_i = 0, X_i=x ]\\)\nReport and do inference on lower dimensional summaries of \\(E[y_i(1) - y_i(0) |X_i=x]\\)"
+  },
+  {
+    "objectID": "conditionaleffect.html#best-linear-projection-of-cate",
+    "href": "conditionaleffect.html#best-linear-projection-of-cate",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Best Linear Projection of CATE",
+    "text": "Best Linear Projection of CATE\n\nTrue \\(CATE(x)\\), noisy proxy \\(\\widehat{CATE}(x)\\)\nBest linear projection: \\[\n\\beta_0, \\beta_1 = \\argmin_{b_0, b_1} \\Er\\left[\\left(CATE(x) - b_0 - b_1(\\widehat{CATE}(x) - E[\\widehat{CATE}(x)])\\right)^2 \\right]\n\\]\n\n\\(\\beta_0 = \\Er[y_i(1) - y_i(0)]\\)\n\\(\\beta_1\\) measures how well \\(\\widehat{CATE}(x)\\) proxies \\(CATE(x)\\)\n\nUseful for comparing two proxies \\(\\widehat{CATE}(x)\\) and \\(\\widetilde{CATE}(x)\\)"
+  },
+  {
+    "objectID": "conditionaleffect.html#grouped-average-treatment-effects",
+    "href": "conditionaleffect.html#grouped-average-treatment-effects",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Grouped Average Treatment Effects",
+    "text": "Grouped Average Treatment Effects\n\nGroup observations by \\(\\widehat{CATE}(x)\\), reported averages conditional on group\nGroups \\(G_{k}(x) = 1\\{\\ell_{k-1} \\leq \\widehat{CATE}(x) \\leq \\ell_k \\}\\)\nGrouped average treatment effects: \\[\n\\gamma_k = E[y(1) - y(0) | G_k(X)=1]\n\\]"
+  },
+  {
+    "objectID": "conditionaleffect.html#estimation",
+    "href": "conditionaleffect.html#estimation",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Estimation",
+    "text": "Estimation\n\nRegression with sample-splitting\nBLP: \\[\ny_i = \\alpha_0 + \\alpha_1 \\widehat{B}(x_i) + \\beta_0 (d_i-P(d=1)) + \\beta_1\n(d_i-P(d=1))(\\widehat{CATE}(x_i) - \\overline{\\widehat{CATE}(x_i)}) + \\epsilon_i\n\\]\n\nwhere \\(\\widehat{B}(x_i)\\) is an estimate of \\(\\Er[y_i(0) | X_i=x]\\)\n\nGATE: \\[\ny_i = \\alpha_0 + \\alpha_1 \\widehat{B}(x_i) + \\sum_k \\gamma_k (d_i-P(d=1)) 1(G_k(x_i)) +\nu_i\n\\]\nEstimates asymptotically normal with usual standard errors"
+  },
+  {
+    "objectID": "conditionaleffect.html#code",
+    "href": "conditionaleffect.html#code",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Code",
+    "text": "Code\n\n# for clustering standard errors\ndef get_treatment_se(fit, cluster_id, rows=None):\n    if cluster_id is not None:\n        if rows is None:\n            rows = [True] * len(cluster_id)\n        vcov = sm.stats.sandwich_covariance.cov_cluster(fit, cluster_id.loc[rows])\n        return np.sqrt(np.diag(vcov))\n\n    return fit.HC0_se"
+  },
+  {
+    "objectID": "conditionaleffect.html#code-1",
+    "href": "conditionaleffect.html#code-1",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Code",
+    "text": "Code\n\ndef generic_ml_model(x, y, treatment, model, n_split=10, n_group=5, cluster_id=None):\n    nobs = x.shape[0]\n\n    blp = np.zeros((n_split, 2))\n    blp_se = blp.copy()\n    gate = np.zeros((n_split, n_group))\n    gate_se = gate.copy()\n\n    baseline = np.zeros((nobs, n_split))\n    cate = baseline.copy()\n    lamb = np.zeros((n_split, 2))\n\n    for i in range(n_split):\n        main = np.random.rand(nobs) &gt; 0.5\n        rows1 = ~main & (treatment == 1)\n        rows0 = ~main & (treatment == 0)\n\n        mod1 = base.clone(model).fit(x.loc[rows1, :], (y.loc[rows1]))\n        mod0 = base.clone(model).fit(x.loc[rows0, :], (y.loc[rows0]))\n\n        B = mod0.predict(x)\n        S = mod1.predict(x) - B\n        baseline[:, i] = B\n        cate[:, i] = S\n        ES = S.mean()\n\n        ## BLP\n        # assume P(treat|x) = P(treat) = mean(treat)\n        p = treatment.mean()\n        reg_df = pd.DataFrame(dict(\n            y=y, B=B, treatment=treatment, S=S, main=main, excess_S=S-ES\n        ))\n        reg = smf.ols(\"y ~ B + I(treatment-p) + I((treatment-p)*(S-ES))\", data=reg_df.loc[main, :])\n        reg_fit = reg.fit()\n        blp[i, :] = reg_fit.params.iloc[2:4]\n        blp_se[i, :] = get_treatment_se(reg_fit, cluster_id, main)[2:]\n\n        lamb[i, 0] = reg_fit.params.iloc[-1]**2 * S.var()\n\n        ## GATEs\n        cutoffs = np.quantile(S, np.linspace(0,1, n_group + 1))\n        cutoffs[-1] += 1\n        for k in range(n_group):\n            reg_df[f\"G{k}\"] = (cutoffs[k] &lt;= S) & (S &lt; cutoffs[k+1])\n\n        g_form = \"y ~ B + \" + \" + \".join([f\"I((treatment-p)*G{k})\" for k in range(n_group)])\n        g_reg = smf.ols(g_form, data=reg_df.loc[main, :])\n        g_fit = g_reg.fit()\n        gate[i, :] = g_fit.params.values[2:] #g_fit.params.filter(regex=\"G\").values\n        gate_se[i, :] = get_treatment_se(g_fit, cluster_id, main)[2:]\n\n        lamb[i, 1] = (gate[i,:]**2).sum()/n_group\n\n    out = dict(\n        gate=gate, gate_se=gate_se,\n        blp=blp, blp_se=blp_se,\n        Lambda=lamb, baseline=baseline, cate=cate,\n        name=type(model).__name__\n    )\n    return out\n\n\ndef generic_ml_summary(generic_ml_output):\n    out = {\n        x: np.nanmedian(generic_ml_output[x], axis=0)\n        for x in [\"blp\", \"blp_se\", \"gate\", \"gate_se\", \"Lambda\"]\n    }\n    out[\"name\"] = generic_ml_output[\"name\"]\n    return out"
+  },
+  {
+    "objectID": "conditionaleffect.html#code-2",
+    "href": "conditionaleffect.html#code-2",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Code",
+    "text": "Code\n\ndef generate_report(results):\n    summaries = list(map(generic_ml_summary, results))\n    df_plot = pd.DataFrame({\n        mod[\"name\"]: np.median(mod[\"cate\"], axis=1)\n        for mod in results\n    })\n\n    corrfig=sns.pairplot(df_plot, diag_kind=\"kde\", kind=\"reg\")\n\n    df_cate = pd.concat({\n        s[\"name\"]: pd.DataFrame(dict(blp=s[\"blp\"], se=s[\"blp_se\"]))\n        for s in summaries\n    }).T.stack()\n\n    df_groups = pd.concat({\n        s[\"name\"]: pd.DataFrame(dict(gate=s[\"gate\"], se=s[\"gate_se\"]))\n        for s in summaries\n    }).T.stack()\n    return({\"corr\":df_plot.corr(), \"pairplot\":corrfig, \"BLP\":df_cate,\"GATE\":df_groups})"
+  },
+  {
+    "objectID": "conditionaleffect.html#code-3",
+    "href": "conditionaleffect.html#code-3",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Code",
+    "text": "Code\n\nimport lightgbm as lgb\nimport io\nfrom contextlib import redirect_stdout, redirect_stderr\nmodels = [\n    linear_model.LassoCV(cv=10, n_alphas=25, max_iter=500, tol=1e-4, n_jobs=20),\n    ensemble.RandomForestRegressor(n_estimators=200, min_samples_leaf=20, n_jobs=20),\n    lgb.LGBMRegressor(n_estimators=200, max_depth=4, reg_lambda=1.0, reg_alpha=0.0, n_jobs=20),\n    neural_network.MLPRegressor(hidden_layer_sizes=(20, 10), max_iter=500, activation=\"logistic\",\n                                solver=\"adam\", tol=1e-3, early_stopping=True, alpha=0.0001)\n]\n\nkw = dict(x=Xl, treatment=treatment, n_split=11, n_group=5, cluster_id=loc_id)\ndef evaluate_models(models, y, **other_kw):\n    all_kw = kw.copy()\n    all_kw[\"y\"] = y\n    all_kw.update(other_kw)\n    # hide many warnings while fitting\n    with io.StringIO() as obuf, redirect_stdout(obuf):\n        with io.StringIO() as ebuf, redirect_stderr(ebuf):\n           results=list(map(lambda x: generic_ml_model(model=x, **all_kw), models))\n           sout = obuf.getvalue()\n           serr = ebuf.getvalue()\n    return([results,sout,serr])"
+  },
+  {
+    "objectID": "conditionaleffect.html#results-birthweight",
+    "href": "conditionaleffect.html#results-birthweight",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Results: Birthweight",
+    "text": "Results: Birthweight\n\nresults = evaluate_models(models, y=bw);\nreport=generate_report(results[0])\nreport[\"pairplot\"].fig.show()"
+  },
+  {
+    "objectID": "conditionaleffect.html#results-birthweight-1",
+    "href": "conditionaleffect.html#results-birthweight-1",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Results: Birthweight",
+    "text": "Results: Birthweight\n\nreport[\"corr\"]\n\n\n\n\n\n\n\n\nLassoCV\nRandomForestRegressor\nLGBMRegressor\nMLPRegressor\n\n\n\n\nLassoCV\n1.000000\n0.473326\n0.235693\n-0.183864\n\n\nRandomForestRegressor\n0.473326\n1.000000\n0.657972\n-0.233754\n\n\nLGBMRegressor\n0.235693\n0.657972\n1.000000\n-0.142473\n\n\nMLPRegressor\n-0.183864\n-0.233754\n-0.142473\n1.000000"
+  },
+  {
+    "objectID": "conditionaleffect.html#results-assisted-delivery",
+    "href": "conditionaleffect.html#results-assisted-delivery",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Results: Assisted Delivery",
+    "text": "Results: Assisted Delivery\n\nad = df.loc[X.index, \"good_assisted_delivery\"]\nresults_ad = evaluate_models(models, y=ad)\nreport_ad=generate_report(results_ad[0])\nreport_ad[\"pairplot\"].fig.show()"
+  },
+  {
+    "objectID": "conditionaleffect.html#results-assisted-delivery-1",
+    "href": "conditionaleffect.html#results-assisted-delivery-1",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Results: Assisted Delivery",
+    "text": "Results: Assisted Delivery\n\nreport_ad[\"corr\"]\n\n\n\n\n\n\n\n\nLassoCV\nRandomForestRegressor\nLGBMRegressor\nMLPRegressor\n\n\n\n\nLassoCV\n1.000000\n0.866979\n0.711125\n0.868933\n\n\nRandomForestRegressor\n0.866979\n1.000000\n0.738210\n0.734370\n\n\nLGBMRegressor\n0.711125\n0.738210\n1.000000\n0.559884\n\n\nMLPRegressor\n0.868933\n0.734370\n0.559884\n1.000000"
+  },
+  {
+    "objectID": "conditionaleffect.html#covariate-means-by-group",
+    "href": "conditionaleffect.html#covariate-means-by-group",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Covariate Means by Group",
+    "text": "Covariate Means by Group\n\ndef cov_mean_by_group(y, res, cluster_id):\n    n_group = res[\"gate\"].shape[1]\n    gate = res[\"gate\"].copy()\n    gate_se = gate.copy()\n    dat = y.to_frame()\n\n    for i in range(res[\"cate\"].shape[1]):\n        S = res[\"cate\"][:, i]\n        cutoffs = np.quantile(S, np.linspace(0, 1, n_group+1))\n        cutoffs[-1] += 1\n        for k in range(n_group):\n            dat[f\"G{k}\"] = ((cutoffs[k] &lt;= S) & (S &lt; cutoffs[k+1])) * 1.0\n\n        g_form = \"y ~ -1 + \" + \" + \".join([f\"G{k}\" for k in range(n_group)])\n        g_reg = smf.ols(g_form, data=dat.astype(float))\n        g_fit = g_reg.fit()\n        gate[i, :] = g_fit.params.filter(regex=\"G\").values\n        rows = ~y.isna()\n        gate_se[i, :] = get_treatment_se(g_fit, cluster_id, rows)\n\n    out = pd.DataFrame(dict(\n        mean=np.nanmedian(gate, axis=0),\n        se=np.nanmedian(gate_se, axis=0),\n        group=list(range(n_group))\n    ))\n\n    return out\n\ndef compute_group_means_for_results(results, variables, df2):\n    to_cat = []\n    for res in results:\n        for v in variables:\n            to_cat.append(\n                cov_mean_by_group(df2[v], res, loc_id)\n                .assign(method=res[\"name\"], variable=v)\n            )\n\n    group_means = pd.concat(to_cat, ignore_index=True)\n    group_means[\"plus2sd\"] = group_means.eval(\"mean + 1.96*se\")\n    group_means[\"minus2sd\"] = group_means.eval(\"mean - 1.96*se\")\n    return group_means\n\ndef groupmeanfig(group_means):\n    g = sns.FacetGrid(group_means, col=\"variable\", col_wrap=min(3,group_means.variable.nunique()), hue=\"method\", sharey=False)\n    g.map(plt.plot, \"group\", \"mean\")\n    g.map(plt.plot, \"group\", \"plus2sd\", ls=\"--\")\n    g.map(plt.plot, \"group\", \"minus2sd\", ls=\"--\")\n    g.add_legend();\n    return(g)"
+  },
+  {
+    "objectID": "conditionaleffect.html#covariate-means-by-group-1",
+    "href": "conditionaleffect.html#covariate-means-by-group-1",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Covariate Means by Group",
+    "text": "Covariate Means by Group\n\ndf2 = df.loc[X.index, :]\ndf2[\"edu99\"] = df2.edu == 99\ndf2[\"educ\"] = df2[\"edu\"]\ndf2.loc[df2[\"edu99\"], \"educ\"] = np.nan\n\nvariables1 = [\"log_xp_percap\",\"agecat\",\"educ\"]\nvariables2 =[\"tv\",\"goat\",\"cow\",\n             \"motorbike\", \"hh_cook_wood\",\"hh_toilet_own\"]\ngroup_means_ad = compute_group_means_for_results(results_ad[0], variables1, df2)"
+  },
+  {
+    "objectID": "conditionaleffect.html#covariate-means-by-group-2",
+    "href": "conditionaleffect.html#covariate-means-by-group-2",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Covariate Means by Group",
+    "text": "Covariate Means by Group\n\ng = groupmeanfig(group_means_ad)\ng.fig.show()"
+  },
+  {
+    "objectID": "conditionaleffect.html#sources-and-further-reading",
+    "href": "conditionaleffect.html#sources-and-further-reading",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Sources and Further Reading",
+    "text": "Sources and Further Reading\n\nSection on generic ML for heterogeneous effects is based on Chernozhukov et al. (2023) and my earlier notes"
+  },
+  {
+    "objectID": "conditionaleffect.html#references",
+    "href": "conditionaleffect.html#references",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "References",
+    "text": "References\n\n\n\n\n\n\nAlatas, Vivi, Nur Cahyadi, Elisabeth Ekasari, Sarah Harmoun, Budi Hidayat, Edgar Janz, Jon Jellema, H Tuhiman, and M Wai-Poi. 2011. “Program Keluarga Harapan : Impact Evaluation of Indonesia’s Pilot Household Conditional Cash Transfer Program.” World Bank. http://documents.worldbank.org/curated/en/589171468266179965/Program-Keluarga-Harapan-impact-evaluation-of-Indonesias-Pilot-Household-Conditional-Cash-Transfer-Program.\n\n\nChernozhukov, Victor, Mert Demirer, Esther Duflo, and Iván Fernández-Val. 2023. “Generic Machine Learning Inference on Heterogenous Treatment Effects in Randomized Experiments, with an Application to Immunization in India.”\n\n\nImai, Kosuke, and Michael Lingzhi Li. 2022. “Statistical Inference for Heterogeneous Treatment Effects Discovered by Generic Machine Learning in Randomized Experiments.” In. https://api.semanticscholar.org/CorpusID:247762848.\n\n\nTriyana, Margaret. 2016. “Do Health Care Providers Respond to Demand-Side Incentives? Evidence from Indonesia.” American Economic Journal: Economic Policy 8 (4): 255–88. https://doi.org/10.1257/pol.20140048."
+  },
+  {
+    "objectID": "conditionaleffect.html#results-birthweight-2",
+    "href": "conditionaleffect.html#results-birthweight-2",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Results: Birthweight",
+    "text": "Results: Birthweight\n\nreport[\"BLP\"]\n\n\n\n\n\n\n\n\n\nLassoCV\nRandomForestRegressor\nLGBMRegressor\nMLPRegressor\n\n\n\n\nblp\n0\n-18.174819\n-0.431231\n-11.706657\n-6.538218\n\n\n1\n0.000000\n0.039711\n0.049534\n-1956.069372\n\n\nse\n0\n32.550357\n33.007352\n32.325615\n32.415041\n\n\n1\n0.324307\n0.273625\n0.113038\n3363.124492"
+  },
+  {
+    "objectID": "conditionaleffect.html#results-birthweight-3",
+    "href": "conditionaleffect.html#results-birthweight-3",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Results: Birthweight",
+    "text": "Results: Birthweight\n\nreport[\"GATE\"]\n\n\n\n\n\n\n\n\n\nLassoCV\nRandomForestRegressor\nLGBMRegressor\nMLPRegressor\n\n\n\n\ngate\n0\n0.000000e+00\n13.660955\n-22.584711\n-9.579810\n\n\n1\n0.000000e+00\n-65.813534\n-39.940905\n15.030689\n\n\n2\n0.000000e+00\n-20.764957\n-41.530434\n9.613109\n\n\n3\n0.000000e+00\n-27.423219\n12.094830\n3.788636\n\n\n4\n-1.817482e+01\n18.911887\n-3.479815\n-21.429997\n\n\nse\n0\n6.795411e-17\n70.018987\n64.051533\n74.053558\n\n\n1\n0.000000e+00\n68.836723\n66.866505\n70.931647\n\n\n2\n3.917293e+01\n66.488450\n66.027336\n71.461789\n\n\n3\n0.000000e+00\n72.216467\n70.056654\n68.223470\n\n\n4\n5.207245e+01\n74.736235\n77.568048\n61.375903"
+  },
+  {
+    "objectID": "conditionaleffect.html#results-assisted-delivery-2",
+    "href": "conditionaleffect.html#results-assisted-delivery-2",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Results: Assisted Delivery",
+    "text": "Results: Assisted Delivery\n\nreport_ad[\"BLP\"]\n\n\n\n\n\n\n\n\n\nLassoCV\nRandomForestRegressor\nLGBMRegressor\nMLPRegressor\n\n\n\n\nblp\n0\n0.049861\n0.040980\n0.042617\n0.042540\n\n\n1\n0.513089\n0.518335\n0.319079\n0.409998\n\n\nse\n0\n0.021010\n0.021916\n0.022413\n0.021105\n\n\n1\n0.148421\n0.143682\n0.089454\n0.124034"
+  },
+  {
+    "objectID": "conditionaleffect.html#results-assisted-delivery-3",
+    "href": "conditionaleffect.html#results-assisted-delivery-3",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Results: Assisted Delivery",
+    "text": "Results: Assisted Delivery\n\nreport_ad[\"GATE\"]\n\n\n\n\n\n\n\n\n\nLassoCV\nRandomForestRegressor\nLGBMRegressor\nMLPRegressor\n\n\n\n\ngate\n0\n-0.040468\n-0.041023\n-0.012224\n-0.019082\n\n\n1\n-0.007526\n0.008998\n-0.004181\n-0.028161\n\n\n2\n0.040487\n0.000478\n0.017984\n-0.029246\n\n\n3\n0.056126\n0.056823\n0.070687\n0.077001\n\n\n4\n0.200392\n0.197438\n0.179738\n0.169169\n\n\nse\n0\n0.041241\n0.050945\n0.049940\n0.029920\n\n\n1\n0.041936\n0.042274\n0.044613\n0.044625\n\n\n2\n0.043105\n0.039405\n0.046310\n0.050314\n\n\n3\n0.047081\n0.044356\n0.046998\n0.049233\n\n\n4\n0.052285\n0.049738\n0.046856\n0.055734"
+  },
+  {
+    "objectID": "conditionaleffect.html#covariate-means-by-group-3",
+    "href": "conditionaleffect.html#covariate-means-by-group-3",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Covariate Means by Group",
+    "text": "Covariate Means by Group\n\ng = groupmeanfig(compute_group_means_for_results(results_ad[0], variables2, df2))\ng.fig.show()"
+  },
+  {
+    "objectID": "conditionaleffect.html#treatment-participation-by-group",
+    "href": "conditionaleffect.html#treatment-participation-by-group",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Treatment Participation by Group",
+    "text": "Treatment Participation by Group\n\ng = groupmeanfig(compute_group_means_for_results(results_ad[0], [\"pkh_ever\"], df2))\ng.fig.show()"
   }
 ]
