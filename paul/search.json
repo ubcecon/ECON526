@@ -1327,7 +1327,7 @@
     "href": "neuralnets.html#single-layer-perceptron",
     "title": "Neural Networks",
     "section": "Single Layer Perceptron",
-    "text": "Single Layer Perceptron\n\n\\(x_i \\in \\R^d\\), want to approximate some \\(f: \\R^d \\to \\R\\)\nApproximate by \\[\n\\begin{align*}\nf(x_i; \\mathbf{w},\\mathbf{b}) = \\psi_1\\left( \\sum_{u=1}^m w_{u,1} \\psi_0( x_i'w_{u,0} + b_{u,0}) + b_{u,1} \\right)\n\\end{align}\n\\] where\n\nWeights: \\(w_{u,1} \\in \\R\\), \\(w_{u,0} \\in \\R^d\\)\nBiases: \\(b_{u,1}, b_{u,0} \\in \\R\\)\nActivation functions \\(\\psi_1, \\psi_0: \\R \\to \\R\\)\nWidth: \\(m\\)"
+    "text": "Single Layer Perceptron\n\n\\(x_i \\in \\R^d\\), want to approximate some \\(f: \\R^d \\to \\R\\)\nApproximate by \\[\n\\begin{align*}\nf(x_i; \\mathbf{w},\\mathbf{b}) =\n\\psi_1 \\left( \\sum_{u=1}^m w_{u,1} \\psi_0( x_i'w_{u,0} + b_{u,0}) + b_{u,1} \\right)\n\\end{align*}\n\\] where\n\nWeights: \\(w_{u,1} \\in \\R\\), \\(w_{u,0} \\in \\R^d\\)\nBiases: \\(b_{u,1}, b_{u,0} \\in \\R\\)\nActivation functions \\(\\psi_1, \\psi_0: \\R \\to \\R\\)\nWidth: \\(m\\)"
   },
   {
     "objectID": "neuralnets.html#activation-functions",
@@ -1362,7 +1362,7 @@
     "href": "neuralnets.html#computing-gradients",
     "title": "Neural Networks",
     "section": "Computing Gradients",
-    "text": "Computing Gradients\n\nAutomatic differentiation: automatically use chainrule on each step of computation\nE.g. \\(\\ell(\\theta) = f(g(h(\\theta)))\\)\n\n\\(\\ell : \\R^p \\to \\R\\), \\(h: \\R^p \\to \\R^q\\), \\(g: \\R^q \\to \\R^j\\), \\(f: \\R^j \\to \\R\\) \\[\n\\left(\\nabla \\ell(\\theta)\\riight)^T = & \\underbrace{Df_{g(h(\\theta))}}_{1 \\times j} \\underbrace{Dg_{h(\\theta)}}_{j \\times q} \\underbrace{Dh_\\theta}_{q \\times p}\n\\]\n\nForward mode:\n\nCalculate \\(h(\\theta)\\) and \\(D_1=Dh_\\theta\\)\nCalculate \\(g(h(\\theta))\\) and \\(Dg_{h(\\theta)}\\), multiply \\(D_2=Dg_{h(\\theta)} D_1\\) (\\(jqp\\) scalar products and additions)\nCalculate \\(f(g(h(\\theta)))\\) and \\(Df_{g(h(\\theta))}\\), multiply \\(Df_{g(h(\\theta))} D_2\\) (\\(1jp\\) scalar products and additions)\n\n\nWork to propagate derivative \\(\\propto jqp + 1jp\\)"
+    "text": "Computing Gradients\n\nAutomatic differentiation: automatically use chainrule on each step of computation\nE.g. \\(\\ell(\\theta) = f(g(h(\\theta)))\\)\n\n\\(\\ell : \\R^p \\to \\R\\), \\(h: \\R^p \\to \\R^q\\), \\(g: \\R^q \\to \\R^j\\), \\(f: \\R^j \\to \\R\\) \\[\n\\left(\\nabla \\ell(\\theta)\\riight)^T = \\underbrace{Df_{g(h(\\theta))}}_{1 \\times j} \\underbrace{Dg_{h(\\theta)}}_{j \\times q} \\underbrace{Dh_\\theta}_{q \\times p}\n\\]\n\nForward mode:\n\nCalculate \\(h(\\theta)\\) and \\(D_1=Dh_\\theta\\)\nCalculate \\(g(h(\\theta))\\) and \\(Dg_{h(\\theta)}\\), multiply \\(D_2=Dg_{h(\\theta)} D_1\\) (\\(jqp\\) scalar products and additions)\nCalculate \\(f(g(h(\\theta)))\\) and \\(Df_{g(h(\\theta))}\\), multiply \\(Df_{g(h(\\theta))} D_2\\) (\\(1jp\\) scalar products and additions)\n\n\nWork to propagate derivative \\(\\propto jqp + 1jp\\)"
   },
   {
     "objectID": "neuralnets.html#computing-gradients-1",
@@ -1390,7 +1390,7 @@
     "href": "neuralnets.html#multi-layer-perceptron-1",
     "title": "Neural Networks",
     "section": "Multi Layer Perceptron",
-    "text": "Multi Layer Perceptron\n\nmlp = multilayer(1,4,4,nn.ReLU())\nprint(count_parameters(mlp))\noptimizer = torch.optim.Adam(mlp.parameters(), lr=0.01)\nfig, ax = plt.subplots()\nepochs = 1000\nfor i in range(epochs):\n    if (i % 50) == 0 :\n        ax.plot(xlin,mlp(xlin.reshape(-1,1)).data, alpha=i/epochs, color='k')\n        mlp.zero_grad()\n    loss = lossfn(y,mlp(x))\n    #print(f\"{i}: {loss.item()}\")\n    optimizer.zero_grad()\n    loss.backward()\n    optimizer.step()\n\nax.plot(xlin, f(xlin), label=\"f\", lw=8)\nax.scatter(x.flatten(),y.flatten())\nfig.show()\n\n73"
+    "text": "Multi Layer Perceptron\n\n\nCode\nmlp = multilayer(1,4,4,nn.ReLU())\nprint(count_parameters(mlp))\noptimizer = torch.optim.Adam(mlp.parameters(), lr=0.01)\nfig, ax = plt.subplots()\nepochs = 1000\nfor i in range(epochs):\n    if (i % 50) == 0 :\n        ax.plot(xlin,mlp(xlin.reshape(-1,1)).data, alpha=i/epochs, color='k')\n        mlp.zero_grad()\n    loss = lossfn(y,mlp(x))\n    #print(f\"{i}: {loss.item()}\")\n    optimizer.zero_grad()\n    loss.backward()\n    optimizer.step()\n\nax.plot(xlin, f(xlin), label=\"f\", lw=8)\nax.scatter(x.flatten(),y.flatten())\nfig.show()\n\n\n73"
   },
   {
     "objectID": "neuralnets.html#overparameterization",
