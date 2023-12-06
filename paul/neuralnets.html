@@ -469,7 +469,7 @@ f(x_i; \mathbf{w},\mathbf{b}) =
 </section>
 <section id="activation-functions" class="slide level2">
 <h2>Activation functions</h2>
-<div class="cell" data-execution_count="1">
+<div class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -498,7 +498,7 @@ f(x_i; \mathbf{w},\mathbf{b}) =
 </section>
 <section id="single-layer-perceptron-1" class="slide level2">
 <h2>Single Layer Perceptron</h2>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="im">import</span> torch</span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="kw">class</span> SingleLayerPerceptron(nn.Module):</span>
@@ -588,7 +588,7 @@ f(x_i; \mathbf{w},\mathbf{b}) =
 </section>
 <section id="gradient-descent-1" class="slide level2">
 <h2>Gradient Descent</h2>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="4">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
@@ -629,7 +629,7 @@ f(x_i; \mathbf{w},\mathbf{b}) =
 </section>
 <section id="multi-layer-perceptron" class="slide level2">
 <h2>Multi Layer Perceptron</h2>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">def</span> multilayer(d,width,depth,activation<span class="op">=</span>nn.ReLU()):</span>
 <span id="cb4-2"><a href="#cb4-2"></a>    mlp <span class="op">=</span> nn.Sequential(</span>
 <span id="cb4-3"><a href="#cb4-3"></a>        nn.Linear(d,width),</span>
@@ -651,7 +651,7 @@ f(x_i; \mathbf{w},\mathbf{b}) =
 </section>
 <section id="multi-layer-perceptron-1" class="slide level2">
 <h2>Multi Layer Perceptron</h2>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="6">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>mlp <span class="op">=</span> multilayer(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">4</span>,nn.ReLU())</span>
@@ -700,7 +700,7 @@ f(x_i; \mathbf{w},\mathbf{b}) =
 </section>
 <section id="double-descent" class="slide level2">
 <h2>Double Descent</h2>
-<div class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="7">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="im">from</span> joblib <span class="im">import</span> Parallel, delayed</span>
@@ -753,7 +753,7 @@ f(x_i; \mathbf{w},\mathbf{b}) =
 </section>
 <section id="double-descent-1" class="slide level2">
 <h2>Double Descent</h2>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.exp(x[<span class="dv">0</span>]<span class="op">-</span>x[<span class="dv">1</span>])</span>
 <span id="cb8-2"><a href="#cb8-2"></a>n <span class="op">=</span> <span class="dv">20</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a>torch.manual_seed(<span class="dv">1234</span>)</span>
@@ -781,7 +781,7 @@ width 9</code></pre>
 </section>
 <section id="double-descent-2" class="slide level2">
 <h2>Double Descent</h2>
-<div class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="9">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">def</span> plotdd(losses, nonoise):</span>
@@ -822,7 +822,7 @@ width 9</code></pre>
 </section>
 <section id="double-descent-low-noise" class="slide level2">
 <h2>Double Descent: Low Noise</h2>
-<div class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="10">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>sigma <span class="op">=</span> <span class="fl">0.01</span></span>
@@ -843,7 +843,10 @@ width 8
 width 9</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="10">
+</section>
+<section id="double-descent-low-noise-1" class="slide level2">
+<h2>Double Descent: Low Noise</h2>
+<div class="cell" data-execution_count="11">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>fig<span class="op">=</span>plotdd(ddlowsig[<span class="dv">0</span>].mean(axis<span class="op">=</span><span class="dv">2</span>), ddlowsig[<span class="dv">1</span>].mean(axis<span class="op">=</span><span class="dv">2</span>))</span>

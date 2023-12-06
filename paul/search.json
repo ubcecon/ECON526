@@ -1425,7 +1425,7 @@
     "href": "neuralnets.html#double-descent-low-noise",
     "title": "Neural Networks",
     "section": "Double Descent: Low Noise",
-    "text": "Double Descent: Low Noise\n\n\nCode\nsigma = 0.01\ny = f(x.T) + sigma*torch.randn(x.shape[0])\nytest = f(xtest.T) + sigma*torch.randn(xtest.shape[0])\nddlowsig = doubledescentdemo(x,y,xtest,ytest,f, lr=0.05)\n\n\nwidth 0\nwidth 1\nwidth 2\nwidth 3\nwidth 4\nwidth 5\nwidth 6\nwidth 7\nwidth 8\nwidth 9\n\n\n\n\nCode\nfig=plotdd(ddlowsig[0].mean(axis=2), ddlowsig[1].mean(axis=2))\nfig.show()"
+    "text": "Double Descent: Low Noise\n\n\nCode\nsigma = 0.01\ny = f(x.T) + sigma*torch.randn(x.shape[0])\nytest = f(xtest.T) + sigma*torch.randn(xtest.shape[0])\nddlowsig = doubledescentdemo(x,y,xtest,ytest,f, lr=0.05)\n\n\nwidth 0\nwidth 1\nwidth 2\nwidth 3\nwidth 4\nwidth 5\nwidth 6\nwidth 7\nwidth 8\nwidth 9"
   },
   {
     "objectID": "neuralnets.html#double-descent-3",
@@ -1475,5 +1475,12 @@
     "title": "Neural Networks",
     "section": "Other Architectures",
     "text": "Other Architectures\n\nMulti-layer perceptrons / feed forward networks are the simplest neural networks, many extensions and variations exist\nTricks to help with vanishing gradients and numeric stability:\n\nNormalization\nResidual connections\n\nVariations motivated by sequential data:\n\nRecurrent\nTransformers\n\nVariations motivated by images:\n\nConvolutions\nGAN\nDiffusion1\n\n\nThe motivating idea of diffusion models is different than neural networks, but neural networks are commonly used as one of the parts of diffusion models."
+  },
+  {
+    "objectID": "neuralnets.html#double-descent-low-noise-1",
+    "href": "neuralnets.html#double-descent-low-noise-1",
+    "title": "Neural Networks",
+    "section": "Double Descent: Low Noise",
+    "text": "Double Descent: Low Noise\n\n\nCode\nfig=plotdd(ddlowsig[0].mean(axis=2), ddlowsig[1].mean(axis=2))\nfig.show()"
   }
 ]
