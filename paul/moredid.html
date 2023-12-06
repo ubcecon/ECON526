@@ -511,7 +511,7 @@ y_{it} = \beta D_{it} + \alpha_i + \delta_t + \epsilon_{it}
 \end{align*}
 \]</span></li>
 </ul>
-<div class="cell" data-execution_count="1">
+<div class="cell" data-execution_count="2">
 <details>
 <summary>imports</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> warnings</span>
@@ -527,7 +527,7 @@ y_{it} = \beta D_{it} + \alpha_i + \delta_t + \epsilon_{it}
 </section>
 <section id="weights" class="slide level2">
 <h2>Weights</h2>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">def</span> assigntreat(n, T, portiontreated):</span>
@@ -556,7 +556,7 @@ y_{it} = \beta D_{it} + \alpha_i + \delta_t + \epsilon_{it}
 <pre><code>-0.21363520721210053</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="4">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># check that it matches fixed effect estimate from a package</span></span>
@@ -610,7 +610,7 @@ Included effects: Entity, Time</code></pre>
 </section>
 <section id="weights-with-single-treatment-time" class="slide level2">
 <h2>Weights with Single Treatment Time</h2>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="5">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">def</span> plotD(D,ax):</span>
@@ -648,7 +648,7 @@ Included effects: Entity, Time</code></pre>
 </section>
 <section id="weights-with-early-and-late-treated" class="slide level2">
 <h2>Weights with Early and Late Treated</h2>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="6">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>pt <span class="op">=</span> np.zeros(T)</span>
@@ -664,7 +664,7 @@ Included effects: Entity, Time</code></pre>
 </section>
 <section id="sign-reversal" class="slide level2">
 <h2>Sign Reversal</h2>
-<div class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="7">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>dvals <span class="op">=</span> np.unique(D,axis<span class="op">=</span><span class="dv">0</span>)</span>
@@ -798,7 +798,7 @@ y_{it} = \sum_{c=1}^C D_{it} 1\{C_i=c\} \beta_{ct} + \alpha_i + \delta_t + \epsi
 </section>
 <section id="regression-with-cohort-treat-time-interactions" class="slide level2">
 <h2>Regression with Cohort-Treat-Time Interactions</h2>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="8">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">def</span> definecohort(df):</span>
@@ -1065,7 +1065,7 @@ y_{it} = \sum_{c=1}^C 1\{C_i=c\} \delta_{c,t} + \alpha_i + \epsilon_{it}
 </section>
 <section id="regression-with-cohort-time-interactions-2" class="slide level2">
 <h2>Regression with Cohort-Time Interactions</h2>
-<div class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>dfi<span class="op">=</span>df.reset_index()</span>
 <span id="cb11-2"><a href="#cb11-2"></a>dfi[<span class="st">'time'</span>] <span class="op">=</span> dfi[<span class="st">'t'</span>]</span>
 <span id="cb11-3"><a href="#cb11-3"></a>dfi<span class="op">=</span>dfi.set_index([<span class="st">'id'</span>,<span class="st">'t'</span>])</span>
@@ -1498,7 +1498,7 @@ H_0 : &amp; \Er[y_{it-r} - y_{it-s} | D_{it}=1, D_{it-r}=0,  D_{it-s}=0] = \\
 <ul>
 <li><span class="citation" data-cites="facure2022">Facure (<a href="#/references" role="doc-biblioref" onclick="">2022, chap. 1</a>)</span></li>
 <li><span class="citation" data-cites="hk2021">Huntington-Klein (<a href="#/references" role="doc-biblioref" onclick="">2021, chap. 16</a>)</span></li>
-<li>Recent reviews: <span class="citation" data-cites="roth2023">Roth et al. (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span>, <span class="citation" data-cites="dd2022">Chaisemartin and D’Haultfœuille (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></li>
+<li>Recent reviews: <span class="citation" data-cites="roth2023">Roth et al. (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span>, <span class="citation" data-cites="dd2022">Chaisemartin and D’Haultfœuille (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>, <span class="citation" data-cites="arkhangelsky2023">Arkhangelsky and Imbens (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span></li>
 <li>Early work pointing to problems with fixed effects:
 <ul>
 <li><span class="citation" data-cites="laporte2005">Laporte and Windmeijer (<a href="#/references" role="doc-biblioref" onclick="">2005</a>)</span>, <span class="citation" data-cites="wooldridge2005">Wooldridge (<a href="#/references" role="doc-biblioref" onclick="">2005</a>)</span></li>
@@ -1520,6 +1520,9 @@ H_0 : &amp; \Er[y_{it-r} - y_{it-s} | D_{it}=1, D_{it-r}=0,  D_{it-s}=0] = \\
 
 </div>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-arkhangelsky2023" class="csl-entry" role="listitem">
+Arkhangelsky, Dmitry, and Guido Imbens. 2023. <span>“Causal Models for Longitudinal and Panel Data: A Survey.”</span>
+</div>
 <div id="ref-borusyak2018" class="csl-entry" role="listitem">
 Borusyak, Kirill, and Xavier Jaravel. 2018. <span>“Revisiting Event Study Designs.”</span> <a href="https://scholar.harvard.edu/files/borusyak/files/borusyak_jaravel_event_studies.pdf">https://scholar.harvard.edu/files/borusyak/files/borusyak_jaravel_event_studies.pdf</a>.
 </div>

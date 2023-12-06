@@ -218,7 +218,7 @@ Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/le
     - https://datascience.quantecon.org/applications/ml_in_economics.html#estimation-of-nuisance-functions
 - **December 4**: [Treatment Heterogeneity and Conditional Effects](https://ubcecon.github.io/ECON526/paul/conditionaleffect.html)
     - https://datascience.quantecon.org/applications/heterogeneity.html
-- **December 6**: Regression Discontinuity
-    - https://matheusfacure.github.io/python-causality-handbook/16-Regression-Discontinuity-Design.html
-- **December 8**
+- **December 6**: 8. [Neural Networks](https://ubcecon.github.io/ECON526/paul/neuralnets.html)
+   - Reading: [QuantEcon Datascience: Regression - Neural Networks](https://datascience.quantecon.org/tools/regression.html#neural-networks)
+- **December 15**
     - **DATA PROJECT DUE**

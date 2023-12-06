@@ -4,14 +4,14 @@
     "href": "feed.html",
     "title": "Slides",
     "section": "",
-    "text": "Difference in Differences II\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nDouble / Debiased Machine Learning\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nECON 526: Quantitative Economics with Data Science Applications\n\n\n\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nFixed Effects\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nIntroduction to Difference in Differences\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nMatching\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nSynthetic Control\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nTreatment Heterogeneity and Conditional Effects\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\nNo matching items"
+    "text": "Difference in Differences II\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nDouble / Debiased Machine Learning\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nECON 526: Quantitative Economics with Data Science Applications\n\n\n\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nFixed Effects\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nIntroduction to Difference in Differences\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nMatching\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nNeural Networks\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nSynthetic Control\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n  \n\n\n\n\nTreatment Heterogeneity and Conditional Effects\n\n\nECON526\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "ECON 526: Quantitative Economics with Data Science Applications",
     "section": "",
-    "text": "Slides\n\nMatching slides, notebook\n\nReading: chapters 10-12 of Facure (2022) and chapter 14 of Huntington-Klein (2021)\n\nIntroduction to difference in differences, notebook\n\nReading: chapter 13 of Facure (2022)\n\nFixed Effects, notebook\n\nReading: chapter 14 of Facure (2022)\n\nAdvanced difference in differences, notebook\n\nReading: chapter 24 of Facure (2022), Roth et al. (2023), Chaisemartin and D’Haultfœuille (2022)\n\nSynthetic Control, notebook\n\nReading: Abadie (2021),chapter 15 of Facure (2022)\n\nDouble/Debiased Machine Learning, notebook\n\nReading: QuantEcon: ML in Economics\n\nTreatment Heterogeneity and Conditional Effects, notebook\n\nReading: QuantEcon: Heterogeneity\n\n\n\n\n\n\n\nReferences\n\nAbadie, Alberto. 2021. “Using Synthetic Controls: Feasibility, Data Requirements, and Methodological Aspects.” Journal of Economic Literature 59 (2): 391–425. https://doi.org/10.1257/jel.20191450.\n\n\nChaisemartin, Clément de, and Xavier D’Haultfœuille. 2022. “Two-way fixed effects and differences-in-differences with heterogeneous treatment effects: a survey.” The Econometrics Journal 26 (3): C1–30. https://doi.org/10.1093/ectj/utac017.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/.\n\n\nRoth, Jonathan, Pedro H. C. Sant’Anna, Alyssa Bilinski, and John Poe. 2023. “What’s Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature.” Journal of Econometrics 235 (2): 2218–44. https://doi.org/https://doi.org/10.1016/j.jeconom.2023.03.008."
+    "text": "Slides\n\nMatching slides, notebook\n\nReading: chapters 10-12 of Facure (2022) and chapter 14 of Huntington-Klein (2021)\n\nIntroduction to difference in differences, notebook\n\nReading: chapter 13 of Facure (2022)\n\nFixed Effects, notebook\n\nReading: chapter 14 of Facure (2022)\n\nAdvanced difference in differences, notebook\n\nReading: chapter 24 of Facure (2022), Roth et al. (2023), Chaisemartin and D’Haultfœuille (2022)\n\nSynthetic Control, notebook\n\nReading: Abadie (2021),chapter 15 of Facure (2022)\n\nDouble/Debiased Machine Learning, notebook\n\nReading: QuantEcon: ML in Economics\n\nTreatment Heterogeneity and Conditional Effects, notebook\n\nReading: QuantEcon: Heterogeneity\n\nNeural Networks, notebook\n\nReading: QuantEcon Datascience: Regression - Neural Networks\n\n\n\n\n\n\n\nReferences\n\nAbadie, Alberto. 2021. “Using Synthetic Controls: Feasibility, Data Requirements, and Methodological Aspects.” Journal of Economic Literature 59 (2): 391–425. https://doi.org/10.1257/jel.20191450.\n\n\nChaisemartin, Clément de, and Xavier D’Haultfœuille. 2022. “Two-way fixed effects and differences-in-differences with heterogeneous treatment effects: a survey.” The Econometrics Journal 26 (3): C1–30. https://doi.org/10.1093/ectj/utac017.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/.\n\n\nRoth, Jonathan, Pedro H. C. Sant’Anna, Alyssa Bilinski, and John Poe. 2023. “What’s Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature.” Journal of Econometrics 235 (2): 2218–44. https://doi.org/https://doi.org/10.1016/j.jeconom.2023.03.008."
   },
   {
     "objectID": "matching.html#setting",
@@ -578,14 +578,14 @@
     "href": "moredid.html#sources-and-further-reading",
     "title": "Difference in Differences II",
     "section": "Sources and Further Reading",
-    "text": "Sources and Further Reading\n\nFacure (2022, chap. 1)\nHuntington-Klein (2021, chap. 16)\nRecent reviews: Roth et al. (2023), Chaisemartin and D’Haultfœuille (2022)\nEarly work pointing to problems with fixed effects:\n\nLaporte and Windmeijer (2005), Wooldridge (2005)\n\nExplosion of papers written just before 2020, published just after:\n\nBorusyak and Jaravel (2018)\nChaisemartin and D’Haultfœuille (2020)\nCallaway and Sant’Anna (2021)\nGoodman-Bacon (2021)\nSun and Abraham (2021)"
+    "text": "Sources and Further Reading\n\nFacure (2022, chap. 1)\nHuntington-Klein (2021, chap. 16)\nRecent reviews: Roth et al. (2023), Chaisemartin and D’Haultfœuille (2022), Arkhangelsky and Imbens (2023)\nEarly work pointing to problems with fixed effects:\n\nLaporte and Windmeijer (2005), Wooldridge (2005)\n\nExplosion of papers written just before 2020, published just after:\n\nBorusyak and Jaravel (2018)\nChaisemartin and D’Haultfœuille (2020)\nCallaway and Sant’Anna (2021)\nGoodman-Bacon (2021)\nSun and Abraham (2021)"
   },
   {
     "objectID": "moredid.html#references",
     "href": "moredid.html#references",
     "title": "Difference in Differences II",
     "section": "References",
-    "text": "References\n\n\n\n\n\n\nBorusyak, Kirill, and Xavier Jaravel. 2018. “Revisiting Event Study Designs.” https://scholar.harvard.edu/files/borusyak/files/borusyak_jaravel_event_studies.pdf.\n\n\nCallaway, Brantly, and Pedro H. C. Sant’Anna. 2021. “Difference-in-Differences with Multiple Time Periods.” Journal of Econometrics 225 (2): 200–230. https://doi.org/https://doi.org/10.1016/j.jeconom.2020.12.001.\n\n\nChaisemartin, Clément de, and Xavier D’Haultfœuille. 2020. “Two-Way Fixed Effects Estimators with Heterogeneous Treatment Effects.” American Economic Review 110 (9): 2964–96. https://doi.org/10.1257/aer.20181169.\n\n\n———. 2022. “Two-way fixed effects and differences-in-differences with heterogeneous treatment effects: a survey.” The Econometrics Journal 26 (3): C1–30. https://doi.org/10.1093/ectj/utac017.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nGoodman-Bacon, Andrew. 2021. “Difference-in-Differences with Variation in Treatment Timing.” Journal of Econometrics 225 (2): 254–77. https://doi.org/https://doi.org/10.1016/j.jeconom.2021.03.014.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/.\n\n\nLaporte, Audrey, and Frank Windmeijer. 2005. “Estimation of Panel Data Models with Binary Indicators When Treatment Effects Are Not Constant over Time.” Economics Letters 88 (3): 389–96. https://doi.org/https://doi.org/10.1016/j.econlet.2005.04.002.\n\n\nRambachan, Ashesh, and Jonathan Roth. 2023. “A More Credible Approach to Parallel Trends.” The Review of Economic Studies 90 (5): 2555–91. https://doi.org/10.1093/restud/rdad018.\n\n\nRoth, Jonathan. 2022. “Pretest with Caution: Event-Study Estimates After Testing for Parallel Trends.” American Economic Review: Insights 4 (3): 305–22. https://doi.org/10.1257/aeri.20210236.\n\n\nRoth, Jonathan, Pedro H. C. Sant’Anna, Alyssa Bilinski, and John Poe. 2023. “What’s Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature.” Journal of Econometrics 235 (2): 2218–44. https://doi.org/https://doi.org/10.1016/j.jeconom.2023.03.008.\n\n\nSant’Anna, Pedro H. C., and Jun Zhao. 2020. “Doubly Robust Difference-in-Differences Estimators.” Journal of Econometrics 219 (1): 101–22. https://doi.org/https://doi.org/10.1016/j.jeconom.2020.06.003.\n\n\nSun, Liyang, and Sarah Abraham. 2021. “Estimating Dynamic Treatment Effects in Event Studies with Heterogeneous Treatment Effects.” Journal of Econometrics 225 (2): 175–99. https://doi.org/https://doi.org/10.1016/j.jeconom.2020.09.006.\n\n\nWooldridge, Jeffrey M. 2005. “Fixed-Effects and Related Estimators for Correlated Random-Coefficient and Treatment-Effect Panel Data Models.” The Review of Economics and Statistics 87 (2): 385–90. https://doi.org/10.1162/0034653053970320."
+    "text": "References\n\n\n\n\n\n\nArkhangelsky, Dmitry, and Guido Imbens. 2023. “Causal Models for Longitudinal and Panel Data: A Survey.”\n\n\nBorusyak, Kirill, and Xavier Jaravel. 2018. “Revisiting Event Study Designs.” https://scholar.harvard.edu/files/borusyak/files/borusyak_jaravel_event_studies.pdf.\n\n\nCallaway, Brantly, and Pedro H. C. Sant’Anna. 2021. “Difference-in-Differences with Multiple Time Periods.” Journal of Econometrics 225 (2): 200–230. https://doi.org/https://doi.org/10.1016/j.jeconom.2020.12.001.\n\n\nChaisemartin, Clément de, and Xavier D’Haultfœuille. 2020. “Two-Way Fixed Effects Estimators with Heterogeneous Treatment Effects.” American Economic Review 110 (9): 2964–96. https://doi.org/10.1257/aer.20181169.\n\n\n———. 2022. “Two-way fixed effects and differences-in-differences with heterogeneous treatment effects: a survey.” The Econometrics Journal 26 (3): C1–30. https://doi.org/10.1093/ectj/utac017.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nGoodman-Bacon, Andrew. 2021. “Difference-in-Differences with Variation in Treatment Timing.” Journal of Econometrics 225 (2): 254–77. https://doi.org/https://doi.org/10.1016/j.jeconom.2021.03.014.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/.\n\n\nLaporte, Audrey, and Frank Windmeijer. 2005. “Estimation of Panel Data Models with Binary Indicators When Treatment Effects Are Not Constant over Time.” Economics Letters 88 (3): 389–96. https://doi.org/https://doi.org/10.1016/j.econlet.2005.04.002.\n\n\nRambachan, Ashesh, and Jonathan Roth. 2023. “A More Credible Approach to Parallel Trends.” The Review of Economic Studies 90 (5): 2555–91. https://doi.org/10.1093/restud/rdad018.\n\n\nRoth, Jonathan. 2022. “Pretest with Caution: Event-Study Estimates After Testing for Parallel Trends.” American Economic Review: Insights 4 (3): 305–22. https://doi.org/10.1257/aeri.20210236.\n\n\nRoth, Jonathan, Pedro H. C. Sant’Anna, Alyssa Bilinski, and John Poe. 2023. “What’s Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature.” Journal of Econometrics 235 (2): 2218–44. https://doi.org/https://doi.org/10.1016/j.jeconom.2023.03.008.\n\n\nSant’Anna, Pedro H. C., and Jun Zhao. 2020. “Doubly Robust Difference-in-Differences Estimators.” Journal of Econometrics 219 (1): 101–22. https://doi.org/https://doi.org/10.1016/j.jeconom.2020.06.003.\n\n\nSun, Liyang, and Sarah Abraham. 2021. “Estimating Dynamic Treatment Effects in Event Studies with Heterogeneous Treatment Effects.” Journal of Econometrics 225 (2): 175–99. https://doi.org/https://doi.org/10.1016/j.jeconom.2020.09.006.\n\n\nWooldridge, Jeffrey M. 2005. “Fixed-Effects and Related Estimators for Correlated Random-Coefficient and Treatment-Effect Panel Data Models.” The Review of Economics and Statistics 87 (2): 385–90. https://doi.org/10.1162/0034653053970320."
   },
   {
     "objectID": "moredid.html#regression-with-cohort-time-interactions",
@@ -1314,5 +1314,166 @@
     "title": "Treatment Heterogeneity and Conditional Effects",
     "section": "Treatment Participation by Group",
     "text": "Treatment Participation by Group\n\ng = groupmeanfig(compute_group_means_for_results(results_ad[0], [\"pkh_ever\"], df2))\ng.fig.show()"
+  },
+  {
+    "objectID": "neuralnets.html#neural-networks",
+    "href": "neuralnets.html#neural-networks",
+    "title": "Neural Networks",
+    "section": "Neural Networks",
+    "text": "Neural Networks\n\nFlexible function approximation & regression\nAutomated feature engineering\nExceptional performance on high dimensional data with low noise\n\nText\nImages\nAudio\nVideo"
+  },
+  {
+    "objectID": "neuralnets.html#single-layer-perceptron",
+    "href": "neuralnets.html#single-layer-perceptron",
+    "title": "Neural Networks",
+    "section": "Single Layer Perceptron",
+    "text": "Single Layer Perceptron\n\n\\(x_i \\in \\R^d\\), want to approximate some \\(f: \\R^d \\to \\R\\)\nApproximate by \\[\n\\begin{align*}\nf(x_i; \\mathbf{w},\\mathbf{b}) = \\psi_1\\left( \\sum_{u=1}^m w_{u,1} \\psi_0( x_i'w_{u,0} + b_{u,0}) + b_{u,1} \\right)\n\\end{align}\n\\] where\n\nWeights: \\(w_{u,1} \\in \\R\\), \\(w_{u,0} \\in \\R^d\\)\nBiases: \\(b_{u,1}, b_{u,0} \\in \\R\\)\nActivation functions \\(\\psi_1, \\psi_0: \\R \\to \\R\\)\nWidth: \\(m\\)"
+  },
+  {
+    "objectID": "neuralnets.html#activation-functions",
+    "href": "neuralnets.html#activation-functions",
+    "title": "Neural Networks",
+    "section": "Activation functions",
+    "text": "Activation functions\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport torch.nn as nn\nimport torch\n# plot 4 activation functions\nx = torch.linspace(-5, 5, 100)\nfig, ax = plt.subplots(2, 2, figsize=(10, 8))\nax = ax.flatten()\nax[0].plot(x, nn.ReLU()(x))\nax[0].set_title(\"ReLU\")\nax[1].plot(x, nn.Tanh()(x))\nax[1].set_title(\"Tanh\")\nax[2].plot(x, nn.Sigmoid()(x))\nax[2].set_title(\"Sigmoid\")\nax[3].plot(x, nn.Softplus()(x))\nax[3].set_title(\"Softplus\")\nfig.tight_layout()\nfig.show()"
+  },
+  {
+    "objectID": "neuralnets.html#single-layer-perceptron-1",
+    "href": "neuralnets.html#single-layer-perceptron-1",
+    "title": "Neural Networks",
+    "section": "Single Layer Perceptron",
+    "text": "Single Layer Perceptron\n\nimport torch.nn as nn\nimport torch\nclass SingleLayerPerceptron(nn.Module):\n    def __init__(self, d, m, activation=nn.ReLU()):\n        super().__init__()\n        self.d = d\n        self.m = m\n        self.activation = activation\n        self.w0 = nn.Parameter(torch.randn(d, m))\n        self.b0 = nn.Parameter(torch.randn(m))\n        self.w1 = nn.Parameter(torch.randn(m))\n        self.b1 = nn.Parameter(torch.randn(1))\n\n    def forward(self, x):\n        return self.activation(x @ self.w0 + self.b0) @ self.w1 + self.b1"
+  },
+  {
+    "objectID": "neuralnets.html#regression",
+    "href": "neuralnets.html#regression",
+    "title": "Neural Networks",
+    "section": "Regression",
+    "text": "Regression\n\nData \\(\\{y_i, x_i\\}_{i=1}^n\\), \\(x_i \\in \\R^d\\), \\(y_i \\in \\R\\)\nLeast squares: \\[\n\\hat{\\mathbf{w}}, \\hat{\\mathbf{b}} \\in \\argmin_{\\mathbf{w},\\mathbf{b}} \\underbrace{\\frac{1}{n} \\sum_{i=1}^n \\left(y_i - f(x_i; \\mathbf{w},\\mathbf{b}) \\right)^2}_{\\text{loss function}}\n\\]\nHard to find global minimum:\n\nLoss not convex\nParameters very high dimensional"
+  },
+  {
+    "objectID": "neuralnets.html#gradient-descent",
+    "href": "neuralnets.html#gradient-descent",
+    "title": "Neural Networks",
+    "section": "Gradient Descent",
+    "text": "Gradient Descent\n\nFind approximate minimum instead \\[\n\\overbrace{\\hat{\\theta}}^{\\hat{\\mathbf{w}}, \\hat{\\mathbf{b}}} \\approx \\argmin_{\\theta} \\ell(y, f(x;\\theta))\n\\]\nStart with random \\(\\theta_1\\)\nRepeatedly update: \\[\n\\theta_{i+1} = \\theta_i - \\gamma \\underbrace{\\nabla \\ell(y,f(;\\theta))}_{\\text{gradient}}\n\\]\nContinue until loss stops improving\n\nOptionally modify \\(\\gamma\\) based on progress"
+  },
+  {
+    "objectID": "neuralnets.html#computing-gradients",
+    "href": "neuralnets.html#computing-gradients",
+    "title": "Neural Networks",
+    "section": "Computing Gradients",
+    "text": "Computing Gradients\n\nAutomatic differentiation: automatically use chainrule on each step of computation\nE.g. \\(\\ell(\\theta) = f(g(h(\\theta)))\\)\n\n\\(\\ell : \\R^p \\to \\R\\), \\(h: \\R^p \\to \\R^q\\), \\(g: \\R^q \\to \\R^j\\), \\(f: \\R^j \\to \\R\\) \\[\n\\left(\\nabla \\ell(\\theta)\\riight)^T = & \\underbrace{Df_{g(h(\\theta))}}_{1 \\times j} \\underbrace{Dg_{h(\\theta)}}_{j \\times q} \\underbrace{Dh_\\theta}_{q \\times p}\n\\]\n\nForward mode:\n\nCalculate \\(h(\\theta)\\) and \\(D_1=Dh_\\theta\\)\nCalculate \\(g(h(\\theta))\\) and \\(Dg_{h(\\theta)}\\), multiply \\(D_2=Dg_{h(\\theta)} D_1\\) (\\(jqp\\) scalar products and additions)\nCalculate \\(f(g(h(\\theta)))\\) and \\(Df_{g(h(\\theta))}\\), multiply \\(Df_{g(h(\\theta))} D_2\\) (\\(1jp\\) scalar products and additions)\n\n\nWork to propagate derivative \\(\\propto jqp + 1jp\\)"
+  },
+  {
+    "objectID": "neuralnets.html#computing-gradients-1",
+    "href": "neuralnets.html#computing-gradients-1",
+    "title": "Neural Networks",
+    "section": "Computing Gradients",
+    "text": "Computing Gradients\n\nReverse mode:\n\n“Forward pass” calculate and save \\(h(\\theta)\\), \\(g(h(\\theta))\\) and \\(f(g(h(\\theta)))\\)\n“Back propagation”:\n\nCalculate \\(D^r_1 = Df_{g(h(\\theta))}\\)\nCalculate \\(D^r_2 = D^r_1 Dg_{h(\\theta)}\\) (\\(1jq\\) scalar products and additions)\nCalculate \\(D^r_3 Dh_{\\theta}\\) (\\(1qp\\) scalar products and additions)\n\n\n\nWork to propagate derivative \\(\\propto 1jq + 1qp\\)\n\nReverse mode much less work when \\(p\\) large"
+  },
+  {
+    "objectID": "neuralnets.html#gradient-descent-1",
+    "href": "neuralnets.html#gradient-descent-1",
+    "title": "Neural Networks",
+    "section": "Gradient Descent",
+    "text": "Gradient Descent\n\n\nCode\nn = 100\nsigma = 0.1\ntorch.manual_seed(987)\nx = torch.randn(n,1)\nf = np.vectorize(lambda x:  np.sin(x)+np.exp(-x*x)/(1+np.abs(x)))\ny = torch.tensor(f(x), dtype=torch.float32) + sigma*torch.randn(x.shape)\nslp = SingleLayerPerceptron(1, 20, nn.ReLU())\nlossfn = nn.MSELoss()\nxlin = torch.linspace(-3,3,100)\nfig, ax = plt.subplots()\nepochs = 1000\nstepscale = 0.1\nfor i in range(epochs):\n    if (i % 50) == 0 :\n        ax.plot(xlin,slp(xlin.reshape(-1,1)).data, alpha=i/epochs, color='k')\n        slp.zero_grad()\n    loss = lossfn(y.flatten(),slp(x))\n    #print(f\"{i}: {loss.item()}\")\n    # calculate gradient\n    loss.backward()\n    # access gradient & use to descend\n    for p in slp.parameters():\n        if p.requires_grad:\n            p.data = p.data - stepscale*p.grad.data\n            p.grad.data.zero_()\n    slp.zero_grad()\n\nax.plot(xlin, f(xlin), label=\"f\", lw=8)\nax.scatter(x.flatten(),y.flatten())\nfig.show()"
+  },
+  {
+    "objectID": "neuralnets.html#multi-layer-perceptron",
+    "href": "neuralnets.html#multi-layer-perceptron",
+    "title": "Neural Networks",
+    "section": "Multi Layer Perceptron",
+    "text": "Multi Layer Perceptron\n\ndef multilayer(d,width,depth,activation=nn.ReLU()):\n    mlp = nn.Sequential(\n        nn.Linear(d,width),\n        activation\n    )\n    for i in range(depth-1):\n        mlp.add_module(f\"layer {i+1}\",nn.Linear(width, width))\n        mlp.add_module(f\"activation {i+1}\",activation)\n\n\n    mlp.add_module(\"output\",nn.Linear(width,1))\n    return(mlp)\n\nmlp=multilayer(2, 10, 1, nn.ReLU())\n\ndef count_parameters(model):\n    return sum(p.numel() for p in model.parameters() if p.requires_grad)"
+  },
+  {
+    "objectID": "neuralnets.html#multi-layer-perceptron-1",
+    "href": "neuralnets.html#multi-layer-perceptron-1",
+    "title": "Neural Networks",
+    "section": "Multi Layer Perceptron",
+    "text": "Multi Layer Perceptron\n\nmlp = multilayer(1,4,4,nn.ReLU())\nprint(count_parameters(mlp))\noptimizer = torch.optim.Adam(mlp.parameters(), lr=0.01)\nfig, ax = plt.subplots()\nepochs = 1000\nfor i in range(epochs):\n    if (i % 50) == 0 :\n        ax.plot(xlin,mlp(xlin.reshape(-1,1)).data, alpha=i/epochs, color='k')\n        mlp.zero_grad()\n    loss = lossfn(y,mlp(x))\n    #print(f\"{i}: {loss.item()}\")\n    optimizer.zero_grad()\n    loss.backward()\n    optimizer.step()\n\nax.plot(xlin, f(xlin), label=\"f\", lw=8)\nax.scatter(x.flatten(),y.flatten())\nfig.show()\n\n73"
+  },
+  {
+    "objectID": "neuralnets.html#overparameterization",
+    "href": "neuralnets.html#overparameterization",
+    "title": "Neural Networks",
+    "section": "Overparameterization",
+    "text": "Overparameterization\n\nClassic statistics wisdom about nonparametric regression: as parameters increase:\n\nBias decreases\nVariance increases\nNeed parameters \\(&lt;\\) sample size for good performance\n\nNeural networks: often see best performance when parameters \\(&gt;\\) sample size"
+  },
+  {
+    "objectID": "neuralnets.html#double-descent",
+    "href": "neuralnets.html#double-descent",
+    "title": "Neural Networks",
+    "section": "Double Descent",
+    "text": "Double Descent\n\n\nCode\nfrom joblib import Parallel, delayed\n#device = 'cuda' if torch.cuda.is_available() else 'cpu'\ndevice = 'cpu' # problem is small, so not much help from cuda\nnum_epochs = 50\nsims = 100\nmaxw = 10\n\ndef doubledescentdemo(x, y, xtest, ytest, f, device=device,\n                      num_epochs=num_epochs, sims=sims,\n                      maxw=maxw, lr=0.1):\n    x=x.to(device)\n    y=y.to(device).reshape(x.shape[0],1)\n    fx = f(x.T).reshape(y.shape).to(device)\n    ytest = ytest.to(device).reshape(xtest.shape[0],1)\n    xtest = xtest.to(device)\n    loss_fn = nn.MSELoss().to(device)\n\n    losses = np.zeros([maxw,num_epochs,sims])\n    nonoise = np.zeros([maxw,num_epochs,sims])\n\n    def dd(w):\n        mlp = multilayer(x.shape[1],w+1,1,nn.ReLU()).to(device)\n        optimizer = torch.optim.Adam(mlp.parameters(), lr=lr)\n        losses = np.zeros(num_epochs)\n        nonoise=np.zeros(num_epochs)\n        for n in range(num_epochs):\n            y_pred = mlp(x)\n            loss = loss_fn(y_pred, y)\n            optimizer.zero_grad()\n            loss.backward()\n            optimizer.step()\n            losses[n] = loss_fn(mlp(xtest),ytest).item()\n            nonoise[n] = loss_fn(y_pred, fx)\n            mlp.zero_grad()\n        return([losses, nonoise])\n\n    for w in range(maxw):\n        foo=lambda s: dd(w)\n        print(f\"width {w}\")\n        results = Parallel(n_jobs=20)(delayed(foo)(s) for s in range(sims))\n\n        for s in range(sims):\n            losses[w,:,s] = results[s][0]\n            nonoise[w,:,s] = results[s][1]\n    return([losses, nonoise])"
+  },
+  {
+    "objectID": "neuralnets.html#double-descent-1",
+    "href": "neuralnets.html#double-descent-1",
+    "title": "Neural Networks",
+    "section": "Double Descent",
+    "text": "Double Descent\n\nf = lambda x: np.exp(x[0]-x[1])\nn = 20\ntorch.manual_seed(1234)\ndimx = 5\nx = torch.rand(n,dimx)\nxtest = torch.rand(n,dimx)\nsigma = 1.5\ny = f(x.T) + sigma*torch.randn(x.shape[0])\nytest = f(xtest.T) + sigma*torch.randn(xtest.shape[0])\nlr = 0.01\ndd = doubledescentdemo(x, y, xtest, ytest, f, lr)\n\nwidth 0\nwidth 1\nwidth 2\nwidth 3\nwidth 4\nwidth 5\nwidth 6\nwidth 7\nwidth 8\nwidth 9"
+  },
+  {
+    "objectID": "neuralnets.html#double-descent-2",
+    "href": "neuralnets.html#double-descent-2",
+    "title": "Neural Networks",
+    "section": "Double Descent",
+    "text": "Double Descent\n\n\nCode\ndef plotdd(losses, nonoise):\n    fig, ax = plt.subplots(2,2)\n    ax = ax.flatten()\n    ax[0].imshow(losses, cmap='plasma')\n    ax[0].set_title('Test Loss')\n    ax[0].set_xlabel('epoch')\n    ax[0].set_ylabel('width')\n    ax[1].imshow(nonoise, cmap='plasma')\n    ax[1].set_title('error in f')\n    ax[1].set_xlabel('epoch')\n    ax[1].set_ylabel('width')\n\n    ws = [0,1, 2, 4, 8]  #10, 12, 19]\n    for w in ws:\n        ax[2].plot(range(losses.shape[1]),losses[w,:], label=f\"width={w+1}\")\n        ax[3].plot(range(nonoise.shape[1]),nonoise[w,:], label=f\"width={w+1}\")\n\n    ax[2].set_xlabel('epoch')\n    ax[2].set_ylabel('test loss')\n    ax[2].legend()\n    ax[3].set_xlabel('epoch')\n    ax[3].set_ylabel('error in f')\n    ax[3].legend()\n\n    fig.tight_layout()\n\n    return(fig)\n\nfig=plotdd(dd[0].mean(axis=2), dd[1].mean(axis=2))\nfig.show()"
+  },
+  {
+    "objectID": "neuralnets.html#double-descent-low-noise",
+    "href": "neuralnets.html#double-descent-low-noise",
+    "title": "Neural Networks",
+    "section": "Double Descent: Low Noise",
+    "text": "Double Descent: Low Noise\n\n\nCode\nsigma = 0.01\ny = f(x.T) + sigma*torch.randn(x.shape[0])\nytest = f(xtest.T) + sigma*torch.randn(xtest.shape[0])\nddlowsig = doubledescentdemo(x,y,xtest,ytest,f, lr=0.05)\n\n\nwidth 0\nwidth 1\nwidth 2\nwidth 3\nwidth 4\nwidth 5\nwidth 6\nwidth 7\nwidth 8\nwidth 9\n\n\n\n\nCode\nfig=plotdd(ddlowsig[0].mean(axis=2), ddlowsig[1].mean(axis=2))\nfig.show()"
+  },
+  {
+    "objectID": "neuralnets.html#double-descent-3",
+    "href": "neuralnets.html#double-descent-3",
+    "title": "Neural Networks",
+    "section": "Double Descent",
+    "text": "Double Descent\n\nFigures show double descent in number of epochs, but has also been demonstrated with respect to number of parameters1\nThese simulations are quite fragile and depend on:\n\nForm of \\(f\\)\ndimension of \\(x\\)\nnoise in \\(y\\)\nlearning rate\noptimizer\n\n\nIf you squint, you can sort of see double descent in parameters in these simulations too."
+  },
+  {
+    "objectID": "neuralnets.html#software-1",
+    "href": "neuralnets.html#software-1",
+    "title": "Neural Networks",
+    "section": "Software",
+    "text": "Software\n\nPyTorch\n\nUsed above\nVery popular\nMiddle ground between convenience and flexibility\nCould be used via higher level wrapper (e.g. skorch)\n\nJAX\n\nMore extensible than pytorch\n\nOthers: Tensorflow, Theano, Keras, and more"
+  },
+  {
+    "objectID": "neuralnets.html#uses-for-neural-networks-1",
+    "href": "neuralnets.html#uses-for-neural-networks-1",
+    "title": "Neural Networks",
+    "section": "Uses for Neural Networks",
+    "text": "Uses for Neural Networks\n\nFlexible regression and/or classification method, in double/debiased learning or elsewhere\n\nConsider carefully whether difficulties of fitting are worth benefits\n\nFlexible function approximation\n\nUseful for computing solutions to games, dynamic models, etc\n\nText, images, audio\n\nUse transfer learning"
+  },
+  {
+    "objectID": "neuralnets.html#transfer-learning",
+    "href": "neuralnets.html#transfer-learning",
+    "title": "Neural Networks",
+    "section": "Transfer Learning",
+    "text": "Transfer Learning\n\nFit (or let researchers or company with more resources fit) large model on large, general dataset\nFind specialized data for your task\nFine tune: take large model and update parameters with your data\nhttps://huggingface.co/ good source for large models to fine-tune"
+  },
+  {
+    "objectID": "neuralnets.html#sources-and-further-reading",
+    "href": "neuralnets.html#sources-and-further-reading",
+    "title": "Neural Networks",
+    "section": "Sources and Further Reading",
+    "text": "Sources and Further Reading\n\nQuantEcon Datascience: Regression - Neural Networks\nQuantEcon: Intro to Artificial Neural Nets\npytorch notebooks from 323"
+  },
+  {
+    "objectID": "neuralnets.html#references",
+    "href": "neuralnets.html#references",
+    "title": "Neural Networks",
+    "section": "References",
+    "text": "References"
+  },
+  {
+    "objectID": "neuralnets.html#other-architectures",
+    "href": "neuralnets.html#other-architectures",
+    "title": "Neural Networks",
+    "section": "Other Architectures",
+    "text": "Other Architectures\n\nMulti-layer perceptrons / feed forward networks are the simplest neural networks, many extensions and variations exist\nTricks to help with vanishing gradients and numeric stability:\n\nNormalization\nResidual connections\n\nVariations motivated by sequential data:\n\nRecurrent\nTransformers\n\nVariations motivated by images:\n\nConvolutions\nGAN\nDiffusion1\n\n\nThe motivating idea of diffusion models is different than neural networks, but neural networks are commonly used as one of the parts of diffusion models."
   }
 ]
