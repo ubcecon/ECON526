@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Paul Schrimpf">
-  <title>ECON 526 - Introduction to Difference in Differences</title>
+  <title>ECON 526 - Fixed Effects</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -405,16 +405,13 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="paulus.jpg" data-background-size="contain" class="quarto-title-block center">
-  <h1 class="title">Introduction to Difference in Differences</h1>
+<section id="title-slide" data-background-image="widowmaker.jpg" data-background-size="contain" class="quarto-title-block center">
+  <h1 class="title">Fixed Effects</h1>
   <p class="subtitle">ECON526</p>
 
 <div class="quarto-title-authors">
@@ -433,8 +430,8 @@ Paul Schrimpf
 <h2 id="toc-title">Table of contents</h2>
 <ul>
 <li><a href="#/introduction" id="/toc-introduction">Introduction</a></li>
-<li><a href="#/difference-in-differences" id="/toc-difference-in-differences">Difference in Differences</a></li>
-<li><a href="#/billboard-application-revisited" id="/toc-billboard-application-revisited">Billboard Application Revisited</a></li>
+<li><a href="#/mechanics-of-fixed-effects" id="/toc-mechanics-of-fixed-effects">Mechanics of Fixed Effects</a></li>
+<li><a href="#/some-theory" id="/toc-some-theory">Some Theory</a></li>
 </ul>
 </nav>
 </section>
@@ -443,193 +440,58 @@ Paul Schrimpf
 <h1>Introduction</h1>
 
 </section>
-<section id="introduction-1" class="slide level2">
-<h2>Introduction</h2>
+<section id="panel-data" class="slide level2">
+<h2>Panel Data</h2>
 <ul>
-<li><p>Have some policy applied to some observations but not others, and observe outcome before and after policy</p></li>
-<li><p>Idea: compare outcome before and after policy in treated and untreated group</p></li>
-<li><p>Change in outcome in treated group reflects both effect of policy and time trend, change in untreated group captures time trend</p></li>
+<li>Units <span class="math inline">\(i=1,..., n\)</span>
+<ul>
+<li>Ex: people, firms, cities, countries</li>
+</ul></li>
+<li>Time <span class="math inline">\(t=1,..., T\)</span></li>
+<li>Observe <span class="math inline">\(\left\{(y_{it}, X_{it})\right\}_{i=1,t=1}^{n,T}\)</span></li>
 </ul>
 </section>
-<section id="example-impact-of-billboards" class="slide level2">
-<h2>Example: Impact of Billboards</h2>
+<section id="linear-model" class="slide level2">
+<h2>Linear Model</h2>
+<div>
 <ul>
-<li>From <span class="citation" data-cites="facure2022">Facure (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> chapter 13</li>
-<li>Bank placed billboards advertising savings accounts in Porto Alegre in July</li>
-<li>Data on deposits in May and July in Porto Alegre and Florianopolis</li>
+<li class="fragment"><p>Model <span class="math display">\[
+y_{it} = X_{it}'\beta + \overbrace{U_i'\gamma + \epsilon_{it}}^{\text{unobserved}}
+\]</span></p>
+<ul>
+<li class="fragment">Time invariant confounders <span class="math inline">\(U_i\)</span></li>
+</ul></li>
+<li class="fragment"><p>Subtract individual averages <span class="math display">\[
+\begin{align*}
+y_{it} - \bar{y}_i &amp; = (X_{it} - \bar{X}_i)'\beta + (\epsilon_{it} -
+                   \bar{\epsilon}_i) \\
+\ddot{y}_{it} &amp; = \ddot{X}_{it}' \beta + \ddot{\epsilon}_{it}
+\end{align*}
+\]</span></p></li>
+<li class="fragment"><p>Equivalent to estimating with individual dummies <span class="math display">\[
+y_{it} = X_{it}'\beta + \alpha_i + \epsilon_{it}
+\]</span></p></li>
 </ul>
-</section>
-<section id="example-impact-of-billboards-1" class="slide level2">
-<h2>Example: Impact of Billboards</h2>
-<div class="cell" data-execution_count="2">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> warnings</span>
-<span id="cb1-2"><a href="#cb1-2"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="im">from</span> matplotlib <span class="im">import</span> style</span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
-<span id="cb1-10"><a href="#cb1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11"></a>datadir<span class="op">=</span><span class="st">"./data"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>data <span class="op">=</span> pd.read_csv(datadir <span class="op">+</span> <span class="st">"/billboard_impact.csv"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">deposits</th>
-<th data-quarto-table-cell-role="th">poa</th>
-<th data-quarto-table-cell-role="th">jul</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>42</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>52</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>119</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>21</td>
-<td>1</td>
-<td>0</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-</section>
-<section id="means-and-differences" class="slide level2">
-<h2>Means and Differences</h2>
-<div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>tbl <span class="op">=</span> data.groupby([<span class="st">'jul'</span>,<span class="st">'poa'</span>]).mean().unstack()</span>
-<span id="cb3-2"><a href="#cb3-2"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead tr th {
-        text-align: left;
-    }
-
-    .dataframe thead tr:last-of-type th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th colspan="2" data-quarto-table-cell-role="th" data-halign="left">deposits</th>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">poa</th>
-<th data-quarto-table-cell-role="th">0</th>
-<th data-quarto-table-cell-role="th">1</th>
-</tr>
-<tr class="header">
-<th data-quarto-table-cell-role="th">jul</th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>171.642308</td>
-<td>46.01600</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>206.165500</td>
-<td>87.06375</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>tbl.diff(axis<span class="op">=</span><span class="dv">0</span>).iloc[<span class="dv">1</span>,:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>          poa
-deposits  0      34.523192
-          1      41.047750
-Name: 1, dtype: float64</code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>tbl.diff(axis<span class="op">=</span><span class="dv">1</span>).iloc[:,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>jul
-0   -125.626308
-1   -119.101750
-Name: (deposits, 1), dtype: float64</code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>tbl.diff(axis<span class="op">=</span><span class="dv">0</span>).diff(axis<span class="op">=</span><span class="dv">1</span>).iloc[<span class="dv">1</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>6.524557692307688</code></pre>
-</div>
-</div>
+<aside class="notes">
+<ul>
+<li>Eliminates <span class="math inline">\(U_i\)</span> and any time invariant observed <span class="math inline">\(X_i\)</span></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
-<section id="difference-in-differences" class="title-slide slide level1 center">
-<h1>Difference in Differences</h1>
+<section id="mechanics-of-fixed-effects" class="title-slide slide level1 center">
+<h1>Mechanics of Fixed Effects</h1>
 <p><span class="math display">\[
 \def\Er{{\mathrm{E}}}
 \def\En{{\mathbb{E}_n}}
@@ -644,153 +506,118 @@ Name: (deposits, 1), dtype: float64</code></pre>
 \DeclareMathOperator*{\plim}{plim}
 \]</span></p>
 </section>
-<section id="setup" class="slide level2">
-<h2>Setup</h2>
-<ul>
-<li>Two periods, binary treatment in second period</li>
-<li>Potential outcomes <span class="math inline">\(\{y_{it}(0),y_{it}(1)\}_{t=0}^1\)</span> for <span class="math inline">\(i=1,...,N\)</span></li>
-<li>Treatment <span class="math inline">\(D_{it} \in \{0,1\}\)</span>,
-<ul>
-<li><span class="math inline">\(D_{i0} = 0\)</span> <span class="math inline">\(\forall i\)</span></li>
-<li><span class="math inline">\(D_{i1} = 1\)</span> for some, <span class="math inline">\(0\)</span> for others</li>
-</ul></li>
-<li>Observe <span class="math inline">\(y_{it} = y_{it}(0)(1-D_{it}) + D_{it} y_{it}(1)\)</span></li>
-</ul>
-</section>
-<section id="identification" class="slide level2">
-<h2>Identification</h2>
-<ul>
-<li>Average treatment effect on the treated: <span class="math display">\[
-\begin{align*}
-ATT &amp; = \Er[y_{i1}(1) - \color{red}{y_{i1}(0)} | D_{i1} = 1] \\
-&amp; = \Er[y_{i1}(1) - y_{i0}(0) | D_{i1} = 1] - \Er[\color{red}{y_{i1}(0)} - y_{i0}(0) | D_{i1}=1] \\
-&amp; \text{ assume } \Er[\color{red}{y_{i1}(0)} - y_{i0}(0) | D_{i1}=1] =  \Er[y_{i1}(0) - y_{i0}(0) | D_{i1}=0] \\
-&amp; = \Er[y_{i1}(1) - y_{i0}(0) | D_{i1} = 1] - \Er[y_{i1}(0) - y_{i0}(0) | D_{i1}=0] \\
-&amp; = \Er[y_{i1} - y_{i0} | D_{i1}=1, D_{i0}=0] - \Er[y_{i1} - y_{i0} | D_{i1}=0, D_{i0}=0]
-\end{align*}
-\]</span></li>
-</ul>
-</section>
-<section id="important-assumptions" class="slide level2">
-<h2>Important Assumptions</h2>
-<ul>
-<li>No anticipation: <span class="math inline">\(D_{i1}=1\)</span> does not affect <span class="math inline">\(y_{i0}\)</span>
-<ul>
-<li>built into the potential outcomes notation we used, relax by allowing potential outcomes given sequence of <span class="math inline">\(D\)</span>, i.e.&nbsp;<span class="math inline">\(y_{it}(D_{i0},D_{i1})\)</span></li>
-</ul></li>
-<li>Parallel trends: <span class="math inline">\(\Er[\color{red}{y_{i1}(0)} - y_{i0}(0) |D_{i1}=1,D_{i0}=0] = \Er[y_{i1}(0) - y_{i0}(0) | D_{i1}=0], D_{i0}=0]\)</span>
-<ul>
-<li>not invariant to tranformations of <span class="math inline">\(y\)</span></li>
-</ul></li>
-</ul>
-</section>
-<section id="estimation" class="slide level2">
-<h2>Estimation</h2>
-<div class=".{incremental}">
-<ul>
-<li><p>Plugin: <span class="math display">\[
-\widehat{ATT} = \frac{ \sum_{i=1}^n (y_{i1} - y_{i0})D_{i1}(1-D_{i0})}{\sum_{i=1}^n D_{i1}(1-D_{i0})} -  \frac{ \sum_{i=1}^n (y_{i1} - y_{i0})(1-D_{i1})(1-D_{i0})}{\sum_{i=1}^n (1-D_{i1})(1-D_{i0})}
-\]</span></p></li>
-<li><p>Regression: <span class="math display">\[
-y_{it} = \delta_t + \alpha 1\{D_{i1}=1\} + \beta D_{it} + \epsilon_{it}
-\]</span> then <span class="math inline">\(\hat{\beta} = \widehat{ATT}\)</span></p></li>
-</ul>
+<section id="ols" class="slide level2">
+<h2>OLS</h2>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>imports</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-2"><a href="#cb1-2"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="im">from</span> matplotlib <span class="im">import</span> style</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb1-9"><a href="#cb1-9"></a>style.use(<span class="st">"fivethirtyeight"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-</section></section>
+<p><sup>1</sup></p>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>toy_panel <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb2-2"><a href="#cb2-2"></a>    <span class="st">"mkt_costs"</span>:[<span class="dv">5</span>,<span class="dv">4</span>,<span class="fl">3.5</span>,<span class="dv">3</span>, <span class="dv">10</span>,<span class="fl">9.5</span>,<span class="dv">9</span>,<span class="dv">8</span>, <span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>, <span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">6</span>,<span class="dv">4</span>],</span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="st">"purchase"</span>:[<span class="dv">12</span>,<span class="dv">9</span>,<span class="fl">7.5</span>,<span class="dv">7</span>, <span class="dv">9</span>,<span class="dv">7</span>,<span class="fl">6.5</span>,<span class="dv">5</span>, <span class="dv">15</span>,<span class="fl">14.5</span>,<span class="dv">14</span>,<span class="dv">13</span>, <span class="dv">11</span>,<span class="fl">9.5</span>,<span class="dv">8</span>,<span class="dv">5</span>],</span>
+<span id="cb2-4"><a href="#cb2-4"></a>    <span class="st">"city"</span>:[<span class="st">"C0"</span>,<span class="st">"C0"</span>,<span class="st">"C0"</span>,<span class="st">"C0"</span>, <span class="st">"C2"</span>,<span class="st">"C2"</span>,<span class="st">"C2"</span>,<span class="st">"C2"</span>, <span class="st">"C1"</span>,<span class="st">"C1"</span>,<span class="st">"C1"</span>,<span class="st">"C1"</span>, <span class="st">"C3"</span>,<span class="st">"C3"</span>,<span class="st">"C3"</span>,<span class="st">"C3"</span>]</span>
+<span id="cb2-5"><a href="#cb2-5"></a>})</span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a>m <span class="op">=</span> smf.ols(<span class="st">"purchase ~ mkt_costs"</span>, data<span class="op">=</span>toy_panel).fit()</span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a>plt.scatter(toy_panel.mkt_costs, toy_panel.purchase)</span>
+<span id="cb2-10"><a href="#cb2-10"></a>plt.plot(toy_panel.mkt_costs, m.fittedvalues, c<span class="op">=</span><span class="st">"C5"</span>, label<span class="op">=</span><span class="st">"Regression Line"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11"></a>plt.xlabel(<span class="st">"Marketing Costs (in 1000)"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12"></a>plt.ylabel(<span class="st">"In-app Purchase (in 1000)"</span>)</span>
+<span id="cb2-13"><a href="#cb2-13"></a>plt.title(<span class="st">"Simple OLS Model"</span>)</span>
+<span id="cb2-14"><a href="#cb2-14"></a>plt.legend()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img data-src="fe_files/figure-revealjs/cell-3-output-1.png" width="910" height="487"></p>
+</div>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Code from <span class="citation" data-cites="facure2022">Facure (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></p></li></ol></aside></section>
+<section id="fixed-effects-within" class="slide level2">
+<h2>Fixed Effects / Within</h2>
+<p><sup>1</sup></p>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>fe <span class="op">=</span> smf.ols(<span class="st">"purchase ~ mkt_costs + C(city)"</span>, data<span class="op">=</span>toy_panel).fit()</span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a>fe_toy <span class="op">=</span> toy_panel.assign(y_hat <span class="op">=</span> fe.fittedvalues)</span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a>plt.scatter(toy_panel.mkt_costs, toy_panel.purchase, c<span class="op">=</span>toy_panel.city)</span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="cf">for</span> city <span class="kw">in</span> fe_toy[<span class="st">"city"</span>].unique():</span>
+<span id="cb3-7"><a href="#cb3-7"></a>    plot_df <span class="op">=</span> fe_toy.query(<span class="ss">f"city=='</span><span class="sc">{</span>city<span class="sc">}</span><span class="ss">'"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8"></a>    plt.plot(plot_df.mkt_costs, plot_df.y_hat, c<span class="op">=</span><span class="st">"C5"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9"></a></span>
+<span id="cb3-10"><a href="#cb3-10"></a>plt.title(<span class="st">"Fixed Effect Model"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11"></a>plt.xlabel(<span class="st">"Marketing Costs (in 1000)"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12"></a>plt.ylabel(<span class="st">"In-app Purchase (in 1000)"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img data-src="fe_files/figure-revealjs/cell-4-output-1.png" width="910" height="487"></p>
+</div>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn2"><p>Code from <span class="citation" data-cites="facure2022">Facure (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></p></li></ol></aside></section></section>
 <section>
-<section id="billboard-application-revisited" class="title-slide slide level1 center">
-<h1>Billboard Application Revisited</h1>
+<section id="some-theory" class="title-slide slide level1 center">
+<h1>Some Theory</h1>
 
 </section>
-<section id="visualizing-difference-in-differences" class="slide level2">
-<h2>Visualizing Difference in Differences</h2>
-<div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>poa_before <span class="op">=</span> data.query(<span class="st">"poa==1 &amp; jul==0"</span>)[<span class="st">"deposits"</span>].mean()</span>
-<span id="cb10-2"><a href="#cb10-2"></a>poa_after <span class="op">=</span> data.query(<span class="st">"poa==1 &amp; jul==1"</span>)[<span class="st">"deposits"</span>].mean()</span>
-<span id="cb10-3"><a href="#cb10-3"></a>fl_before <span class="op">=</span> data.query(<span class="st">"poa==0 &amp; jul==0"</span>)[<span class="st">"deposits"</span>].mean()</span>
-<span id="cb10-4"><a href="#cb10-4"></a>fl_after <span class="op">=</span> data.query(<span class="st">"poa==0 &amp; jul==1"</span>)[<span class="st">"deposits"</span>].mean()</span>
-<span id="cb10-5"><a href="#cb10-5"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
-<span id="cb10-6"><a href="#cb10-6"></a>plt.plot([<span class="st">"May"</span>, <span class="st">"Jul"</span>], [fl_before, fl_after], label<span class="op">=</span><span class="st">"FL"</span>, lw<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb10-7"><a href="#cb10-7"></a>plt.plot([<span class="st">"May"</span>, <span class="st">"Jul"</span>], [poa_before, poa_after], label<span class="op">=</span><span class="st">"POA"</span>, lw<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb10-8"><a href="#cb10-8"></a></span>
-<span id="cb10-9"><a href="#cb10-9"></a>plt.plot([<span class="st">"May"</span>, <span class="st">"Jul"</span>], [poa_before, poa_before<span class="op">+</span>(fl_after<span class="op">-</span>fl_before)],</span>
-<span id="cb10-10"><a href="#cb10-10"></a>         label<span class="op">=</span><span class="st">"Counterfactual"</span>, lw<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"C2"</span>, ls<span class="op">=</span><span class="st">"-."</span>)</span>
-<span id="cb10-11"><a href="#cb10-11"></a></span>
-<span id="cb10-12"><a href="#cb10-12"></a>plt.legend()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img data-src="did_files/figure-revealjs/cell-8-output-1.png" width="798" height="411"></p>
-</div>
-</div>
-</section>
-<section id="estimation-via-regression" class="slide level2">
-<h2>Estimation via Regression</h2>
-<div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>smf.ols(<span class="st">'deposits ~ poa*jul'</span>, data<span class="op">=</span>data).fit().summary().tables[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
-<table class="simpletable" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td></td>
-<td data-quarto-table-cell-role="th">coef</td>
-<td data-quarto-table-cell-role="th">std err</td>
-<td data-quarto-table-cell-role="th">t</td>
-<td data-quarto-table-cell-role="th">P&gt;|t|</td>
-<td data-quarto-table-cell-role="th">[0.025</td>
-<td data-quarto-table-cell-role="th">0.975]</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Intercept</td>
-<td>171.6423</td>
-<td>2.363</td>
-<td>72.625</td>
-<td>0.000</td>
-<td>167.009</td>
-<td>176.276</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">poa</td>
-<td>-125.6263</td>
-<td>4.484</td>
-<td>-28.015</td>
-<td>0.000</td>
-<td>-134.418</td>
-<td>-116.835</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">jul</td>
-<td>34.5232</td>
-<td>3.036</td>
-<td>11.372</td>
-<td>0.000</td>
-<td>28.571</td>
-<td>40.475</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">poa:jul</td>
-<td>6.5246</td>
-<td>5.729</td>
-<td>1.139</td>
-<td>0.255</td>
-<td>-4.706</td>
-<td>17.755</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</section>
-<section id="further-topics" class="slide level2">
-<h2>Further Topics</h2>
+<section id="large-n-small-t" class="slide level2">
+<h2>Large <span class="math inline">\(n\)</span>, Small <span class="math inline">\(T\)</span></h2>
 <ul>
-<li>More periods, more groups</li>
-<li>Covariates</li>
-<li>Pre-trends</li>
+<li>Often <span class="math inline">\(n&gt;&gt;T\)</span></li>
+<li>Usual analysis of fixed effects uses asymptotics with <span class="math inline">\(n \to \infty\)</span>, <span class="math inline">\(T\)</span> fixed
+<ul>
+<li>We will mostly stick to that, but if you have data with <span class="math inline">\(n \approx T\)</span>, other approaches can be better</li>
+</ul></li>
 </ul>
 </section>
-<section id="reading" class="slide level2">
-<h2>Reading</h2>
+<section id="strict-exogeneity" class="slide level2">
+<h2>Strict Exogeneity</h2>
 <ul>
-<li><a href="https://matheusfacure.github.io/python-causality-handbook/13-Difference-in-Differences.html">Chapter 13</a> of <span class="citation" data-cites="facure2022">Facure (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></li>
+<li><p>In fixed effect model <span class="math display">\[
+y_{it} - \bar{y}_i  = (X_{it} - \bar{X}_i)'\beta + (\epsilon_{it} - \bar{\epsilon}_i)
+\]</span> for <span class="math inline">\(\hat{\beta}^{FE} \inprob \beta\)</span>, need <span class="math inline">\(\Er[(X_{it} - \bar{X}_i)(\epsilon_{it} - \bar{\epsilon}_i)]=0\)</span></p></li>
+<li><p>I.e. <span class="math inline">\(\Er[X_{it} \epsilon_{is}] = 0\)</span> for all <span class="math inline">\(t, s\)</span></p></li>
+</ul>
+</section>
+<section id="strict-exogeneity-1" class="slide level2">
+<h2>Strict Exogeneity</h2>
+<ul>
+<li>Problematic with dynamics, e.g.
+<ul>
+<li><span class="math inline">\(X_{it}\)</span> including lagged <span class="math inline">\(y_{it-1}\)</span></li>
+<li><span class="math inline">\(X_{it}\)</span> affected by past <span class="math inline">\(y\)</span></li>
+<li>“Nickell bias”</li>
+</ul></li>
+<li>See <span class="citation" data-cites="chen2019">Chen, Chernozhukov, and Fernández-Val (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> for bias correction under weak exogeneity, <span class="math inline">\(\Er[X_{it} \epsilon_{is}] = 0\)</span> for <span class="math inline">\(t \leq s\)</span></li>
+</ul>
+</section>
+<section id="standard-errors" class="slide level2">
+<h2>Standard Errors</h2>
+<ul>
+<li>Generally, good idea to use clustered standard errors, clustered on <span class="math inline">\(i\)</span></li>
+<li>See <span class="citation" data-cites="mackinon2023">MacKinnon, Nielsen, and Webb (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span> for guide to clustered standard errors</li>
+</ul>
+</section>
+<section id="sources-and-further-reading" class="slide level2">
+<h2>Sources and Further Reading</h2>
+<ul>
+<li><span class="citation" data-cites="facure2022">Facure (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> <a href="https://matheusfacure.github.io/python-causality-handbook/14-Panel-Data-and-Fixed-Effects.html">chapter 14</a></li>
+<li><span class="citation" data-cites="hk2021">Huntington-Klein (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span> <a href="https://theeffectbook.net/ch-FixedEffects.html">chapter 16</a></li>
 </ul>
 </section>
 <section id="references" class="slide level2 smaller scrollable">
@@ -800,11 +627,21 @@ y_{it} = \delta_t + \alpha 1\{D_{i1}=1\} + \beta D_{it} + \epsilon_{it}
 
 </div>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-chen2019" class="csl-entry" role="listitem">
+Chen, Shuowen, Victor Chernozhukov, and Iván Fernández-Val. 2019. <span>“Mastering Panel Metrics: Causal Impact of Democracy on Growth.”</span> <em>AEA Papers and Proceedings</em> 109 (May): 77–82. <a href="https://doi.org/10.1257/pandp.20191071">https://doi.org/10.1257/pandp.20191071</a>.
+</div>
 <div id="ref-facure2022" class="csl-entry" role="listitem">
 Facure, Matheus. 2022. <em>Causal Inference for the Brave and True</em>. <a href="https://matheusfacure.github.io/python-causality-handbook/landing-page.html">https://matheusfacure.github.io/python-causality-handbook/landing-page.html</a>.
 </div>
+<div id="ref-hk2021" class="csl-entry" role="listitem">
+Huntington-Klein, Nick. 2021. <em>The Effect: An Introduction to Research Design and Causality</em>. CRC Press. <a href="https://theeffectbook.net/">https://theeffectbook.net/</a>.
+</div>
+<div id="ref-mackinon2023" class="csl-entry" role="listitem">
+MacKinnon, James G., Morten Ørregaard Nielsen, and Matthew D. Webb. 2023. <span>“Cluster-Robust Inference: A Guide to Empirical Practice.”</span> <em>Journal of Econometrics</em> 232 (2): 272–99. https://doi.org/<a href="https://doi.org/10.1016/j.jeconom.2022.04.001">https://doi.org/10.1016/j.jeconom.2022.04.001</a>.
+</div>
 </div>
 </section></section>
+
     </div>
   </div>
 

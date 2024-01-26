@@ -2,9 +2,15 @@
   {
     "listing": "/feed.html",
     "items": [
-      "/did.html",
+      "/moredid.html",
+      "/doubleml.html",
       "/index.html",
-      "/matching.html"
+      "/fe.html",
+      "/did.html",
+      "/matching.html",
+      "/neuralnets.html",
+      "/syntheticcontrol.html",
+      "/conditionaleffect.html"
     ]
   }
 ]
