@@ -206,4 +206,4 @@ Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/le
 - **time-permitting**: 8. [Neural Networks](https://ubcecon.github.io/ECON526/paul/neuralnets.html)
    - Reading: [QuantEcon Datascience: Regression - Neural Networks](https://datascience.quantecon.org/tools/regression.html#neural-networks)
 - **December 15**
-    - **DATA PROJECT DUE**
+    - **PROJECT DUE**

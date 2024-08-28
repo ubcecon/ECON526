@@ -25,12 +25,12 @@ The course will have problem sets due roughly weekly, a midterm, and a final dat
 - Midterm: 40%
 - Final Data Project: 40%
 
-The midterm will be done in the computer lab.
+The midterm will be done in the computer lab.  We will have a practice session to accomodate ourselves with the Jupyter-based technology.
 
 
 **Missed Exam Policy:** You are responsible for ensuring that you take these exams as scheduled; no make-up exams will be given.
-- Missing one of the midterms for ANY acceptable reason will result in its weight being automatically transferred to the other midterm.  Missing both exams will require a discussion with Arts Advising as a special case.
 - Travel plans and/or cheap tickets are not a reason to miss the exams. If you have a medical	or other compelling reason why you cannot take the exam at its scheduled time you must follow the formal process and get an Academic Concession from your Faculty Advising Office (see below)
+- If an Academic Concession is given, then alternative arrangements are discussed with the instructor which may involve a re-examination at a later date depending on the circumstances.  Otherwise a grade of zero will be given for the exam.
 
 
 ## Syllabus
@@ -49,6 +49,9 @@ The course will cover the following topics:
 
 In all cases the material will combine the economic theory with practical programming and datascience tools.
 
+
+### Policy on Collaborating on Assignments:
+Students are encouraged to work together on assignments throughout the course.  However, all students must independently write solutions up and submit separately.  If the code and writeup is too close then a penalty or a zero will be given for all students involved.
 
 
 ### Policy for Academic Concessions:
@@ -88,7 +91,8 @@ Requests for academic concessions should be made before the due date for that gr
 
 ### Policy on the Use of AI Learning Tools:
 
-The specific rules for the use of AI tools are at the discretion of the course instructor. Those rules might change over the course of the term as new technologies become available. Changes to those rules might change the content of assessments and the way that your work is evaluated. If no written instructions on the use of AI tools have been provided by the instructor, the use of all AI tools is strictly prohibited in the course. Where the written instructions permit the use of AI tools, that usage must be documented and attributed within your assessment(s). Students are responsible for all factual inaccuracies that are created by the use of AI tools. Please speak to your instructor if you have further questions about the ways in which AI technology use is permitted in this course.
+Students are permitted to use artificial intelligence tools, including generative AI, to gather information, review concepts or to help produce assignments. However, students are ultimately accountable for the work they submit, and any content generated or supported by an artificial intelligence tool must be cited appropriately. Use of AI tools of any type is not permitted during exams.
+
 
 ### VSE Policy Prohibiting the Hiring of Tutors: 
 
