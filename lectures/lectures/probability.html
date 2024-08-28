@@ -1,0 +1,2808 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.3.450">
+
+  <meta name="author" content="Jesse Perla">
+  <title>ECON 526 Lectures - ECON526: Quantitative Economics with Data Science Applications</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+  <style>
+  .reveal .custom3070 > div.column:first-child {
+    width: 30%;
+  }
+  .reveal .custom3070 div.column:not(:first-child) {
+    width: 70%;
+  }
+  .reveal .custom4060 > div.column:first-child {
+    width: 40%;
+  }
+  .reveal .custom4060 div.column:not(:first-child) {
+    width: 60%;
+  }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">ECON526: Quantitative Economics with Data Science Applications</h1>
+  <p class="subtitle">Probability and Uncertainty</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Jesse Perla 
+</div>
+<div class="quarto-title-author-email">
+<a href="mailto:jesse.perla@ubc.ca">jesse.perla@ubc.ca</a>
+</div>
+        <p class="quarto-title-affiliation">
+            University of British Columbia
+          </p>
+    </div>
+</div>
+
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#/overview" id="/toc-overview">Overview</a></li>
+<li><a href="#/probability" id="/toc-probability">Probability</a></li>
+<li><a href="#/discrete-distributions" id="/toc-discrete-distributions">Discrete Distributions</a></li>
+<li><a href="#/lln-and-clt" id="/toc-lln-and-clt">LLN and CLT</a></li>
+<li><a href="#/joint-distributions" id="/toc-joint-distributions">Joint Distributions</a></li>
+<li><a href="#/conditional-expectations" id="/toc-conditional-expectations">Conditional Expectations</a></li>
+</ul>
+</nav>
+</section>
+<section>
+<section id="overview" class="title-slide slide level1 center">
+<h1>Overview</h1>
+
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>Will provide background on probability, simulation of randomness, independence, and expectations</li>
+<li>See the following for extra material - some of which were used in these notes
+<ul>
+<li><a href="https://python.quantecon.org/prob_matrix.html" target="_blank">QuantEcon Probability</a></li>
+<li><a href="https://intro.quantecon.org/prob_dist.html" target="_blank">QuantEcon Distributions and Probabilities</a></li>
+<li><a href="https://python.quantecon.org/lln_clt.html" target="_blank">QuantEcon LLN and CLT</a></li>
+</ul></li>
+<li>Using the following packages and definitions</li>
+</ul>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="im">import</span> scipy.stats</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="im">from</span> matplotlib.animation <span class="im">import</span> FuncAnimation</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="im">import</span> IPython.display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section>
+<section>
+<section id="probability" class="title-slide slide level1 center">
+<h1>Probability</h1>
+
+</section>
+<section id="definitions" class="slide level2">
+<h2>Definitions</h2>
+<p>To formalize probability always be careful to separate</p>
+<ol type="1">
+<li><strong>Events</strong> i.e., probability space.</li>
+<li><strong>Probability</strong> an events occurs. i.e., probability measure</li>
+<li><strong>Value</strong> or implications of an event. i.e., random variables</li>
+</ol>
+</section>
+<section id="probability-space" class="slide level2">
+<h2>Probability Space</h2>
+<p><strong>Probability space</strong> is a <span class="math inline">\((\Omega, \mathcal{A})\)</span>:</p>
+<ul>
+<li><p>Set <span class="math inline">\(\Omega\)</span> of possible <strong>outcomes</strong> and <span class="math inline">\(\omega \in \Omega\)</span> is a particular outcome</p>
+<ul>
+<li>e.g.&nbsp;<span class="math inline">\(\Omega = \{U, E, R, D\}\)</span> for unemployed, employed, retired, or dead</li>
+</ul></li>
+<li><p>Subsets <span class="math inline">\(A \subseteq \Omega\)</span> are <strong>events</strong></p>
+<ul>
+<li>e.g.&nbsp;<span class="math inline">\(A = \{U, E\}\)</span> is the event of being employed or unemployed</li>
+<li><span class="math inline">\(\Omega \setminus A = \{R, D\}\)</span> (the <code>\setminus</code>) is event of not being either</li>
+</ul></li>
+<li><p>The collection of all possible events is <span class="math inline">\(\mathcal{A}\)</span> where <span class="math inline">\(A \in \mathcal{A}\)</span></p>
+<ul>
+<li><span class="math inline">\(\Omega \in \mathcal{A}\)</span>, i.e.&nbsp;we can consider the event of any outcome occurring</li>
+<li><span class="math inline">\(\emptyset \in \mathcal{A}\)</span>, i.e.&nbsp;we can consider the event of nothing occurring</li>
+</ul></li>
+</ul>
+</section>
+<section id="probability-measure" class="slide level2">
+<h2>Probability Measure</h2>
+<p><strong>Probability Measure</strong> is a function which assigns a numerical value on the likelihood of an event</p>
+<ul>
+<li><p>For us, <span class="math inline">\(\mathbb{P} : \mathcal{A} \rightarrow [0,1]\)</span></p>
+<ul>
+<li>e.g.&nbsp;<span class="math inline">\(\mathbb{P}(\{U, E\}) = 0.7\)</span> is probability either <span class="math inline">\(U\)</span> or <span class="math inline">\(E\)</span></li>
+<li><span class="math inline">\(\mathbb{P}(\Omega \setminus \{U, E\}) = 0.3\)</span></li>
+</ul></li>
+<li><p>Will see denoted as a function, <span class="math inline">\(\mu(A)\)</span> for integrals in advanced uses</p>
+<ul>
+<li>Overkill for probability spaces with a finite, discrete number of elements</li>
+<li>Important for probability spaces with a continuous number of elements</li>
+<li>Essential for stochastic processes (e.g., flipping a coin until heads)</li>
+</ul></li>
+</ul>
+</section>
+<section id="random-variables" class="slide level2">
+<h2>Random Variables</h2>
+<p><strong>Random Variable</strong>: <span class="math inline">\(X(\omega)\)</span> assigns a numerical value to a particular outcome</p>
+<ul>
+<li><p><span class="math inline">\(X : \Omega \rightarrow \mathbb{R}\)</span>, but could be vector or matrix valued</p>
+<ul>
+<li>e.g.&nbsp;<span class="math inline">\(X(\omega = E) = 1\)</span> if employed, <span class="math inline">\(X(\omega = U) = 0\)</span> if unemployed. Useful for doing counts</li>
+</ul></li>
+<li><p>Or <span class="math inline">\(X(\omega = E) = \$40,000\)</span> if employed, <span class="math inline">\(X(\omega = E) = \$15,000\)</span> if unemployed. Useful for finding average incomes</p></li>
+<li><p>Random variables defined on <span class="math inline">\(\Omega\)</span>, and inherit the probability measure</p>
+<ul>
+<li>So can query values like <span class="math inline">\(\mathbb{P}(X =\$40,000)\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="axioms-of-probability" class="slide level2">
+<h2>Axioms of Probability</h2>
+<p>Probability measure <span class="math inline">\(\mathbb{P}\)</span> on probability space <span class="math inline">\((\Omega, \mathcal{A})\)</span> must satisfy axioms:</p>
+<ul>
+<li><strong>Non-negativity</strong>: <span class="math inline">\(\mathbb{P}(A) \geq 0\)</span></li>
+<li><strong>Normalization</strong>: <span class="math inline">\(\mathbb{P}(\Omega) = 1\)</span></li>
+<li><strong>Additivity</strong>: If <span class="math inline">\(A \cap B = \emptyset\)</span>, then <span class="math inline">\(\mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B)\)</span></li>
+</ul>
+<p>These imply other results such as:</p>
+<ul>
+<li><span class="math inline">\(\mathbb{P}(\emptyset) = 0\)</span></li>
+<li><span class="math inline">\(\mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A \cap B)\)</span></li>
+<li><span class="math inline">\(\mathbb{P}(\Omega \setminus A) = 1 - \mathbb{P}(A)\)</span></li>
+</ul>
+</section></section>
+<section>
+<section id="discrete-distributions" class="title-slide slide level1 center">
+<h1>Discrete Distributions</h1>
+
+</section>
+<section id="discrete-distributions-1" class="slide level2">
+<h2>Discrete Distributions</h2>
+<ul>
+<li><p>A discrete probability spaces have finite (or countable) number of outcomes</p></li>
+<li><p>When convenient, we can number the outcomes arbitrarily as <span class="math inline">\(n = 1,\ldots N\)</span> (or <span class="math inline">\(\infty\)</span>) and then work with <span class="math inline">\(\Omega = \{1, \ldots N\}\)</span> and <span class="math inline">\(\omega \in \Omega\)</span></p></li>
+<li><p>Axioms especially simple because we use <span class="math inline">\(\mathbb{P}(\omega = n) = p_n\)</span>,</p>
+<ul>
+<li><strong>Non-negativity</strong>: <span class="math inline">\(p_n \geq 0\)</span></li>
+<li><strong>Normalization</strong>: <span class="math inline">\(\sum\limits_{n=1}^{N} p_n = 1\)</span></li>
+<li><strong>Additivity</strong>: <span class="math inline">\(\mathbb{P}(A) = \sum\limits_{n \in A} p_n\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="random-variables-1" class="slide level2">
+<h2>Random Variables</h2>
+<ul>
+<li><p>Notation can become a little confusing because we will sometimes use the same index number for the event and for the random value, but they are separate!</p></li>
+<li><p>Frequently we will assign the random variable as just that index</p>
+<ul>
+<li><span class="math inline">\(X(\omega = n) = n\)</span> and then denote <span class="math inline">\(\mathbb{P}(X = n) = p_n\)</span></li>
+</ul></li>
+<li><p>Other times we may want to associate a value with each outcome</p>
+<ul>
+<li><span class="math inline">\(X(\omega = n) = x_n\)</span> and then denote <span class="math inline">\(\mathbb{P}(X = x_n) = p_n\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="pdf-and-cdf" class="slide level2">
+<h2>PDF and CDF</h2>
+<ul>
+<li><p><strong>Probability Mass Function (PMF)</strong> is the probability of a single outcome for random variable <span class="math inline">\(X\)</span>. Will assume <span class="math inline">\(X\)</span> itself has discrete values <span class="math display">\[
+p_n \equiv \mathbb{P}(X = n)
+\]</span></p></li>
+<li><p><strong>Cumulative Distribution Function (CDF)</strong> is the probability of all outcomes less than or equal to a particular outcome. <span class="math display">\[
+\mathbb{P}(X \leq n) = \sum\limits_{i=1}^{n} p_i
+\]</span></p></li>
+</ul>
+</section>
+<section id="expectation" class="slide level2">
+<h2>Expectation</h2>
+<ul>
+<li>Expectation of a random variable is the sum of the values weighted by the probabilities. Continuous <span class="math inline">\(\Omega\)</span> uses integrals, or measure theory if “weird”</li>
+<li>Especially easy to compute for discrete random variables <span class="math display">\[
+\mathbb{E}[X] = \sum_{n=1}^N x_n \mathbb{P}(X = x_n)
+\]</span></li>
+<li>Generalized to functions of a random variables <span class="math display">\[
+\mathbb{E}[f(X)] = \sum_{n=1}^N f(x_n) \mathbb{P}(X = x_n)
+\]</span></li>
+</ul>
+</section>
+<section id="expectations-and-linear-algebra" class="slide level2">
+<h2>Expectations and Linear Algebra</h2>
+<p>Vectors can help with the accounting and notation of expectations. Let</p>
+<ul>
+<li><span class="math inline">\(x \equiv \begin{bmatrix} x_1 &amp; x_2 &amp; \ldots &amp; x_N \end{bmatrix}^{\top}\)</span> be the list of values for the random variable <span class="math inline">\(X\)</span></li>
+<li><span class="math inline">\(p \equiv \begin{bmatrix} p_1 &amp; p_2 &amp; \ldots &amp; p_N \end{bmatrix}^{\top}\)</span> be the list of probabilities</li>
+<li>Then the expectation is (broadcasting <span class="math inline">\(f(\cdot)\)</span> across <span class="math inline">\(x\)</span> as required)</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb{E}[X] &amp;= \sum_{n=1}^N x_n \mathbb{P}(X = x_n) = p \cdot x = p^{\top} x\\
+\mathbb{E}[f(X)] &amp;= \sum_{n=1}^N f(x_n) \mathbb{P}(X = x_n) = p \cdot f(x) = p^{\top} f(x)
+\end{aligned}
+\]</span></p>
+</section>
+<section id="example-with-a-discrete-distribution" class="slide level2">
+<h2>Example with a Discrete Distribution</h2>
+<ul>
+<li><span class="math inline">\(\Omega = \{U, E, R\}\)</span></li>
+<li><span class="math inline">\(\mathbb{P}(U) = 0.1, \mathbb{P}(E) = 0.8, \mathbb{P}(R) = 0.1\)</span></li>
+<li><span class="math inline">\(X(U) = 15000, X(E) = 40000, X(R) = 10000\)</span></li>
+<li><span class="math inline">\(\mathbb{E}[X]\)</span> and <span class="math inline">\(\mathbb{E}[\sqrt{X}]\)</span></li>
+</ul>
+<div class="cell columns column-output-location" data-execution_count="3">
+<div class="column">
+<div class="sourceCode cell-code" id="cb2" data-code-line-numbers="5-7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>p <span class="op">=</span> np.array([<span class="fl">0.1</span>, <span class="fl">0.8</span>, <span class="fl">0.1</span>])</span>
+<span id="cb2-2"><a href="#cb2-2"></a>x <span class="op">=</span> np.array([<span class="dv">15000</span>, <span class="dv">40000</span>, <span class="dv">10000</span>])</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">def</span> f(x):</span>
+<span id="cb2-4"><a href="#cb2-4"></a>    <span class="cf">return</span> np.sqrt(x)</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="bu">print</span>(<span class="ss">f"E(X) = </span><span class="sc">{</span>p <span class="op">@</span> x<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="bu">print</span>(<span class="ss">f"E(f(X)) = </span><span class="sc">{</span>p <span class="op">@</span> f(x)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="bu">print</span>(<span class="ss">f"CDF(X) = </span><span class="sc">{</span>np<span class="sc">.</span>cumsum(p)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-stdout">
+<pre><code>E(X) = 34500.0
+E(f(X)) = 182.2474487139159
+CDF(X) = [0.1 0.9 1. ]</code></pre>
+</div>
+</div>
+</div>
+<p>Note that the CDF was easy to calculate as cumulative sums. Interpretable?</p>
+</section>
+<section id="using-the-discrete_rv" class="slide level2">
+<h2>Using the <code>discrete_rv</code></h2>
+<ul>
+<li><code>scipy.stats</code> has a <code>discrete_rv</code> type with built-in functions</li>
+<li>Useful for working with discrete random variables</li>
+</ul>
+<div class="cell columns column-output-location" data-execution_count="4">
+<div class="column">
+<div class="sourceCode cell-code" id="cb4" data-code-line-numbers="1-4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>p <span class="op">=</span> np.array([<span class="fl">0.1</span>, <span class="fl">0.8</span>, <span class="fl">0.1</span>])</span>
+<span id="cb4-2"><a href="#cb4-2"></a>x <span class="op">=</span> np.array([<span class="dv">15000</span>, <span class="dv">40000</span>, <span class="dv">10000</span>])</span>
+<span id="cb4-3"><a href="#cb4-3"></a>u <span class="op">=</span> scipy.stats.rv_discrete(</span>
+<span id="cb4-4"><a href="#cb4-4"></a>  values<span class="op">=</span>(x, p))</span>
+<span id="cb4-5"><a href="#cb4-5"></a>samples <span class="op">=</span> u.rvs(size<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="bu">print</span>(<span class="ss">f"E(X) = </span><span class="sc">{</span>u<span class="sc">.</span>mean()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="bu">print</span>(<span class="ss">f"E(f(X)) = </span><span class="sc">{</span>u<span class="sc">.</span>expect(f)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="bu">print</span>(<span class="ss">f"CDF(X) = </span><span class="sc">{</span>u<span class="sc">.</span>cdf(x)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="bu">print</span>(<span class="ss">f"Samples of X = </span><span class="sc">{</span>samples<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-stdout">
+<pre><code>E(X) = 34500.0
+E(f(X)) = 182.2474487139159
+CDF(X) = [0.2 1.  0.1]
+Samples of X = [15000 40000 40000 40000 40000]</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="histogram-n50" class="slide level2">
+<h2>Histogram <span class="math inline">\(N=50\)</span></h2>
+<div class="cell custom4060 columns column-output-location" data-execution_count="5">
+<div class="column">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>N <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>samples <span class="op">=</span> u.rvs(size<span class="op">=</span>N)</span>
+<span id="cb6-3"><a href="#cb6-3"></a>ax <span class="op">=</span> sns.histplot(samples,</span>
+<span id="cb6-4"><a href="#cb6-4"></a>  stat<span class="op">=</span><span class="st">"proportion"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co"># Alternative</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co"># Density doesn't add up</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co"># plt.hist(samples_1,</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#   density=True)</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co"># Or must build barchart</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-display">
+<p><img data-src="probability_files/figure-revealjs/cell-5-output-1.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="histogram-n500" class="slide level2">
+<h2>Histogram <span class="math inline">\(N=500\)</span></h2>
+<div class="cell custom4060 columns column-output-location" data-execution_count="6">
+<div class="column">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>N <span class="op">=</span> <span class="dv">500</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>samples <span class="op">=</span> u.rvs(size<span class="op">=</span>N)</span>
+<span id="cb7-3"><a href="#cb7-3"></a>ax <span class="op">=</span> sns.histplot(samples,</span>
+<span id="cb7-4"><a href="#cb7-4"></a>  stat<span class="op">=</span><span class="st">"proportion"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-display">
+<p><img data-src="probability_files/figure-revealjs/cell-6-output-1.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-binomial-distribution" class="slide level2">
+<h2>The Binomial Distribution</h2>
+<p>For <span class="math inline">\(n = 1 \ldots N\)</span>, the <strong>binomial distribution</strong> is defined by the PMF</p>
+<p><span class="math display">\[
+\displaystyle
+\begin{aligned}
+\mathbb{P}(X = n) &amp;= \binom{N}{n} \theta^n (1-\theta)^{N-n}\\
+\mathbb{E}(X) &amp;= \sum_{n=0}^N n \binom{N}{n} \theta^n (1-\theta)^{N-n} = N \theta
+\end{aligned}
+\]</span></p>
+<div class="cell columns column-output-location" data-execution_count="7">
+<div class="column">
+<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="3|4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>N <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>θ <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>u <span class="op">=</span> scipy.stats.binom(N, θ)</span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="bu">print</span>(<span class="ss">f"Mean: </span><span class="sc">{</span>u<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="bu">print</span>(<span class="ss">f"Variance: </span><span class="sc">{</span>u<span class="sc">.</span>var()<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="bu">print</span>(<span class="ss">f"Draws of u: </span><span class="sc">{</span>u<span class="sc">.</span>rvs(<span class="dv">5</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-stdout">
+<pre><code>Mean: 5.00
+Variance: 2.50
+Draws of u: [6 3 5 4 8]</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="the-binomial-probability-mass-function" class="slide level2">
+<h2>The Binomial Probability Mass Function</h2>
+<div class="cell custom4060 columns column-output-location" data-execution_count="8">
+<div class="column">
+<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="1-2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>grid <span class="op">=</span> np.arange(N<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb10-2"><a href="#cb10-2"></a>u_pmf <span class="op">=</span> u.pmf(grid)</span>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb10-5"><a href="#cb10-5"></a>ax.plot(grid, u_pmf,</span>
+<span id="cb10-6"><a href="#cb10-6"></a>  linestyle<span class="op">=</span><span class="st">''</span>,</span>
+<span id="cb10-7"><a href="#cb10-7"></a>  marker<span class="op">=</span><span class="st">'o'</span>,</span>
+<span id="cb10-8"><a href="#cb10-8"></a>  alpha<span class="op">=</span><span class="fl">0.8</span>, ms<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb10-9"><a href="#cb10-9"></a>ax.vlines(grid, <span class="dv">0</span>,</span>
+<span id="cb10-10"><a href="#cb10-10"></a>  u_pmf,</span>
+<span id="cb10-11"><a href="#cb10-11"></a>  lw<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb10-12"><a href="#cb10-12"></a>ax.set_xticks(grid)</span>
+<span id="cb10-13"><a href="#cb10-13"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-display">
+<p><img data-src="probability_files/figure-revealjs/cell-8-output-1.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-binomial-cumulative-distribution-function" class="slide level2">
+<h2>The Binomial Cumulative Distribution Function</h2>
+<p><span class="math display">\[
+\mathbb{P}(X \leq n) = \sum_{i=0}^n \binom{N}{i} \theta^i (1-\theta)^{N-i}
+\]</span></p>
+<div class="cell columns column-output-location" data-execution_count="9">
+<div class="column">
+<div class="sourceCode cell-code" id="cb11" data-code-line-numbers="2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>grid <span class="op">=</span> np.arange(N<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb11-2"><a href="#cb11-2"></a>u_cdf <span class="op">=</span> u.cdf(grid)</span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb11-5"><a href="#cb11-5"></a>ax.step(grid, u_cdf)</span>
+<span id="cb11-6"><a href="#cb11-6"></a>ax.vlines(grid, <span class="dv">0</span>, u_cdf,</span>
+<span id="cb11-7"><a href="#cb11-7"></a>  lw<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb11-8"><a href="#cb11-8"></a>ax.set_xticks(grid)</span>
+<span id="cb11-9"><a href="#cb11-9"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-display">
+<p><img data-src="probability_files/figure-revealjs/cell-9-output-1.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="histogram-n50-1" class="slide level2">
+<h2>Histogram <span class="math inline">\(N=50\)</span></h2>
+<div class="cell custom4060 columns column-output-location" data-execution_count="10">
+<div class="column">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>N <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>u <span class="op">=</span> scipy.stats.binom(<span class="dv">10</span>, <span class="fl">0.5</span>)</span>
+<span id="cb12-3"><a href="#cb12-3"></a>plt.hist(u.rvs(size<span class="op">=</span>N),</span>
+<span id="cb12-4"><a href="#cb12-4"></a>  density<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb12-5"><a href="#cb12-5"></a>  align<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb12-6"><a href="#cb12-6"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-display">
+<p><img data-src="probability_files/figure-revealjs/cell-10-output-1.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="histogram-n5000" class="slide level2">
+<h2>Histogram <span class="math inline">\(N=5000\)</span></h2>
+<div class="cell custom4060 columns column-output-location" data-execution_count="11">
+<div class="column">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>N <span class="op">=</span> <span class="dv">5000</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>u <span class="op">=</span> scipy.stats.binom(<span class="dv">10</span>, <span class="fl">0.5</span>)</span>
+<span id="cb13-3"><a href="#cb13-3"></a>plt.hist(u.rvs(size<span class="op">=</span>N),</span>
+<span id="cb13-4"><a href="#cb13-4"></a>  density<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb13-5"><a href="#cb13-5"></a>  align<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb13-6"><a href="#cb13-6"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-display">
+<p><img data-src="probability_files/figure-revealjs/cell-11-output-1.png"></p>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="lln-and-clt" class="title-slide slide level1 center">
+<h1>LLN and CLT</h1>
+
+</section>
+<section id="law-of-large-numbers-lln" class="slide level2">
+<h2>Law of Large Numbers (LLN)</h2>
+<ul>
+<li><p>A classic LLN is the <a href="https://en.wikipedia.org/wiki/Law_of_large_numbers#Strong_law">Strong Law of Large Numbers</a></p></li>
+<li><p>Take a sequence of independent, identically distributed random variables <span class="math inline">\(X_1, X_2, \ldots\)</span> with <span class="math inline">\(\mathbb{E}[X_i] = \mu\)</span> and <span class="math inline">\(\mathbb{V}[X_i] = \sigma^2 &lt; \infty\)</span>. Then,</p>
+<ul>
+<li>If <span class="math inline">\(X_n\)</span> is a random variable then <span class="math inline">\(\bar{X}_N \equiv \frac{1}{N}\sum_{i=1}^N X_n\)</span> is also an RV</li>
+<li>The law says for any <span class="math inline">\(\epsilon &gt; 0\)</span>, <span class="math inline">\(\lim_{N\to\infty} \mathbb{P}(|\bar{X}_N - \mu| &gt; \epsilon) \rightarrow 0\)</span></li>
+<li>Sometimes denoted <span class="math inline">\(\bar{X}_N \xrightarrow{p} \mu\)</span> for “convergence in probability”</li>
+</ul></li>
+<li><p>Powerful and frequently used, but remember assumptions!</p></li>
+</ul>
+</section>
+<section id="visualizing-the-lln-with-gaussian-rvs-n20" class="slide level2">
+<h2>Visualizing the LLN with Gaussian RVs <span class="math inline">\(N=20\)</span></h2>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb14" data-code-line-numbers="3-4|6-8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>N <span class="op">=</span> <span class="dv">20</span>  <span class="co"># Number of samples</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>mu, sigma <span class="op">=</span> <span class="dv">0</span>, <span class="dv">1</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb14-4"><a href="#cb14-4"></a>samples <span class="op">=</span> np.random.normal(mu, sigma, N)</span>
+<span id="cb14-5"><a href="#cb14-5"></a>sample_means <span class="op">=</span> np.cumsum(samples) <span class="op">/</span> np.arange(<span class="dv">1</span>, N <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb14-6"><a href="#cb14-6"></a>plt.scatter(<span class="bu">range</span>(<span class="dv">1</span>, N <span class="op">+</span> <span class="dv">1</span>), samples, label<span class="op">=</span><span class="st">'Individual Samples'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, s<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb14-7"><a href="#cb14-7"></a>plt.plot(<span class="bu">range</span>(<span class="dv">1</span>, N <span class="op">+</span> <span class="dv">1</span>), sample_means, label<span class="op">=</span><span class="st">'Sample Mean'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb14-8"><a href="#cb14-8"></a>plt.axhline(mu, color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'True Mean'</span>)</span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(N): <span class="co"># add lines to samples from sample mean</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a>    plt.plot([n <span class="op">+</span> <span class="dv">1</span>, n <span class="op">+</span> <span class="dv">1</span>], [sample_means[n], samples[n]], color<span class="op">=</span><span class="st">'gray'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb14-11"><a href="#cb14-11"></a>plt.xlabel(<span class="st">'Sample Number $N$'</span>)</span>
+<span id="cb14-12"><a href="#cb14-12"></a>plt.legend()</span>
+<span id="cb14-13"><a href="#cb14-13"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="visualizing-the-lln-with-gaussian-rvs-n20-output" class="slide level2 output-location-slide"><h2>Visualizing the LLN with Gaussian RVs <span class="math inline">\(N=20\)</span></h2><div class="cell output-location-slide" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<p><img data-src="probability_files/figure-revealjs/cell-12-output-1.png"></p>
+</div>
+</div></section><section id="visualizing-the-lln-with-gaussian-rvs-n100" class="slide level2">
+<h2>Visualizing the LLN with Gaussian RVs <span class="math inline">\(N=100\)</span></h2>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb15" data-code-line-numbers="1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>N <span class="op">=</span> <span class="dv">100</span>  <span class="co"># Number of samples</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>mu, sigma <span class="op">=</span> <span class="dv">0</span>, <span class="dv">1</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb15-4"><a href="#cb15-4"></a>samples <span class="op">=</span> np.random.normal(mu, sigma, N)</span>
+<span id="cb15-5"><a href="#cb15-5"></a>sample_means <span class="op">=</span> np.cumsum(samples) <span class="op">/</span> np.arange(<span class="dv">1</span>, N <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb15-6"><a href="#cb15-6"></a>plt.scatter(<span class="bu">range</span>(<span class="dv">1</span>, N <span class="op">+</span> <span class="dv">1</span>), samples, label<span class="op">=</span><span class="st">'Individual Samples'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, s<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb15-7"><a href="#cb15-7"></a>plt.plot(<span class="bu">range</span>(<span class="dv">1</span>, N <span class="op">+</span> <span class="dv">1</span>), sample_means, label<span class="op">=</span><span class="st">'Sample Mean'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb15-8"><a href="#cb15-8"></a>plt.axhline(mu, color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'True Mean'</span>)</span>
+<span id="cb15-9"><a href="#cb15-9"></a><span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(N): <span class="co"># add lines to samples from sample mean</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a>    plt.plot([n <span class="op">+</span> <span class="dv">1</span>, n <span class="op">+</span> <span class="dv">1</span>], [sample_means[n], samples[n]], color<span class="op">=</span><span class="st">'gray'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb15-11"><a href="#cb15-11"></a>plt.xlabel(<span class="st">'Sample Number $N$'</span>)</span>
+<span id="cb15-12"><a href="#cb15-12"></a>plt.legend()</span>
+<span id="cb15-13"><a href="#cb15-13"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="visualizing-the-lln-with-gaussian-rvs-n100-output" class="slide level2 output-location-slide"><h2>Visualizing the LLN with Gaussian RVs <span class="math inline">\(N=100\)</span></h2><div class="cell output-location-slide" data-execution_count="13">
+<div class="cell-output cell-output-display">
+<p><img data-src="probability_files/figure-revealjs/cell-13-output-1.png"></p>
+</div>
+</div></section><section id="pareto-distributions" class="slide level2">
+<h2>Pareto Distributions</h2>
+<ul>
+<li><p>Pareto distributions are a family of distributions with a power-law tail</p></li>
+<li><p>Parameterized by <span class="math inline">\((x_m, \alpha)\)</span> with the PDF <span class="math display">\[
+p(x) = \frac{\alpha x_m^{\alpha}}{x^{\alpha+1}}
+\]</span></p></li>
+<li><p>The mean is <span class="math inline">\(\mathbb{E}[X] = \frac{\alpha x_m}{\alpha - 1}\)</span> for <span class="math inline">\(\alpha &gt; 1\)</span></p></li>
+<li><p>The variance is <span class="math inline">\(\mathbb{V}[X] = \frac{\alpha x_m^2}{(\alpha - 1)^2(\alpha - 2)}\)</span> for <span class="math inline">\(\alpha &gt; 2\)</span></p></li>
+</ul>
+
+<aside><div>
+<p>A distribution with pdf <span class="math inline">\(p(x)\)</span> is power-law if <span class="math inline">\(p(x) \propto x^{-\alpha}\)</span> for some <span class="math inline">\(\alpha &gt; 0\)</span> as <span class="math inline">\(x \rightarrow \infty\)</span>. More formally, if <span class="math inline">\(\lim_{x\to\infty}\frac{\log p(x)}{\log x} = -\alpha\)</span></p>
+</div></aside></section>
+<section id="visualizing-the-sample-means-for-a-pareto-distribution" class="slide level2">
+<h2>Visualizing the Sample Means for a Pareto Distribution</h2>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb16" data-code-line-numbers="3-4|6-8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>N <span class="op">=</span> <span class="dv">100</span> <span class="co"># Number of samples</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>alpha <span class="op">=</span> <span class="fl">1.5</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb16-4"><a href="#cb16-4"></a>dist <span class="op">=</span> scipy.stats.pareto(alpha)</span>
+<span id="cb16-5"><a href="#cb16-5"></a>samples <span class="op">=</span> dist.rvs(size<span class="op">=</span>N)</span>
+<span id="cb16-6"><a href="#cb16-6"></a>sample_means <span class="op">=</span> np.cumsum(samples) <span class="op">/</span> np.arange(<span class="dv">1</span>, N <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb16-7"><a href="#cb16-7"></a>plt.scatter(<span class="bu">range</span>(<span class="dv">1</span>, N <span class="op">+</span> <span class="dv">1</span>), samples, label<span class="op">=</span><span class="st">'Individual Samples'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, s<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb16-8"><a href="#cb16-8"></a>plt.plot(<span class="bu">range</span>(<span class="dv">1</span>, N <span class="op">+</span> <span class="dv">1</span>), sample_means, label<span class="op">=</span><span class="st">'Sample Mean'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb16-9"><a href="#cb16-9"></a>plt.axhline(dist.mean(), color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'True Mean'</span>)</span>
+<span id="cb16-10"><a href="#cb16-10"></a><span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(N): <span class="co"># add lines to samples from sample mean</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a>    plt.plot([n <span class="op">+</span> <span class="dv">1</span>, n <span class="op">+</span> <span class="dv">1</span>], [sample_means[n], samples[n]], color<span class="op">=</span><span class="st">'gray'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb16-12"><a href="#cb16-12"></a>plt.xlabel(<span class="st">'Sample Number $N$'</span>)</span>
+<span id="cb16-13"><a href="#cb16-13"></a>plt.legend()</span>
+<span id="cb16-14"><a href="#cb16-14"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="visualizing-the-sample-means-for-a-pareto-distribution-output" class="slide level2 output-location-slide"><h2>Visualizing the Sample Means for a Pareto Distribution</h2><div class="cell output-location-slide" data-execution_count="14">
+<div class="cell-output cell-output-display">
+<p><img data-src="probability_files/figure-revealjs/cell-14-output-1.png"></p>
+</div>
+</div></section><section id="central-limit-theorem-clt" class="slide level2">
+<h2>Central Limit Theorem (CLT)</h2>
+<ul>
+<li><p>The <a href="https://en.wikipedia.org/wiki/Central_limit_theorem">Central Limit Theorem</a> (CLT) is a classic result in statistics</p></li>
+<li><p>Again, lets assume we have IID observations with <span class="math inline">\(\mathbb{E}[X_i] = \mu\)</span> and <span class="math inline">\(\mathbb{V}[X_i] = \sigma^2 &lt; \infty\)</span></p></li>
+<li><p>Define the sample mean <span class="math inline">\(\bar{X}_N \equiv \frac{1}{N} \sum_{i=1}^N X_i\)</span></p></li>
+<li><p>Then the CLT is</p>
+<p><span class="math display">\[
+\sqrt{n} \left( \bar{X}_n - \mu \right) \xrightarrow{d} \mathcal{N}(0, \sigma^2)
+\]</span></p>
+<ul>
+<li>That notation means <a href="https://en.wikipedia.org/wiki/Convergence_of_random_variables#Convergence_in_distribution">converges in distribution</a>, which roughly means that as <span class="math inline">\(n\to\infty\)</span> the CDF are getting closer to each other</li>
+</ul></li>
+</ul>
+</section>
+<section id="visualizing-the-clt-with-exponential-distributions" class="slide level2">
+<h2>Visualizing the CLT with Exponential Distributions</h2>
+<ul>
+<li>See <a href="https://python.quantecon.org/lln_clt.html#clt">QuantEcon CLT lecture</a> for the source.</li>
+<li>Exponential distributions <span class="math inline">\(p(x) = \lambda e^{-\lambda x}\)</span> for <span class="math inline">\(\lambda = 0.5\)</span></li>
+</ul>
+<div class="cell columns column-output-location" data-execution_count="15">
+<div class="column">
+<div class="sourceCode cell-code" id="cb17" data-code-line-numbers="1|3-4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>distribution <span class="op">=</span> scipy.stats.expon(<span class="dv">1</span><span class="op">/</span><span class="fl">0.5</span>)</span>
+<span id="cb17-2"><a href="#cb17-2"></a>mu, s <span class="op">=</span> distribution.mean(), distribution.std()</span>
+<span id="cb17-3"><a href="#cb17-3"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="fl">15.0</span>, <span class="dv">1000</span>)</span>
+<span id="cb17-4"><a href="#cb17-4"></a>y <span class="op">=</span> distribution.pdf(x)</span>
+<span id="cb17-5"><a href="#cb17-5"></a>plt.plot(x, y)</span>
+<span id="cb17-6"><a href="#cb17-6"></a>plt.xlabel(<span class="st">'Value'</span>)</span>
+<span id="cb17-7"><a href="#cb17-7"></a>plt.ylabel(<span class="st">'Density'</span>)</span>
+<span id="cb17-8"><a href="#cb17-8"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-display">
+<p><img data-src="probability_files/figure-revealjs/cell-15-output-1.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="clt-of-exponential-to-n100" class="slide level2 nostretch">
+<h2>CLT of Exponential to <span class="math inline">\(N=100\)</span></h2>
+<div class="cell columns column-output-location" data-execution_count="16">
+<div class="column">
+<div class="sourceCode cell-code" id="cb18" data-code-line-numbers="4-6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">def</span> update(n):</span>
+<span id="cb18-3"><a href="#cb18-3"></a>    ax.clear()</span>
+<span id="cb18-4"><a href="#cb18-4"></a>    data <span class="op">=</span> distribution.rvs((<span class="dv">5000</span>, n))</span>
+<span id="cb18-5"><a href="#cb18-5"></a>    sample_means <span class="op">=</span> data.mean(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb18-6"><a href="#cb18-6"></a>    Y <span class="op">=</span> np.sqrt(n) <span class="op">*</span> (sample_means <span class="op">-</span> mu)</span>
+<span id="cb18-7"><a href="#cb18-7"></a>    ax.set_xlim(<span class="op">-</span><span class="dv">3</span> <span class="op">*</span> s, <span class="dv">3</span> <span class="op">*</span> s)</span>
+<span id="cb18-8"><a href="#cb18-8"></a>    ax.set_ylim(<span class="dv">0</span>, <span class="fl">0.5</span>)</span>
+<span id="cb18-9"><a href="#cb18-9"></a>    ax.hist(Y, bins<span class="op">=</span><span class="dv">60</span>, alpha<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb18-10"><a href="#cb18-10"></a>      density<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb18-11"><a href="#cb18-11"></a>    ax.set_title(<span class="ss">f"CLT for $N = </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">$"</span>)</span>
+<span id="cb18-12"><a href="#cb18-12"></a>ani <span class="op">=</span> FuncAnimation(fig,update,</span>
+<span id="cb18-13"><a href="#cb18-13"></a>  frames<span class="op">=</span><span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">5</span>),</span>
+<span id="cb18-14"><a href="#cb18-14"></a>  interval<span class="op">=</span><span class="dv">500</span>,blit<span class="op">=</span><span class="va">False</span>, repeat<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb18-15"><a href="#cb18-15"></a>plt.close()</span>
+<span id="cb18-16"><a href="#cb18-16"></a>IPython.display.HTML(ani.to_html5_video())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-display" data-execution_count="15">
+<video width="576" height="384" controls="" autoplay="">
+  <source type="video/mp4" src="data:video/mp4;base64,AAAAIGZ0eXBNNFYgAAACAE00ViBpc29taXNvMmF2YzEAAAAIZnJlZQAAT+VtZGF0AAACrgYF//+q
+3EXpvebZSLeWLNgg2SPu73gyNjQgLSBjb3JlIDE2NCByMzEwNiBlYWE2OGZhIC0gSC4yNjQvTVBF
+Ry00IEFWQyBjb2RlYyAtIENvcHlsZWZ0IDIwMDMtMjAyMyAtIGh0dHA6Ly93d3cudmlkZW9sYW4u
+b3JnL3gyNjQuaHRtbCAtIG9wdGlvbnM6IGNhYmFjPTEgcmVmPTMgZGVibG9jaz0xOjA6MCBhbmFs
+eXNlPTB4MzoweDExMyBtZT1oZXggc3VibWU9NyBwc3k9MSBwc3lfcmQ9MS4wMDowLjAwIG1peGVk
+X3JlZj0xIG1lX3JhbmdlPTE2IGNocm9tYV9tZT0xIHRyZWxsaXM9MSA4eDhkY3Q9MSBjcW09MCBk
+ZWFkem9uZT0yMSwxMSBmYXN0X3Bza2lwPTEgY2hyb21hX3FwX29mZnNldD0tMiB0aHJlYWRzPTEy
+IGxvb2thaGVhZF90aHJlYWRzPTIgc2xpY2VkX3RocmVhZHM9MCBucj0wIGRlY2ltYXRlPTEgaW50
+ZXJsYWNlZD0wIGJsdXJheV9jb21wYXQ9MCBjb25zdHJhaW5lZF9pbnRyYT0wIGJmcmFtZXM9MyBi
+X3B5cmFtaWQ9MiBiX2FkYXB0PTEgYl9iaWFzPTAgZGlyZWN0PTEgd2VpZ2h0Yj0xIG9wZW5fZ29w
+PTAgd2VpZ2h0cD0yIGtleWludD0yNTAga2V5aW50X21pbj0yIHNjZW5lY3V0PTQwIGludHJhX3Jl
+ZnJlc2g9MCByY19sb29rYWhlYWQ9NDAgcmM9Y3JmIG1idHJlZT0xIGNyZj0yMy4wIHFjb21wPTAu
+NjAgcXBtaW49MCBxcG1heD02OSBxcHN0ZXA9NCBpcF9yYXRpbz0xLjQwIGFxPTE6MS4wMACAAAAS
+VWWIhAAU//73x0/Apuj5ZsudSh6+Gvgqachj5pzyzpnCW+AAAAMAAAMABvY5Fqvrs7owquv/tqeF
+8ABkHx2cJUn9KvYhkzJixBm2EQnTYDVvDyrnUlQUZtID0pRiIzDfbn2UK/K10M9mO2ckJRZutcdB
+7Pb2YnKEDqAbCHPH5703/jNq62qDoJ8tROWj/l3tCdNQYFg9PXF/YQO7xBWm3WvEDckrH1cSz2mH
+FtKQNeDCgrBHy8lW3qh42Lflzpu4PInIoKD1JCrQ27iHIy25ks1aY0Jgcbla+a7rQ3CQTsb0wQkg
+z3XaLSMLK0awVcDvvpsZTp2A6zpCPIaIeXv4cc5isJdhiaNi/6SCS3ejzmTTcl8+WUouuWmcZesj
+dA70FXBejD9PWXX7UOV+YbRvE/hXK9yDrEiIys5QXayCcpzz95XJK8d4T5IjogAEMzy1f4HYVfiJ
+XI+vJ8vxZypnTJm2A1YUB8DWgOdKXZTIBzLepusHYc0KqBIPweojoPPHjGEuNTyQR/1PnauO4CDz
+fBJzh5+JrujzJ+3nKw6zeGfUQQKm7xAlRft/91359bL5SPJQ1ZgfQbPEuiAAABuTq2H9xFfe04BA
+iDKityfUsYe6fIOg/SuK5mCwUboBmedDZqliR+MfCPVVT15nBasMq16fZ3HDQVWbYz1/Iu1vOfO9
+K7i0OW5vEK8bmuZsq76lxrydYhbt/EbqIOj1T202Ofdhm7GVlB+yMcAUYY1A2xUWefp+FevY92D5
++cX6AdIZ+Y19DSbVic3S5srpJqUZ6shVtB/DFzwmi9Sf/4f7Zzx37HNNg0bQFgkG9KVZA/bKe8q9
+39OudTGA2Ib88z9f9B8R5nuYSMmC9R5yk/jzFKdml/KG3e3/Q74Udwt05NGqXBEupg8xxDEfhuwN
+AZsS30yyjzaWspIpkRlUqqwjFeS9F6V0cbHfqZW/RhffzLz+GUtqUYEO9ZcJjIitbJR/r5GNcCLV
+jbqRp3NhdvZALRgTpTBGw/RW0ymZKyk2Ex27fOqi0FKZ1/jyVmCO3Z/nlYjKH+Pn3VolS6yD2UeK
++P+0BizF1TPBVxCm44dnqJOyUGlktUuJmu3aKIP6eFXg1vGofqf+11zCAEFJF9slSbr+i5FCgK4C
+hVA7Fpk6TDQNoUS2EjbAkTgA0B4++WX0XtuqTYYhq1fY+aisL2ZO8CjhU1GMOfDO2Z0yQ8EJCywm
+OwlIHQGsQWD9xaV9K61kKMR5cxHxGQL0JCBgXYH/ocq3R/W9mIq9SJ3R0/zB2o3Z4iDz2Itkfh8C
+OyLaiLKmkyqRgm3vfyfbmObUZGSjLrurQkrBMKAcaFiKq30R8Gcvhtgy+TeYPYAzLfZ5sYao1viQ
+AhB31aXsyNiXHWdxmxZp5y7Xj413DlDrbWvq+5qdSC+wYqLDjIkgtg5wsLPMOaCFQWUudOETvKys
+Oh74hjfNyY9AQ3zPSze/8eoRrLw39PMNOnNKXHX1jVk+H0zNXG4PWVh9yfvUe7xenu+/nDtiDh3l
+f3iEquuVpITj8rEtJw02971QKO6fmMRQnTNrcIBRIKc7ADDf70IG3XRXRvgkzsdSIQtIA+GgartN
+6lWL3vjU1hoc4bpuNoEjUNFm//E/hZNyMcRlVLhXHJUBJjLlDZ2mwMn4CZlhsbYTYOXc6ABlrORn
+jRahmQqEki1JUVZrcEgC4WCM+D+p0g3kIW9evOkRLZ7HTBZTUhXryRMXNtvrOWipTBaqH/v9RW5C
+l3Ff4ZFsDE9Ov1/K9nR0bgcejobxSybKoFCPUU4JZnuHVy1UvO/n2n6bDJMMEAUDNrJKOPDq+KL8
+ZQiKUT+phK7qEzRYGHoOlu28PwZfGXYyPJzhZRScwxSkA5A82JwN3nOKGSE3Yh2h8EN7Gf5xoBI5
+sOzBk3jTvK46vMApdlSwi63VoUl8rXzvdEyjlfwkCddiGOcApcG2dabWf6NCd88kJjEjxv8EYVj+
+5QY8YiOhSndKEC3/OqkwSK1MAbK+qRo2TmVpbdY7MHAUC2+HK4LqqlblwZO5d9XbZSN0/K65xEv7
+z+xKoITJApVRt93gfVoXzN9TvPXZUGcPW4SPMZ6lWsCVe9wG9ie45oAZ9pRhMHUIlJGTIVqHR7ce
+CZgsVTApPxsmNNffQChb9Yw6zv+w1geI9swFac4AbhwyTK3LpKHGLiFBNnqtYq6CuGgapmyJa4dr
+HB9OBskMMgcUsaqAjT72cvZ1DtCPGZ11WrzixRRcHSqGQIku/xxfJB80T6zbyXSlJj3h23AwjL+R
+Tw7zh4gxzwcroy1oNZPSkf733hkD2mUUoqMaB7cQY6GVzCsbGcfu8cpwwda9m0M9+uwfRcx7a86r
+c1AoEzh5OSmXUecUdLtCrZ3MwAgG+qjpWyuQuiNJaZwnPaxO4nkYvqHfGLjfEtd9fhpAWYGcQmDT
+u0meXe113fdV7mZuzATbhNb5CcUEaVwaMTLnIQbhuFxyygQVlEjAjrpLqdCtgo47wv8TUVdoDKkF
+zrqa1kBUD3Ac6hrnZ/BUcfGuOlGo9dEzg0aMJX2+z9NeTYrLLDReIK3RO2n8YYZmH3Tc3Bp8bkrl
+TsGZr3mdVzyOcaY3RDdmYh17ARcclvoP0l6NEcOUMqKDnf6+H1+j1KsflGgWcjZKaJUe9SYG+d/7
+X9d+LLBLPbg0VvpRfrhFdphvqJzjEUFByrgCotfUBIx7YM31KS/a6JkWJY8UO0cjsUz89cNfgMYn
+/xu0KfQIGQ0BllESvUIqzFlC3Kr/haEdbZbH1D5QlDtsX/MELUh1+nKSk1DvV+kIJDsfxZPLvkwE
+Vhc7iaYjmoYfOwzERJtEfJfPxqCwgWvPIpPVyijpEApgZ2qvNYUDDA9jjS3YpczApFyZwFwd9qdA
+cUduxF5uxLSAl+JDOlZXvoAi75fAJ6gKm+uGnPT0fykxtpL1NrPbsXwWqR3g+Jq7Xk83VrTRnePO
+9VNRz/yzjO33An93xJ2luy9ZxU4MEAG5IBLOZoMhqDUONoDJ3Lvq2BJgkk5YfYxe/yK5EscAh/Tx
+Vp2FgTLJVzw8KzVOyEk7btbUM6jkFm/8RvmMOzmYHlGawfTYGVKsGVg4Ga3b3+Z6+9yxZSHd7fIO
+KfIj2/peFGSljBJgNR5ySMvAb/9vcfh8///gk5QmTwoSV/BE8TiR2H9nS5kMpuzbyxBo9zfQZjb4
+VQeB5SZ3ag5kpCl1VzCarEbzQ2C4Vyxn0gdMINYxB5LvD/b+yq3ahyA+5qUjJAwYXwQQlT4R3g8w
+WeNECAoJYv0DFI4JbRo9+RPfvO5s7GuKaTKZERGGAK9id6Ut20t7ri06jYIFjjAEZXKsC7MRlwZO
+PjmvMZTLRpfYHz1bFsAS3vsVBNXNpMWqb9GpdBRWYE9F5A6wB0dqbfQ2a8xg/sN3PvLRmLtulAwX
+BQHpAoMVnl0AoorqWVSDu9/uBW8L9J0JROz5b6NvoN6Lj5On4VwCXHAL0Jex0wfpZiQsllcejMDz
+1lxb4d3eVCwQiLnjskJeXGdUVY3RWLCOc+WIl4iQyk9zQXjhjAJG/WW6PerDKten2dxw0FVm2NFy
+CP0zAxcb4lrvvx5sVyL8Si2jHdr5XbyUSA2Iw88k5T7i5BOOSYIkgpuXUjV/lDmkiA36H6dL9bJX
++nRw5GCRZnukUH9Ok+Dw6+99dW1Kqj8JAb0y993BoxMucg79QI/+dGd7s9EVxEFXi67dPwV++shM
+stapKJAcUmTpIKPS6Pw61vA7HWVBPj7Xg9UIArdEGhVjRwFl8BI99a9y8XBeqI6O2qzX95sKSytu
+aADqGCdr+D5u2hHUffj1P11LGUpqkQBX/uPl8+s2N7ZC7nYL0GUsChdr8eVs3ie3xrg66sA08uZg
+P+yPuGNP+pu7caUNEeXpcxtxojU0715rncapCjgL5YVgYxeykkD1vx0WN1mlZBpnFYakmWEarDKX
+S84ADGb7vupmzmQ+L2JCfPzQvFbYjv/03KqN4apffEUJkedT1TzMzIyFWGJJkdTZ7YDX84IqtX0a
+5qTLJIpLTCPP68jEUWUPbu9YvTuM8qvMqJcFo7iXkrCpi5URSyL/t/yLk8XPmdKoxsXpWSfuE4hr
+8HowJNwd2p7xfNvhVVQARg1Y7vhR9Ic+Ip6zEbxn8rtze8Vh8u+feYn7j+R3PfU6jkLvmc6Ndt/F
+FnqdRksoGVHNoprzrt2Qi+hK/VFB1nenbrm75xqpxE7ud+D7auE9IcSoT7YQWKkIjxZBz7hsD4QW
+12R9luobAB+aK4WenINZUOMZuEkIRK+pF4gg/BLpRPfeiauimgk7kFQlP5u3Mirqu1X61D8ByBYu
+sFVYNgf8oHgdlgaVnjavsaCcUXxcWG44LxlanxU1ZMpJTsvhT+dswjwYeyHqWrYKW7pCD819u/jH
+3YvYsyguXYHCSnTyiOJQ7xi55SM2VB/i/d3Kc2+BYUb+IifIuv3wntuay6RpvIXHXHoYh3danCSS
+0CHFeZGFD94EHap6sAA1eRnagCpWmSOz2l2pOgMuL873BYOAjGimQDjY1Euqf6cUYrMjw+9XEXWq
+eL/Db0kVE+IYdkixwGEG4dM8nUvmc3d1u/G1CFWhzbminQ1BOfRIEezm4PMoryQ10VuYqbqN6rNo
+ZPQUH6VZqegbNR2ikz+qUCczIM7Qf27ZkineUQyCp7K6PjM2sgM63gGjkls6lcMXa4XzkcC5zKso
+oOQozFDIQsezd3DmNbXXqRiwG7lJIdnbyU+Epz4/27x0xq5hu5ltk8kYcfvTZrhAsy+z+Y5Zm+1C
+HLfCLgORylcW6aFQB4L2m1fSQdbFUsicF6CgRXKGGc83+7ybLcF2EXqKuYRHEpqgSASKno7LR3A8
+FCWSvpLkDMHpZ7DblnsOhY0xJRtBHxZhuiKBzd1/jcrjgUo6R2W4vaObZ2viPmfqkNzjqtW2ncyI
+0MzgTKpFJO4qos/iDsIlPdCtEUnZByVl4iseyViPM/8/Xcplwzpvr4Wyf+6lUuQXRCtA5mM11GkJ
++s5zdyW1X2r3hGMbS+8HvtTOaxYH8UqEmlj6KMfR/dVv5WFu7+zqB7HXMB1+ptLblhqJ5GzkRzqR
+f4h5qm3c9XK5tF8M2CDfT4Bi7J+GbrotXLy1iExnYh62YXgYVQ0kxOUnegZDuNi4eG1cvThpvKc/
+ePAS/2tJcNplDnRW4KpRSlQ2Mnzx8WM2KU4J7yq0XDDPtjM9S82esWQdi/nh0Q7wrcYfFWvAZYTO
+LmNUTi3iYV5Hjw8fyOUAOC/pSwczIQaqfEUP7DvUsevkkrBlObTkIXWI71KCldY1fiTSr3JxaD3D
+/LN3t1tV9IzxeS2WgxumNMmGGEts3Ro/Mn0cFgTi/FsAWLX8MJNA5TgE++lrF+VOQeSOXx7zN1U4
+6QmZILo2iiHZJ1Tvg78Tjd+m0qPcDiMkO9VWcBYEKgERvA8yn50pRaHROi3DdVQzNV0MZ/yrIq1L
+tQT2W3ej8I/vMS39S3JHyTMdCr82MeFOsnmUOly4xKzRAACId7754uzJUhMmHGakB2Mym8IwDwWG
+xpX0RAm++yRqM0Jg/kPziJf3n9iVQCUkwyRgpANxe0c2ztZoefTgbkjfEKCNrVI211eJH4KD+nSf
+B4eJkn6jsTEGRyW23B6f0J3QHE3qgQhdORYc25SOtNqvHrJrtuOwb5zi7SQrwEnKYkxLn/s4utKd
+joIHfW/CtelCnbpslQ2YXgYVQ0llqqlUKPT6UNeY+YzanAJ9C09tSw9XDgpL6BoTxNL+rwHsUX21
+cPYPTi7NjULH3ginJWgCkpZ6RY+JKsrZPSk6EDVrB0BV6ZnQWW4il2zK9ANWMUD3AgDzI1fwj/t8
+8FPx5Xt4ESRRTI328yRuxoWdxfLXGmRniUfOZY/Ote/rU5cxrYzzU4rbpjshu2oidPulTIygZ7mg
+L//S53R8/p+ddSigKInxIrGQw2nUmFhqeh9Hrw2cbKz3zX5OePCq+0iHzNkK+bGXtszLkJqUEMbq
+GK8StQVaaazAy3x4urlFawMcvdA0oD9ToJGwB/JqK8mwG+El23tXcuKRkvuNeL5LiC0CZa1jcojB
+A9g8+hzXGQx3rhq5OBRilXbn8YGpCwbHUk9vwX1hRjAkVK9ChkNrc+DSby5O5JP5Zt/Uy7gxrgkd
+YvIuZGJ0xY5Ao+EPIqUhLjf7IP608IWCD+ZNha8VoSYVGfzz0GfVe046D0oiaz6WuDawODShltbU
+l4LwPzKpp51/sRnuV4caAAFVZREAAAgkQZokbEFP/taMsA6gPWR4xuHQAvzijw9KBmv7rIwH74BJ
+gzkrzV3CUq0N0+YzsiumEUGFq7fPXhl8JKbf1EHe6crqXwmoSOmuML/5UpkV8El+GmsJFpSM1CW7
+0oK9I2s+T+oU3lHjxJ/+gkaffb7EgViBgcua+lqia29UA8whXiccTDgbnMTtl1QYfW4gmqBOnpII
+E23uGAib52RbskpAq3mv7lshAZrj+COq/bw+LryArjQNOUFCihJgnzIXlnXpNqOvAEsb3zJOHHIo
+wLSOaf1gaO4YVgXJ6WE4QKxZ+HhiNgvn32kqvUeTQwJHa7pQFPEfRPn9CMboZRJuGk4oAO4WOSho
+OocPej3rPd3bf/OGaz8IRIx/YGoUUSdscBQ4gCR5qnc4c1N4iPbsKvYEQGkrmRqaMHfSchDnXK03
+WlWT0PsuGFbMZz8k75Ej9Ifwi/1vDpjeOFAJCPOPBWNuERIzpzuNh5vnsKdvg/7c1yBuJUUaFxfj
+EiREuUAghaWOgcCNW8JOqUwvqdjhW2R1oQKvDB1Y6BvTMPum/70Axtu65yyxd6nkkmVC0jdoqSm+
+mokoawbPPnUbCAi6ARSZQ7uhs7Io/B3UHgx9Vgz238NZqh2jTOK22ZVzV+ZrR4fZyVe77Nr0TO/k
+TWFL2KaW5R5DwQwlk+/DWg+b/459W3wlM1y8z/IlYPJpeEpasJHq7fFiGZYnUUxf6T0YKY/j/uAC
+vyD8y62gYs+P+BIow8vF5uj037T77C/gbX4UyBy0jCJamwXrsxZP/ZYY0N50OX4v50HO7SXz9xd3
+vyLhIi+BiHXgsdI5IguPrE9++u23Odj4qR4wNf2JUgJgW3HShca8CuEvySne3MMyPay3SKLLhTvg
+/qEXPJDp5Df7+ExruFvAkd2Cbv6M8HlrKRqzDNj9Y1ZwwRTIbGGK3tVzYQJhUXPrqz1ls5pceGeM
+xrJ9fn4a+MgMnLhahl/TRZQ0DsmXSPXjBlG58yViabgkWDQJlR7nPYsJ+bC2p4L2bLD89glqjQ3Z
+NKdzLe6vaZADS1ogpWkumYbtKj1Avi73+uFSCBVgMCB/NkH6kcxQRdYkm0sBhEUihH5YNkKChCZU
+9OJof0MTpwmL3Gc1jwEUlo7XFFzqPek+8ng6A2C1tM22IxG/0vEM8UAwItn+a0a0uDn0nxFemSgu
+kQIYF5wMDDNMwSp0Vp8rNTFVtK3KcYS9tfplC8WbznQnn94rPfspiD0or+tXxdGqjNr+NUedbNr1
+pV++Dp1NgjZHp6+ePUDGB3DGKSLj3Bww3bJT5Kb3IZYnyquABLdfB4rTCHqVZwxrOoFD7F6NmaS5
+zFnPyDESJrvhlRyegkGG9A8MEKQx8gCR7npuvQLcXyqjyVKJc56DgdevHqQUuevYDelfSzafSdTp
+VebkLvzcR3A0VQfVDU3eWhnJJlO6V1c9zYH46TcL0SB5om7zojBm/0HknWz+Abl6Ffl5pVo14quc
+fx+oDuULN6uky+KOVqk6IogM0ST07ifJ7H2g8zun1kt/PICEv8sQd2s6C9Mf9gx+30qcJqfeolcq
+RIse0sGyKKnSgU/oKc07josBH/IwM8ukvOgkkS0iB7qtgXRd01je0DVHS0z569ZrMo7EbibQJANc
+HcWuUuDLJDAlyOQ8rLTxAdWViX0/nMiNaJzqiWO8FlwS7iuK4jutkVJjQOHUs36Eaa1szDAPgI8k
+kNX1CosEaJnOJs1f9njpY12OeoyOdkI1dL6Ym7vMBiJgpnP3O8UfNp3nfyg5Ljxu9fVaaYc6gJJr
+oxzC6v4SaYKSk7gZTkdTs4Kwut3kCh2FBEjzAFB0MgDP5Zw5ux9oZCybi7urziv4vy/fc8FLErk1
+/alP22u5YNAmkDysWm4psV+KpYxqsSRbV0wEC2ZVqTvZ0e8P9D5rJK5dzZB+mlqVk7l5Cf5iLSoT
+BXpGXp2J8kDey5VZjNH/hhArcuuR2oEt6+etGD5IFWE0PZNUmIaOYBm3lN2ThgAc+wTZR6SQlRQ3
+0NAlNAZVeLdyCtZeNf8FojLpNpLhgYSZl2Q2Fc/eRfw/ysGvlEeJchZ4ybonCohgwYNTyP6PvZn7
+YGEPwtqVwBHGz1LY4/67zfnSqZBZZ89yhZdt2Tdw9PiIjZoEB5ukXiGUAPnviMNBIWmxHqqEueeM
+TP0WY6yF5OQhOXhtvMZrCknuwbFCzAK6TcRS08/f+sFSAF99aHpPa50HoFV5hvycAPM09jR4Fke3
+5lcAitUw/oCCWTf+dMyE7Kmk1JcCCHAhiKgRV4zQNwUIr3MXwoygLT7AqmZhRdsqN+OyGy0xvcHR
+pShxqABcsvcenV/EbheEkFkskZN/5XZ3DEHBnciJ53Rz877jEMurP+efZZ7tBm6lRz5XISRF3urO
+5S0vzBoTqW17thMGR9p02f+eL/KB+xf7nYWS6t7THaPj/3p/0rQjscxi7pXbqjsSuMmH/6aXhJFO
+/xI9JNZrRWVkq5lJBPfHtrU4MWpGB3XZIYE8jdo/NOd/daFX5i8HXQaFrfv/yaYPE7+LjQcR+2eT
+u1QxBiIKwOATfWiT8uOungH8VbkgnMxP8RbdoU6vIkOFhJGhfm6XhUXZ0HySoeHHVoj0gJ7eoRle
+xk18R9W0UWXo9xTqltlp3TYg2kP53wmfHODqRDC8d9oftHNOIpWJrjCqT2WgxLoDG5GYS10H3nKK
+Re3GX8Mu8VX6L7AxOp/hQMtf0JimmosK98Km2eTifQdpV4RinZu/0fN8J4Gql6UhTsm1qeZ6p0AA
+AAPOQZ5CeIKfAAZlQe37WaxYWSzBGXwlkAAde0aZESQhDUb22yj/nyPs5RRC2RF1i72yM5K5uPpw
+qJvMV/YsFKAKWxMxRsysyQj56qz/Qcc+7L5wxt73nGdXj/0Zkx9sl0w7Rpa6fNllLORoWPwzjVI0
+y/5kVKYKAq1q+id6ig8SNXo6BUBocNKGkH5zmGVkvn9k+FRDZJKneSFMqERAVODL4DXCP0N8/Rds
+p6hTPopEAOs4GEUiEZo36KUgTIPa+6S6bSgneu83X6cxjSRlcsxOzamx7X6BEDN7wOrhNEgim/eg
+T9dxRFN2fsPNZ+PctZcDQY0aTbW8AxCJCzQ83KgyBZRGatQ8SxXRLo8qdbQ1Wo+frNsr0oxz/DlU
+JOqIOZAV7LmkzR6wrqq/FHTFdH70kV8TBkCdmn3R+WEKasL3/YHODBouVukCet2QuhBI/TWm3N1B
+UxhnxsnPK/c9blNX/0BO+T7wk0nX2kYQHB/LcsxEUw4awvHTPp/Doovv/uq5PRJdJOqSzy6TWWQ8
+o+vr9eMkO2Y+IYQ0KruebFhevtjvHv158jxK5IYwaG0OteKogsep4aDitnaSYSZ9TOeD1lPe4oxp
+S+GPVyjn/kGXi+91oUIif2R5LYHODmCw3ZRxHfsGNbKesq9DICO+emu1f/cobSxcfVP9x96IBMKw
+lJnCCkRsXnR4iHDx5xUYHszdtx56yqfAewH71e9pBS2jvHNSQSyNXv9c61hM4SkIW29iLsqdjO0v
+TDH5aWaZmB42mT0qz4ER3Nj1jK7dE07wPc5lW0DfACYH9Sgb5hh7GFfkJlLdsRk96QGYbSOjBtuo
+AoZ1lSwYgMKiZAiPA9zFTJsNxzPL9fdyXR9MeLSYhxUusUcmsTwHBr9r9c69FRxDSK4PT0AyGeh4
+B2IfCEE8SaSJwi+LJEDlt+znJdmLtRleZkkK+8nrPdUNFQGpnA0NAc3r5vvoebpNqKP7+rQBkrCF
+aaPFRkwaC+iLJAXDlSeVa3GhOYCtV8Da+U68nuxD6YPA1/XPWDfU2IbpIjO/v2bnYNANtBLneB2S
+mj2JUE2rhjYB1VbQkYOkj+/yoJ6Fe0k7JtpImhLIImmMFqrAHjb7evM9/S3slV2/2iFCYe5iWoPl
+Tq3hR53zqWTZJXn+pz1iNjNhIzXlqME4GvbMoB7PuqhRSpOkX5tvxiqeLtcZ4We5GHuE/s0v+Zgi
+ySUA2KL66/BYUdJ85K7ZO5TPj7vGm1OgAMBzVQ9oSo5XhmcSfVTpHTSnIxgS9+0ctkzVrMMVZ1xy
+uJl6rBkLMKkAAAJTAZ5hdEEvABGG5OpGK6Zz6K4LkkJnn9k+fKKADWK5IPEB1dfNbHnXb4p26Z+U
+GPZC9zlXYBH/uJBJ9LM6ytsMkpiUKJGVeNVqe9dgPG/7T269+zfDgh+WO/ipmWwYw/X1Mxq/SCps
+lXbXQ71j+nktx/GFw5si5aDWWG+8qsD5xZYOWMRCA20ACcuJQ8GSQYCwA9uVySbndhn+2YXJhssU
+VaD+eu3Y18iBKapo5QWWGI11dKBTdI/g6DcPl7ZWDEsGIR/WdBYw7LFqlNvS4ySext4S0PT5ga/R
+HjkfgRBaNPbrt7Osdz3ro6IDHrCgw8q80wFNcxLcsWknoX1NKlEkO1+tENVQzIzuTSHwwed8lT/+
+IV+p3flQ+SA5G6CHSLIR+j7+9bOzBMCa0uwAMF4IpyU5c3DD7m+TbFaWCY5U4bZ4P4UuILZqrJzA
+f06hGiWchcMjY8Lqul4My2fgUTTqHkt9+OBbQpNiJRjJgWOxIttKx28WROLXGMdMT3uVIvNmpFWP
+EOcYxgJsstMK4SduPzUm8ndcQMU6g+9SWz325f55ztH5xUcdtS+wSCBPDAP7Co5kvrXI3XtfnDPW
+2t5sWl5BAkVT6tdQAS36mDs2evv0pV31G9wA19a8pKB/yWuluFZT/dQTTw8pHNsZijYBQNCktICf
+bjcKjk3PoAirVjt1HPdF/+eZwPFTAH4jKYBZMqXq/zvn+FxxU793r8QjVuslth6qcAafXmILCbUZ
+ee5L8SiQqnc5h+awEpM5PaSwHDBUOIJkgaEI5uoqc0HJl0y+gAAAAkQBnmNqQS8ADgAG1XKA0AAh
+U/7f/L+A8aUgbhVwwdcle10+Qcj+9kWHv9WNLXC+eAMHhm+qCLvvc2IF3XZHHXsD4hasysmALfdt
+OcH/yQH8NjsYdJiA1Ul/zpjiC0ggrJu0lz3fTne6ScEiQ4g4YuVBptSmQ7cA5zGLEnhSVEkXfHse
+W9PRrCchRSJQdK2Oq0wr3MTiY7aorkGZ4WyJ8+Kl3OEwkuL/msSAEk1jkUqz570p43LNgY8NX01w
+YlZIv6yJ9l2EbtemXEr+5Y6FfCzfxVJR5YhiZdzDexv59Ad+50Q6aCOPfOZ2Y/yjVFINAgahAnnH
+CuXQPkxuhnKmTsMerDgRZzRkMO6HkLJHgd/b9+Fmsbx812tgleMN7p8HJBnZ6kQ+fy6mT/cU+z5N
+ItLi8sHP7Jg7e48p6md0W7UNcVk+HEj1ck/1pVNq+rVksdk34q0MO0Ei+tPI77eb9RSR+HCrPvU8
+FRUTsmFrXtj1Rpfv7Vd+IFuvxmg0bo+igksCi7c5ZJkbnXKXRAq0KZQ3FLBZVzLhdWG1/nF5iBfu
+sR4FLfqOwF/ILWMVrLf5ZL4j4BhR7NXHnepDGI0ZgtVgcewCFQNyB79Qu+EJaPX9ilW8u1j7l5CJ
+CKQRUxSzVZ7epwP2YDc2OH9Ewszrz0Ncb3gSm5PluVP4Ae/f3tumFPPrO8TqfMbodwG2B28bVbk/
+xZ5PQdDoSaouoMp9/947rVZFDBW0rIZSOa7bcqeDs9CTNIVaVkvTjZZ4xui4FnIJmHFBAAADvkGa
+aEmoQWiZTAgp//7WjLAJslYbNMADdtgOlS/wk77OgQpdoaYRSiC7e2ndTUABjc9K2lhi4ToybIJS
+6GFpHCdhLhx3oYqJ4iyeo3Cc4Sws7YwaUKHQseKg5aHa8eo47O5eWjzxcfPlHJqSwPEKt8LohNx7
+VjZHv3Z+xSWPsu0aClf/lrb0wVuj2Px67kXNrDJPR6cBvljalqpJg4GqaLzrfEpz+unpD2GoWZYy
+qgmliTnLUfj3jWUryf4BoYrzRs8Y66i3ScFNFEHDZQyE17gMZKpECuPmCruHCejv/xmgmq3us70b
+bPtWHbq2dG4dDfYH4Dk4Fhrk/obm4WDorIUgVGu2Njbk3hCWEdO67bE9xf5VesC5uPwnt9TFDB/L
+7J5P+uHozlUnr1UnPWiPN+yUuujOpsVD/5ZR7ywJi+YQC9DY5RV3ompqk6R+rRbIOvzKRzf3WGdz
+/QCxjHwfZYwUmYIzAP9FdQw5tIyv1VcpG8+rf7DjLRYLWrkkRkIbegDUfEzjBqPIs0iYbWa7TzZM
+W21xtwOs/SaJGZLH6uorH5I+uG7xzgaEWrmy7I+uIEU/2IKatlqou6x8M5Hhe9sy4puo3O4bf4iG
+hrBIaxXHACYKJ5Op04amuLty5h16pTsXNxP//tTGD8qIlM21FlmuWxdWS6p66DAHlYLyy4P1j11X
+4XrAQ6QO1RL9gruJ5E75/7iRaomRbggZfsaauhVJLeXuIr08tjj/zICtN5dr8vhWHzSrPqD3kYoX
+tvEhzP1pvEzmeB/5l3JgsgJ7yCj/UW1qwv/3umwMVm1YtMMTAnStq8RWseWG8ihK8hGRFPsYUr/t
+ByiZjKcpYc9Z0fmMai4YMlRWiLDJHUMXTtQimu3lcjCh2UadZzClG3Z4VizDt1eLH3djqJYDdKEO
+38s0VNZYeZ8hrA6TXRKhQ9zYb0sWD8KwcTH1bXu6+V9Th7ULJw4/tLrTEtjC/hYGbizclPwpxIda
+ueZ/MVC0bYR146vLnTpnaLzp+gD29vR8Q8rm+JtszAVLknsIoO3OQiXvMU8cj8bu1JDl/uNZRaFS
+OyTbbOTfO3Z6zvteJv5qAIoo+afiDFwsLPCWleJZz9ZaKVsW2yGMKKl0VHeURYhbjkR41qHwXtZf
+2uwn9TxLtqlWZxDPyXco6gtr1hIdS/vyDFddVQ+HN3rx6yDDQnFe5BtEBq4Oge64IQol+qii3+ky
+2BhAjIC+l1m1vxyejnSmZNjEZwowtXjHQHsNngFVShxfi5BAHankglZ450EAAAJtQZ6GRREsFP8A
+BTt08AACd1LyWSL8e/ZOTePMfgDILbrawjpyTLXcKgjRK0xlSZCXmEPsABvh3fGj/+VOk3h20pU/
+kxYlfbjAeyEjdXvoVhIo+6D4PZGo9MoUR6+fdR6VgiWTZntljxEBfv+IXh53m5rGTbVJxCNLCUOd
+fbA6sANm5ZAOQPBPqOi9vWhwSZ+qqksla/lCq6lrS4O3mj2XkIvYh/h+XOZO0K3ZPhJFFMv1Kmfw
+lZu6IKtsLYuh0dKsvPYbLsBJK22L1qK6LA8aYh4nR1nZT5iBvFl0dpEuVU+vp824wYy9thtAMybY
+0i9swMR9irTRNO4cBOCLoviyVNh0YX7uOlRBmUNDs6D//SC1GVhNHrqst/y5UeDFcUQ2j+GUD58j
+Ip8174hYwN7nj61RGm8UIXkq18PT69BSu4iu/91U79GG7Gj+ToTEbCEdEz96mVHJviSbr4Gvg0ZB
++wlwu7KMC6mSKGh65eahe4sBGbR84LLyltT0POGLzCW6m2A4jmTeRidw571lz6FSoQVP4uyvLntN
+ASMQo6Wwn8A8OvdkLSCZ3hajh/K5zNE0tr375r508/LLtm+XkKlZh0gwRdFlI3XFUQV0ryXxw6cA
+6a5fV8EfKwa0LWWTqh90V+AUgNTRuaQHr8rQtznU+mXLMXq2p8dJjdO+Tgl1+Gf3+c0JWtDHH8gw
+KovdACLhZcUWEaozc3q4DWgHIE0BJuVnZEnsCvbisUn1X0gRmGXt9Nsf8fKXqnHnUO+PQb0sQnbZ
+PNWvEJPFTY5s3Dnbl7iHCO/pHvs1lfoHeRThAioprDmylmxG62XJAJuBAAACUgGepXRBLwAOhuXh
+AsAEOoTEyv5pFa4wlZR7mQHGGPVvrKHaWS52/PLJLUMOMePRy8xVNmeHW+gV9Fyu+v+0dZJVU+tX
+q5A8BGoGsOogGc/orJKYOgQltSG4H0PT7VY+GOFtrECyuBQylZ3y3eLMrDFMyVay4oe6eos+CWTd
+VCyNVWvDrS+0HeiOmzknr/8JH2g7ZAN/0kzca1o0KDb3ZFDrPzcj7OLa4phc2YbRqu7nH+YFzRbn
+sdWLxx+c5PAcbt98vg8WI/4rhcueBDnry9YiE5BUpo+OzJ9lCKbaCJOsFZCy/qI86y7Te43Y388Z
+On1n3pw9R5py/NniDB2NEsU+54dMoAktbXTR9SkseKavJaRfRcnhzoaolhi+Mmt7JdDTrHlujO2p
+8Na6V1bORkEOBJt55fEhXm8J+SJS/FPfIklmU/BfnyhPBkjrEIrywc1lKlXSmZnHim+tXqZKgqox
+EKTJ7CXNPvZpyB+z+5teVmthIWTiWLspivV3GPFYHfBLephghZvjN+1vHILhcWkUtnl2i0p+RfNH
+eWc/p33TxkY8eRDZbEKQj9yMqC3wWi5MuNMsFo/fGz7LXV5QVHgXLLuukZcREqliC4l+CNu4MA24
+NZ5Z05n67owZ83H1izaTB/PjDs3KeZo7FhIjj6CC4MiOeRRQ8oPZpgyi5aRJ0T2aDI0CazAsXaC+
+/6jovpThpK++wS1UL8yaRnQp4jtoadf0TAJFkpcm6n8h8OPehJEPXT+EySqQWhBG8ekbXyW368Q8
+PdcsJ8omR+rHMOITsQAAAuEBnqdqQS8ADocSu3rBco7gAvdCYmJSSrTncYFxDRAcYJm/fAf4nUQ3
+MYpXDxPaTqT3QM5GirSVWTg4odyAROs8zr4P562wILUA7YmSV0AI20iLlLZmwd9IZ/JoFG9J93pp
+PmaWuwLkeHOlDJM2Y71olBHJunmOizr1uq1LcsD7g1r+0xAsAUzfZyp77wFpGlf0yPS0/fCgnASS
+FmbZ2OwKO1EN/9bWa8hUxs5mxhigwNIvnP4VXiGWNIqQeItDE4DqMB0NqrKrcNqIXLQwwKTTsW83
+nNLD01sIk317bsk7qZ1RZR3DE64k5Q7fn1IOiRvkCqFRySISuxJVfxk+VGa+HafOzJh+CKMCOUnh
+zn/5idxg25h/h4W4o8TQwT+kLv1HNgt1WiEthjoH4vrxnu5QdJgWeB6uA08vN4bYArSwIMSPbcHn
+2VachOz4jHbwbMrsUIxOg7Dklkllw98fbG+iD76j+Y53EbjAzRI+FzbbF4fuVPusZ36ClwLqIbAO
+DKNPTrWPanFkoYN4YAf7bRbnixgJfOJduaucCGKDxIFhw1rkAoJoUtSNPHhFKwcqR+3aj9KFSxm2
+ZjMxWjdWhnH+Amg/45DVjnpN1+33x2iDXR75pfJGZ6Zae9MdgRogWSRa1w1IIBOLu8qE1Hao+BHR
+oGBxkyPW1/nf0IQIXx39xGcyo/8/hp4xKN/ECWspGihk8CEs2nQBrlPShIq0pufzuhems1JZHN7F
+ZkMi32+QSi1JTuXrp+TCTdY8dWqRBtaR8cegZ694xe7AoazNaz+ecEtS+PhG7Vf79mrd+6xxKTrY
+3kS8jd8zFKzk4fdGq6tXcWjsR7UDnMBUVoaWhJNWtuH46Zu/O+mLPRXPMwKY0Pmwp679BXsz/ML8
+/7TcQgjECKHqEEj0zm7EyEcB+3ug/iNv48LV/oFz0NMbfT+ON1f0bzIkMwtdtTeSDFpHSZdCximy
+jo9MnbK/nKZE1ZWGzAAAA4NBmqxJqEFsmUwIKf/+1oywCZ+dIg1v0AA46mROLP8YIqSbchT+Z+uP
+EOa/E2PSWl2qvj8qIk2KE1CugVKfBB4ECsDGDaQ1vmCYWppxtACcUO2hBKjPUPulh4wRNOMUvbnx
+0A415tkeS9Ig5nGAAS6yxAmiqj7RmRIj3zhCMF4oF/6QPd9hqermz9RLHCoo2TOEQ3wGH0xCmtjT
+RKI4a/95pulNkk2K2JpSFoFiyFe71XCkATUxHUiCYFSUiG08XH6D/XFj2jrD26KFQTl2gq6AdrhB
+ubgLiKLp1267J21OHCYx93WNtauDPWQjpgSvwYDPs6UqTQXlvTdYgbPtjz3WudLJuyMNwXjFeYJu
+QsH1dKWEH+6SvhhbF3xPYzdOc2oYk49UnqbLmzFh8pFu4gi5F/zB2QfSsfNVkoRP/b/KMtAv6RG4
+eGJ4CSfkqKB6y5a1gCIYwBMNOuKZPNDSVLNmWJi/s4K+9xAjyPB2L9a+OOsPa4q9BVg8aNf4sBvb
+izfBkC762buYzs0HIZIOGIr/PYCFWD5dZzxgLjL1YB/SMNPUHPk/vWR8hSGU1rVq8GaJe0ewH2mR
+SeyDbY+L7aTVV24gvEBjFBVxdkg/S3AD0DumFH+uwn1sZImEr9Wp8rpushUhg+b/5lYtaRwXerIj
+SlowCXMKufiGnRhRohy8J1I/hVbXDbW7oQcBtVONuWAZ7o9iA8oKsWOlAxXR585QSr/4zDvT+CHW
+XacHueIH0RfgXUQlRpUxnM4jck97dzidOP+fE6rUjl8XQLzh/iTQQ2Vnn9vyFepNdtH6nUM+z4RN
+nMQA0Yqfz0+pKWPW3CUjcGpyQnU3dYbOvpWuxoOBrjn0buSfxkQgW0mxSpp+FcKffyzVvnLxdmfd
+QaSimqjTxBG8QEUIjYKKYfplae93y7MxxbcESdpiRyoHfGJNd0bgI6Yhv14rx3k0ey/A6ycPMFBs
+XxrDYSz8tAr7eA4bt306mkpGtWdMxVa8CW7vn4mEG4MK/MFFcH4Bqxl/IxOo8lhonDcZFflHWsLn
+REBpNx+z2GRgR9t9z8dXaQYOpWlope7sT2KjIh8mcDtE9sXyF5Sw/Q0//0govesA8PlZUvn7hoS/
+lLyUpu2CDsOCWRY145n8oyXRRIFchCxPI26S8t4QEM71HW0c1zBwcnEt9VEqf6AxBU13bRpwKL4H
+dHGBfgAAAv9BnspFFSwU/wAFOlPpFlABsJ8gPj8MuJfxGIacAg9OpSCXyTNaguPqenWxf67QN1hC
+/IVBwDm8LCnGCjAfgT0+mKB/Sr7ER3IItfz0sK1SNeO8iOgVag3keco0CeNDrb7PQWaWuDrqwxzT
+8x+Zx0cI2bhB2xkE9jpkF6CKy7mZIe/wWAxKvfXpscruuWxIjxQbD0LQFYbsA5GqsBNUcfNRe9jQ
+ZJe1+OlI9wEhf0vEE2ui1CdAn6ujjRRVxiV4lCA4MJE0gmAhlaZQn68/JBVP/EVLdb3f8ZXnjZlA
+7SB/FJ4mf1uh2sNVylzinhY3zMOqQHiiFmbyxC63RH+HVU9Ru5FWI/7lPYYPX1GPsIjpskkVZOpu
+TOhsZQQuPef8IBIPMMJVWEJNrZaG0pG0cyy9MEnhc6WS04pmc1MZUURGLjOQyri+Q/CsVseyYA+s
+EAb+mUOFxvF1edPdGYR6JpAzwYD01NsmMZwakrLIMa32GoMtejinAYpqGIH6qdoyGcs/dw3D6+wa
+StlfEYdP0di3GS49WJPtr9IdJkwrpEZ83cssBIO7xvZGozTgbrwN+V5SKwYFFzJO7LROpo+UfOXI
+E9LIcj2K/H3QwzhFYqBjFUkUnx58fhh0WxWMsNGLPqLSaNuLOMu+pMO1yzO3eTXasj5PsLT24UUi
+Bj0kmX4wzcSgLAZY9qZyFeVen4uLHofneQOa55jzAszVwhgjSVpzA3jZp6kf1oq0i0ba1G3s2sBU
+gLMTTXMiY8O0FTFAf0C9Pr1HwkFoyExxFswKmcp259IGT+E2uFgjYNlr6RrQ0JGlGKXNW5Z/uvx8
+Yw9Xeftaa4u/+tLyoadLO5s0wF0AfBKnjWwVl+LoWCh6QvkV2OgpdPI9rLjBy8zviU8FFlVUM9BQ
+cmcHPrDg6ERSuWQjp7FYcf0cCIeTSzP53Q1KrwMIQGQ6R+rSq5z4t7rdR0jHcmYXfnnhLTyw6Pji
+qi1V28RKPHBB4OIJjxgf4wolZjvMzz8MU1TnI1tnBmeXRwAAAtEBnul0QS8ADobl4QLABDqExMr+
+XvOOPxUmJLcxxhj0GjcP8493ziFpGk9DDjQTAcvMVTZnh1voFfcZs0KK4nWm/6vDz2uQPAR2stTq
+IBnP6KySmDoEJbUhuB9D0+1tiN4msAxAsrgPbZlbIzd96G2DyZkq1lxQ909RaBQ1m6qFkaqteHAg
+W85l0dfEb/wmov/mJ/2UCbw4r0Nldx+QF7TbiexupF/EAjHe7MXGGVoXpG/riS4NCerEXgVSGWG8
+DdOt827Z4mst5+tP5HsCwMPSk+v6ZWu7mCXmdZszeBdQvnygWrZd7d5mGtIMN4NImPrrWsGviK0P
+pJP61/n558BYUczQoidZcxZ98rL3OM1QZJ3EXA7wZy/Wv9AQeijz3KVdsJaIOySDeytDxpvyOcnu
+8cy0UIQj9a1xDroWvulKzpuLe7rcX6LZaM9N1gojwqq6pKSO6gHepUFEyyAmDnnd+d+K8JpOdiTB
+mMxqOvY5w7dAXfe4hFMQLxI8gWqStBTqEges8NNB4VuUffG0/AmWdW6Wx5HaqOOc1W0IeJwuxmhP
+DtZKRhMmvZG3dK2NDf6RO5orMV+mrxnjBMVsaci4h0SqjqDB/NLMvedJY2ykoIHZ5rDZYIpR5jLn
+VQ6YaS8cTjcojidtp9yCq4s0i7KrJE3LGljKSk+SN2cxjqbV281Y326dLEyLs5+zjh/66uC+1RQP
+NYp17+9T5FqDcvmPd7Gu2l/OhS//D+FGaQ0zAQFORHDrPj4Qyc02YLHnJ7e72rlpyqt5qLd4Ny5r
+YXUitvT2QRXa5DY/1uvq6JZTjEJJY6nrSjZwl9m4LWx0Qz9zITHqZ5TDDLJjflI70usSZIzOLuAG
+ABFEfYtx57Z7eP1IvzK/VDM/auACe7NUMx2HhPssG+7lw+YrMF/yI4AjssKiHJy7tN9pR3NYoAKK
+XgbTCBb0N+sp65wj3fyqAHXAAAACmAGe62pBLwAOhxJNr9A7sIliAEJ5EP/s1gTtFFh2LKQaYD8v
+BQBLQKDWV2+BezHB/yUe5PNVaJcwOj9dYZmrqtKEjTz4uJan+mXEexR1hRaAOh4gcEt2dJ+F3+r1
+T+m47ImgnbfGqpUqTRCVtfOx2P3T9p47DFMyVay4oe/X2ypJ7yUyHbgHOYyFcc58IxYRReIdG6RD
+rESOsKnCB6wEbrPlLYm1SErDQE8D1ihWGPsO8Rfv5dpuhQn/eG05mv2QdP7ly413n73vanlSBeOj
+Hq/E/LJ+loZ+K37MB3UznTMWIW/h8XsH1xK/nhAvvAHGZjm1tjbDXMoPSrPRegMmZ/OvDyTB0zur
+DUzgeC8e8SMOdnNRm6jse6wN+VyKqwgFYrKm7etxx5tbJWC3sYMf0L485C1sdqCf285d+VUibkpi
+ZjYy2qqwHbpdwEtXTaSroG/5BQeB96HSgpcasLi0K4DN0OHW1MwgSutZuUQ/1tZMiZFFtOtLnibj
+XM5aDqnOYwzsH1WarJ6Wj0EgHqLqjVx0TUyWfims4ZK1DnErhPHUnkClikV8OqZ1//huDfc8eRsn
+yfgNF6wiBiSDW+9CrI4QRLLJUnvaUwiUJImpzkxgzcdqF6CY1ODUFkNvY+LI0SOmaIdDUydI5bt/
+/T4SPMfCSgypTDR/rG3cwNq/yy61CfQ+1E+fnwAzXbkAAkVSDZ4D4x4txdiqPr9817HEMEUYoU0W
+RNxdnN4Y5CpkYdgcl5/tzsd1cSMaRkz4ufnby7wm4GppNYbIlE2dRPbDh7mcUeCLOdK1Ejed6kxi
+fVUwl4JzGDWlW7Ci4izVRaseeZGgpVq6/6Uni4/alQn44Rm2VUi1K5e++DNvYWdwW0ztNsL4cUP0
+hxUAAAM0QZrwSahBbJlMCCn//taMsAmswHmoASq42kr+XshELPwimqCUT4HvlooAGopzY3WuXqo9
+u2wvvAts3sipuOPfXXAKFFmNPt1c0uoVHqg6wQstsNkj64RGm/RjeFGkzPYyJEjItcbHe0stKuJo
+HOifwdgF/djmpu9T0eo5TrVkqFHJQd+M/bc6bhlHaqwLE5bbauq/m0YEgJcv49i6slMnaMNZAL6V
+rQ6/00SsbvCA5Vaoh+w8ZB55XkdfXWUQrU3DD/1e6CEYEhxyy4NotkL8GToqJe6Vw0LvSKSkm4AZ
+ZyrWptSfc62cpwZXwQ7blNW4s9rW8QFVMmGpNryxG3kmdlKHBL9qrSj5og5wMSyS7FAA2izT7HQG
+va5BFgzy36O0jH0Ad0NXoCVDJMaGkkFkHrYP0SO9yD6jcACL/b/uYidTrl5Xy2P6Xd///szEGnD4
+a1vY0xNjCYcVRTr5SI2Jop8jiVzHrg8sqOFggp992iIKACLJrdPWajcse7hcbOwPrrEOUBEOocTF
+FkAQ6KsqEaflLY63Ci68jTp0GWS9DMq4jVfqxrXMmd0LbL8MRoZ+suUii0o2M7EHrmGxcdaFRfl4
+wgBiWJs/Qhs612ld2e7Y31R1D4nN5jisnzxEAqXPWmWBVWCjpeuOT5biMIp+QIs047YKj1YN3N0I
+tj0LKgSS9NOb36gwWxz7KIxet116RPSu8pmOSXatJTcgVK7cKLH8twn0HuqooblH59Iy+/c7gbTC
+fxDc0ur4XNEu6S1vuLP/rertEmGeL1lSk+qB/INtM4vRic9PG36txVM1dXXOTqfDs0LNXs5B+VPh
+tRcQG8JfsK8OauUq8VYK3+TNOsGiolWCNwf/PmKz2QWiG48TRKY8m+Mv6OC6BVNGA1iIE05s+jwK
+1DyTDYJL9qIFt2BpbaJN3yvm3FW1UWrADKqxKv3hHhm9FuMVNmcMo6XpvQZEC/punJNWrwSzvOyF
+3+5y1YzFi4fQl8B80u03AwNh7ZqLfzuQ/JnQVc7VcXGZhWpckH2nQIyeDMZxfakZrdwT4lPcuCRQ
+xBYLOcHnYcKb84GDxkATAMcn+J9Q/eco/kpg0QAAAktBnw5FFSwU/wAFLDMXSuAATmj1VCZZiHjS
+PHpeW4CTv3b9NqaDLTomoRmAu08a/SZeb0XB6+PTFmz96irGV8Me0VTr7R3gsjaDMjLlyzSVqpT7
+95Mx3tyNCFzjDdwZbZQZsXa23rWd1/gZ80mWJGLJXO2QFrvWOk8+YVfXKMrh9OZqBD+ZQBhCtu2C
+GpmDxEStdviwEGWfyL/j/Ht+93A3jIPSymoV0rRmT+DNHHkuooEUi6FvKjrR8f2IwM008SzNy8dP
+X4Pd9Gi327U8KLw4FZkLb3ngC4UMNSXNcSkoY2mqp7+UGJSfRzVtDw2pJihcAcj0k/tYlJSsOLX7
+Br16OmHdYebKLi38Feuyy3z7bfjo7ZIcpK70IIadCX+K4VAycg7CDCdDj7op7bjEvz6lYQIsSXFe
+8k0e0uGz3jV9wCPCA9tPBhk17JSenWNV4fZ339ibj/cPd9kD5u4kV6stnGy1zLQew5rRwh/wN76M
+pDJijsQiXObpfNaDXwbzWMktm3o2IUUuxuodJSJQn9BsRC5OLwU8zfWVJqjKODKIs1eb8G3xvhXz
+C/s6AiexiKwgXTRluEUGio6fURoGcsVuFStq2FmBFDbGi3m3ch8zT1uO6szS+9qp1l3Q2AmItgHU
+EG/VCD6i13lNRP9A3EOe3sNnCxP+57/5aeES6JHflhNMthkvV11Te8OUtuqexcuUIJMsdzlLPbrR
+6KLS26YLW56J2l+a9ZSXnOf1/ycmzKlyKTcwhUZFnBjDlAteLb1S+2hSOFyNC01sQQAAAnsBny10
+QS8ADobl4QLABDqExMr+Xrp3GD58r+z44wx6Dt3dN7JLnb88sktQw40EwHLzFU2Z4db6BX3GbNCi
+uJ1pu0vDz2uQPAR2stTqIBnP6KySmDoEJbUhuB9D0+1tiN4msSoD2NW187HbIzd93/ic73STgkSH
+DOKi0ChZN1ULI1Va8OBFv5+SXImj916KtDDDwUoRUKNrpTwp+0tEVtecXrqelZB/Gi4EG/UuDPuw
+vYFK6tyIEgjn9zSjUbMXS1sZfsHqKFlsWpDHOKlbGyHKf9FdgYq/sE369pjHEkQfZ/zF3F8oMkoG
+QbPzxQy5t2fhxzeLK4VD/E2aJibpCBrRGo7ktgQLcces8XjRR42VDN/pD2v9KzsJtiB1ynnJMnt2
+QlyOF4bJdl5R+ukQeZG6d4m+ABRH0AVTHuqD9DEH9DBmQ4Qq+3XfMCzHQj8a4pZLwZeaYrSWU5Sz
+8VCkGsxqXJuP4jFz1yvnUXHivBKZkU7nAsSQ9KlAp4PHS7iD3xTKx4A63Z/P+TCfshW7d2XMAQn2
+03zvMIqcb/RawPZS56eEURyUK5YqXCAh+yY0rD229pcjuj/zDLr7fB8qT2mcXNonPYPu+BrKWwij
+SvQwSTiLPVkm+Lc9rbxyyZ0HbYEg27admAJEpbJWhnQH5OZGpXCjQ286qc/hVrIrA1EclgqY63rg
+Qo3Gp2y1HaOsijqYwa9ramzOGv8QX9RRBza8wgXHW/8nytvWfFaQN5trcMKvkXh6LoeETO3cJZ6N
+wI50DoAKv5te4uTf7XTIxkRMpp3ITv6xWU4ZNtpA+lstR7S3OmaslID58VK0qhbi9QJiM5trZTHK
+QsLnwQAAAnkBny9qQS8ADocSFldf9eVRgBDqExMr+Xrp3GD58sPOY4wNSnJ0T/sokfmcoGj2badT
+lE4DoqT3AJ/9098s4LKOBQr1usv3NhDVHi9wl31KXxOyKD6Dl+RKpn9IXtXH+IUVO8y6kdxG6XPh
+6eSVyXCaAx0Djo+a/RaiCeDr4RiMipCAFxfEbtxtMFhp6G5BlQlXzGORfnr6iq92/cLuGSZWBdV1
+WgkXaV6jD8wgvvIC1vKEDYDJHgoVPMptQbLXFYK6sr471xD3S8w71ZYzpLYun5ni2hNxoYNpxdv1
+GROSRm/6ErH/GyJctpNCjU6LOb4AIVwaJb5c2kE6GnYlLjzuW72b1n4ab8gy0UwoQPhOhg5Iigzf
+ooHdU9Pezwq/wYAKEO9jWcfH9IqeU4HJciLmbgW4yuZDKnm7WxoYYbWkTzuS8mBkzBb4PseZoJN/
+TKXfAw/aNc/v4vpoelibo5mSFCwp4yS5asDiynfQXp152M3j7xXhodTpDLFOho4n2CEx1tyLiran
+wiZg8bBL/kP0tOlK1GPU9AZCJJkbe7eCHids/seYPE5sOWXRkUhcJCNB4Pk5Z/FAKfgKnT2fAHDm
+xISJ5yCJCueX1yHl9TPzlHfQ3udNscEqHUQqHB4AKUzT31qi5EX2DLEV4e9DNgL/uwPObl1DNYr8
+4TrU4YJm6/MzzogDIFY13Hlgj8TbQZWx1EnHeYsaoOylELU8AYnb/sZ2zmwqf7dbYQC67x1zR21I
+/zCebAsJ68EWIJcWYQWDDB528WwEGa0Pe5TGqtq4oMH9LXmYPpA8X9S6iQAAAwDZWIAGxWt37qgb
+QcL9WZSuXuvksQR/1KQAAANCQZszSahBbJlMCCX//rUqgCSKLNABEKUuf4puzAaAZePA8r1/u30Z
+OrnwU2t7RRcorM58IW/+30X1YLCzTZaF6honz+lHHP0H/ydVUJhalYVDZU3p56/q3tjQzguqhw2R
+ap9tZ1dmgkPFD80d1G7c5pze1jSIAPkWcYpsyfcw/mpi1p83dPrWACMBni+paVBEhZOi/y1c0MnI
+NspQQ4ORrorQ/w5fzIKcankEA4Gi15vkmJfge0yyJLifCL4MyK5h8tokrxeS0rDsomETkN8zL/ru
+7SFc6wdazDcR2Bxz10OeuqNDrdjGh58+0Eh3n3qYfk6+l9Ev18idkSHcb4kvBCvM713qQIPxbg21
+qttR93aI1sCCxOn3nIw/oNFQ0NUf7cFwH8L4BL+FbfWSJELDabGPN+XGnRUhscwNAGz5448awmul
+kYVwKnyinUy71cRDg/t+EIy/wyq4IPpOpfLnC8vMKYmaG9Ryp3Af+H9phm/4NHXPwwnlen7bAomg
+j8dA1WkIBqU8iYz1fgFccdTAsLfEAi7rG80WGr3lvFwmu+hec43KvT/bsYnwpHAw+Ur6FDJLTfbS
+iJmFj/ixPxS+x3vrpSC4fe7eTAMMFpu9WhDmTlCjPPwi32KQivx6krlEIpCyfHUtooHW9Kj0o87f
+C7iHFnXN33ZKDYsQmN9TkI954bI9bdjtUoSYUpSOXEZm0j8eqLNbnqkPbkhmBpz3OxKhewrHCsaY
+/h/8Xka0AdvXjwHieOCmKwAaSfYJfoy5C7jaEmKjN5iSr6wTdQ3xiuIyrvIdlYNLLKzzgsnxcNG2
+eI/JphlG1ZMjbsurFQUJTaE/iMnigrYy8uRwZ+2ji3jDtpy44Xnhwuo+w4BeEWTt9NRT+G6a2cy2
+hY7xX00AIrpy6VCDEKLX4TU0E57cezaHcjkhTxpLh3axrraar3JXlSaBdamBLM3VUvklWF8n3C6s
+qAhEP2GG+1V81jihhj/iEcicrBkgMAnoHZDgU3BNo6TdzZKmW8wrCgzagY3OJkspf8h6FirKWR2H
+AwLxJtrZOxQ+b6sF3NQz6BfGPI59CFw1/8EcbbuQQml7CCpLo8sQkUX3/vogvmpepVF9bwTTAAAC
+gEGfUUUVLBP/AAm/qOMZzigAdetzREXzLCKZrb70/O1xkKqhX0xtEwiFsLYiNdn3ETPV8CQg8m3/
+5YoTe3kwqTu+kc96NnrdTy6cSr8S1O7elLfq+no8MQ2kER7/Qsg9salgfnsmuMWrQZ+PjouI5jYM
+ICgax6OQl5edyaMbfxsysYTsRjWv51CTPQVuuVPyfXrOJAovQzo9rJ0lRJdWffAEWUqnLskO26kg
+VMIKuIv41CwZY38+1/chWphXRuBY2SjgaB8Qyn3/cJqco1m1Gpl5qfsO3so8k70scbMdGI4zXf35
+MiOeQvjKAXTFQLAUp0NdIWtwShqpQt5OGyYe0vXyFl9fiVZKUl/lDKF+OfITUPwbrP2UKTf6NeSZ
+bvdUMK7dznaKEQAlRA9KryPp/qgO44l9OkpHP+djT9/vXj+oKSsHZDBF6LPnQvEJIJ0y+KBUY9wh
+Svqt+bdtZSWcCzmLCqdQ0I6s1IT0jCZ5bDll2sCNFIzficJwR0vIbVzDMivLBpg3HogAcIGBVtZl
+uNhxoZGIdsdLHkXulr9ix0mA/S+ziNsf8enuEquT3buFXHvU4Mc92RoxTC3ZKJ/t9Bqa8vUnp6X4
+UYH1TYHg2c1qgjL6L1gEPikUmxdBJWAMe2yS1iWwsd5NJKoprIlXp68YITOYdXadgc5KJFqb54OC
+E2DxIelgghwZjZSKJsDFnv/nM1gNCmlxO9jTk0Dbjkd4btoBk5SjlBCcP/vBt26htfBhsIbhp7xW
+5oK9CojtwekNag/obDfKqCRDr3qTmaY2OJfqDPfoJ6EBbc1iRzIUlQcBSFPT9A9OXt9AkI21WI/a
+aW/aoL81OlHx60y+y5cAAAJ/AZ9yakEvAA6F5YgAIQiixay5jFf5aS/AOnzybZbTFMmWWcfZ0OFj
+rZ/QOQqVBxrrPjsqqID+nHZWQQqGoVCT9lJOdBsCUk0Uxn1qP5/4F29Qez4h0+yND1cONpuwENSw
+AmSi5AkOql5JltD2mOY8H8SaZtLNU615lsi8pi/7nf96H4n1Fo2JeFgOy5dodHNPeMlr8X5MKGPZ
+QCzFvkFPqexNbvL82DaYz5klbytSMdGkBiaPx1TJVpXAecT8kWz37ID84Du6fcdUscq9HYajoOGz
+zHL8Qx5HE7saf15JmEgdSsaTFMgFOv/Mq+7TGNfI5gWeIcwkXS3UZuXe0pcbtV93GAhIFDFNj5Y6
+IuSei1uYPSPU4oIXLoE/ITwaiuG5bA/CMnMembMGcso/gXKcLryDtvcHHtglgAdnOMjZ1fN388XZ
+AEd6DCOLBKV5/zRfLOZ4X/zyzrKfUliUGgfCZbaJwriyopsSpyIVwta8BOAee7azDRxOCjVsTGyD
+GCO2TMzlJ0mJPNkAhwUtndqkXMHlSz8nH1gIv6AIN2WGlN8PtEjhvrW/ABIBsNckZXHzZ1B5/Up5
+G7e0uMTsOgng85ukTHXyiaF9XO6FNBO6x54vcOyk9cZMYbZoZxQ6kkYTzqTH+oM/fOZsAEm4NsHD
+hpEqne/XSwkJs9y064R6t6A6ot4ELCMaa66R4nGEZyI8q+nCSBSkVuvz1vgNM0Mwp7B/aWxJ/OC2
+fQnhbqdJtW/W5+sTpzilMkVYmAMmzSi9CnwqECtr5y9LPwpj6T62CFDDWWdYow+0WgAABPkAuoV/
+Is93udyjKy9Ir0BXMGAtkg0yHrK/ib7RWYK7HK6gAAAEGW1vb3YAAABsbXZoZAAAAAAAAAAAAAAA
+AAAAA+gAACcQAAEAAAEAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA
+QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAANEdHJhawAAAFx0a2hkAAAAAwAAAAAA
+AAAAAAAAAQAAAAAAACcQAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA
+AAAAAAAAQAAAAAJAAAABgAAAAAAAJGVkdHMAAAAcZWxzdAAAAAAAAAABAAAnEAAAQAAAAQAAAAAC
+vG1kaWEAAAAgbWRoZAAAAAAAAAAAAAAAAAAAQAAAAoAAVcQAAAAAAC1oZGxyAAAAAAAAAAB2aWRl
+AAAAAAAAAAAAAAAAVmlkZW9IYW5kbGVyAAAAAmdtaW5mAAAAFHZtaGQAAAABAAAAAAAAAAAAAAAk
+ZGluZgAAABxkcmVmAAAAAAAAAAEAAAAMdXJsIAAAAAEAAAInc3RibAAAALdzdHNkAAAAAAAAAAEA
+AACnYXZjMQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAJAAYAASAAAAEgAAAAAAAAAAQAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABj//wAAADVhdmNDAWQAFv/hABhnZAAWrNlAkDGhAAAD
+AAEAAAMABA8WLZYBAAZo6+PLIsD9+PgAAAAAHHV1aWRraEDyXyRPxbo5pRvPAyPzAAAAAAAAABhz
+dHRzAAAAAAAAAAEAAAAUAAAgAAAAABRzdHNzAAAAAAAAAAEAAAABAAAAqGN0dHMAAAAAAAAAEwAA
+AAEAAEAAAAAAAQAAoAAAAAABAABAAAAAAAEAAAAAAAAAAQAAIAAAAAABAACgAAAAAAEAAEAAAAAA
+AQAAAAAAAAABAAAgAAAAAAEAAKAAAAAAAQAAQAAAAAABAAAAAAAAAAEAACAAAAAAAQAAoAAAAAAB
+AABAAAAAAAEAAAAAAAAAAQAAIAAAAAABAACAAAAAAAIAACAAAAAAHHN0c2MAAAAAAAAAAQAAAAEA
+AAAUAAAAAQAAAGRzdHN6AAAAAAAAAAAAAAAUAAAVCwAACCgAAAPSAAACVwAAAkgAAAPCAAACcQAA
+AlYAAALlAAADhwAAAwMAAALVAAACnAAAAzgAAAJPAAACfwAAAn0AAANGAAAChAAAAoMAAAAUc3Rj
+bwAAAAAAAAABAAAAMAAAAGF1ZHRhAAAAWW1ldGEAAAAAAAAAIWhkbHIAAAAAAAAAAG1kaXJhcHBs
+AAAAAAAAAAAAAAAALGlsc3QAAAAkqXRvbwAAABxkYXRhAAAAAQAAAABMYXZmNjAuMy4xMDA=
+">
+  Your browser does not support the video tag.
+</video>
+</div>
+</div>
+</div>
+</section>
+<section id="clt-of-exponential-to-n2000" class="slide level2 nostretch">
+<h2>CLT of Exponential to <span class="math inline">\(N=2000\)</span></h2>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb19" data-code-line-numbers="4-6|11-12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="kw">def</span> update(n):</span>
+<span id="cb19-3"><a href="#cb19-3"></a>    ax.clear()</span>
+<span id="cb19-4"><a href="#cb19-4"></a>    data <span class="op">=</span> distribution.rvs((<span class="dv">10000</span>, n))</span>
+<span id="cb19-5"><a href="#cb19-5"></a>    sample_means <span class="op">=</span> data.mean(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb19-6"><a href="#cb19-6"></a>    Y <span class="op">=</span> np.sqrt(n) <span class="op">*</span> (sample_means <span class="op">-</span> mu)</span>
+<span id="cb19-7"><a href="#cb19-7"></a>    ax.set_xlim(<span class="op">-</span><span class="dv">3</span> <span class="op">*</span> s, <span class="dv">3</span> <span class="op">*</span> s)</span>
+<span id="cb19-8"><a href="#cb19-8"></a>    ax.set_ylim(<span class="dv">0</span>, <span class="fl">0.5</span>)</span>
+<span id="cb19-9"><a href="#cb19-9"></a>    ax.hist(Y, bins<span class="op">=</span><span class="dv">60</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, density<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb19-10"><a href="#cb19-10"></a>    ax.set_title(<span class="ss">f"CLT for $N = </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">$"</span>)</span>
+<span id="cb19-11"><a href="#cb19-11"></a>    x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span> <span class="op">*</span> s, <span class="dv">3</span> <span class="op">*</span> s, <span class="dv">100</span>)</span>
+<span id="cb19-12"><a href="#cb19-12"></a>    ax.plot(x, scipy.stats.norm.pdf(x, <span class="dv">0</span>, s), <span class="st">'r-'</span>, lw<span class="op">=</span><span class="dv">2</span>, alpha<span class="op">=</span><span class="fl">0.7</span>, label<span class="op">=</span><span class="st">'N(0, 1)'</span>)    </span>
+<span id="cb19-13"><a href="#cb19-13"></a>ani <span class="op">=</span> FuncAnimation(fig,update,frames<span class="op">=</span><span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">2000</span>, <span class="dv">250</span>), interval<span class="op">=</span><span class="dv">500</span>,blit<span class="op">=</span><span class="va">False</span>, repeat<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb19-14"><a href="#cb19-14"></a>plt.close()</span>
+<span id="cb19-15"><a href="#cb19-15"></a>IPython.display.HTML(ani.to_html5_video())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section><section id="clt-of-exponential-to-n2000-output" class="slide level2 nostretch output-location-slide"><h2>CLT of Exponential to <span class="math inline">\(N=2000\)</span></h2><div class="cell output-location-slide" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="16">
+<video width="576" height="384" controls="" autoplay="">
+  <source type="video/mp4" src="data:video/mp4;base64,AAAAIGZ0eXBNNFYgAAACAE00ViBpc29taXNvMmF2YzEAAAAIZnJlZQAAXKdtZGF0AAACrgYF//+q
+3EXpvebZSLeWLNgg2SPu73gyNjQgLSBjb3JlIDE2NCByMzEwNiBlYWE2OGZhIC0gSC4yNjQvTVBF
+Ry00IEFWQyBjb2RlYyAtIENvcHlsZWZ0IDIwMDMtMjAyMyAtIGh0dHA6Ly93d3cudmlkZW9sYW4u
+b3JnL3gyNjQuaHRtbCAtIG9wdGlvbnM6IGNhYmFjPTEgcmVmPTMgZGVibG9jaz0xOjA6MCBhbmFs
+eXNlPTB4MzoweDExMyBtZT1oZXggc3VibWU9NyBwc3k9MSBwc3lfcmQ9MS4wMDowLjAwIG1peGVk
+X3JlZj0xIG1lX3JhbmdlPTE2IGNocm9tYV9tZT0xIHRyZWxsaXM9MSA4eDhkY3Q9MSBjcW09MCBk
+ZWFkem9uZT0yMSwxMSBmYXN0X3Bza2lwPTEgY2hyb21hX3FwX29mZnNldD0tMiB0aHJlYWRzPTEy
+IGxvb2thaGVhZF90aHJlYWRzPTIgc2xpY2VkX3RocmVhZHM9MCBucj0wIGRlY2ltYXRlPTEgaW50
+ZXJsYWNlZD0wIGJsdXJheV9jb21wYXQ9MCBjb25zdHJhaW5lZF9pbnRyYT0wIGJmcmFtZXM9MyBi
+X3B5cmFtaWQ9MiBiX2FkYXB0PTEgYl9iaWFzPTAgZGlyZWN0PTEgd2VpZ2h0Yj0xIG9wZW5fZ29w
+PTAgd2VpZ2h0cD0yIGtleWludD0yNTAga2V5aW50X21pbj0yIHNjZW5lY3V0PTQwIGludHJhX3Jl
+ZnJlc2g9MCByY19sb29rYWhlYWQ9NDAgcmM9Y3JmIG1idHJlZT0xIGNyZj0yMy4wIHFjb21wPTAu
+NjAgcXBtaW49MCBxcG1heD02OSBxcHN0ZXA9NCBpcF9yYXRpbz0xLjQwIGFxPTE6MS4wMACAAAAf
+FGWIhAAV//73ye/AputbW7W/k89I/Cy3PsIqP25bE7TqAAADAAADAAAQXWgxYAAtuIFqv7n/tqeG
+oAI+5PU38wKJtrUfrOWLMka8R5jhpPiHSalJ6FxS6QJ5OZ4kq27EYwutQf/6wYgspBP4cNl33F3G
+wh/P1PjKIMG785NhLom8a8v9/EDjt1Iyj6/EhxXASpCK0TVLTHPP3JW/BPF9CftbKKuFFO3m07LJ
+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
+">
+  Your browser does not support the video tag.
+</video>
+</div>
+</div></section></section>
+<section>
+<section id="joint-distributions" class="title-slide slide level1 center">
+<h1>Joint Distributions</h1>
+
+</section>
+<section id="joint-probability-distributions" class="slide level2">
+<h2>Joint Probability Distributions</h2>
+<ul>
+<li>Key concepts are <strong>marginal distributions</strong>, <strong>conditional distributions</strong>, <strong>independence</strong>, and <strong>conditional expectations</strong></li>
+<li>Will demonstrate with bivariate discretely valued distributions
+<ul>
+<li>Similar for multivariate distributions, except we replace sums with sums over multiple indices</li>
+<li>Similar for continuous or mixed discrete-continuous distributions, except we replace sums with integrals</li>
+</ul></li>
+<li>Interpretation of the joint distribution of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is the probability of each pair of outcomes occurs
+<ul>
+<li>e.g., prob you get a cash transfer and are unemployed, don’t get a cash transfer and are unemployed, get a cash transfer and are employed, etc.</li>
+</ul></li>
+</ul>
+</section>
+<section id="bivariate-probability-distributions" class="slide level2">
+<h2>Bivariate Probability Distributions</h2>
+<ul>
+<li><p>Let <span class="math inline">\(X,Y\)</span> be two discrete random variables that take values:</p>
+<p><span class="math display">\[
+X\in\{1,\ldots,I\},\quad Y\in\{1,\ldots,J\}
+\]</span></p></li>
+<li><p>Then their <strong>joint distribution</strong> is described by a matrix</p>
+<p><span class="math display">\[
+P\equiv[\mathbb{P}(X=i,Y=j)]_{i=1\ldots I, j=1,\ldots J}\in \mathbb{R}^{I\times J}
+\]</span></p></li>
+<li><p>Which fulfills the key axioms of probability</p></li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+p_{ij}\equiv\mathbb{P}(X=i,Y=j) &amp;\geq 0\\
+\sum_{i=1}^{I}\sum_{j=1}^{J}p_{ij}=1
+\end{aligned}
+\]</span></p>
+</section>
+<section id="marginal-probability-distributions" class="slide level2">
+<h2>Marginal Probability Distributions</h2>
+<ul>
+<li><p>The joint distribution induces marginal distributions</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb{P}(X=i)&amp; = \sum_{j=1}^{J}p_{ij} = \mu_i, \quad i=1,\ldots,I\\
+\mathbb{P}(Y=j)&amp;= \sum_{i=1}^{I}p_{ij} = \nu_j, \quad j=1,\ldots,J
+\end{aligned}
+\]</span></p></li>
+<li><p>The marginal distributions are also probability distributions</p>
+<ul>
+<li>i.e., <span class="math inline">\(\mu_i \geq 0\)</span> and <span class="math inline">\(\sum_{i=1}^{I} \mu_i = 1\)</span></li>
+<li>e.g.&nbsp;the probability you were given a conditional cash transfer regardless of your employment status</li>
+</ul></li>
+</ul>
+</section>
+<section id="conditional-probability" class="slide level2">
+<h2>Conditional Probability</h2>
+<ul>
+<li><p>Conditional probabilities are defined according to</p>
+<p><span class="math display">\[
+\mathbb{P}(A \,|\, B)=\frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}
+\]</span></p></li>
+<li><p><span class="math inline">\(A \cap B\)</span> is the event that both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> occur, i.e., the intersection</p>
+<ul>
+<li>e.g.&nbsp;you were given a conditional cash transfer AND you were unemployed</li>
+</ul></li>
+<li><p>The conditional probability is the probability of <span class="math inline">\(A\)</span> given <span class="math inline">\(B\)</span> has occurred</p>
+<ul>
+<li>e.g.&nbsp;the probability you were given a conditional cash transfer given you were unemployed</li>
+</ul></li>
+</ul>
+</section>
+<section id="conditional-distributions" class="slide level2">
+<h2>Conditional Distributions</h2>
+<p>For a pair of discrete random variables, we have the <strong>conditional distribution</strong></p>
+<p><span class="math display">\[
+\mathbb{P}(X=i|Y=j)=\frac{p_{ij}}{\sum_{i=1}^{I}p_{ij}}
+=\frac{\mathbb{P}(X=i, Y=j)}{\mathbb{P}(Y=j)}
+\]</span></p>
+<ul>
+<li>Fix <span class="math inline">\(Y=j\)</span>, then the conditional distribution of <span class="math inline">\(X \,|\,Y=j\)</span> is a probability distribution. Trivially positive since <span class="math inline">\(p_ij \geq 0\)</span>. Verify it sums to <span class="math inline">\(1\)</span></li>
+</ul>
+<p><span class="math display">\[
+\sum_{i=1}^{I}\mathbb{P}(X=i\,|\,Y=j)
+=\frac{\sum_{i=1}^{I}p_{ij}}{\sum_{i=1}^{I}p_{ij}}=1
+\]</span></p>
+</section>
+<section id="law-of-total-probability" class="slide level2">
+<h2>Law of Total Probability</h2>
+<ul>
+<li><strong>Law of Total Probability</strong> is a useful identity for conditional probabilities
+<ul>
+<li>Let <span class="math inline">\(A_1, \ldots, A_N\)</span> be a partition of <span class="math inline">\(\Omega\)</span></li>
+<li>i.e., <span class="math inline">\(\Omega = \cup_{i=1}^{N} A_i\)</span> and <span class="math inline">\(A_i \cap A_j = \emptyset\)</span> for <span class="math inline">\(i \neq j\)</span></li>
+</ul></li>
+<li>Then for any event <span class="math inline">\(B\)</span>, <span class="math display">\[
+\mathbb{P}(B) = \sum_{i=1}^{N} \mathbb{P}(B \cap A_i) = \sum_{i=1}^{N} \mathbb{P}(B \,|\, A_i) \mathbb{P}(A_i)
+\]</span>
+<ul>
+<li>e.g.&nbsp;the probability of being unemployed is the probability of being unemployed and getting a cash transfer plus the probability of being unemployed and not getting a cash transfer</li>
+</ul></li>
+</ul>
+</section>
+<section id="statistical-independence" class="slide level2">
+<h2>Statistical Independence</h2>
+<ul>
+<li>Random variables <span class="math inline">\(X \sim p\)</span> and <span class="math inline">\(Y \sim g\)</span> are statistically <strong>independent</strong> if</li>
+</ul>
+<p><span class="math display">\[
+\mathbb{P}(X=i,Y=j)=p_i g_j,\text{ for all } i, j
+\]</span></p>
+<ul>
+<li>i.e., the joint distribution is the product of the marginal distributions</li>
+<li>e.g., the probability you were given a conditional cash transfer AND you were unemployed is probability you were given a conditional cash transfer <span class="math inline">\(\times\)</span> the probability you were unemployed</li>
+</ul>
+</section>
+<section id="conditional-distributions-and-independence" class="slide level2">
+<h2>Conditional Distributions and Independence</h2>
+<ul>
+<li>When <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, use the definitions of conditional and marginal distributions</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb{P}(X=i\,|\,Y=j) &amp;=\frac{\mathbb{P}(X=i, Y=j)}{\mathbb{P}(Y=j)} =\frac{p_ig_j}{\sum_{i=1}^{I}p_ig_j}=\frac{p_ig_j}{g_j}=p_i \\
+\mathbb{P}(Y=j\,|\,X=i) &amp;=\frac{\mathbb{P}(X=i, Y=j)}{\mathbb{P}(X=i)} =\frac{p_ig_j}{\sum_{j=1}^{J}p_ig_j}=\frac{p_ig_j}{p_i}=g_j
+\end{aligned}
+\]</span> - i.e, independent <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> implies the conditional distributions are the marginals</p>
+<ul>
+<li><span class="math inline">\(\mathbb{P}(X=i\,|\,Y=j) = \mathbb{P}(X=i)\)</span> and <span class="math inline">\(\mathbb{P}(Y=j\,|\,X=i) = \mathbb{P}(Y=j)\)</span></li>
+</ul>
+</section>
+<section id="notation-for-conditional-independence" class="slide level2">
+<h2>Notation for (Conditional) Independence</h2>
+<ul>
+<li><p>Let <span class="math inline">\(X, Y, Z\)</span> be random variables</p></li>
+<li><p>Common notation for independence is</p>
+<p><span class="math display">\[
+\begin{aligned}
+X &amp;\perp Y\\
+\mathbb{P}(X=x, Y=y) &amp;= \mathbb{P}(X=x) \mathbb{P}(Y=y)
+\end{aligned}
+\]</span></p></li>
+<li><p>Common notation for conditional independence</p>
+<p><span class="math display">\[
+\begin{aligned}
+X &amp;\perp\!\!\!\perp Y \,|\, Z\\
+\mathbb{P}(X=x, Y=y | Z=z) &amp;= \mathbb{P}(X=x | Z=z) \mathbb{P}(Y=y | Z=z)
+\end{aligned}
+\]</span></p></li>
+<li><p>Central to causal inference and treatment effects</p></li>
+</ul>
+</section>
+<section id="classic-example-of-conditional-independence" class="slide level2">
+<h2>Classic Example of Conditional Independence</h2>
+<ul>
+<li>Let <span class="math inline">\(X\)</span> be the number of cigarettes smoked per day</li>
+<li>Let <span class="math inline">\(Y\)</span> be the number of years of life remaining</li>
+<li>Let <span class="math inline">\(Z\)</span> be the number of years of smoking</li>
+<li>Then <span class="math inline">\(X \perp\!\!\!\perp Y \,|\, Z\)</span>
+<ul>
+<li>i.e., the number of cigarettes smoked per day is independent of the number of years of life remaining given the number of years of smoking</li>
+<li>i.e., the number of cigarettes smoked per day is independent of the number of years of life remaining given the number of years of smoking</li>
+</ul></li>
+</ul>
+</section>
+<section id="simpsons-paradox" class="slide level2">
+<h2>Simpson’s “Paradox”</h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Simpson%27s_paradox">Simpson’s paradox</a> is a warning on composition effects</li>
+<li>Recall the law of total probability <span class="math inline">\(\mathbb{P}(X = x| Y=y) = \sum_{z} \mathbb{P}(X = x| Y=y, Z=z) \mathbb{P}(Z=z| Y=y)\)</span></li>
+<li>Lets say you see <span class="math inline">\(\mathbb{P}(X| Y=y_1) &gt; \mathbb{P}(X| Y=y_2)\)</span>
+<ul>
+<li>Might suggests positive relationship on <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>?</li>
+</ul></li>
+<li>If <span class="math inline">\(\mathbb{P}(X| Y=y_1, Z=z) &lt; \mathbb{P}(X| Y=y_2, Z=z)\)</span> for many <span class="math inline">\(z\)</span> then
+<ul>
+<li><span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> may have a negative relationship after conditioning on <span class="math inline">\(Z\)</span>?</li>
+</ul></li>
+</ul>
+</section>
+<section id="uc-berkeley-gender-bias-overall-data" class="slide level2">
+<h2>UC Berkeley Gender Bias: Overall Data</h2>
+<table>
+<colgroup>
+<col style="width: 17%">
+<col style="width: 11%">
+<col style="width: 17%">
+<col style="width: 15%">
+<col style="width: 20%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Total Applicants</th>
+<th>Admitted</th>
+<th>Men Applicants</th>
+<th>Men Admitted</th>
+<th>Women Applicants</th>
+<th>Women Admitted</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>12,763</td>
+<td>41%</td>
+<td>8,442</td>
+<td><span style="background-color:#9EFF9E;">44%</span></td>
+<td>4,321</td>
+<td>35%</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Classic example is the <a href="https://en.wikipedia.org/wiki/Simpson%27s_paradox#UC_Berkeley_gender_bias">Berkeley Gender Bias</a> is a classic example of <a href="https://en.wikipedia.org/wiki/Simpson%27s_paradox">Simpson’s paradox</a></li>
+<li>But if you look at individual departments the results are different</li>
+<li>Seemed to show that 4 out of 85 departments had significant bias against women and 6 significant bias against men</li>
+<li>But the biggest difference was in which departments women applied to</li>
+<li>The following shows the top 6 departments to get a sense of heterogeneity</li>
+</ul>
+</section>
+<section id="conditional-probabilities-for-6-largest-departments" class="slide level2">
+<h2>Conditional Probabilities for 6 Largest Departments</h2>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 16%">
+<col style="width: 10%">
+<col style="width: 16%">
+<col style="width: 14%">
+<col style="width: 18%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dept</th>
+<th>All Applicants</th>
+<th>Admitted</th>
+<th>Men Applicants</th>
+<th>Men Admitted</th>
+<th>Women Applicants</th>
+<th>Women Admitted</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>933</td>
+<td>64%</td>
+<td><span style="background-color:#FE9;"><strong>825</strong></span></td>
+<td>62%</td>
+<td>108</td>
+<td><span style="background-color:#9EFF9E;">82%</span></td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>585</td>
+<td>63%</td>
+<td><span style="background-color:#FE9;"><strong>560</strong></span></td>
+<td>63%</td>
+<td>25</td>
+<td><span style="background-color:#9EFF9E;">68%</span></td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>918</td>
+<td>35%</td>
+<td>325</td>
+<td><span style="background-color:#9EFF9E;">37%</span></td>
+<td><span style="background-color:#FE9;"><strong>593</strong></span></td>
+<td>34%</td>
+</tr>
+<tr class="even">
+<td>D</td>
+<td>792</td>
+<td>34%</td>
+<td><span style="background-color:#FE9;">417</span></td>
+<td>33%</td>
+<td>375</td>
+<td><span style="background-color:#9EFF9E;">35%</span></td>
+</tr>
+<tr class="odd">
+<td>E</td>
+<td>584</td>
+<td>25%</td>
+<td>191</td>
+<td><span style="background-color:#9EFF9E;">28%</span></td>
+<td><span style="background-color:#FE9;"><strong>393</strong></span></td>
+<td>24%</td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td>714</td>
+<td>6%</td>
+<td><span style="background-color:#FE9;">373</span></td>
+<td>6%</td>
+<td>341</td>
+<td><span style="background-color:#9EFF9E;">7%</span></td>
+</tr>
+</tbody>
+</table>
+
+<aside><div>
+<p><span style="background-color:#FE9;">greater number of applicants than other gender</span> and <span style="background-color:#9EFF9E;">less number of applicants than other gender</span> <strong>bold</strong> the two “most applied for” departments for each gender</p>
+</div></aside></section>
+<section id="explanation-using-conditional-probabilities" class="slide level2">
+<h2>Explanation Using Conditional Probabilities</h2>
+<p>Overall, <span class="math inline">\(\mathbb{P}(\text{Admitted | Men}) = 0.44\)</span> and <span class="math inline">\(\mathbb{P}(\text{Admitted | Women}) = 0.35\)</span></p>
+<p>But this is different when conditioning on departments!</p>
+<ul>
+<li><span class="math inline">\(\mathbb{P}(\text{Admitted | Men, A}) = 0.62\)</span>, <span class="math inline">\(\mathbb{P}(\text{Admitted | Women, A}) = 0.82\)</span></li>
+<li><span class="math inline">\(\mathbb{P}(\text{Admitted | Men, B}) = 0.63\)</span>, <span class="math inline">\(\mathbb{P}(\text{Admitted | Women, B}) = 0.68\)</span></li>
+<li>“Paradox” because women tend to apply to more competitive departments</li>
+</ul>
+</section>
+<section id="does-this-old-data-imply-there-was-no-bias" class="slide level2">
+<h2>Does this Old Data Imply There was No Bias?</h2>
+<ul>
+<li>All data requires assumptions to interpret! Most assumptions are implicit, so you need to reflect on what assumptions you may have made</li>
+<li>This simply corrected for the mechanical composition effect</li>
+<li>Interpreting bias better requires reflecting on your “model” and assumptions
+<ul>
+<li>Is average quality is identical conditional on department and gender? Especially in 1973 when there was enormous selection bias?</li>
+<li>What if bias leads women to apply to the more competitive departments?</li>
+</ul></li>
+</ul>
+</section>
+<section id="bayes-law" class="slide level2">
+<h2>Bayes’ Law</h2>
+<p>Conditional probability is used for <strong>Bayes’ Law</strong>:</p>
+<p><span class="math display">\[
+\mathbb{P}(A \,|\, B)=\frac{\mathbb{P}(B \,|\, A)\mathbb{P}(A)}{\mathbb{P}(B)}
+\]</span></p>
+<p>Sometimes:</p>
+<ul>
+<li><span class="math inline">\(\mathbb{P}(B\,|\,A)\)</span> is called the “likelihood”</li>
+<li><span class="math inline">\(\mathbb{P}(A)\)</span> is called the “prior”</li>
+<li><span class="math inline">\(\mathbb{P}(A\,|\,B)\)</span> is called the “posterior”</li>
+<li><span class="math inline">\(\mathbb{P}(B)\)</span> is called the “marginal likelihood”, which normalizes the expression</li>
+</ul>
+</section>
+<section id="example-with-bayes-law" class="slide level2">
+<h2>Example with Bayes’ Law</h2>
+<p><span class="math inline">\(A\)</span> is the event of being unemployed, <span class="math inline">\(B\)</span> is the event of getting a cash transfer</p>
+<ul>
+<li><span class="math inline">\(\mathbb{P}(B\,|\,A)\)</span> is the probability of being given a cash transfer given you were unemployed</li>
+<li><span class="math inline">\(\mathbb{P}(A)\)</span> is the probability of being unemployed within the whole distribution</li>
+<li><span class="math inline">\(\mathbb{P}(A\,|\,B)\)</span> is the probability of being unemployed given you were given a cash transfer</li>
+<li><span class="math inline">\(\mathbb{P}(B)\)</span> is the probability of being given a cash transfer within the whole distribution</li>
+<li><strong>Bayes’ law</strong>: probability of being unemployed given you were given a cash transfer <span class="math inline">\(\propto\)</span> probability of being given cash transfer given you were unemployed <span class="math inline">\(\times\)</span> probability of being unemployed</li>
+</ul>
+</section>
+<section id="bayes-law-with-bivariate-random-variables" class="slide level2">
+<h2>Bayes Law with Bivariate Random Variables</h2>
+<ul>
+<li><p>For discrete bi-variate random variables, we can write Bayes’ Law as</p>
+<p><span class="math display">\[
+\mathbb{P}(X=i\,|\,Y=j)=\frac{\mathbb{P}(X=i,Y=j)}{\mathbb{P}(Y=j)}=\frac{\mathbb{P}(Y=j\,|\,X=i)\mathbb{P}(X=i)}{\mathbb{P}(Y=j)}
+\]</span></p></li>
+<li><p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent</p>
+<ul>
+<li><span class="math inline">\(\mathbb{P}(Y=j\,|\,X=i) = \mathbb{P}(Y=j)\)</span></li>
+<li>Bayes’ Law simplifies to just the marginal distribution</li>
+</ul>
+<p><span class="math display">\[
+\mathbb{P}(X=i\,|\,Y=j) = \mathbb{P}(X=i)
+\]</span></p></li>
+</ul>
+</section>
+<section id="calculating-marginal-distributions" class="slide level2">
+<h2>Calculating Marginal Distributions</h2>
+<ul>
+<li>Lets create a bivariate <span class="math inline">\(\mathbb{P}(X=i, Y=j)\)</span> with <span class="math inline">\(I=5\)</span> and <span class="math inline">\(J=4\)</span></li>
+<li>Use matrix <span class="math inline">\(P\)</span> to calculate <span class="math inline">\(\mathbb{P}(X=i)\)</span> and <span class="math inline">\(\mathbb{P}(Y=j)\)</span></li>
+</ul>
+<div class="cell columns column-output-location" data-execution_count="18">
+<div class="column">
+<div class="sourceCode cell-code" id="cb20" data-code-line-numbers="2-6|10-11|13,15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a>np.set_printoptions(precision<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb20-2"><a href="#cb20-2"></a>P <span class="op">=</span> np.array([[<span class="fl">0.05</span>, <span class="fl">0.07</span>, <span class="fl">0.02</span>, <span class="fl">0.01</span>],</span>
+<span id="cb20-3"><a href="#cb20-3"></a>              [<span class="fl">0.04</span>, <span class="fl">0.1</span>,  <span class="fl">0.06</span>, <span class="fl">0.03</span>],</span>
+<span id="cb20-4"><a href="#cb20-4"></a>              [<span class="fl">0.08</span>, <span class="fl">0.09</span>, <span class="fl">0.07</span>, <span class="fl">0.04</span>],</span>
+<span id="cb20-5"><a href="#cb20-5"></a>              [<span class="fl">0.02</span>, <span class="fl">0.03</span>, <span class="fl">0.02</span>, <span class="fl">0.01</span>],</span>
+<span id="cb20-6"><a href="#cb20-6"></a>              [<span class="fl">0.09</span>, <span class="fl">0.08</span>, <span class="fl">0.04</span>, <span class="fl">0.05</span>]])</span>
+<span id="cb20-7"><a href="#cb20-7"></a></span>
+<span id="cb20-8"><a href="#cb20-8"></a><span class="bu">print</span>(<span class="ss">f"sum = 1? </span><span class="sc">{</span>np<span class="sc">.</span>isclose(P.<span class="bu">sum</span>(), <span class="fl">1.0</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="bu">print</span>(<span class="ss">f"p_ij &gt;= 0? </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">all</span>(P <span class="op">&gt;=</span> <span class="dv">0</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb20-10"><a href="#cb20-10"></a>margin_x <span class="op">=</span> P.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># sum over j</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a>margin_y <span class="op">=</span> P.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">0</span>) <span class="co"># sum over i</span></span>
+<span id="cb20-12"><a href="#cb20-12"></a><span class="bu">print</span>(<span class="ss">f"P(X=i) = </span><span class="sc">{</span>margin_x<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb20-13"><a href="#cb20-13"></a><span class="bu">print</span>(<span class="ss">f"Sum_i P(X=i) = </span><span class="sc">{</span>margin_x<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb20-14"><a href="#cb20-14"></a><span class="bu">print</span>(<span class="ss">f"P(Y=j) = </span><span class="sc">{</span>margin_y<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb20-15"><a href="#cb20-15"></a><span class="bu">print</span>(<span class="ss">f"Sum_j P(Y=j) = </span><span class="sc">{</span>margin_y<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-stdout">
+<pre><code>sum = 1? True
+p_ij &gt;= 0? True
+P(X=i) = [0.15 0.23 0.28 0.08 0.26]
+Sum_i P(X=i) = 0.9999999999999999
+P(Y=j) = [0.28 0.37 0.21 0.14]
+Sum_j P(Y=j) = 1.0</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="calculating-conditional-distributions" class="slide level2">
+<h2>Calculating Conditional Distributions</h2>
+<ul>
+<li>Now use <span class="math inline">\(P\)</span> to calculate <span class="math inline">\(\mathbb{P}(X=i\,|\,Y=j)\)</span>, etc. <!--
+Code to check: 
+cond_x_y = np.row_stack(
+  P[:,i] / margin_y[i] for i in range(4))
+cond_x_y.sum(axis=1)
+(P / margin_y[np.newaxis, :]).T - cond_x_y
+cond_y_x = np.row_stack(
+  P[j,:] / margin_x[j] for j in range(5))
+cond_y_x.sum(axis=1)  
+(P.T / margin_x[np.newaxis, :]).T - cond_y_x
+--></li>
+</ul>
+<div class="cell columns column-output-location" data-execution_count="19">
+<div class="column">
+<div class="sourceCode cell-code" id="cb22" data-code-line-numbers="1|2-3,5-6|4,7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a><span class="bu">print</span>(<span class="ss">f"P(X=i|Y=1)=</span><span class="ch">\n</span><span class="sc">{</span>P[:,<span class="dv">0</span>] <span class="op">/</span> margin_y[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">\,"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2"></a>cond_x_y <span class="op">=</span> np.row_stack(</span>
+<span id="cb22-3"><a href="#cb22-3"></a>  [P[:,i] <span class="op">/</span> margin_y[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>)])</span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="co"># or (P / margin_y[np.newaxis, :]).T</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a>cond_y_x <span class="op">=</span> np.row_stack(</span>
+<span id="cb22-6"><a href="#cb22-6"></a>  [P[j,:] <span class="op">/</span> margin_x[j] <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)])</span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="co"># or (P.T / margin_x[np.newaxis, :]).T</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="bu">print</span>(<span class="ss">f"P(X=i|Y=2)=</span><span class="ch">\n</span><span class="sc">{</span>cond_x_y[:, <span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb22-9"><a href="#cb22-9"></a><span class="bu">print</span>(<span class="ss">f"sum_i P(X=i|Y=2)=</span><span class="ch">\</span></span>
+<span id="cb22-10"><a href="#cb22-10"></a><span class="sc">{</span>cond_x_y[<span class="dv">1</span>,:]<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb22-11"><a href="#cb22-11"></a><span class="bu">print</span>(<span class="ss">f"P(Y=j|X=1)=</span><span class="ch">\n</span><span class="sc">{</span>cond_y_x[:, <span class="dv">0</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-stdout">
+<pre><code>P(X=i|Y=1)=
+[0.179 0.143 0.286 0.071 0.321]\,
+P(X=i|Y=2)=
+[0.143 0.27  0.286 0.214]
+sum_i P(X=i|Y=2)=1.00
+P(Y=j|X=1)=
+[0.333 0.174 0.286 0.25  0.346]</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="check-bayes-law" class="slide level2">
+<h2>Check Bayes’ Law</h2>
+<p><span class="math display">\[
+\mathbb{P}(X=1\,|\,Y=2) = \frac{\mathbb{P}(Y=2\,|\,X=1)\mathbb{P}(X=1)}{\mathbb{P}(Y=2)}
+\]</span></p>
+<div class="cell columns column-output-location" data-execution_count="20">
+<div class="column">
+<div class="sourceCode cell-code" id="cb24" data-code-line-numbers="3|4-5|6|7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a>x <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>y <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a>p_y_x <span class="op">=</span> cond_y_x[x<span class="op">-</span><span class="dv">1</span>, y<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb24-4"><a href="#cb24-4"></a>p_x <span class="op">=</span> margin_x[x<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb24-5"><a href="#cb24-5"></a>p_y <span class="op">=</span> margin_y[y<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb24-6"><a href="#cb24-6"></a>p_x_y <span class="op">=</span> cond_x_y[y<span class="op">-</span><span class="dv">1</span>, x<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb24-7"><a href="#cb24-7"></a>p_bayes <span class="op">=</span> p_y_x <span class="op">*</span> p_x <span class="op">/</span> p_y</span>
+<span id="cb24-8"><a href="#cb24-8"></a><span class="bu">print</span>(<span class="ss">f"P(Y=</span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">|X=</span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">) = </span><span class="sc">{</span>p_y_x<span class="sc">:.2g}</span><span class="ss">"</span>)</span>
+<span id="cb24-9"><a href="#cb24-9"></a><span class="bu">print</span>(<span class="ss">f"P(X=</span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">) = </span><span class="sc">{</span>p_x<span class="sc">:.2g}</span><span class="ss">"</span>)</span>
+<span id="cb24-10"><a href="#cb24-10"></a><span class="bu">print</span>(<span class="ss">f"P(Y=</span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">) = </span><span class="sc">{</span>p_y<span class="sc">:.2g}</span><span class="ss">"</span>)</span>
+<span id="cb24-11"><a href="#cb24-11"></a><span class="bu">print</span>(<span class="ss">f"P(X=</span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">|Y=</span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">)=</span><span class="sc">{</span>p_x_y<span class="sc">:.2g}</span><span class="ss">"</span>)</span>
+<span id="cb24-12"><a href="#cb24-12"></a><span class="bu">print</span>(<span class="ss">f"P(Y=</span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">|X=</span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">)P(X=</span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">)</span><span class="ch">\</span></span>
+<span id="cb24-13"><a href="#cb24-13"></a><span class="ss">/P(Y=</span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">)=</span><span class="sc">{</span>p_bayes<span class="sc">:.2g}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-stdout">
+<pre><code>P(Y=2|X=1) = 0.47
+P(X=1) = 0.15
+P(Y=2) = 0.37
+P(X=1|Y=2)=0.19
+P(Y=2|X=1)P(X=1)/P(Y=2)=0.19</code></pre>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="conditional-expectations" class="title-slide slide level1 center">
+<h1>Conditional Expectations</h1>
+
+</section>
+<section id="conditional-expectation" class="slide level2">
+<h2>Conditional Expectation</h2>
+<ul>
+<li><p>Recall: <span class="math inline">\(\mathbb{P}(X=i\,|\,Y=j)\)</span> is itself a probability distribution if we vary <span class="math inline">\(j\)</span></p></li>
+<li><p>A <strong>conditional expectation</strong> is an expectation using the conditional probability distribution. For a discrete random variable <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, <span class="math display">\[
+\mathbb{E}[X\,|\,Y=j] = \sum_{i=1}^{I} i\, \mathbb{P}(X=i\,|\,Y=j)
+\]</span></p></li>
+<li><p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent then</p>
+<ul>
+<li>Recall that <span class="math inline">\(\mathbb{P}(X=i\,|\,Y=j) = \mathbb{P}(X=i)\)</span></li>
+<li>Which implies <span class="math inline">\(\mathbb{E}[X\,|\,Y=j] = \mathbb{E}[X]\)</span></li>
+<li>That the expected value of <span class="math inline">\(X\)</span> is the same regardless of the value of <span class="math inline">\(Y\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="key-properties-of-expectations" class="slide level2">
+<h2>Key Properties of Expectations</h2>
+<ul>
+<li><p>Let <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> be scalar/vector/matrix constants, and <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are scalar/vector/matrix random variables</p></li>
+<li><p>Expectations are <strong>linear operators</strong>, which gives us some useful properties</p>
+<ul>
+<li><span class="math inline">\(\mathbb{E}[A X + B Y] = A \mathbb{E}[X] + B \mathbb{E}[Y]\)</span></li>
+</ul></li>
+<li><p><span class="math inline">\(\mathbb{E}[X Y] \neq \mathbb{E}[X] \mathbb{E}[Y]\)</span> in general</p>
+<ul>
+<li>But if <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, then <span class="math inline">\(\mathbb{E}[X Y] = \mathbb{E}[X] \mathbb{E}[Y]\)</span></li>
+</ul></li>
+<li><p><span class="math inline">\(\mathbb{E}[f(X)] \neq f(\mathbb{E}[X])\)</span> in geneal</p>
+<ul>
+<li>Unless <span class="math inline">\(f(\cdot)\)</span> is linear or if <span class="math inline">\(X\)</span> is degenerate (i.e., a constant)</li>
+</ul></li>
+<li><p><strong>Jensen’s Inequality</strong>: If <span class="math inline">\(f(\cdot)\)</span> is a convex function, then <span class="math inline">\(\mathbb{E}[f(X)] \geq f(\mathbb{E}[X])\)</span></p></li>
+</ul>
+</section>
+<section id="law-of-total-expectations" class="slide level2">
+<h2>Law of Total Expectations</h2>
+<ul>
+<li>Let <span class="math inline">\(\{A_1, \ldots, A_N\}\)</span> be a partition of <span class="math inline">\(\Omega\)</span>. For any random variable <span class="math inline">\(X\)</span>,</li>
+<li><strong>Law of Total Expectations</strong></li>
+</ul>
+<p><span class="math display">\[
+  \mathbb{E}[X] = \sum_{i=1}^{N} \mathbb{E}[X \,|\, A_i] \mathbb{P}(A_i)
+\]</span></p>
+<ul>
+<li>e.g.&nbsp;the expected value of income is the expected value of income given you were unemployed times the probability of being unemployed plus the expected value of income given you were employed times the probability of being employed</li>
+</ul>
+
+<aside><div>
+<p>Related decomposition is the <a href="https://en.wikipedia.org/wiki/Law_of_total_variance">Law of Total Variances</a>: <span class="math inline">\(\mathbb{V}[X] = \mathbb{E}[\mathbb{V}[Y\,|\,X]] + \mathbb{V}[\mathbb{E}[Y\,|\,X]]\)</span></p>
+</div></aside></section>
+<section id="conditional-expectations-and-iterated-expectations" class="slide level2">
+<h2>Conditional Expectations and Iterated Expectations</h2>
+<ul>
+<li><p>Same properties all hold e.g.&nbsp;<span class="math inline">\(\mathbb{E}[A X + B Y \,|\, Z] = A \mathbb{E}[X \,|\, Z] + B \mathbb{E}[Y \,|\, Z]\)</span></p></li>
+<li><p>Conditional expectations are themselves random variables if the conditional is. e.g.&nbsp;<span class="math inline">\(\mathbb{E}[X \,|\, Y]\)</span> is a random variable in <span class="math inline">\(Y\)</span></p></li>
+<li><p><strong>Law of Iterated Expectations</strong></p>
+<p><span class="math display">\[
+\mathbb{E}\left[\mathbb{E}[X\,|\,Y]\right] = \mathbb{E}[X]
+\]</span></p>
+<ul>
+<li>The expected value of <span class="math inline">\(X\)</span> is the average of the conditional expectations of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y\)</span> over the distribution of <span class="math inline">\(Y\)</span></li>
+<li>Similarly for conditionals: <span class="math inline">\(\mathbb{E}\left[\mathbb{E}[X\,|\,Y, Z]\, |\, Z\right] = \mathbb{E}[X\,|\,Z]\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="calculating-conditional-expectations" class="slide level2">
+<h2>Calculating Conditional Expectations</h2>
+<p>Assign an RV to each state then find <span class="math inline">\(\mathbb{E}[X\,|\,Y=1]\)</span></p>
+<!--
+# Check code
+-->
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb26" data-code-line-numbers="11-12|15-16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a>P <span class="op">=</span> np.array([[<span class="fl">0.05</span>, <span class="fl">0.07</span>, <span class="fl">0.02</span>, <span class="fl">0.01</span>],</span>
+<span id="cb26-2"><a href="#cb26-2"></a>              [<span class="fl">0.04</span>, <span class="fl">0.1</span>,  <span class="fl">0.06</span>, <span class="fl">0.03</span>],</span>
+<span id="cb26-3"><a href="#cb26-3"></a>              [<span class="fl">0.08</span>, <span class="fl">0.09</span>, <span class="fl">0.07</span>, <span class="fl">0.04</span>],</span>
+<span id="cb26-4"><a href="#cb26-4"></a>              [<span class="fl">0.02</span>, <span class="fl">0.03</span>, <span class="fl">0.02</span>, <span class="fl">0.01</span>],</span>
+<span id="cb26-5"><a href="#cb26-5"></a>              [<span class="fl">0.09</span>, <span class="fl">0.08</span>, <span class="fl">0.04</span>, <span class="fl">0.05</span>]])</span>
+<span id="cb26-6"><a href="#cb26-6"></a>margin_x <span class="op">=</span> P.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb26-7"><a href="#cb26-7"></a>margin_y <span class="op">=</span> P.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb26-8"><a href="#cb26-8"></a>cond_x_y <span class="op">=</span> (P <span class="op">/</span> margin_y[np.newaxis, :]).T</span>
+<span id="cb26-9"><a href="#cb26-9"></a>cond_y_x <span class="op">=</span> (P.T <span class="op">/</span> margin_x[np.newaxis, :]).T</span>
+<span id="cb26-10"><a href="#cb26-10"></a><span class="co"># Give RV values to states</span></span>
+<span id="cb26-11"><a href="#cb26-11"></a>vals_x <span class="op">=</span> np.arange(P.shape[<span class="dv">0</span>]) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb26-12"><a href="#cb26-12"></a>vals_y <span class="op">=</span> np.arange(P.shape[<span class="dv">1</span>]) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb26-13"><a href="#cb26-13"></a></span>
+<span id="cb26-14"><a href="#cb26-14"></a><span class="bu">print</span>(<span class="st">"E(X | Y = 1) ="</span>,</span>
+<span id="cb26-15"><a href="#cb26-15"></a>  np.<span class="bu">sum</span>([vals_x[i]<span class="op">*</span>cond_x_y[<span class="dv">0</span>,i]</span>
+<span id="cb26-16"><a href="#cb26-16"></a>          <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">5</span>)]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>E(X | Y = 1) = 3.2142857142857144</code></pre>
+</div>
+</div>
+</section>
+<section id="conditional-expectations-and-the-law-of-iterated-expectations" class="slide level2">
+<h2>Conditional Expectations and the Law of Iterated Expectations</h2>
+<div class="cell columns column-output-location" data-execution_count="22">
+<div class="column">
+<div class="sourceCode cell-code" id="cb28" data-code-line-numbers="1-8|10-11|14-15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a>E_x_y <span class="op">=</span> np.array([</span>
+<span id="cb28-2"><a href="#cb28-2"></a>  np.<span class="bu">sum</span>([vals_x[i]<span class="op">*</span>cond_x_y[j,i]</span>
+<span id="cb28-3"><a href="#cb28-3"></a>          <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">5</span>)])</span>
+<span id="cb28-4"><a href="#cb28-4"></a>  <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">4</span>)])</span>
+<span id="cb28-5"><a href="#cb28-5"></a>E_y_x <span class="op">=</span> np.array([</span>
+<span id="cb28-6"><a href="#cb28-6"></a>  np.<span class="bu">sum</span>([vals_y[j]<span class="op">*</span>cond_y_x[i,j]</span>
+<span id="cb28-7"><a href="#cb28-7"></a>          <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">4</span>)])</span>
+<span id="cb28-8"><a href="#cb28-8"></a>  <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">5</span>)])      </span>
+<span id="cb28-9"><a href="#cb28-9"></a><span class="co"># Or use np broadcasting with *</span></span>
+<span id="cb28-10"><a href="#cb28-10"></a>E_x_y <span class="op">=</span> np.<span class="bu">sum</span>(vals_x <span class="op">*</span> cond_x_y, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb28-11"><a href="#cb28-11"></a>E_y_x <span class="op">=</span> np.<span class="bu">sum</span>(vals_y <span class="op">*</span> cond_y_x, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb28-12"><a href="#cb28-12"></a><span class="bu">print</span>(<span class="st">"E(X | Y = j) ="</span>, E_x_y)</span>
+<span id="cb28-13"><a href="#cb28-13"></a><span class="bu">print</span>(<span class="st">"E(Y | X = i) ="</span>, E_y_x)</span>
+<span id="cb28-14"><a href="#cb28-14"></a><span class="bu">print</span>(<span class="ss">f"E(X) = </span><span class="sc">{</span>vals_x <span class="op">@</span> margin_x<span class="sc">:.3g}</span><span class="ss">,</span><span class="ch">\</span></span>
+<span id="cb28-15"><a href="#cb28-15"></a><span class="ss">  E(E(X|Y)) = </span><span class="sc">{</span>E_x_y <span class="op">@</span> margin_y<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-stdout">
+<pre><code>E(X | Y = j) = [3.214 2.865 3.    3.429]
+E(Y | X = i) = [1.933 2.348 2.25  2.25  2.192]
+E(X) = 3.07,  E(E(X|Y)) = 3.07</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="tips-for-using-numpy-broadcasting" class="slide level2">
+<h2>Tips for using Numpy Broadcasting</h2>
+<ol type="1">
+<li><strong>Don’t</strong>
+<ul>
+<li>Loops, list comprehensions (e.g., <code>[x[i, i+1] for i in range(5)]</code>), or a combination are usually clearer and often fast enough</li>
+</ul></li>
+<li>Write the slow version first</li>
+<li>Ask Github Copilot or ChatGPT to do a numpy broadcasting version</li>
+<li>Test it for a few values! Easy to make mistakes</li>
+<li>For more advanced usage you may be working in a ML library. If so, then packages such as <a href="https://jax.readthedocs.io/en/latest/jax-101/03-vectorization.html">jax.vmap</a> of <a href="https://pytorch.org/docs/master/generated/torch.func.vmap.html#torch.func.vmap">torch.vmap</a> help</li>
+</ol>
+
+<div class="footer footer-default">
+
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: false,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
