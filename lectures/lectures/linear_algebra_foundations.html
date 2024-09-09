@@ -635,7 +635,7 @@ Matrix is singular (non-invertible).</code></pre>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>eps, K <span class="op">=</span> <span class="fl">1e-8</span>, <span class="dv">100000</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">1</span> <span class="op">+</span> eps, <span class="dv">2</span> <span class="op">+</span> eps]])</span>
 <span id="cb18-3"><a href="#cb18-3"></a><span class="bu">print</span>(<span class="ss">f"det(A)=</span><span class="sc">{</span>det(A)<span class="sc">:.5g}</span><span class="ss">, det(K*A)=</span><span class="sc">{</span>det(K<span class="op">*</span>A)<span class="sc">:.5g}</span><span class="ss">"</span>)</span>
-<span id="cb18-4"><a href="#cb18-4"></a><span class="bu">print</span>(<span class="ss">f"cond(A)=</span><span class="sc">{</span>cond(A)<span class="sc">:.5g}</span><span class="ss">, cond(K*A)=</span><span class="sc">{</span>cond(A)<span class="sc">:.5g}</span><span class="ss">,"</span>)</span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="bu">print</span>(<span class="ss">f"cond(A)=</span><span class="sc">{</span>cond(A)<span class="sc">:.5g}</span><span class="ss">, cond(K*A)=</span><span class="sc">{</span>cond(K<span class="op">*</span>A)<span class="sc">:.5g}</span><span class="ss">,"</span>)</span>
 <span id="cb18-5"><a href="#cb18-5"></a><span class="bu">print</span>(<span class="ss">f"det(inv(A))=</span><span class="sc">{</span>det(inv(A))<span class="sc">:.5g}</span><span class="ss">, cond(inv(A))=</span><span class="sc">{</span>cond(inv(A))<span class="sc">:.5g}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>det(A)=-1e-08, det(K*A)=-100
@@ -643,6 +643,36 @@ cond(A)=1e+09, cond(K*A)=1e+09,
 det(inv(A))=-1e+08, cond(inv(A))=1e+09</code></pre>
 </div>
 </div>
+</section>
+<section id="interpreting-condition-numbers" class="slide level2">
+<h2>Interpreting Condition Numbers</h2>
+<ul>
+<li>The condition number of the matrix <span class="math inline">\(A\)</span> is <span class="math inline">\(\kappa(A) = ||A|| \cdot ||A^{-1}||\)</span>, which can be shown in terms of ratio of the largest and smallest eigenvalues
+<ul>
+<li><span class="math inline">\(\kappa(A) = \frac{\lambda_{\text{max}}}{\lambda_{\text{min}}}\)</span> for <span class="math inline">\(\lambda\)</span> the eigenvalues of <span class="math inline">\(A\)</span>. More soon!</li>
+</ul></li>
+<li>Crude intuition: for machine epsilon <span class="math inline">\(\epsilon_{\text{mach}}\)</span> when calculating some <span class="math inline">\(x\)</span>
+<ul>
+<li>The relative error, <span class="math inline">\(||x - x_{\text{approx}}||/||x||\)</span> is roughly <span class="math inline">\(\kappa(A) \cdot \epsilon_{\text{mach}}\)</span></li>
+<li>Solving <span class="math inline">\(A x = b\)</span> when <span class="math inline">\(\epsilon_{\text{mach}} = 1e^{-16}\)</span> it amplifies errors in <span class="math inline">\(b\)</span>, etc.</li>
+<li>if <span class="math inline">\(\kappa(A) \approx 1e^{16}\)</span> errors amplified so the scale of 100% relative error</li>
+</ul></li>
+</ul>
+</section>
+<section id="rules-of-thumb" class="slide level2">
+<h2>Rules of Thumb</h2>
+<ul>
+<li>Rule of thumb for standard floating points where <span class="math inline">\(\epsilon_{\text{mach}} = 1e^{-16}\)</span>:
+<ul>
+<li><span class="math inline">\(\kappa(A) \approx 1\)</span> well-conditioned</li>
+<li><span class="math inline">\(\kappa(A) &lt; 100\)</span> fairly well-conditioned</li>
+<li><span class="math inline">\(\kappa(A) &lt; 1e^{5}\)</span> moderately ill-conditioned. Take care</li>
+<li><span class="math inline">\(\kappa(A) &lt; 1e^{8}\)</span> ill-conditioned and might introduce significant errors, especially in algorithms which repeatedly use the same calculations</li>
+<li><span class="math inline">\(\kappa(A) &gt; 1e^{8}\)</span> very ill-conditioned and likely to introduce significant errors</li>
+</ul></li>
+<li>Choose solution algorithms based on “numerical stability” and “conditioning” when worried</li>
+<li>Much more extreme with 32-bit floats such as when using GPUs.</li>
+</ul>
 </section></section>
 <section>
 <section id="solving-linear-systems-of-equations" class="title-slide slide level1 center">
@@ -1121,9 +1151,9 @@ Q Lambda Q^T =
 <span id="cb48-6"><a href="#cb48-6"></a><span class="bu">print</span>(<span class="ss">f"beta =</span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span>beta<span class="sc">}</span><span class="ch">\n</span><span class="ss">beta_hat =</span><span class="ch">\n</span><span class="sc">{</span>beta_hat<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>beta =
- [-0.11808814  2.15055915 -0.58880581  0.78110081  1.20729284]
+ [-0.37740033 -0.03482823 -0.62279476  1.50312151  0.45715271]
 beta_hat =
-[-0.11245331  2.14808037 -0.58152911  0.7760979   1.20739825]</code></pre>
+[-0.38415748 -0.03090123 -0.61707946  1.50418288  0.45413767]</code></pre>
 </div>
 </div>
 </section>
@@ -1135,9 +1165,9 @@ beta_hat =
 <span id="cb50-2"><a href="#cb50-2"></a><span class="bu">print</span>(<span class="ss">f"beta =</span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span>beta<span class="sc">}</span><span class="ch">\n</span><span class="ss">beta_hat =</span><span class="ch">\n</span><span class="sc">{</span>beta_hat<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>beta =
- [-0.11808814  2.15055915 -0.58880581  0.78110081  1.20729284]
+ [-0.37740033 -0.03482823 -0.62279476  1.50312151  0.45715271]
 beta_hat =
-[-0.11245331  2.14808037 -0.58152911  0.7760979   1.20739825]</code></pre>
+[-0.38415748 -0.03090123 -0.61707946  1.50418288  0.45413767]</code></pre>
 </div>
 </div>
 </section>
@@ -1165,7 +1195,7 @@ beta_hat =
 <div class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a><span class="bu">print</span>(<span class="ss">f"cond(X'*X)=</span><span class="sc">{</span>cond(X.T<span class="op">@</span>X)<span class="sc">}</span><span class="ss">, cond(X_col'*X_col)=</span><span class="sc">{</span>cond(X_col.T<span class="op">@</span>X_col)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>cond(X'*X)=2819.332978639814, cond(X_col'*X_col)=1.1014450683078442e+16</code></pre>
+<pre><code>cond(X'*X)=2819.3329786399063, cond(X_col'*X_col)=1.2999933999712892e+16</code></pre>
 </div>
 </div>
 <ul>
