@@ -68,7 +68,21 @@ Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/le
      - Introductory material on linear algebra: https://intro.quantecon.org/linear_equations.html and https://datascience.quantecon.org/scientific/applied_linalg.html
      - Matrix decompositions and other topics: https://python.quantecon.org/linear_algebra.html#further-topics
 
-- **September 9**: Applications of Linear Algebra (Eigenvalues and Discounting)
+- **September 9**: Continuing on Introduction to Numerical Linear Algebra
+   - **Topics:** Overview of computational complexity and numerical precision, solving systems of equations, geometric interpretations of linear algebra, matrix decompositions, linear least squares, and eigenvalues and eigenvectors.  Preparation for applications.
+   - **Material:**
+     - [Linear Algebra Foundations](https://ubcecon.github.io/ECON526/lectures/lectures/linear_algebra_foundations.html), [Jupyter](lectures/lectures/linear_algebra_foundations.ipynb), [PDF](lectures/lectures/linear_algebra_foundations.pdf)
+   - **Self-study:**
+     - Basics of linear algebra, matrices, norms, and linear independence: https://python.quantecon.org/linear_algebra.html
+     - Numerical optimization: https://datascience.quantecon.org/scientific/optimization.html
+     - Systems of Equations: https://python.quantecon.org/linear_algebra.html#solving-systems-of-equations
+     - Eigenvectors and eigenvalues: https://python.quantecon.org/linear_algebra.html#eigenvalues-and-eigenvectors
+     - Downloading and manipulating data in Python: https://intro.quantecon.org/long_run_growth.html and https://intro.quantecon.org/business_cycle.html
+   - **(Optional) Extra Material**:
+     - Introductory material on linear algebra: https://intro.quantecon.org/linear_equations.html and https://datascience.quantecon.org/scientific/applied_linalg.html
+     - Matrix decompositions and other topics: https://python.quantecon.org/linear_algebra.html#further-topics
+
+- **September 11**: Applications of Linear Algebra (Eigenvalues and Discounting)
    - **Topics:** Geometric series and present values, difference equations, steady states, and convergence, unemployment dynamics, present discounted values
    - **Material:**
      - Finishing off [Linear Algebra Foundations](https://ubcecon.github.io/ECON526/lectures/lectures/linear_algebra_foundations.html)
@@ -81,21 +95,21 @@ Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/le
      - Supply and Demand: https://intro.quantecon.org/intro_supply_demand.html
      - More on Competitive Equilibrium: https://intro.quantecon.org/supply_demand_multiple_goods.html
 
-- **September 11**: Latent Variables and Intro to Unsupervised Learning
-   - **Topics:** Finished off eigenvalues and dynamics, principle components, and present discounted values
+- **September 16**: Latent Variables and Intro to Unsupervised Learning
+   - **Topics:** Review eigenvalues and dynamics, principle components, and present discounted values
    - **Material:**
      -  [Latent Variables and Unsupervised Learning](https://ubcecon.github.io/ECON526/lectures/lectures/latent_variables.html), [Jupyter](lectures/lectures/latent_variables.ipynb), [PDF](lectures/lectures/latent_variables.pdf)
    - **Self-study:**
      - [scikit-learn PCA docs](https://scikit-learn.org/stable/modules/decomposition.html#principal-component-analysis-pca)
      - [seaborn tutorials](https://seaborn.pydata.org/tutorial/introduction.html)
 
-- **September 16**: More on Latent Variables and Clustering
+- **September 18**: More on Latent Variables and Clustering
    - **Topics:** Finish off continuous latent variables, PCA, auto-encoders, clustering, and started dynamics
    - **Material:**
      - [Latent Variables and Unsupervised Learning](https://ubcecon.github.io/ECON526/lectures/lectures/latent_variables.html)
    - **Self-study:**
      - [scikit-learn k-means docs](https://scikit-learn.org/stable/modules/clustering.html#k-means)
-- **September 18**: Dynamics
+- **September 23**: Dynamics
    - **Topics:** Dynamical systems, stability, fixed points, linearization, intro to the Solow-Swan growth model
    - **Material:**
      - [Linear and Nonlinear Dynamics](https://ubcecon.github.io/ECON526/lectures/lectures/dynamics.html), [Jupyter](lectures/lectures/dynamics.ipynb), [PDF](lectures/lectures/dynamics.pdf)
@@ -106,7 +120,7 @@ Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/le
    - **(Optional) Extra Material**:
      - More on the Solow Model and Python: https://python-programming.quantecon.org/python_oop.html#example-the-solow-growth-model
 
-- **September 23**: Probability, Randomness, and Independence
+- **September 25**: Probability, Randomness, and Independence
    - **Topics:** Axioms of probability, LLN and CLT, and Conditional Independence
    - **Material:**
      - [Probability, Conditioning, and Independence](https://ubcecon.github.io/ECON526/lectures/lectures/probability.html), [Jupyter](lectures/lectures/probability.ipynb), [PDF](lectures/lectures/probability.pdf)
@@ -118,7 +132,9 @@ Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/le
      - https://python.quantecon.org/prob_meaning.html
      - https://python.quantecon.org/prob_matrix.html
 
--  **September 25**: Stochastic Processes and Forecasts
+-  **September 30 (Statutory holiday)**
+
+-  **October 2**: Stochastic Processes and Forecasts
    - **Topics:** Conditional expectations, Bayes' rule, Law of Iterated Expectations, stochastic processes
     - **Material:**
       - Finish [Probability, Conditioning, and Independence](https://ubcecon.github.io/ECON526/lectures/lectures/probability.html)
@@ -128,30 +144,29 @@ Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/le
      - https://python.quantecon.org/ar1_processes.html for more on AR(1) processes
      - https://datascience.quantecon.org/scientific/randomness.html#loan-states for a simple Markov Chain example
 
--  **September 30 (Statutory holiday)**
 
--  **October 2**: Markov Chains and Introduction to Causality and Counterfactuals
-   - **Topics:** Finish stochastic processes and Markov Chains and briefly setup causality and counterfactuals
+-  **October 7**: Markov Chains
+   - **Topics:** Finish stochastic processes and Markov Chains and briefly setup causality and counterfactuals if time permits
    - **Material:**
      - Finish [Stochastic Processes](https://ubcecon.github.io/ECON526/lectures/lectures/stochastic_processes.html)
    - **Self-Study:**
      - https://matheusfacure.github.io/python-causality-handbook/01-Introduction-To-Causality.html
 
--   **October 7** Introduction to Causality, continued
+-   **October 9** Introduction to Causality and Counterfactuals
     - **Material:**
       - [Introduction to Causality and Randomized Experiments](https://ubcecon.github.io/ECON526/lectures/lectures/introduction_to_causality.html)
     - **Self-study:**
       - https://matheusfacure.github.io/python-causality-handbook/01-Introduction-To-Causality.html
       - https://matheusfacure.github.io/python-causality-handbook/02-Randomised-Experiments.html
 
--   **October 9** Stats Review: Quantifying Uncertainty in Causal Inference
+-  **October 14 (Statutory holiday)**
+
+-  **October 16** Stats Review: Quantifying Uncertainty in Causal Inference + Midterm Logistics REview
     - **Material:**
       - [Stats Review: Quantifying Uncertainty in Applied Economics](https://ubcecon.github.io/ECON526/lectures/lectures/uncertainty_bias_variance.html)
     - **Self-study:**
       - https://matheusfacure.github.io/python-causality-handbook/03-Stats-Review-The-Most-Dangerous-Equation.html
 
--  **October 14 (Statutory holiday)**
--  **October 16 (TA session Midterm Review)**
 -  **October 21 (IN CLASS MIDTERM)**
 
 ### Paul
