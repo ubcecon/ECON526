@@ -539,10 +539,39 @@ X = U \Sigma V^T
 <p>A key result is that we can decompose the data into a sum of outer products of the eigenvectors and singular values. Assume ordered so that <span class="math inline">\(\sigma_1 \geq \sigma_2 \geq \ldots \geq \sigma_M\)</span>: <span class="math display">\[
 X = U \Sigma V^T = \sum_{m=1}^M \sigma_m u_m v_m^T
 \]</span></p>
-<p>Where here we assumed that the <span class="math inline">\(\text{rank}(X) \leq M\)</span> and</p>
+<p>Note that</p>
 <ul>
 <li><span class="math inline">\(u_m \in\mathbb{R}^N\)</span> is the <span class="math inline">\(m\)</span>-th column of <span class="math inline">\(U\)</span> and <span class="math inline">\(v_m \in\mathbb{R}^M\)</span> is the <span class="math inline">\(m\)</span>th column of <span class="math inline">\(V\)</span></li>
 <li>So <span class="math inline">\(u_m v_m^T\)</span> is an <span class="math inline">\(N \times M\)</span> matrix but you can show that it is rank-1. i.e., you can decompose it into the product of two vectors.</li>
+</ul>
+</section>
+<section id="interpretation-the-scatter-covariance-matrix" class="slide level2">
+<h2>Interpretation the Scatter (Covariance) Matrix</h2>
+<ul>
+<li>Assuming the data has been de-meaned already, <span class="math inline">\(X^{\top} X\)</span> is the covariance matrix, otherwise it is called a scatter matrix</li>
+<li>The covariance matrix, <span class="math inline">\(X^{\top} X\)</span> is a <span class="math inline">\(M \times M\)</span> matrix where <span class="math display">\[
+[X^{\top} X]_{ij} = \sum_{k=1}^N x_{ki} x_{kj}
+\]</span></li>
+<li>Calculates an expression related to the the covariance between features</li>
+<li>The eigenvectors of this tell you along which directions is there the most variation</li>
+</ul>
+</section>
+<section id="interpretation-of-the-gram-matrix" class="slide level2">
+<h2>Interpretation of the Gram Matrix</h2>
+<ul>
+<li>The Gramian is <span class="math inline">\(X X^{\top}\)</span> is a <span class="math inline">\(N \times N\)</span> matrix where</li>
+</ul>
+<p><span class="math display">\[
+[X X^{\top}]_{ij} = x_i^{\top} x_j
+\]</span></p>
+<ul>
+<li>i.e., each element measures the similarity between features of the <span class="math inline">\(i\)</span>th and <span class="math inline">\(j\)</span>th observations</li>
+<li>Inner products are a classic way to measure similarity
+<ul>
+<li>If <span class="math inline">\(x_i^T x_j\)</span> is large, then the <span class="math inline">\(i\)</span>th and <span class="math inline">\(j\)</span>th observations are similar, and it is maximized if equal.</li>
+<li>If <span class="math inline">\(x_i^T x_j\)</span> is zero then the features are as different as possible</li>
+</ul></li>
+<li>This is important in what are called ``Kernel methods’’ which form approximations by comparing the similarity of observations</li>
 </ul>
 </section>
 <section id="interpreting-rank" class="slide level2">
@@ -701,8 +730,18 @@ g(f(x; \theta_e); \theta_d) \approx x
 \min_{W} \frac{1}{N} \sum_{n=1}^N ||W \overbrace{W^T x_n}^{z_n = f(x_n;W)} - x_n||_2^2,\quad \text{with } W^T W = I
 \]</span></p>
 <ul>
-<li><p>Can show gives equivalent to PCA! For fixed <span class="math inline">\(L\)</span> latent space size, <span class="math inline">\(W\)</span> are the first <span class="math inline">\(L\)</span> columns of <span class="math inline">\(V\)</span> from the SVD (sorted by size of singular values)</p></li>
-<li><p>In more advanced machine learning examples, intuition seems to come up frequently. Related to embeddings, which come up with NLP, networks, etc.</p></li>
+<li>In more advanced machine learning examples, intuition seems to come up frequently. Related to embeddings, which come up with NLP, networks, etc.</li>
+</ul>
+</section>
+<section id="connection-to-pca" class="slide level2">
+<h2>Connection to PCA</h2>
+<ul>
+<li>From a SVD of <span class="math inline">\(X = U \Sigma V^T\)</span> where <span class="math inline">\(V\)</span> are the eigenvectors. Assuming <span class="math inline">\(\Sigma\)</span> is sorted largest to smallest.
+<ul>
+<li>If we are using <span class="math inline">\(L\)</span> components, then we truncate by taking the first <span class="math inline">\(L\)</span> columns of <span class="math inline">\(V\)</span> and <span class="math inline">\(\Sigma\)</span></li>
+<li>Then let <span class="math inline">\(W^{\top} = \Sigma_{1:L} V_{1:L}^{\top}\)</span></li>
+</ul></li>
+<li>With this, <span class="math inline">\(f(x) = W^{\top} x\)</span> is an low-dimensional approximation to <span class="math inline">\(x\)</span> that minimizes the reconstruction error</li>
 </ul>
 </section></section>
 <section>
