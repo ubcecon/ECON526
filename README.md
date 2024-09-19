@@ -40,9 +40,10 @@ The course has one midterm, weekly to bi-weekly problem sets, and a final data p
 
 1. **September 8th Midnight:** [Problem Set 1](problem_sets/problem_set_1.ipynb)
 2. **September 18th Midnight:** [Problem Set 2](problem_sets/problem_set_2.ipynb)
-3. **October 16th:** Midterm Logistics Practice and Review <!-- with [Midterm Practice Problems](problem_sets/midterm_practice_1.ipynb) -->
-4. **October 21st:** IN CLASS MIDTERM
-5.  **December 15th Midnight:** Data Project Due
+3. **September 25th Midnight:** [Problem Set 3](problem_sets/problem_set_3.ipynb)
+4. **October 16th:** Midterm Logistics Practice and Review <!-- with [Midterm Practice Problems](problem_sets/midterm_practice_1.ipynb) -->
+5. **October 21st:** IN CLASS MIDTERM
+6.  **December 15th Midnight:** Data Project Due
 
 See the `/problem_sets` folder within this repository for the problem sets as jupyter notebooks.  You should modify them directly as Jupyter notebooks, and the TA will explain how to submit them.
 
