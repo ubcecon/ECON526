@@ -41,9 +41,10 @@ The course has one midterm, weekly to bi-weekly problem sets, and a final data p
 1. **September 8th Midnight:** [Problem Set 1](problem_sets/problem_set_1.ipynb)
 2. **September 18th Midnight:** [Problem Set 2](problem_sets/problem_set_2.ipynb)
 3. **September 25th Midnight:** [Problem Set 3](problem_sets/problem_set_3.ipynb)
-4. **October 16th:** Midterm Logistics Practice and Review <!-- with [Midterm Practice Problems](problem_sets/midterm_practice_1.ipynb) -->
-5. **October 21st:** IN CLASS MIDTERM
-6.  **December 15th Midnight:** Data Project Due
+4. **October 6th Midnight:** [Problem Set 4](problem_sets/problem_set_4.ipynb)
+5. **October 16th:** Midterm Logistics Practice and Review <!-- with [Midterm Practice Problems](problem_sets/midterm_practice_1.ipynb) -->
+6. **October 21st:** IN CLASS MIDTERM
+7.  **December 15th Midnight:** Data Project Due
 
 See the `/problem_sets` folder within this repository for the problem sets as jupyter notebooks.  You should modify them directly as Jupyter notebooks, and the TA will explain how to submit them.
 
@@ -122,7 +123,7 @@ Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/le
    - **(Optional) Extra Material**:
      - More on the Solow Model and Python: https://python-programming.quantecon.org/python_oop.html#example-the-solow-growth-model
 
-- **September 25**: Probability, Randomness, and Independence
+- **September 25**: Finished Dynamics and Started Probability, Randomness, and Independence
    - **Topics:** Axioms of probability, LLN and CLT, and Conditional Independence
    - **Material:**
      - [Probability, Conditioning, and Independence](https://ubcecon.github.io/ECON526/lectures/lectures/probability.html), [Jupyter](lectures/lectures/probability.ipynb), [PDF](lectures/lectures/probability.pdf)
@@ -136,7 +137,20 @@ Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/le
 
 -  **September 30 (Statutory holiday)**
 
--  **October 2**: Stochastic Processes and Forecasts
+- **October 2nd**: Continue Probability, Randomness, and Independence
+   - **Topics:** Axioms of probability, LLN and CLT, and Conditional Independence
+   - **Material:**
+     - [Probability, Conditioning, and Independence](https://ubcecon.github.io/ECON526/lectures/lectures/probability.html), [Jupyter](lectures/lectures/probability.ipynb), [PDF](lectures/lectures/probability.pdf)
+   - **Self-study:**
+     - https://datascience.quantecon.org/scientific/randomness.html
+     - https://intro.quantecon.org/prob_dist.html
+   - **(Optional) Extra Material**:
+     - https://python.quantecon.org/lln_clt.html
+     - https://python.quantecon.org/prob_meaning.html
+     - https://python.quantecon.org/prob_matrix.html
+
+
+-  **October 7**: Stochastic Processes and Forecasts
    - **Topics:** Conditional expectations, Bayes' rule, Law of Iterated Expectations, stochastic processes
     - **Material:**
       - Finish [Probability, Conditioning, and Independence](https://ubcecon.github.io/ECON526/lectures/lectures/probability.html)
@@ -147,28 +161,31 @@ Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/le
      - https://datascience.quantecon.org/scientific/randomness.html#loan-states for a simple Markov Chain example
 
 
--  **October 7**: Markov Chains
+-  **October 9**: Markov Chains and Maybe Start Causality
    - **Topics:** Finish stochastic processes and Markov Chains and briefly setup causality and counterfactuals if time permits
    - **Material:**
      - Finish [Stochastic Processes](https://ubcecon.github.io/ECON526/lectures/lectures/stochastic_processes.html)
+      - [Introduction to Causality and Randomized Experiments](https://ubcecon.github.io/ECON526/lectures/lectures/introduction_to_causality.html)
    - **Self-Study:**
      - https://matheusfacure.github.io/python-causality-handbook/01-Introduction-To-Causality.html
 
--   **October 9** Introduction to Causality and Counterfactuals
+
+-  **October 14 (Statutory holiday)**
+<!-- 
+-  **October 16** Stats Review: Quantifying Uncertainty in Causal Inference + Midterm Logistics Review
+    - **Material:**
+      - [Stats Review: Quantifying Uncertainty in Applied Economics](https://ubcecon.github.io/ECON526/lectures/lectures/uncertainty_bias_variance.html)
+    - **Self-study:**
+      - https://matheusfacure.github.io/python-causality-handbook/03-Stats-Review-The-Most-Dangerous-Equation.html
+-->
+
+-   **October 16** Introduction to Causality and Counterfactuals + Midterm Logistics Review
     - **Material:**
       - [Introduction to Causality and Randomized Experiments](https://ubcecon.github.io/ECON526/lectures/lectures/introduction_to_causality.html)
     - **Self-study:**
       - https://matheusfacure.github.io/python-causality-handbook/01-Introduction-To-Causality.html
       - https://matheusfacure.github.io/python-causality-handbook/02-Randomised-Experiments.html
-
--  **October 14 (Statutory holiday)**
-
--  **October 16** Stats Review: Quantifying Uncertainty in Causal Inference + Midterm Logistics REview
-    - **Material:**
-      - [Stats Review: Quantifying Uncertainty in Applied Economics](https://ubcecon.github.io/ECON526/lectures/lectures/uncertainty_bias_variance.html)
-    - **Self-study:**
-      - https://matheusfacure.github.io/python-causality-handbook/03-Stats-Review-The-Most-Dangerous-Equation.html
-
+       
 -  **October 21 (IN CLASS MIDTERM)**
 
 ### Paul

@@ -569,8 +569,8 @@ x_2 &amp;= a x_1 + b = a^2 x_0 + ab + b\\
 \ldots &amp; \\
 x_t &amp;= a^t x_0 + b \sum_{i=0}^{t-1} a^i = a^t x_0 + b \frac{1-a^t}{1-a}\\
 x^* &amp;\equiv \lim_{t\to\infty}x_t = \begin{cases}\frac{b}{1-a} &amp; \text{ if } |a|&lt;1\\
-\text{diverges} &amp; \text{ if } |a|\geq 1\\
-\text{indeterminate} &amp; \text{ if } a=1
+\text{diverges} &amp; \text{ if } |a| &gt; 1 \text{ or } a=1, b\neq 0\\
+\text{indeterminate} &amp; \text{ if } a=1, b=0
 \end{cases}
 \end{aligned}
 \]</span></p>
@@ -907,7 +907,7 @@ S = \begin{pmatrix}
 <li>For a given <span class="math inline">\(r_t\)</span> distribution of probabilities across page, I can see the new probabilities distribution as</li>
 </ul>
 <p><span class="math display">\[
-r_{t+1} = S r_t
+r_{t+1} = S^{\top} r_t
 \]</span></p>
 <ul>
 <li>Motivation to learn more probability and Markov Chains (next set of lectures)</li>
@@ -917,7 +917,7 @@ r_{t+1} = S r_t
 <h2>Fixed Points and Eigenvectors</h2>
 <ul>
 <li>What is a fixed point of this process?</li>
-<li>Eigenvector of <span class="math inline">\(S\)</span> associated with <span class="math inline">\(\lambda = 1\)</span> eigenvalue!</li>
+<li>Eigenvector of <span class="math inline">\(S^{\top}\)</span> associated with <span class="math inline">\(\lambda = 1\)</span> eigenvalue!</li>
 <li>The real PageRank is a little more subtle (adds in dampening) but the same basic idea</li>
 <li>Learn numerical algebra to use in practice. It is infeasible to actually compute the eigenvector of a huge matrix with a decomposition.</li>
 </ul>
