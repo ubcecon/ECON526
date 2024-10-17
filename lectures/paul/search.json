@@ -1,0 +1,1430 @@
+[
+  {
+    "objectID": "feed.html",
+    "href": "feed.html",
+    "title": "Slides",
+    "section": "",
+    "text": "Difference in Differences II\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nDouble / Debiased Machine Learning\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nECON 526: Quantitative Economics with Data Science Applications\n\n\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nFixed Effects\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nIntroduction to Difference in Differences\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nMatching\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Networks\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nSynthetic Control\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nTreatment Heterogeneity and Conditional Effects\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "moredid.html#setup",
+    "href": "moredid.html#setup",
+    "title": "Difference in Differences II",
+    "section": "Setup",
+    "text": "Setup\n\nTwo Many periods, binary treatment in second some periods\nPotential outcomes \\(\\{y_{it}(0),y_{it}(1)\\}_{t=1}^T\\) for \\(i=1,...,N\\)\nTreatment \\(D_{it} \\in \\{0,1\\}\\),\n\n\\(D_{i0} = 0\\) \\(\\forall i\\)\n\\(D_{i1} = 1\\) for some, \\(0\\) for others\n\nObserve \\(y_{it} = y_{it}(0)(1-D_{it}) + D_{it} y_{it}(1)\\)"
+  },
+  {
+    "objectID": "moredid.html#identification",
+    "href": "moredid.html#identification",
+    "title": "Difference in Differences II",
+    "section": "Identification",
+    "text": "Identification\n\nSame logic as before, \\[\n\\begin{align*}\nATT_{t,t-s} & = \\Er[y_{it}(1) - \\color{red}{y_{it}(0)} | D_{it} = 1, D_{it-s}=0] \\\\\n& = \\Er[y_{it}(1) - y_{it-s}(0) | D_{it} = 1, D_{it-s}=0] - \\\\\n& \\;\\; -  \\Er[\\color{red}{y_{it}(0)} - y_{t-s}(0) | D_{it}=1, D_{it-s}=0]\n\\end{align*}\n\\]\n\nassume \\(\\Er[\\color{red}{y_{it}(0)} - y_{it-s}(0) | D_{it}=1,  D_{it-s}=0] = \\Er[y_{it}(0) - y_{it-s}(0) | D_{it}=0, D_{it-s}=0]\\)\n\n\n\\[\n\\begin{align*}\nATT_{t,t-s}& = \\Er[y_{it} - y_{it-s} | D_{it}=1, D_{it-s}=0] - \\Er[y_{it} - y_{it-s} | D_{it}=0, D_{it-s}=0]\n\\end{align*}\n\\] - Similarly, can identify various other interpretable average treatment effects conditional on being treated at some times and not others"
+  },
+  {
+    "objectID": "moredid.html#estimation",
+    "href": "moredid.html#estimation",
+    "title": "Difference in Differences II",
+    "section": "Estimation",
+    "text": "Estimation\n\nPlugin\nFixed effects? \\[\ny_{it} = \\beta D_{it} + \\alpha_i + \\delta_t + \\epsilon_{it}\n\\] When will \\(\\hat{\\beta}^{FE}\\) consistently estimate some interpretable conditional average of treatment effects?"
+  },
+  {
+    "objectID": "moredid.html#fixed-effects",
+    "href": "moredid.html#fixed-effects",
+    "title": "Difference in Differences II",
+    "section": "Fixed Effects",
+    "text": "Fixed Effects\n\nAs with matching, \\[\n\\begin{align*}\n\\hat{\\beta} = & \\sum_{i=1,t=1}^{n,T} y_{it} \\overbrace{\\frac{\\tilde{D}_{it}}{ \\sum_{i,t} \\tilde{D}_{it}^2 }}^{\\hat{\\omega}_{it}} = \\sum_{i=1,t=1}^{n,T} y_{it}(0) \\hat{\\omega}_{it} + \\sum_{i=1,t=1}^{n,T} D_{it} (y_{it}(1) - y_{it}(0)) \\hat{\\omega}_{it}\n\\end{align*}\n\\] where \\[\n\\begin{align*}\n\\tilde{D}_{it} & = D_{it} - \\frac{1}{n} \\sum_{j=1}^n (D_{jt} - \\frac{1}{T} \\sum_{s=1}^T D_{js}) - \\frac{1}{T} \\sum_{s=1}^T D_{is} \\\\\n& = D_{it} - \\frac{1}{n} \\sum_{j=1}^n D_{jt} - \\frac{1}{T} \\sum_{s=1}^T D_{is} + \\frac{1}{nT} \\sum_{j,s} D_{js}\n\\end{align*}\n\\]\n\n\n\nimports\nimport warnings\nwarnings.filterwarnings('ignore')\n\nimport pandas as pd\nimport numpy as np\nfrom matplotlib import style\nfrom matplotlib import pyplot as plt\nstyle.use(\"fivethirtyeight\")"
+  },
+  {
+    "objectID": "moredid.html#weights",
+    "href": "moredid.html#weights",
+    "title": "Difference in Differences II",
+    "section": "Weights",
+    "text": "Weights\n\n\nCode\ndef assigntreat(n, T, portiontreated):\n    treated = np.zeros((n, T), dtype=bool)\n    for t in range(1, T):\n        treated[:, t] = treated[:, t - 1]\n        if portiontreated[t] &gt; 0:\n            treated[:, t] = np.logical_or(treated[:, t-1], np.random.rand(n) &lt; portiontreated[t])\n    return treated\n\ndef weights(D):\n    D̈ = D - np.mean(D, axis=0) - np.mean(D, axis=1)[:, np.newaxis] + np.mean(D)\n    ω = D̈ / np.sum(D̈**2)\n    return ω\n\nn = 100\nT = 9\npt = np.zeros(T)\npt[T//2 + 1] = 0.5\nD = assigntreat(n, T,pt)\ny = np.random.randn(n, T)\nweighted_sum = np.sum(y * weights(D))\nprint(weighted_sum)\n\n\n0.006086045527913524\n\n\n\n\nCode\n# check that it matches fixed effect estimate from a package\nfrom linearmodels.panel import PanelOLS\n\ndf = pd.DataFrame({\n    'id': np.repeat(np.arange(1, n + 1), T),\n    't': np.tile(np.arange(1, T + 1), n),\n    'y': y.flatten(),\n    'D': D.flatten()\n})\ndf.set_index(['id', 't'], inplace=True)\nmodel = PanelOLS(df['y'], df[['D']], entity_effects=True, time_effects=True)\nresult = model.fit()\nprint(result)\n\n\n                          PanelOLS Estimation Summary                           \n================================================================================\nDep. Variable:                      y   R-squared:                     2.734e-06\nEstimator:                   PanelOLS   R-squared (Between):             -0.0004\nNo. Observations:                 900   R-squared (Within):            -4.23e-05\nDate:                Thu, Oct 17 2024   R-squared (Overall):          -7.226e-05\nTime:                        11:54:22   Log-likelihood                   -1196.4\nCov. Estimator:            Unadjusted                                           \n                                        F-statistic:                      0.0022\nEntities:                         100   P-value                           0.9629\nAvg Obs:                       9.0000   Distribution:                   F(1,791)\nMin Obs:                       9.0000                                           \nMax Obs:                       9.0000   F-statistic (robust):             0.0022\n                                        P-value                           0.9629\nTime periods:                       9   Distribution:                   F(1,791)\nAvg Obs:                      100.000                                           \nMin Obs:                      100.000                                           \nMax Obs:                      100.000                                           \n                                                                                \n                             Parameter Estimates                              \n==============================================================================\n            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI\n------------------------------------------------------------------------------\nD              0.0061     0.1309     0.0465     0.9629     -0.2508      0.2630\n==============================================================================\n\nF-test for Poolability: 0.7345\nP-value: 0.9771\nDistribution: F(107,791)\n\nIncluded effects: Entity, Time"
+  },
+  {
+    "objectID": "moredid.html#weights-with-single-treatment-time",
+    "href": "moredid.html#weights-with-single-treatment-time",
+    "title": "Difference in Differences II",
+    "section": "Weights with Single Treatment Time",
+    "text": "Weights with Single Treatment Time\n\n\nCode\ndef plotD(D,ax):\n    n, T = D.shape\n    ax.set(xlabel='time',ylabel='portiontreated')\n    ax.plot(range(1,T+1),D.mean(axis=0))\n    ax\n\ndef plotweights(D, ax):\n    n, T = D.shape\n    ω = weights(D)\n    groups = np.unique(D, axis=0)\n    ax.set(xlabel='time', ylabel='weight')\n\n    for g in groups:\n        i = np.where(np.all(D == g, axis=1))[0][0]\n        wt = ω[i, :]\n        ax.plot(range(1, T+1), wt, marker='o', label=f'Treated {np.sum(g)} times')\n\n    ax.legend()\n    ax\n\ndef plotwd(D):\n    fig, ax = plt.subplots(2,1)\n    ax[0]=plotD(D,ax[0])\n    ax[1]=plotweights(D,ax[1])\n    plt.show()\n\nplotwd(D)"
+  },
+  {
+    "objectID": "moredid.html#weights-with-early-and-late-treated",
+    "href": "moredid.html#weights-with-early-and-late-treated",
+    "title": "Difference in Differences II",
+    "section": "Weights with Early and Late Treated",
+    "text": "Weights with Early and Late Treated\n\n\nCode\npt = np.zeros(T)\npt[1] = 0.3\npt[T-2] = 0.6\nD = assigntreat(n,T,pt)\nplotwd(D)"
+  },
+  {
+    "objectID": "moredid.html#sign-reversal",
+    "href": "moredid.html#sign-reversal",
+    "title": "Difference in Differences II",
+    "section": "Sign Reversal",
+    "text": "Sign Reversal\n\n\nCode\ndvals = np.unique(D,axis=0)\ndvals.sort()\nATT = np.ones(T)\nATT[0] = 0.0\nATT[T-2:T] = 6.0\n\ndef simulate(n,T,pt,ATT,sigma=0.01):\n    D = assigntreat(n,T,pt)\n    y = np.random.randn(n,T)*sigma + ATT[np.cumsum(D, axis=1)]\n    df = pd.DataFrame({\n        'id': np.repeat(np.arange(1, n + 1), T),\n        't': np.tile(np.arange(1, T + 1), n),\n        'y': y.flatten(),\n        'D': D.flatten()\n    })\n    df.set_index(['id', 't'], inplace=True)\n    return(df)\n\ndf = simulate(n,T,pt,ATT)\nmodel = PanelOLS(df['y'], df[['D']], entity_effects=True, time_effects=True)\nresult = model.fit()\nprint(result)\n\n\n                          PanelOLS Estimation Summary                           \n================================================================================\nDep. Variable:                      y   R-squared:                        0.0125\nEstimator:                   PanelOLS   R-squared (Between):             -0.4400\nNo. Observations:                 900   R-squared (Within):              -0.0841\nDate:                Thu, Oct 17 2024   R-squared (Overall):             -0.2460\nTime:                        11:54:23   Log-likelihood                   -1213.1\nCov. Estimator:            Unadjusted                                           \n                                        F-statistic:                      10.000\nEntities:                         100   P-value                           0.0016\nAvg Obs:                       9.0000   Distribution:                   F(1,791)\nMin Obs:                       9.0000                                           \nMax Obs:                       9.0000   F-statistic (robust):             10.000\n                                        P-value                           0.0016\nTime periods:                       9   Distribution:                   F(1,791)\nAvg Obs:                      100.000                                           \nMin Obs:                      100.000                                           \nMax Obs:                      100.000                                           \n                                                                                \n                             Parameter Estimates                              \n==============================================================================\n            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI\n------------------------------------------------------------------------------\nD             -0.4423     0.1399    -3.1623     0.0016     -0.7168     -0.1677\n==============================================================================\n\nF-test for Poolability: 5.8976\nP-value: 0.0000\nDistribution: F(107,791)\n\nIncluded effects: Entity, Time"
+  },
+  {
+    "objectID": "moredid.html#when-to-worry",
+    "href": "moredid.html#when-to-worry",
+    "title": "Difference in Differences II",
+    "section": "When to worry",
+    "text": "When to worry\n\nIf multiple treatment times and treatment heterogeneity\nEven if weights do not have wrong sign, the fixed effects estimate is hard to interpret\nSame logic applies more generally – not just to time\n\nE.g. if have group effects, some treated units in multiple groups, and \\(E[y(1) - y(0) | group]\\) varies"
+  },
+  {
+    "objectID": "moredid.html#what-to-do",
+    "href": "moredid.html#what-to-do",
+    "title": "Difference in Differences II",
+    "section": "What to Do?",
+    "text": "What to Do?\n\nFollow identification \\[\n\\begin{align*}\nATT_{t,t-s}& = \\Er[y_{it} - y_{it-s} | D_{it}=1, D_{it-s}=0] - \\Er[y_{it} - y_{it-s} | D_{it}=0, D_{it-s}=0]\n\\end{align*}\n\\] and estimate \\[\n\\begin{align*}\n\\widehat{ATT}_{t,t-s} = & \\frac{\\sum_i y_{it} D_{it}(1-D_{it-s})}{\\sum_i D_{it}(1-D_{it-s})} \\\\\n& - \\frac{\\sum_i y_{it} (1-D_{it})(1-D_{it-s})}{\\sum_i (1-D_{it})(1-D_{it-s})}\n\\end{align*}\n\\] and perhaps some average, e.g. (there are other reasonable weighted averages) \\[\n\\sum_{t=1}^T \\frac{\\sum_i D_{it}}{\\sum_{i,s} D_{i,s}} \\frac{1}{t-1} \\sum_{s=1}^{t-1} \\widehat{ATT}_{t,t-s}\n\\]\n\nCode? Inference? Optimal? (could create it, but there’s an easier way)"
+  },
+  {
+    "objectID": "moredid.html#what-to-do-1",
+    "href": "moredid.html#what-to-do-1",
+    "title": "Difference in Differences II",
+    "section": "What to Do?",
+    "text": "What to Do?\n\nUse an appropriate package\n\ndifferences\nsee https://asjadnaqvi.github.io/DiD/ for more options (but none are python)\n\nProblem is possible correlation of \\((y_{it}(1) - y_{it}(0))D_{it}\\) with \\(\\tilde{D}_{it}\\)\n\n\\(\\tilde{D}_{it}\\) is function of \\(t\\) and \\((D_{i1}, ..., D_{iT})\\)\nEstimating separate coefficient for each combination of \\(t\\) and \\((D_{i1}, ..., D_{iT})\\) will eliminate correlation / flexibly model treatment effect heterogeneity"
+  },
+  {
+    "objectID": "moredid.html#what-to-do-2",
+    "href": "moredid.html#what-to-do-2",
+    "title": "Difference in Differences II",
+    "section": "What to Do?",
+    "text": "What to Do?\n\nCohorts = unique sequences of \\((D_{i1}, ..., D_{iT})\\)\n\nIn current simulated example, three cohorts\n\n\\((0, 0, 0, 0, 0, 0, 0, 0, 0)\\)\n\\((0, 0, 0, 0, 0, 0, 0, 1, 1)\\)\n\\((0, 1, 1, 1, 1, 1, 1, 1, 1)\\)"
+  },
+  {
+    "objectID": "moredid.html#regression-with-cohort-time-interactions",
+    "href": "moredid.html#regression-with-cohort-time-interactions",
+    "title": "Difference in Differences II",
+    "section": "Regression with Cohort-time Interactions",
+    "text": "Regression with Cohort-time Interactions\n\nEstimate: \\[\ny_{it} = \\sum_{c=1}^C D_{it} 1\\{C_i=c\\} \\beta_{ct} + \\alpha_i + \\delta_t + \\epsilon_{it}\n\\]\n\\(\\hat{\\beta}_{ct}\\) consistently estimates \\(\\Er[y_{it}(1) - y_{it}(0) | C_{i}=c, D_{it}=1]\\) is parallel trends holds for all periods \\[\n\\Er[y_{it}(0) - y_{it-s}(0) | C_i=c] = \\Er[y_{it}(0) - y_{it-s}(0) | C_i=c']\n\\] for all \\(t, s, c, c'\\)"
+  },
+  {
+    "objectID": "moredid.html#regression-with-cohort-treat-time-interactions",
+    "href": "moredid.html#regression-with-cohort-treat-time-interactions",
+    "title": "Difference in Differences II",
+    "section": "Regression with Cohort-Treat-Time Interactions",
+    "text": "Regression with Cohort-Treat-Time Interactions\n\n\nCode\ndef definecohort(df):\n    # convert dummies into categorical\n    n = len(df.index.levels[0])\n    T = len(df.index.levels[1])\n    dmat=np.array(df.sort_index().D)\n    dmat=np.array(df.D).reshape(n,T)\n    cohort=dmat.dot(1 &lt;&lt; np.arange(dmat.shape[-1] - 1, -1, -1))\n    cdf = pd.DataFrame({\"id\":np.array(df.index.levels[0]), \"cohort\":pd.Categorical(cohort)})\n    cdf.set_index(['id'],inplace=True)\n    df=pd.merge(df, cdf, left_index=True, right_index=True)\n    return(df)\n\ndf = definecohort(df)\n\ndef defineinteractions(df):\n    df = df.reset_index()\n    df['dct'] = 'untreated'\n    df['dct'] = df.apply(lambda x: f\"t{x['t']},c{x['cohort']}\" if x['D'] else f\"untreated\", axis=1)\n    return(df.set_index(['id','t']))\n\ndf = defineinteractions(df)\n\nPanelOLS.from_formula(\"y ~ -1 + dct + EntityEffects + TimeEffects\", df).fit()\n\n\n\nPanelOLS Estimation Summary\n\n\nDep. Variable:\ny\nR-squared:\n0.9999\n\n\nEstimator:\nPanelOLS\nR-squared (Between):\n1.0000\n\n\nNo. Observations:\n900\nR-squared (Within):\n0.9999\n\n\nDate:\nThu, Oct 17 2024\nR-squared (Overall):\n1.0000\n\n\nTime:\n11:54:23\nLog-likelihood\n2932.3\n\n\nCov. Estimator:\nUnadjusted\n\n\n\n\n\n\nF-statistic:\n7.93e+05\n\n\nEntities:\n100\nP-value\n0.0000\n\n\nAvg Obs:\n9.0000\nDistribution:\nF(10,782)\n\n\nMin Obs:\n9.0000\n\n\n\n\nMax Obs:\n9.0000\nF-statistic (robust):\n1.339e+06\n\n\n\n\nP-value\n0.0000\n\n\nTime periods:\n9\nDistribution:\nF(10,782)\n\n\nAvg Obs:\n100.000\n\n\n\n\nMin Obs:\n100.000\n\n\n\n\nMax Obs:\n100.000\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nParameter Estimates\n\n\n\nParameter\nStd. Err.\nT-stat\nP-value\nLower CI\nUpper CI\n\n\ndct[T.t2,c255]\n0.9991\n0.0025\n396.65\n0.0000\n0.9942\n1.0041\n\n\ndct[T.t3,c255]\n0.9970\n0.0025\n395.83\n0.0000\n0.9921\n1.0020\n\n\ndct[T.t4,c255]\n0.9971\n0.0025\n395.83\n0.0000\n0.9921\n1.0020\n\n\ndct[T.t5,c255]\n0.9984\n0.0025\n396.37\n0.0000\n0.9935\n1.0033\n\n\ndct[T.t6,c255]\n0.9950\n0.0025\n395.02\n0.0000\n0.9901\n1.0000\n\n\ndct[T.t7,c255]\n1.0007\n0.0025\n397.28\n0.0000\n0.9958\n1.0056\n\n\ndct[T.t8,c255]\n5.9987\n0.0028\n2123.9\n0.0000\n5.9931\n6.0042\n\n\ndct[T.t8,c3]\n1.0027\n0.0026\n385.68\n0.0000\n0.9976\n1.0078\n\n\ndct[T.t9,c255]\n6.0036\n0.0028\n2125.7\n0.0000\n5.9980\n6.0091\n\n\ndct[T.t9,c3]\n0.9993\n0.0026\n384.34\n0.0000\n0.9941\n1.0044\n\n\ndct[T.untreated]\n0.0001\n0.0008\n0.1468\n0.8833\n-0.0015\n0.0017\n\n\n\nF-test for Poolability: 0.9910P-value: 0.5099Distribution: F(107,782)Included effects: Entity, Timeid: 0x7cc598ad6150"
+  },
+  {
+    "objectID": "moredid.html#regression-with-cohort-time-interactions-1",
+    "href": "moredid.html#regression-with-cohort-time-interactions-1",
+    "title": "Difference in Differences II",
+    "section": "Regression with Cohort-Time Interactions",
+    "text": "Regression with Cohort-Time Interactions\n\nIf just want to assume parallel trends at treatment times, instead of parallel trends everywhere, can estimate \\[\ny_{it} = \\sum_{c=1}^C 1\\{C_i=c\\} \\delta_{c,t} + \\alpha_i + \\epsilon_{it}\n\\]\n\\(\\hat{\\delta}_{c,t} + \\frac{\\sum \\alpha_i 1\\{C_i=c\\}}{\\sum 1\\{C_i =\nc\\}}\\) consistently estimates \\(\\Er[y_{it} | C_{i} = c]\\)\n\\(\\hat{\\delta}_{c,t} -\\hat{\\delta}_{c,t-s}\\) consistently estimates \\(\\Er[y_{it} - y_{i,t-s}| C_{i} = c]\\)\nIf \\(c\\) treated at \\(t\\), not at \\(t-s\\), and \\(c'\\) not treated at either and assume parallel trends, \\[\n\\hat{\\delta}_{c,t} -\\hat{\\delta}_{c,t-s} - (\\hat{\\delta}_{c',t} -\\hat{\\delta}_{c',t-s}) \\inprob \\Er[y_{it}(1)-y{it}(0)| C_i =c]\n\\]"
+  },
+  {
+    "objectID": "moredid.html#regression-with-cohort-time-interactions-2",
+    "href": "moredid.html#regression-with-cohort-time-interactions-2",
+    "title": "Difference in Differences II",
+    "section": "Regression with Cohort-Time Interactions",
+    "text": "Regression with Cohort-Time Interactions\n\ndfi=df.reset_index()\ndfi['time'] = dfi['t']\ndfi=dfi.set_index(['id','t'])\nPanelOLS.from_formula(\"y ~ -1 + C(cohort)*C(time) + EntityEffects\",dfi, drop_absorbed=True).fit()\n\n\nPanelOLS Estimation Summary\n\n\nDep. Variable:\ny\nR-squared:\n0.9999\n\n\nEstimator:\nPanelOLS\nR-squared (Between):\n1.0000\n\n\nNo. Observations:\n900\nR-squared (Within):\n0.9999\n\n\nDate:\nThu, Oct 17 2024\nR-squared (Overall):\n1.0000\n\n\nTime:\n11:54:23\nLog-likelihood\n2933.3\n\n\nCov. Estimator:\nUnadjusted\n\n\n\n\n\n\nF-statistic:\n6.351e+05\n\n\nEntities:\n100\nP-value\n0.0000\n\n\nAvg Obs:\n9.0000\nDistribution:\nF(24,776)\n\n\nMin Obs:\n9.0000\n\n\n\n\nMax Obs:\n9.0000\nF-statistic (robust):\n8.618e+05\n\n\n\n\nP-value\n0.0000\n\n\nTime periods:\n9\nDistribution:\nF(24,776)\n\n\nAvg Obs:\n100.000\n\n\n\n\nMin Obs:\n100.000\n\n\n\n\nMax Obs:\n100.000\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nParameter Estimates\n\n\n\nParameter\nStd. Err.\nT-stat\nP-value\nLower CI\nUpper CI\n\n\nC(cohort)[T.0]\n-0.0047\n0.0035\n-1.3571\n0.1751\n-0.0115\n0.0021\n\n\nC(time)[T.2]\n0.0013\n0.0026\n0.5111\n0.6094\n-0.0038\n0.0065\n\n\nC(time)[T.3]\n0.0024\n0.0026\n0.8996\n0.3686\n-0.0028\n0.0075\n\n\nC(time)[T.4]\n0.0007\n0.0026\n0.2483\n0.8040\n-0.0045\n0.0058\n\n\nC(time)[T.5]\n0.0017\n0.0026\n0.6432\n0.5203\n-0.0035\n0.0069\n\n\nC(time)[T.6]\n0.0013\n0.0026\n0.4806\n0.6309\n-0.0039\n0.0064\n\n\nC(time)[T.7]\n0.0007\n0.0026\n0.2590\n0.7957\n-0.0045\n0.0058\n\n\nC(time)[T.8]\n0.0006\n0.0026\n0.2234\n0.8233\n-0.0046\n0.0057\n\n\nC(time)[T.9]\n0.0018\n0.0026\n0.6956\n0.4869\n-0.0033\n0.0070\n\n\nC(cohort)[T.3]:C(time)[T.2]\n0.0012\n0.0035\n0.3384\n0.7352\n-0.0057\n0.0081\n\n\nC(cohort)[T.255]:C(time)[T.2]\n0.9997\n0.0036\n281.18\n0.0000\n0.9927\n1.0067\n\n\nC(cohort)[T.3]:C(time)[T.3]\n-3.471e-05\n0.0035\n-0.0098\n0.9922\n-0.0070\n0.0069\n\n\nC(cohort)[T.255]:C(time)[T.3]\n0.9969\n0.0036\n280.40\n0.0000\n0.9899\n1.0039\n\n\nC(cohort)[T.3]:C(time)[T.4]\n0.0022\n0.0035\n0.6100\n0.5420\n-0.0048\n0.0091\n\n\nC(cohort)[T.255]:C(time)[T.4]\n0.9981\n0.0036\n280.75\n0.0000\n0.9912\n1.0051\n\n\nC(cohort)[T.3]:C(time)[T.5]\n-0.0019\n0.0035\n-0.5441\n0.5865\n-0.0089\n0.0050\n\n\nC(cohort)[T.255]:C(time)[T.5]\n0.9972\n0.0036\n280.49\n0.0000\n0.9902\n1.0042\n\n\nC(cohort)[T.3]:C(time)[T.6]\n0.0012\n0.0035\n0.3314\n0.7404\n-0.0058\n0.0081\n\n\nC(cohort)[T.255]:C(time)[T.6]\n0.9956\n0.0036\n280.02\n0.0000\n0.9886\n1.0025\n\n\nC(cohort)[T.3]:C(time)[T.7]\n0.0015\n0.0035\n0.4183\n0.6758\n-0.0055\n0.0084\n\n\nC(cohort)[T.255]:C(time)[T.7]\n1.0014\n0.0036\n281.67\n0.0000\n0.9944\n1.0084\n\n\nC(cohort)[T.3]:C(time)[T.8]\n1.0032\n0.0035\n283.96\n0.0000\n0.9962\n1.0101\n\n\nC(cohort)[T.255]:C(time)[T.8]\n5.9989\n0.0036\n1687.3\n0.0000\n5.9919\n6.0058\n\n\nC(cohort)[T.3]:C(time)[T.9]\n0.9997\n0.0035\n282.98\n0.0000\n0.9928\n1.0066\n\n\nC(cohort)[T.255]:C(time)[T.9]\n6.0038\n0.0036\n1688.7\n0.0000\n5.9968\n6.0108\n\n\n\nF-test for Poolability: 1.0439P-value: 0.3725Distribution: F(99,776)Included effects: Entityid: 0x7cc5949ce090"
+  },
+  {
+    "objectID": "moredid.html#pre-trends-1",
+    "href": "moredid.html#pre-trends-1",
+    "title": "Difference in Differences II",
+    "section": "Pre-trends",
+    "text": "Pre-trends\n\nParallel trends assumption\n\n\\[\n\\Er[\\color{red}{y_{it}(0)} - y_{it-s}(0) | D_{it}=1,  D_{it-s}=0] = \\Er[y_{it}(0) - y_{it-s}(0) | D_{it}=0, D_{it-s}=0]\n\\]\n\nMore plausible if there are parallel pre-trends\n\n\\[\n\\begin{align*}\n& \\Er[y_{it-r}(0) - y_{it-s}(0) | D_{it}=1, D_{it-r}=0,  D_{it-s}=0] = \\\\\n& = \\Er[y_{it-r}(0) - y_{it-s}(0) | D_{it}=0, D_{it-r}=0, D_{it-s}=0]\n\\end{align*}\n\\]\n\nAlways at least plot pre-trends"
+  },
+  {
+    "objectID": "moredid.html#testing-for-pre-trends",
+    "href": "moredid.html#testing-for-pre-trends",
+    "title": "Difference in Differences II",
+    "section": "Testing for Pre-trends",
+    "text": "Testing for Pre-trends\n\nIs it a good idea to test\n\n\\[\n\\begin{align*}\nH_0 : & \\Er[y_{it-r} - y_{it-s} | D_{it}=1, D_{it-r}=0,  D_{it-s}=0] = \\\\\n& = \\Er[y_{it-r} - y_{it-s} | D_{it}=0, D_{it-r}=0, D_{it-s}=0]?\n\\end{align*}\n\\] - Even if not testing formally, we do it informally by plotting"
+  },
+  {
+    "objectID": "moredid.html#testing-for-pre-trends-1",
+    "href": "moredid.html#testing-for-pre-trends-1",
+    "title": "Difference in Differences II",
+    "section": "Testing for Pre-trends",
+    "text": "Testing for Pre-trends\n\nDistribution of \\(\\hat{ATT}\\) conditional on fail to reject parallel pre-trends is not normal\nRoth (2022) : test can have low power, and in plausible violations, \\(\\widehat{ATT}_{3,2}\\) conditional on failing to reject is biased"
+  },
+  {
+    "objectID": "moredid.html#bounds-from-pre-trends",
+    "href": "moredid.html#bounds-from-pre-trends",
+    "title": "Difference in Differences II",
+    "section": "Bounds from Pre-trends",
+    "text": "Bounds from Pre-trends\n\nLet \\(\\Delta\\) be violation of parallel trends \\[\n\\Delta = \\Er[\\color{red}{y_{it}(0)} - y_{it-1}(0) | D_{it}=1,  D_{it-1}=0] - \\Er[y_{it}(0) - y_{it-1}(0) | D_{it}=0, D_{it-1}=0]\n\\]\nAssume \\(\\Delta\\) is bounded by deviation from parallel of pre-trends \\[\n|\\Delta| \\leq M \\max_{r} \\left\\vert \\tau^{1t}_{t-r,t-r-1} - \\tau^{0t}_{t-r,t-r-1} \\right\\vert\n\\] for some chosen \\(M\\)\nSee Rambachan and Roth (2023)"
+  },
+  {
+    "objectID": "moredid.html#doubly-robust-difference-in-differences",
+    "href": "moredid.html#doubly-robust-difference-in-differences",
+    "title": "Difference in Differences II",
+    "section": "Doubly Robust Difference in Differences",
+    "text": "Doubly Robust Difference in Differences\n\nLinear covariates could lead to same problem as with matching\nDoubly robust estimator Sant’Anna and Zhao (2020)\n\ndoubleml package implements it"
+  },
+  {
+    "objectID": "moredid.html#sources-and-further-reading",
+    "href": "moredid.html#sources-and-further-reading",
+    "title": "Difference in Differences II",
+    "section": "Sources and Further Reading",
+    "text": "Sources and Further Reading\n\nFacure (2022, chap. 1)\nHuntington-Klein (2021, chap. 16)\nRecent reviews: Roth et al. (2023), Chaisemartin and D’Haultfœuille (2022), Arkhangelsky and Imbens (2023)\nEarly work pointing to problems with fixed effects:\n\nLaporte and Windmeijer (2005), Wooldridge (2005)\n\nExplosion of papers written just before 2020, published just after:\n\nBorusyak and Jaravel (2018)\nChaisemartin and D’Haultfœuille (2020)\nCallaway and Sant’Anna (2021)\nGoodman-Bacon (2021)\nSun and Abraham (2021)"
+  },
+  {
+    "objectID": "moredid.html#references",
+    "href": "moredid.html#references",
+    "title": "Difference in Differences II",
+    "section": "References",
+    "text": "References\n\n\n\n\n\n\n\n\nArkhangelsky, Dmitry, and Guido Imbens. 2023. “Causal Models for Longitudinal and Panel Data: A Survey.”\n\n\nBorusyak, Kirill, and Xavier Jaravel. 2018. “Revisiting Event Study Designs.” https://scholar.harvard.edu/files/borusyak/files/borusyak_jaravel_event_studies.pdf.\n\n\nCallaway, Brantly, and Pedro H. C. Sant’Anna. 2021. “Difference-in-Differences with Multiple Time Periods.” Journal of Econometrics 225 (2): 200–230. https://doi.org/https://doi.org/10.1016/j.jeconom.2020.12.001.\n\n\nChaisemartin, Clément de, and Xavier D’Haultfœuille. 2020. “Two-Way Fixed Effects Estimators with Heterogeneous Treatment Effects.” American Economic Review 110 (9): 2964–96. https://doi.org/10.1257/aer.20181169.\n\n\n———. 2022. “Two-way fixed effects and differences-in-differences with heterogeneous treatment effects: a survey.” The Econometrics Journal 26 (3): C1–30. https://doi.org/10.1093/ectj/utac017.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nGoodman-Bacon, Andrew. 2021. “Difference-in-Differences with Variation in Treatment Timing.” Journal of Econometrics 225 (2): 254–77. https://doi.org/https://doi.org/10.1016/j.jeconom.2021.03.014.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/.\n\n\nLaporte, Audrey, and Frank Windmeijer. 2005. “Estimation of Panel Data Models with Binary Indicators When Treatment Effects Are Not Constant over Time.” Economics Letters 88 (3): 389–96. https://doi.org/https://doi.org/10.1016/j.econlet.2005.04.002.\n\n\nRambachan, Ashesh, and Jonathan Roth. 2023. “A More Credible Approach to Parallel Trends.” The Review of Economic Studies 90 (5): 2555–91. https://doi.org/10.1093/restud/rdad018.\n\n\nRoth, Jonathan. 2022. “Pretest with Caution: Event-Study Estimates After Testing for Parallel Trends.” American Economic Review: Insights 4 (3): 305–22. https://doi.org/10.1257/aeri.20210236.\n\n\nRoth, Jonathan, Pedro H. C. Sant’Anna, Alyssa Bilinski, and John Poe. 2023. “What’s Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature.” Journal of Econometrics 235 (2): 2218–44. https://doi.org/https://doi.org/10.1016/j.jeconom.2023.03.008.\n\n\nSant’Anna, Pedro H. C., and Jun Zhao. 2020. “Doubly Robust Difference-in-Differences Estimators.” Journal of Econometrics 219 (1): 101–22. https://doi.org/https://doi.org/10.1016/j.jeconom.2020.06.003.\n\n\nSun, Liyang, and Sarah Abraham. 2021. “Estimating Dynamic Treatment Effects in Event Studies with Heterogeneous Treatment Effects.” Journal of Econometrics 225 (2): 175–99. https://doi.org/https://doi.org/10.1016/j.jeconom.2020.09.006.\n\n\nWooldridge, Jeffrey M. 2005. “Fixed-Effects and Related Estimators for Correlated Random-Coefficient and Treatment-Effect Panel Data Models.” The Review of Economics and Statistics 87 (2): 385–90. https://doi.org/10.1162/0034653053970320."
+  },
+  {
+    "objectID": "neuralnets.html#neural-networks",
+    "href": "neuralnets.html#neural-networks",
+    "title": "Neural Networks",
+    "section": "Neural Networks",
+    "text": "Neural Networks\n\nFlexible function approximation & regression\nAutomated feature engineering\nExceptional performance on high dimensional data with low noise\n\nText\nImages\nAudio\nVideo"
+  },
+  {
+    "objectID": "neuralnets.html#single-layer-perceptron",
+    "href": "neuralnets.html#single-layer-perceptron",
+    "title": "Neural Networks",
+    "section": "Single Layer Perceptron",
+    "text": "Single Layer Perceptron\n\n\\(x_i \\in \\R^d\\), want to approximate some \\(f: \\R^d \\to \\R\\)\nApproximate by \\[\n\\begin{align*}\nf(x_i; \\mathbf{w},\\mathbf{b}) =\n\\psi_1 \\left( \\sum_{u=1}^m w_{u,1} \\psi_0( x_i'w_{u,0} + b_{u,0}) + b_{u,1} \\right)\n\\end{align*}\n\\] where\n\nWeights: \\(w_{u,1} \\in \\R\\), \\(w_{u,0} \\in \\R^d\\)\nBiases: \\(b_{u,1}, b_{u,0} \\in \\R\\)\nActivation functions \\(\\psi_1, \\psi_0: \\R \\to \\R\\)\nWidth: \\(m\\)"
+  },
+  {
+    "objectID": "neuralnets.html#activation-functions",
+    "href": "neuralnets.html#activation-functions",
+    "title": "Neural Networks",
+    "section": "Activation functions",
+    "text": "Activation functions\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport torch.nn as nn\nimport torch\n# plot 4 activation functions\nx = torch.linspace(-5, 5, 100)\nfig, ax = plt.subplots(2, 2, figsize=(10, 8))\nax = ax.flatten()\nax[0].plot(x, nn.ReLU()(x))\nax[0].set_title(\"ReLU\")\nax[1].plot(x, nn.Tanh()(x))\nax[1].set_title(\"Tanh\")\nax[2].plot(x, nn.Sigmoid()(x))\nax[2].set_title(\"Sigmoid\")\nax[3].plot(x, nn.Softplus()(x))\nax[3].set_title(\"Softplus\")\nfig.tight_layout()\nfig.show()"
+  },
+  {
+    "objectID": "neuralnets.html#single-layer-perceptron-1",
+    "href": "neuralnets.html#single-layer-perceptron-1",
+    "title": "Neural Networks",
+    "section": "Single Layer Perceptron",
+    "text": "Single Layer Perceptron\n\nimport torch.nn as nn\nimport torch\nclass SingleLayerPerceptron(nn.Module):\n    def __init__(self, d, m, activation=nn.ReLU()):\n        super().__init__()\n        self.d = d\n        self.m = m\n        self.activation = activation\n        self.w0 = nn.Parameter(torch.randn(d, m))\n        self.b0 = nn.Parameter(torch.randn(m))\n        self.w1 = nn.Parameter(torch.randn(m))\n        self.b1 = nn.Parameter(torch.randn(1))\n\n    def forward(self, x):\n        return self.activation(x @ self.w0 + self.b0) @ self.w1 + self.b1"
+  },
+  {
+    "objectID": "neuralnets.html#regression",
+    "href": "neuralnets.html#regression",
+    "title": "Neural Networks",
+    "section": "Regression",
+    "text": "Regression\n\nData \\(\\{y_i, x_i\\}_{i=1}^n\\), \\(x_i \\in \\R^d\\), \\(y_i \\in \\R\\)\nLeast squares: \\[\n\\hat{\\mathbf{w}}, \\hat{\\mathbf{b}} \\in \\argmin_{\\mathbf{w},\\mathbf{b}} \\underbrace{\\frac{1}{n} \\sum_{i=1}^n \\left(y_i - f(x_i; \\mathbf{w},\\mathbf{b}) \\right)^2}_{\\text{loss function}}\n\\]\nHard to find global minimum:\n\nLoss not convex\nParameters very high dimensional"
+  },
+  {
+    "objectID": "neuralnets.html#gradient-descent",
+    "href": "neuralnets.html#gradient-descent",
+    "title": "Neural Networks",
+    "section": "Gradient Descent",
+    "text": "Gradient Descent\n\nFind approximate minimum instead \\[\n\\overbrace{\\hat{\\theta}}^{\\hat{\\mathbf{w}}, \\hat{\\mathbf{b}}} \\approx \\argmin_{\\theta} \\ell(y, f(x;\\theta))\n\\]\nStart with random \\(\\theta_1\\)\nRepeatedly update: \\[\n\\theta_{i+1} = \\theta_i - \\gamma \\underbrace{\\nabla \\ell(y,f(;\\theta))}_{\\text{gradient}}\n\\]\nContinue until loss stops improving\n\nOptionally modify \\(\\gamma\\) based on progress"
+  },
+  {
+    "objectID": "neuralnets.html#computing-gradients",
+    "href": "neuralnets.html#computing-gradients",
+    "title": "Neural Networks",
+    "section": "Computing Gradients",
+    "text": "Computing Gradients\n\nAutomatic differentiation: automatically use chainrule on each step of computation\nE.g. \\(\\ell(\\theta) = f(g(h(\\theta)))\\)\n\n\\(\\ell : \\R^p \\to \\R\\), \\(h: \\R^p \\to \\R^q\\), \\(g: \\R^q \\to \\R^j\\), \\(f: \\R^j \\to \\R\\) \\[\n\\left(\\nabla \\ell(\\theta)\\riight)^T = \\underbrace{Df_{g(h(\\theta))}}_{1 \\times j} \\underbrace{Dg_{h(\\theta)}}_{j \\times q} \\underbrace{Dh_\\theta}_{q \\times p}\n\\]\n\nForward mode:\n\nCalculate \\(h(\\theta)\\) and \\(D_1=Dh_\\theta\\)\nCalculate \\(g(h(\\theta))\\) and \\(Dg_{h(\\theta)}\\), multiply \\(D_2=Dg_{h(\\theta)} D_1\\) (\\(jqp\\) scalar products and additions)\nCalculate \\(f(g(h(\\theta)))\\) and \\(Df_{g(h(\\theta))}\\), multiply \\(Df_{g(h(\\theta))} D_2\\) (\\(1jp\\) scalar products and additions)\n\n\nWork to propagate derivative \\(\\propto jqp + 1jp\\)"
+  },
+  {
+    "objectID": "neuralnets.html#computing-gradients-1",
+    "href": "neuralnets.html#computing-gradients-1",
+    "title": "Neural Networks",
+    "section": "Computing Gradients",
+    "text": "Computing Gradients\n\nReverse mode:\n\n“Forward pass” calculate and save \\(h(\\theta)\\), \\(g(h(\\theta))\\) and \\(f(g(h(\\theta)))\\)\n“Back propagation”:\n\nCalculate \\(D^r_1 = Df_{g(h(\\theta))}\\)\nCalculate \\(D^r_2 = D^r_1 Dg_{h(\\theta)}\\) (\\(1jq\\) scalar products and additions)\nCalculate \\(D^r_3 Dh_{\\theta}\\) (\\(1qp\\) scalar products and additions)\n\n\n\nWork to propagate derivative \\(\\propto 1jq + 1qp\\)\n\nReverse mode much less work when \\(p\\) large"
+  },
+  {
+    "objectID": "neuralnets.html#gradient-descent-1",
+    "href": "neuralnets.html#gradient-descent-1",
+    "title": "Neural Networks",
+    "section": "Gradient Descent",
+    "text": "Gradient Descent\n\n\nCode\nn = 100\nsigma = 0.1\ntorch.manual_seed(987)\nx = torch.randn(n,1)\nf = np.vectorize(lambda x:  np.sin(x)+np.exp(-x*x)/(1+np.abs(x)))\ny = torch.tensor(f(x), dtype=torch.float32) + sigma*torch.randn(x.shape)\nslp = SingleLayerPerceptron(1, 20, nn.ReLU())\nlossfn = nn.MSELoss()\nxlin = torch.linspace(-3,3,100)\nfig, ax = plt.subplots()\nepochs = 1000\nstepscale = 0.1\nfor i in range(epochs):\n    if (i % 50) == 0 :\n        ax.plot(xlin,slp(xlin.reshape(-1,1)).data, alpha=i/epochs, color='k')\n        slp.zero_grad()\n    loss = lossfn(y.flatten(),slp(x))\n    #print(f\"{i}: {loss.item()}\")\n    # calculate gradient\n    loss.backward()\n    # access gradient & use to descend\n    for p in slp.parameters():\n        if p.requires_grad:\n            p.data = p.data - stepscale*p.grad.data\n            p.grad.data.zero_()\n    slp.zero_grad()\n\nax.plot(xlin, f(xlin), label=\"f\", lw=8)\nax.scatter(x.flatten(),y.flatten())\nfig.show()"
+  },
+  {
+    "objectID": "neuralnets.html#multi-layer-perceptron",
+    "href": "neuralnets.html#multi-layer-perceptron",
+    "title": "Neural Networks",
+    "section": "Multi Layer Perceptron",
+    "text": "Multi Layer Perceptron\n\ndef multilayer(d,width,depth,activation=nn.ReLU()):\n    mlp = nn.Sequential(\n        nn.Linear(d,width),\n        activation\n    )\n    for i in range(depth-1):\n        mlp.add_module(f\"layer {i+1}\",nn.Linear(width, width))\n        mlp.add_module(f\"activation {i+1}\",activation)\n\n\n    mlp.add_module(\"output\",nn.Linear(width,1))\n    return(mlp)\n\nmlp=multilayer(2, 10, 1, nn.ReLU())\n\ndef count_parameters(model):\n    return sum(p.numel() for p in model.parameters() if p.requires_grad)"
+  },
+  {
+    "objectID": "neuralnets.html#multi-layer-perceptron-1",
+    "href": "neuralnets.html#multi-layer-perceptron-1",
+    "title": "Neural Networks",
+    "section": "Multi Layer Perceptron",
+    "text": "Multi Layer Perceptron\n\n\nCode\nmlp = multilayer(1,4,4,nn.ReLU())\nprint(count_parameters(mlp))\noptimizer = torch.optim.Adam(mlp.parameters(), lr=0.01)\nfig, ax = plt.subplots()\nepochs = 1000\nfor i in range(epochs):\n    if (i % 50) == 0 :\n        ax.plot(xlin,mlp(xlin.reshape(-1,1)).data, alpha=i/epochs, color='k')\n        mlp.zero_grad()\n    loss = lossfn(y,mlp(x))\n    #print(f\"{i}: {loss.item()}\")\n    optimizer.zero_grad()\n    loss.backward()\n    optimizer.step()\n\nax.plot(xlin, f(xlin), label=\"f\", lw=8)\nax.scatter(x.flatten(),y.flatten())\nfig.show()\n\n\n73"
+  },
+  {
+    "objectID": "neuralnets.html#overparameterization",
+    "href": "neuralnets.html#overparameterization",
+    "title": "Neural Networks",
+    "section": "Overparameterization",
+    "text": "Overparameterization\n\nClassic statistics wisdom about nonparametric regression: as parameters increase:\n\nBias decreases\nVariance increases\nNeed parameters \\(&lt;\\) sample size for good performance\n\nNeural networks: often see best performance when parameters \\(&gt;\\) sample size"
+  },
+  {
+    "objectID": "neuralnets.html#double-descent",
+    "href": "neuralnets.html#double-descent",
+    "title": "Neural Networks",
+    "section": "Double Descent",
+    "text": "Double Descent\n\n\nCode\nfrom joblib import Parallel, delayed\n#device = 'cuda' if torch.cuda.is_available() else 'cpu'\ndevice = 'cpu' # problem is small, so not much help from cuda\nnum_epochs = 50\nsims = 100\nmaxw = 10\n\ndef doubledescentdemo(x, y, xtest, ytest, f, device=device,\n                      num_epochs=num_epochs, sims=sims,\n                      maxw=maxw, lr=0.1):\n    x=x.to(device)\n    y=y.to(device).reshape(x.shape[0],1)\n    fx = f(x.T).reshape(y.shape).to(device)\n    ytest = ytest.to(device).reshape(xtest.shape[0],1)\n    xtest = xtest.to(device)\n    loss_fn = nn.MSELoss().to(device)\n\n    losses = np.zeros([maxw,num_epochs,sims])\n    nonoise = np.zeros([maxw,num_epochs,sims])\n\n    def dd(w):\n        mlp = multilayer(x.shape[1],w+1,1,nn.ReLU()).to(device)\n        optimizer = torch.optim.Adam(mlp.parameters(), lr=lr)\n        losses = np.zeros(num_epochs)\n        nonoise=np.zeros(num_epochs)\n        for n in range(num_epochs):\n            y_pred = mlp(x)\n            loss = loss_fn(y_pred, y)\n            optimizer.zero_grad()\n            loss.backward()\n            optimizer.step()\n            losses[n] = loss_fn(mlp(xtest),ytest).item()\n            nonoise[n] = loss_fn(y_pred, fx)\n            mlp.zero_grad()\n        return([losses, nonoise])\n\n    for w in range(maxw):\n        foo=lambda s: dd(w)\n        print(f\"width {w}\")\n        results = Parallel(n_jobs=20)(delayed(foo)(s) for s in range(sims))\n\n        for s in range(sims):\n            losses[w,:,s] = results[s][0]\n            nonoise[w,:,s] = results[s][1]\n    return([losses, nonoise])"
+  },
+  {
+    "objectID": "neuralnets.html#double-descent-1",
+    "href": "neuralnets.html#double-descent-1",
+    "title": "Neural Networks",
+    "section": "Double Descent",
+    "text": "Double Descent\n\nf = lambda x: np.exp(x[0]-x[1])\nn = 20\ntorch.manual_seed(1234)\ndimx = 5\nx = torch.rand(n,dimx)\nxtest = torch.rand(n,dimx)\nsigma = 1.5\ny = f(x.T) + sigma*torch.randn(x.shape[0])\nytest = f(xtest.T) + sigma*torch.randn(xtest.shape[0])\nlr = 0.01\ndd = doubledescentdemo(x, y, xtest, ytest, f, lr)\n\nwidth 0\nwidth 1\nwidth 2\nwidth 3\nwidth 4\nwidth 5\nwidth 6\nwidth 7\nwidth 8\nwidth 9"
+  },
+  {
+    "objectID": "neuralnets.html#double-descent-2",
+    "href": "neuralnets.html#double-descent-2",
+    "title": "Neural Networks",
+    "section": "Double Descent",
+    "text": "Double Descent\n\n\nCode\ndef plotdd(losses, nonoise):\n    fig, ax = plt.subplots(2,2)\n    ax = ax.flatten()\n    ax[0].imshow(losses, cmap='plasma')\n    ax[0].set_title('Test Loss')\n    ax[0].set_xlabel('epoch')\n    ax[0].set_ylabel('width')\n    ax[1].imshow(nonoise, cmap='plasma')\n    ax[1].set_title('error in f')\n    ax[1].set_xlabel('epoch')\n    ax[1].set_ylabel('width')\n\n    ws = [0,1, 2, 4, 8]  #10, 12, 19]\n    for w in ws:\n        ax[2].plot(range(losses.shape[1]),losses[w,:], label=f\"width={w+1}\")\n        ax[3].plot(range(nonoise.shape[1]),nonoise[w,:], label=f\"width={w+1}\")\n\n    ax[2].set_xlabel('epoch')\n    ax[2].set_ylabel('test loss')\n    ax[2].legend()\n    ax[3].set_xlabel('epoch')\n    ax[3].set_ylabel('error in f')\n    ax[3].legend()\n\n    fig.tight_layout()\n\n    return(fig)\n\nfig=plotdd(dd[0].mean(axis=2), dd[1].mean(axis=2))\nfig.show()"
+  },
+  {
+    "objectID": "neuralnets.html#double-descent-low-noise",
+    "href": "neuralnets.html#double-descent-low-noise",
+    "title": "Neural Networks",
+    "section": "Double Descent: Low Noise",
+    "text": "Double Descent: Low Noise\n\n\nCode\nsigma = 0.01\ny = f(x.T) + sigma*torch.randn(x.shape[0])\nytest = f(xtest.T) + sigma*torch.randn(xtest.shape[0])\nddlowsig = doubledescentdemo(x,y,xtest,ytest,f, lr=0.05)\n\n\nwidth 0\nwidth 1\nwidth 2\nwidth 3\nwidth 4\nwidth 5\nwidth 6\nwidth 7\nwidth 8\nwidth 9"
+  },
+  {
+    "objectID": "neuralnets.html#double-descent-low-noise-1",
+    "href": "neuralnets.html#double-descent-low-noise-1",
+    "title": "Neural Networks",
+    "section": "Double Descent: Low Noise",
+    "text": "Double Descent: Low Noise\n\n\nCode\nfig=plotdd(ddlowsig[0].mean(axis=2), ddlowsig[1].mean(axis=2))\nfig.show()"
+  },
+  {
+    "objectID": "neuralnets.html#double-descent-3",
+    "href": "neuralnets.html#double-descent-3",
+    "title": "Neural Networks",
+    "section": "Double Descent",
+    "text": "Double Descent\n\nFigures show double descent in number of epochs, but has also been demonstrated with respect to number of parameters1\nThese simulations are quite fragile and depend on:\n\nForm of \\(f\\)\ndimension of \\(x\\)\nnoise in \\(y\\)\nlearning rate\noptimizer\n\n\nIf you squint, you can sort of see double descent in parameters in these simulations too."
+  },
+  {
+    "objectID": "neuralnets.html#software-1",
+    "href": "neuralnets.html#software-1",
+    "title": "Neural Networks",
+    "section": "Software",
+    "text": "Software\n\nPyTorch\n\nUsed above\nVery popular\nMiddle ground between convenience and flexibility\nCould be used via higher level wrapper (e.g. skorch)\n\nJAX\n\nMore extensible than pytorch\n\nOthers: Tensorflow, Theano, Keras, and more"
+  },
+  {
+    "objectID": "neuralnets.html#uses-for-neural-networks-1",
+    "href": "neuralnets.html#uses-for-neural-networks-1",
+    "title": "Neural Networks",
+    "section": "Uses for Neural Networks",
+    "text": "Uses for Neural Networks\n\nFlexible regression and/or classification method, in double/debiased learning or elsewhere\n\nConsider carefully whether difficulties of fitting are worth benefits\n\nFlexible function approximation\n\nUseful for computing solutions to games, dynamic models, etc\n\nText, images, audio\n\nUse transfer learning"
+  },
+  {
+    "objectID": "neuralnets.html#transfer-learning",
+    "href": "neuralnets.html#transfer-learning",
+    "title": "Neural Networks",
+    "section": "Transfer Learning",
+    "text": "Transfer Learning\n\nFit (or let researchers or company with more resources fit) large model on large, general dataset\nFind specialized data for your task\nFine tune: take large model and update parameters with your data\nhttps://huggingface.co/ good source for large models to fine-tune"
+  },
+  {
+    "objectID": "neuralnets.html#other-architectures",
+    "href": "neuralnets.html#other-architectures",
+    "title": "Neural Networks",
+    "section": "Other Architectures",
+    "text": "Other Architectures\n\nMulti-layer perceptrons / feed forward networks are the simplest neural networks, many extensions and variations exist\nTricks to help with vanishing gradients and numeric stability:\n\nNormalization\nResidual connections\n\nVariations motivated by sequential data:\n\nRecurrent\nTransformers\n\nVariations motivated by images:\n\nConvolutions\nGAN\nDiffusion1\n\n\nThe motivating idea of diffusion models is different than neural networks, but neural networks are commonly used as one of the parts of diffusion models."
+  },
+  {
+    "objectID": "neuralnets.html#sources-and-further-reading",
+    "href": "neuralnets.html#sources-and-further-reading",
+    "title": "Neural Networks",
+    "section": "Sources and Further Reading",
+    "text": "Sources and Further Reading\n\nQuantEcon Datascience: Regression - Neural Networks\nQuantEcon: Intro to Artificial Neural Nets\npytorch notebooks from 323"
+  },
+  {
+    "objectID": "neuralnets.html#references",
+    "href": "neuralnets.html#references",
+    "title": "Neural Networks",
+    "section": "References",
+    "text": "References"
+  },
+  {
+    "objectID": "did.html#introduction-1",
+    "href": "did.html#introduction-1",
+    "title": "Introduction to Difference in Differences",
+    "section": "Introduction",
+    "text": "Introduction\n\nHave some policy applied to some observations but not others, and observe outcome before and after policy\nIdea: compare outcome before and after policy in treated and untreated group\nChange in outcome in treated group reflects both effect of policy and time trend, change in untreated group captures time trend"
+  },
+  {
+    "objectID": "did.html#example-impact-of-billboards",
+    "href": "did.html#example-impact-of-billboards",
+    "title": "Introduction to Difference in Differences",
+    "section": "Example: Impact of Billboards",
+    "text": "Example: Impact of Billboards\n\nFrom Facure (2022) chapter 13\nBank placed billboards advertising savings accounts in Porto Alegre in July\nData on deposits in May and July in Porto Alegre and Florianopolis"
+  },
+  {
+    "objectID": "did.html#example-impact-of-billboards-1",
+    "href": "did.html#example-impact-of-billboards-1",
+    "title": "Introduction to Difference in Differences",
+    "section": "Example: Impact of Billboards",
+    "text": "Example: Impact of Billboards\n\n\nCode\nimport warnings\nwarnings.filterwarnings('ignore')\n\nimport pandas as pd\nimport numpy as np\nfrom matplotlib import style\nfrom matplotlib import pyplot as plt\nimport seaborn as sns\nimport statsmodels.formula.api as smf\n\ndatadir=\"./data\"\n\n\n\ndata = pd.read_csv(datadir + \"/billboard_impact.csv\")\ndata.head()\n\n\n\n\n\n\n\n\ndeposits\npoa\njul\n\n\n\n\n0\n42\n1\n0\n\n\n1\n0\n1\n0\n\n\n2\n52\n1\n0\n\n\n3\n119\n1\n0\n\n\n4\n21\n1\n0"
+  },
+  {
+    "objectID": "did.html#means-and-differences",
+    "href": "did.html#means-and-differences",
+    "title": "Introduction to Difference in Differences",
+    "section": "Means and Differences",
+    "text": "Means and Differences\n\ntbl = data.groupby(['jul','poa']).mean().unstack()\ntbl\n\n\n\n\n\n\n\n\ndeposits\n\n\npoa\n0\n1\n\n\njul\n\n\n\n\n\n\n0\n171.642308\n46.01600\n\n\n1\n206.165500\n87.06375\n\n\n\n\n\n\n\n\ntbl.diff(axis=0).iloc[1,:]\n\n          poa\ndeposits  0      34.523192\n          1      41.047750\nName: 1, dtype: float64\n\n\n\ntbl.diff(axis=1).iloc[:,1]\n\njul\n0   -125.626308\n1   -119.101750\nName: (deposits, 1), dtype: float64\n\n\n\ntbl.diff(axis=0).diff(axis=1).iloc[1,1]\n\n6.524557692307688"
+  },
+  {
+    "objectID": "did.html#setup",
+    "href": "did.html#setup",
+    "title": "Introduction to Difference in Differences",
+    "section": "Setup",
+    "text": "Setup\n\nTwo periods, binary treatment in second period\nPotential outcomes \\(\\{y_{it}(0),y_{it}(1)\\}_{t=0}^1\\) for \\(i=1,...,N\\)\nTreatment \\(D_{it} \\in \\{0,1\\}\\),\n\n\\(D_{i0} = 0\\) \\(\\forall i\\)\n\\(D_{i1} = 1\\) for some, \\(0\\) for others\n\nObserve \\(y_{it} = y_{it}(0)(1-D_{it}) + D_{it} y_{it}(1)\\)"
+  },
+  {
+    "objectID": "did.html#identification",
+    "href": "did.html#identification",
+    "title": "Introduction to Difference in Differences",
+    "section": "Identification",
+    "text": "Identification\n\nAverage treatment effect on the treated: \\[\n\\begin{align*}\nATT & = \\Er[y_{i1}(1) - \\color{red}{y_{i1}(0)} | D_{i1} = 1] \\\\\n& = \\Er[y_{i1}(1) - y_{i0}(0) | D_{i1} = 1] - \\Er[\\color{red}{y_{i1}(0)} - y_{i0}(0) | D_{i1}=1] \\\\\n& \\text{ assume } \\Er[\\color{red}{y_{i1}(0)} - y_{i0}(0) | D_{i1}=1] =  \\Er[y_{i1}(0) - y_{i0}(0) | D_{i1}=0] \\\\\n& = \\Er[y_{i1}(1) - y_{i0}(0) | D_{i1} = 1] - \\Er[y_{i1}(0) - y_{i0}(0) | D_{i1}=0] \\\\\n& = \\Er[y_{i1} - y_{i0} | D_{i1}=1, D_{i0}=0] - \\Er[y_{i1} - y_{i0} | D_{i1}=0, D_{i0}=0]\n\\end{align*}\n\\]"
+  },
+  {
+    "objectID": "did.html#important-assumptions",
+    "href": "did.html#important-assumptions",
+    "title": "Introduction to Difference in Differences",
+    "section": "Important Assumptions",
+    "text": "Important Assumptions\n\nNo anticipation: \\(D_{i1}=1\\) does not affect \\(y_{i0}\\)\n\nbuilt into the potential outcomes notation we used, relax by allowing potential outcomes given sequence of \\(D\\), i.e. \\(y_{it}(D_{i0},D_{i1})\\)\n\nParallel trends: \\(\\Er[\\color{red}{y_{i1}(0)} - y_{i0}(0) |D_{i1}=1,D_{i0}=0] =  \\Er[y_{i1}(0) - y_{i0}(0) | D_{i1}=0], D_{i0}=0]\\)\n\nnot invariant to tranformations of \\(y\\)"
+  },
+  {
+    "objectID": "did.html#estimation",
+    "href": "did.html#estimation",
+    "title": "Introduction to Difference in Differences",
+    "section": "Estimation",
+    "text": "Estimation\n\n\nPlugin: \\[\n\\widehat{ATT} = \\frac{ \\sum_{i=1}^n (y_{i1} - y_{i0})D_{i1}(1-D_{i0})}{\\sum_{i=1}^n D_{i1}(1-D_{i0})} -  \\frac{ \\sum_{i=1}^n (y_{i1} - y_{i0})(1-D_{i1})(1-D_{i0})}{\\sum_{i=1}^n (1-D_{i1})(1-D_{i0})}\n\\]\nRegression: \\[\ny_{it} = \\delta_t + \\alpha 1\\{D_{i1}=1\\} + \\beta D_{it} + \\epsilon_{it}\n\\] then \\(\\hat{\\beta} = \\widehat{ATT}\\)"
+  },
+  {
+    "objectID": "did.html#visualizing-difference-in-differences",
+    "href": "did.html#visualizing-difference-in-differences",
+    "title": "Introduction to Difference in Differences",
+    "section": "Visualizing Difference in Differences",
+    "text": "Visualizing Difference in Differences\n\npoa_before = data.query(\"poa==1 & jul==0\")[\"deposits\"].mean()\npoa_after = data.query(\"poa==1 & jul==1\")[\"deposits\"].mean()\nfl_before = data.query(\"poa==0 & jul==0\")[\"deposits\"].mean()\nfl_after = data.query(\"poa==0 & jul==1\")[\"deposits\"].mean()\nplt.figure(figsize=(10,5))\nplt.plot([\"May\", \"Jul\"], [fl_before, fl_after], label=\"FL\", lw=2)\nplt.plot([\"May\", \"Jul\"], [poa_before, poa_after], label=\"POA\", lw=2)\n\nplt.plot([\"May\", \"Jul\"], [poa_before, poa_before+(fl_after-fl_before)],\n         label=\"Counterfactual\", lw=2, color=\"C2\", ls=\"-.\")\n\nplt.legend();"
+  },
+  {
+    "objectID": "did.html#estimation-via-regression",
+    "href": "did.html#estimation-via-regression",
+    "title": "Introduction to Difference in Differences",
+    "section": "Estimation via Regression",
+    "text": "Estimation via Regression\n\nsmf.ols('deposits ~ poa*jul', data=data).fit().summary().tables[1]\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n[0.025\n0.975]\n\n\nIntercept\n171.6423\n2.363\n72.625\n0.000\n167.009\n176.276\n\n\npoa\n-125.6263\n4.484\n-28.015\n0.000\n-134.418\n-116.835\n\n\njul\n34.5232\n3.036\n11.372\n0.000\n28.571\n40.475\n\n\npoa:jul\n6.5246\n5.729\n1.139\n0.255\n-4.706\n17.755"
+  },
+  {
+    "objectID": "did.html#further-topics",
+    "href": "did.html#further-topics",
+    "title": "Introduction to Difference in Differences",
+    "section": "Further Topics",
+    "text": "Further Topics\n\nMore periods, more groups\nCovariates\nPre-trends"
+  },
+  {
+    "objectID": "did.html#reading",
+    "href": "did.html#reading",
+    "title": "Introduction to Difference in Differences",
+    "section": "Reading",
+    "text": "Reading\n\nChapter 13 of Facure (2022)"
+  },
+  {
+    "objectID": "did.html#references",
+    "href": "did.html#references",
+    "title": "Introduction to Difference in Differences",
+    "section": "References",
+    "text": "References\n\n\n\n\n\n\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html."
+  },
+  {
+    "objectID": "fe.html#panel-data",
+    "href": "fe.html#panel-data",
+    "title": "Fixed Effects",
+    "section": "Panel Data",
+    "text": "Panel Data\n\nUnits \\(i=1,..., n\\)\n\nEx: people, firms, cities, countries\n\nTime \\(t=1,..., T\\)\nObserve \\(\\left\\{(y_{it}, X_{it})\\right\\}_{i=1,t=1}^{n,T}\\)"
+  },
+  {
+    "objectID": "fe.html#linear-model",
+    "href": "fe.html#linear-model",
+    "title": "Fixed Effects",
+    "section": "Linear Model",
+    "text": "Linear Model\n\n\nModel \\[\ny_{it} = X_{it}'\\beta + \\overbrace{U_i'\\gamma + \\epsilon_{it}}^{\\text{unobserved}}\n\\]\n\nTime invariant confounders \\(U_i\\)\n\nSubtract individual averages \\[\n\\begin{align*}\ny_{it} - \\bar{y}_i & = (X_{it} - \\bar{X}_i)'\\beta + (\\epsilon_{it} -\n                   \\bar{\\epsilon}_i) \\\\\n\\ddot{y}_{it} & = \\ddot{X}_{it}' \\beta + \\ddot{\\epsilon}_{it}\n\\end{align*}\n\\]\nEquivalent to estimating with individual dummies \\[\ny_{it} = X_{it}'\\beta + \\alpha_i + \\epsilon_{it}\n\\]\n\n\n\n\nEliminates \\(U_i\\) and any time invariant observed \\(X_i\\)"
+  },
+  {
+    "objectID": "fe.html#ols",
+    "href": "fe.html#ols",
+    "title": "Fixed Effects",
+    "section": "OLS",
+    "text": "OLS\n\n\nimports\nimport warnings\nwarnings.filterwarnings('ignore')\n\nimport pandas as pd\nimport numpy as np\nfrom matplotlib import style\nfrom matplotlib import pyplot as plt\nimport statsmodels.formula.api as smf\nstyle.use(\"fivethirtyeight\")\n\n\n1\n\n\nCode\ntoy_panel = pd.DataFrame({\n    \"mkt_costs\":[5,4,3.5,3, 10,9.5,9,8, 4,3,2,1, 8,7,6,4],\n    \"purchase\":[12,9,7.5,7, 9,7,6.5,5, 15,14.5,14,13, 11,9.5,8,5],\n    \"city\":[\"C0\",\"C0\",\"C0\",\"C0\", \"C2\",\"C2\",\"C2\",\"C2\", \"C1\",\"C1\",\"C1\",\"C1\", \"C3\",\"C3\",\"C3\",\"C3\"]\n})\n\nm = smf.ols(\"purchase ~ mkt_costs\", data=toy_panel).fit()\n\nplt.scatter(toy_panel.mkt_costs, toy_panel.purchase)\nplt.plot(toy_panel.mkt_costs, m.fittedvalues, c=\"C5\", label=\"Regression Line\")\nplt.xlabel(\"Marketing Costs (in 1000)\")\nplt.ylabel(\"In-app Purchase (in 1000)\")\nplt.title(\"Simple OLS Model\")\nplt.legend();\n\n\n\n\n\n\n\n\n\nCode from Facure (2022)"
+  },
+  {
+    "objectID": "fe.html#fixed-effects-within",
+    "href": "fe.html#fixed-effects-within",
+    "title": "Fixed Effects",
+    "section": "Fixed Effects / Within",
+    "text": "Fixed Effects / Within\n1\n\n\nCode\nfe = smf.ols(\"purchase ~ mkt_costs + C(city)\", data=toy_panel).fit()\n\nfe_toy = toy_panel.assign(y_hat = fe.fittedvalues)\n\nplt.scatter(toy_panel.mkt_costs, toy_panel.purchase, c=toy_panel.city)\nfor city in fe_toy[\"city\"].unique():\n    plot_df = fe_toy.query(f\"city=='{city}'\")\n    plt.plot(plot_df.mkt_costs, plot_df.y_hat, c=\"C5\")\n\nplt.title(\"Fixed Effect Model\")\nplt.xlabel(\"Marketing Costs (in 1000)\")\nplt.ylabel(\"In-app Purchase (in 1000)\");\n\n\n\n\n\n\n\n\n\nCode from Facure (2022)"
+  },
+  {
+    "objectID": "fe.html#large-n-small-t",
+    "href": "fe.html#large-n-small-t",
+    "title": "Fixed Effects",
+    "section": "Large \\(n\\), Small \\(T\\)",
+    "text": "Large \\(n\\), Small \\(T\\)\n\nOften \\(n&gt;&gt;T\\)\nUsual analysis of fixed effects uses asymptotics with \\(n \\to \\infty\\), \\(T\\) fixed\n\nWe will mostly stick to that, but if you have data with \\(n \\approx T\\), other approaches can be better"
+  },
+  {
+    "objectID": "fe.html#strict-exogeneity",
+    "href": "fe.html#strict-exogeneity",
+    "title": "Fixed Effects",
+    "section": "Strict Exogeneity",
+    "text": "Strict Exogeneity\n\nIn fixed effect model \\[\ny_{it} - \\bar{y}_i  = (X_{it} - \\bar{X}_i)'\\beta + (\\epsilon_{it} - \\bar{\\epsilon}_i)\n\\] for \\(\\hat{\\beta}^{FE} \\inprob \\beta\\), need \\(\\Er[(X_{it} - \\bar{X}_i)(\\epsilon_{it} - \\bar{\\epsilon}_i)]=0\\)\nI.e. \\(\\Er[X_{it} \\epsilon_{is}] = 0\\) for all \\(t, s\\)"
+  },
+  {
+    "objectID": "fe.html#strict-exogeneity-1",
+    "href": "fe.html#strict-exogeneity-1",
+    "title": "Fixed Effects",
+    "section": "Strict Exogeneity",
+    "text": "Strict Exogeneity\n\nProblematic with dynamics, e.g.\n\n\\(X_{it}\\) including lagged \\(y_{it-1}\\)\n\\(X_{it}\\) affected by past \\(y\\)\n“Nickell bias”\n\nSee Chen, Chernozhukov, and Fernández-Val (2019) for bias correction under weak exogeneity, \\(\\Er[X_{it} \\epsilon_{is}] = 0\\) for \\(t \\leq s\\)"
+  },
+  {
+    "objectID": "fe.html#standard-errors",
+    "href": "fe.html#standard-errors",
+    "title": "Fixed Effects",
+    "section": "Standard Errors",
+    "text": "Standard Errors\n\nGenerally, good idea to use clustered standard errors, clustered on \\(i\\)\nSee MacKinnon, Nielsen, and Webb (2023) for guide to clustered standard errors"
+  },
+  {
+    "objectID": "fe.html#sources-and-further-reading",
+    "href": "fe.html#sources-and-further-reading",
+    "title": "Fixed Effects",
+    "section": "Sources and Further Reading",
+    "text": "Sources and Further Reading\n\nFacure (2022) chapter 14\nHuntington-Klein (2021) chapter 16"
+  },
+  {
+    "objectID": "fe.html#references",
+    "href": "fe.html#references",
+    "title": "Fixed Effects",
+    "section": "References",
+    "text": "References\n\n\n\n\n\n\n\n\nChen, Shuowen, Victor Chernozhukov, and Iván Fernández-Val. 2019. “Mastering Panel Metrics: Causal Impact of Democracy on Growth.” AEA Papers and Proceedings 109 (May): 77–82. https://doi.org/10.1257/pandp.20191071.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/.\n\n\nMacKinnon, James G., Morten Ørregaard Nielsen, and Matthew D. Webb. 2023. “Cluster-Robust Inference: A Guide to Empirical Practice.” Journal of Econometrics 232 (2): 272–99. https://doi.org/https://doi.org/10.1016/j.jeconom.2022.04.001."
+  },
+  {
+    "objectID": "syntheticcontrol.html#setup",
+    "href": "syntheticcontrol.html#setup",
+    "title": "Synthetic Control",
+    "section": "Setup",
+    "text": "Setup\n\n1 treated unit, observed \\(T_0\\) periods before treatment, \\(T_1\\) periods after\n\\(J\\) untreated units\n\\(J\\), \\(T_0\\) moderate in size\nFormalisation of comparative case study"
+  },
+  {
+    "objectID": "syntheticcontrol.html#example-california-tobacco-control-program",
+    "href": "syntheticcontrol.html#example-california-tobacco-control-program",
+    "title": "Synthetic Control",
+    "section": "Example: California Tobacco Control Program",
+    "text": "Example: California Tobacco Control Program\n\nCode and copy of data from Facure (2022)\nData used in Abadie, Diamond, and Hainmueller (2010)\n\n\n\nCode\nimport warnings\nwarnings.filterwarnings('ignore')\n\nimport pandas as pd\nimport numpy as np\nfrom matplotlib import style\nfrom matplotlib import pyplot as plt\nimport seaborn as sns\nimport statsmodels.formula.api as smf\n\n#if 'ipykernel' in sys.modules:\n#    %matplotlib inline\n\npd.set_option(\"display.max_columns\", 20)\nstyle.use(\"fivethirtyeight\")"
+  },
+  {
+    "objectID": "syntheticcontrol.html#data-california-tobacco-control-program",
+    "href": "syntheticcontrol.html#data-california-tobacco-control-program",
+    "title": "Synthetic Control",
+    "section": "Data: California Tobacco Control Program",
+    "text": "Data: California Tobacco Control Program\n\ncigar = pd.read_csv(\"data/smoking.csv\")\ncigar.query(\"california\").head()\n\n\n\n\n\n\n\n\nstate\nyear\ncigsale\nlnincome\nbeer\nage15to24\nretprice\ncalifornia\nafter_treatment\n\n\n\n\n62\n3\n1970\n123.000000\nNaN\nNaN\n0.178158\n38.799999\nTrue\nFalse\n\n\n63\n3\n1971\n121.000000\nNaN\nNaN\n0.179296\n39.700001\nTrue\nFalse\n\n\n64\n3\n1972\n123.500000\n9.930814\nNaN\n0.180434\n39.900002\nTrue\nFalse\n\n\n65\n3\n1973\n124.400002\n9.955092\nNaN\n0.181572\n39.900002\nTrue\nFalse\n\n\n66\n3\n1974\n126.699997\n9.947999\nNaN\n0.182710\n41.900002\nTrue\nFalse"
+  },
+  {
+    "objectID": "syntheticcontrol.html#cigarette-sales-trends",
+    "href": "syntheticcontrol.html#cigarette-sales-trends",
+    "title": "Synthetic Control",
+    "section": "Cigarette Sales Trends",
+    "text": "Cigarette Sales Trends\n\nax = plt.subplot(1, 1, 1)\nfor gdf in cigar.groupby(\"state\"):\n    ax.plot(gdf[1]['year'],gdf[1]['cigsale'], alpha=0.2, lw=1, color=\"k\")\n\nax.set_ylim(40, 150)\nax.plot(cigar.query(\"california\")['year'], cigar.query(\"california\")['cigsale'], label=\"California\")\ncigar.query(\"not california\").groupby(\"year\")['cigsale'].mean().plot(ax=ax, label=\"Mean Other States\")\n\nplt.vlines(x=1988, ymin=40, ymax=140, linestyle=\":\", lw=2, label=\"Proposition 99\")\nplt.ylabel(\"Per-capita cigarette sales (in packs)\")\nplt.legend()\nplt.show()"
+  },
+  {
+    "objectID": "syntheticcontrol.html#which-comparison",
+    "href": "syntheticcontrol.html#which-comparison",
+    "title": "Synthetic Control",
+    "section": "Which Comparison?",
+    "text": "Which Comparison?\n\n\nAll states?\nStates bordering California?\nStates with similar characteristics? Which characteristics?"
+  },
+  {
+    "objectID": "syntheticcontrol.html#synthetic-control",
+    "href": "syntheticcontrol.html#synthetic-control",
+    "title": "Synthetic Control",
+    "section": "Synthetic Control",
+    "text": "Synthetic Control\n\nCompare treated unit (California) to weighted average of untreated units\nWeights chosen to make sythetic control close to California"
+  },
+  {
+    "objectID": "syntheticcontrol.html#synthetic-control-1",
+    "href": "syntheticcontrol.html#synthetic-control-1",
+    "title": "Synthetic Control",
+    "section": "Synthetic Control",
+    "text": "Synthetic Control\n\nPotential outcomes \\(Y_{it}(0), Y_{it}(1)\\)\nFor \\(t&gt;T_0\\), estimate treatment effect on treated unit as \\[\n\\hat{\\tau}_{1t} = Y_{1t} -\n\\underbrace{\\sum_{j=2}^{J+1} \\hat{w}_j Y_{jt}}_{\\hat{Y}_{1t}(0)}\n\\]\n\\(\\hat{w}_j\\) chosen to make synthetic control close to treated unit in before treatment"
+  },
+  {
+    "objectID": "syntheticcontrol.html#variables-to-match",
+    "href": "syntheticcontrol.html#variables-to-match",
+    "title": "Synthetic Control",
+    "section": "Variables to Match",
+    "text": "Variables to Match\n\nVector of pretreatment variables for treated unit \\[\n\\mathbf{X}_1 = \\left(Y_{11}, \\cdots Y_{1T_0}, z_{11}, \\cdots, z_1K \\right)^T\n\\]\nMatrix of same variabels for untreated \\[\n\\mathbf{X}_0 = \\begin{pmatrix}\nY_{21} & \\cdots & Y_{2T_0} & z_{21} & \\cdots & z_{2K} \\\\\n\\vdots &        &          &        &        & \\vdots \\\\\nY_{J+1,1} & \\cdots & Y_{J+1,T_0} & z_{J+1,1} & \\cdots & z_{J+1,K}\n\\end{pmatrix}^T\n\\]"
+  },
+  {
+    "objectID": "syntheticcontrol.html#weights",
+    "href": "syntheticcontrol.html#weights",
+    "title": "Synthetic Control",
+    "section": "Weights",
+    "text": "Weights\n\nWeights minimize difference \\[\n\\begin{align*}\n\\hat{W} = & \\textrm{arg}\\min_{W \\in \\R^J} \\Vert \\mathbf{X}_1 - \\mathbf{X}_0 W \\Vert_V \\\\\n& s.t. \\sum_{j=2}^{J+1} w_j = 1 \\\\\n& \\;\\;\\; 0 \\leq w_j \\leq 1 \\;\\; \\forall j\n\\end{align*}\n\\]\n\n\n\n\\(\\Vert x \\Vert_V = x' V x\\) is a weighted norm. Choose \\(V\\) to e.g. weight by inverse variance"
+  },
+  {
+    "objectID": "syntheticcontrol.html#computing-weights",
+    "href": "syntheticcontrol.html#computing-weights",
+    "title": "Synthetic Control",
+    "section": "Computing Weights",
+    "text": "Computing Weights\n\nfeatures = [\"cigsale\", \"retprice\"]\ninverted = (cigar.query(\"~after_treatment\") # filter pre-intervention period\n            .pivot(index='state', columns=\"year\")[features] # make one column per year and one row per state\n            .T) # flip the table to have one column per state\ninverted.head()\n\n\n\n\n\n\n\n\nstate\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n...\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n\n\n\nyear\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncigsale\n1970\n89.800003\n100.300003\n123.000000\n124.800003\n120.000000\n155.000000\n109.900002\n102.400002\n124.800003\n134.600006\n...\n103.599998\n92.699997\n99.800003\n106.400002\n65.500000\n122.599998\n124.300003\n114.500000\n106.400002\n132.199997\n\n\n1971\n95.400002\n104.099998\n121.000000\n125.500000\n117.599998\n161.100006\n115.699997\n108.500000\n125.599998\n139.300003\n...\n115.000000\n96.699997\n106.300003\n108.900002\n67.699997\n124.400002\n128.399994\n111.500000\n105.400002\n131.699997\n\n\n1972\n101.099998\n103.900002\n123.500000\n134.300003\n110.800003\n156.300003\n117.000000\n126.099998\n126.599998\n149.199997\n...\n118.699997\n103.000000\n111.500000\n108.599998\n71.300003\n138.000000\n137.000000\n117.500000\n108.800003\n140.000000\n\n\n1973\n102.900002\n108.000000\n124.400002\n137.899994\n109.300003\n154.699997\n119.800003\n121.800003\n124.400002\n156.000000\n...\n125.500000\n103.500000\n109.699997\n110.400002\n72.699997\n146.800003\n143.100006\n116.599998\n109.500000\n141.199997\n\n\n1974\n108.199997\n109.699997\n126.699997\n132.800003\n112.400002\n151.300003\n123.699997\n125.599998\n131.899994\n159.600006\n...\n129.699997\n108.400002\n114.800003\n114.699997\n75.599998\n151.800003\n149.600006\n119.900002\n111.800003\n145.800003\n\n\n\n\n5 rows × 39 columns"
+  },
+  {
+    "objectID": "syntheticcontrol.html#computing-weights-1",
+    "href": "syntheticcontrol.html#computing-weights-1",
+    "title": "Synthetic Control",
+    "section": "Computing Weights",
+    "text": "Computing Weights\n\nfrom scipy.optimize import fmin_slsqp\nfrom toolz import reduce, partial\n\nX1 = inverted[3].values # state of california\nX0 = inverted.drop(columns=3).values  # other states\n\ndef loss_w(W, X0, X1) -&gt; float:\n    return np.sqrt(np.mean((X1 - X0.dot(W))**2))\n\n\ndef get_w(X0, X1):\n    w_start = [1/X0.shape[1]]*X0.shape[1]\n    weights = fmin_slsqp(partial(loss_w, X0=X0, X1=X1),\n                         np.array(w_start),\n                         f_eqcons=lambda x: np.sum(x) - 1,\n                         bounds=[(0.0, 1.0)]*len(w_start),\n                         disp=False)\n    return weights"
+  },
+  {
+    "objectID": "syntheticcontrol.html#examining-weights",
+    "href": "syntheticcontrol.html#examining-weights",
+    "title": "Synthetic Control",
+    "section": "Examining Weights",
+    "text": "Examining Weights\n\nWeights tend to be sparse\nGood idea to examine which untreated units get positive weight\nShould look at state names, but the data does not have them, and the state variable is not FIPs code or any standard identifier\n\n\ncalif_weights = get_w(X0, X1)\nprint(\"Sum:\", calif_weights.sum())\nnp.round(calif_weights, 4)\n\nSum: 1.000000000000424\n\n\narray([0.    , 0.    , 0.    , 0.0852, 0.    , 0.    , 0.    , 0.    ,\n       0.    , 0.    , 0.    , 0.    , 0.    , 0.    , 0.    , 0.    ,\n       0.    , 0.    , 0.    , 0.113 , 0.1051, 0.4566, 0.    , 0.    ,\n       0.    , 0.    , 0.    , 0.    , 0.    , 0.    , 0.    , 0.    ,\n       0.2401, 0.    , 0.    , 0.    , 0.    , 0.    ])"
+  },
+  {
+    "objectID": "syntheticcontrol.html#effect-of-california-tobacco-control-program",
+    "href": "syntheticcontrol.html#effect-of-california-tobacco-control-program",
+    "title": "Synthetic Control",
+    "section": "Effect of California Tobacco Control Program",
+    "text": "Effect of California Tobacco Control Program\n\ncalif_synth = cigar.query(\"~california\").pivot(index='year', columns=\"state\")[\"cigsale\"].values.dot(calif_weights)\nplt.figure(figsize=(10,6))\nplt.plot(cigar.query(\"california\")[\"year\"], cigar.query(\"california\")[\"cigsale\"], label=\"California\")\nplt.plot(cigar.query(\"california\")[\"year\"], calif_synth, label=\"Synthetic Control\")\nplt.vlines(x=1988, ymin=40, ymax=140, linestyle=\":\", lw=2, label=\"Proposition 99\")\nplt.ylabel(\"Per-capita cigarette sales (in packs)\")\nplt.legend()\nplt.show()"
+  },
+  {
+    "objectID": "syntheticcontrol.html#when-does-this-work",
+    "href": "syntheticcontrol.html#when-does-this-work",
+    "title": "Synthetic Control",
+    "section": "When Does this Work?",
+    "text": "When Does this Work?\n\nIf data generated by linear factor model: \\[\nY_{jt}(0) = \\delta_t + \\theta_t Z_j + \\lambda_t \\mu_j + \\epsilon_{jt}\n\\]\n\nObserved \\(Z_j\\)\nUnobserved\\(\\lambda_t\\), \\(\\mu_j\\)\n\nAs \\(T_0\\) increases or variance of \\(\\epsilon_{jt}\\) decreases, bias of \\(\\hat{\\tau}_{it}\\) decreases\n\nNeeds \\(\\mathbf{X}_1 \\approx \\mathbf{X}_0 W\\)"
+  },
+  {
+    "objectID": "syntheticcontrol.html#choices",
+    "href": "syntheticcontrol.html#choices",
+    "title": "Synthetic Control",
+    "section": "Choices",
+    "text": "Choices\n\n\nVariables in \\(\\mathbf{X}\\) to match\n\nFewer make eaiser to have \\(\\mathbf{X}_1 \\approx \\mathbf{X}_0 W\\)\nBut fewer make \\(W\\) depend more on \\(\\epsilon\\)\n\nSet of untreated units to consider\n\nMore units makes eaiser to have \\(\\mathbf{X}_1 \\approx \\mathbf{X}_0 W\\)\nBut risk of overfitting"
+  },
+  {
+    "objectID": "syntheticcontrol.html#inference-1",
+    "href": "syntheticcontrol.html#inference-1",
+    "title": "Synthetic Control",
+    "section": "Inference",
+    "text": "Inference\n\nEstimator \\[\n\\hat{\\tau}_{1t} = Y_{1t} -\n\\underbrace{\\sum_{j=2}^{J+1} \\hat{w}_j Y_{jt}}_{\\hat{Y}_{1t}(0)}\n\\]\n\nsingle observation of \\(Y_{1t}\\)\n\\(\\hat{w}_j\\) depends on pre-treatment variables \\(\\underbrace{\\mathbf{X}_1, \\mathbf{X}_0}_{(J+1) \\times (T_0 + K)}\\)\n\\(J\\) values of \\(Y_{jt}\\)\n\nUsual asymptotics not applicable"
+  },
+  {
+    "objectID": "syntheticcontrol.html#treatment-permutation",
+    "href": "syntheticcontrol.html#treatment-permutation",
+    "title": "Synthetic Control",
+    "section": "Treatment Permutation",
+    "text": "Treatment Permutation\n\nCompute estimate pretending each of the \\(J\\) untreated units were treated instead\nUse as distribution of \\(\\hat{\\tau}_{1t}\\) under \\(H_0: \\tau_{1t} = 0\\)"
+  },
+  {
+    "objectID": "syntheticcontrol.html#treatment-permutation-1",
+    "href": "syntheticcontrol.html#treatment-permutation-1",
+    "title": "Synthetic Control",
+    "section": "Treatment Permutation",
+    "text": "Treatment Permutation\n\ndef synthetic_control(state: int, data: pd.DataFrame) -&gt; np.array:\n    features = [\"cigsale\", \"retprice\"]\n    inverted = (data.query(\"~after_treatment\")\n                .pivot(index='state', columns=\"year\")[features]\n                .T)\n    X1 = inverted[state].values # treated\n    X0 = inverted.drop(columns=state).values # donor pool\n\n    weights = get_w(X0, X1)\n    synthetic = (data.query(f\"~(state=={state})\")\n                 .pivot(index='year', columns=\"state\")[\"cigsale\"]\n                 .values.dot(weights))\n    return (data\n            .query(f\"state=={state}\")[[\"state\", \"year\", \"cigsale\", \"after_treatment\"]]\n            .assign(synthetic=synthetic))\n\nfrom joblib import Parallel, delayed\n\ncontrol_pool = cigar[\"state\"].unique()\nparallel_fn = delayed(partial(synthetic_control, data=cigar))\nsynthetic_states = Parallel(n_jobs=20)(parallel_fn(state) for state in control_pool);"
+  },
+  {
+    "objectID": "syntheticcontrol.html#treatment-permutation-2",
+    "href": "syntheticcontrol.html#treatment-permutation-2",
+    "title": "Synthetic Control",
+    "section": "Treatment Permutation",
+    "text": "Treatment Permutation\n\n\nCode\nplt.figure(figsize=(12,7))\nfor state in synthetic_states:\n    plt.plot(state[\"year\"], state[\"cigsale\"] - state[\"synthetic\"], color=\"C5\",alpha=0.4)\n\nplt.plot(cigar.query(\"california\")[\"year\"], cigar.query(\"california\")[\"cigsale\"] - calif_synth,\n        label=\"California\");\n\nplt.vlines(x=1988, ymin=-50, ymax=120, linestyle=\":\", lw=2, label=\"Proposition 99\")\nplt.hlines(y=0, xmin=1970, xmax=2000, lw=3)\nplt.ylabel(\"Gap in per-capita cigarette sales (in packs)\")\nplt.title(\"State - Synthetic Across Time\")\nplt.legend()\nplt.show()"
+  },
+  {
+    "objectID": "syntheticcontrol.html#treatment-permutation-inference",
+    "href": "syntheticcontrol.html#treatment-permutation-inference",
+    "title": "Synthetic Control",
+    "section": "Treatment Permutation Inference",
+    "text": "Treatment Permutation Inference\n\n\nCode\ndef pre_treatment_error(state):\n    pre_treat_error = (state.query(\"~after_treatment\")[\"cigsale\"]\n                       - state.query(\"~after_treatment\")[\"synthetic\"]) ** 2\n    return pre_treat_error.mean()\n\nplt.figure(figsize=(12,7))\nfor state in synthetic_states:\n\n    # remove units with mean error above 80.\n    if pre_treatment_error(state) &lt; 80:\n        plt.plot(state[\"year\"], state[\"cigsale\"] - state[\"synthetic\"], color=\"C5\",alpha=0.4)\n\nplt.plot(cigar.query(\"california\")[\"year\"], cigar.query(\"california\")[\"cigsale\"] - calif_synth,\n        label=\"California\");\n\nplt.vlines(x=1988, ymin=-50, ymax=120, linestyle=\":\", lw=2, label=\"Proposition 99\")\nplt.hlines(y=0, xmin=1970, xmax=2000, lw=3)\nplt.ylabel(\"Gap in per-capita cigarette sales (in packs)\")\nplt.title(\"Distribution of Effects\")\nplt.title(\"State - Synthetic Across Time (Large Pre-Treatment Errors Removed)\")\nplt.legend()\nplt.show()"
+  },
+  {
+    "objectID": "syntheticcontrol.html#treatment-permutation-inference-testing-h_0-tau0",
+    "href": "syntheticcontrol.html#treatment-permutation-inference-testing-h_0-tau0",
+    "title": "Synthetic Control",
+    "section": "Treatment Permutation Inference: Testing \\(H_0: \\tau=0\\)",
+    "text": "Treatment Permutation Inference: Testing \\(H_0: \\tau=0\\)\n\ncalif_number = 3\n\neffects = [state.query(\"year==2000\").iloc[0][\"cigsale\"] - state.query(\"year==2000\").iloc[0][\"synthetic\"]\n           for state in synthetic_states\n           if pre_treatment_error(state) &lt; 80] # filter out noise\n\ncalif_effect = cigar.query(\"california & year==2000\").iloc[0][\"cigsale\"] - calif_synth[-1]\n\nprint(\"California Treatment Effect for the Year 2000:\", calif_effect)\nnp.array(effects)\n\nnp.mean(np.array(effects) &lt; calif_effect)\n\nCalifornia Treatment Effect for the Year 2000: -24.83015975607075\n\n\n0.02857142857142857"
+  },
+  {
+    "objectID": "syntheticcontrol.html#design-based-inference",
+    "href": "syntheticcontrol.html#design-based-inference",
+    "title": "Synthetic Control",
+    "section": "Design Based Inference",
+    "text": "Design Based Inference\n\n\nSampling based inference:\n\nSpecify data generating process (DGP)\nFind distribution of estimator under repeated sampling of datasets from DGP\n\n\n\n\n\nDesign based inference:\n\nCondition on dataset you have\nRandomness of estimator from random assignment of treatment\nSee Abadie et al. (2020) for more information\n\n\n\n\n\nTreatment permutation inference is design based inference assuming the treated unit was chosen uniformly at random from all units"
+  },
+  {
+    "objectID": "syntheticcontrol.html#design-based-treatment-permutation-inference",
+    "href": "syntheticcontrol.html#design-based-treatment-permutation-inference",
+    "title": "Synthetic Control",
+    "section": "Design Based / Treatment Permutation Inference",
+    "text": "Design Based / Treatment Permutation Inference\n\nPros:\n\nEasy to implement and explain\nIntuitive appeal, similar to placebo tests\nMinimal assumptions about DGP\n\nCons:\n\nAssumption about randomized treatment assignment is generally false\nNeeds modification to test hypotheses other than \\(H_0: \\tau=0\\) & to construct confidence intervals"
+  },
+  {
+    "objectID": "syntheticcontrol.html#prediction-intervals",
+    "href": "syntheticcontrol.html#prediction-intervals",
+    "title": "Synthetic Control",
+    "section": "Prediction Intervals",
+    "text": "Prediction Intervals\n\nEstimation error is a prediction error \\[\n\\begin{align*}\n\\hat{\\tau}_{1t} = & Y_{1t} -\n\\underbrace{\\hat{Y}_{1t}(0)}_{\\text{prediction given $Y_{jt}, \\mathbf{X}_0$}}\n\\\\\n= &  \\underbrace{Y_{1t}(1) - \\color{grey}{Y_{1t}(0)}}_{\\tau_{1t}} + \\underbrace{\\color{grey}{Y_{1t}(0)} - \\hat{Y}_{1t}(0)}_{\\text{prediction error}}\n\\end{align*}\n\\]\n\n\n\nMany statistical methods for calculating distribution of prediction error\nDifficulties:\n\nHigh-dimensional: number of weights comparable to number of observations and dimension of predictors\nModerate sample sizes"
+  },
+  {
+    "objectID": "syntheticcontrol.html#prediction-intervals-1",
+    "href": "syntheticcontrol.html#prediction-intervals-1",
+    "title": "Synthetic Control",
+    "section": "Prediction Intervals",
+    "text": "Prediction Intervals\n\nModern approaches accomodate high-dimensionality and give non-asymptotic results\nChernozhukov, Wüthrich, and Zhu (2021) : construct prediction intervals by permuting residuals (conformal inference)\nCattaneo, Feng, and Titiunik (2021) : divide prediction error into two pieces: estimation of \\(\\hat{w}\\) and unpredictable randomness in \\(Y_{1t}(0)\\)"
+  },
+  {
+    "objectID": "syntheticcontrol.html#catteneo-feng-titiunik",
+    "href": "syntheticcontrol.html#catteneo-feng-titiunik",
+    "title": "Synthetic Control",
+    "section": "Catteneo, Feng, & Titiunik",
+    "text": "Catteneo, Feng, & Titiunik\n\nGiven coverage level \\(\\alpha\\), gives interval \\(\\mathcal{I}_{1-\\alpha}\\) such that \\[\nP\\left[ P\\left(\\tau_{1t} \\in \\mathcal{I}_{1-\\alpha} | \\mathbf{X}_0, \\{y_{jt}\\}_{j=1}^J\\right) &gt; 1-\\alpha-\\epsilon(T_0) \\right] &gt; 1 - \\pi(T_0)\n\\] where \\(\\epsilon(T_0) \\to 0\\) and \\(\\pi(T_0) \\to 0\\) as \\(T_0 \\to \\infty\\)\nprediction error comes from\n\nestimation of \\(\\hat{w}\\), options refer to u_ in scpi_pkg\nunobservable stochastic error in \\(Y_{1t}(0)\\), options begin with e_ in scpi_pkg\n\nvalid under broad range of DGPs, but appropriate interval does depend on dependence of data over time, stationarity, assumptions about distribution of error given predictors"
+  },
+  {
+    "objectID": "syntheticcontrol.html#software",
+    "href": "syntheticcontrol.html#software",
+    "title": "Synthetic Control",
+    "section": "Software",
+    "text": "Software\n\nscpi_pkg recommended, created by leading econometricians\npysyncon actively maintained, well-documented, but appears not popular\nSpareSC created by researchers at Microsoft, uses particular variant\nscinference R package accompanying Chernozhukov, Wüthrich, and Zhu (2021)"
+  },
+  {
+    "objectID": "syntheticcontrol.html#data-preparation",
+    "href": "syntheticcontrol.html#data-preparation",
+    "title": "Synthetic Control",
+    "section": "Data Preparation",
+    "text": "Data Preparation\n\nimport random\nfrom scpi_pkg.scdata import scdata\nfrom scpi_pkg.scest import scest\nfrom scpi_pkg.scplot import scplot\nscdf = scdata(df=cigar, id_var=\"state\", time_var=\"year\", outcome_var=\"cigsale\",\n              period_pre=cigar.query(\"not after_treatment\").year.unique(),\n              period_post=cigar.query(\"after_treatment\").year.unique(),\n              unit_tr=calif_number,\n              unit_co=cigar.query(\"not california\").state.unique(),\n              features=[\"cigsale\",\"retprice\"],\n              cov_adj=None, cointegrated_data=True,\n              constant=False)"
+  },
+  {
+    "objectID": "syntheticcontrol.html#point-estimation",
+    "href": "syntheticcontrol.html#point-estimation",
+    "title": "Synthetic Control",
+    "section": "Point Estimation",
+    "text": "Point Estimation\n\n\nCode\nest_si = scest(scdf, w_constr={'name': \"simplex\"})\nprint(est_si)\nest_si2 = scest(scdf, w_constr={'p': 'L1', 'dir': '==', 'Q': 1, 'lb': 0})\nprint(est_si2)\nscplot(est_si)\n\n\n-----------------------------------------------------------------------\nCall: scest\nSynthetic Control Estimation - Setup\n\nConstraint Type:                                                simplex\nConstraint Size (Q):                                                  1\nTreated Unit:                                                         3\nSize of the donor pool:                                              38\nFeatures                                                              2\nPre-treatment period                                          1970-1988\nPre-treatment periods used in estimation per feature:\n Feature  Observations\n cigsale            19\nretprice            19\nCovariates used for adjustment per feature:\n Feature  Num of Covariates\n cigsale                  0\nretprice                  0\n\nSynthetic Control Estimation - Results\n\nActive donors: 5\n\nCoefficients:\n                    Weights\nTreated Unit Donor         \n3            1        0.000\n             10       0.000\n             11       0.000\n             12       0.000\n             13       0.000\n             14       0.000\n             15       0.000\n             16       0.000\n             17       0.000\n             18       0.000\n             19       0.000\n             2        0.000\n             20       0.000\n             21       0.113\n             22       0.105\n             23       0.457\n             24       0.000\n             25       0.000\n             26       0.000\n             27       0.000\n             28       0.000\n             29       0.000\n             30       0.000\n             31       0.000\n             32       0.000\n             33       0.000\n             34       0.240\n             35       0.000\n             36       0.000\n             37       0.000\n             38       0.000\n             39       0.000\n             4        0.000\n             5        0.085\n             6        0.000\n             7        0.000\n             8        0.000\n             9        0.000\n\n-----------------------------------------------------------------------\nCall: scest\nSynthetic Control Estimation - Setup\n\nConstraint Type:                                          user provided\nConstraint Size (Q):                                                  1\nTreated Unit:                                                         3\nSize of the donor pool:                                              38\nFeatures                                                              2\nPre-treatment period                                          1970-1988\nPre-treatment periods used in estimation per feature:\n Feature  Observations\n cigsale            19\nretprice            19\nCovariates used for adjustment per feature:\n Feature  Num of Covariates\n cigsale                  0\nretprice                  0\n\nSynthetic Control Estimation - Results\n\nActive donors: 5\n\nCoefficients:\n                    Weights\nTreated Unit Donor         \n3            1        0.000\n             10       0.000\n             11       0.000\n             12       0.000\n             13       0.000\n             14       0.000\n             15       0.000\n             16       0.000\n             17       0.000\n             18       0.000\n             19       0.000\n             2        0.000\n             20       0.000\n             21       0.113\n             22       0.105\n             23       0.457\n             24       0.000\n             25       0.000\n             26       0.000\n             27       0.000\n             28       0.000\n             29       0.000\n             30       0.000\n             31       0.000\n             32       0.000\n             33       0.000\n             34       0.240\n             35       0.000\n             36       0.000\n             37       0.000\n             38       0.000\n             39       0.000\n             4        0.000\n             5        0.085\n             6        0.000\n             7        0.000\n             8        0.000\n             9        0.000"
+  },
+  {
+    "objectID": "syntheticcontrol.html#inference-2",
+    "href": "syntheticcontrol.html#inference-2",
+    "title": "Synthetic Control",
+    "section": "Inference",
+    "text": "Inference\n\n\nCode\nfrom scpi_pkg.scpi import scpi\nimport random\nw_constr = {'name': 'simplex', 'Q': 1}\nu_missp = True\nu_sigma = \"HC1\"\nu_order = 1\nu_lags = 0\ne_method = \"gaussian\"\ne_order = 1\ne_lags = 0\ne_alpha = 0.05\nu_alpha = 0.05\nsims = 200\ncores = 1\n\nrandom.seed(8894)\nresult = scpi(scdf, sims=sims, w_constr=w_constr, u_order=u_order, u_lags=u_lags,\n              e_order=e_order, e_lags=e_lags, e_method=e_method, u_missp=u_missp,\n              u_sigma=u_sigma, cores=cores, e_alpha=e_alpha, u_alpha=u_alpha)\nscplot(result, e_out=True, x_lab=\"year\", y_lab=\"per-capita cigarette sales (in packs)\")\n\n\n-----------------------------------------------\nEstimating Weights...\nQuantifying Uncertainty\nMaximum expected execution time: 2 minutes.\n \n\n20/200 iterations completed (10%)\n40/200 iterations completed (20%)\n60/200 iterations completed (30%)\n80/200 iterations completed (40%)\n100/200 iterations completed (50%)\n120/200 iterations completed (60%)\n140/200 iterations completed (70%)\n160/200 iterations completed (80%)\n180/200 iterations completed (90%)\n200/200 iterations completed (100%)"
+  },
+  {
+    "objectID": "syntheticcontrol.html#sources-and-further-reading",
+    "href": "syntheticcontrol.html#sources-and-further-reading",
+    "title": "Synthetic Control",
+    "section": "Sources and Further Reading",
+    "text": "Sources and Further Reading\n\nexample code from Facure (2022) chapter 15\nnotation and theory follows Abadie (2021)\nHuntington-Klein (2021) chapter 21.2\nMore technical:\n\nCattaneo et al. (2022) user guide for scpi_pkg\nAbadie, Diamond, and Hainmueller (2010) important paper popularizing synthetic control and permutation inference\nAbadie and Cattaneo (2021) lists recent statistical advances in synthetic control"
+  },
+  {
+    "objectID": "syntheticcontrol.html#references",
+    "href": "syntheticcontrol.html#references",
+    "title": "Synthetic Control",
+    "section": "References",
+    "text": "References\n\n\n\n\n\n\n\n\nAbadie, Alberto. 2021. “Using Synthetic Controls: Feasibility, Data Requirements, and Methodological Aspects.” Journal of Economic Literature 59 (2): 391–425. https://doi.org/10.1257/jel.20191450.\n\n\nAbadie, Alberto, Susan Athey, Guido W. Imbens, and Jeffrey M. Wooldridge. 2020. “Sampling-Based Versus Design-Based Uncertainty in Regression Analysis.” Econometrica 88 (1): 265–96. https://doi.org/https://doi.org/10.3982/ECTA12675.\n\n\nAbadie, Alberto, and Matias D. Cattaneo. 2021. “Introduction to the Special Section on Synthetic Control Methods.” Journal of the American Statistical Association 116 (536): 1713–15. https://doi.org/10.1080/01621459.2021.2002600.\n\n\nAbadie, Alberto, Alexis Diamond, and Jens Hainmueller. 2010. “Synthetic Control Methods for Comparative Case Studies: Estimating the Effect of California’s Tobacco Control Program.” Journal of the American Statistical Association 105 (490): 493–505. https://doi.org/10.1198/jasa.2009.ap08746.\n\n\nCattaneo, Matias D., Yingjie Feng, Filippo Palomba, and Rocio Titiunik. 2022. “Scpi: Uncertainty Quantification for Synthetic Control Methods.”\n\n\nCattaneo, Matias D., Yingjie Feng, and Rocio Titiunik. 2021. “Prediction Intervals for Synthetic Control Methods.” Journal of the American Statistical Association 116 (536): 1865–80. https://doi.org/10.1080/01621459.2021.1979561.\n\n\nChernozhukov, Victor, Kaspar Wüthrich, and Yinchu Zhu. 2021. “An Exact and Robust Conformal Inference Method for Counterfactual and Synthetic Controls.” Journal of the American Statistical Association 116 (536): 1849–64. https://doi.org/10.1080/01621459.2021.1920957.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ECON 526: Quantitative Economics with Data Science Applications",
+    "section": "",
+    "text": "Slides\n\nMatching slides, notebook\n\nReading: chapters 10-12 of Facure (2022) and chapter 14 of Huntington-Klein (2021)\n\nIntroduction to difference in differences, notebook\n\nReading: chapter 13 of Facure (2022)\n\nFixed Effects, notebook\n\nReading: chapter 14 of Facure (2022)\n\nAdvanced difference in differences, notebook\n\nReading: chapter 24 of Facure (2022), Roth et al. (2023), Chaisemartin and D’Haultfœuille (2022)\n\nSynthetic Control, notebook\n\nReading: Abadie (2021),chapter 15 of Facure (2022)\n\nDouble/Debiased Machine Learning, notebook\n\nReading: QuantEcon: ML in Economics\n\nTreatment Heterogeneity and Conditional Effects, notebook\n\nReading: QuantEcon: Heterogeneity\n\nNeural Networks, notebook\n\nReading: QuantEcon Datascience: Regression - Neural Networks\n\n\n\n\n\n\n\nReferences\n\nAbadie, Alberto. 2021. “Using Synthetic Controls: Feasibility, Data Requirements, and Methodological Aspects.” Journal of Economic Literature 59 (2): 391–425. https://doi.org/10.1257/jel.20191450.\n\n\nChaisemartin, Clément de, and Xavier D’Haultfœuille. 2022. “Two-way fixed effects and differences-in-differences with heterogeneous treatment effects: a survey.” The Econometrics Journal 26 (3): C1–30. https://doi.org/10.1093/ectj/utac017.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/.\n\n\nRoth, Jonathan, Pedro H. C. Sant’Anna, Alyssa Bilinski, and John Poe. 2023. “What’s Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature.” Journal of Econometrics 235 (2): 2218–44. https://doi.org/https://doi.org/10.1016/j.jeconom.2023.03.008."
+  },
+  {
+    "objectID": "conditionaleffect.html#conditional-average-effecst",
+    "href": "conditionaleffect.html#conditional-average-effecst",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Conditional Average Effecst",
+    "text": "Conditional Average Effecst\n\n\nPreviously, mostly focused on average effects, e.g. \\[\nATE = \\Er[Y_i(1) - Y_i(0)]\n\\]\nAlso care about conditional average effects, e.g. \\[\nCATE(x) = \\Er[Y_i(1) - Y_i(0)|X_i = x]\n\\]\n\nMore detailed description\nSuggest mechanism for how treatment affects outcome\nGive treatment assignment rule, e.g. \\[\nD_i = 1\\{CATE(X_i) &gt; 0 \\}\n\\]"
+  },
+  {
+    "objectID": "conditionaleffect.html#conditional-average-effects-challenges",
+    "href": "conditionaleffect.html#conditional-average-effects-challenges",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Conditional Average Effects: Challenges",
+    "text": "Conditional Average Effects: Challenges\n\\[\nCATE(x) = \\Er[Y_i(1) - Y_i(0)|X_i = x]\n\\]\n\nHard to communicate, espeically when \\(x\\) high dimensional\nWorse statistical properties, especially when \\(x\\) high dimensional and/or continuous\nMore demanding of data\nFocus on useful summaries of \\(CATE(x)\\)"
+  },
+  {
+    "objectID": "conditionaleffect.html#program-keluarga-harapan",
+    "href": "conditionaleffect.html#program-keluarga-harapan",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Program Keluarga Harapan",
+    "text": "Program Keluarga Harapan\n\nAlatas et al. (2011) , Triyana (2016)\nRandomized experiment in Indonesia\nConditional cash transfer for pregnant women\n\n60-220USD (15-20% quarterly consumption)\nConditions: 4 pre, 2 post natal medical visits, baby delivered by doctor or midwife\n\nRandomly assigned at kecamatan (district) level\n\n\n\nimports\nimport pandas as pd\nimport numpy as np\nimport patsy\nfrom sklearn import linear_model, ensemble, base, neural_network\nimport statsmodels.formula.api as smf\nimport statsmodels.api as sm\n#from sklearn.utils._testing import ignore_warnings\n#from sklearn.exceptions import ConvergenceWarning\n\nimport matplotlib.pyplot as plt\nimport seaborn as sns"
+  },
+  {
+    "objectID": "conditionaleffect.html#data",
+    "href": "conditionaleffect.html#data",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Data",
+    "text": "Data\n\nurl = \"https://datascience.quantecon.org/assets/data/Triyana_2016_price_women_clean.csv\"\ndf = pd.read_csv(url)\ndf.describe()\n\n\n\n\n\n\n\n\nrid_panel\nprov\nLocation_ID\ndist\nwave\nedu\nagecat\nlog_xp_percap\nrhr031\nrhr032\n...\nhh_xp_all\ntv\nparabola\nfridge\nmotorbike\ncar\npig\ngoat\ncow\nhorse\n\n\n\n\ncount\n1.225100e+04\n22768.000000\n2.277100e+04\n22771.000000\n22771.000000\n22771.000000\n22771.000000\n22771.000000\n22771.000000\n22771.000000\n...\n22771.000000\n22771.000000\n22771.000000\n22771.000000\n22771.000000\n22771.000000\n22771.000000\n22771.00000\n22771.000000\n22771.000000\n\n\nmean\n3.406884e+12\n42.761156\n4.286882e+06\n431842.012033\n1.847174\n52.765799\n4.043081\n13.420404\n0.675157\n0.754908\n...\n3.839181\n0.754908\n0.482148\n0.498661\n0.594792\n0.470511\n0.536691\n0.53858\n0.515041\n0.470247\n\n\nstd\n1.944106e+12\n14.241982\n1.423541e+06\n143917.353784\n0.875323\n45.833778\n1.280589\n1.534089\n0.468326\n0.430151\n...\n1.481982\n0.430151\n0.499692\n0.500009\n0.490943\n0.499141\n0.498663\n0.49852\n0.499785\n0.499125\n\n\nmin\n1.100103e+10\n31.000000\n3.175010e+06\n3524.000000\n1.000000\n6.000000\n0.000000\n7.461401\n0.000000\n0.000000\n...\n1.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.00000\n0.000000\n0.000000\n\n\n25%\n1.731008e+12\n32.000000\n3.210180e+06\n323210.000000\n1.000000\n6.000000\n3.000000\n11.972721\n0.000000\n1.000000\n...\n3.000000\n1.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.00000\n0.000000\n0.000000\n\n\n50%\n3.491004e+12\n35.000000\n3.517171e+06\n353517.000000\n2.000000\n12.000000\n5.000000\n12.851639\n1.000000\n1.000000\n...\n5.000000\n1.000000\n0.000000\n0.000000\n1.000000\n0.000000\n1.000000\n1.00000\n1.000000\n0.000000\n\n\n75%\n5.061008e+12\n53.000000\n5.307020e+06\n535307.000000\n3.000000\n99.000000\n5.000000\n15.018967\n1.000000\n1.000000\n...\n5.000000\n1.000000\n1.000000\n1.000000\n1.000000\n1.000000\n1.000000\n1.00000\n1.000000\n1.000000\n\n\nmax\n6.681013e+12\n75.000000\n7.571030e+06\n757571.000000\n3.000000\n99.000000\n5.000000\n15.018967\n1.000000\n1.000000\n...\n5.000000\n1.000000\n1.000000\n1.000000\n1.000000\n1.000000\n1.000000\n1.00000\n1.000000\n1.000000\n\n\n\n\n8 rows × 121 columns"
+  },
+  {
+    "objectID": "conditionaleffect.html#average-treatment-effects",
+    "href": "conditionaleffect.html#average-treatment-effects",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Average Treatment Effects",
+    "text": "Average Treatment Effects\n\n\ndata prep\n# some data prep for later\nformula = \"\"\"\nbw ~ pkh_kec_ever +\n  C(edu)*C(agecat) + log_xp_percap + hh_land + hh_home + C(dist) +\n  hh_phone + hh_rf_tile + hh_rf_shingle + hh_rf_fiber +\n  hh_wall_plaster + hh_wall_brick + hh_wall_wood + hh_wall_fiber +\n  hh_fl_tile + hh_fl_plaster + hh_fl_wood + hh_fl_dirt +\n  hh_water_pam + hh_water_mechwell + hh_water_well + hh_water_spring + hh_water_river +\n  hh_waterhome +\n  hh_toilet_own + hh_toilet_pub + hh_toilet_none +\n  hh_waste_tank + hh_waste_hole + hh_waste_river + hh_waste_field +\n  hh_kitchen +\n  hh_cook_wood + hh_cook_kerosene + hh_cook_gas +\n  tv + fridge + motorbike + car + goat + cow + horse\n\"\"\"\nbw, X = patsy.dmatrices(formula, df, return_type=\"dataframe\")\n# some categories are empty after dropping rows with Null, drop now\nX = X.loc[:, X.sum() &gt; 0]\nbw = bw.iloc[:, 0]\ntreatment_variable = \"pkh_kec_ever\"\ntreatment = X[\"pkh_kec_ever\"]\nXl = X.drop([\"Intercept\", \"pkh_kec_ever\", \"C(dist)[T.313175]\"], axis=1)\nloc_id = df.loc[X.index, \"Location_ID\"].astype(\"category\")\n\nimport re\n# remove [ ] from names for compatibility with lightgbm\nXl = Xl.rename(columns = lambda x:re.sub('[^A-Za-z0-9_]+', '', x))\n\n\n\nfrom statsmodels.iolib.summary2 import summary_col\ntmp = pd.DataFrame(dict(birthweight=bw,treatment=treatment,assisted_delivery=df.loc[X.index, \"good_assisted_delivery\"]))\nusage = smf.ols(\"assisted_delivery ~ treatment\", data=tmp).fit(cov_type=\"cluster\", cov_kwds={'groups':loc_id})\nhealth= smf.ols(\"bw ~ treatment\", data=tmp).fit(cov_type=\"cluster\", cov_kwds={'groups':loc_id})\nsummary_col([usage, health])\n\n\n\n\n\nassisted_delivery\nbw\n\n\nIntercept\n0.7827\n3173.4067\n\n\n\n(0.0124)\n(10.2323)\n\n\ntreatment\n0.0235\n-14.8992\n\n\n\n(0.0192)\n(24.6304)\n\n\nR-squared\n0.0004\n0.0001\n\n\nR-squared Adj.\n0.0002\n-0.0001\n\n\n\n\nStandard errors in parentheses."
+  },
+  {
+    "objectID": "conditionaleffect.html#conditional-average-treatment-effects",
+    "href": "conditionaleffect.html#conditional-average-treatment-effects",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Conditional Average Treatment Effects",
+    "text": "Conditional Average Treatment Effects\n\nCan never recover individual treatment effect, \\(y_i(1)- y_i(0)\\)\nCan estimate conditional averages: \\[\n\\begin{align*}\nE[y_i(1) - y_i(0) |X_i=x] = & E[y_i(1)|X_i = x] - E[y_i(0)|X_i=x] \\\\\n& \\text{random assignment } \\\\\n= & E[y_i(1) | d_i = 1, X_i=x] - E[y_i(0) | d_i = 0, X_i=x] \\\\\n= & E[y_i | d_i = 1, X_i = x] - E[y_i | d_i = 0, X_i=x ]\n\\end{align*}\n\\]\nBut, inference and communication difficult"
+  },
+  {
+    "objectID": "conditionaleffect.html#generic-machine-learning-for-heterogeneous-effects-in-randomized-experiments",
+    "href": "conditionaleffect.html#generic-machine-learning-for-heterogeneous-effects-in-randomized-experiments",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Generic Machine Learning for Heterogeneous Effects in Randomized Experiments",
+    "text": "Generic Machine Learning for Heterogeneous Effects in Randomized Experiments\n\nChernozhukov et al. (2023)\nDesigned based inference Imai and Li (2022)\nIdea: use any machine learning estimator for \\(E[y_i | d_i = 0, X_i=x ]\\)\nReport and do inference on lower dimensional summaries of \\(E[y_i(1) - y_i(0) |X_i=x]\\)"
+  },
+  {
+    "objectID": "conditionaleffect.html#best-linear-projection-of-cate",
+    "href": "conditionaleffect.html#best-linear-projection-of-cate",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Best Linear Projection of CATE",
+    "text": "Best Linear Projection of CATE\n\nTrue \\(CATE(x)\\), noisy proxy \\(\\widehat{CATE}(x)\\)\nBest linear projection: \\[\n\\beta_0, \\beta_1 = \\argmin_{b_0, b_1} \\Er\\left[\\left(CATE(x) - b_0 - b_1(\\widehat{CATE}(x) - E[\\widehat{CATE}(x)])\\right)^2 \\right]\n\\]\n\n\\(\\beta_0 = \\Er[y_i(1) - y_i(0)]\\)\n\\(\\beta_1\\) measures how well \\(\\widehat{CATE}(x)\\) proxies \\(CATE(x)\\)\n\nUseful for comparing two proxies \\(\\widehat{CATE}(x)\\) and \\(\\widetilde{CATE}(x)\\)"
+  },
+  {
+    "objectID": "conditionaleffect.html#grouped-average-treatment-effects",
+    "href": "conditionaleffect.html#grouped-average-treatment-effects",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Grouped Average Treatment Effects",
+    "text": "Grouped Average Treatment Effects\n\nGroup observations by \\(\\widehat{CATE}(x)\\), reported averages conditional on group\nGroups \\(G_{k}(x) = 1\\{\\ell_{k-1} \\leq \\widehat{CATE}(x) \\leq \\ell_k \\}\\)\nGrouped average treatment effects: \\[\n\\gamma_k = E[y(1) - y(0) | G_k(X)=1]\n\\]"
+  },
+  {
+    "objectID": "conditionaleffect.html#estimation",
+    "href": "conditionaleffect.html#estimation",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Estimation",
+    "text": "Estimation\n\nRegression with sample-splitting\nBLP: \\[\ny_i = \\alpha_0 + \\alpha_1 \\widehat{B}(x_i) + \\beta_0 (d_i-P(d=1)) + \\beta_1\n(d_i-P(d=1))(\\widehat{CATE}(x_i) - \\overline{\\widehat{CATE}(x_i)}) + \\epsilon_i\n\\]\n\nwhere \\(\\widehat{B}(x_i)\\) is an estimate of \\(\\Er[y_i(0) | X_i=x]\\)\n\nGATE: \\[\ny_i = \\alpha_0 + \\alpha_1 \\widehat{B}(x_i) + \\sum_k \\gamma_k (d_i-P(d=1)) 1(G_k(x_i)) +\nu_i\n\\]\nEstimates asymptotically normal with usual standard errors"
+  },
+  {
+    "objectID": "conditionaleffect.html#code",
+    "href": "conditionaleffect.html#code",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Code",
+    "text": "Code\n\n# for clustering standard errors\ndef get_treatment_se(fit, cluster_id, rows=None):\n    if cluster_id is not None:\n        if rows is None:\n            rows = [True] * len(cluster_id)\n        vcov = sm.stats.sandwich_covariance.cov_cluster(fit, cluster_id.loc[rows])\n        return np.sqrt(np.diag(vcov))\n\n    return fit.HC0_se"
+  },
+  {
+    "objectID": "conditionaleffect.html#code-1",
+    "href": "conditionaleffect.html#code-1",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Code",
+    "text": "Code\n\ndef generic_ml_model(x, y, treatment, model, n_split=10, n_group=5, cluster_id=None):\n    nobs = x.shape[0]\n\n    blp = np.zeros((n_split, 2))\n    blp_se = blp.copy()\n    gate = np.zeros((n_split, n_group))\n    gate_se = gate.copy()\n\n    baseline = np.zeros((nobs, n_split))\n    cate = baseline.copy()\n    lamb = np.zeros((n_split, 2))\n\n    for i in range(n_split):\n        main = np.random.rand(nobs) &gt; 0.5\n        rows1 = ~main & (treatment == 1)\n        rows0 = ~main & (treatment == 0)\n\n        mod1 = base.clone(model).fit(x.loc[rows1, :], (y.loc[rows1]))\n        mod0 = base.clone(model).fit(x.loc[rows0, :], (y.loc[rows0]))\n\n        B = mod0.predict(x)\n        S = mod1.predict(x) - B\n        baseline[:, i] = B\n        cate[:, i] = S\n        ES = S.mean()\n\n        ## BLP\n        # assume P(treat|x) = P(treat) = mean(treat)\n        p = treatment.mean()\n        reg_df = pd.DataFrame(dict(\n            y=y, B=B, treatment=treatment, S=S, main=main, excess_S=S-ES\n        ))\n        reg = smf.ols(\"y ~ B + I(treatment-p) + I((treatment-p)*(S-ES))\", data=reg_df.loc[main, :])\n        reg_fit = reg.fit()\n        blp[i, :] = reg_fit.params.iloc[2:4]\n        blp_se[i, :] = get_treatment_se(reg_fit, cluster_id, main)[2:]\n\n        lamb[i, 0] = reg_fit.params.iloc[-1]**2 * S.var()\n\n        ## GATEs\n        cutoffs = np.quantile(S, np.linspace(0,1, n_group + 1))\n        cutoffs[-1] += 1\n        for k in range(n_group):\n            reg_df[f\"G{k}\"] = (cutoffs[k] &lt;= S) & (S &lt; cutoffs[k+1])\n\n        g_form = \"y ~ B + \" + \" + \".join([f\"I((treatment-p)*G{k})\" for k in range(n_group)])\n        g_reg = smf.ols(g_form, data=reg_df.loc[main, :])\n        g_fit = g_reg.fit()\n        gate[i, :] = g_fit.params.values[2:] #g_fit.params.filter(regex=\"G\").values\n        gate_se[i, :] = get_treatment_se(g_fit, cluster_id, main)[2:]\n\n        lamb[i, 1] = (gate[i,:]**2).sum()/n_group\n\n    out = dict(\n        gate=gate, gate_se=gate_se,\n        blp=blp, blp_se=blp_se,\n        Lambda=lamb, baseline=baseline, cate=cate,\n        name=type(model).__name__\n    )\n    return out\n\n\ndef generic_ml_summary(generic_ml_output):\n    out = {\n        x: np.nanmedian(generic_ml_output[x], axis=0)\n        for x in [\"blp\", \"blp_se\", \"gate\", \"gate_se\", \"Lambda\"]\n    }\n    out[\"name\"] = generic_ml_output[\"name\"]\n    return out"
+  },
+  {
+    "objectID": "conditionaleffect.html#code-2",
+    "href": "conditionaleffect.html#code-2",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Code",
+    "text": "Code\n\ndef generate_report(results):\n    summaries = list(map(generic_ml_summary, results))\n    df_plot = pd.DataFrame({\n        mod[\"name\"]: np.median(mod[\"cate\"], axis=1)\n        for mod in results\n    })\n\n    corrfig=sns.pairplot(df_plot, diag_kind=\"kde\", kind=\"reg\")\n\n    df_cate = pd.concat({\n        s[\"name\"]: pd.DataFrame(dict(blp=s[\"blp\"], se=s[\"blp_se\"]))\n        for s in summaries\n    }).T.stack()\n\n    df_groups = pd.concat({\n        s[\"name\"]: pd.DataFrame(dict(gate=s[\"gate\"], se=s[\"gate_se\"]))\n        for s in summaries\n    }).T.stack()\n    return({\"corr\":df_plot.corr(), \"pairplot\":corrfig, \"BLP\":df_cate,\"GATE\":df_groups})"
+  },
+  {
+    "objectID": "conditionaleffect.html#code-3",
+    "href": "conditionaleffect.html#code-3",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Code",
+    "text": "Code\n\nimport lightgbm as lgb\nimport io\nfrom contextlib import redirect_stdout, redirect_stderr\nmodels = [\n    linear_model.LassoCV(cv=10, n_alphas=25, max_iter=500, tol=1e-4, n_jobs=20),\n    ensemble.RandomForestRegressor(n_estimators=200, min_samples_leaf=20, n_jobs=20),\n    lgb.LGBMRegressor(n_estimators=200, max_depth=4, reg_lambda=1.0, reg_alpha=0.0, n_jobs=20),\n    neural_network.MLPRegressor(hidden_layer_sizes=(20, 10), max_iter=500, activation=\"logistic\",\n                                solver=\"adam\", tol=1e-3, early_stopping=True, alpha=0.0001)\n]\n\nkw = dict(x=Xl, treatment=treatment, n_split=11, n_group=5, cluster_id=loc_id)\ndef evaluate_models(models, y, **other_kw):\n    all_kw = kw.copy()\n    all_kw[\"y\"] = y\n    all_kw.update(other_kw)\n    # hide many warnings while fitting\n    with io.StringIO() as obuf, redirect_stdout(obuf):\n        with io.StringIO() as ebuf, redirect_stderr(ebuf):\n           results=list(map(lambda x: generic_ml_model(model=x, **all_kw), models))\n           sout = obuf.getvalue()\n           serr = ebuf.getvalue()\n    return([results,sout,serr])"
+  },
+  {
+    "objectID": "conditionaleffect.html#results-birthweight",
+    "href": "conditionaleffect.html#results-birthweight",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Results: Birthweight",
+    "text": "Results: Birthweight\n\nresults = evaluate_models(models, y=bw);\nreport=generate_report(results[0])\nreport[\"pairplot\"].fig.show()"
+  },
+  {
+    "objectID": "conditionaleffect.html#results-birthweight-1",
+    "href": "conditionaleffect.html#results-birthweight-1",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Results: Birthweight",
+    "text": "Results: Birthweight\n\nreport[\"corr\"]\n\n\n\n\n\n\n\n\nLassoCV\nRandomForestRegressor\nLGBMRegressor\nMLPRegressor\n\n\n\n\nLassoCV\n1.000000\n0.367106\n0.099130\n-0.000621\n\n\nRandomForestRegressor\n0.367106\n1.000000\n0.620231\n-0.259018\n\n\nLGBMRegressor\n0.099130\n0.620231\n1.000000\n-0.172049\n\n\nMLPRegressor\n-0.000621\n-0.259018\n-0.172049\n1.000000"
+  },
+  {
+    "objectID": "conditionaleffect.html#results-birthweight-2",
+    "href": "conditionaleffect.html#results-birthweight-2",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Results: Birthweight",
+    "text": "Results: Birthweight\n\nreport[\"BLP\"]\n\n\n\n\n\n\n\n\n\nLassoCV\nRandomForestRegressor\nLGBMRegressor\nMLPRegressor\n\n\n\n\nblp\n0\n-22.568002\n-11.462487\n-11.941160\n-6.279482\n\n\n1\n0.017488\n0.006881\n0.097679\n-1541.554221\n\n\nse\n0\n31.975947\n32.051788\n32.617325\n33.302140\n\n\n1\n0.679940\n0.269991\n0.118483\n3628.286621"
+  },
+  {
+    "objectID": "conditionaleffect.html#results-birthweight-3",
+    "href": "conditionaleffect.html#results-birthweight-3",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Results: Birthweight",
+    "text": "Results: Birthweight\n\nreport[\"GATE\"]\n\n\n\n\n\n\n\n\n\nLassoCV\nRandomForestRegressor\nLGBMRegressor\nMLPRegressor\n\n\n\n\ngate\n0\n0.000000\n-13.284641\n-20.578421\n12.360276\n\n\n1\n-13.691474\n-4.390817\n6.634374\n-22.503743\n\n\n2\n-23.129674\n-26.268309\n-29.946450\n-15.274649\n\n\n3\n-38.429092\n11.557572\n-42.463889\n-9.390308\n\n\n4\n-21.569168\n-16.960292\n28.091366\n-18.151821\n\n\nse\n0\n65.897912\n68.436618\n71.298899\n75.583985\n\n\n1\n62.654801\n70.288355\n70.154849\n68.218221\n\n\n2\n66.319468\n69.902365\n69.413472\n65.029318\n\n\n3\n61.830268\n67.600977\n68.672941\n72.137209\n\n\n4\n58.794582\n73.066751\n75.838379\n62.095010"
+  },
+  {
+    "objectID": "conditionaleffect.html#results-assisted-delivery",
+    "href": "conditionaleffect.html#results-assisted-delivery",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Results: Assisted Delivery",
+    "text": "Results: Assisted Delivery\n\nad = df.loc[X.index, \"good_assisted_delivery\"]\nresults_ad = evaluate_models(models, y=ad)\nreport_ad=generate_report(results_ad[0])\nreport_ad[\"pairplot\"].fig.show()"
+  },
+  {
+    "objectID": "conditionaleffect.html#results-assisted-delivery-1",
+    "href": "conditionaleffect.html#results-assisted-delivery-1",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Results: Assisted Delivery",
+    "text": "Results: Assisted Delivery\n\nreport_ad[\"corr\"]\n\n\n\n\n\n\n\n\nLassoCV\nRandomForestRegressor\nLGBMRegressor\nMLPRegressor\n\n\n\n\nLassoCV\n1.000000\n0.833052\n0.718235\n0.875582\n\n\nRandomForestRegressor\n0.833052\n1.000000\n0.752526\n0.694210\n\n\nLGBMRegressor\n0.718235\n0.752526\n1.000000\n0.605871\n\n\nMLPRegressor\n0.875582\n0.694210\n0.605871\n1.000000"
+  },
+  {
+    "objectID": "conditionaleffect.html#results-assisted-delivery-2",
+    "href": "conditionaleffect.html#results-assisted-delivery-2",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Results: Assisted Delivery",
+    "text": "Results: Assisted Delivery\n\nreport_ad[\"BLP\"]\n\n\n\n\n\n\n\n\n\nLassoCV\nRandomForestRegressor\nLGBMRegressor\nMLPRegressor\n\n\n\n\nblp\n0\n0.050851\n0.050091\n0.046645\n0.041081\n\n\n1\n0.444944\n0.483945\n0.260558\n0.371236\n\n\nse\n0\n0.021194\n0.021903\n0.021903\n0.021485\n\n\n1\n0.145494\n0.145631\n0.094021\n0.149884"
+  },
+  {
+    "objectID": "conditionaleffect.html#results-assisted-delivery-3",
+    "href": "conditionaleffect.html#results-assisted-delivery-3",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Results: Assisted Delivery",
+    "text": "Results: Assisted Delivery\n\nreport_ad[\"GATE\"]\n\n\n\n\n\n\n\n\n\nLassoCV\nRandomForestRegressor\nLGBMRegressor\nMLPRegressor\n\n\n\n\ngate\n0\n-0.012323\n-0.052476\n-0.024511\n-0.014330\n\n\n1\n0.003649\n-0.010400\n0.016304\n0.003519\n\n\n2\n0.023902\n0.013054\n0.027872\n0.007801\n\n\n3\n0.082557\n0.083082\n0.064248\n0.078915\n\n\n4\n0.175096\n0.187124\n0.158091\n0.135305\n\n\nse\n0\n0.038181\n0.054737\n0.048957\n0.034020\n\n\n1\n0.043502\n0.047169\n0.042196\n0.045372\n\n\n2\n0.042353\n0.043675\n0.045325\n0.047387\n\n\n3\n0.048448\n0.044126\n0.043614\n0.045193\n\n\n4\n0.056124\n0.051436\n0.049159\n0.053205"
+  },
+  {
+    "objectID": "conditionaleffect.html#covariate-means-by-group",
+    "href": "conditionaleffect.html#covariate-means-by-group",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Covariate Means by Group",
+    "text": "Covariate Means by Group\n\ndef cov_mean_by_group(y, res, cluster_id):\n    n_group = res[\"gate\"].shape[1]\n    gate = res[\"gate\"].copy()\n    gate_se = gate.copy()\n    dat = y.to_frame()\n\n    for i in range(res[\"cate\"].shape[1]):\n        S = res[\"cate\"][:, i]\n        cutoffs = np.quantile(S, np.linspace(0, 1, n_group+1))\n        cutoffs[-1] += 1\n        for k in range(n_group):\n            dat[f\"G{k}\"] = ((cutoffs[k] &lt;= S) & (S &lt; cutoffs[k+1])) * 1.0\n\n        g_form = \"y ~ -1 + \" + \" + \".join([f\"G{k}\" for k in range(n_group)])\n        g_reg = smf.ols(g_form, data=dat.astype(float))\n        g_fit = g_reg.fit()\n        gate[i, :] = g_fit.params.filter(regex=\"G\").values\n        rows = ~y.isna()\n        gate_se[i, :] = get_treatment_se(g_fit, cluster_id, rows)\n\n    out = pd.DataFrame(dict(\n        mean=np.nanmedian(gate, axis=0),\n        se=np.nanmedian(gate_se, axis=0),\n        group=list(range(n_group))\n    ))\n\n    return out\n\ndef compute_group_means_for_results(results, variables, df2):\n    to_cat = []\n    for res in results:\n        for v in variables:\n            to_cat.append(\n                cov_mean_by_group(df2[v], res, loc_id)\n                .assign(method=res[\"name\"], variable=v)\n            )\n\n    group_means = pd.concat(to_cat, ignore_index=True)\n    group_means[\"plus2sd\"] = group_means.eval(\"mean + 1.96*se\")\n    group_means[\"minus2sd\"] = group_means.eval(\"mean - 1.96*se\")\n    return group_means\n\ndef groupmeanfig(group_means):\n    g = sns.FacetGrid(group_means, col=\"variable\", col_wrap=min(3,group_means.variable.nunique()), hue=\"method\", sharey=False)\n    g.map(plt.plot, \"group\", \"mean\")\n    g.map(plt.plot, \"group\", \"plus2sd\", ls=\"--\")\n    g.map(plt.plot, \"group\", \"minus2sd\", ls=\"--\")\n    g.add_legend();\n    return(g)"
+  },
+  {
+    "objectID": "conditionaleffect.html#covariate-means-by-group-1",
+    "href": "conditionaleffect.html#covariate-means-by-group-1",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Covariate Means by Group",
+    "text": "Covariate Means by Group\n\ndf2 = df.loc[X.index, :]\ndf2[\"edu99\"] = df2.edu == 99\ndf2[\"educ\"] = df2[\"edu\"]\ndf2.loc[df2[\"edu99\"], \"educ\"] = np.nan\n\nvariables1 = [\"log_xp_percap\",\"agecat\",\"educ\"]\nvariables2 =[\"tv\",\"goat\",\"cow\",\n             \"motorbike\", \"hh_cook_wood\",\"hh_toilet_own\"]\ngroup_means_ad = compute_group_means_for_results(results_ad[0], variables1, df2)"
+  },
+  {
+    "objectID": "conditionaleffect.html#covariate-means-by-group-2",
+    "href": "conditionaleffect.html#covariate-means-by-group-2",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Covariate Means by Group",
+    "text": "Covariate Means by Group\n\ng = groupmeanfig(group_means_ad)\ng.fig.show()"
+  },
+  {
+    "objectID": "conditionaleffect.html#covariate-means-by-group-3",
+    "href": "conditionaleffect.html#covariate-means-by-group-3",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Covariate Means by Group",
+    "text": "Covariate Means by Group\n\ng = groupmeanfig(compute_group_means_for_results(results_ad[0], variables2, df2))\ng.fig.show()"
+  },
+  {
+    "objectID": "conditionaleffect.html#treatment-participation-by-group",
+    "href": "conditionaleffect.html#treatment-participation-by-group",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Treatment Participation by Group",
+    "text": "Treatment Participation by Group\n\ng = groupmeanfig(compute_group_means_for_results(results_ad[0], [\"pkh_ever\"], df2))\ng.fig.show()"
+  },
+  {
+    "objectID": "conditionaleffect.html#sources-and-further-reading",
+    "href": "conditionaleffect.html#sources-and-further-reading",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "Sources and Further Reading",
+    "text": "Sources and Further Reading\n\nSection on generic ML for heterogeneous effects is based on Chernozhukov et al. (2023) and my earlier notes"
+  },
+  {
+    "objectID": "conditionaleffect.html#references",
+    "href": "conditionaleffect.html#references",
+    "title": "Treatment Heterogeneity and Conditional Effects",
+    "section": "References",
+    "text": "References\n\n\n\n\n\n\n\n\nAlatas, Vivi, Nur Cahyadi, Elisabeth Ekasari, Sarah Harmoun, Budi Hidayat, Edgar Janz, Jon Jellema, H Tuhiman, and M Wai-Poi. 2011. “Program Keluarga Harapan : Impact Evaluation of Indonesia’s Pilot Household Conditional Cash Transfer Program.” World Bank. http://documents.worldbank.org/curated/en/589171468266179965/Program-Keluarga-Harapan-impact-evaluation-of-Indonesias-Pilot-Household-Conditional-Cash-Transfer-Program.\n\n\nChernozhukov, Victor, Mert Demirer, Esther Duflo, and Iván Fernández-Val. 2023. “Generic Machine Learning Inference on Heterogenous Treatment Effects in Randomized Experiments, with an Application to Immunization in India.”\n\n\nImai, Kosuke, and Michael Lingzhi Li. 2022. “Statistical Inference for Heterogeneous Treatment Effects Discovered by Generic Machine Learning in Randomized Experiments.” In. https://api.semanticscholar.org/CorpusID:247762848.\n\n\nTriyana, Margaret. 2016. “Do Health Care Providers Respond to Demand-Side Incentives? Evidence from Indonesia.” American Economic Journal: Economic Policy 8 (4): 255–88. https://doi.org/10.1257/pol.20140048."
+  },
+  {
+    "objectID": "matching.html#setting",
+    "href": "matching.html#setting",
+    "title": "Matching",
+    "section": "Setting",
+    "text": "Setting\n\nPotential outcomes \\((Y_0, Y_1)\\)\nTreatment \\(T\\)\nObserve \\(Y = Y_0(1-T) + T Y_1\\)\nCovariates \\(X\\)\nAssume conditional independence \\((Y_0,Y_1) \\perp T | X\\)\n\n\\[\n\\def\\Er{{\\mathrm{E}}}\n\\def\\En{{\\mathbb{En}}}\n\\def\\cov{{\\mathrm{Cov}}}\n\\def\\var{{\\mathrm{Var}}}\n\\def\\R{{\\mathbb{R}}}\n\\newcommand\\norm[1]{\\left\\lVert#1\\right\\rVert}\n\\def\\rank{{\\mathrm{rank}}}\n\\newcommand{\\inpr}{ \\overset{p^*_{\\scriptscriptstyle n}}{\\longrightarrow}}\n\\def\\inprob{{\\,{\\buildrel p \\over \\rightarrow}\\,}}\n\\def\\indist{\\,{\\buildrel d \\over \\rightarrow}\\,}\n\\DeclareMathOperator*{\\plim}{plim}\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\]"
+  },
+  {
+    "objectID": "matching.html#why-not-regression",
+    "href": "matching.html#why-not-regression",
+    "title": "Matching",
+    "section": "Why not regression?",
+    "text": "Why not regression?\n\nAverage treatment effect \\[\nATE = \\int \\Er[Y|T=1,X=x] - \\Er[Y|T=0,X=x] dP(x)\n\\]\nRegression gives the best linear approximation to \\(\\Er[Y|T,X]\\), so why not just estimate linear regression \\[\nY_i = \\hat{\\alpha} T_i + X_i'\\hat{\\beta} + \\hat{\\epsilon}_i\n\\] and, and then use \\(\\hat{\\alpha}\\) as an estimate of the ATE?"
+  },
+  {
+    "objectID": "matching.html#why-not-regression-1",
+    "href": "matching.html#why-not-regression-1",
+    "title": "Matching",
+    "section": "Why not regression?",
+    "text": "Why not regression?\n\nPartial out (Frish-Waugh-Lovell theorem) \\[\n\\begin{align*}\n\\hat{\\alpha} = & \\frac{\\frac{1}{n} \\sum_{i=1}^n Y_i (T_i - X_i'(X'X)^{-1}X'T)}\n  {\\frac{1}{n} \\sum_{i=1}^n (T_i - X_i'(X'X)^{-1}X'T)^2} \\\\\n  \\inprob & \\Er\\left[Y_i \\underbrace{\\frac{T_i - X_i'\\pi}{\\Er[(T_i - X_i'\\pi)^2]}}_{\\equiv \\omega(T_i,X_i)}\\right] \\\\\n  = & \\Er\\left[Y_{0,i} \\omega(T_i,X_i)\\right] + \\Er\\left[(Y_{1,i}-Y_{0,i}) \\omega(T_i,X_i)T_i\\right]\n\\end{align*}\n\\] where \\(\\pi = \\argmin_{\\tilde{\\pi}} \\Er[(T_i - X_i'\\tilde{\\pi})^2]\\)\nNote: \\(\\Er[\\omega(T,X)] = 0\\), \\(\\Er[T\\omega(T,X)] = 1\\)"
+  },
+  {
+    "objectID": "matching.html#why-not-regression-2",
+    "href": "matching.html#why-not-regression-2",
+    "title": "Matching",
+    "section": "Why not regression?",
+    "text": "Why not regression?\n\n\\(\\plim \\hat{\\alpha} = \\Er\\left[Y_{0,i} \\omega(T_i,X_i)\\right] + \\Er\\left[(Y_{1,i}-Y_{0,i}) \\omega(T_i,X_i)T_i\\right]\\)\nWhat can be in the range of \\(\\omega(T,X) = \\frac{T - X'\\pi}{\\Er[(T_i - X_i'\\pi)^2]}\\)?"
+  },
+  {
+    "objectID": "matching.html#why-not-regression-3",
+    "href": "matching.html#why-not-regression-3",
+    "title": "Matching",
+    "section": "Why not regression?",
+    "text": "Why not regression?\n\n\nimports\nimport numpy as np\nfrom matplotlib import style\nfrom matplotlib import pyplot as plt\nstyle.use(\"fivethirtyeight\")\n\n\n\nnp.random.seed(1234)\n\ndef simulate(n, pi=np.array([0,1])):\n    X = np.random.randn(n, len(pi))\n    X[:,0] = 1\n    T = 1*((X @ pi + np.random.randn(n))&gt;0)\n    y0 = np.random.randn(n)\n    y1 = np.exp(3*(X[:,1]-2)) + np.random.randn(n)\n    y = T*y1 + (1-T)*y0\n    return(X,T,y,y0,y1)\n\nX,T,y,y0,y1 = simulate(1000)\n\npihat = np.linalg.solve(X.T @ X, X.T @ T)\nw = T - X @ pihat\nw = w/np.mean(w**2);"
+  },
+  {
+    "objectID": "matching.html#why-not-regression-4",
+    "href": "matching.html#why-not-regression-4",
+    "title": "Matching",
+    "section": "Why not regression?",
+    "text": "Why not regression?\n\nTX = np.hstack((T.reshape(len(T),1),X))\nabhat = np.linalg.solve(TX.T @ TX, TX.T @ y)\nahat = abhat[0]\nprint(ahat)\n\n-0.06414016921951447\n\n\n\nnp.mean(y1-y0)\n\n0.22383059765273303\n\n\n\nWeights, \\(\\omega(T,X)\\), are not all positive, so the regression estimate can be negative even if \\(\\Er[Y_1 | X] - \\Er[Y_0|X]\\) is positive everywhere"
+  },
+  {
+    "objectID": "matching.html#why-not-regression-5",
+    "href": "matching.html#why-not-regression-5",
+    "title": "Matching",
+    "section": "Why not regression?",
+    "text": "Why not regression?\n\n\nplot\nimport matplotlib.cm as cm\nfig, axes = plt.subplots(2, 1, figsize=(6, 6))\n\n# Create a scatter plot for the first panel (left)\naxes[0].scatter(X[:,1], w, c=T, cmap=cm.Dark2)\naxes[0].set_xlabel(\"X\")\naxes[0].set_ylabel(\"ωT\")\naxes[0].set_title(\"Weights\")\n\naxes[1].scatter(X[:,1], y1-y0, label=\"TE\")\naxes[1].set_xlabel(\"X\")\naxes[1].set_ylabel(\"Y₁ - Y₀\")\naxes[1].set_title(\"Treatment effects\")\n\n\n# Display the plot\nplt.tight_layout()  # Ensure proper layout spacing\nplt.show()"
+  },
+  {
+    "objectID": "matching.html#matching-1",
+    "href": "matching.html#matching-1",
+    "title": "Matching",
+    "section": "Matching",
+    "text": "Matching\n\nIf not regression, then what? \\[\nATE = \\int \\Er[Y|T=1,X=x] - \\Er[Y|T=0,X=x] dP(x)\n\\]"
+  },
+  {
+    "objectID": "matching.html#plug-in-estimator",
+    "href": "matching.html#plug-in-estimator",
+    "title": "Matching",
+    "section": "Plug-in estimator",
+    "text": "Plug-in estimator\n\nPlug in estimator: \\[\n\\widehat{ATE} = \\frac{1}{n} \\sum_{i=1}^n \\left(\\hat{E}[Y|T=1,X=X_i] - \\hat{E}[Y|T=0,X=X_i] \\right)\n\\] where \\(\\hat{E}[Y|T,X]\\) is some flexible estimator for \\(\\Er[Y|T,X]\\)\n\nif \\(X\\) is discrete, \\(\\hat{E}\\) can be conditional averages or equivalently, “saturated” regression\nif \\(X\\) continuous, \\(\\hat{E}\\) can be some nonparametric regression estimator\nOriginal approaches to this problem used nearest neighbor matching to estimate \\(\\hat{E}[Y|T,X]\\)\n\nDownside:\n\nDifficult statistical properties — choice of tuning parameters, strong assumptions needed, failure of bootstrap for nearest neighbors Abadie and Imbens (2008)"
+  },
+  {
+    "objectID": "matching.html#propensity-score",
+    "href": "matching.html#propensity-score",
+    "title": "Matching",
+    "section": "Propensity Score",
+    "text": "Propensity Score\n\nLet \\(e(X) = P(T=1|X=X)\\)\nNote: \\[\n\\begin{align*}\n\\Er[Y|X,T=1] - \\Er[Y|X,T=0] = & E\\left[\\frac{Y T}{e(X)}|X \\right] - E\\left[\\frac{Y(1-T)}{1-e(X)}|X \\right] \\\\\n= & E\\left[ Y \\frac{T - e(X)}{e(X)(1-e(X))} | X \\right]\n\\end{align*}\n\\]"
+  },
+  {
+    "objectID": "matching.html#propensity-score-1",
+    "href": "matching.html#propensity-score-1",
+    "title": "Matching",
+    "section": "Propensity Score",
+    "text": "Propensity Score\n\nso \\[\nATE = \\Er\\left[ \\frac{Y T}{e(X)} -  \\frac{Y(1-T)}{1-e(X)}\\right] = \\Er\\left[ Y \\frac{T - e(X)}{e(X)(1-e(X))} \\right]\n\\]"
+  },
+  {
+    "objectID": "matching.html#inverse-propensity-weighting",
+    "href": "matching.html#inverse-propensity-weighting",
+    "title": "Matching",
+    "section": "Inverse propensity weighting",
+    "text": "Inverse propensity weighting\n\nEstimator \\[\n\\widehat{ATE}^{IPW} = \\frac{1}{n} \\sum_{i=1}^n \\frac{Y_iT_i}{\\hat{e}(X_i)} - \\frac{Y_i(1-T_i)}{1-\\hat{e}(X_i)}\n\\] where \\(\\hat{e}(X)\\) is some flexible estimator for \\(P(T=1|X)\\)\nDownside:\n\nDifficult statistical properties — choice of tuning parameters, strong assumptions needed"
+  },
+  {
+    "objectID": "matching.html#doubly-robust-estimator",
+    "href": "matching.html#doubly-robust-estimator",
+    "title": "Matching",
+    "section": "Doubly Robust Estimator",
+    "text": "Doubly Robust Estimator\n\nEstimator \\[\n\\begin{align*}\n\\widehat{ATE}^{DR} = & \\frac{1}{n} \\sum_{i=1}^n \\hat{E}[Y|T=1,X=X_i] - \\hat{E}[Y|T=0,X=X_i] + \\\\\n& + \\frac{1}{n} \\sum_{i=1}^n  \\frac{T_i(Y_i - \\hat{E}[Y|T=1,X=X_i])}{\\hat{e}(X_i)} - \\\\\n& - \\frac{(1-T_i)(Y_i - \\hat{E}[Y|T=0,X=X_i])} {1-\\hat{e}(X_i)}\n\\end{align*}\n\\]"
+  },
+  {
+    "objectID": "matching.html#doubly-robust-estimator-1",
+    "href": "matching.html#doubly-robust-estimator-1",
+    "title": "Matching",
+    "section": "Doubly Robust Estimator",
+    "text": "Doubly Robust Estimator\n\nDoubly robust in that:\n\nConsistent as long as either \\(\\hat{e}(X) \\inprob e(X)\\) or \\(\\hat{E}[Y|T,X] \\inprob \\Er[Y|T,X]\\)\nInsensitive to small changes in \\(\\hat{e}(X)\\) or \\(\\hat{E}[Y|T,X]\\)\n\nAllows: nicer statistical properties\n\nWeaker assumptions needed\nAsymptotic distribution is the same as if \\(e(X)\\) and \\(\\Er[Y|T,X]\\) were known"
+  },
+  {
+    "objectID": "matching.html#software",
+    "href": "matching.html#software",
+    "title": "Matching",
+    "section": "Software",
+    "text": "Software\n\nAdvice: use the doubly robust estimator with nonparametric estimates for \\(\\hat{E}[Y|T,X]\\) and \\(\\hat{e}(X)\\)\nRecommended package:\n\neconml has the correct estimator and examples of using it with nonparametric estimates\n\nfocuses on conditional instead of unconditional average treatment effects, but can be used for both"
+  },
+  {
+    "objectID": "matching.html#software-1",
+    "href": "matching.html#software-1",
+    "title": "Matching",
+    "section": "Software",
+    "text": "Software\n\nOther packages:\n\ncausalinference has a double robust estimator, but it estimates \\(\\hat{E}[Y|T,X]\\) via linear regression and \\(\\hat{e}(X)\\) via logit (maybe probit, not sure)\n\ncan make nonparametric by adding e.g. powers of \\(x\\) to \\(X\\), but need to manage manually\n\nzEpid is similiar to causalinference, but has a formula interface, so slightly easier to make model more flexible"
+  },
+  {
+    "objectID": "matching.html#example-simulation",
+    "href": "matching.html#example-simulation",
+    "title": "Matching",
+    "section": "Example: simulation",
+    "text": "Example: simulation\n\nInfeasible estimator: average of \\(Y_1 - Y_0\\)\n\n\nse = np.sqrt(np.var(y1-y0)/len(y1))\nate = np.mean(y1-y0)\nprint(ate-1.96*se, ate, ate+1.96*se)\n\n0.10010844404085255 0.22383059765273303 0.3475527512646135"
+  },
+  {
+    "objectID": "matching.html#example-simulation-1",
+    "href": "matching.html#example-simulation-1",
+    "title": "Matching",
+    "section": "Example: simulation",
+    "text": "Example: simulation\n\nfrom econml.dr import DRLearner, LinearDRLearner, SparseLinearDRLearner\nfrom econml.sklearn_extensions.linear_model import StatsModelsLinearRegression\nfrom sklearn.ensemble import GradientBoostingRegressor, GradientBoostingClassifier\nfrom sklearn.linear_model import LassoCV, LogisticRegressionCV, ElasticNetCV\nfrom sklearn.preprocessing import PolynomialFeatures#\n\nest = LinearDRLearner(featurizer=PolynomialFeatures(degree=20, include_bias=False),\n                model_regression=LassoCV(),\n                model_propensity=LogisticRegressionCV(),\n                #model_final=StatsModelsLinearRegression(),\n                cv=10)\nest.fit(y, T, X=None, W=X)\n\n&lt;econml.dr._drlearner.LinearDRLearner at 0x73cb0bf49ac0&gt;\n\n\n\npoint = est.const_marginal_effect(None)\nlb, ub = est.const_marginal_effect_interval(None, alpha=0.05)\nprint(lb,point,ub)\n\n[[-0.016536]] [[0.15691383]] [[0.33036367]]"
+  },
+  {
+    "objectID": "matching.html#national-study-of-learning-mindsets",
+    "href": "matching.html#national-study-of-learning-mindsets",
+    "title": "Matching",
+    "section": "National Study of Learning Mindsets",
+    "text": "National Study of Learning Mindsets\n\nOriginal study by Yeager et al. (2019)\nSynthetic data created by Athey and Wager (2019), downloaded from Facure (2022)"
+  },
+  {
+    "objectID": "matching.html#data",
+    "href": "matching.html#data",
+    "title": "Matching",
+    "section": "Data",
+    "text": "Data\n\n\nimports\nimport pandas as pd\nimport numpy as np\nfrom matplotlib import style\nfrom matplotlib import pyplot as plt\nimport seaborn as sns\nimport statsmodels.formula.api as smf\nfrom causalinference import CausalModel\nstyle.use(\"fivethirtyeight\")\npd.set_option(\"display.max_columns\", 20)\ndatadir=\"./data\"\n\n\n\ndata = pd.read_csv(datadir+\"/learning_mindset.csv\")\ndata.sample(5, random_state=431)\n\n\n\n\n\n\n\n\nschoolid\nintervention\nachievement_score\nsuccess_expect\nethnicity\ngender\nfrst_in_family\nschool_urbanicity\nschool_mindset\nschool_achievement\nschool_ethnic_minority\nschool_poverty\nschool_size\n\n\n\n\n9366\n9\n0\n1.137192\n6\n1\n1\n1\n4\n1.324323\n-1.311438\n1.930281\n0.281143\n0.362031\n\n\n7810\n27\n0\n-0.554268\n5\n2\n1\n1\n1\n0.240267\n-0.785287\n0.611807\n0.612568\n-0.116284\n\n\n7532\n29\n0\n-0.462576\n6\n1\n1\n1\n1\n-0.373087\n0.113096\n-0.833417\n-1.924778\n-1.147314\n\n\n10381\n1\n0\n-0.402644\n5\n2\n2\n1\n3\n1.185986\n-1.129889\n1.009875\n1.005063\n-1.174702\n\n\n1244\n57\n1\n1.528680\n6\n4\n1\n1\n2\n0.097162\n-0.292353\n-1.030865\n-0.813799\n0.184716"
+  },
+  {
+    "objectID": "matching.html#evidence-of-confounding",
+    "href": "matching.html#evidence-of-confounding",
+    "title": "Matching",
+    "section": "Evidence of Confounding",
+    "text": "Evidence of Confounding\n\n\nCode\ndef std_error(x):\n    return np.std(x, ddof=1) / np.sqrt(len(x))\n\ngrouped = data.groupby('success_expect')['intervention'].agg(['mean', std_error])\ngrouped = grouped.reset_index()\n\nfig, ax = plt.subplots()\nplt.errorbar(grouped['success_expect'],grouped['mean'],yerr=1.96*grouped['std_error'],fmt=\"o\")\nax.set_xlabel('student expectation of success')\nax.set_ylabel('P(treatment)')\nplt.show()"
+  },
+  {
+    "objectID": "matching.html#unadjusted-estimate-of-ate",
+    "href": "matching.html#unadjusted-estimate-of-ate",
+    "title": "Matching",
+    "section": "Unadjusted estimate of ATE",
+    "text": "Unadjusted estimate of ATE\n\nprint(smf.ols(\"achievement_score ~ intervention\", data=data).fit().summary().tables[1])\n\n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nIntercept       -0.1538      0.012    -13.201      0.000      -0.177      -0.131\nintervention     0.4723      0.020     23.133      0.000       0.432       0.512\n================================================================================\n\n\n\nprint(smf.ols(\"achievement_score ~ intervention\", data=data).fit(\n    cov_type=\"cluster\", cov_kwds={'groups': data['schoolid']}).summary().tables[1])\n\n================================================================================\n                   coef    std err          z      P&gt;|z|      [0.025      0.975]\n--------------------------------------------------------------------------------\nIntercept       -0.1538      0.036     -4.275      0.000      -0.224      -0.083\nintervention     0.4723      0.025     19.184      0.000       0.424       0.521\n================================================================================"
+  },
+  {
+    "objectID": "matching.html#unadjusted-estimate-of-ate-1",
+    "href": "matching.html#unadjusted-estimate-of-ate-1",
+    "title": "Matching",
+    "section": "Unadjusted estimate of ATE",
+    "text": "Unadjusted estimate of ATE\n\n\nCode\nfig,ax=plt.subplots()\nplt.hist(data.query(\"intervention==0\")[\"achievement_score\"], bins=20, alpha=0.3, color=\"C2\")\nplt.hist(data.query(\"intervention==1\")[\"achievement_score\"], bins=20, alpha=0.3, color=\"C3\")\nplt.vlines(-0.1538, 0, 300, label=\"Untreated\", color=\"C2\")\nplt.vlines(-0.1538+0.4723, 0, 300, label=\"Treated\", color=\"C3\")\nax.set_xlabel(\"Achievement Score\")\nax.set_ylabel(\"N\")\nplt.legend()\nplt.show();"
+  },
+  {
+    "objectID": "matching.html#regression-estimate-of-ate",
+    "href": "matching.html#regression-estimate-of-ate",
+    "title": "Matching",
+    "section": "Regression estimate of ATE",
+    "text": "Regression estimate of ATE\n\nols = smf.ols(\"achievement_score ~ intervention + success_expect + ethnicity + gender + frst_in_family + school_urbanicity + school_mindset + school_achievement + school_ethnic_minority + school_poverty + school_size\",data=data).fit()\nprint(ols.summary().tables[1])\n\n==========================================================================================\n                             coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------------------\nIntercept                 -1.7786      0.056    -31.880      0.000      -1.888      -1.669\nintervention               0.3964      0.018     22.192      0.000       0.361       0.431\nsuccess_expect             0.3746      0.008     49.514      0.000       0.360       0.389\nethnicity                  0.0043      0.002      2.049      0.040       0.000       0.008\ngender                    -0.2684      0.017    -16.060      0.000      -0.301      -0.236\nfrst_in_family            -0.1310      0.018     -7.248      0.000      -0.166      -0.096\nschool_urbanicity          0.0573      0.007      8.240      0.000       0.044       0.071\nschool_mindset            -0.1484      0.011    -13.083      0.000      -0.171      -0.126\nschool_achievement        -0.0253      0.013     -1.902      0.057      -0.051       0.001\nschool_ethnic_minority     0.1197      0.011     11.178      0.000       0.099       0.141\nschool_poverty            -0.0154      0.011     -1.466      0.143      -0.036       0.005\nschool_size               -0.0467      0.011     -4.326      0.000      -0.068      -0.026\n=========================================================================================="
+  },
+  {
+    "objectID": "matching.html#regression-estimate-of-ate-weights",
+    "href": "matching.html#regression-estimate-of-ate-weights",
+    "title": "Matching",
+    "section": "Regression estimate of ATE: weights",
+    "text": "Regression estimate of ATE: weights\n\nlpm = smf.ols(\"intervention ~ success_expect + ethnicity + gender + frst_in_family + school_urbanicity + school_mindset + school_achievement + school_ethnic_minority + school_poverty + school_size\",data=data).fit(cov_type=\"cluster\", cov_kwds={'groups': data['schoolid']})\nw = lpm.resid / np.var(lpm.resid)\nprint(np.mean(data.achievement_score*w))\n\n0.39640236033389553"
+  },
+  {
+    "objectID": "matching.html#regression-estimate-of-ate-weights-1",
+    "href": "matching.html#regression-estimate-of-ate-weights-1",
+    "title": "Matching",
+    "section": "Regression estimate of ATE: weights",
+    "text": "Regression estimate of ATE: weights\n\n\nCode\nfig,ax=plt.subplots()\nplt.hist(w[data.intervention==0], bins=20, alpha=0.3, color=\"C2\", label=\"Untreated\")\nplt.hist(w[data.intervention==1], bins=20, alpha=0.3, color=\"C3\", label=\"Treated\")\nax.set_xlabel(\"w\")\nax.set_ylabel(\"N\")\nplt.legend()\nplt.show();"
+  },
+  {
+    "objectID": "matching.html#propensity-score-matching",
+    "href": "matching.html#propensity-score-matching",
+    "title": "Matching",
+    "section": "Propensity Score Matching",
+    "text": "Propensity Score Matching\n\ncateg = [\"ethnicity\", \"gender\", \"school_urbanicity\",\"success_expect\"]\ncont = [\"school_mindset\", \"school_achievement\", \"school_ethnic_minority\", \"school_poverty\", \"school_size\"]\n\ndata_with_categ = pd.concat([\n    data.drop(columns=categ), # dataset without the categorical features\n    pd.get_dummies(data[categ], columns=categ, drop_first=False)# categorical features converted to dummies\n], axis=1)\n\nprint(data_with_categ.shape)\nT = 'intervention'\nY = 'achievement_score'\nX = data_with_categ.columns.drop(['schoolid', T, Y])\n\n(10391, 38)"
+  },
+  {
+    "objectID": "matching.html#propensity-score-matching-1",
+    "href": "matching.html#propensity-score-matching-1",
+    "title": "Matching",
+    "section": "Propensity Score Matching",
+    "text": "Propensity Score Matching\n\nfrom sklearn.linear_model import LogisticRegression, LogisticRegressionCV\nfrom sklearn.neighbors import KNeighborsRegressor\nimport sklearn\n\ndef propensitymatching(T,Y,X,psmodel=LogisticRegressionCV(),neighbormodel=KNeighborsRegressor(n_neighbors=1,algorithm='auto',weights='uniform')):\n    pfit = psmodel.fit(X,T)\n    ps = pfit.predict_proba(X)[:,1]\n    ey1 = neighbormodel.fit(ps[T==1].reshape(-1,1),Y[T==1])\n    ey0 = sklearn.base.clone(neighbormodel).fit(ps[T==0].reshape(-1,1),Y[T==0])\n    tex = ey1.predict(ps.reshape(-1,1)) - ey0.predict(ps.reshape(-1,1))\n    ate = np.mean(tex)\n    return(ate, tex,ps)\n\nate,tex,ps=propensitymatching(data_with_categ[T],data_with_categ[Y],data_with_categ[X])\nprint(ate)\n\n0.456936911462113"
+  },
+  {
+    "objectID": "matching.html#propensity-score-matching-2",
+    "href": "matching.html#propensity-score-matching-2",
+    "title": "Matching",
+    "section": "Propensity Score Matching",
+    "text": "Propensity Score Matching\n\n\nCode\nfig, ax = plt.subplots(2,1)\ntreat = data.intervention\nax[0].scatter(ps[treat==0],tex[treat==0],color=\"C2\")\nax[0].scatter(ps[treat==1],tex[treat==1],color=\"C3\")\nax[1].hist(ps[treat==0],bins=20,color=\"C2\",label=\"Untreated\")\nax[1].hist(ps[treat==1],bins=20,color=\"C3\",label=\"Treated\")\nax[1].set_xlabel(\"P(Treatment)\")\nax[1].set_ylabel(\"N\")\nax[0].set_ylabel(\"E[Y|T=1,P(X)] - E[Y|T=0,P(X)]\")\nplt.legend()\nplt.show()"
+  },
+  {
+    "objectID": "matching.html#inverse-propensity-weighting-1",
+    "href": "matching.html#inverse-propensity-weighting-1",
+    "title": "Matching",
+    "section": "Inverse Propensity Weighting",
+    "text": "Inverse Propensity Weighting\n\ndef ipw(T,Y,X,psmodel=LogisticRegressionCV()):\n    pfit = psmodel.fit(X,T)\n    ps = pfit.predict_proba(X)[:,1]\n    ate=np.mean(Y*(T - ps)/(ps*(1-ps)))\n    return(ate,ps)\n\nate,ps = ipw(data_with_categ[T],data_with_categ[Y],data_with_categ[X])\nprint(ate)\n\n0.4650069227598922"
+  },
+  {
+    "objectID": "matching.html#doubly-robust",
+    "href": "matching.html#doubly-robust",
+    "title": "Matching",
+    "section": "Doubly Robust",
+    "text": "Doubly Robust\n\nfrom sklearn.ensemble import GradientBoostingRegressor, GradientBoostingClassifier\nfrom sklearn.linear_model import LassoCV, LogisticRegressionCV, ElasticNetCV\nfrom sklearn.preprocessing import PolynomialFeatures\n\ndef robustate(T,Y,X,psmodel=LogisticRegressionCV(),ymodel=LassoCV(), cluster=None):\n    pfit = psmodel.fit(X,T)\n    ps = pfit.predict_proba(X)[:,1]\n    ey1fit = ymodel.fit(X[T==1],Y[T==1])\n    ey0fit = sklearn.base.clone(ymodel).fit(X[T==0],Y[T==0])\n    ey1 = ey1fit.predict(X)\n    ey0 = ey0fit.predict(X)\n    ate_terms = ey1 - ey0 + T*(Y- ey1)/ps - (1-T)*(Y-ey0)/(1-ps)\n    ate = np.mean(ate_terms)\n    # check if cluster is None\n    if cluster is None :\n        ate_se = np.sqrt(np.var(ate_terms)/len(ate_terms))\n    else :\n        creg=smf.ols(\"y ~ 1\", pd.DataFrame({\"y\" : ate_terms})).fit(cov_type=\"cluster\", cov_kwds={'groups': cluster})\n        ate_se = np.sqrt(creg.cov_params().iloc[0,0])\n\n    return(ate, ate_se, ps, ey1,ey0)\n\nate,se,ps,ey1,ey0 = robustate(data_with_categ[T],data_with_categ[Y],data_with_categ[X],cluster=data_with_categ['schoolid'])\nprint(ate-1.96*se, ate, ate+1.96*se)\n\n0.3321412901659991 0.3836159751515205 0.43509066013704195\n\n\n1\nWe have glossed over some details needed for doubly robust estimation to have nice statistical properties. Those details matter and are not implemented correctly above. It is better to use the econml instead."
+  },
+  {
+    "objectID": "matching.html#doubly-robust-1",
+    "href": "matching.html#doubly-robust-1",
+    "title": "Matching",
+    "section": "Doubly Robust",
+    "text": "Doubly Robust\n\nbetter to use the econml package\n\n\nfrom econml.dr import DRLearner, LinearDRLearner, SparseLinearDRLearner\n\nest = LinearDRLearner(#featurizer=PolynomialFeatures(degree=2, include_bias=False),\n                model_regression=LassoCV(),\n                model_propensity=LogisticRegressionCV(),\n                cv=5)\n\nest.fit(data_with_categ[Y], data_with_categ[T], X=None, W=data_with_categ[X])\npoint = est.const_marginal_effect(None)\nlb, ub = est.const_marginal_effect_interval(None, alpha=0.05)\nprint(lb,point,ub)\n\n[[0.34806843]] [[0.38205572]] [[0.41604301]]"
+  },
+  {
+    "objectID": "matching.html#sources-and-further-reading",
+    "href": "matching.html#sources-and-further-reading",
+    "title": "Matching",
+    "section": "Sources and Further Reading",
+    "text": "Sources and Further Reading\n\nUseful additional reading is chapters 10-12 of Facure (2022) and chapter 14 of Huntington-Klein (2021).1\nThe representation of the estimate from a linear model as a weighted average is based on Borusyak and Jaravel (2018)\nThe growth mindset example is take from Facure (2022)\n\nThese slides do not mention the importance of overlap/balance, but hopefully I emphasized it during lecture. Overlap is very important in practice. The reading, especially Huntington-Klein (2021), cover it pretty well."
+  },
+  {
+    "objectID": "matching.html#references",
+    "href": "matching.html#references",
+    "title": "Matching",
+    "section": "References",
+    "text": "References\n\n\n\n\n\n\n\n\nAbadie, Alberto, and Guido W. Imbens. 2008. “On the Failure of the Bootstrap for Matching Estimators.” Econometrica 76 (6): 1537–57. https://doi.org/https://doi.org/10.3982/ECTA6474.\n\n\nAthey, Susan, and Stefan Wager. 2019. “Estimating Treatment Effects with Causal Forests: An Application.”\n\n\nBorusyak, Kirill, and Xavier Jaravel. 2018. “Revisiting Event Study Designs.” https://scholar.harvard.edu/files/borusyak/files/borusyak_jaravel_event_studies.pdf.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/.\n\n\nYeager, David S., Paul Hanselman, Gregory M. Walton, Jared S. Murray, Robert Crosnoe, Chandra Muller, Elizabeth Tipton, et al. 2019. “A National Experiment Reveals Where a Growth Mindset Improves Achievement.” Nature 573 (7774): 364–69. https://doi.org/10.1038/s41586-019-1466-y."
+  },
+  {
+    "objectID": "doubleml.html#introduction-1",
+    "href": "doubleml.html#introduction-1",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Introduction",
+    "text": "Introduction\n\nMany estimation tasks involve:\n\nLow dimensional parameter of interest\nHigh dimensional nuisance parameters needed to recover parameter of interest\n\nExample: in matching\n\nInterested in \\(ATE = \\Er[Y(1) - Y(0)]\\)\nNuisance parameters \\(\\Er[Y|D,X]\\) and/or \\(P(D=1|X)\\)"
+  },
+  {
+    "objectID": "doubleml.html#machine-learning-for-nuisance-parameters",
+    "href": "doubleml.html#machine-learning-for-nuisance-parameters",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Machine Learning for Nuisance Parameters",
+    "text": "Machine Learning for Nuisance Parameters\n\nIn matching we said that we could use flexible machine learning estimators for \\(\\Er[Y|D,X]\\) and \\(P(D=1|X)\\) and plug them into the doubly robust estimator\nWe will cover:\n\nSome of the technical details behind this idea\nHow this idea can be applied to other estimators\n\n\n\nThese notes will examine the incorportion of machine learning methods in classic econometric techniques for estimating causal effects. More specifally, we will focus on estimating treatment effects using matching and instrumental variables. In these estimators (and many others) there is a low-dimensional parameter of interest, such as the average treatment effect, but estimating it requires also estimating a potentially high dimensional nuisance parameter, such as the propensity score. Machine learning methods were developed for prediction with high dimensional data. It is then natural to try to use machine learning for estimating high dimensional nuisance parameters. Care must be taken when doing so though because the flexibility and complexity that make machine learning so good at prediction also pose challenges for inference."
+  },
+  {
+    "objectID": "doubleml.html#example-partially-linear-model",
+    "href": "doubleml.html#example-partially-linear-model",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Example: partially linear model",
+    "text": "Example: partially linear model\n\\[\n    y_i = \\theta d_i + f(x_i) + \\epsilon_i\n\\]\n\nInterested in \\(\\theta\\)\nAssume \\(\\Er[\\epsilon|d,x] = 0\\)\nNuisance parameter \\(f()\\)"
+  },
+  {
+    "objectID": "doubleml.html#example-matching",
+    "href": "doubleml.html#example-matching",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Example: Matching",
+    "text": "Example: Matching\n\nBinary treatment \\(d_i \\in \\{0,1\\}\\)\nPotential outcomes \\(y_i(0), y_i(1)\\), observe \\(y_i = y_i(d_i)\\)\nInterested in average treatment effect : \\(\\theta = \\Er[y_i(1) -\ny_i(0)]\\)\nCovariates \\(x_i\\)\nAssume unconfoundedness : \\(d_i \\indep y_i(1), y_i(0) | x_i\\)\n\n\nThe partially linear and matching models are closely related. If the conditional mean independence assumption of the partially linear model is strengthing to conditional indepence then the partially linear model is a special case of the matching model with constant treatment effects, \\(y_i(1) - y_i(0) = \\theta\\). Thus the matching model can be viewed as a generalization of the partially linear model that allows for treatment effect heterogeneity."
+  },
+  {
+    "objectID": "doubleml.html#example-matching-1",
+    "href": "doubleml.html#example-matching-1",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Example: Matching",
+    "text": "Example: Matching\n\nEstimatable formulae for ATE : \\[\n\\begin{align*}\n\\theta = & \\Er\\left[\\frac{y_i d_i}{\\Pr(d = 1 | x_i)} - \\frac{y_i\n    (1-d_i)}{1-\\Pr(d=1|x_i)} \\right] \\\\\n\\theta = & \\Er\\left[\\Er[y_i | d_i = 1, x_i] - \\Er[y_i | d_i = 0 , x_i]\\right] \\\\\n\\theta = & \\Er\\left[ \\begin{array}{l} d_i \\frac{y_i - \\Er[y_i | d_i = 1,\n    x_i]}{\\Pr(d=1|x_i)} - (1-d_i)\\frac{y_i - \\Er[y_i | d_i = 0,\n    x_i]}{1-\\Pr(d=1|x_i)} + \\\\ + \\Er[y_i | d_i = 1, x_i] - \\Er[y_i | d_i = 0 ,\n    x_i]\\end{array}\\right]\n\\end{align*}\n\\]"
+  },
+  {
+    "objectID": "doubleml.html#example-iv",
+    "href": "doubleml.html#example-iv",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Example: IV",
+    "text": "Example: IV\n\\[\n\\begin{align*}\ny_i = & \\theta d_i + f(x_i) + \\epsilon_i \\\\\nd_i = & g(x_i, z_i) + u_i\n\\end{align*}\n\\]\n\nInterested in \\(\\theta\\)\nAssume \\(\\Er[\\epsilon|x,z] = 0\\), \\(\\Er[u|x,z]=0\\)\nNuisance parameters \\(f()\\), \\(g()\\)"
+  },
+  {
+    "objectID": "doubleml.html#example-late",
+    "href": "doubleml.html#example-late",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Example: LATE",
+    "text": "Example: LATE\n\nBinary instrumet \\(z_i \\in \\{0,1\\}\\)\nPotential treatments \\(d_i(0), d_i(1) \\in \\{0,1\\}\\), \\(d_i = d_i(Z_i)\\)\nPotential outcomes \\(y_i(0), y_i(1)\\), observe \\(y_i = y_i(d_i)\\)\nCovariates \\(x_i\\)\n\\((y_i(1), y_i(0), d_i(1), d_i(0)) \\indep z_i | x_i\\)\nLocal average treatment effect: \\[\n\\begin{align*}\n\\theta = & \\Er\\left[\\Er[y_i(1) - y_i(0) | x, d_i(1) &gt; d_i(0)]\\right] \\\\\n     = & \\Er\\left[\\frac{\\Er[y|z=1,x] - \\Er[y|z=0,x]}\n                    {\\Er[d|z=1,x]-\\Er[d|z=0,x]} \\right]\n\\end{align*}\n\\]"
+  },
+  {
+    "objectID": "doubleml.html#general-setup",
+    "href": "doubleml.html#general-setup",
+    "title": "Double / Debiased Machine Learning",
+    "section": "General setup",
+    "text": "General setup\n\nParameter of interest \\(\\theta \\in \\R^{d_\\theta}\\)\nNuisance parameter \\(\\eta \\in T\\)\nMoment conditions \\[\n\\Er[\\psi(W;\\theta_0,\\eta_0) ] = 0 \\in \\R^{d_\\theta}\n\\] with \\(\\psi\\) known\nEstimate \\(\\hat{\\eta}\\) using some machine learning method\nEstimate \\(\\hat{\\theta}\\) from \\[\n\\En[\\psi(w_i;\\hat{\\theta},\\hat{\\eta}) ] = 0\n\\]\n\n\nWe are following the setup and notation of Chernozhukov et al. (2018). As in the examples, the dimension of \\(\\theta\\) is fixed and small. The dimension of \\(\\eta\\) is large and might be increasing with sample size. \\(T\\) is some normed vector space."
+  },
+  {
+    "objectID": "doubleml.html#example-partially-linear-model-1",
+    "href": "doubleml.html#example-partially-linear-model-1",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Example: partially linear model",
+    "text": "Example: partially linear model\n\\[\n    y_i = \\theta_0 d_i + f_0(x_i) + \\epsilon_i\n\\]\n\nCompare the estimates from\n\n\\(\\En[d_i(y_i - \\tilde{\\theta} d_i - \\hat{f}(x_i)) ] = 0\\)\n\nand\n\n\\(\\En[(d_i - \\hat{m}(x_i))(y_i - \\hat{\\mu}(x_i) -  \\theta (d_i - \\hat{m}(x_i)))] = 0\\)\n\nwhere \\(m(x) = \\Er[d|x]\\) and \\(\\mu(y) = \\Er[y|x]\\)\n\n\nExample: partially linear model In the partially linear model,\n\\[\n    y_i = \\theta_0 d_i + f_0(x_i) + \\epsilon_i\n\\]\nwe can let \\(w_i = (y_i, x_i)\\) and \\(\\eta = f\\). There are a variety of candidates for \\(\\psi\\). An obvious (but flawed) one is \\(\\psi(w_i; \\theta,\n\\eta) = (y_i - \\theta_0 d_i - f_0(x_i))d_i\\). With this choice of \\(\\psi\\), we have\n\\[\n\\begin{align*}\n0 = & \\En[d_i(y_i - \\hat{\\theta} d_i - \\hat{f}(x_i)) ] \\\\\n\\hat{\\theta} = & \\En[d_i^2]^{-1} \\En[d_i (y_i - \\hat{f}(x_i))] \\\\\n(\\hat{\\theta} - \\theta_0) = &  \\En[d_i^2]^{-1} \\En[d_i \\epsilon_i] +\n    \\En[d_i^2]^{-1} \\En[d_i (f_0(x_i) - \\hat{f}(x_i))]\n\\end{align*}\n\\]\nThe first term of this expression is quite promising. \\(d_i\\) and \\(\\epsilon_i\\) are both finite dimensional random variables, so a law of large numbers will apply to \\(\\En[d_i^2]\\), and a central limit theorem would apply to \\(\\sqrt{n} \\En[d_i \\epsilon_i]\\). Unfortunately, the second expression is problematic. To accomodate high dimensional \\(x\\) and allow for flexible \\(f()\\), machine learning estimators must introduce some sort of regularization to control variance. This regularization also introduces some bias. The bias generally vanishes, but at a slower than \\(\\sqrt{n}\\) rate. Hence\n\\[\n\\sqrt{n} \\En[d_i (f_0(x_i) - \\hat{f}(x_i))] \\to \\infty.\n\\]\nTo get around this problem, we must modify our estimate of \\(\\theta\\). Let \\(m(x) = \\Er[d|x]\\) and \\(\\mu(y) = \\Er[y|x]\\). Let \\(\\hat{m}()\\) and \\(\\hat{\\mu}()\\) be some estimates. Then we can estimate \\(\\theta\\) by partialling out:\n\\[\n\\begin{align*}\n0 = & \\En[(d_i - \\hat{m}(x_i))(y_i - \\hat{\\mu}(x_i) -  \\theta (d_i - \\hat{m}(x_i)))] \\\\\n\\hat{\\theta} = & \\En[(d_i -\\hat{m}(x_i))^2]^{-1} \\En[(d_i -\n\\hat{m}(x_i))(y_i - \\hat{\\mu}(x_i))] \\\\\n(\\hat{\\theta} - \\theta_0) = & \\En[(d_i -\\hat{m}(x_i))^2]^{-1} \\left(\\En[(d_i -\n\\hat{m}(x_i))\\epsilon_i] + \\En[(d_i - \\hat{m}(x_i))(\\mu(x_i) -\n\\hat{\\mu}(x_i))] \\right) \\\\\n= & \\En[(d_i -\\hat{m}(x_i))^2]^{-1} \\left( a + b +c + d \\right)\n\\end{align*}\n\\]\nwhere\n\\[\n\\begin{align*}\na = & \\En[(d_i -m(x_i))\\epsilon_i] \\\\\nb = & \\En[(m(x_i)-\\hat{m}(x_i))\\epsilon_i] \\\\\nc = & \\En[v_i(\\mu(x_i) - \\hat{\\mu}(x_i))] \\\\\nd = & \\En[(m(x_i) - \\hat{m}(x_i))(\\mu(x_i) - \\hat{\\mu}(x_i))]\n\\end{align*}\n\\]\nwith \\(v_i = d_i - \\Er[d_i | x_i]\\). The term \\(a\\) is well behaved and \\(\\sqrt{n}a \\leadsto N(0,\\Sigma)\\) under standard conditions. Although terms \\(b\\) and \\(c\\) appear similar to the problematic term in the initial estimator, they are better behaved because \\(\\Er[v|x] = 0\\) and \\(\\Er[\\epsilon|x] = 0\\). This makes it possible, but difficult to show that \\(\\sqrt{n}b \\to_p = 0\\) and \\(\\sqrt{n} c \\to_p = 0\\), see e.g. Belloni, Chernozhukov, and Hansen (2014). However, the conditions on \\(\\hat{m}\\) and \\(\\hat{\\mu}\\) needed to show this are slightly restrictive, and appropriate conditions might not be known for all estimators. Chernozhukov et al. (2018) describe a sample splitting modification to \\(\\hat{\\theta}\\) that allows \\(\\sqrt{n} b\\) and \\(\\sqrt{n} c\\) to vanish under weaker conditions (essentially the same rate condition as needed for \\(\\sqrt{n} d\\) to vanish.)\nThe last term, \\(d\\), is a considerable improvement upon the first estimator. Instead of involving the error in one estimate, it now involes the product of the error in two estimates. By the Cauchy-Schwarz inequality, \\[\nd \\leq \\sqrt{\\En[(m(x_i) - \\hat{m}(x_i))^2]} \\sqrt{\\En[(\\mu(x_i) - \\hat{\\mu}(x_i))^2]}.\n\\] So if the estimates of \\(m\\) and \\(\\mu\\) converge at rates faster than \\(n^{-1/4}\\), then \\(\\sqrt{n} d \\to_p 0\\). This \\(n^{-1/4}\\) rate is reached by many machine learning estimators."
+  },
+  {
+    "objectID": "doubleml.html#lessons-from-the-example",
+    "href": "doubleml.html#lessons-from-the-example",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Lessons from the example",
+    "text": "Lessons from the example\n\nNeed an extra condition on moments – Neyman orthogonality \\[\n\\partial \\eta \\Er[\\psi(W;\\theta_0,\\eta_0)](\\eta-\\eta_0) = 0\n\\]\nWant estimators faster than \\(n^{-1/4}\\) in the prediction norm, \\[\n\\sqrt{\\En[(\\hat{\\eta}(x_i) - \\eta(x_i))^2]} \\lesssim_P n^{-1/4}\n\\]\nAlso want estimators that satisfy something like \\[ \\sqrt{n} \\En[(\\eta(x_i)-\\hat{\\eta}(x_i))\\epsilon_i] = o_p(1) \\]\n\nSample splitting / cross-fitting will make this easier"
+  },
+  {
+    "objectID": "doubleml.html#cross-fitting",
+    "href": "doubleml.html#cross-fitting",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Cross-fitting",
+    "text": "Cross-fitting\n\nRandomly partition into \\(K\\) subsets \\((I_k)_{k=1}^K\\)\n\\(I^c_k = \\{1, ..., n\\} \\setminus I_k\\)\n\\(\\hat{\\eta}_k =\\) estimate of \\(\\eta\\) using \\(I^c_k\\)\nEstimator: \\[\n\\begin{align*}\n0 = & \\frac{1}{K} \\sum_{k=1}^K \\frac{K}{n} \\sum_{i \\in I_k}\n\\psi(w_i;\\hat{\\theta}^{DML},\\hat{\\eta}_k) \\\\\n0 = & \\frac{1}{K} \\sum_{k=1}^K \\En_k[\n\\psi(w_i;\\hat{\\theta}^{DML},\\hat{\\eta}_k)]\n\\end{align*}\n\\]"
+  },
+  {
+    "objectID": "doubleml.html#assumptions",
+    "href": "doubleml.html#assumptions",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Assumptions",
+    "text": "Assumptions\n\nNeyman Orthogonality \\[\n\\partial \\eta \\Er[\\psi(W;\\theta_0,\\eta_0)](\\eta-\\eta_0) \\approx 0\n\\]\nFast enough convergence of \\(\\hat{\\eta}\\) \\[\n\\sqrt{\\Er[(\\hat{\\eta}_k(x_i) - \\eta(x_i))^2|I_k^c]} \\lesssim_P n^{-1/4}\n\\]\nVarious moments exist and other regularity conditions\nMoment condition linear in \\(\\theta\\) (to simplify notation only) \\[\n\\psi(w;\\theta,\\eta) = \\psi^a(w;\\eta) \\theta + \\psi^b(w;\\eta)\n\\]\n\n1\nThese are stated loosely, see Chernozhukov et al. (2018) for precise conditions."
+  },
+  {
+    "objectID": "doubleml.html#asymptotic-normality",
+    "href": "doubleml.html#asymptotic-normality",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Asymptotic Normality",
+    "text": "Asymptotic Normality\n\\[\n\\sqrt{n} \\sigma^{-1} (\\hat{\\theta} - \\theta_0) = \\frac{1}{\\sqrt{n}}\n\\sum_{i=1}^n \\bar{\\psi}(w_i) + o_p(1) \\indist N(0,1)\n\\] - Variance \\[\\sigma^2 = \\Er[\\psi^a(w_i;\\eta_0)]^{-1}  \\Er\\left[ \\psi(w;\\theta_0,\\eta_0)\n  \\psi(w;\\theta_0,\\eta_0)'\\right]  \\Er[\\psi^a(w_i;\\eta_0)]^{-1}\n\\] - Influence function \\[\\bar{\\psi}(w) = -\\sigma^{-1} \\Er[\\psi^a(w_i;\\eta_0)]^{-1} \\psi(w;\\theta_0,\\eta_0)\\]"
+  },
+  {
+    "objectID": "doubleml.html#creating-orthogonal-moments-1",
+    "href": "doubleml.html#creating-orthogonal-moments-1",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Creating orthogonal moments",
+    "text": "Creating orthogonal moments\n\nNeed \\[\n\\partial \\eta\\Er\\left[\\psi(W;\\theta_0,\\eta_0)[\\eta-\\eta_0] \\right]  \\approx 0\n\\]\nGiven an some model, how do we find a suitable \\(\\psi\\)?\nRelated to finding the efficient influence function, see Oliver Hines and Vansteelandt (2022)"
+  },
+  {
+    "objectID": "doubleml.html#orthogonal-scores-via-concentrating-out",
+    "href": "doubleml.html#orthogonal-scores-via-concentrating-out",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Orthogonal scores via concentrating-out",
+    "text": "Orthogonal scores via concentrating-out\n\nOriginal model: \\[\n(\\theta_0, \\beta_0) = \\argmax_{\\theta, \\beta} \\Er[\\ell(W;\\theta,\\beta)]\n\\]\nDefine \\[\n\\eta(\\theta) = \\beta(\\theta) = \\argmax_\\beta \\Er[\\ell(W;\\theta,\\beta)]\n\\]\nFirst order condition from \\(\\max_\\theta\n\\Er[\\ell(W;\\theta,\\beta(\\theta))]\\) is \\[\n0 = \\Er\\left[ \\underbrace{\\frac{\\partial \\ell}{\\partial \\theta} + \\frac{\\partial \\ell}{\\partial \\beta} \\frac{d \\beta}{d \\theta}}_{\\psi(W;\\theta,\\beta(\\theta))} \\right]\n\\]"
+  },
+  {
+    "objectID": "doubleml.html#example-average-derivative",
+    "href": "doubleml.html#example-average-derivative",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Example: average derivative",
+    "text": "Example: average derivative\n\n\\(x,y \\in \\R^1\\), \\(\\Er[y|x] = f_0(x)\\), \\(p(x) =\\) density of \\(x\\)\n\\(\\theta_0 = \\Er[f_0'(x)]\\)\nJoint objective \\[\n\\min_{\\theta,f} \\Er\\left[ (y - f(x))^2 + (\\theta - f'(x)^2) \\right]\n\\]\nSolve for minimizing \\(f\\) given \\(\\theta\\) \\[\nf_\\theta(x) = \\Er[y|x] - \\theta \\partial_x \\log p(x) + f''(x) + f'(x) \\partial_x \\log p(x)\n\\]"
+  },
+  {
+    "objectID": "doubleml.html#example-average-derivative-1",
+    "href": "doubleml.html#example-average-derivative-1",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Example: average derivative",
+    "text": "Example: average derivative\n\nConcentrated objective: \\[\n\\min_\\theta \\Er\\left[ (y - f_\\theta(x))^2 + (\\theta - f_\\theta'(x)^2)\n\\right]\n\\]\nFirst order condition at \\(f_\\theta = f_0\\) gives \\[\n0 = \\Er\\left[ (y - f_0(x))\\partial_x \\log p(x) + (\\theta - f_0'(x)) \\right]\n\\]"
+  },
+  {
+    "objectID": "doubleml.html#orthogonal-scores-via-two-other-methods",
+    "href": "doubleml.html#orthogonal-scores-via-two-other-methods",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Orthogonal scores via Two Other Methods",
+    "text": "Orthogonal scores via Two Other Methods\n\n“Orthogonal” suggests ideas from linear algebra will useful, and they are\nProjection: take orthogonal to \\(\\eta_0\\) projection of moments\nRiesz representer\n\n\nChernozhukov et al. (2018) show how to construct orthogonal scores in a few examples via concentrating out and projection. Chernozhukov, Hansen, and Spindler (2015) also discusses creating orthogonal scores."
+  },
+  {
+    "objectID": "doubleml.html#data",
+    "href": "doubleml.html#data",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Data",
+    "text": "Data\n\n\nimports\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport pandas as pd\n\nfrom sklearn.model_selection import cross_val_predict\nfrom sklearn import linear_model\nfrom sklearn.preprocessing import PolynomialFeatures\nimport statsmodels as sm\nimport statsmodels.formula.api as smf\nfrom statsmodels.iolib.summary2 import summary_col\n\n\n\ncpsall = pd.read_stata(\"https://www.nber.org/morg/annual/morg20.dta\")\n# take subset of data just to reduce computation time\ncps = cpsall.sample(30000, replace=False, random_state=0)\ncps.describe()\n\n\n\n\n\n\n\n\nhurespli\nhhnum\ncounty\ncentcity\nsmsastat\nicntcity\nsmsa04\nrelref95\nage\nspouse\n...\nrecnum\nyear\nym_file\nym\nch02\nch35\nch613\nch1417\nch05\nihigrdc\n\n\n\n\ncount\n29998.000000\n30000.000000\n30000.000000\n24785.000000\n29699.000000\n3775.000000\n30000.000000\n30000.000000\n30000.000000\n15421.000000\n...\n30000.000000\n30000.0\n30000.000000\n30000.000000\n30000.000000\n30000.000000\n30000.000000\n30000.000000\n30000.000000\n20929.000000\n\n\nmean\n1.248017\n1.050267\n25.579267\n1.926811\n1.186942\n1.399735\n3.691300\n42.792200\n48.781800\n1.574347\n...\n200364.281250\n2020.0\n725.461367\n716.238567\n0.053967\n0.064967\n0.136967\n0.081267\n0.099833\n12.443547\n\n\nstd\n0.617033\n0.238765\n61.435104\n0.718238\n0.389872\n0.987978\n2.592906\n3.830515\n18.922986\n0.675013\n...\n116372.054688\n0.0\n3.498569\n6.903731\n0.225956\n0.246471\n0.343818\n0.273249\n0.299783\n2.441900\n\n\nmin\n0.000000\n1.000000\n0.000000\n1.000000\n1.000000\n1.000000\n0.000000\n40.000000\n16.000000\n1.000000\n...\n23.000000\n2020.0\n720.000000\n705.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n\n\n25%\n1.000000\n1.000000\n0.000000\n1.000000\n1.000000\n1.000000\n0.000000\n40.000000\n33.000000\n1.000000\n...\n98957.250000\n2020.0\n722.000000\n710.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n12.000000\n\n\n50%\n1.000000\n1.000000\n0.000000\n2.000000\n1.000000\n1.000000\n4.000000\n41.000000\n49.000000\n2.000000\n...\n200032.500000\n2020.0\n725.000000\n716.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n12.000000\n\n\n75%\n1.000000\n1.000000\n27.000000\n2.000000\n1.000000\n1.000000\n6.000000\n42.000000\n64.000000\n2.000000\n...\n302111.750000\n2020.0\n729.000000\n722.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n14.000000\n\n\nmax\n13.000000\n4.000000\n810.000000\n3.000000\n2.000000\n7.000000\n7.000000\n59.000000\n85.000000\n9.000000\n...\n401132.000000\n2020.0\n731.000000\n728.000000\n1.000000\n1.000000\n1.000000\n1.000000\n1.000000\n18.000000\n\n\n\n\n8 rows × 55 columns"
+  },
+  {
+    "objectID": "doubleml.html#partial-linear-model",
+    "href": "doubleml.html#partial-linear-model",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Partial Linear Model",
+    "text": "Partial Linear Model\n\ndef partial_linear(y, d, X, yestimator, destimator, folds=3):\n    \"\"\"Estimate the partially linear model y = d*C + f(x) + e\n\n    Parameters\n    ----------\n    y : array_like\n        vector of outcomes\n    d : array_like\n        vector or matrix of regressors of interest\n    X : array_like\n        matrix of controls\n    mlestimate : Estimator object for partialling out X. Must have ‘fit’\n        and ‘predict’ methods.\n    folds : int\n        Number of folds for cross-fitting\n\n    Returns\n    -------\n    ols : statsmodels regression results containing estimate of coefficient on d.\n    yhat : cross-fitted predictions of y\n    dhat : cross-fitted predictions of d\n    \"\"\"\n\n    # we want predicted probabilities if y or d is discrete\n    ymethod = \"predict\" if False==getattr(yestimator, \"predict_proba\",False) else \"predict_proba\"\n    dmethod = \"predict\" if False==getattr(destimator, \"predict_proba\",False) else \"predict_proba\"\n    # get the predictions\n    yhat = cross_val_predict(yestimator,X,y,cv=folds,method=ymethod)\n    dhat = cross_val_predict(destimator,X,d,cv=folds,method=dmethod)\n    ey = np.array(y - yhat)\n    ed = np.array(d - dhat)\n    ols = sm.regression.linear_model.OLS(ey,ed).fit(cov_type='HC0')\n\n    return(ols, yhat, dhat)"
+  },
+  {
+    "objectID": "doubleml.html#unconditional-gap",
+    "href": "doubleml.html#unconditional-gap",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Unconditional Gap",
+    "text": "Unconditional Gap\n\n\nCode\ncps[\"female\"] = (cps.sex==2)\ncps[\"log_earn\"] = np.log(cps.earnwke)\ncps.loc[np.isinf(cps.log_earn), \"log_earn\"] = np.nan\ncps[\"log_uhours\"] = np.log(cps.uhourse)\ncps.loc[np.isinf(cps.log_uhours), \"log_uhours\"] = np.nan\ncps[\"log_hourslw\"] = np.log(cps.hourslw)\ncps.loc[np.isinf(cps.log_hourslw),\"log_hourslw\"] = np.nan\ncps[\"log_wageu\"] = cps.log_earn - cps.log_uhours\ncps[\"log_wagelw\"] = cps.log_earn - cps.log_hourslw\n\nlm = list()\nlm.append(smf.ols(formula=\"log_earn ~ female\", data=cps,\n                  missing=\"drop\").fit(cov_type='HC0'))\nlm.append( smf.ols(formula=\"log_wageu ~ female\", data=cps,\n                   missing=\"drop\").fit(cov_type='HC0'))\nlm.append(smf.ols(formula=\"log_wagelw ~ female\", data=cps,\n                  missing=\"drop\").fit(cov_type='HC0'))\nlm.append(smf.ols(formula=\"log_earn ~ female + log_hourslw + log_uhours\", data=cps,\n                  missing=\"drop\").fit(cov_type='HC0'))\nsummary_col(lm, stars=True)\n\n\n\n\n\n\nlog_earn I\nlog_wageu I\nlog_wagelw I\nlog_earn II\n\n\nIntercept\n6.8607***\n3.2022***\n3.2366***\n2.0104***\n\n\n\n(0.0091)\n(0.0080)\n(0.0088)\n(0.0945)\n\n\nfemale[T.True]\n-0.2965***\n-0.1729***\n-0.1746***\n-0.1363***\n\n\n\n(0.0133)\n(0.0112)\n(0.0124)\n(0.0115)\n\n\nlog_hourslw\n\n\n\n0.0227\n\n\n\n\n\n\n(0.0223)\n\n\nlog_uhours\n\n\n\n1.3025***\n\n\n\n\n\n\n(0.0372)\n\n\nR-squared\n0.0323\n0.0166\n0.0136\n0.3367\n\n\nR-squared Adj.\n0.0323\n0.0165\n0.0135\n0.3366\n\n\n\n\nStandard errors in parentheses.\n* p&lt;.1, ** p&lt;.05, ***p&lt;.01"
+  },
+  {
+    "objectID": "doubleml.html#adding-controls",
+    "href": "doubleml.html#adding-controls",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Adding Controls",
+    "text": "Adding Controls\n\nfrom patsy import dmatrices\nfmla  = \"log_earn + female ~ log_uhours + log_hourslw + I(age**2) + age + C(grade92) + C(race) + C(smsastat) + C(unionmme) + C(unioncov)\" #C(ind02) + C(occ2012)\"\nyd, X = dmatrices(fmla,cps)\nfemale = yd[:,1]\nlogearn = yd[:,2];"
+  },
+  {
+    "objectID": "doubleml.html#estimating-eta",
+    "href": "doubleml.html#estimating-eta",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Estimating \\(\\eta\\)",
+    "text": "Estimating \\(\\eta\\)\n\nalphas = np.exp(np.linspace(-2, -12, 20))\nlassoy = linear_model.LassoCV(cv=4, alphas=alphas, max_iter=5000).fit(X,logearn)\nlassod = linear_model.LassoCV(cv=4, alphas=alphas, max_iter=5000).fit(X,female);"
+  },
+  {
+    "objectID": "doubleml.html#estimating-eta-1",
+    "href": "doubleml.html#estimating-eta-1",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Estimating \\(\\eta\\)",
+    "text": "Estimating \\(\\eta\\)\n\n\nCode\nfig, ax = plt.subplots(1,2)\n\ndef plotlassocv(l, ax) :\n    alphas = l.alphas_\n    mse = l.mse_path_.mean(axis=1)\n    std_error = l.mse_path_.std(axis=1)\n    ax.plot(alphas,mse)\n    ax.fill_between(alphas, mse + std_error, mse - std_error, alpha=0.2)\n\n    ax.set_ylabel('MSE +/- std error')\n    ax.set_xlabel('alpha')\n    ax.set_xlim([alphas[0], alphas[-1]])\n    ax.set_xscale(\"log\")\n    return(ax)\n\nax[0] = plotlassocv(lassoy,ax[0])\nax[0].set_title(\"MSE for log(earn)\")\nax[1] = plotlassocv(lassod,ax[1])\nax[1].set_title(\"MSE for female\")\nfig.tight_layout()\nfig.show()"
+  },
+  {
+    "objectID": "doubleml.html#estimating-eta-2",
+    "href": "doubleml.html#estimating-eta-2",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Estimating \\(\\eta\\)",
+    "text": "Estimating \\(\\eta\\)\n\ndef pickalpha(lassocv) :\n    #imin = np.argmin(lassocv.mse_path_.mean(axis=1))\n    #msemin = lassocv.mse_path_.mean(axis=1)[imin]\n    #se = lassocv.mse_path_.std(axis=1)[imin]\n    #alpha= min([alpha for (alpha, mse) in zip(lassocv.alphas_, lassocv.mse_path_.mean(axis=1)) if mse&lt;msemin+se])\n    alpha = lassocv.alpha_\n    return(alpha)\n\nalphay = pickalpha(lassoy)\nalphad = pickalpha(lassod)"
+  },
+  {
+    "objectID": "doubleml.html#estimate-theta",
+    "href": "doubleml.html#estimate-theta",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Estimate \\(\\theta\\)",
+    "text": "Estimate \\(\\theta\\)\n\npl_lasso = partial_linear(logearn, female, X,\n                          linear_model.Lasso(alpha=alphay),\n                          linear_model.Lasso(alpha=alphad))\npl_lasso[0].summary(slim=True)\n\n\nOLS Regression Results\n\n\nDep. Variable:\ny\nF-statistic:\n\n\nModel:\nOLS\nProb (F-statistic):\n\n\nNo. Observations:\n12038\n\n\n\nCovariance Type:\nHC0\n\n\n\n\n\n\n\n\n\n\ncoef\nstd err\nz\nP&gt;|z|\n[0.025\n0.975]\n\n\nx1\n-0.1868\n0.011\n-16.643\n0.000\n-0.209\n-0.165\n\n\n\nNotes:[1] R² is computed without centering (uncentered) since the model does not contain a constant.[2] Standard Errors are heteroscedasticity robust (HC0)"
+  },
+  {
+    "objectID": "doubleml.html#examining-predictions",
+    "href": "doubleml.html#examining-predictions",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Examining Predictions",
+    "text": "Examining Predictions\n\n\nCode\nimport seaborn as sns\n# Visualize predictions\ndef preddf(pl):\n    df = pd.DataFrame({\"logearn\":logearn,\n                       \"predicted\":pl[1],\n                       \"female\":female,\n                       \"P(female|x)\":pl[2]})\n    return(df)\n\ndef plotpredictions(df) :\n    fig, ax = plt.subplots(2,1)\n    plt.figure()\n    sns.scatterplot(x = df.predicted, y = df.logearn-df.predicted, hue=df.female, ax=ax[0])\n    ax[0].set_title(\"Prediction Errors for Log Earnings\")\n\n    sns.histplot(df[\"P(female|x)\"][df.female==0], kde = False,\n                 label = \"Male\", ax=ax[1])\n    sns.histplot(df[\"P(female|x)\"][df.female==1], kde = False,\n                 label = \"Female\", ax=ax[1])\n    ax[1].set_title('P(female|x)')\n    return(fig)\n\nfig=plotpredictions(preddf(pl_lasso))\nfig.show()\n\n\n\n\n\n\n\n\n\n&lt;Figure size 960x480 with 0 Axes&gt;"
+  },
+  {
+    "objectID": "doubleml.html#software",
+    "href": "doubleml.html#software",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Software",
+    "text": "Software\n\ndoubleml\neconml"
+  },
+  {
+    "objectID": "doubleml.html#using-doubleml",
+    "href": "doubleml.html#using-doubleml",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Using doubleml",
+    "text": "Using doubleml\n\n\nCode\nimport doubleml\nfrom sklearn.preprocessing import PolynomialFeatures\nfrom sklearn.linear_model import LassoCV, LogisticRegressionCV\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.pipeline import make_pipeline\n\ndml_data = doubleml.DoubleMLData.from_arrays(X,logearn,female)\n# Initialize learners\nCs = 0.0001*np.logspace(0, 4, 10)\nlasso = make_pipeline(StandardScaler(), LassoCV(cv=5, max_iter=10000))\nlasso_class = make_pipeline(StandardScaler(),\n                            LogisticRegressionCV(cv=5, penalty='l1', solver='liblinear',\n                                                 Cs = Cs, max_iter=1000))\n\nnp.random.seed(123)\ndml_plr_lasso = doubleml.DoubleMLPLR(dml_data,\n                                     ml_l = lasso,\n                                     ml_m = lasso_class,\n                                     n_folds = 3)\ndml_plr_lasso.fit(store_predictions=True)\nprint(dml_plr_lasso.summary)\n\n\n       coef   std err          t         P&gt;|t|     2.5 %   97.5 %\nd -0.181669  0.011178 -16.252139  2.157063e-59 -0.203578 -0.15976"
+  },
+  {
+    "objectID": "doubleml.html#visualizing-predictions-lasso-logistic-lasso",
+    "href": "doubleml.html#visualizing-predictions-lasso-logistic-lasso",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Visualizing Predictions: Lasso & Logistic Lasso",
+    "text": "Visualizing Predictions: Lasso & Logistic Lasso\n\n\nCode\ndef dmlpreddf(dml_model):\n    df=pd.DataFrame({\"logearn\":logearn,\n                     \"predicted\":dml_model.predictions['ml_l'].flatten(),\n                     \"female\":female,\n                     \"P(female|x)\":dml_model.predictions['ml_m'].flatten()})\n    return(df)\n\nplotpredictions(dmlpreddf(dml_plr_lasso)).show()\n\n\n\n\n\n\n\n\n\n&lt;Figure size 960x480 with 0 Axes&gt;"
+  },
+  {
+    "objectID": "doubleml.html#with-gradient-boosted-trees",
+    "href": "doubleml.html#with-gradient-boosted-trees",
+    "title": "Double / Debiased Machine Learning",
+    "section": "With Gradient Boosted Trees",
+    "text": "With Gradient Boosted Trees\n\n\nCode\nfrom lightgbm import LGBMClassifier, LGBMRegressor\nylearner = LGBMRegressor(force_col_wise=True)\ndlearner = LGBMClassifier(force_col_wise=True)\ndml_plr_gbt = doubleml.DoubleMLPLR(dml_data, ylearner, dlearner)\ndml_plr_gbt.fit(store_predictions=True)\nprint(dml_plr_gbt.summary)\n\n\n[LightGBM] [Info] Total Bins 292\n[LightGBM] [Info] Number of data points in the train set: 9630, number of used features: 28\n[LightGBM] [Info] Start training from score 6.719951\n[LightGBM] [Info] Total Bins 290\n[LightGBM] [Info] Number of data points in the train set: 9630, number of used features: 28\n[LightGBM] [Info] Start training from score 6.715158\n[LightGBM] [Info] Total Bins 292\n[LightGBM] [Info] Number of data points in the train set: 9630, number of used features: 28\n[LightGBM] [Info] Start training from score 6.719371\n[LightGBM] [Info] Total Bins 289\n[LightGBM] [Info] Number of data points in the train set: 9631, number of used features: 28\n[LightGBM] [Info] Start training from score 6.719395\n[LightGBM] [Info] Total Bins 289\n[LightGBM] [Info] Number of data points in the train set: 9631, number of used features: 28\n[LightGBM] [Info] Start training from score 6.714159\n[LightGBM] [Info] Number of positive: 4711, number of negative: 4919\n[LightGBM] [Info] Total Bins 292\n[LightGBM] [Info] Number of data points in the train set: 9630, number of used features: 28\n[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.489200 -&gt; initscore=-0.043205\n[LightGBM] [Info] Start training from score -0.043205\n[LightGBM] [Info] Number of positive: 4647, number of negative: 4983\n[LightGBM] [Info] Total Bins 290\n[LightGBM] [Info] Number of data points in the train set: 9630, number of used features: 28\n[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.482555 -&gt; initscore=-0.069810\n[LightGBM] [Info] Start training from score -0.069810\n[LightGBM] [Info] Number of positive: 4701, number of negative: 4929\n[LightGBM] [Info] Total Bins 292\n[LightGBM] [Info] Number of data points in the train set: 9630, number of used features: 28\n[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.488162 -&gt; initscore=-0.047361\n[LightGBM] [Info] Start training from score -0.047361\n[LightGBM] [Info] Number of positive: 4678, number of negative: 4953\n[LightGBM] [Info] Total Bins 289\n[LightGBM] [Info] Number of data points in the train set: 9631, number of used features: 28\n[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.485723 -&gt; initscore=-0.057123\n[LightGBM] [Info] Start training from score -0.057123\n[LightGBM] [Info] Number of positive: 4703, number of negative: 4928\n[LightGBM] [Info] Total Bins 289\n[LightGBM] [Info] Number of data points in the train set: 9631, number of used features: 28\n[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.488319 -&gt; initscore=-0.046733\n[LightGBM] [Info] Start training from score -0.046733\n       coef   std err          t         P&gt;|t|     2.5 %    97.5 %\nd -0.163842  0.011051 -14.826095  9.934713e-50 -0.185501 -0.142182"
+  },
+  {
+    "objectID": "doubleml.html#visualizing-predictions-trees",
+    "href": "doubleml.html#visualizing-predictions-trees",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Visualizing Predictions: Trees",
+    "text": "Visualizing Predictions: Trees\n\n\nCode\nplotpredictions(dmlpreddf(dml_plr_gbt)).show()\n\n\n\n\n\n\n\n\n\n&lt;Figure size 960x480 with 0 Axes&gt;"
+  },
+  {
+    "objectID": "doubleml.html#interactive-regression-model",
+    "href": "doubleml.html#interactive-regression-model",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Interactive Regression Model",
+    "text": "Interactive Regression Model\n\nSimilar to matching, the partially linear regression model can suffer from misspecification bias if the effect of \\(D\\) varies with \\(X\\)\nInteractive regression model: \\[\n\\begin{align*}\nY & = g_0(D,X) + U \\\\\nD & = m_0(X) + V\n\\end{align*}\n\\]\nMechanics same as matching heterogeneous effects\nOrthogonal moment condition is same as doubly robust matching"
+  },
+  {
+    "objectID": "doubleml.html#interactive-regression-model---lasso",
+    "href": "doubleml.html#interactive-regression-model---lasso",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Interactive Regression Model - Lasso",
+    "text": "Interactive Regression Model - Lasso\n\n\nCode\nnp.random.seed(123)\ndml_irm_lasso = doubleml.DoubleMLIRM(dml_data,\n                                     ml_g = lasso,\n                                     ml_m = lasso_class,\n                                     trimming_threshold = 0.01,\n                                     n_folds = 3)\ndml_irm_lasso.fit()\ndml_irm_lasso.summary\n\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n2.5 %\n97.5 %\n\n\n\n\nd\n-0.229206\n0.03706\n-6.184647\n6.224143e-10\n-0.301843\n-0.156569"
+  },
+  {
+    "objectID": "doubleml.html#interactive-regression-model---trees",
+    "href": "doubleml.html#interactive-regression-model---trees",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Interactive Regression Model - Trees",
+    "text": "Interactive Regression Model - Trees\n\n\nCode\nnp.random.seed(123)\ndml_irm_gbt = doubleml.DoubleMLIRM(dml_data,\n                                     ml_g = ylearner,\n                                     ml_m = dlearner,\n                                     trimming_threshold = 0.01,\n                                     n_folds = 3)\ndml_irm_gbt.fit()\ndml_irm_gbt.summary\n\n\n[LightGBM] [Info] Total Bins 257\n[LightGBM] [Info] Number of data points in the train set: 4119, number of used features: 25\n[LightGBM] [Info] Start training from score 6.868347\n[LightGBM] [Info] Total Bins 252\n[LightGBM] [Info] Number of data points in the train set: 4118, number of used features: 23\n[LightGBM] [Info] Start training from score 6.859271\n[LightGBM] [Info] Total Bins 255\n[LightGBM] [Info] Number of data points in the train set: 4119, number of used features: 24\n[LightGBM] [Info] Start training from score 6.857057\n[LightGBM] [Info] Total Bins 254\n[LightGBM] [Info] Number of data points in the train set: 3906, number of used features: 22\n[LightGBM] [Info] Start training from score 6.576155\n[LightGBM] [Info] Total Bins 263\n[LightGBM] [Info] Number of data points in the train set: 3907, number of used features: 24\n[LightGBM] [Info] Start training from score 6.567823\n[LightGBM] [Info] Total Bins 253\n[LightGBM] [Info] Number of data points in the train set: 3907, number of used features: 21\n[LightGBM] [Info] Start training from score 6.553555\n[LightGBM] [Info] Number of positive: 3906, number of negative: 4119\n[LightGBM] [Info] Total Bins 286\n[LightGBM] [Info] Number of data points in the train set: 8025, number of used features: 28\n[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.486729 -&gt; initscore=-0.053097\n[LightGBM] [Info] Start training from score -0.053097\n[LightGBM] [Info] Number of positive: 3907, number of negative: 4118\n[LightGBM] [Info] Total Bins 286\n[LightGBM] [Info] Number of data points in the train set: 8025, number of used features: 28\n[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.486854 -&gt; initscore=-0.052598\n[LightGBM] [Info] Start training from score -0.052598\n[LightGBM] [Info] Number of positive: 3907, number of negative: 4119\n[LightGBM] [Info] Total Bins 288\n[LightGBM] [Info] Number of data points in the train set: 8026, number of used features: 28\n[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.486793 -&gt; initscore=-0.052841\n[LightGBM] [Info] Start training from score -0.052841\n\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n2.5 %\n97.5 %\n\n\n\n\nd\n-0.159562\n0.013846\n-11.524304\n9.951303e-31\n-0.1867\n-0.132425"
+  },
+  {
+    "objectID": "doubleml.html#sources-and-further-reading",
+    "href": "doubleml.html#sources-and-further-reading",
+    "title": "Double / Debiased Machine Learning",
+    "section": "Sources and Further Reading",
+    "text": "Sources and Further Reading\n\nThese slides borrow heavily from my notes on machine learning in economics\nThe example is from my chapter on machine learning in QuantEcon: DataScience\nChernozhukov et al. (2017) : short introduction to main idea\nChernozhukov et al. (2018) : underlying theory\nKnaus (2022) : approachable review of DML for doubly robust matching"
+  },
+  {
+    "objectID": "doubleml.html#references",
+    "href": "doubleml.html#references",
+    "title": "Double / Debiased Machine Learning",
+    "section": "References",
+    "text": "References\n\n\n\n\n\n\n\n\nBelloni, Alexandre, Victor Chernozhukov, and Christian Hansen. 2014. “Inference on Treatment Effects After Selection Among High-Dimensional Controls†.” The Review of Economic Studies 81 (2): 608–50. https://doi.org/10.1093/restud/rdt044.\n\n\nChernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, and Whitney Newey. 2017. “Double/Debiased/Neyman Machine Learning of Treatment Effects.” American Economic Review 107 (5): 261–65. https://doi.org/10.1257/aer.p20171038.\n\n\nChernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins. 2018. “Double/Debiased Machine Learning for Treatment and Structural Parameters.” The Econometrics Journal 21 (1): C1–68. https://doi.org/10.1111/ectj.12097.\n\n\nChernozhukov, Victor, Christian Hansen, and Martin Spindler. 2015. “Valid Post-Selection and Post-Regularization Inference: An Elementary, General Approach.” Annual Review of Economics 7 (1): 649–88. https://doi.org/10.1146/annurev-economics-012315-015826.\n\n\nKnaus, Michael C. 2022. “Double machine learning-based programme evaluation under unconfoundedness.” The Econometrics Journal 25 (3): 602–27. https://doi.org/10.1093/ectj/utac015.\n\n\nOliver Hines, Karla Diaz-Ordaz, Oliver Dukes, and Stijn Vansteelandt. 2022. “Demystifying Statistical Learning Based on Efficient Influence Functions.” The American Statistician 76 (3): 292–304. https://doi.org/10.1080/00031305.2021.2021984."
+  }
+]

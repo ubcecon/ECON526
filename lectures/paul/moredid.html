@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.5.57">
+
+  <meta name="author" content="Paul Schrimpf">
+  <title>ECON 526 – Difference in Differences II</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-background-image="hudson.jpg" data-background-size="contain" class="quarto-title-block center">
+  <h1 class="title">Difference in Differences II</h1>
+  <p class="subtitle">ECON526</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Paul Schrimpf 
+</div>
+        <p class="quarto-title-affiliation">
+            University of British Columbia
+          </p>
+    </div>
+</div>
+
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#/difference-in-differences" id="/toc-difference-in-differences">Difference in Differences</a></li>
+<li><a href="#/pre-trends" id="/toc-pre-trends">Pre-Trends</a></li>
+<li><a href="#/covariates" id="/toc-covariates">Covariates</a></li>
+</ul>
+</nav>
+</section>
+<section>
+<section id="difference-in-differences" class="title-slide slide level1 center">
+<h1>Difference in Differences</h1>
+<p><span class="math display">\[
+\def\Er{{\mathrm{E}}}
+\def\En{{\mathbb{E}_n}}
+\def\cov{{\mathrm{Cov}}}
+\def\var{{\mathrm{Var}}}
+\def\R{{\mathbb{R}}}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\def\rank{{\mathrm{rank}}}
+\newcommand{\inpr}{ \overset{p^*_{\scriptscriptstyle n}}{\longrightarrow}}
+\def\inprob{{\,{\buildrel p \over \rightarrow}\,}}
+\def\indist{\,{\buildrel d \over \rightarrow}\,}
+\DeclareMathOperator*{\plim}{plim}
+\]</span></p>
+</section>
+<section id="setup" class="slide level2">
+<h2>Setup</h2>
+<ul>
+<li><del>Two</del> Many periods, binary treatment in <del>second</del> some periods</li>
+<li>Potential outcomes <span class="math inline">\(\{y_{it}(0),y_{it}(1)\}_{t=1}^T\)</span> for <span class="math inline">\(i=1,...,N\)</span></li>
+<li>Treatment <span class="math inline">\(D_{it} \in \{0,1\}\)</span>,
+<ul>
+<li><span class="math inline">\(D_{i0} = 0\)</span> <span class="math inline">\(\forall i\)</span></li>
+<li><span class="math inline">\(D_{i1} = 1\)</span> for some, <span class="math inline">\(0\)</span> for others</li>
+</ul></li>
+<li>Observe <span class="math inline">\(y_{it} = y_{it}(0)(1-D_{it}) + D_{it} y_{it}(1)\)</span></li>
+</ul>
+</section>
+<section id="identification" class="slide level2">
+<h2>Identification</h2>
+<ul>
+<li><p>Same logic as before, <span class="math display">\[
+\begin{align*}
+ATT_{t,t-s} &amp; = \Er[y_{it}(1) - \color{red}{y_{it}(0)} | D_{it} = 1, D_{it-s}=0] \\
+&amp; = \Er[y_{it}(1) - y_{it-s}(0) | D_{it} = 1, D_{it-s}=0] - \\
+&amp; \;\; -  \Er[\color{red}{y_{it}(0)} - y_{t-s}(0) | D_{it}=1, D_{it-s}=0]
+\end{align*}
+\]</span></p>
+<ul>
+<li>assume <span class="math inline">\(\Er[\color{red}{y_{it}(0)} - y_{it-s}(0) | D_{it}=1,  D_{it-s}=0] = \Er[y_{it}(0) - y_{it-s}(0) | D_{it}=0, D_{it-s}=0]\)</span></li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+\begin{align*}
+ATT_{t,t-s}&amp; = \Er[y_{it} - y_{it-s} | D_{it}=1, D_{it-s}=0] - \Er[y_{it} - y_{it-s} | D_{it}=0, D_{it-s}=0]
+\end{align*}
+\]</span> - Similarly, can identify various other interpretable average treatment effects conditional on being treated at some times and not others</p>
+</section>
+<section id="estimation" class="slide level2">
+<h2>Estimation</h2>
+<ul>
+<li><p>Plugin</p></li>
+<li><p>Fixed effects? <span class="math display">\[
+y_{it} = \beta D_{it} + \alpha_i + \delta_t + \epsilon_{it}
+\]</span> When will <span class="math inline">\(\hat{\beta}^{FE}\)</span> consistently estimate some interpretable conditional average of treatment effects?</p></li>
+</ul>
+</section>
+<section id="fixed-effects" class="slide level2">
+<h2>Fixed Effects</h2>
+<ul>
+<li>As with <a href="./matching.html">matching</a>, <span class="math display">\[
+\begin{align*}
+\hat{\beta} = &amp; \sum_{i=1,t=1}^{n,T} y_{it} \overbrace{\frac{\tilde{D}_{it}}{ \sum_{i,t} \tilde{D}_{it}^2 }}^{\hat{\omega}_{it}} = \sum_{i=1,t=1}^{n,T} y_{it}(0) \hat{\omega}_{it} + \sum_{i=1,t=1}^{n,T} D_{it} (y_{it}(1) - y_{it}(0)) \hat{\omega}_{it}
+\end{align*}
+\]</span> where <span class="math display">\[
+\begin{align*}
+\tilde{D}_{it} &amp; = D_{it} - \frac{1}{n} \sum_{j=1}^n (D_{jt} - \frac{1}{T} \sum_{s=1}^T D_{js}) - \frac{1}{T} \sum_{s=1}^T D_{is} \\
+&amp; = D_{it} - \frac{1}{n} \sum_{j=1}^n D_{jt} - \frac{1}{T} \sum_{s=1}^T D_{is} + \frac{1}{nT} \sum_{j,s} D_{js}
+\end{align*}
+\]</span></li>
+</ul>
+<div id="74b90320" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>imports</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> warnings</span>
+<span id="cb1-2"><a></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
+<span id="cb1-3"><a></a></span>
+<span id="cb1-4"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-5"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-6"><a></a><span class="im">from</span> matplotlib <span class="im">import</span> style</span>
+<span id="cb1-7"><a></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb1-8"><a></a>style.use(<span class="st">"fivethirtyeight"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="weights" class="slide level2">
+<h2>Weights</h2>
+<div id="121f8da5" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="kw">def</span> assigntreat(n, T, portiontreated):</span>
+<span id="cb2-2"><a></a>    treated <span class="op">=</span> np.zeros((n, T), dtype<span class="op">=</span><span class="bu">bool</span>)</span>
+<span id="cb2-3"><a></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, T):</span>
+<span id="cb2-4"><a></a>        treated[:, t] <span class="op">=</span> treated[:, t <span class="op">-</span> <span class="dv">1</span>]</span>
+<span id="cb2-5"><a></a>        <span class="cf">if</span> portiontreated[t] <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb2-6"><a></a>            treated[:, t] <span class="op">=</span> np.logical_or(treated[:, t<span class="op">-</span><span class="dv">1</span>], np.random.rand(n) <span class="op">&lt;</span> portiontreated[t])</span>
+<span id="cb2-7"><a></a>    <span class="cf">return</span> treated</span>
+<span id="cb2-8"><a></a></span>
+<span id="cb2-9"><a></a><span class="kw">def</span> weights(D):</span>
+<span id="cb2-10"><a></a>    D̈ <span class="op">=</span> D <span class="op">-</span> np.mean(D, axis<span class="op">=</span><span class="dv">0</span>) <span class="op">-</span> np.mean(D, axis<span class="op">=</span><span class="dv">1</span>)[:, np.newaxis] <span class="op">+</span> np.mean(D)</span>
+<span id="cb2-11"><a></a>    ω <span class="op">=</span> D̈ <span class="op">/</span> np.<span class="bu">sum</span>(D̈<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb2-12"><a></a>    <span class="cf">return</span> ω</span>
+<span id="cb2-13"><a></a></span>
+<span id="cb2-14"><a></a>n <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb2-15"><a></a>T <span class="op">=</span> <span class="dv">9</span></span>
+<span id="cb2-16"><a></a>pt <span class="op">=</span> np.zeros(T)</span>
+<span id="cb2-17"><a></a>pt[T<span class="op">//</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>] <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb2-18"><a></a>D <span class="op">=</span> assigntreat(n, T,pt)</span>
+<span id="cb2-19"><a></a>y <span class="op">=</span> np.random.randn(n, T)</span>
+<span id="cb2-20"><a></a>weighted_sum <span class="op">=</span> np.<span class="bu">sum</span>(y <span class="op">*</span> weights(D))</span>
+<span id="cb2-21"><a></a><span class="bu">print</span>(weighted_sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.006086045527913524</code></pre>
+</div>
+</div>
+<div id="79596b8f" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># check that it matches fixed effect estimate from a package</span></span>
+<span id="cb4-2"><a></a><span class="im">from</span> linearmodels.panel <span class="im">import</span> PanelOLS</span>
+<span id="cb4-3"><a></a></span>
+<span id="cb4-4"><a></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb4-5"><a></a>    <span class="st">'id'</span>: np.repeat(np.arange(<span class="dv">1</span>, n <span class="op">+</span> <span class="dv">1</span>), T),</span>
+<span id="cb4-6"><a></a>    <span class="st">'t'</span>: np.tile(np.arange(<span class="dv">1</span>, T <span class="op">+</span> <span class="dv">1</span>), n),</span>
+<span id="cb4-7"><a></a>    <span class="st">'y'</span>: y.flatten(),</span>
+<span id="cb4-8"><a></a>    <span class="st">'D'</span>: D.flatten()</span>
+<span id="cb4-9"><a></a>})</span>
+<span id="cb4-10"><a></a>df.set_index([<span class="st">'id'</span>, <span class="st">'t'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-11"><a></a>model <span class="op">=</span> PanelOLS(df[<span class="st">'y'</span>], df[[<span class="st">'D'</span>]], entity_effects<span class="op">=</span><span class="va">True</span>, time_effects<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-12"><a></a>result <span class="op">=</span> model.fit()</span>
+<span id="cb4-13"><a></a><span class="bu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:                      y   R-squared:                     2.734e-06
+Estimator:                   PanelOLS   R-squared (Between):             -0.0004
+No. Observations:                 900   R-squared (Within):            -4.23e-05
+Date:                Thu, Oct 17 2024   R-squared (Overall):          -7.226e-05
+Time:                        11:54:22   Log-likelihood                   -1196.4
+Cov. Estimator:            Unadjusted                                           
+                                        F-statistic:                      0.0022
+Entities:                         100   P-value                           0.9629
+Avg Obs:                       9.0000   Distribution:                   F(1,791)
+Min Obs:                       9.0000                                           
+Max Obs:                       9.0000   F-statistic (robust):             0.0022
+                                        P-value                           0.9629
+Time periods:                       9   Distribution:                   F(1,791)
+Avg Obs:                      100.000                                           
+Min Obs:                      100.000                                           
+Max Obs:                      100.000                                           
+                                                                                
+                             Parameter Estimates                              
+==============================================================================
+            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------
+D              0.0061     0.1309     0.0465     0.9629     -0.2508      0.2630
+==============================================================================
+
+F-test for Poolability: 0.7345
+P-value: 0.9771
+Distribution: F(107,791)
+
+Included effects: Entity, Time</code></pre>
+</div>
+</div>
+</section>
+<section id="weights-with-single-treatment-time" class="slide level2">
+<h2>Weights with Single Treatment Time</h2>
+<div id="1d157565" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="kw">def</span> plotD(D,ax):</span>
+<span id="cb6-2"><a></a>    n, T <span class="op">=</span> D.shape</span>
+<span id="cb6-3"><a></a>    ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">'time'</span>,ylabel<span class="op">=</span><span class="st">'portiontreated'</span>)</span>
+<span id="cb6-4"><a></a>    ax.plot(<span class="bu">range</span>(<span class="dv">1</span>,T<span class="op">+</span><span class="dv">1</span>),D.mean(axis<span class="op">=</span><span class="dv">0</span>))</span>
+<span id="cb6-5"><a></a>    ax</span>
+<span id="cb6-6"><a></a></span>
+<span id="cb6-7"><a></a><span class="kw">def</span> plotweights(D, ax):</span>
+<span id="cb6-8"><a></a>    n, T <span class="op">=</span> D.shape</span>
+<span id="cb6-9"><a></a>    ω <span class="op">=</span> weights(D)</span>
+<span id="cb6-10"><a></a>    groups <span class="op">=</span> np.unique(D, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb6-11"><a></a>    ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">'time'</span>, ylabel<span class="op">=</span><span class="st">'weight'</span>)</span>
+<span id="cb6-12"><a></a></span>
+<span id="cb6-13"><a></a>    <span class="cf">for</span> g <span class="kw">in</span> groups:</span>
+<span id="cb6-14"><a></a>        i <span class="op">=</span> np.where(np.<span class="bu">all</span>(D <span class="op">==</span> g, axis<span class="op">=</span><span class="dv">1</span>))[<span class="dv">0</span>][<span class="dv">0</span>]</span>
+<span id="cb6-15"><a></a>        wt <span class="op">=</span> ω[i, :]</span>
+<span id="cb6-16"><a></a>        ax.plot(<span class="bu">range</span>(<span class="dv">1</span>, T<span class="op">+</span><span class="dv">1</span>), wt, marker<span class="op">=</span><span class="st">'o'</span>, label<span class="op">=</span><span class="ss">f'Treated </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">sum</span>(g)<span class="sc">}</span><span class="ss"> times'</span>)</span>
+<span id="cb6-17"><a></a></span>
+<span id="cb6-18"><a></a>    ax.legend()</span>
+<span id="cb6-19"><a></a>    ax</span>
+<span id="cb6-20"><a></a></span>
+<span id="cb6-21"><a></a><span class="kw">def</span> plotwd(D):</span>
+<span id="cb6-22"><a></a>    fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">1</span>)</span>
+<span id="cb6-23"><a></a>    ax[<span class="dv">0</span>]<span class="op">=</span>plotD(D,ax[<span class="dv">0</span>])</span>
+<span id="cb6-24"><a></a>    ax[<span class="dv">1</span>]<span class="op">=</span>plotweights(D,ax[<span class="dv">1</span>])</span>
+<span id="cb6-25"><a></a>    plt.show()</span>
+<span id="cb6-26"><a></a></span>
+<span id="cb6-27"><a></a>plotwd(D)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="moredid_files/figure-revealjs/cell-5-output-1.png" width="955" height="458"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="weights-with-early-and-late-treated" class="slide level2">
+<h2>Weights with Early and Late Treated</h2>
+<div id="1fca216f" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>pt <span class="op">=</span> np.zeros(T)</span>
+<span id="cb7-2"><a></a>pt[<span class="dv">1</span>] <span class="op">=</span> <span class="fl">0.3</span></span>
+<span id="cb7-3"><a></a>pt[T<span class="op">-</span><span class="dv">2</span>] <span class="op">=</span> <span class="fl">0.6</span></span>
+<span id="cb7-4"><a></a>D <span class="op">=</span> assigntreat(n,T,pt)</span>
+<span id="cb7-5"><a></a>plotwd(D)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="moredid_files/figure-revealjs/cell-6-output-1.png" width="943" height="462"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sign-reversal" class="slide level2">
+<h2>Sign Reversal</h2>
+<div id="47141e40" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a>dvals <span class="op">=</span> np.unique(D,axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb8-2"><a></a>dvals.sort()</span>
+<span id="cb8-3"><a></a>ATT <span class="op">=</span> np.ones(T)</span>
+<span id="cb8-4"><a></a>ATT[<span class="dv">0</span>] <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb8-5"><a></a>ATT[T<span class="op">-</span><span class="dv">2</span>:T] <span class="op">=</span> <span class="fl">6.0</span></span>
+<span id="cb8-6"><a></a></span>
+<span id="cb8-7"><a></a><span class="kw">def</span> simulate(n,T,pt,ATT,sigma<span class="op">=</span><span class="fl">0.01</span>):</span>
+<span id="cb8-8"><a></a>    D <span class="op">=</span> assigntreat(n,T,pt)</span>
+<span id="cb8-9"><a></a>    y <span class="op">=</span> np.random.randn(n,T)<span class="op">*</span>sigma <span class="op">+</span> ATT[np.cumsum(D, axis<span class="op">=</span><span class="dv">1</span>)]</span>
+<span id="cb8-10"><a></a>    df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb8-11"><a></a>        <span class="st">'id'</span>: np.repeat(np.arange(<span class="dv">1</span>, n <span class="op">+</span> <span class="dv">1</span>), T),</span>
+<span id="cb8-12"><a></a>        <span class="st">'t'</span>: np.tile(np.arange(<span class="dv">1</span>, T <span class="op">+</span> <span class="dv">1</span>), n),</span>
+<span id="cb8-13"><a></a>        <span class="st">'y'</span>: y.flatten(),</span>
+<span id="cb8-14"><a></a>        <span class="st">'D'</span>: D.flatten()</span>
+<span id="cb8-15"><a></a>    })</span>
+<span id="cb8-16"><a></a>    df.set_index([<span class="st">'id'</span>, <span class="st">'t'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-17"><a></a>    <span class="cf">return</span>(df)</span>
+<span id="cb8-18"><a></a></span>
+<span id="cb8-19"><a></a>df <span class="op">=</span> simulate(n,T,pt,ATT)</span>
+<span id="cb8-20"><a></a>model <span class="op">=</span> PanelOLS(df[<span class="st">'y'</span>], df[[<span class="st">'D'</span>]], entity_effects<span class="op">=</span><span class="va">True</span>, time_effects<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-21"><a></a>result <span class="op">=</span> model.fit()</span>
+<span id="cb8-22"><a></a><span class="bu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:                      y   R-squared:                        0.0125
+Estimator:                   PanelOLS   R-squared (Between):             -0.4400
+No. Observations:                 900   R-squared (Within):              -0.0841
+Date:                Thu, Oct 17 2024   R-squared (Overall):             -0.2460
+Time:                        11:54:23   Log-likelihood                   -1213.1
+Cov. Estimator:            Unadjusted                                           
+                                        F-statistic:                      10.000
+Entities:                         100   P-value                           0.0016
+Avg Obs:                       9.0000   Distribution:                   F(1,791)
+Min Obs:                       9.0000                                           
+Max Obs:                       9.0000   F-statistic (robust):             10.000
+                                        P-value                           0.0016
+Time periods:                       9   Distribution:                   F(1,791)
+Avg Obs:                      100.000                                           
+Min Obs:                      100.000                                           
+Max Obs:                      100.000                                           
+                                                                                
+                             Parameter Estimates                              
+==============================================================================
+            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------
+D             -0.4423     0.1399    -3.1623     0.0016     -0.7168     -0.1677
+==============================================================================
+
+F-test for Poolability: 5.8976
+P-value: 0.0000
+Distribution: F(107,791)
+
+Included effects: Entity, Time</code></pre>
+</div>
+</div>
+</section>
+<section id="when-to-worry" class="slide level2">
+<h2>When to worry</h2>
+<ul>
+<li>If multiple treatment times and treatment heterogeneity</li>
+<li>Even if weights do not have wrong sign, the fixed effects estimate is hard to interpret</li>
+<li>Same logic applies more generally – not just to time
+<ul>
+<li>E.g. if have group effects, some treated units in multiple groups, and <span class="math inline">\(E[y(1) - y(0) | group]\)</span> varies</li>
+</ul></li>
+</ul>
+</section>
+<section id="what-to-do" class="slide level2">
+<h2>What to Do?</h2>
+<ul>
+<li>Follow identification <span class="math display">\[
+\begin{align*}
+ATT_{t,t-s}&amp; = \Er[y_{it} - y_{it-s} | D_{it}=1, D_{it-s}=0] - \Er[y_{it} - y_{it-s} | D_{it}=0, D_{it-s}=0]
+\end{align*}
+\]</span> and estimate <span class="math display">\[
+\begin{align*}
+\widehat{ATT}_{t,t-s} = &amp; \frac{\sum_i y_{it} D_{it}(1-D_{it-s})}{\sum_i D_{it}(1-D_{it-s})} \\
+&amp; - \frac{\sum_i y_{it} (1-D_{it})(1-D_{it-s})}{\sum_i (1-D_{it})(1-D_{it-s})}
+\end{align*}
+\]</span> and perhaps some average, e.g.&nbsp;(there are other reasonable weighted averages) <span class="math display">\[
+\sum_{t=1}^T \frac{\sum_i D_{it}}{\sum_{i,s} D_{i,s}} \frac{1}{t-1} \sum_{s=1}^{t-1} \widehat{ATT}_{t,t-s}
+\]</span>
+<ul>
+<li>Code? Inference? Optimal? (could create it, but there’s an easier way)</li>
+</ul></li>
+</ul>
+</section>
+<section id="what-to-do-1" class="slide level2">
+<h2>What to Do?</h2>
+<ul>
+<li>Use an appropriate package
+<ul>
+<li><a href="https://github.com/bernardodionisi/differences">differences</a></li>
+<li>see https://asjadnaqvi.github.io/DiD/ for more options (but none are python)</li>
+</ul></li>
+<li>Problem is possible correlation of <span class="math inline">\((y_{it}(1) - y_{it}(0))D_{it}\)</span> with <span class="math inline">\(\tilde{D}_{it}\)</span>
+<ul>
+<li><span class="math inline">\(\tilde{D}_{it}\)</span> is function of <span class="math inline">\(t\)</span> and <span class="math inline">\((D_{i1}, ..., D_{iT})\)</span></li>
+<li>Estimating separate coefficient for each combination of <span class="math inline">\(t\)</span> and <span class="math inline">\((D_{i1}, ..., D_{iT})\)</span> will eliminate correlation / flexibly model treatment effect heterogeneity</li>
+</ul></li>
+</ul>
+</section>
+<section id="what-to-do-2" class="slide level2">
+<h2>What to Do?</h2>
+<ul>
+<li>Cohorts = unique sequences of <span class="math inline">\((D_{i1}, ..., D_{iT})\)</span>
+<ul>
+<li>In current simulated example, three cohorts
+<ol type="1">
+<li><span class="math inline">\((0, 0, 0, 0, 0, 0, 0, 0, 0)\)</span></li>
+<li><span class="math inline">\((0, 0, 0, 0, 0, 0, 0, 1, 1)\)</span></li>
+<li><span class="math inline">\((0, 1, 1, 1, 1, 1, 1, 1, 1)\)</span></li>
+</ol></li>
+</ul></li>
+</ul>
+</section>
+<section id="regression-with-cohort-time-interactions" class="slide level2">
+<h2>Regression with Cohort-time Interactions</h2>
+<ul>
+<li><p>Estimate: <span class="math display">\[
+y_{it} = \sum_{c=1}^C D_{it} 1\{C_i=c\} \beta_{ct} + \alpha_i + \delta_t + \epsilon_{it}
+\]</span></p></li>
+<li><p><span class="math inline">\(\hat{\beta}_{ct}\)</span> consistently estimates <span class="math inline">\(\Er[y_{it}(1) - y_{it}(0) | C_{i}=c, D_{it}=1]\)</span> is parallel trends holds for all periods <span class="math display">\[
+\Er[y_{it}(0) - y_{it-s}(0) | C_i=c] = \Er[y_{it}(0) - y_{it-s}(0) | C_i=c']
+\]</span> for all <span class="math inline">\(t, s, c, c'\)</span></p></li>
+</ul>
+</section>
+<section id="regression-with-cohort-treat-time-interactions" class="slide level2">
+<h2>Regression with Cohort-Treat-Time Interactions</h2>
+<div id="a2ad4aaa" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="kw">def</span> definecohort(df):</span>
+<span id="cb10-2"><a></a>    <span class="co"># convert dummies into categorical</span></span>
+<span id="cb10-3"><a></a>    n <span class="op">=</span> <span class="bu">len</span>(df.index.levels[<span class="dv">0</span>])</span>
+<span id="cb10-4"><a></a>    T <span class="op">=</span> <span class="bu">len</span>(df.index.levels[<span class="dv">1</span>])</span>
+<span id="cb10-5"><a></a>    dmat<span class="op">=</span>np.array(df.sort_index().D)</span>
+<span id="cb10-6"><a></a>    dmat<span class="op">=</span>np.array(df.D).reshape(n,T)</span>
+<span id="cb10-7"><a></a>    cohort<span class="op">=</span>dmat.dot(<span class="dv">1</span> <span class="op">&lt;&lt;</span> np.arange(dmat.shape[<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>))</span>
+<span id="cb10-8"><a></a>    cdf <span class="op">=</span> pd.DataFrame({<span class="st">"id"</span>:np.array(df.index.levels[<span class="dv">0</span>]), <span class="st">"cohort"</span>:pd.Categorical(cohort)})</span>
+<span id="cb10-9"><a></a>    cdf.set_index([<span class="st">'id'</span>],inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-10"><a></a>    df<span class="op">=</span>pd.merge(df, cdf, left_index<span class="op">=</span><span class="va">True</span>, right_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-11"><a></a>    <span class="cf">return</span>(df)</span>
+<span id="cb10-12"><a></a></span>
+<span id="cb10-13"><a></a>df <span class="op">=</span> definecohort(df)</span>
+<span id="cb10-14"><a></a></span>
+<span id="cb10-15"><a></a><span class="kw">def</span> defineinteractions(df):</span>
+<span id="cb10-16"><a></a>    df <span class="op">=</span> df.reset_index()</span>
+<span id="cb10-17"><a></a>    df[<span class="st">'dct'</span>] <span class="op">=</span> <span class="st">'untreated'</span></span>
+<span id="cb10-18"><a></a>    df[<span class="st">'dct'</span>] <span class="op">=</span> df.<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="ss">f"t</span><span class="sc">{</span>x[<span class="st">'t'</span>]<span class="sc">}</span><span class="ss">,c</span><span class="sc">{</span>x[<span class="st">'cohort'</span>]<span class="sc">}</span><span class="ss">"</span> <span class="cf">if</span> x[<span class="st">'D'</span>] <span class="cf">else</span> <span class="ss">f"untreated"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb10-19"><a></a>    <span class="cf">return</span>(df.set_index([<span class="st">'id'</span>,<span class="st">'t'</span>]))</span>
+<span id="cb10-20"><a></a></span>
+<span id="cb10-21"><a></a>df <span class="op">=</span> defineinteractions(df)</span>
+<span id="cb10-22"><a></a></span>
+<span id="cb10-23"><a></a>PanelOLS.from_formula(<span class="st">"y ~ -1 + dct + EntityEffects + TimeEffects"</span>, df).fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<table class="simpletable caption-top" data-quarto-postprocess="true">
+<caption>PanelOLS Estimation Summary</caption>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Dep. Variable:</td>
+<td>y</td>
+<td data-quarto-table-cell-role="th">R-squared:</td>
+<td>0.9999</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Estimator:</td>
+<td>PanelOLS</td>
+<td data-quarto-table-cell-role="th">R-squared (Between):</td>
+<td>1.0000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">No. Observations:</td>
+<td>900</td>
+<td data-quarto-table-cell-role="th">R-squared (Within):</td>
+<td>0.9999</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Date:</td>
+<td>Thu, Oct 17 2024</td>
+<td data-quarto-table-cell-role="th">R-squared (Overall):</td>
+<td>1.0000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Time:</td>
+<td>11:54:23</td>
+<td data-quarto-table-cell-role="th">Log-likelihood</td>
+<td>2932.3</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Cov. Estimator:</td>
+<td>Unadjusted</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+<td data-quarto-table-cell-role="th">F-statistic:</td>
+<td>7.93e+05</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Entities:</td>
+<td>100</td>
+<td data-quarto-table-cell-role="th">P-value</td>
+<td>0.0000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Avg Obs:</td>
+<td>9.0000</td>
+<td data-quarto-table-cell-role="th">Distribution:</td>
+<td>F(10,782)</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Min Obs:</td>
+<td>9.0000</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Max Obs:</td>
+<td>9.0000</td>
+<td data-quarto-table-cell-role="th">F-statistic (robust):</td>
+<td>1.339e+06</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+<td data-quarto-table-cell-role="th">P-value</td>
+<td>0.0000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Time periods:</td>
+<td>9</td>
+<td data-quarto-table-cell-role="th">Distribution:</td>
+<td>F(10,782)</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Avg Obs:</td>
+<td>100.000</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Min Obs:</td>
+<td>100.000</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Max Obs:</td>
+<td>100.000</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+<table class="simpletable caption-top" data-quarto-postprocess="true">
+<caption>Parameter Estimates</caption>
+<tbody>
+<tr class="odd">
+<td></td>
+<td data-quarto-table-cell-role="th">Parameter</td>
+<td data-quarto-table-cell-role="th">Std. Err.</td>
+<td data-quarto-table-cell-role="th">T-stat</td>
+<td data-quarto-table-cell-role="th">P-value</td>
+<td data-quarto-table-cell-role="th">Lower CI</td>
+<td data-quarto-table-cell-role="th">Upper CI</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">dct[T.t2,c255]</td>
+<td>0.9991</td>
+<td>0.0025</td>
+<td>396.65</td>
+<td>0.0000</td>
+<td>0.9942</td>
+<td>1.0041</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">dct[T.t3,c255]</td>
+<td>0.9970</td>
+<td>0.0025</td>
+<td>395.83</td>
+<td>0.0000</td>
+<td>0.9921</td>
+<td>1.0020</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">dct[T.t4,c255]</td>
+<td>0.9971</td>
+<td>0.0025</td>
+<td>395.83</td>
+<td>0.0000</td>
+<td>0.9921</td>
+<td>1.0020</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">dct[T.t5,c255]</td>
+<td>0.9984</td>
+<td>0.0025</td>
+<td>396.37</td>
+<td>0.0000</td>
+<td>0.9935</td>
+<td>1.0033</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">dct[T.t6,c255]</td>
+<td>0.9950</td>
+<td>0.0025</td>
+<td>395.02</td>
+<td>0.0000</td>
+<td>0.9901</td>
+<td>1.0000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">dct[T.t7,c255]</td>
+<td>1.0007</td>
+<td>0.0025</td>
+<td>397.28</td>
+<td>0.0000</td>
+<td>0.9958</td>
+<td>1.0056</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">dct[T.t8,c255]</td>
+<td>5.9987</td>
+<td>0.0028</td>
+<td>2123.9</td>
+<td>0.0000</td>
+<td>5.9931</td>
+<td>6.0042</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">dct[T.t8,c3]</td>
+<td>1.0027</td>
+<td>0.0026</td>
+<td>385.68</td>
+<td>0.0000</td>
+<td>0.9976</td>
+<td>1.0078</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">dct[T.t9,c255]</td>
+<td>6.0036</td>
+<td>0.0028</td>
+<td>2125.7</td>
+<td>0.0000</td>
+<td>5.9980</td>
+<td>6.0091</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">dct[T.t9,c3]</td>
+<td>0.9993</td>
+<td>0.0026</td>
+<td>384.34</td>
+<td>0.0000</td>
+<td>0.9941</td>
+<td>1.0044</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">dct[T.untreated]</td>
+<td>0.0001</td>
+<td>0.0008</td>
+<td>0.1468</td>
+<td>0.8833</td>
+<td>-0.0015</td>
+<td>0.0017</td>
+</tr>
+</tbody>
+</table>
+<br><br>F-test for Poolability: 0.9910<br>P-value: 0.5099<br>Distribution: F(107,782)<br><br>Included effects: Entity, Time<br>id: 0x7cc598ad6150
+</div>
+</div>
+</section>
+<section id="regression-with-cohort-time-interactions-1" class="slide level2">
+<h2>Regression with Cohort-Time Interactions</h2>
+<ul>
+<li><p>If just want to assume parallel trends at treatment times, instead of parallel trends everywhere, can estimate <span class="math display">\[
+y_{it} = \sum_{c=1}^C 1\{C_i=c\} \delta_{c,t} + \alpha_i + \epsilon_{it}
+\]</span></p></li>
+<li><p><span class="math inline">\(\hat{\delta}_{c,t} + \frac{\sum \alpha_i 1\{C_i=c\}}{\sum 1\{C_i =
+c\}}\)</span> consistently estimates <span class="math inline">\(\Er[y_{it} | C_{i} = c]\)</span></p></li>
+<li><p><span class="math inline">\(\hat{\delta}_{c,t} -\hat{\delta}_{c,t-s}\)</span> consistently estimates <span class="math inline">\(\Er[y_{it} - y_{i,t-s}| C_{i} = c]\)</span></p></li>
+<li><p>If <span class="math inline">\(c\)</span> treated at <span class="math inline">\(t\)</span>, not at <span class="math inline">\(t-s\)</span>, and <span class="math inline">\(c'\)</span> not treated at either and assume parallel trends, <span class="math display">\[
+\hat{\delta}_{c,t} -\hat{\delta}_{c,t-s} - (\hat{\delta}_{c',t} -\hat{\delta}_{c',t-s}) \inprob \Er[y_{it}(1)-y{it}(0)| C_i =c]
+\]</span></p></li>
+</ul>
+</section>
+<section id="regression-with-cohort-time-interactions-2" class="slide level2">
+<h2>Regression with Cohort-Time Interactions</h2>
+<div id="0f55d7a0" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>dfi<span class="op">=</span>df.reset_index()</span>
+<span id="cb11-2"><a></a>dfi[<span class="st">'time'</span>] <span class="op">=</span> dfi[<span class="st">'t'</span>]</span>
+<span id="cb11-3"><a></a>dfi<span class="op">=</span>dfi.set_index([<span class="st">'id'</span>,<span class="st">'t'</span>])</span>
+<span id="cb11-4"><a></a>PanelOLS.from_formula(<span class="st">"y ~ -1 + C(cohort)*C(time) + EntityEffects"</span>,dfi, drop_absorbed<span class="op">=</span><span class="va">True</span>).fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<table class="simpletable caption-top" data-quarto-postprocess="true">
+<caption>PanelOLS Estimation Summary</caption>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Dep. Variable:</td>
+<td>y</td>
+<td data-quarto-table-cell-role="th">R-squared:</td>
+<td>0.9999</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Estimator:</td>
+<td>PanelOLS</td>
+<td data-quarto-table-cell-role="th">R-squared (Between):</td>
+<td>1.0000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">No. Observations:</td>
+<td>900</td>
+<td data-quarto-table-cell-role="th">R-squared (Within):</td>
+<td>0.9999</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Date:</td>
+<td>Thu, Oct 17 2024</td>
+<td data-quarto-table-cell-role="th">R-squared (Overall):</td>
+<td>1.0000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Time:</td>
+<td>11:54:23</td>
+<td data-quarto-table-cell-role="th">Log-likelihood</td>
+<td>2933.3</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Cov. Estimator:</td>
+<td>Unadjusted</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+<td data-quarto-table-cell-role="th">F-statistic:</td>
+<td>6.351e+05</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Entities:</td>
+<td>100</td>
+<td data-quarto-table-cell-role="th">P-value</td>
+<td>0.0000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Avg Obs:</td>
+<td>9.0000</td>
+<td data-quarto-table-cell-role="th">Distribution:</td>
+<td>F(24,776)</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Min Obs:</td>
+<td>9.0000</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Max Obs:</td>
+<td>9.0000</td>
+<td data-quarto-table-cell-role="th">F-statistic (robust):</td>
+<td>8.618e+05</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+<td data-quarto-table-cell-role="th">P-value</td>
+<td>0.0000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Time periods:</td>
+<td>9</td>
+<td data-quarto-table-cell-role="th">Distribution:</td>
+<td>F(24,776)</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Avg Obs:</td>
+<td>100.000</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Min Obs:</td>
+<td>100.000</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Max Obs:</td>
+<td>100.000</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+<table class="simpletable caption-top" data-quarto-postprocess="true">
+<caption>Parameter Estimates</caption>
+<tbody>
+<tr class="odd">
+<td></td>
+<td data-quarto-table-cell-role="th">Parameter</td>
+<td data-quarto-table-cell-role="th">Std. Err.</td>
+<td data-quarto-table-cell-role="th">T-stat</td>
+<td data-quarto-table-cell-role="th">P-value</td>
+<td data-quarto-table-cell-role="th">Lower CI</td>
+<td data-quarto-table-cell-role="th">Upper CI</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">C(cohort)[T.0]</td>
+<td>-0.0047</td>
+<td>0.0035</td>
+<td>-1.3571</td>
+<td>0.1751</td>
+<td>-0.0115</td>
+<td>0.0021</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">C(time)[T.2]</td>
+<td>0.0013</td>
+<td>0.0026</td>
+<td>0.5111</td>
+<td>0.6094</td>
+<td>-0.0038</td>
+<td>0.0065</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">C(time)[T.3]</td>
+<td>0.0024</td>
+<td>0.0026</td>
+<td>0.8996</td>
+<td>0.3686</td>
+<td>-0.0028</td>
+<td>0.0075</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">C(time)[T.4]</td>
+<td>0.0007</td>
+<td>0.0026</td>
+<td>0.2483</td>
+<td>0.8040</td>
+<td>-0.0045</td>
+<td>0.0058</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">C(time)[T.5]</td>
+<td>0.0017</td>
+<td>0.0026</td>
+<td>0.6432</td>
+<td>0.5203</td>
+<td>-0.0035</td>
+<td>0.0069</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">C(time)[T.6]</td>
+<td>0.0013</td>
+<td>0.0026</td>
+<td>0.4806</td>
+<td>0.6309</td>
+<td>-0.0039</td>
+<td>0.0064</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">C(time)[T.7]</td>
+<td>0.0007</td>
+<td>0.0026</td>
+<td>0.2590</td>
+<td>0.7957</td>
+<td>-0.0045</td>
+<td>0.0058</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">C(time)[T.8]</td>
+<td>0.0006</td>
+<td>0.0026</td>
+<td>0.2234</td>
+<td>0.8233</td>
+<td>-0.0046</td>
+<td>0.0057</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">C(time)[T.9]</td>
+<td>0.0018</td>
+<td>0.0026</td>
+<td>0.6956</td>
+<td>0.4869</td>
+<td>-0.0033</td>
+<td>0.0070</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">C(cohort)[T.3]:C(time)[T.2]</td>
+<td>0.0012</td>
+<td>0.0035</td>
+<td>0.3384</td>
+<td>0.7352</td>
+<td>-0.0057</td>
+<td>0.0081</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">C(cohort)[T.255]:C(time)[T.2]</td>
+<td>0.9997</td>
+<td>0.0036</td>
+<td>281.18</td>
+<td>0.0000</td>
+<td>0.9927</td>
+<td>1.0067</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">C(cohort)[T.3]:C(time)[T.3]</td>
+<td>-3.471e-05</td>
+<td>0.0035</td>
+<td>-0.0098</td>
+<td>0.9922</td>
+<td>-0.0070</td>
+<td>0.0069</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">C(cohort)[T.255]:C(time)[T.3]</td>
+<td>0.9969</td>
+<td>0.0036</td>
+<td>280.40</td>
+<td>0.0000</td>
+<td>0.9899</td>
+<td>1.0039</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">C(cohort)[T.3]:C(time)[T.4]</td>
+<td>0.0022</td>
+<td>0.0035</td>
+<td>0.6100</td>
+<td>0.5420</td>
+<td>-0.0048</td>
+<td>0.0091</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">C(cohort)[T.255]:C(time)[T.4]</td>
+<td>0.9981</td>
+<td>0.0036</td>
+<td>280.75</td>
+<td>0.0000</td>
+<td>0.9912</td>
+<td>1.0051</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">C(cohort)[T.3]:C(time)[T.5]</td>
+<td>-0.0019</td>
+<td>0.0035</td>
+<td>-0.5441</td>
+<td>0.5865</td>
+<td>-0.0089</td>
+<td>0.0050</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">C(cohort)[T.255]:C(time)[T.5]</td>
+<td>0.9972</td>
+<td>0.0036</td>
+<td>280.49</td>
+<td>0.0000</td>
+<td>0.9902</td>
+<td>1.0042</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">C(cohort)[T.3]:C(time)[T.6]</td>
+<td>0.0012</td>
+<td>0.0035</td>
+<td>0.3314</td>
+<td>0.7404</td>
+<td>-0.0058</td>
+<td>0.0081</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">C(cohort)[T.255]:C(time)[T.6]</td>
+<td>0.9956</td>
+<td>0.0036</td>
+<td>280.02</td>
+<td>0.0000</td>
+<td>0.9886</td>
+<td>1.0025</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">C(cohort)[T.3]:C(time)[T.7]</td>
+<td>0.0015</td>
+<td>0.0035</td>
+<td>0.4183</td>
+<td>0.6758</td>
+<td>-0.0055</td>
+<td>0.0084</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">C(cohort)[T.255]:C(time)[T.7]</td>
+<td>1.0014</td>
+<td>0.0036</td>
+<td>281.67</td>
+<td>0.0000</td>
+<td>0.9944</td>
+<td>1.0084</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">C(cohort)[T.3]:C(time)[T.8]</td>
+<td>1.0032</td>
+<td>0.0035</td>
+<td>283.96</td>
+<td>0.0000</td>
+<td>0.9962</td>
+<td>1.0101</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">C(cohort)[T.255]:C(time)[T.8]</td>
+<td>5.9989</td>
+<td>0.0036</td>
+<td>1687.3</td>
+<td>0.0000</td>
+<td>5.9919</td>
+<td>6.0058</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">C(cohort)[T.3]:C(time)[T.9]</td>
+<td>0.9997</td>
+<td>0.0035</td>
+<td>282.98</td>
+<td>0.0000</td>
+<td>0.9928</td>
+<td>1.0066</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">C(cohort)[T.255]:C(time)[T.9]</td>
+<td>6.0038</td>
+<td>0.0036</td>
+<td>1688.7</td>
+<td>0.0000</td>
+<td>5.9968</td>
+<td>6.0108</td>
+</tr>
+</tbody>
+</table>
+<br><br>F-test for Poolability: 1.0439<br>P-value: 0.3725<br>Distribution: F(99,776)<br><br>Included effects: Entity<br>id: 0x7cc5949ce090
+</div>
+</div>
+</section></section>
+<section>
+<section id="pre-trends" class="title-slide slide level1 center">
+<h1>Pre-Trends</h1>
+
+</section>
+<section id="pre-trends-1" class="slide level2">
+<h2>Pre-trends</h2>
+<ul>
+<li>Parallel trends assumption</li>
+</ul>
+<p><span class="math display">\[
+\Er[\color{red}{y_{it}(0)} - y_{it-s}(0) | D_{it}=1,  D_{it-s}=0] = \Er[y_{it}(0) - y_{it-s}(0) | D_{it}=0, D_{it-s}=0]
+\]</span></p>
+<ul>
+<li>More plausible if there are parallel pre-trends</li>
+</ul>
+<p><span class="math display">\[
+\begin{align*}
+&amp; \Er[y_{it-r}(0) - y_{it-s}(0) | D_{it}=1, D_{it-r}=0,  D_{it-s}=0] = \\
+&amp; = \Er[y_{it-r}(0) - y_{it-s}(0) | D_{it}=0, D_{it-r}=0, D_{it-s}=0]
+\end{align*}
+\]</span></p>
+<ul>
+<li>Always at least plot pre-trends</li>
+</ul>
+</section>
+<section id="testing-for-pre-trends" class="slide level2">
+<h2>Testing for Pre-trends</h2>
+<ul>
+<li>Is it a good idea to test</li>
+</ul>
+<p><span class="math display">\[
+\begin{align*}
+H_0 : &amp; \Er[y_{it-r} - y_{it-s} | D_{it}=1, D_{it-r}=0,  D_{it-s}=0] = \\
+&amp; = \Er[y_{it-r} - y_{it-s} | D_{it}=0, D_{it-r}=0, D_{it-s}=0]?
+\end{align*}
+\]</span> - Even if not testing formally, we do it informally by plotting</p>
+</section>
+<section id="testing-for-pre-trends-1" class="slide level2">
+<h2>Testing for Pre-trends</h2>
+<ul>
+<li><p>Distribution of <span class="math inline">\(\hat{ATT}\)</span> conditional on fail to reject parallel pre-trends is not normal</p></li>
+<li><p><span class="citation" data-cites="roth2022">Roth (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> : test can have low power, and in plausible violations, <span class="math inline">\(\widehat{ATT}_{3,2}\)</span> conditional on failing to reject is biased</p></li>
+</ul>
+</section>
+<section id="bounds-from-pre-trends" class="slide level2">
+<h2>Bounds from Pre-trends</h2>
+<ul>
+<li><p>Let <span class="math inline">\(\Delta\)</span> be violation of parallel trends <span class="math display">\[
+\Delta = \Er[\color{red}{y_{it}(0)} - y_{it-1}(0) | D_{it}=1,  D_{it-1}=0] - \Er[y_{it}(0) - y_{it-1}(0) | D_{it}=0, D_{it-1}=0]
+\]</span></p></li>
+<li><p>Assume <span class="math inline">\(\Delta\)</span> is bounded by deviation from parallel of pre-trends <span class="math display">\[
+|\Delta| \leq M \max_{r} \left\vert \tau^{1t}_{t-r,t-r-1} - \tau^{0t}_{t-r,t-r-1} \right\vert
+\]</span> for some chosen <span class="math inline">\(M\)</span></p></li>
+<li><p>See <span class="citation" data-cites="rambachan2023">Rambachan and Roth (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span></p></li>
+</ul>
+</section></section>
+<section>
+<section id="covariates" class="title-slide slide level1 center">
+<h1>Covariates</h1>
+
+</section>
+<section id="doubly-robust-difference-in-differences" class="slide level2">
+<h2>Doubly Robust Difference in Differences</h2>
+<ul>
+<li><p>Linear covariates could lead to same problem as with matching</p></li>
+<li><p>Doubly robust estimator <span class="citation" data-cites="sz2020">Sant’Anna and Zhao (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span></p>
+<ul>
+<li><a href="https://docs.doubleml.org/stable/examples/py_double_ml_did.html">doubleml</a> package implements it</li>
+</ul></li>
+</ul>
+</section>
+<section id="sources-and-further-reading" class="slide level2">
+<h2>Sources and Further Reading</h2>
+<ul>
+<li><span class="citation" data-cites="facure2022">Facure (<a href="#/references" role="doc-biblioref" onclick="">2022, chap. 1</a>)</span></li>
+<li><span class="citation" data-cites="hk2021">Huntington-Klein (<a href="#/references" role="doc-biblioref" onclick="">2021, chap. 16</a>)</span></li>
+<li>Recent reviews: <span class="citation" data-cites="roth2023">Roth et al. (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span>, <span class="citation" data-cites="dd2022">Chaisemartin and D’Haultfœuille (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>, <span class="citation" data-cites="arkhangelsky2023">Arkhangelsky and Imbens (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span></li>
+<li>Early work pointing to problems with fixed effects:
+<ul>
+<li><span class="citation" data-cites="laporte2005">Laporte and Windmeijer (<a href="#/references" role="doc-biblioref" onclick="">2005</a>)</span>, <span class="citation" data-cites="wooldridge2005">Wooldridge (<a href="#/references" role="doc-biblioref" onclick="">2005</a>)</span></li>
+</ul></li>
+<li>Explosion of papers written just before 2020, published just after:
+<ul>
+<li><span class="citation" data-cites="borusyak2018">Borusyak and Jaravel (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span></li>
+<li><span class="citation" data-cites="dd2020">Chaisemartin and D’Haultfœuille (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span></li>
+<li><span class="citation" data-cites="callaway2021">Callaway and Sant’Anna (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></li>
+<li><span class="citation" data-cites="goodmanbacon2021">Goodman-Bacon (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></li>
+<li><span class="citation" data-cites="sun2021">Sun and Abraham (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+
+<div class="quarto-auto-generated-content">
+<div class="footer footer-default">
+
+</div>
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-arkhangelsky2023" class="csl-entry" role="listitem">
+Arkhangelsky, Dmitry, and Guido Imbens. 2023. <span>“Causal Models for Longitudinal and Panel Data: A Survey.”</span>
+</div>
+<div id="ref-borusyak2018" class="csl-entry" role="listitem">
+Borusyak, Kirill, and Xavier Jaravel. 2018. <span>“Revisiting Event Study Designs.”</span> <a href="https://scholar.harvard.edu/files/borusyak/files/borusyak_jaravel_event_studies.pdf">https://scholar.harvard.edu/files/borusyak/files/borusyak_jaravel_event_studies.pdf</a>.
+</div>
+<div id="ref-callaway2021" class="csl-entry" role="listitem">
+Callaway, Brantly, and Pedro H. C. Sant’Anna. 2021. <span>“Difference-in-Differences with Multiple Time Periods.”</span> <em>Journal of Econometrics</em> 225 (2): 200–230. https://doi.org/<a href="https://doi.org/10.1016/j.jeconom.2020.12.001">https://doi.org/10.1016/j.jeconom.2020.12.001</a>.
+</div>
+<div id="ref-dd2020" class="csl-entry" role="listitem">
+Chaisemartin, Clément de, and Xavier D’Haultfœuille. 2020. <span>“Two-Way Fixed Effects Estimators with Heterogeneous Treatment Effects.”</span> <em>American Economic Review</em> 110 (9): 2964–96. <a href="https://doi.org/10.1257/aer.20181169">https://doi.org/10.1257/aer.20181169</a>.
+</div>
+<div id="ref-dd2022" class="csl-entry" role="listitem">
+———. 2022. <span>“<span class="nocase">Two-way fixed effects and differences-in-differences with heterogeneous treatment effects: a survey</span>.”</span> <em>The Econometrics Journal</em> 26 (3): C1–30. <a href="https://doi.org/10.1093/ectj/utac017">https://doi.org/10.1093/ectj/utac017</a>.
+</div>
+<div id="ref-facure2022" class="csl-entry" role="listitem">
+Facure, Matheus. 2022. <em>Causal Inference for the Brave and True</em>. <a href="https://matheusfacure.github.io/python-causality-handbook/landing-page.html">https://matheusfacure.github.io/python-causality-handbook/landing-page.html</a>.
+</div>
+<div id="ref-goodmanbacon2021" class="csl-entry" role="listitem">
+Goodman-Bacon, Andrew. 2021. <span>“Difference-in-Differences with Variation in Treatment Timing.”</span> <em>Journal of Econometrics</em> 225 (2): 254–77. https://doi.org/<a href="https://doi.org/10.1016/j.jeconom.2021.03.014">https://doi.org/10.1016/j.jeconom.2021.03.014</a>.
+</div>
+<div id="ref-hk2021" class="csl-entry" role="listitem">
+Huntington-Klein, Nick. 2021. <em>The Effect: An Introduction to Research Design and Causality</em>. CRC Press. <a href="https://theeffectbook.net/">https://theeffectbook.net/</a>.
+</div>
+<div id="ref-laporte2005" class="csl-entry" role="listitem">
+Laporte, Audrey, and Frank Windmeijer. 2005. <span>“Estimation of Panel Data Models with Binary Indicators When Treatment Effects Are Not Constant over Time.”</span> <em>Economics Letters</em> 88 (3): 389–96. https://doi.org/<a href="https://doi.org/10.1016/j.econlet.2005.04.002">https://doi.org/10.1016/j.econlet.2005.04.002</a>.
+</div>
+<div id="ref-rambachan2023" class="csl-entry" role="listitem">
+Rambachan, Ashesh, and Jonathan Roth. 2023. <span>“<span class="nocase">A More Credible Approach to Parallel Trends</span>.”</span> <em>The Review of Economic Studies</em> 90 (5): 2555–91. <a href="https://doi.org/10.1093/restud/rdad018">https://doi.org/10.1093/restud/rdad018</a>.
+</div>
+<div id="ref-roth2022" class="csl-entry" role="listitem">
+Roth, Jonathan. 2022. <span>“Pretest with Caution: Event-Study Estimates After Testing for Parallel Trends.”</span> <em>American Economic Review: Insights</em> 4 (3): 305–22. <a href="https://doi.org/10.1257/aeri.20210236">https://doi.org/10.1257/aeri.20210236</a>.
+</div>
+<div id="ref-roth2023" class="csl-entry" role="listitem">
+Roth, Jonathan, Pedro H. C. Sant’Anna, Alyssa Bilinski, and John Poe. 2023. <span>“What’s Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature.”</span> <em>Journal of Econometrics</em> 235 (2): 2218–44. https://doi.org/<a href="https://doi.org/10.1016/j.jeconom.2023.03.008">https://doi.org/10.1016/j.jeconom.2023.03.008</a>.
+</div>
+<div id="ref-sz2020" class="csl-entry" role="listitem">
+Sant’Anna, Pedro H. C., and Jun Zhao. 2020. <span>“Doubly Robust Difference-in-Differences Estimators.”</span> <em>Journal of Econometrics</em> 219 (1): 101–22. https://doi.org/<a href="https://doi.org/10.1016/j.jeconom.2020.06.003">https://doi.org/10.1016/j.jeconom.2020.06.003</a>.
+</div>
+<div id="ref-sun2021" class="csl-entry" role="listitem">
+Sun, Liyang, and Sarah Abraham. 2021. <span>“Estimating Dynamic Treatment Effects in Event Studies with Heterogeneous Treatment Effects.”</span> <em>Journal of Econometrics</em> 225 (2): 175–99. https://doi.org/<a href="https://doi.org/10.1016/j.jeconom.2020.09.006">https://doi.org/10.1016/j.jeconom.2020.09.006</a>.
+</div>
+<div id="ref-wooldridge2005" class="csl-entry" role="listitem">
+Wooldridge, Jeffrey M. 2005. <span>“<span class="nocase">Fixed-Effects and Related Estimators for Correlated Random-Coefficient and Treatment-Effect Panel Data Models</span>.”</span> <em>The Review of Economics and Statistics</em> 87 (2): 385–90. <a href="https://doi.org/10.1162/0034653053970320">https://doi.org/10.1162/0034653053970320</a>.
+</div>
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true,"theme":"whiteboard","boardmarkerWidth":2,"chalkWidth":2,"chalkEffect":0},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1600,
+
+        height: 900,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        // Bounds for smallest/largest possible scale to apply to content
+        minScale: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
