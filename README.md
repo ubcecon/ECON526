@@ -190,7 +190,7 @@ Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/le
 
 ### Paul
 
-[Go here](https://ubcecon.github.io/ECON526/paul/) for a list of topics, reading, and slides.
+[Go here](https://ubcecon.github.io/ECON526/lectures/paul/) for a list of topics, reading, and slides.
 
 Here is the [source](https://github.com/ubcecon/526) for my slides.
 
