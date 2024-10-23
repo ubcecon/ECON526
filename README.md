@@ -53,7 +53,7 @@ This year the course will be taught in two parts where the later parts of the co
 
 This lecture begins assuming you have completed the math/programming bootcamp for our masters students, or had an existing python-based programming course.  To refresh your knowledge, see basics in [QuantEcon Data Science Lectures](https://datascience.quantecon.org/) or [QuantEcon Python Programming for Economics and Finance](https://python-programming.quantecon.org/intro.html).
 
-Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/lectures/index.html) and after his section starts: [Paul's HTML Slides](https://ubcecon.github.io/ECON526/paul/), [source](https://github.com/ubcecon/526)
+Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/lectures/index.html) and after his section starts: [Paul's HTML Slides](https://ubcecon.github.io/ECON526/lectures/paul/), [source](https://github.com/ubcecon/526)
 
 ### Jesse
 

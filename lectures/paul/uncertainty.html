@@ -436,6 +436,7 @@ Paul Schrimpf
 <ul>
 <li><a href="#/overview" id="/toc-overview">Overview</a></li>
 <li><a href="#/introduction" id="/toc-introduction">Introduction</a></li>
+<li><a href="#/standard-errors" id="/toc-standard-errors">Standard Errors</a></li>
 <li><a href="#/confidence-intervals" id="/toc-confidence-intervals">Confidence Intervals</a></li>
 <li><a href="#/functions-of-estimates" id="/toc-functions-of-estimates">Functions of Estimates</a></li>
 <li><a href="#/bootstrap" id="/toc-bootstrap">Bootstrap</a></li>
@@ -608,12 +609,12 @@ Paul Schrimpf
 <li>We see the sample ATE of the Vaccine on infections per 1000 people</li>
 <li>Sample ATE is random, how confident can we be that it is near the population ATE?</li>
 </ul>
-</div><section id="standard-errors" class="title-slide slide level1 center">
+</div></div>
+</section></section>
+<section>
+<section id="standard-errors" class="title-slide slide level1 center">
 <h1>Standard Errors</h1>
 
-</section>
-
-</div>
 </section>
 <section id="standard-errors-1" class="slide level2">
 <h2>Standard Errors</h2>
@@ -691,7 +692,7 @@ P(ATE \in \widehat{CI}_\alpha) \approx \alpha
 <li>Confidence interval for <span class="math inline">\(P(Y)\)</span> with <span class="math inline">\(Y_i \in \{0,1\}\)</span>, i.i.d.</li>
 <li>Given <span class="math inline">\(P(Y)=p\)</span> can calculate or simulate distribution of <span class="math inline">\(\hat{p} = \frac{1}{n} \sum Y_i\)</span></li>
 </ul>
-<div id="cdfa42d3" class="cell columns column-output-location" data-execution_count="4">
+<div id="b6c13128" class="cell columns column-output-location" data-execution_count="3">
 <div class="column">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -712,7 +713,7 @@ P(ATE \in \widehat{CI}_\alpha) \approx \alpha
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="uncertainty_files/figure-revealjs/cell-4-output-1.png" width="820" height="431"></p>
+<p><img data-src="uncertainty_files/figure-revealjs/cell-4-output-1.png" width="815" height="431"></p>
 </figure>
 </div>
 </div>
@@ -725,7 +726,7 @@ P(ATE \in \widehat{CI}_\alpha) \approx \alpha
 \widehat{CI}_\alpha(\hat{p}_{obs}) = \{p: P(|\hat{p}-p| \leq |\hat{p}_{obs} - p|) \leq \alpha \}
 \]</span></li>
 </ul>
-<div id="e4cf8522" class="cell" data-execution_count="5">
+<div id="30da7e3c" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="kw">def</span> proportioncisim(phat, n, level<span class="op">=</span><span class="fl">0.95</span>, S<span class="op">=</span><span class="dv">100_000</span>):</span>
 <span id="cb4-2"><a></a>    se <span class="op">=</span> (phat<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>phat)<span class="op">/</span>n)<span class="op">**</span><span class="fl">0.5</span></span>
 <span id="cb4-3"><a></a>    dp <span class="op">=</span> se<span class="op">/</span><span class="dv">20</span></span>
@@ -747,14 +748,14 @@ P(ATE \in \widehat{CI}_\alpha) \approx \alpha
 <span id="cb4-19"><a></a>phat <span class="op">=</span> <span class="fl">0.05</span></span>
 <span id="cb4-20"><a></a>n <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb4-21"><a></a>proportioncisim(phat, <span class="dv">100</span>, level<span class="op">=</span><span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>(0.024936331074641174, 0.10557596153014372)</code></pre>
 </div>
 </div>
 </section>
 <section id="exact-confidence-interval-1" class="slide level2">
 <h2>Exact Confidence Interval</h2>
-<div id="6431cc58" class="cell" data-execution_count="6">
+<div id="c159847e" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="im">import</span> scipy</span>
 <span id="cb6-2"><a></a><span class="co">#| echo: true</span></span>
 <span id="cb6-3"><a></a><span class="kw">def</span> proportionci(phat, n, level<span class="op">=</span><span class="fl">0.95</span>):</span>
@@ -776,18 +777,18 @@ P(ATE \in \widehat{CI}_\alpha) \approx \alpha
 <span id="cb6-19"><a></a>    <span class="cf">return</span>(plo,phi)</span>
 <span id="cb6-20"><a></a></span>
 <span id="cb6-21"><a></a>proportionci(phat, n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>(0.022320991708517042, 0.11287711726057285)</code></pre>
 </div>
 </div>
 </section>
 <section id="exact-confidence-interval-2" class="slide level2">
 <h2>Exact Confidence Interval</h2>
-<div id="f2fef9bc" class="cell" data-execution_count="7">
+<div id="ff751d2c" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a>phat <span class="op">=</span> pfizerall.NYT<span class="op">/</span>pfizerall.NT</span>
 <span id="cb8-2"><a></a>plo, phi<span class="op">=</span>proportionci(phat,pfizerall.NT)</span>
 <span id="cb8-3"><a></a><span class="dv">1000</span><span class="op">*</span>plo, <span class="dv">1000</span><span class="op">*</span>phi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>(0.23971701200382992, 0.8556562725036012)</code></pre>
 </div>
 </div>
@@ -809,8 +810,8 @@ P(ATE \in \widehat{CI}_\alpha) \approx \alpha
 </div>
 <div class="callout-content">
 <p>If <span class="math inline">\(X_i\)</span> are i.i.d. with <span class="math inline">\(\Er[X] = 0\)</span> and <span class="math inline">\(\var(X)=1\)</span>, then <span class="math display">\[
-\sup_{x \in \R} P\left( \left\vert
-P\left(\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i \leq x \right) - \Phi(X) \right\vert \right) \leq C \Er[|X|^3]/\sqrt{n}
+\sup_{z \in \R} \left\vert
+P\left(\left[\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i\right] \leq z \right) - \Phi(z) \right\vert \leq 0.5 \Er[|X|^3]/\sqrt{n}
 \]</span> where <span class="math inline">\(\Phi\)</span> is the normal CDF.</p>
 </div>
 </div>
@@ -825,8 +826,8 @@ P\left(\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i \leq x \right) - \Phi(X) \right\vert 
 </div>
 <div class="callout-content">
 <p>If <span class="math inline">\(X_i \in \R^d\)</span> are i.i.d. with <span class="math inline">\(\Er[X] = 0\)</span> and <span class="math inline">\(\var(X)=I_d\)</span>, then <span class="math display">\[
-\sup_{A \subset \R^d, \text{convex}} P\left( \left\vert
-P\left(\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i \in A \right) - P(N(0,I_d) \in A) \right\vert \right) \leq
+\sup_{A \subset \R^d, \text{convex}} \left\vert
+P\left(\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i \in A \right) - P(N(0,I_d) \in A) \right\vert \leq
 (42 d^{1/4} + 16) \Er[\Vert X \Vert ^3]/\sqrt{n}
 \]</span></p>
 <p><sup>1</sup></p>
@@ -838,7 +839,7 @@ P\left(\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i \in A \right) - P(N(0,I_d) \in A) \ri
 <aside><ol class="aside-footnotes"><li id="fn1"><p>See <span class="citation" data-cites="raic2019">Raič (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> for details.</p></li></ol></aside></section>
 <section id="approximate-confidence-interval-1" class="slide level2">
 <h2>Approximate Confidence Interval</h2>
-<div id="fe9e9749" class="cell" data-execution_count="8">
+<div id="951fa025" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="kw">def</span> normalci(estimate, se, level<span class="op">=</span><span class="fl">0.95</span>):</span>
 <span id="cb10-2"><a></a>    <span class="cf">return</span> (estimate <span class="op">+</span> se<span class="op">*</span>scipy.stats.norm.ppf((<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>),</span>
 <span id="cb10-3"><a></a>            estimate <span class="op">+</span> se<span class="op">*</span>scipy.stats.norm.ppf(<span class="dv">1</span><span class="op">-</span>(<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>))</span>
@@ -847,11 +848,11 @@ P\left(\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i \in A \right) - P(N(0,I_d) \in A) \ri
 <span id="cb10-6"><a></a>se <span class="op">=</span> (phat<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>phat)<span class="op">/</span>pfizerall.NT)<span class="op">**</span><span class="fl">0.5</span></span>
 <span id="cb10-7"><a></a>lo,hi<span class="op">=</span>normalci(phat, se)</span>
 <span id="cb10-8"><a></a>lo<span class="op">*</span><span class="dv">1000</span>, hi<span class="op">*</span><span class="dv">1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>(np.float64(0.1563452787741701), np.float64(0.7452324823077232))</code></pre>
 </div>
 </div>
-<div id="9a34c2ff" class="cell" data-execution_count="9">
+<div id="1242c0a6" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="kw">def</span> differenceci(e1,se1, e0, se0, level<span class="op">=</span><span class="fl">0.95</span>) :</span>
 <span id="cb12-2"><a></a>    diff <span class="op">=</span> e1 <span class="op">-</span> e0</span>
 <span id="cb12-3"><a></a>    se <span class="op">=</span> (se1<span class="op">*</span>se1 <span class="op">+</span> se0<span class="op">*</span>s0)<span class="op">**</span><span class="fl">0.5</span></span>
@@ -861,7 +862,7 @@ P\left(\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i \in A \right) - P(N(0,I_d) \in A) \ri
 <span id="cb12-7"><a></a>s0 <span class="op">=</span> (p0<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>p0)<span class="op">/</span>pfizerall.NU)<span class="op">**</span><span class="fl">0.5</span></span>
 <span id="cb12-8"><a></a>lo,hi<span class="op">=</span>differenceci(phat,se, p0, s0)</span>
 <span id="cb12-9"><a></a>lo<span class="op">*</span><span class="dv">1000</span>, hi<span class="op">*</span><span class="dv">1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>(np.float64(-9.218976095611334), np.float64(-6.63534540961651))</code></pre>
 </div>
 </div>
@@ -912,7 +913,7 @@ P\left(\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i \in A \right) - P(N(0,I_d) \in A) \ri
 </section>
 <section id="delta-method-2" class="slide level2">
 <h2>Delta Method</h2>
-<div id="6bf5998c" class="cell" data-execution_count="10">
+<div id="c07ae01e" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="im">import</span> torch</span>
 <span id="cb14-2"><a></a></span>
 <span id="cb14-3"><a></a>theta <span class="op">=</span> [p0, phat]</span>
@@ -933,8 +934,8 @@ P\left(\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i \in A \right) - P(N(0,I_d) \in A) \ri
 </div>
 </div>
 </section>
-<section id="simulation" class="slide level2">
-<h2>Simulation</h2>
+<section id="simulating-distribution-of-gtheta" class="slide level2">
+<h2>Simulating Distribution of <span class="math inline">\(g(\theta)\)</span></h2>
 <ul>
 <li>Suppose <span class="math inline">\(\sqrt{n} (\hat{\theta} - \theta_0) \leadsto N(0,\Omega)\)</span></li>
 <li>Create <span class="math inline">\(\tilde{\theta}_s \sim N(\hat{\theta}, \Omega/n)\)</span>
@@ -943,7 +944,10 @@ P\left(\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i \in A \right) - P(N(0,I_d) \in A) \ri
 </ul></li>
 <li>and <span class="math inline">\(\sqrt{n}(g(\theta_{s}) - g(\hat{\theta})) \approx \sqrt{n}(g(\hat{\theta}) - g(\theta_0))\)</span></li>
 </ul>
-<div id="fbcdaf8f" class="cell columns column-output-location" data-execution_count="11">
+</section>
+<section id="simulated-distribution-of-vaccine-efficacy" class="slide level2">
+<h2>Simulated Distribution of Vaccine Efficacy</h2>
+<div id="a6301617" class="cell columns column-output-location" data-execution_count="10">
 <div class="column">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="kw">def</span> simulateg(g,theta,Omega,S<span class="op">=</span><span class="dv">10_000</span>):</span>
 <span id="cb16-2"><a></a>    thetas <span class="op">=</span> np.random.multivariate_normal(theta, Omega, S)</span>
@@ -953,9 +957,13 @@ P\left(\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i \in A \right) - P(N(0,I_d) \in A) \ri
 <span id="cb16-6"><a></a>gs, gv<span class="op">=</span>simulateg(ve, theta, Omega)</span>
 <span id="cb16-7"><a></a><span class="bu">print</span>(<span class="ss">f"simulation se = </span><span class="sc">{</span>gv<span class="op">**</span><span class="fl">0.5</span><span class="sc">:.2}</span><span class="ss">"</span>)</span>
 <span id="cb16-8"><a></a></span>
-<span id="cb16-9"><a></a>plt.hist(gs, bins<span class="op">=</span><span class="dv">50</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb16-10"><a></a>plt.title(<span class="st">"Distribution of Vaccine Efficacy"</span>)</span>
-<span id="cb16-11"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-9"><a></a>plt.hist(gs, bins<span class="op">=</span><span class="dv">50</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, density<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-10"><a></a>dse <span class="op">=</span> deltamethod(ve,theta,Omega)[<span class="dv">0</span>,<span class="dv">0</span>]<span class="op">**</span><span class="fl">0.5</span></span>
+<span id="cb16-11"><a></a>z <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,num<span class="op">=</span><span class="dv">100</span>)<span class="op">*</span>dse <span class="op">+</span> ve(theta)</span>
+<span id="cb16-12"><a></a>fdeltamethod <span class="op">=</span> scipy.stats.norm(loc<span class="op">=</span>ve(theta), scale<span class="op">=</span>dse).pdf</span>
+<span id="cb16-13"><a></a>plt.plot(z, fdeltamethod(z))</span>
+<span id="cb16-14"><a></a>plt.title(<span class="st">"Distribution of Vaccine Efficacy"</span>)</span>
+<span id="cb16-15"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>simulation se = 0.019</code></pre>
@@ -963,7 +971,7 @@ P\left(\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i \in A \right) - P(N(0,I_d) \in A) \ri
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="uncertainty_files/figure-revealjs/cell-11-output-2.png" width="798" height="431"></p>
+<p><img data-src="uncertainty_files/figure-revealjs/cell-11-output-2.png" width="789" height="431"></p>
 </figure>
 </div>
 </div>
@@ -992,7 +1000,7 @@ P\left(\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i \in A \right) - P(N(0,I_d) \in A) \ri
 </section>
 <section id="bootstrap-2" class="slide level2">
 <h2>Bootstrap</h2>
-<div id="eeac87d2" class="cell" data-execution_count="12">
+<div id="cec447f2" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb18-2"><a></a></span>
 <span id="cb18-3"><a></a><span class="kw">def</span> dgp(n):</span>
@@ -1023,7 +1031,7 @@ P\left(\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i \in A \right) - P(N(0,I_d) \in A) \ri
 </div>
 
 </section>
-<section id="bootstrap-2-output" class="slide level2 output-location-slide"><h2>Bootstrap</h2><div class="cell output-location-slide" data-execution_count="12">
+<section id="bootstrap-2-output" class="slide level2 output-location-slide"><h2>Bootstrap</h2><div class="cell output-location-slide" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1033,7 +1041,7 @@ P\left(\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i \in A \right) - P(N(0,I_d) \in A) \ri
 </div>
 </div></section><section id="bootstrap-confidence-interval" class="slide level2">
 <h2>Bootstrap Confidence Interval</h2>
-<div id="1c471944" class="cell" data-execution_count="13">
+<div id="09a0d08d" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a> <span class="kw">def</span> bootstrapci(data, estimator, B<span class="op">=</span><span class="dv">999</span>, level<span class="op">=</span><span class="fl">0.95</span>):</span>
 <span id="cb19-2"><a></a>    estimates <span class="op">=</span> bootstrap(data, estimator, B)</span>
 <span id="cb19-3"><a></a>    lo <span class="op">=</span> np.percentile(estimates, <span class="dv">100</span><span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>) <span class="op">+</span> estimator(data)</span>
@@ -1041,8 +1049,8 @@ P\left(\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i \in A \right) - P(N(0,I_d) \in A) \ri
 <span id="cb19-5"><a></a>    <span class="cf">return</span> lo, hi</span>
 <span id="cb19-6"><a></a></span>
 <span id="cb19-7"><a></a>bootstrapci(dgp(n), estimator)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="24">
-<pre><code>(np.float64(1.5547337473677028), np.float64(2.2840793049422867))</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>(np.float64(1.634157509872081), np.float64(2.1425942785242857))</code></pre>
 </div>
 </div>
 </section></section>
