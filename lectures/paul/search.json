@@ -4,7 +4,7 @@
     "href": "feed.html",
     "title": "Slides",
     "section": "",
-    "text": "Difference in Differences II\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nDouble / Debiased Machine Learning\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nECON 526: Quantitative Economics with Data Science Applications\n\n\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nFixed Effects\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nIntroduction to Difference in Differences\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nMatching\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Networks\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nSynthetic Control\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nTreatment Heterogeneity and Conditional Effects\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\nNo matching items"
+    "text": "Difference in Differences II\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nDouble / Debiased Machine Learning\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nECON 526: Quantitative Economics with Data Science Applications\n\n\n\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nFixed Effects\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nIntroduction to Causality and Potential Outcomes\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nIntroduction to Difference in Differences\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nMatching\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Networks\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nSynthetic Control\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nTreatment Heterogeneity and Conditional Effects\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\n\n\n\n\n\n\nUncertainty Quantification\n\n\nECON526\n\n\n\n\n\n\n\n\nPaul Schrimpf\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "moredid.html#setup",
@@ -354,14 +354,14 @@
     "href": "did.html#example-impact-of-billboards-1",
     "title": "Introduction to Difference in Differences",
     "section": "Example: Impact of Billboards",
-    "text": "Example: Impact of Billboards\n\n\nCode\nimport warnings\nwarnings.filterwarnings('ignore')\n\nimport pandas as pd\nimport numpy as np\nfrom matplotlib import style\nfrom matplotlib import pyplot as plt\nimport seaborn as sns\nimport statsmodels.formula.api as smf\n\ndatadir=\"./data\"\n\n\n\ndata = pd.read_csv(datadir + \"/billboard_impact.csv\")\ndata.head()\n\n\n\n\n\n\n\n\ndeposits\npoa\njul\n\n\n\n\n0\n42\n1\n0\n\n\n1\n0\n1\n0\n\n\n2\n52\n1\n0\n\n\n3\n119\n1\n0\n\n\n4\n21\n1\n0"
+    "text": "Example: Impact of Billboards\n\n\nCode\nimport warnings\nwarnings.filterwarnings('ignore')\nimport pandas as pd\nfrom matplotlib import pyplot as plt\nimport statsmodels.formula.api as smf\n\ndatadir=\"./data\"\n\n\n\ndata = pd.read_csv(datadir + \"/billboard_impact.csv\")\ndata.head()\n\n\n\n\n\n\n\n\ndeposits\npoa\njul\n\n\n\n\n0\n42\n1\n0\n\n\n1\n0\n1\n0\n\n\n2\n52\n1\n0\n\n\n3\n119\n1\n0\n\n\n4\n21\n1\n0"
   },
   {
     "objectID": "did.html#means-and-differences",
     "href": "did.html#means-and-differences",
     "title": "Introduction to Difference in Differences",
     "section": "Means and Differences",
-    "text": "Means and Differences\n\ntbl = data.groupby(['jul','poa']).mean().unstack()\ntbl\n\n\n\n\n\n\n\n\ndeposits\n\n\npoa\n0\n1\n\n\njul\n\n\n\n\n\n\n0\n171.642308\n46.01600\n\n\n1\n206.165500\n87.06375\n\n\n\n\n\n\n\n\ntbl.diff(axis=0).iloc[1,:]\n\n          poa\ndeposits  0      34.523192\n          1      41.047750\nName: 1, dtype: float64\n\n\n\ntbl.diff(axis=1).iloc[:,1]\n\njul\n0   -125.626308\n1   -119.101750\nName: (deposits, 1), dtype: float64\n\n\n\ntbl.diff(axis=0).diff(axis=1).iloc[1,1]\n\n6.524557692307688"
+    "text": "Means and Differences\n\ntbl = data.groupby(['jul','poa']).mean().unstack()\ntbl\n\n\n\n\n\n\n\n\ndeposits\n\n\npoa\n0\n1\n\n\njul\n\n\n\n\n\n\n0\n171.642308\n46.01600\n\n\n1\n206.165500\n87.06375\n\n\n\n\n\n\n\n\ntbl.diff(axis=0).iloc[1,:]\n\n          poa\ndeposits  0      34.523192\n          1      41.047750\nName: 1, dtype: float64\n\n\n\ntbl.diff(axis=1).iloc[:,1]\n\njul\n0   -125.626308\n1   -119.101750\nName: (deposits, 1), dtype: float64\n\n\n\ntbl.diff(axis=0).diff(axis=1).iloc[1,1]\n\nnp.float64(6.524557692307688)"
   },
   {
     "objectID": "did.html#setup",
@@ -375,7 +375,7 @@
     "href": "did.html#identification",
     "title": "Introduction to Difference in Differences",
     "section": "Identification",
-    "text": "Identification\n\nAverage treatment effect on the treated: \\[\n\\begin{align*}\nATT & = \\Er[y_{i1}(1) - \\color{red}{y_{i1}(0)} | D_{i1} = 1] \\\\\n& = \\Er[y_{i1}(1) - y_{i0}(0) | D_{i1} = 1] - \\Er[\\color{red}{y_{i1}(0)} - y_{i0}(0) | D_{i1}=1] \\\\\n& \\text{ assume } \\Er[\\color{red}{y_{i1}(0)} - y_{i0}(0) | D_{i1}=1] =  \\Er[y_{i1}(0) - y_{i0}(0) | D_{i1}=0] \\\\\n& = \\Er[y_{i1}(1) - y_{i0}(0) | D_{i1} = 1] - \\Er[y_{i1}(0) - y_{i0}(0) | D_{i1}=0] \\\\\n& = \\Er[y_{i1} - y_{i0} | D_{i1}=1, D_{i0}=0] - \\Er[y_{i1} - y_{i0} | D_{i1}=0, D_{i0}=0]\n\\end{align*}\n\\]"
+    "text": "Identification\n\nAverage treatment effect on the treated:\n\n\\[ %\n\\begin{align*}\nATT & = \\Er[y_{i1}(1) - \\color{red}{y_{i1}(0)} | D_{i1} = 1] \\\\\n& = \\Er[y_{i1}(1) - y_{i0}(0) | D_{i1} = 1] - \\Er[\\color{red}{y_{i1}(0)} - y_{i0}(0) | D_{i1}=1] \\\\\n& \\text{ assume } \\Er[\\color{red}{y_{i1}(0)} - y_{i0}(0) | D_{i1}=1] =  \\Er[y_{i1}(0) - y_{i0}(0) | D_{i1}=0] \\\\\n& = \\Er[y_{i1}(1) - y_{i0}(0) | D_{i1} = 1] - \\Er[y_{i1}(0) - y_{i0}(0) | D_{i1}=0] \\\\\n& = \\Er[y_{i1} - y_{i0} | D_{i1}=1, D_{i0}=0] - \\Er[y_{i1} - y_{i0} | D_{i1}=0, D_{i0}=0]\n\\end{align*}\n\\]"
   },
   {
     "objectID": "did.html#important-assumptions",
@@ -389,7 +389,7 @@
     "href": "did.html#estimation",
     "title": "Introduction to Difference in Differences",
     "section": "Estimation",
-    "text": "Estimation\n\n\nPlugin: \\[\n\\widehat{ATT} = \\frac{ \\sum_{i=1}^n (y_{i1} - y_{i0})D_{i1}(1-D_{i0})}{\\sum_{i=1}^n D_{i1}(1-D_{i0})} -  \\frac{ \\sum_{i=1}^n (y_{i1} - y_{i0})(1-D_{i1})(1-D_{i0})}{\\sum_{i=1}^n (1-D_{i1})(1-D_{i0})}\n\\]\nRegression: \\[\ny_{it} = \\delta_t + \\alpha 1\\{D_{i1}=1\\} + \\beta D_{it} + \\epsilon_{it}\n\\] then \\(\\hat{\\beta} = \\widehat{ATT}\\)"
+    "text": "Estimation\n\n\nPlugin: \\[ %\n\\widehat{ATT} = \\frac{ \\sum_{i=1}^n (y_{i1} - y_{i0})D_{i1}(1-D_{i0})}{\\sum_{i=1}^n D_{i1}(1-D_{i0})} -  \\frac{ \\sum_{i=1}^n (y_{i1} - y_{i0})(1-D_{i1})(1-D_{i0})}{\\sum_{i=1}^n (1-D_{i1})(1-D_{i0})}\n\\]\nRegression: \\[ %\ny_{it} = \\delta_t + \\alpha 1\\{D_{i1}=1\\} + \\beta D_{it} + \\epsilon_{it}\n\\] then \\(\\hat{\\beta} = \\widehat{ATT}\\)"
   },
   {
     "objectID": "did.html#visualizing-difference-in-differences",
@@ -725,7 +725,7 @@
     "href": "index.html",
     "title": "ECON 526: Quantitative Economics with Data Science Applications",
     "section": "",
-    "text": "Slides\n\nMatching slides, notebook\n\nReading: chapters 10-12 of Facure (2022) and chapter 14 of Huntington-Klein (2021)\n\nIntroduction to difference in differences, notebook\n\nReading: chapter 13 of Facure (2022)\n\nFixed Effects, notebook\n\nReading: chapter 14 of Facure (2022)\n\nAdvanced difference in differences, notebook\n\nReading: chapter 24 of Facure (2022), Roth et al. (2023), Chaisemartin and D’Haultfœuille (2022)\n\nSynthetic Control, notebook\n\nReading: Abadie (2021),chapter 15 of Facure (2022)\n\nDouble/Debiased Machine Learning, notebook\n\nReading: QuantEcon: ML in Economics\n\nTreatment Heterogeneity and Conditional Effects, notebook\n\nReading: QuantEcon: Heterogeneity\n\nNeural Networks, notebook\n\nReading: QuantEcon Datascience: Regression - Neural Networks\n\n\n\n\n\n\n\nReferences\n\nAbadie, Alberto. 2021. “Using Synthetic Controls: Feasibility, Data Requirements, and Methodological Aspects.” Journal of Economic Literature 59 (2): 391–425. https://doi.org/10.1257/jel.20191450.\n\n\nChaisemartin, Clément de, and Xavier D’Haultfœuille. 2022. “Two-way fixed effects and differences-in-differences with heterogeneous treatment effects: a survey.” The Econometrics Journal 26 (3): C1–30. https://doi.org/10.1093/ectj/utac017.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/.\n\n\nRoth, Jonathan, Pedro H. C. Sant’Anna, Alyssa Bilinski, and John Poe. 2023. “What’s Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature.” Journal of Econometrics 235 (2): 2218–44. https://doi.org/https://doi.org/10.1016/j.jeconom.2023.03.008."
+    "text": "Slides\n\nIntroduction to Causlity, notebook\n\nReading: Chapter 2 of Chernozhukov et al. (2024) or Chapter 1 of Facure (2022)\n\nUncertainty Quantification, notebook\n\nChapter 3 of Facure (2022)\n\nLinear regression, notebook\nMatching slides, notebook\n\nReading: chapters 10-12 of Facure (2022) and chapter 14 of Huntington-Klein (2021)\n\nIntroduction to difference in differences, notebook\n\nReading: chapter 13 of Facure (2022)\n\nFixed Effects, notebook\n\nReading: chapter 14 of Facure (2022)\n\nAdvanced difference in differences, notebook\n\nReading: chapter 24 of Facure (2022), Roth et al. (2023), Chaisemartin and D’Haultfœuille (2022)\n\nSynthetic Control, notebook\n\nReading: Abadie (2021),chapter 15 of Facure (2022)\n\nInstrumental Variables, notebook\nDouble/Debiased Machine Learning, notebook\n\n\nReading: QuantEcon: ML in Economics\n\n\nTreatment Heterogeneity and Conditional Effects, notebook\n\n\nReading: QuantEcon: Heterogeneity\n\n\nNeural Networks, notebook\n\n\nReading: QuantEcon Datascience: Regression - Neural Networks\n\n\n\n\n\n\nReferences\n\nAbadie, Alberto. 2021. “Using Synthetic Controls: Feasibility, Data Requirements, and Methodological Aspects.” Journal of Economic Literature 59 (2): 391–425. https://doi.org/10.1257/jel.20191450.\n\n\nChaisemartin, Clément de, and Xavier D’Haultfœuille. 2022. “Two-way fixed effects and differences-in-differences with heterogeneous treatment effects: a survey.” The Econometrics Journal 26 (3): C1–30. https://doi.org/10.1093/ectj/utac017.\n\n\nChernozhukov, V., C. Hansen, N. Kallus, M. Spindler, and V. Syrgkanis. 2024. Applied Causal Inference Powered by ML and AI. https://causalml-book.org/.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/.\n\n\nRoth, Jonathan, Pedro H. C. Sant’Anna, Alyssa Bilinski, and John Poe. 2023. “What’s Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature.” Journal of Econometrics 235 (2): 2218–44. https://doi.org/https://doi.org/10.1016/j.jeconom.2023.03.008."
   },
   {
     "objectID": "conditionaleffect.html#conditional-average-effecst",
@@ -935,7 +935,7 @@
     "href": "matching.html#setting",
     "title": "Matching",
     "section": "Setting",
-    "text": "Setting\n\nPotential outcomes \\((Y_0, Y_1)\\)\nTreatment \\(T\\)\nObserve \\(Y = Y_0(1-T) + T Y_1\\)\nCovariates \\(X\\)\nAssume conditional independence \\((Y_0,Y_1) \\perp T | X\\)\n\n\\[\n\\def\\Er{{\\mathrm{E}}}\n\\def\\En{{\\mathbb{En}}}\n\\def\\cov{{\\mathrm{Cov}}}\n\\def\\var{{\\mathrm{Var}}}\n\\def\\R{{\\mathbb{R}}}\n\\newcommand\\norm[1]{\\left\\lVert#1\\right\\rVert}\n\\def\\rank{{\\mathrm{rank}}}\n\\newcommand{\\inpr}{ \\overset{p^*_{\\scriptscriptstyle n}}{\\longrightarrow}}\n\\def\\inprob{{\\,{\\buildrel p \\over \\rightarrow}\\,}}\n\\def\\indist{\\,{\\buildrel d \\over \\rightarrow}\\,}\n\\DeclareMathOperator*{\\plim}{plim}\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\]"
+    "text": "Setting\n\nPotential outcomes \\((Y(0), Y(1))\\)\nTreatment \\(T \\in \\{0,1\\}\\)\nObserve \\(Y = Y(T)\\)\nCovariates \\(X\\)\nAssume conditional independence \\((Y(0),Y(1)) \\perp T | X\\)\n\n\\[\n\\def\\Er{{\\mathrm{E}}}\n\\def\\En{{\\mathbb{En}}}\n\\def\\cov{{\\mathrm{Cov}}}\n\\def\\var{{\\mathrm{Var}}}\n\\def\\R{{\\mathbb{R}}}\n\\newcommand\\norm[1]{\\left\\lVert#1\\right\\rVert}\n\\def\\rank{{\\mathrm{rank}}}\n\\newcommand{\\inpr}{ \\overset{p^*_{\\scriptscriptstyle n}}{\\longrightarrow}}\n\\def\\inprob{{\\,{\\buildrel p \\over \\rightarrow}\\,}}\n\\def\\indist{\\,{\\buildrel d \\over \\rightarrow}\\,}\n\\DeclareMathOperator*{\\plim}{plim}\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\]"
   },
   {
     "objectID": "matching.html#why-not-regression",
@@ -970,7 +970,7 @@
     "href": "matching.html#why-not-regression-4",
     "title": "Matching",
     "section": "Why not regression?",
-    "text": "Why not regression?\n\nTX = np.hstack((T.reshape(len(T),1),X))\nabhat = np.linalg.solve(TX.T @ TX, TX.T @ y)\nahat = abhat[0]\nprint(ahat)\n\n-0.06414016921951447\n\n\n\nnp.mean(y1-y0)\n\n0.22383059765273303\n\n\n\nWeights, \\(\\omega(T,X)\\), are not all positive, so the regression estimate can be negative even if \\(\\Er[Y_1 | X] - \\Er[Y_0|X]\\) is positive everywhere"
+    "text": "Why not regression?\n\nTX = np.hstack((T.reshape(len(T),1),X))\nabhat = np.linalg.solve(TX.T @ TX, TX.T @ y)\nahat = abhat[0]\nprint(ahat)\n\n-0.06414016921951447\n\n\n\nnp.mean(y1-y0)\n\nnp.float64(0.22383059765273303)\n\n\n\nWeights, \\(\\omega(T,X)\\), are not all positive, so the regression estimate can be negative even if \\(\\Er[Y(1) | X] - \\Er[Y(0)|X]\\) is positive everywhere"
   },
   {
     "objectID": "matching.html#why-not-regression-5",
@@ -1033,7 +1033,7 @@
     "href": "matching.html#software",
     "title": "Matching",
     "section": "Software",
-    "text": "Software\n\nAdvice: use the doubly robust estimator with nonparametric estimates for \\(\\hat{E}[Y|T,X]\\) and \\(\\hat{e}(X)\\)\nRecommended package:\n\neconml has the correct estimator and examples of using it with nonparametric estimates\n\nfocuses on conditional instead of unconditional average treatment effects, but can be used for both"
+    "text": "Software\n\nAdvice: use the doubly robust estimator with nonparametric estimates for \\(\\hat{E}[Y|T,X]\\) and \\(\\hat{e}(X)\\)\nRecommended package:\n\ndoubleml"
   },
   {
     "objectID": "matching.html#software-1",
@@ -1047,14 +1047,14 @@
     "href": "matching.html#example-simulation",
     "title": "Matching",
     "section": "Example: simulation",
-    "text": "Example: simulation\n\nInfeasible estimator: average of \\(Y_1 - Y_0\\)\n\n\nse = np.sqrt(np.var(y1-y0)/len(y1))\nate = np.mean(y1-y0)\nprint(ate-1.96*se, ate, ate+1.96*se)\n\n0.10010844404085255 0.22383059765273303 0.3475527512646135"
+    "text": "Example: simulation\n\nInfeasible estimator: average of \\(Y(1) - Y(0)\\)\n\n\nse = np.sqrt(np.var(y1-y0)/len(y1))\nate = np.mean(y1-y0)\nprint(ate-1.96*se, ate, ate+1.96*se)\n\n0.10010844404085255 0.22383059765273303 0.3475527512646135"
   },
   {
     "objectID": "matching.html#example-simulation-1",
     "href": "matching.html#example-simulation-1",
     "title": "Matching",
     "section": "Example: simulation",
-    "text": "Example: simulation\n\nfrom econml.dr import DRLearner, LinearDRLearner, SparseLinearDRLearner\nfrom econml.sklearn_extensions.linear_model import StatsModelsLinearRegression\nfrom sklearn.ensemble import GradientBoostingRegressor, GradientBoostingClassifier\nfrom sklearn.linear_model import LassoCV, LogisticRegressionCV, ElasticNetCV\nfrom sklearn.preprocessing import PolynomialFeatures#\n\nest = LinearDRLearner(featurizer=PolynomialFeatures(degree=20, include_bias=False),\n                model_regression=LassoCV(),\n                model_propensity=LogisticRegressionCV(),\n                #model_final=StatsModelsLinearRegression(),\n                cv=10)\nest.fit(y, T, X=None, W=X)\n\n&lt;econml.dr._drlearner.LinearDRLearner at 0x73cb0bf49ac0&gt;\n\n\n\npoint = est.const_marginal_effect(None)\nlb, ub = est.const_marginal_effect_interval(None, alpha=0.05)\nprint(lb,point,ub)\n\n[[-0.016536]] [[0.15691383]] [[0.33036367]]"
+    "text": "Example: simulation\n\nimport doubleml as dml\nfrom sklearn.ensemble import GradientBoostingRegressor, GradientBoostingClassifier\nfrom sklearn.linear_model import LassoCV, LogisticRegressionCV, ElasticNetCV\nfrom sklearn.preprocessing import PolynomialFeatures, StandardScaler\n\n\n\ng = GradientBoostingRegressor()\nm = GradientBoostingClassifier()\n#Xpoly = PolynomialFeatures(degree=2, include_bias=False).fit_transform(X)\n#scaler = StandardScaler().fit(Xpoly)\n#Xpoly = scaler.transform(Xpoly)\ndmldata = dml.DoubleMLData.from_arrays(X, y, T)\ndmlATE = dml.DoubleMLAPOS(dmldata, g, m, treatment_levels=[0, 1])\ndmlATE.fit()\ndmlATE.summary\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n2.5 %\n97.5 %\n\n\n\n\n0\n0.074218\n0.068535\n1.082920\n0.278844\n-0.060108\n0.208544\n\n\n1\n0.273606\n0.136631\n2.002514\n0.045229\n0.005814\n0.541398\n\n\n\n\n\n\n\n\ndmlATE.causal_contrast(0).summary\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n2.5 %\n97.5 %\n\n\n\n\n1 vs 0\n0.199388\n0.152778\n1.305081\n0.191865\n-0.100052\n0.498828"
   },
   {
     "objectID": "matching.html#national-study-of-learning-mindsets",
@@ -1145,14 +1145,14 @@
     "href": "matching.html#doubly-robust",
     "title": "Matching",
     "section": "Doubly Robust",
-    "text": "Doubly Robust\n\nfrom sklearn.ensemble import GradientBoostingRegressor, GradientBoostingClassifier\nfrom sklearn.linear_model import LassoCV, LogisticRegressionCV, ElasticNetCV\nfrom sklearn.preprocessing import PolynomialFeatures\n\ndef robustate(T,Y,X,psmodel=LogisticRegressionCV(),ymodel=LassoCV(), cluster=None):\n    pfit = psmodel.fit(X,T)\n    ps = pfit.predict_proba(X)[:,1]\n    ey1fit = ymodel.fit(X[T==1],Y[T==1])\n    ey0fit = sklearn.base.clone(ymodel).fit(X[T==0],Y[T==0])\n    ey1 = ey1fit.predict(X)\n    ey0 = ey0fit.predict(X)\n    ate_terms = ey1 - ey0 + T*(Y- ey1)/ps - (1-T)*(Y-ey0)/(1-ps)\n    ate = np.mean(ate_terms)\n    # check if cluster is None\n    if cluster is None :\n        ate_se = np.sqrt(np.var(ate_terms)/len(ate_terms))\n    else :\n        creg=smf.ols(\"y ~ 1\", pd.DataFrame({\"y\" : ate_terms})).fit(cov_type=\"cluster\", cov_kwds={'groups': cluster})\n        ate_se = np.sqrt(creg.cov_params().iloc[0,0])\n\n    return(ate, ate_se, ps, ey1,ey0)\n\nate,se,ps,ey1,ey0 = robustate(data_with_categ[T],data_with_categ[Y],data_with_categ[X],cluster=data_with_categ['schoolid'])\nprint(ate-1.96*se, ate, ate+1.96*se)\n\n0.3321412901659991 0.3836159751515205 0.43509066013704195\n\n\n1\nWe have glossed over some details needed for doubly robust estimation to have nice statistical properties. Those details matter and are not implemented correctly above. It is better to use the econml instead."
+    "text": "Doubly Robust\n\nfrom sklearn.ensemble import GradientBoostingRegressor, GradientBoostingClassifier\nfrom sklearn.linear_model import LassoCV, LogisticRegressionCV, ElasticNetCV\nfrom sklearn.preprocessing import PolynomialFeatures\n\ndef robustate(T,Y,X,psmodel=LogisticRegressionCV(),ymodel=LassoCV(), cluster=None):\n    pfit = psmodel.fit(X,T)\n    ps = pfit.predict_proba(X)[:,1]\n    ey1fit = ymodel.fit(X[T==1],Y[T==1])\n    ey0fit = sklearn.base.clone(ymodel).fit(X[T==0],Y[T==0])\n    ey1 = ey1fit.predict(X)\n    ey0 = ey0fit.predict(X)\n    ate_terms = ey1 - ey0 + T*(Y- ey1)/ps - (1-T)*(Y-ey0)/(1-ps)\n    ate = np.mean(ate_terms)\n    # check if cluster is None\n    if cluster is None :\n        ate_se = np.sqrt(np.var(ate_terms)/len(ate_terms))\n    else :\n        creg=smf.ols(\"y ~ 1\", pd.DataFrame({\"y\" : ate_terms})).fit(cov_type=\"cluster\", cov_kwds={'groups': cluster})\n        ate_se = np.sqrt(creg.cov_params().iloc[0,0])\n\n    return(ate, ate_se, ps, ey1,ey0)\n\nate,se,ps,ey1,ey0 = robustate(data_with_categ[T],data_with_categ[Y],data_with_categ[X],cluster=data_with_categ['schoolid'])\nprint(ate-1.96*se, ate, ate+1.96*se)\n\n0.3321412901659991 0.3836159751515205 0.43509066013704195\n\n\n1\nWe have glossed over some details needed for doubly robust estimation to have nice statistical properties. Those details matter and are not implemented correctly above. It is better to use doubleml instead."
   },
   {
     "objectID": "matching.html#doubly-robust-1",
     "href": "matching.html#doubly-robust-1",
     "title": "Matching",
     "section": "Doubly Robust",
-    "text": "Doubly Robust\n\nbetter to use the econml package\n\n\nfrom econml.dr import DRLearner, LinearDRLearner, SparseLinearDRLearner\n\nest = LinearDRLearner(#featurizer=PolynomialFeatures(degree=2, include_bias=False),\n                model_regression=LassoCV(),\n                model_propensity=LogisticRegressionCV(),\n                cv=5)\n\nest.fit(data_with_categ[Y], data_with_categ[T], X=None, W=data_with_categ[X])\npoint = est.const_marginal_effect(None)\nlb, ub = est.const_marginal_effect_interval(None, alpha=0.05)\nprint(lb,point,ub)\n\n[[0.34806843]] [[0.38205572]] [[0.41604301]]"
+    "text": "Doubly Robust\n\nbetter to use the doubleml package\n\n\nimport doubleml as dml\n\nm = LassoCV()\ng = LogisticRegressionCV()\ndmldata = dml.DoubleMLData(data_with_categ, Y,T,X.to_list())\ndmlATE = dml.DoubleMLAPOS(dmldata, m, g, treatment_levels=[0, 1])\ndmlATE.fit()\ndmlATE.summary\ndmlATE.causal_contrast(0).summary\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n2.5 %\n97.5 %\n\n\n\n\n1 vs 0\n0.383877\n0.01705\n22.514192\n0.0\n0.350459\n0.417295"
   },
   {
     "objectID": "matching.html#sources-and-further-reading",
@@ -1426,5 +1426,306 @@
     "title": "Double / Debiased Machine Learning",
     "section": "References",
     "text": "References\n\n\n\n\n\n\n\n\nBelloni, Alexandre, Victor Chernozhukov, and Christian Hansen. 2014. “Inference on Treatment Effects After Selection Among High-Dimensional Controls†.” The Review of Economic Studies 81 (2): 608–50. https://doi.org/10.1093/restud/rdt044.\n\n\nChernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, and Whitney Newey. 2017. “Double/Debiased/Neyman Machine Learning of Treatment Effects.” American Economic Review 107 (5): 261–65. https://doi.org/10.1257/aer.p20171038.\n\n\nChernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins. 2018. “Double/Debiased Machine Learning for Treatment and Structural Parameters.” The Econometrics Journal 21 (1): C1–68. https://doi.org/10.1111/ectj.12097.\n\n\nChernozhukov, Victor, Christian Hansen, and Martin Spindler. 2015. “Valid Post-Selection and Post-Regularization Inference: An Elementary, General Approach.” Annual Review of Economics 7 (1): 649–88. https://doi.org/10.1146/annurev-economics-012315-015826.\n\n\nKnaus, Michael C. 2022. “Double machine learning-based programme evaluation under unconfoundedness.” The Econometrics Journal 25 (3): 602–27. https://doi.org/10.1093/ectj/utac015.\n\n\nOliver Hines, Karla Diaz-Ordaz, Oliver Dukes, and Stijn Vansteelandt. 2022. “Demystifying Statistical Learning Based on Efficient Influence Functions.” The American Statistician 76 (3): 292–304. https://doi.org/10.1080/00031305.2021.2021984."
+  },
+  {
+    "objectID": "causality_intro.html#summary",
+    "href": "causality_intro.html#summary",
+    "title": "Introduction to Causality and Potential Outcomes",
+    "section": "Summary",
+    "text": "Summary\n\nPotential outcomes, treatment effects\nRandomized experiments"
+  },
+  {
+    "objectID": "causality_intro.html#treatment",
+    "href": "causality_intro.html#treatment",
+    "title": "Introduction to Causality and Potential Outcomes",
+    "section": "Treatment",
+    "text": "Treatment\n\n\n\\(T_i \\in \\{0,1\\}\\)\nObserved outcome \\(Y_i\\)\nWe want the causal effect of \\(T\\) on \\(Y\\), but what does that mean?\n\nPotential outcomes give a rigorous definition"
+  },
+  {
+    "objectID": "causality_intro.html#potential-outcomes",
+    "href": "causality_intro.html#potential-outcomes",
+    "title": "Introduction to Causality and Potential Outcomes",
+    "section": "Potential Outcomes",
+    "text": "Potential Outcomes\n\nPotential outcomes \\(Y_i(0), Y_i(1)\\) if \\(T_i = 0\\) or \\(1\\)\nObserve \\(Y_i = Y_i(T_i)\\)\n\n\n\nAssume: No Interference: \\((Y_i(0), Y_i(1))\\) is unaffected by \\(T_j\\) for \\(j \\neq i\\)\n\naka Stable Unit-Treatment Value Assumption (SUTVA)\n\nTreatment effect on \\(i\\) = \\(Y_i(1) - Y_i(0)\\)"
+  },
+  {
+    "objectID": "causality_intro.html#fundamental-problem-of-causal-inference",
+    "href": "causality_intro.html#fundamental-problem-of-causal-inference",
+    "title": "Introduction to Causality and Potential Outcomes",
+    "section": "Fundamental Problem of Causal Inference",
+    "text": "Fundamental Problem of Causal Inference\n\n\nOnly observe \\(Y_i(1)\\) or \\(Y_i(0)\\), never both\nIndividual effects, \\(Y_i(1) - Y_i(0)\\), generally impossible to recover\nSummaries of individual effects, e.g. \\(\\Er[Y_i(1) - Y_i(0)]\\), possible to estimate, but require assumptions"
+  },
+  {
+    "objectID": "causality_intro.html#average-treatment-effect",
+    "href": "causality_intro.html#average-treatment-effect",
+    "title": "Introduction to Causality and Potential Outcomes",
+    "section": "Average Treatment Effect",
+    "text": "Average Treatment Effect\n\n\nWant the average treatment effect \\[\nATE = \\Er[Y_i(1) - Y_i(0)]\n\\]\nCan’t estimate \\(\\Er[Y_i(d)]\\), because \\(Y_i(d)\\) not always observed"
+  },
+  {
+    "objectID": "causality_intro.html#average-population-effect-and-selection-bias",
+    "href": "causality_intro.html#average-population-effect-and-selection-bias",
+    "title": "Introduction to Causality and Potential Outcomes",
+    "section": "Average Population Effect and Selection Bias",
+    "text": "Average Population Effect and Selection Bias\n\n\nCan estimate \\(\\Er[Y_i(d)|T_i=d]\\)\nAverage population effect \\[\nAPE = \\Er[Y_i(1)|T_i=1] - \\Er[Y_i(0)|T_i=0]\n\\]\nHow does it compare to the ATE? \\[ %\n\\begin{align*}\nATE = & \\Er[Y_i(1) - Y_i(0)] \\\\\n= & \\overbrace{\\Er[Y_i(1) - Y_i(0) | T_i=1]}^{\\text{avg treatment effect  on treated}} P(T_i=1) + \\overbrace{\\Er[Y_i(1) - Y_i(0) | T_i=0]}^{\\text{avg treatment effect on untreated}} P(T_i=0) \\\\\n= & \\left(\\Er[Y_i(1) | T_i=1] - \\Er[Y_i(0)|T_i=0] + \\overbrace{\\Er[Y_i(0)|T_i=0] - \\Er[Y_i(0)|T_i=1]}^{\\text{selection bias}}\\right)\n  P(T_i=1) + \\\\\n& +  \\left(\\Er[Y_i(1) | T_i=1] - \\Er[Y_i(0)|T_i=0] + \\underbrace{\\Er[Y_i(1)|T_i=0] - \\Er[Y_i(1)|T_i=1]}_{\\text{selection bias}}\\right)\nP(T_i=0)\n\\end{align*}\n\\]"
+  },
+  {
+    "objectID": "causality_intro.html#sources-and-further-reading",
+    "href": "causality_intro.html#sources-and-further-reading",
+    "title": "Introduction to Causality and Potential Outcomes",
+    "section": "Sources and Further Reading",
+    "text": "Sources and Further Reading\n\nChapter 2 of Chernozhukov et al. (2024) is the basis for much of these slides, inlcuding the Pfizer/BioNTech Covid Vaccine RCT example\nChapter 1 of Facure (2022)"
+  },
+  {
+    "objectID": "causality_intro.html#average-population-effect",
+    "href": "causality_intro.html#average-population-effect",
+    "title": "Introduction to Causality and Potential Outcomes",
+    "section": "Average Population Effect",
+    "text": "Average Population Effect\n\nCan estimate \\(\\Er[Y_i(d)|T_i=d]\\)\nAverage population effect \\[\nAPE = \\Er[Y_i(1)|T_i=1] - \\Er[Y_i(0)|T_i=0]\n\\]\nHow does it compare to the ATE?"
+  },
+  {
+    "objectID": "causality_intro.html#selection-bias",
+    "href": "causality_intro.html#selection-bias",
+    "title": "Introduction to Causality and Potential Outcomes",
+    "section": "Selection Bias",
+    "text": "Selection Bias\n\nComparing ATE and APE \\[ %\n\\begin{align*}\nATE = & \\Er[Y_i(1) - Y_i(0)] \\\\\n= & \\overbrace{\\Er[Y_i(1) - Y_i(0) | T_i=1]}^{\\text{avg treatment effect  on treated}} P(T_i=1) + \\overbrace{\\Er[Y_i(1) - Y_i(0) | T_i=0]}^{\\text{avg treatment effect on untreated}} P(T_i=0) \\\\\n= & \\left(APE + \\overbrace{\\Er[Y_i(0)|T_i=0] - \\Er[Y_i(0)|T_i=1]}^{\\text{selection bias}}\\right)\n  P(T_i=1) + \\\\\n& +  \\left(APE + \\underbrace{\\Er[Y_i(1)|T_i=0] - \\Er[Y_i(1)|T_i=1]}_{\\text{selection bias}}\\right)\nP(T_i=0)\n\\end{align*}\n\\]"
+  },
+  {
+    "objectID": "causality_intro.html#selection-bias-1",
+    "href": "causality_intro.html#selection-bias-1",
+    "title": "Introduction to Causality and Potential Outcomes",
+    "section": "Selection Bias",
+    "text": "Selection Bias\n\nOr, \\[ %\nAPE = ATE + \\underbrace{\\begin{pmatrix} (\\Er[Y_i(0) | T_i=1] - \\Er[Y_i(0)|T_i=0])P(T_i=1) + \\\\\n  + (\\Er[Y_i(1) | T_i=1] - \\Er[Y_i(1)|T_i=0])P(T_i=0)\n\\end{pmatrix}}_{\\text{selection bias}}\n\\]\nSelection bias is nonzero if the treated and untreated groups would be different even if everyone had been treated or untreated\nSelection bias usually nonzero if people select their own treatment"
+  },
+  {
+    "objectID": "causality_intro.html#references",
+    "href": "causality_intro.html#references",
+    "title": "Introduction to Causality and Potential Outcomes",
+    "section": "References",
+    "text": "References\n\n\n\n\n\n\n\n\nChernozhukov, V., C. Hansen, N. Kallus, M. Spindler, and V. Syrgkanis. 2024. Applied Causal Inference Powered by ML and AI. https://causalml-book.org/.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html."
+  },
+  {
+    "objectID": "causality_intro.html#selection-bias-example",
+    "href": "causality_intro.html#selection-bias-example",
+    "title": "Introduction to Causality and Potential Outcomes",
+    "section": "Selection Bias Example",
+    "text": "Selection Bias Example\n\nPeople have some (possibly noisy) information about \\(Y_i(0), Y_i(1)\\) and choose \\(T_i\\) they prefer\n\ne.g. \\(T_i = \\arg\\max_{d\\in \\{0,1\\}} \\Er[U(Y_i(d)) | \\mathcal{I}_i]\\)\n\nSimulation\n\n\\(i\\) observes signal \\(S_i(0) = Y_i(0) + \\epsilon_i(0)\\) and \\(S_i(1) = Y_i(1) + \\epsilon_i(1)\\)\n\\(\\epsilon_i(d) \\sim N(0,\\sigma^2)\\), independent\nChooses \\(\\max_d \\Er[Y_i(d)|S_i(0), S_i(1)] = \\max_d S_i(d)\\)\n\n\n\nCode\nimport numpy as np\nnp.random.seed(0)\nclass selectiondata:\n    def __init__(self, n=1000, noisesd=1.0, ate=0.5):\n        self.Y0 = np.random.normal(size=n)\n        self.Y1 = np.random.normal(size=n) + ate\n        self.S0 = self.Y0 + np.random.normal(size=n)*noisesd\n        self.S1 = self.Y1 + np.random.normal(size=n)*noisesd\n        self.T = (self.S1 &gt; self.S0).astype(int)\n        self.Y = self.Y0 * (1 - self.T) + self.Y1 * self.T\n\n    def APE(self):\n        return np.mean(self.Y[self.T==1]) - np.mean(self.Y[self.T==0])\n\n    def ATE(self):\n        return np.mean(self.Y1) - np.mean(self.Y0)\n\n    def selectionbias(self):\n        return (self.APE() - self.ATE())\n\n    def selectionbias0(self):\n        return np.mean( self.Y0[self.T==1]) - np.mean( self.Y0[self.T==0] )\n\n    def selectionbias1(self):\n        return np.mean( self.Y1[self.T==1]) - np.mean(self.Y1[self.T==0] )\n\n\ns = 0.5\neate = 0.5\ndata = selectiondata(n=10_000,noisesd=s, ate=eate)\n\nprint(\"|APE|ATE|Selection Bias|\\n\" +\n      \"|---|---|---|\\n\" +\n      f\"|{data.APE():.2}|{data.ATE():.2}|{data.selectionbias():.2}|\\n\"\n      f\"|σ={s:.2}|\\n\\n\")\n\n\n\n\nAPE\nATE\nSelection Bias\n\n\n\n\n0.27\n0.53\n-0.26\n\n\nσ=0.5"
+  },
+  {
+    "objectID": "causality_intro.html#random-experiment",
+    "href": "causality_intro.html#random-experiment",
+    "title": "Introduction to Causality and Potential Outcomes",
+    "section": "Random Experiment",
+    "text": "Random Experiment\n\nAssign treatment randomly \\[\nT_i \\indep (Y_i(0),Y_i(1))\n\\]\nImplies \\[\n\\Er[Y_i(1) | T_i=1] = \\Er[Y_i(1)] \\text{ and } \\Er[Y_i(0) | T_i=0] = \\Er[Y_i(0)]\n\\]\nSo \\[\n\\begin{align*}\nAPE = & \\Er[Y_i(1)|T_i=1] - \\Er[Y_i(0)|T_i=0] \\\\\n  = & \\Er[Y_i(1)] - \\Er[Y_i(0)] \\\\\n  = & ATE\n\\end{align*}\n\\]"
+  },
+  {
+    "objectID": "causality_intro.html#example-pfizer-covid-vaccine-rct",
+    "href": "causality_intro.html#example-pfizer-covid-vaccine-rct",
+    "title": "Introduction to Causality and Potential Outcomes",
+    "section": "Example: Pfizer Covid Vaccine RCT",
+    "text": "Example: Pfizer Covid Vaccine RCT\n\nNumber of participants and number infected by treatment status\n\n\n\n\nGroup\nTreated\nPlacebo\n\n\n\n\nAll\n19965\n20172\n\n\nInfected\n9\n169\n\n\n65+\n4044\n4067\n\n\n65+ Infected\n1\n19"
+  },
+  {
+    "objectID": "causality_intro.html#example-pfizer-covid-vaccine-rct-1",
+    "href": "causality_intro.html#example-pfizer-covid-vaccine-rct-1",
+    "title": "Introduction to Causality and Potential Outcomes",
+    "section": "Example Pfizer Covid Vaccine RCT",
+    "text": "Example Pfizer Covid Vaccine RCT\n\nimport statsmodels.api as sm\n\nclass binarybinaryrct :\n    def __init__(self, NT, NU, NYT, NYU):\n        self.NT=NT\n        self.NU=NU\n        self.NYT=NYT\n        self.NYU=NYU\n\n    def ATE(self):\n        return (self.NYT/self.NT - self.NYU/self.NU)\n\n    def table(self):\n        return(\"|  | Infection Rate per 1000|\\n\"+\n               \"|---|---|\\n\"\n               f\"|Treated| {self.NYT/self.NT*1000:.2}|\\n\" +\n               f\"|Control| {self.NYU/self.NU*1000:.2}|\\n\" +\n               f\"|Difference| {self.ATE()*1000:.2}|\\n\")\n    def VE(self):\n        tb = sm.stats.Table2x2([[self.NYT, self.NT - self.NYT], [self.NYU, self.NU - self.NYU]])\n        ve=1-tb.riskratio\n        ci = tb.riskratio_confint()\n        ci = [1-ci[1],1-ci[0]]\n        return(ve,ci)\n\npfizerall = binarybinaryrct(19965, 20172, 9, 169)\npfizer65 = binarybinaryrct(4044, 4067, 1, 19)\n\nprint(\"\\n- All\\n\\n\" + pfizerall.table() + \"\\n - 65+\\n\\n\" + pfizer65.table())\n\n\n- All\n\n|  | Infection Rate per 1000|\n|---|---|\n|Treated| 0.45|\n|Control| 8.4|\n|Difference| -7.9|\n\n - 65+\n\n|  | Infection Rate per 1000|\n|---|---|\n|Treated| 0.25|\n|Control| 4.7|\n|Difference| -4.4|"
+  },
+  {
+    "objectID": "uncertainty.html#summary",
+    "href": "uncertainty.html#summary",
+    "title": "Uncertainty Quantification",
+    "section": "Summary",
+    "text": "Summary\n\nStandard errors\nConfidence intervals\nStandard errors for functions of estimates\n\nDelta method\nSimulation\n\nBootstrap"
+  },
+  {
+    "objectID": "uncertainty.html#example-pfizer-covid-vaccine-rct",
+    "href": "uncertainty.html#example-pfizer-covid-vaccine-rct",
+    "title": "Uncertainty Quantification",
+    "section": "Example: Pfizer Covid Vaccine RCT",
+    "text": "Example: Pfizer Covid Vaccine RCT\n\nNumber of participants and number infected by treatment status\n\n\n\n\nGroup\nTreated\nPlacebo\n\n\n\n\nAll\n19965\n20172\n\n\nInfected\n9\n169\n\n\n65+\n4044\n4067\n\n\n65+ Infected\n1\n19"
+  },
+  {
+    "objectID": "uncertainty.html#example-pfizer-covid-vaccine-rct-1",
+    "href": "uncertainty.html#example-pfizer-covid-vaccine-rct-1",
+    "title": "Uncertainty Quantification",
+    "section": "Example Pfizer Covid Vaccine RCT",
+    "text": "Example Pfizer Covid Vaccine RCT\n\n\n\nCode\nimport statsmodels.api as sm\n\nclass binarybinaryrct :\n    def __init__(self, NT, NU, NYT, NYU):\n        self.NT=NT\n        self.NU=NU\n        self.NYT=NYT\n        self.NYU=NYU\n\n    def ATE(self):\n        return (self.NYT/self.NT - self.NYU/self.NU)\n\n    def table(self):\n        return(\"|  | Infection Rate per 1000|\\n\"+\n               \"|---|---|\\n\"\n               f\"|Treated| {self.NYT/self.NT*1000:.2}|\\n\" +\n               f\"|Control| {self.NYU/self.NU*1000:.2}|\\n\" +\n               f\"|Difference| {self.ATE()*1000:.2}|\\n\")\n    def VE(self):\n        tb = sm.stats.Table2x2([[self.NYT, self.NT - self.NYT], [self.NYU, self.NU - self.NYU]])\n        ve=1-tb.riskratio\n        ci = tb.riskratio_confint()\n        ci = [1-ci[1],1-ci[0]]\n        return(ve,ci)\n\npfizerall = binarybinaryrct(19965, 20172, 9, 169)\npfizer65 = binarybinaryrct(4044, 4067, 1, 19)\n\nprint(\"\\n- All\\n\\n\" + pfizerall.table() + \"\\n - 65+\\n\\n\" + pfizer65.table())\n\n\nAll\n\n\n\n\n\nInfection Rate per 1000\n\n\n\n\nTreated\n0.45\n\n\nControl\n8.4\n\n\nDifference\n-7.9\n\n\n\n\n65+\n\n\n\n\n\nInfection Rate per 1000\n\n\n\n\nTreated\n0.25\n\n\nControl\n4.7\n\n\nDifference\n-4.4\n\n\n\n\n\nWe see the sample ATE of the Vaccine on infections per 1000 people\nSample ATE is random, how confident can we be that it is near the population ATE?\n\n\nStandard Errors"
+  },
+  {
+    "objectID": "uncertainty.html#standard-errors",
+    "href": "uncertainty.html#standard-errors",
+    "title": "Uncertainty Quantification",
+    "section": "Standard Errors",
+    "text": "Standard Errors\n\n\n\nStandard Error = standard deviation of an estimator\nIn this example, ATE is difference of two proportions, so \\[\n\\begin{align*}\n  \\var(ATE) & = \\var(\\hat{p}_1 - \\hat{p}_0) \\\\\n  & = \\var(\\hat{p}_1) + \\var(\\hat{p}_0) \\\\\n  & = \\var\\left(\\frac{1}{N_1} \\sum_{i=1}^{N_1} Y_i \\right) + \\var\\left(\\frac{1}{N_0} \\sum_{i=1}^{N_0} Y_i \\right) \\\\\n  & = \\frac{1}{N_1} \\hat{p}_1(1-\\hat{p}_1) + \\frac{1}{N_0} \\hat{p}_0(1-\\hat{p}_0)\n\\end{align*}\n\\]\n\n\n\nCode\ndef tablewithse(self, scale=1000):\n    p1 = self.NYT/self.NT\n    p0 = self.NYU/self.NU\n    se = (p1*(1-p1)/self.NT + p0*(1-p0)/self.NU)**0.5\n    return(f\"|  | Infection Rate per {scale}|\\n\"+\n           \"|---|---|\\n\"\n           f\"|Treated| {p1*scale:.2} ({scale*(p1*(1-p1)/self.NT)**0.5:.2})|\\n\" +\n           f\"|Control| {p0*scale:.2} ({scale*(p0*(1-p0)/self.NU)**0.5:.2})|\\n\" +\n           f\"|Difference| {self.ATE()*scale:.2} ({se*scale:.2})|\\n\")\n\nbinarybinaryrct.table = tablewithse\n\nprint(pfizerall.table())\n\n\n\n\n\nInfection Rate per 1000\n\n\n\n\nTreated\n0.45 (0.15)\n\n\nControl\n8.4 (0.64)\n\n\nDifference\n-7.9 (0.66)"
+  },
+  {
+    "objectID": "uncertainty.html#confidence-intervals",
+    "href": "uncertainty.html#confidence-intervals",
+    "title": "Uncertainty Quantification",
+    "section": "Confidence Intervals",
+    "text": "Confidence Intervals\n\nFunction of data constructed such that \\[\nP(ATE \\in \\widehat{CI}_\\alpha) \\approx \\alpha\n\\]\nCan create if we know the (approximate) distribution of the data or the estimate"
+  },
+  {
+    "objectID": "uncertainty.html#exact-confidence-interval",
+    "href": "uncertainty.html#exact-confidence-interval",
+    "title": "Uncertainty Quantification",
+    "section": "Exact Confidence Interval",
+    "text": "Exact Confidence Interval\n\nKnowing distribution of \\(\\hat{p}\\) given \\(p\\) can compute \\(P(|\\hat{p}-p|\\geq |\\hat{p}_{obs} - p|)\\) \\[\n\\widehat{CI}_\\alpha(\\hat{p}_{obs}) = \\{p: P(|\\hat{p}-p| \\leq |\\hat{p}_{obs} - p|) \\leq \\alpha \\}\n\\]\n\n\ndef proportioncisim(phat, n, level=0.95, S=100_000):\n    se = (phat*(1-phat)/n)**0.5\n    dp = se/20\n    p = phat - dp\n    while (abs(np.random.binomial(n,p, S)/n-p) &lt;= abs((phat-p))).mean() &lt; level :\n        p = p - dp\n        if p &lt; 0:\n            break\n    plo = p\n    p = phat + dp\n    while (abs(np.random.binomial(n,p,S)/n-p) &lt;= abs((phat-p))).mean() &lt; level :\n        p = p + dp\n        if p &lt; 0:\n            break\n    phi = p\n\n    return(plo,phi)\n\nphat = 0.05\nn = 100\nproportioncisim(phat, 100, level=0.95)\n\n(0.024936331074641174, 0.10557596153014372)"
+  },
+  {
+    "objectID": "uncertainty.html#references",
+    "href": "uncertainty.html#references",
+    "title": "Uncertainty Quantification",
+    "section": "References",
+    "text": "References\n\n\n\n\n\n\n\n\nChernozhukov, V., C. Hansen, N. Kallus, M. Spindler, and V. Syrgkanis. 2024. Applied Causal Inference Powered by ML and AI. https://causalml-book.org/.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nRaič, Martin. 2019. “A multivariate Berry–Esseen theorem with explicit constants.” Bernoulli 25 (4A): 2824–53. https://doi.org/10.3150/18-BEJ1072."
+  },
+  {
+    "objectID": "uncertainty.html#sources-and-further-reading",
+    "href": "uncertainty.html#sources-and-further-reading",
+    "title": "Uncertainty Quantification",
+    "section": "Sources and Further Reading",
+    "text": "Sources and Further Reading\n\nChapter 3 of Facure (2022)\nChapter 1 of Chernozhukov et al. (2024)"
+  },
+  {
+    "objectID": "uncertainty.html#exact-estimator-distribution",
+    "href": "uncertainty.html#exact-estimator-distribution",
+    "title": "Uncertainty Quantification",
+    "section": "Exact Estimator Distribution",
+    "text": "Exact Estimator Distribution\n\nConfidence interval for \\(P(Y)\\) with \\(Y_i \\in \\{0,1\\}\\), i.i.d.\nGiven \\(P(Y)=p\\) can calculate or simulate distribution of \\(\\hat{p} = \\frac{1}{n} \\sum Y_i\\)\n\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nps = [0.1, 0.05, 0.01]\nN = 400\nS = 100_000\nfor p in ps:\n    Y = np.random.binomial(1, p, (S, N))\n    Ybar = Y.mean(axis=1)\n    plt.hist(Ybar, bins=20, alpha=0.5,\n             label=f\"p₀={p}\")\n\nplt.title(\"Distribution of Sample Proportion\")\nplt.legend()\nplt.show()"
+  },
+  {
+    "objectID": "uncertainty.html#exact-confidence-interval-1",
+    "href": "uncertainty.html#exact-confidence-interval-1",
+    "title": "Uncertainty Quantification",
+    "section": "Exact Confidence Interval",
+    "text": "Exact Confidence Interval\n\nimport scipy\n#| echo: true\ndef proportionci(phat, n, level=0.95):\n    se = (phat*(1-phat)/n)**0.5\n    dp = se/200\n    k = round(phat*n)\n    p = phat - dp\n    while (scipy.stats.binom.cdf(k,n,p) &lt; (1-(1-level)/2) ) :\n        p = p - dp\n        if (p &lt; 0):\n            break\n    plo = p\n    p = phat + dp\n    while (scipy.stats.binom.cdf(k,n,p) &gt; (1-level)/2) :\n        p = p + dp\n        if p &lt; 0 :\n            break\n    phi = p\n    return(plo,phi)\n\nproportionci(phat, n)\n\n(0.022320991708517042, 0.11287711726057285)"
+  },
+  {
+    "objectID": "uncertainty.html#standard-errors-1",
+    "href": "uncertainty.html#standard-errors-1",
+    "title": "Uncertainty Quantification",
+    "section": "Standard Errors",
+    "text": "Standard Errors\n\n\n\nStandard Error = standard deviation of an estimator\nIn this example, ATE is difference of two proportions, so \\[\n\\begin{align*}\n  \\var(ATE) & = \\var(\\hat{p}_1 - \\hat{p}_0) \\\\\n  & = \\var(\\hat{p}_1) + \\var(\\hat{p}_0) \\\\\n  & = \\var\\left(\\frac{1}{N_1} \\sum_{i=1}^{N_1} Y_i \\right) + \\var\\left(\\frac{1}{N_0} \\sum_{i=1}^{N_0} Y_i \\right) \\\\\n  & = \\frac{1}{N_1} \\hat{p}_1(1-\\hat{p}_1) + \\frac{1}{N_0} \\hat{p}_0(1-\\hat{p}_0)\n\\end{align*}\n\\]\n\n\n\nCode\ndef tablewithse(self, scale=1000):\n    p1 = self.NYT/self.NT\n    p0 = self.NYU/self.NU\n    se = (p1*(1-p1)/self.NT + p0*(1-p0)/self.NU)**0.5\n    return(f\"|  | Infection Rate per {scale}|\\n\"+\n           \"|---|---|\\n\"\n           f\"|Treated| {p1*scale:.2} ({scale*(p1*(1-p1)/self.NT)**0.5:.2})|\\n\" +\n           f\"|Control| {p0*scale:.2} ({scale*(p0*(1-p0)/self.NU)**0.5:.2})|\\n\" +\n           f\"|Difference| {self.ATE()*scale:.2} ({se*scale:.2})|\\n\")\n\nbinarybinaryrct.table = tablewithse\n\nprint(pfizerall.table())\n\n\n\n\n\nInfection Rate per 1000\n\n\n\n\nTreated\n0.45 (0.15)\n\n\nControl\n8.4 (0.64)\n\n\nDifference\n-7.9 (0.66)"
+  },
+  {
+    "objectID": "uncertainty.html#confidence-intervals-1",
+    "href": "uncertainty.html#confidence-intervals-1",
+    "title": "Uncertainty Quantification",
+    "section": "Confidence Intervals",
+    "text": "Confidence Intervals\n\nFunction of data constructed such that \\[\nP(ATE \\in \\widehat{CI}_\\alpha) \\approx \\alpha\n\\]\nCan create if we know the (approximate) distribution of the data or the estimate"
+  },
+  {
+    "objectID": "uncertainty.html#approximate-confidence-interval",
+    "href": "uncertainty.html#approximate-confidence-interval",
+    "title": "Uncertainty Quantification",
+    "section": "Approximate Confidence Interval",
+    "text": "Approximate Confidence Interval\n\nUsually, distribution of data and/or estimator unknown\nBut a Central Limit Theorem can give an approximate distribution"
+  },
+  {
+    "objectID": "uncertainty.html#central-limit-theorem",
+    "href": "uncertainty.html#central-limit-theorem",
+    "title": "Uncertainty Quantification",
+    "section": "Central Limit Theorem",
+    "text": "Central Limit Theorem\n\n\n\n\nBerry-Esseen Central Limit Theorem\n\n\nIf \\(X_i\\) are i.i.d. with \\(\\Er[X] = 0\\) and \\(\\var(X)=1\\), then \\[\n\\sup_{x \\in \\R} P\\left( \\left\\vert\nP\\left(\\frac{1}{\\sqrt{n}} \\sum_{i=1}^n X_i \\leq x \\right) - \\Phi(X) \\right\\vert \\right) \\leq C \\Er[|X|^3]/\\sqrt{n}\n\\] where \\(\\Phi\\) is the normal CDF.\n\n\n\n\n\n\n\n\n\nMultivariate Central Limit Theorem\n\n\nIf \\(X_i \\in \\R^d\\) are i.i.d. with \\(\\Er[X] = 0\\) and \\(\\var(X)=I_d\\), then \\[\n\\sup_{A \\subset \\R^d, \\text{convex}} P\\left( \\left\\vert\nP\\left(\\frac{1}{\\sqrt{n}} \\sum_{i=1}^n X_i \\in A \\right) - P(N(0,I_d) \\in A) \\right\\vert \\right) \\leq\n(42 d^{1/4} + 16) \\Er[\\Vert X \\Vert ^3]/\\sqrt{n}\n\\]\n1\n\n\n\n\n\nSee Raič (2019) for details."
+  },
+  {
+    "objectID": "uncertainty.html#approximate-confidence-interval-1",
+    "href": "uncertainty.html#approximate-confidence-interval-1",
+    "title": "Uncertainty Quantification",
+    "section": "Approximate Confidence Interval",
+    "text": "Approximate Confidence Interval\n\ndef normalci(estimate, se, level=0.95):\n    return (estimate + se*scipy.stats.norm.ppf((1-level)/2),\n            estimate + se*scipy.stats.norm.ppf(1-(1-level)/2))\n\nphat = pfizerall.NYT/pfizerall.NT\nse = (phat*(1-phat)/pfizerall.NT)**0.5\nlo,hi=normalci(phat, se)\nlo*1000, hi*1000\n\n(np.float64(0.1563452787741701), np.float64(0.7452324823077232))\n\n\n\ndef differenceci(e1,se1, e0, se0, level=0.95) :\n    diff = e1 - e0\n    se = (se1*se1 + se0*s0)**0.5\n    return(normalci(diff, se, level=level))\n\np0 = pfizerall.NYU/pfizerall.NU\ns0 = (p0*(1-p0)/pfizerall.NU)**0.5\nlo,hi=differenceci(phat,se, p0, s0)\nlo*1000, hi*1000\n\n(np.float64(-9.218976095611334), np.float64(-6.63534540961651))"
+  },
+  {
+    "objectID": "uncertainty.html#functions-of-estimates-1",
+    "href": "uncertainty.html#functions-of-estimates-1",
+    "title": "Uncertainty Quantification",
+    "section": "Functions of Estimates",
+    "text": "Functions of Estimates\n\nOften report functions of estimates\n\nE.g. \\[\n\\text{vaccine efficacy} = 1 - \\frac{\\Er[Y|T=1]} {\\Er[Y|T=0]}\n\\]"
+  },
+  {
+    "objectID": "uncertainty.html#delta-method",
+    "href": "uncertainty.html#delta-method",
+    "title": "Uncertainty Quantification",
+    "section": "Delta Method",
+    "text": "Delta Method\n\n\n\n\nDelta Method\n\n\nIf 1. \\(\\sqrt{n} (\\hat{\\theta} - \\theta_0) \\leadsto N(0,\\Omega)\\)\n\n\\(g: \\R^k \\to \\R^m\\) is continuously differentiable\n\nThen \\(\\sqrt{n}(g(\\hat{\\theta}) - g(\\theta_0)) \\leadsto N\\left(0, D(g)(\\theta_0) \\Omega D(g)(\\theta_0) \\right)'\\)\n\n\n\n\n\nE.g. vaccine efficacy\n\n\\(\\theta_0 = (\\Er[Y|T=0], \\Er[Y|t=1])\\)\n\\(g(\\theta) = 1 - \\theta_2/\\theta_1\\)\n\\(D(g)(\\theta_0) = \\begin{pmatrix} \\frac{\\Er[Y|T=1]}{\\Er[Y|T=0]^2} & -\\frac{1}{\\Er[Y|T=0]} \\end{pmatrix}\\)\n\\(\\Omega = \\begin{pmatrix} p_0(1-p_0)/n_0 & 0 \\\\ 0 & p_1(1-p_1)/n_1 \\end{pmatrix}\\)"
+  },
+  {
+    "objectID": "uncertainty.html#delta-method-2",
+    "href": "uncertainty.html#delta-method-2",
+    "title": "Uncertainty Quantification",
+    "section": "Delta Method",
+    "text": "Delta Method\n\nimport torch\n\ntheta = [p0, phat]\nOmega = np.matrix([[s0**2, 0], [0, se**2]])\ndef ve(theta) :\n    return(1 - theta[1]/theta[0])\n\ndef deltamethod(g, theta, Omega) :\n    x = torch.tensor(theta, requires_grad=True)\n    val = g(x)\n    val.backward()\n    Dg = x.grad.numpy()\n    return(Dg @ Omega @ Dg.transpose())\n\nprint(f\"Efficacy among everyone is {ve(theta):.3} ({deltamethod(ve,theta,Omega)[0,0]**0.5:.2})\")\n\nEfficacy among everyone is 0.946 (0.018)"
+  },
+  {
+    "objectID": "uncertainty.html#simulation",
+    "href": "uncertainty.html#simulation",
+    "title": "Uncertainty Quantification",
+    "section": "Simulation",
+    "text": "Simulation\n\nSuppose \\(\\sqrt{n} (\\hat{\\theta} - \\theta_0) \\leadsto N(0,\\Omega)\\)\nCreate \\(\\tilde{\\theta}_s \\sim N(\\hat{\\theta}, \\Omega/n)\\)\n\nso \\(\\sqrt{n}(\\tilde{\\theta}_s - \\hat{\\theta}) \\sim N(0,\\Omega)\\)\n\nand \\(\\sqrt{n}(g(\\theta_{s}) - g(\\hat{\\theta})) \\approx \\sqrt{n}(g(\\hat{\\theta}) - g(\\theta_0))\\)\n\n\n\ndef simulateg(g,theta,Omega,S=10_000):\n    thetas = np.random.multivariate_normal(theta, Omega, S)\n    gs = np.apply_along_axis(g,1,thetas)\n    return(gs, ((gs-g(theta))**2).mean())\n\ngs, gv=simulateg(ve, theta, Omega)\nprint(f\"simulation se = {gv**0.5:.2}\")\n\nplt.hist(gs, bins=50, alpha=0.5)\nplt.title(\"Distribution of Vaccine Efficacy\")\nplt.show()\n\n\nsimulation se = 0.019"
+  },
+  {
+    "objectID": "uncertainty.html#exact-confidence-interval-2",
+    "href": "uncertainty.html#exact-confidence-interval-2",
+    "title": "Uncertainty Quantification",
+    "section": "Exact Confidence Interval",
+    "text": "Exact Confidence Interval\n\nphat = pfizerall.NYT/pfizerall.NT\nplo, phi=proportionci(phat,pfizerall.NT)\n1000*plo, 1000*phi\n\n(0.23971701200382992, 0.8556562725036012)"
+  },
+  {
+    "objectID": "uncertainty.html#bootstrap-1",
+    "href": "uncertainty.html#bootstrap-1",
+    "title": "Uncertainty Quantification",
+    "section": "Bootstrap",
+    "text": "Bootstrap\n\nData \\(\\{x_i\\}_{i=1}^n\\)\nEstimator \\(\\hat{\\theta}(\\{x_i\\}_{i=1}^n)\\)\n\ne.g. mean \\(\\hat{\\theta}(\\{x_i\\}_{i=1}^n) = \\frac{1}{n} \\sum_{i=1}^n x_i\\)\n\nIf we knew the distribution of \\(x\\), we could calculate the distribution of \\(\\hat{\\theta}\\)\n\n\n\nBootstrap: use empirical distribution as estimate of unknown distribution of \\(x\\)"
+  },
+  {
+    "objectID": "uncertainty.html#bootstrap-2",
+    "href": "uncertainty.html#bootstrap-2",
+    "title": "Uncertainty Quantification",
+    "section": "Bootstrap",
+    "text": "Bootstrap\n\nimport seaborn as sns\n\ndef dgp(n):\n    x = np.exp(abs(np.random.normal(0,1,n)))\n    # x = np.random.normal(0,1,n)\n    return x\n\ndef estimator(x):\n    return np.median(x)\n\nn = 100\nS = 9999\n# simulate true distribution of estimator\ntrue = estimator(dgp(n*100_00))\nmediansims = [estimator(dgp(n)) - true for _ in range(S)]\n\ndef bootstrap(data, estimator, B=999):\n    n = len(data)\n    est = estimator(data)\n    bestimates = [estimator(np.random.choice(data,size=n, replace=True))-est for _ in range(B)]\n    return bestimates\n\nsns.ecdfplot(mediansims, label=\"True distribution\", linewidth=3)\nfor b in range(3):\n    sns.ecdfplot(bootstrap(dgp(n), estimator), alpha=0.5, label=f\"Bootstrap {b}\")\nplt.legend()\nplt.show()"
+  },
+  {
+    "objectID": "uncertainty.html#bootstrap-2-output",
+    "href": "uncertainty.html#bootstrap-2-output",
+    "title": "Uncertainty Quantification",
+    "section": "Bootstrap",
+    "text": "Bootstrap"
+  },
+  {
+    "objectID": "uncertainty.html#bootstrap-confidence-interval",
+    "href": "uncertainty.html#bootstrap-confidence-interval",
+    "title": "Uncertainty Quantification",
+    "section": "Bootstrap Confidence Interval",
+    "text": "Bootstrap Confidence Interval\n\n def bootstrapci(data, estimator, B=999, level=0.95):\n    estimates = bootstrap(data, estimator, B)\n    lo = np.percentile(estimates, 100*(1-level)/2) + estimator(data)\n    hi = np.percentile(estimates, 100*(1-(1-level)/2)) + estimator(data)\n    return lo, hi\n\nbootstrapci(dgp(n), estimator)\n\n(np.float64(1.5547337473677028), np.float64(2.2840793049422867))"
+  },
+  {
+    "objectID": "uncertainty.html#multiple-testing",
+    "href": "uncertainty.html#multiple-testing",
+    "title": "Uncertainty Quantification",
+    "section": "Multiple Testing",
+    "text": "Multiple Testing\n\nIf construct many confidence intervals, there is high change at least one will not contain the true parameter\n\n65% chance with twenty 95% confidence intervals\n\nTrying many things and only focusing on “statistically significant” results only leads to spurious conclusions"
+  },
+  {
+    "objectID": "uncertainty.html#dependence",
+    "href": "uncertainty.html#dependence",
+    "title": "Uncertainty Quantification",
+    "section": "Dependence",
+    "text": "Dependence\n\nStandard errors require assumptions limiting dependence\n\nIndependent observations\nNot-too-dependent observations\n\nClustered (for panel or grouped data)\nStationary (for time series)\n\n\nBootstrap needs to be modified for dependence"
+  },
+  {
+    "objectID": "uncertainty.html#pathological-parameter-values",
+    "href": "uncertainty.html#pathological-parameter-values",
+    "title": "Uncertainty Quantification",
+    "section": "Pathological Parameter Values",
+    "text": "Pathological Parameter Values\n\nUsual asymptotics (CLT, bootstrap, etc) don’t work if\n\nTrue parameter on boundary (e.g. variance = 0)\nTrue parameter near value where distribution of estimator discontinuous\n\nWeak instruments\nUnit root"
+  },
+  {
+    "objectID": "uncertainty.html#high-dimensions",
+    "href": "uncertainty.html#high-dimensions",
+    "title": "Uncertainty Quantification",
+    "section": "High Dimensions",
+    "text": "High Dimensions\n\nNumber of parameters (\\(p\\)) large compared to sample size (\\(n\\))\nUsual asymptotics break down\nRisk of overfitting\nInference difficult, but possible\n\nChernozhukov et al. (2024) chapter 4\n\nMore later …"
   }
 ]

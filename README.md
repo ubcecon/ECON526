@@ -171,7 +171,7 @@ Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/le
 
 
 -  **October 14 (Statutory holiday)**
-<!-- 
+<!--
 -  **October 16** Stats Review: Quantifying Uncertainty in Causal Inference + Midterm Logistics Review
     - **Material:**
       - [Stats Review: Quantifying Uncertainty in Applied Economics](https://ubcecon.github.io/ECON526/lectures/lectures/uncertainty_bias_variance.html)
@@ -185,59 +185,56 @@ Slides for the lectures can be found [here](https://ubcecon.github.io/ECON526/le
     - **Self-study:**
       - https://matheusfacure.github.io/python-causality-handbook/01-Introduction-To-Causality.html
       - https://matheusfacure.github.io/python-causality-handbook/02-Randomised-Experiments.html
-       
+
 -  **October 21 (IN CLASS MIDTERM)**
 
 ### Paul
 
-[HTML Slides](https://ubcecon.github.io/ECON526/paul/), [source](https://github.com/ubcecon/526)
+[Go here](https://ubcecon.github.io/ECON526/paul/) for a list of topics, reading, and slides.
 
--   **October 23** Uncertainty Quantification II
-    - **Material:**
-      - Finish [Stats Review: Quantifying Uncertainty in Applied Economics](https://ubcecon.github.io/ECON526/lectures/lectures/uncertainty_bias_variance.html)
+Here is the [source](https://github.com/ubcecon/526) for my slides.
 
--   **October 28** Causal Graphical Models
-    - **Material:**
-      - [Causal Graphical Models](https://ubcecon.github.io/ECON526/lectures/lectures/causal_graphical_models.html#/title-slide)
-      - https://matheusfacure.github.io/python-causality-handbook/04-Graphical-Causal-Models.html
-    - **Self-study:**
-      - https://theeffectbook.net/ch-DrawingCausalDiagrams.html
+See "Sources and Futher Reading" (2nd last slide) on each set of slides for additional reading.
 
--   **October 30** Regression, Confounders
-    - **Material:**
-      - https://matheusfacure.github.io/python-causality-handbook/05-The-Unreasonable-Effectiveness-of-Linear-Regression.html
-      - https://matheusfacure.github.io/python-causality-handbook/06-Grouped-and-Dummy-Regression.html
-      - https://matheusfacure.github.io/python-causality-handbook/07-Beyond-Confounders.html
+#### Important Dates
 
--   **November 4** Instrumental Variables, Noncompliance, LATE
-    - **Material:**
-      - https://matheusfacure.github.io/python-causality-handbook/08-Instrumental-Variables.html
-      - https://matheusfacure.github.io/python-causality-handbook/09-Non-Compliance-and-LATE.html
+<!-- - **October 23** [Introduction to Causality](https://ubcecon.github.io/ECON526/paul/causality_intro.html) -->
 
--   **November 6**: Matching
-    - **Material:**
-      - https://matheusfacure.github.io/python-causality-handbook/10-Matching.html
-      - https://matheusfacure.github.io/python-causality-handbook/11-Propensity-Score.html
+<!-- - **October 28** [Uncertainty Quantification](https://ubcecon.github.io/ECON526/paul/uncertainty.html) -->
+
+<!-- - **October 30** [Causal Graphs](https://ubcecon.github.io/ECON526/paul/causal_graphs.html) -->
+
+<!-- - **November 4** Regression -->
+<!--     - **Material:** -->
+<!--       - https://matheusfacure.github.io/python-causality-handbook/05-The-Unreasonable-Effectiveness-of-Linear-Regression.html -->
+<!--       - https://matheusfacure.github.io/python-causality-handbook/06-Grouped-and-Dummy-Regression.html -->
+<!--       - https://matheusfacure.github.io/python-causality-handbook/07-Beyond-Confounders.html -->
+
+<!-- -  **November 6**: [Matching](https://ubcecon.github.io/ECON526/paul/matching.html) -->
 
 -  **November 11 (Midterm Break)**
 -  **November 13 (Midterm Break)**
--  **November 18**: [Matching](https://ubcecon.github.io/ECON526/paul/matching.html)
--  **November 20**: Predictive Models
-    - https://matheusfacure.github.io/python-causality-handbook/17-Predictive-Models-101.html
-    - https://datascience.quantecon.org/tools/regression.html
--  **November 25**:  Finish [Matching](https://ubcecon.github.io/ECON526/paul/matching.html), start [Difference in Differences](https://ubcecon.github.io/ECON526/paul/did.html)
-    - https://matheusfacure.github.io/python-causality-handbook/13-Difference-in-Differences.html
--  **November 27**: [Panel Data and Fixed Effects](https://ubcecon.github.io/ECON526/paul/fe.html), [The Difference in Differences Saga](https://ubcecon.github.io/ECON526/paul/moredid.html)
-    - https://matheusfacure.github.io/python-causality-handbook/14-Panel-Data-and-Fixed-Effects.html
-    - https://matheusfacure.github.io/python-causality-handbook/24-The-Diff-in-Diff-Saga.html
--  **December 2nd**: [Synthetic Control](https://ubcecon.github.io/ECON526/paul/syntheticcontrol.html)
-    - https://matheusfacure.github.io/python-causality-handbook/15-Synthetic-Control.html
-    - https://matheusfacure.github.io/python-causality-handbook/25-Synthetic-Diff-in-Diff.html
--  **December 4th**: [Debiased/Orthogonal Machine Learning](https://ubcecon.github.io/ECON526/paul/doubleml.html)
-    - https://datascience.quantecon.org/applications/ml_in_economics.html#estimation-of-nuisance-functions
-- **time-permitting**: [Treatment Heterogeneity and Conditional Effects](https://ubcecon.github.io/ECON526/paul/conditionaleffect.html)
-    - https://datascience.quantecon.org/applications/heterogeneity.html
-- **time-permitting**: 8. [Neural Networks](https://ubcecon.github.io/ECON526/paul/neuralnets.html)
-   - Reading: [QuantEcon Datascience: Regression - Neural Networks](https://datascience.quantecon.org/tools/regression.html#neural-networks)
+<!-- -  **November 18**: Predictive Models -->
+<!--     - https://matheusfacure.github.io/python-causality-handbook/17-Predictive-Models-101.html -->
+<!--     - https://datascience.quantecon.org/tools/regression.html -->
+
+<!-- -  **November 20** Instrumental Variables -->
+<!--     - **Material:** -->
+<!--       - https://matheusfacure.github.io/python-causality-handbook/08-Instrumental-Variables.html -->
+<!--       - https://matheusfacure.github.io/python-causality-handbook/09-Non-Compliance-and-LATE.html -->
+<!-- -  **November 25**:  [Difference in Differences](https://ubcecon.github.io/ECON526/paul/did.html) -->
+<!--     - https://matheusfacure.github.io/python-causality-handbook/13-Difference-in-Differences.html -->
+<!-- -  **November 27**: [Panel Data and Fixed Effects](https://ubcecon.github.io/ECON526/paul/fe.html), [The Difference in Differences Saga](https://ubcecon.github.io/ECON526/paul/moredid.html) -->
+<!--     - https://matheusfacure.github.io/python-causality-handbook/14-Panel-Data-and-Fixed-Effects.html -->
+<!--     - https://matheusfacure.github.io/python-causality-handbook/24-The-Diff-in-Diff-Saga.html -->
+<!-- -  **December 2nd**: [Synthetic Control](https://ubcecon.github.io/ECON526/paul/syntheticcontrol.html) -->
+<!--     - https://matheusfacure.github.io/python-causality-handbook/15-Synthetic-Control.html -->
+<!--     - https://matheusfacure.github.io/python-causality-handbook/25-Synthetic-Diff-in-Diff.html -->
+<!-- -  **December 4th**: [Debiased Machine Learning](https://ubcecon.github.io/ECON526/paul/doubleml.html) -->
+<!--     - https://datascience.quantecon.org/applications/ml_in_economics.html#estimation-of-nuisance-functions -->
+<!-- - **time-permitting**: [Treatment Heterogeneity and Conditional Effects](https://ubcecon.github.io/ECON526/paul/conditionaleffect.html) -->
+<!--     - https://datascience.quantecon.org/applications/heterogeneity.html -->
+<!-- - **time-permitting**: [Neural Networks](https://ubcecon.github.io/ECON526/paul/neuralnets.html) -->
+<!--    - Reading: [QuantEcon Datascience: Regression - Neural Networks](https://datascience.quantecon.org/tools/regression.html#neural-networks) -->
 - **December 15**
     - **PROJECT DUE**

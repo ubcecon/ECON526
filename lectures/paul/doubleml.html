@@ -823,7 +823,7 @@ f_\theta(x) = \Er[y|x] - \theta \partial_x \log p(x) + f''(x) + f'(x) \partial_x
 </section>
 <section id="data" class="slide level2">
 <h2>Data</h2>
-<div id="40d80256" class="cell" data-execution_count="1">
+<div id="40d80256" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>imports</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -838,7 +838,7 @@ f_\theta(x) = \Er[y|x] - \theta \partial_x \log p(x) + f''(x) + f'(x) \partial_x
 <span id="cb1-10"><a></a><span class="im">from</span> statsmodels.iolib.summary2 <span class="im">import</span> summary_col</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="b0f6c50f" class="cell" data-execution_count="2">
+<div id="b0f6c50f" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>cpsall <span class="op">=</span> pd.read_stata(<span class="st">"https://www.nber.org/morg/annual/morg20.dta"</span>)</span>
 <span id="cb2-2"><a></a><span class="co"># take subset of data just to reduce computation time</span></span>
 <span id="cb2-3"><a></a>cps <span class="op">=</span> cpsall.sample(<span class="dv">30000</span>, replace<span class="op">=</span><span class="va">False</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
@@ -1089,7 +1089,7 @@ f_\theta(x) = \Er[y|x] - \theta \partial_x \log p(x) + f''(x) + f'(x) \partial_x
 </section>
 <section id="partial-linear-model" class="slide level2">
 <h2>Partial Linear Model</h2>
-<div id="796d0c2a" class="cell" data-execution_count="3">
+<div id="796d0c2a" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="kw">def</span> partial_linear(y, d, X, yestimator, destimator, folds<span class="op">=</span><span class="dv">3</span>):</span>
 <span id="cb3-2"><a></a>    <span class="co">"""Estimate the partially linear model y = d*C + f(x) + e</span></span>
 <span id="cb3-3"><a></a></span>
@@ -1128,7 +1128,7 @@ f_\theta(x) = \Er[y|x] - \theta \partial_x \log p(x) + f''(x) + f'(x) \partial_x
 </section>
 <section id="unconditional-gap" class="slide level2">
 <h2>Unconditional Gap</h2>
-<div id="bf296b61" class="cell" data-execution_count="4">
+<div id="bf296b61" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>cps[<span class="st">"female"</span>] <span class="op">=</span> (cps.sex<span class="op">==</span><span class="dv">2</span>)</span>
@@ -1242,7 +1242,7 @@ Standard errors in parentheses.<br>
 </section>
 <section id="adding-controls" class="slide level2">
 <h2>Adding Controls</h2>
-<div id="c1d4da95" class="cell" data-execution_count="5">
+<div id="c1d4da95" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">from</span> patsy <span class="im">import</span> dmatrices</span>
 <span id="cb5-2"><a></a>fmla  <span class="op">=</span> <span class="st">"log_earn + female ~ log_uhours + log_hourslw + I(age**2) + age + C(grade92) + C(race) + C(smsastat) + C(unionmme) + C(unioncov)"</span> <span class="co">#C(ind02) + C(occ2012)"</span></span>
 <span id="cb5-3"><a></a>yd, X <span class="op">=</span> dmatrices(fmla,cps)</span>
@@ -1252,7 +1252,7 @@ Standard errors in parentheses.<br>
 </section>
 <section id="estimating-eta" class="slide level2">
 <h2>Estimating <span class="math inline">\(\eta\)</span></h2>
-<div id="ba539342" class="cell" data-execution_count="6">
+<div id="ba539342" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>alphas <span class="op">=</span> np.exp(np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">12</span>, <span class="dv">20</span>))</span>
 <span id="cb6-2"><a></a>lassoy <span class="op">=</span> linear_model.LassoCV(cv<span class="op">=</span><span class="dv">4</span>, alphas<span class="op">=</span>alphas, max_iter<span class="op">=</span><span class="dv">5000</span>).fit(X,logearn)</span>
 <span id="cb6-3"><a></a>lassod <span class="op">=</span> linear_model.LassoCV(cv<span class="op">=</span><span class="dv">4</span>, alphas<span class="op">=</span>alphas, max_iter<span class="op">=</span><span class="dv">5000</span>).fit(X,female)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1260,7 +1260,7 @@ Standard errors in parentheses.<br>
 </section>
 <section id="estimating-eta-1" class="slide level2">
 <h2>Estimating <span class="math inline">\(\eta\)</span></h2>
-<div id="5d041938" class="cell" data-execution_count="7">
+<div id="5d041938" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">2</span>)</span>
@@ -1296,7 +1296,7 @@ Standard errors in parentheses.<br>
 </section>
 <section id="estimating-eta-2" class="slide level2">
 <h2>Estimating <span class="math inline">\(\eta\)</span></h2>
-<div id="678d0b42" class="cell" data-execution_count="8">
+<div id="678d0b42" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="kw">def</span> pickalpha(lassocv) :</span>
 <span id="cb8-2"><a></a>    <span class="co">#imin = np.argmin(lassocv.mse_path_.mean(axis=1))</span></span>
 <span id="cb8-3"><a></a>    <span class="co">#msemin = lassocv.mse_path_.mean(axis=1)[imin]</span></span>
@@ -1311,7 +1311,7 @@ Standard errors in parentheses.<br>
 </section>
 <section id="estimate-theta" class="slide level2">
 <h2>Estimate <span class="math inline">\(\theta\)</span></h2>
-<div id="a42b3c49" class="cell" data-execution_count="9">
+<div id="a42b3c49" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a>pl_lasso <span class="op">=</span> partial_linear(logearn, female, X,</span>
 <span id="cb9-2"><a></a>                          linear_model.Lasso(alpha<span class="op">=</span>alphay),</span>
 <span id="cb9-3"><a></a>                          linear_model.Lasso(alpha<span class="op">=</span>alphad))</span>
@@ -1372,7 +1372,7 @@ Standard errors in parentheses.<br>
 </section>
 <section id="examining-predictions" class="slide level2">
 <h2>Examining Predictions</h2>
-<div id="f43b4a6f" class="cell" data-execution_count="10">
+<div id="f43b4a6f" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -1421,7 +1421,7 @@ Standard errors in parentheses.<br>
 </section>
 <section id="using-doubleml" class="slide level2">
 <h2>Using <code>doubleml</code></h2>
-<div id="00e6abb3" class="cell" data-execution_count="11">
+<div id="00e6abb3" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="im">import</span> doubleml</span>
@@ -1454,7 +1454,7 @@ d -0.181669  0.011178 -16.252139  2.157063e-59 -0.203578 -0.15976</code></pre>
 </section>
 <section id="visualizing-predictions-lasso-logistic-lasso" class="slide level2">
 <h2>Visualizing Predictions: Lasso &amp; Logistic Lasso</h2>
-<div id="088f61a5" class="cell" data-execution_count="12">
+<div id="088f61a5" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="kw">def</span> dmlpreddf(dml_model):</span>
@@ -1480,7 +1480,7 @@ d -0.181669  0.011178 -16.252139  2.157063e-59 -0.203578 -0.15976</code></pre>
 </section>
 <section id="with-gradient-boosted-trees" class="slide level2">
 <h2>With Gradient Boosted Trees</h2>
-<div id="cdeb32e9" class="cell" data-execution_count="13">
+<div id="cdeb32e9" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="im">from</span> lightgbm <span class="im">import</span> LGBMClassifier, LGBMRegressor</span>
@@ -1538,7 +1538,7 @@ d -0.163842  0.011051 -14.826095  9.934713e-50 -0.185501 -0.142182</code></pre>
 </section>
 <section id="visualizing-predictions-trees" class="slide level2">
 <h2>Visualizing Predictions: Trees</h2>
-<div id="35f4fd53" class="cell" data-execution_count="14">
+<div id="35f4fd53" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a>plotpredictions(dmlpreddf(dml_plr_gbt)).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1571,7 +1571,7 @@ D &amp; = m_0(X) + V
 </section>
 <section id="interactive-regression-model---lasso" class="slide level2">
 <h2>Interactive Regression Model - Lasso</h2>
-<div id="ae26df0e" class="cell" data-execution_count="15">
+<div id="ae26df0e" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a>np.random.seed(<span class="dv">123</span>)</span>
@@ -1630,7 +1630,7 @@ D &amp; = m_0(X) + V
 </section>
 <section id="interactive-regression-model---trees" class="slide level2">
 <h2>Interactive Regression Model - Trees</h2>
-<div id="15dd66b8" class="cell" data-execution_count="16">
+<div id="15dd66b8" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a>np.random.seed(<span class="dv">123</span>)</span>

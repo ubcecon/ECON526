@@ -463,23 +463,19 @@ Paul Schrimpf
 </section>
 <section id="example-impact-of-billboards-1" class="slide level2">
 <h2>Example: Impact of Billboards</h2>
-<div id="8f526367" class="cell" data-execution_count="2">
+<div id="20e90989" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> warnings</span>
 <span id="cb1-2"><a></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
-<span id="cb1-3"><a></a></span>
-<span id="cb1-4"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-5"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-6"><a></a><span class="im">from</span> matplotlib <span class="im">import</span> style</span>
-<span id="cb1-7"><a></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
-<span id="cb1-8"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb1-9"><a></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
-<span id="cb1-10"><a></a></span>
-<span id="cb1-11"><a></a>datadir<span class="op">=</span><span class="st">"./data"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb1-6"><a></a></span>
+<span id="cb1-7"><a></a>datadir<span class="op">=</span><span class="st">"./data"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="1bdf6ad8" class="cell" data-execution_count="3">
+<div id="60515726" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>data <span class="op">=</span> pd.read_csv(datadir <span class="op">+</span> <span class="st">"/billboard_impact.csv"</span>)</span>
 <span id="cb2-2"><a></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -547,7 +543,7 @@ Paul Schrimpf
 </section>
 <section id="means-and-differences" class="slide level2">
 <h2>Means and Differences</h2>
-<div id="55aa8616" class="cell" data-execution_count="4">
+<div id="dd662407" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>tbl <span class="op">=</span> data.groupby([<span class="st">'jul'</span>,<span class="st">'poa'</span>]).mean().unstack()</span>
 <span id="cb3-2"><a></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
@@ -604,7 +600,7 @@ Paul Schrimpf
 </div>
 </div>
 </div>
-<div id="e23fe3c3" class="cell" data-execution_count="5">
+<div id="dec7ac5b" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>tbl.diff(axis<span class="op">=</span><span class="dv">0</span>).iloc[<span class="dv">1</span>,:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>          poa
@@ -613,7 +609,7 @@ deposits  0      34.523192
 Name: 1, dtype: float64</code></pre>
 </div>
 </div>
-<div id="eb0211db" class="cell" data-execution_count="6">
+<div id="5b7fbfd0" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>tbl.diff(axis<span class="op">=</span><span class="dv">1</span>).iloc[:,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>jul
@@ -622,17 +618,17 @@ Name: 1, dtype: float64</code></pre>
 Name: (deposits, 1), dtype: float64</code></pre>
 </div>
 </div>
-<div id="6c4ce446" class="cell" data-execution_count="7">
+<div id="27dc0657" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a>tbl.diff(axis<span class="op">=</span><span class="dv">0</span>).diff(axis<span class="op">=</span><span class="dv">1</span>).iloc[<span class="dv">1</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>6.524557692307688</code></pre>
+<pre><code>np.float64(6.524557692307688)</code></pre>
 </div>
 </div>
 </section></section>
 <section>
 <section id="difference-in-differences" class="title-slide slide level1 center">
 <h1>Difference in Differences</h1>
-<p><span class="math display">\[
+<p><span class="math display">\[ %
 \def\Er{{\mathrm{E}}}
 \def\En{{\mathbb{E}_n}}
 \def\cov{{\mathrm{Cov}}}
@@ -662,7 +658,9 @@ Name: (deposits, 1), dtype: float64</code></pre>
 <section id="identification" class="slide level2">
 <h2>Identification</h2>
 <ul>
-<li>Average treatment effect on the treated: <span class="math display">\[
+<li>Average treatment effect on the treated:</li>
+</ul>
+<p><span class="math display">\[ %
 \begin{align*}
 ATT &amp; = \Er[y_{i1}(1) - \color{red}{y_{i1}(0)} | D_{i1} = 1] \\
 &amp; = \Er[y_{i1}(1) - y_{i0}(0) | D_{i1} = 1] - \Er[\color{red}{y_{i1}(0)} - y_{i0}(0) | D_{i1}=1] \\
@@ -670,8 +668,7 @@ ATT &amp; = \Er[y_{i1}(1) - \color{red}{y_{i1}(0)} | D_{i1} = 1] \\
 &amp; = \Er[y_{i1}(1) - y_{i0}(0) | D_{i1} = 1] - \Er[y_{i1}(0) - y_{i0}(0) | D_{i1}=0] \\
 &amp; = \Er[y_{i1} - y_{i0} | D_{i1}=1, D_{i0}=0] - \Er[y_{i1} - y_{i0} | D_{i1}=0, D_{i0}=0]
 \end{align*}
-\]</span></li>
-</ul>
+\]</span></p>
 </section>
 <section id="important-assumptions" class="slide level2">
 <h2>Important Assumptions</h2>
@@ -690,10 +687,10 @@ ATT &amp; = \Er[y_{i1}(1) - \color{red}{y_{i1}(0)} | D_{i1} = 1] \\
 <h2>Estimation</h2>
 <div class=".{incremental}">
 <ul>
-<li><p>Plugin: <span class="math display">\[
+<li><p>Plugin: <span class="math display">\[ %
 \widehat{ATT} = \frac{ \sum_{i=1}^n (y_{i1} - y_{i0})D_{i1}(1-D_{i0})}{\sum_{i=1}^n D_{i1}(1-D_{i0})} -  \frac{ \sum_{i=1}^n (y_{i1} - y_{i0})(1-D_{i1})(1-D_{i0})}{\sum_{i=1}^n (1-D_{i1})(1-D_{i0})}
 \]</span></p></li>
-<li><p>Regression: <span class="math display">\[
+<li><p>Regression: <span class="math display">\[ %
 y_{it} = \delta_t + \alpha 1\{D_{i1}=1\} + \beta D_{it} + \epsilon_{it}
 \]</span> then <span class="math inline">\(\hat{\beta} = \widehat{ATT}\)</span></p></li>
 </ul>
@@ -706,7 +703,7 @@ y_{it} = \delta_t + \alpha 1\{D_{i1}=1\} + \beta D_{it} + \epsilon_{it}
 </section>
 <section id="visualizing-difference-in-differences" class="slide level2">
 <h2>Visualizing Difference in Differences</h2>
-<div id="2bec76b2" class="cell" data-execution_count="8">
+<div id="1beb2f99" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>poa_before <span class="op">=</span> data.query(<span class="st">"poa==1 &amp; jul==0"</span>)[<span class="st">"deposits"</span>].mean()</span>
 <span id="cb10-2"><a></a>poa_after <span class="op">=</span> data.query(<span class="st">"poa==1 &amp; jul==1"</span>)[<span class="st">"deposits"</span>].mean()</span>
 <span id="cb10-3"><a></a>fl_before <span class="op">=</span> data.query(<span class="st">"poa==0 &amp; jul==0"</span>)[<span class="st">"deposits"</span>].mean()</span>
@@ -730,7 +727,7 @@ y_{it} = \delta_t + \alpha 1\{D_{i1}=1\} + \beta D_{it} + \epsilon_{it}
 </section>
 <section id="estimation-via-regression" class="slide level2">
 <h2>Estimation via Regression</h2>
-<div id="e3a35514" class="cell" data-execution_count="9">
+<div id="e64510d1" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>smf.ols(<span class="st">'deposits ~ poa*jul'</span>, data<span class="op">=</span>data).fit().summary().tables[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <table class="simpletable caption-top" data-quarto-postprocess="true">

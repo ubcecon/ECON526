@@ -6,11 +6,13 @@
       "/doubleml.html",
       "/index.html",
       "/fe.html",
+      "/causality_intro.html",
       "/did.html",
       "/matching.html",
       "/neuralnets.html",
       "/syntheticcontrol.html",
-      "/conditionaleffect.html"
+      "/conditionaleffect.html",
+      "/uncertainty.html"
     ]
   }
 ]
