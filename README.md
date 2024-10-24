@@ -4,7 +4,7 @@ This is a MA-level course in quantitative economics, data science, and causal in
 
 
 This course will have a combination of coding, theory, and development of mathematical background.  All coding is done in Python.
-[Link to Jesse's Lecture Slides](https://ubcecon.github.io/ECON526/lectures/index.html) and [Paul's HTML Slides](https://ubcecon.github.io/ECON526/paul/), [source](https://github.com/ubcecon/526)
+[Link to Jesse's Lecture Slides](https://ubcecon.github.io/ECON526/lectures/index.html) and [Paul's HTML Slides](https://ubcecon.github.io/ECON526/lectures/paul/), [source](https://github.com/ubcecon/526)
 
 
 # Course materials
