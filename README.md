@@ -48,7 +48,7 @@ The course is structured into two parts:
 - **September 4**: Introduction to Numerical Linear Algebra and its Applications in Data Science
    - **Topics:** Overview of computational complexity and numerical precision, solving systems of equations, geometric interpretations of linear algebra, matrix decompositions, linear least squares, and eigenvalues and eigenvectors.  Preparation for applications.
    - **Material:**
-     - [Linear Algebra Foundations](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html), [Jupyter](lectures/lectures/linear_algebra_foundations.ipynb), [PDF](lectures/lectures/linear_algebra_foundations.pdf)
+     - [Linear Algebra Foundations](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html), [Jupyter](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.ipynb), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.pdf)
    - **Self-study:**
      - Basics of linear algebra, matrices, norms, and linear independence: https://python.quantecon.org/linear_algebra.html
      - Numerical optimization: https://datascience.quantecon.org/scientific/optimization.html
@@ -62,7 +62,7 @@ The course is structured into two parts:
 - **September 9**: Continuing on Introduction to Numerical Linear Algebra
    - **Topics:** Overview of computational complexity and numerical precision, solving systems of equations, geometric interpretations of linear algebra, matrix decompositions, linear least squares, and eigenvalues and eigenvectors.  Preparation for applications.
    - **Material:**
-     - [Linear Algebra Foundations](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html), [Jupyter](lectures/lectures/linear_algebra_foundations.ipynb), [PDF](lectures/lectures/linear_algebra_foundations.pdf)
+     - [Linear Algebra Foundations](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html), [Jupyter](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.ipynb), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.pdf)
    - **Self-study:**
      - Basics of linear algebra, matrices, norms, and linear independence: https://python.quantecon.org/linear_algebra.html
      - Numerical optimization: https://datascience.quantecon.org/scientific/optimization.html
@@ -77,7 +77,7 @@ The course is structured into two parts:
    - **Topics:** Geometric series and present values, difference equations, steady states, and convergence, unemployment dynamics, present discounted values
    - **Material:**
      - Finishing off [Linear Algebra Foundations](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html)
-     - [Eigenvalues and Stability](https://jlperla.github.io/grad_econ_datascience/slides/eigenvalue_applications.html), [Jupyter](lectures/lectures/eigenvalue_applications.ipynb), [PDF](lectures/lectures/eigenvalue_applications.pdf)
+     - [Eigenvalues and Stability](https://jlperla.github.io/grad_econ_datascience/slides/eigenvalue_applications.html), [Jupyter](https://jlperla.github.io/grad_econ_datascience/slides/eigenvalue_applications.ipynb), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/eigenvalue_applications.pdf)
    - **Self-study:**
      - Geometric Series and Present Values: https://intro.quantecon.org/geom_series.html#example-interest-rates-and-present-values
      - Portfolio example: https://datascience.quantecon.org/scientific/applied_linalg.html#portfolios
@@ -89,7 +89,7 @@ The course is structured into two parts:
 - **September 16**: Latent Variables and Intro to Unsupervised Learning
    - **Topics:** Review eigenvalues and dynamics, principle components, and present discounted values
    - **Material:**
-     -  [Latent Variables and Unsupervised Learning](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.html), [Jupyter](lectures/lectures/latent_variables.ipynb), [PDF](lectures/lectures/latent_variables.pdf)
+     -  [Latent Variables and Unsupervised Learning](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.html), [Jupyter](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.ipynb), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.pdf)
    - **Self-study:**
      - [scikit-learn PCA docs](https://scikit-learn.org/stable/modules/decomposition.html#principal-component-analysis-pca)
      - [seaborn tutorials](https://seaborn.pydata.org/tutorial/introduction.html)
@@ -103,7 +103,7 @@ The course is structured into two parts:
 - **September 23**: Dynamics
    - **Topics:** Dynamical systems, stability, fixed points, linearization, intro to the Solow-Swan growth model
    - **Material:**
-     - [Linear and Nonlinear Dynamics](https://jlperla.github.io/grad_econ_datascience/slides/dynamics.html), [Jupyter](lectures/lectures/dynamics.ipynb), [PDF](lectures/lectures/dynamics.pdf)
+     - [Linear and Nonlinear Dynamics](https://jlperla.github.io/grad_econ_datascience/slides/dynamics.html), [Jupyter](https://jlperla.github.io/grad_econ_datascience/slides/dynamics.ipynb), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/dynamics.pdf)
    - **Self-study:**
      - Solow-Swan Growth Model Derivation: https://intro.quantecon.org/solow.html (skip 20.3)
      - Nonlinear Dynamics and Stability: https://intro.quantecon.org/scalar_dynam.html
@@ -114,7 +114,7 @@ The course is structured into two parts:
 - **September 25**: Finished Dynamics and Started Probability, Randomness, and Independence
    - **Topics:** Axioms of probability, LLN and CLT, and Conditional Independence
    - **Material:**
-     - [Probability, Conditioning, and Independence](https://jlperla.github.io/grad_econ_datascience/slides/probability.html), [Jupyter](lectures/lectures/probability.ipynb), [PDF](lectures/lectures/probability.pdf)
+     - [Probability, Conditioning, and Independence](https://jlperla.github.io/grad_econ_datascience/slides/probability.html), [Jupyter](https://jlperla.github.io/grad_econ_datascience/slides/probability.ipynb), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/probability.pdf)
    - **Self-study:**
      - https://datascience.quantecon.org/scientific/randomness.html
      - https://intro.quantecon.org/prob_dist.html
@@ -128,7 +128,7 @@ The course is structured into two parts:
 - **October 2nd**: Continue Probability, Randomness, and Independence
    - **Topics:** Axioms of probability, LLN and CLT, and Conditional Independence
    - **Material:**
-     - [Probability, Conditioning, and Independence](https://jlperla.github.io/grad_econ_datascience/slides/probability.html), [Jupyter](lectures/lectures/probability.ipynb), [PDF](lectures/lectures/probability.pdf)
+     - [Probability, Conditioning, and Independence](https://jlperla.github.io/grad_econ_datascience/slides/probability.html), [Jupyter](https://jlperla.github.io/grad_econ_datascience/slides/probability.ipynb), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/probability.pdf)
    - **Self-study:**
      - https://datascience.quantecon.org/scientific/randomness.html
      - https://intro.quantecon.org/prob_dist.html
@@ -142,7 +142,7 @@ The course is structured into two parts:
    - **Topics:** Conditional expectations, Bayes' rule, Law of Iterated Expectations, stochastic processes
     - **Material:**
       - Finish [Probability, Conditioning, and Independence](https://jlperla.github.io/grad_econ_datascience/slides/probability.html)
-      - [Stochastic Processes](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html), [Jupyter](lectures/lectures/stochastic_processes.ipynb), [PDF](lectures/lectures/stochastic_processes.pdf)
+      - [Stochastic Processes](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html), [Jupyter](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.ipynb), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.pdf)
    - **(Optional) Extra Material**:
      - https://python.quantecon.org/finite_markov.html for more on Markov Chains
      - https://python.quantecon.org/ar1_processes.html for more on AR(1) processes
