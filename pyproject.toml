@@ -1,0 +1,24 @@
+[project]
+name = "grad-econ-datascience"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "ffmpeg-python>=0.2.0",
+    "gr>=1.30.0",
+    "ipykernel>=6.29.5",
+    "ipython>=9.1.0",
+    "jupyter>=1.1.1",
+    "jupyter-cache>=1.0.1",
+    "matplotlib>=3.10.5",
+    "nbconvert>=7.16.6",
+    "numpy>=2.2",
+    "pandas>=2.3.1",
+    "ruff>=0.11.4",
+    "scikit-learn>=1.7.1",
+    "scipy>=1.16.1",
+    "seaborn>=0.13.2",
+    "statsmodels>=0.14.5",
+    "numba>=0.61",
+]

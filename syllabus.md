@@ -1,4 +1,4 @@
-# ECON526 - Fall 2024
+# ECON526 - Fall 2025
 
 ## Quantitative Economics with Data Science Applications
 
