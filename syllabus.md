@@ -25,12 +25,12 @@ The course will have problem sets due roughly weekly, a midterm, and a final dat
 - Midterm: 40%
 - Final Data Project: 40%
 
-The midterm will be done in the computer lab.  We will have a practice session to accomodate ourselves with the Jupyter-based technology.
+The midterm will be done in the computer lab.  We will have a practice session to accommodate ourselves with the Jupyter-based technology.
 
 
 **Missed Exam Policy:** You are responsible for ensuring that you take these exams as scheduled; no make-up exams will be given.
 - Travel plans and/or cheap tickets are not a reason to miss the exams. If you have a medical	or other compelling reason why you cannot take the exam at its scheduled time you must follow the formal process and get an Academic Concession from your Faculty Advising Office (see below)
-- If an Academic Concession is given, then alternative arrangements are discussed with the instructor which may involve a re-examination at a later date depending on the circumstances.  Otherwise a grade of zero will be given for the exam.
+- If an Academic Concession is given, then alternative arrangements are discussed with the instructor may include moving the weight of the midterm across other portions of the class, or an alternative testing plan.  Otherwise a grade of zero will be given for the exam.
 
 
 ## Syllabus
