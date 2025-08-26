@@ -34,8 +34,8 @@ See [Syllabus](syllabus.md) for more details
 The course has one midterm, weekly to bi-weekly problem sets, and a final data project due the last day of class.
 
 1. **September TBD Midnight:** [Problem Set 1](problem_sets/problem_set_1.ipynb)
-5. **October TBD:** Midterm Logistics Practice <!-- and Review [Midterm Practice Problems](problem_sets/midterm_practice_1.ipynb) -->
-6. **October TBD:** IN CLASS MIDTERM
+5. **October 2 (LAB SESSION):** Midterm Logistics Practice <!-- and Review [Midterm Practice Problems](problem_sets/midterm_practice_1.ipynb) -->
+6. **October 8:** IN CLASS MIDTERM
 7. **December 15th Midnight:** Data Project Due
 
 See the `/problem_sets` folder within this repository for the problem sets as jupyter notebooks.  You should modify them directly as Jupyter notebooks, and the TA will explain how to submit them.  The `pyproject.toml` and `uv.lock` files provide the package setup.  Simple run `uv sync` (more details [here](https://jlperla.github.io/grad_econ_datascience/pages/setup.html))
@@ -45,122 +45,41 @@ The course is structured into two parts:
 
 ### Jesse
 
-- **September 4**: Introduction to Numerical Linear Algebra and its Applications in Data Science
-   - **Lecture Notes**: [Linear Algebra Foundations](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.pdf)
-   - [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html#extra-materials)
+- **September 3**: [Linear Algebra Foundations](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html#extra-materials)
 
+- **September 8**: [Linear Algebra Foundations](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html#extra-materials)
 
-- **September 9**: Continuing on Introduction to Numerical Linear Algebra
-   - **Lecture Notes**: [Linear Algebra Foundations](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.pdf)
-   - [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html#extra-materials)
+- **September 10**: [Least Squares, Uniqueness, and Regularization](https://jlperla.github.io/grad_econ_datascience/slides/least_squares.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/least_squares.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/least_squares.html#extra-materials)
 
-- **September 9**: Least Squares, Uniqueness, and Regularization
-   - **Lecture Notes**: [Least Squares, Uniqueness, and Regularization](https://jlperla.github.io/grad_econ_datascience/slides/least_squares.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/least_squares.pdf)
-   - [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/least_squares.html#extra-materials)
+- **September 15**: [Applications of Linear Algebra and Eigenvalues](https://jlperla.github.io/grad_econ_datascience/slides/eigenvalue_applications.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/eigenvalue_applications.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/eigenvalue_applications.html#extra-materials)
 
-- **September 11**: Applications of Linear Algebra (Eigenvalues and Discounting)
-   - **Topics:** Geometric series and present values, difference equations, steady states, and convergence, unemployment dynamics, present discounted values
-   - **Material:**
-     - Finishing off [Linear Algebra Foundations](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html)
-     - [Eigenvalues and Stability](https://jlperla.github.io/grad_econ_datascience/slides/eigenvalue_applications.html), [Jupyter](https://jlperla.github.io/grad_econ_datascience/slides/eigenvalue_applications.ipynb), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/eigenvalue_applications.pdf)
-   - **Self-study:**
-     - Geometric Series and Present Values: https://intro.quantecon.org/geom_series.html#example-interest-rates-and-present-values
-     - Portfolio example: https://datascience.quantecon.org/scientific/applied_linalg.html#portfolios
-     - Unemployment Dynamics example: https://datascience.quantecon.org/scientific/applied_linalg.html#unemployment-dynamics
-   - **(Optional) Extra Material**:
-     - Supply and Demand: https://intro.quantecon.org/intro_supply_demand.html
-     - More on Competitive Equilibrium: https://intro.quantecon.org/supply_demand_multiple_goods.html
+- **September 17**:[Latent Variables and Unsupervised Learning](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.html#extra-materials)
 
-- **September 16**: Latent Variables and Intro to Unsupervised Learning
-   - **Topics:** Review eigenvalues and dynamics, principle components, and present discounted values
-   - **Material:**
-     -  [Latent Variables and Unsupervised Learning](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.html), [Jupyter](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.ipynb), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.pdf)
-   - **Self-study:**
-     - [scikit-learn PCA docs](https://scikit-learn.org/stable/modules/decomposition.html#principal-component-analysis-pca)
-     - [seaborn tutorials](https://seaborn.pydata.org/tutorial/introduction.html)
+- **September 22**: [Latent Variables and Unsupervised Learning](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.html#extra-materials)
+- **September 24**: [Linear and Nonlinear Dynamics](https://jlperla.github.io/grad_econ_datascience/slides/dynamics.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/dynamics.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/dynamics.html#extra-materials)
+- **September 29**:  [Probability, Conditioning, and Independence](https://jlperla.github.io/grad_econ_datascience/slides/probability.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/probability.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/probability.html#extra-materials)
+- **October 1**: [Probability, Conditioning, and Independence](https://jlperla.github.io/grad_econ_datascience/slides/probability.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/probability.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/probability.html#extra-materials)
+-  **October 6**: [Stochastic Processes, Markov Chains, and Expectations](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html#extra-materials)
+-  **October 8 (IN CLASS MIDTERM)**
+-  **October 13 (Statutory holiday)**
+-  **October 15**: [Stochastic Processes, Markov Chains, and Expectations](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html#extra-materials)
 
-- **September 18**: More on Latent Variables and Clustering
-   - **Topics:** Finish off continuous latent variables, PCA, auto-encoders, clustering, and started dynamics
-   - **Material:**
-     - [Latent Variables and Unsupervised Learning](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.html)
-   - **Self-study:**
-     - [scikit-learn k-means docs](https://scikit-learn.org/stable/modules/clustering.html#k-means)
-- **September 23**: Dynamics
-   - **Topics:** Dynamical systems, stability, fixed points, linearization, intro to the Solow-Swan growth model
-   - **Material:**
-     - [Linear and Nonlinear Dynamics](https://jlperla.github.io/grad_econ_datascience/slides/dynamics.html), [Jupyter](https://jlperla.github.io/grad_econ_datascience/slides/dynamics.ipynb), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/dynamics.pdf)
-   - **Self-study:**
-     - Solow-Swan Growth Model Derivation: https://intro.quantecon.org/solow.html (skip 20.3)
-     - Nonlinear Dynamics and Stability: https://intro.quantecon.org/scalar_dynam.html
-     - Review [taylor series](https://en.wikipedia.org/wiki/Linearization#Multivariable_functions), just to first order
-   - **(Optional) Extra Material**:
-     - More on the Solow Model and Python: https://python-programming.quantecon.org/python_oop.html#example-the-solow-growth-model
+<!-- More classes
+- October 20
+- October 22
+- October 27
+- October 29
+- November 3
+- November 5
+- READING WEEK
+- November 17
+- November 18
+- November 24
+- November 26
+- December 1
+- December 3
 
-- **September 25**: Finished Dynamics and Started Probability, Randomness, and Independence
-   - **Topics:** Axioms of probability, LLN and CLT, and Conditional Independence
-   - **Material:**
-     - [Probability, Conditioning, and Independence](https://jlperla.github.io/grad_econ_datascience/slides/probability.html), [Jupyter](https://jlperla.github.io/grad_econ_datascience/slides/probability.ipynb), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/probability.pdf)
-   - **Self-study:**
-     - https://datascience.quantecon.org/scientific/randomness.html
-     - https://intro.quantecon.org/prob_dist.html
-   - **(Optional) Extra Material**:
-     - https://python.quantecon.org/lln_clt.html
-     - https://python.quantecon.org/prob_meaning.html
-     - https://python.quantecon.org/prob_matrix.html
-
--  **September 30 (Statutory holiday)**
-
-- **October 2nd**: Continue Probability, Randomness, and Independence
-   - **Topics:** Axioms of probability, LLN and CLT, and Conditional Independence
-   - **Material:**
-     - [Probability, Conditioning, and Independence](https://jlperla.github.io/grad_econ_datascience/slides/probability.html), [Jupyter](https://jlperla.github.io/grad_econ_datascience/slides/probability.ipynb), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/probability.pdf)
-   - **Self-study:**
-     - https://datascience.quantecon.org/scientific/randomness.html
-     - https://intro.quantecon.org/prob_dist.html
-   - **(Optional) Extra Material**:
-     - https://python.quantecon.org/lln_clt.html
-     - https://python.quantecon.org/prob_meaning.html
-     - https://python.quantecon.org/prob_matrix.html
-
-
--  **October 7**: Stochastic Processes and Forecasts
-   - **Topics:** Conditional expectations, Bayes' rule, Law of Iterated Expectations, stochastic processes
-    - **Material:**
-      - Finish [Probability, Conditioning, and Independence](https://jlperla.github.io/grad_econ_datascience/slides/probability.html)
-      - [Stochastic Processes](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html), [Jupyter](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.ipynb), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.pdf)
-   - **(Optional) Extra Material**:
-     - https://python.quantecon.org/finite_markov.html for more on Markov Chains
-     - https://python.quantecon.org/ar1_processes.html for more on AR(1) processes
-     - https://datascience.quantecon.org/scientific/randomness.html#loan-states for a simple Markov Chain example
-
-
--  **October 9**: Markov Chains and Maybe Start Causality
-   - **Topics:** Finish stochastic processes and Markov Chains and briefly setup causality and counterfactuals if time permits
-   - **Material:**
-     - Finish [Stochastic Processes](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html)
-      - [Introduction to Causality and Randomized Experiments](https://jlperla.github.io/grad_econ_datascience/slides/introduction_to_causality.html)
-   - **Self-Study:**
-     - https://matheusfacure.github.io/python-causality-handbook/01-Introduction-To-Causality.html
-
-
--  **October 14 (Statutory holiday)**
-<!--
--  **October 16** Stats Review: Quantifying Uncertainty in Causal Inference + Midterm Logistics Review
-    - **Material:**
-      - [Stats Review: Quantifying Uncertainty in Applied Economics](https://jlperla.github.io/grad_econ_datascience/slides/uncertainty_bias_variance.html)
-    - **Self-study:**
-      - https://matheusfacure.github.io/python-causality-handbook/03-Stats-Review-The-Most-Dangerous-Equation.html
 -->
-
--   **October 16** Introduction to Causality and Counterfactuals + Midterm Logistics Review
-    - **Material:**
-      - [Introduction to Causality and Randomized Experiments](https://jlperla.github.io/grad_econ_datascience/slides/introduction_to_causality.html)
-    - **Self-study:**
-      - https://matheusfacure.github.io/python-causality-handbook/01-Introduction-To-Causality.html
-      - https://matheusfacure.github.io/python-causality-handbook/02-Randomised-Experiments.html
-
--  **October 21 (IN CLASS MIDTERM)**
-
 ### Paul
 
 [Go here](https://ubcecon.github.io/ECON526/lectures/paul/) for a list of topics, reading, and slides.
