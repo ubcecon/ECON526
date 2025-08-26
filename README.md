@@ -46,32 +46,17 @@ The course is structured into two parts:
 ### Jesse
 
 - **September 4**: Introduction to Numerical Linear Algebra and its Applications in Data Science
-   - **Topics:** Overview of computational complexity and numerical precision, solving systems of equations, geometric interpretations of linear algebra, matrix decompositions, linear least squares, and eigenvalues and eigenvectors.  Preparation for applications.
-   - **Material:**
-     - [Linear Algebra Foundations](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html), [Jupyter](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.ipynb), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.pdf)
-   - **Self-study:**
-     - Basics of linear algebra, matrices, norms, and linear independence: https://python.quantecon.org/linear_algebra.html
-     - Numerical optimization: https://datascience.quantecon.org/scientific/optimization.html
-     - Systems of Equations: https://python.quantecon.org/linear_algebra.html#solving-systems-of-equations
-     - Eigenvectors and eigenvalues: https://python.quantecon.org/linear_algebra.html#eigenvalues-and-eigenvectors
-     - Downloading and manipulating data in Python: https://intro.quantecon.org/long_run_growth.html and https://intro.quantecon.org/business_cycle.html
-   - **(Optional) Extra Material**:
-     - Introductory material on linear algebra: https://intro.quantecon.org/linear_equations.html and https://datascience.quantecon.org/scientific/applied_linalg.html
-     - Matrix decompositions and other topics: https://python.quantecon.org/linear_algebra.html#further-topics
+   - **Lecture Notes**: [Linear Algebra Foundations](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.pdf)
+   - [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html#extra-materials)
+
 
 - **September 9**: Continuing on Introduction to Numerical Linear Algebra
-   - **Topics:** Overview of computational complexity and numerical precision, solving systems of equations, geometric interpretations of linear algebra, matrix decompositions, linear least squares, and eigenvalues and eigenvectors.  Preparation for applications.
-   - **Material:**
-     - [Linear Algebra Foundations](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html), [Jupyter](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.ipynb), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.pdf)
-   - **Self-study:**
-     - Basics of linear algebra, matrices, norms, and linear independence: https://python.quantecon.org/linear_algebra.html
-     - Numerical optimization: https://datascience.quantecon.org/scientific/optimization.html
-     - Systems of Equations: https://python.quantecon.org/linear_algebra.html#solving-systems-of-equations
-     - Eigenvectors and eigenvalues: https://python.quantecon.org/linear_algebra.html#eigenvalues-and-eigenvectors
-     - Downloading and manipulating data in Python: https://intro.quantecon.org/long_run_growth.html and https://intro.quantecon.org/business_cycle.html
-   - **(Optional) Extra Material**:
-     - Introductory material on linear algebra: https://intro.quantecon.org/linear_equations.html and https://datascience.quantecon.org/scientific/applied_linalg.html
-     - Matrix decompositions and other topics: https://python.quantecon.org/linear_algebra.html#further-topics
+   - **Lecture Notes**: [Linear Algebra Foundations](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.pdf)
+   - [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html#extra-materials)
+
+- **September 9**: Least Squares, Uniqueness, and Regularization
+   - **Lecture Notes**: [Least Squares, Uniqueness, and Regularization](https://jlperla.github.io/grad_econ_datascience/slides/least_squares.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/least_squares.pdf)
+   - [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/least_squares.html#extra-materials)
 
 - **September 11**: Applications of Linear Algebra (Eigenvalues and Discounting)
    - **Topics:** Geometric series and present values, difference equations, steady states, and convergence, unemployment dynamics, present discounted values
