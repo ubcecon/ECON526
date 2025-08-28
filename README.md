@@ -15,7 +15,7 @@ Course notes:
 
 There is no assigned physical textbook, but we will be using lecture notes from:
 - [Causal Inference for The Brave and True](https://matheusfacure.github.io/python-causality-handbook/landing-page.html)
-- [QuantEcon Python and Data Science Lectures](https://quantecon.org/projects/#filter=lecture)
+- [QuantEcon Python and Data Science Lectures](https://quantecon.org/lectures/)
 
 # Computing Environment
 
