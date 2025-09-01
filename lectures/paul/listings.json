@@ -1,0 +1,21 @@
+[
+  {
+    "listing": "/feed.html",
+    "items": [
+      "/moredid.html",
+      "/doubleml.html",
+      "/index.html",
+      "/fe.html",
+      "/iv.html",
+      "/causality_intro.html",
+      "/did.html",
+      "/regression.html",
+      "/matching.html",
+      "/neuralnets.html",
+      "/rdd.html",
+      "/syntheticcontrol.html",
+      "/conditionaleffect.html",
+      "/uncertainty.html"
+    ]
+  }
+]

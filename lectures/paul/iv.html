@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2486e1f0a3ee9ee1fc393803a1361cdb.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.32">
+
+  <meta name="author" content="Paul Schrimpf">
+  <title>ECON 526 – Instrumental Variables</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-2ff78e2e6999b6200d15f6cb181d00bd.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-background-image="kokaneetrees.jpg" data-background-size="contain" class="quarto-title-block center">
+  <h1 class="title">Instrumental Variables</h1>
+  <p class="subtitle">ECON526</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Paul Schrimpf 
+</div>
+<div class="quarto-title-author-email">
+<a href="mailto:paul.schrimpf@ubc.ca">paul.schrimpf@ubc.ca</a>
+</div>
+        <p class="quarto-title-affiliation">
+            University of British Columbia
+          </p>
+    </div>
+</div>
+
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#/introduction" id="/toc-introduction">Introduction</a></li>
+<li><a href="#/instrumental-variables" id="/toc-instrumental-variables">Instrumental Variables</a></li>
+<li><a href="#/example-returns-to-education" id="/toc-example-returns-to-education">Example: Returns to Education</a></li>
+<li><a href="#/weak-instruments" id="/toc-weak-instruments">Weak Instruments</a></li>
+</ul>
+</nav>
+</section>
+<section>
+<section id="introduction" class="title-slide slide level1 center">
+<h1>Introduction</h1>
+<p><span class="math display">\[
+\def\indep{\perp\!\!\!\perp} % \def\idp{\perp\kern-5pt\perp}
+\def\Er{\mathrm{E}}
+\def\var{\mathrm{Var}}
+\def\cov{\mathrm{Cov}}
+\def\R{\mathbb{R}}
+\def\En{{\mathbb{E}_n}}
+\def\Pr{\mathrm{P}}
+\newcommand{\norm}[1]{\left\Vert {#1} \right\Vert}
+\newcommand{\abs}[1]{\left\vert {#1} \right\vert}
+\def\inprob{{\,{\buildrel p \over \rightarrow}\,}}
+\def\indist{\,{\buildrel d \over \rightarrow}\,}
+\DeclareMathOperator*{\plim}{plim}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\]</span></p>
+</section>
+<section id="endogeneity" class="slide level2">
+<h2>Endogeneity</h2>
+<p><span class="math display">\[
+Y_i = X_i' \beta_0 + \epsilon_i
+\]</span></p>
+<ul>
+<li>Believe <span class="math inline">\(\Er[X_i \epsilon_i] \neq 0\)</span>, so OLS biased and inconsistent</li>
+</ul>
+</section>
+<section id="sources-of-endogeneity" class="slide level2">
+<h2>Sources of Endogeneity</h2>
+<ul>
+<li>Omitted variables</li>
+<li>Simultaneity</li>
+<li>Measurement error</li>
+<li>And more …</li>
+</ul>
+</section>
+<section id="omitted-variables" class="slide level2">
+<h2>Omitted Variables</h2>
+<ul>
+<li><p>Desired model <span class="math display">\[
+Y_i = X_i'\beta_0 + W_i'\gamma_0 + \epsilon_i
+\]</span> Assume <span class="math inline">\(\Er[\epsilon] = \Er[X\epsilon] = \Er[W\epsilon] = 0\)</span></p></li>
+<li><p>Estimated model <span class="math display">\[
+Y_i = X_i'\beta + \underbrace{u_i}_{\equiv W_i'\gamma_0 + \epsilon_i}
+\]</span></p></li>
+</ul>
+</section>
+<section id="omitted-variables-bias" class="slide level2">
+<h2>Omitted Variables Bias</h2>
+<div>
+<ul>
+<li class="fragment">OLS inconsistent and biased</li>
+</ul>
+<p><span class="math display">\[
+\plim \hat{\beta}^{OLS} \inprob \beta_0 + \Er[X_i X_i']^{-1} \Er[X_i W_i'] \gamma_0
+\]</span></p>
+<ul>
+<li class="fragment">Or if <span class="math inline">\(X_i = (1, x_i)'\)</span> and <span class="math inline">\(W_i\)</span> is a scalar, <span class="math inline">\(y_i = \beta_0 + \beta_1 x_i + \gamma_0 w_i + \epsilon\)</span> <span class="math display">\[
+\plim \hat{\beta}_1 \inprob \beta_1 + \frac{\cov(x_i,w_i)}{\var(x_i)} \gamma_0
+\]</span></li>
+</ul>
+</div>
+</section>
+<section id="simultaneity" class="slide level2">
+<h2>Simultaneity</h2>
+<ul>
+<li><p>Equilibrium conditions lead to variables that are simultaneously determined</p></li>
+<li><p>Demand and supply: <span class="math display">\[
+\begin{align*}
+Q_i^D &amp; = P_i \beta_D + X_D'\gamma_D + u_{D,i} \\
+Q_i^S &amp; = P_i \beta_S + X_S'\gamma_S + u_{S,i} \\
+Q_i^S &amp; = Q_i^D
+\end{align*}
+\]</span></p></li>
+<li><p>Assume <span class="math inline">\(X_D\)</span> and <span class="math inline">\(X_S\)</span> exogenous</p>
+<ul>
+<li><span class="math inline">\(0 = \Er[X_D u_{D,i}] = \Er[X_D u_{S,i}] = \Er[X_S u_{D,i}] = \Er[X_S u_{S,i}]\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="simultaneity-1" class="slide level2">
+<h2>Simultaneity</h2>
+<ul>
+<li>Structural equations: (demand and inverse supply): <span class="math display">\[
+\begin{align*}
+Q_i &amp; = P_i \beta_D + X_D'\gamma_D + u_{D,i} \\
+P_i &amp; = Q_i \frac{1}{\beta_S}  - X_S'\gamma_D\frac{1}{\beta_S} - u_{S,i}\frac{1}{\beta_S} \\
+\end{align*}
+\]</span></li>
+<li>Reduced form: <span class="math display">\[
+\begin{align*}
+Q_i = &amp; \frac{\beta_D}{\beta_D - \beta_S} \left( -X_{D,i}' \gamma_D + X_{S,i}'\gamma_S - u_{D,i} + u_{S,i} \right) + X_{D,i}'\gamma_D + u_{D,i} \\
+P_i = &amp; \frac{1}{\beta_D - \beta_S}\left(-X_{D,i}' \gamma_D + X_{S,i}'\gamma_S - u_{D,i} + u_{S,i} \right)
+\end{align*}
+\]</span></li>
+<li><span class="math inline">\(\Er[P_i u_{D,i}] \neq 0\)</span>, so OLS estimate of <span class="math inline">\(Q_i = P_i \beta_D + X_D'\gamma_D + u_{D,i}\)</span> is biased and inconsistent</li>
+</ul>
+</section>
+<section id="measurment-error" class="slide level2">
+<h2>Measurment Error</h2>
+<ul>
+<li>True model <span class="math display">\[
+Y_i = \beta_0 + \beta_1 x_i^* + \epsilon_i
+\]</span> with <span class="math inline">\(\Er[x_i^* \epsilon_i]=0\)</span>, but <span class="math inline">\(x_i^*\)</span> unobserved</li>
+<li>Observe <span class="math inline">\(x_i = x_i^* + u_i\)</span></li>
+<li>Estimated model <span class="math display">\[
+Y_i = \beta_0 + \beta_1 x_i + \underbrace{\tilde{\epsilon}_i}_{\equiv -\beta_1 u_i + \epsilon_i}
+\]</span></li>
+<li><span class="math inline">\(\Er[x_i\tilde{\epsilon}_i] = -\beta_1\Er[u_i^2] \neq 0\)</span></li>
+</ul>
+</section></section>
+<section>
+<section id="instrumental-variables" class="title-slide slide level1 center">
+<h1>Instrumental Variables</h1>
+
+</section>
+<section id="instrumental-variables-1" class="slide level2">
+<h2>Instrumental Variables</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[
+Y_i = \underbrace{X_i}_{\in \R^k}' \beta_0 + \epsilon_i
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(\Er[\epsilon_i] = 0\)</span>, but <span class="math inline">\(\Er[X_i \epsilon_i] \neq 0\)</span></p></li>
+<li><p>Instrument <span class="math inline">\(Z_i \in \R^d\)</span> s.t.</p>
+<ol type="1">
+<li><p>Relevant <span class="math inline">\(rank(\Er[Z_i X_i']) = k\)</span></p></li>
+<li><p>Exogenous <span class="math inline">\(\Er[Z_i \epsilon_i] = 0\)</span></p></li>
+</ol></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div id="a0a4cd20" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> graphviz <span class="im">as</span> gr</span>
+<span id="cb1-2"><a></a></span>
+<span id="cb1-3"><a></a>dot <span class="op">=</span> gr.Digraph()</span>
+<span id="cb1-4"><a></a>dot.edge(<span class="st">'X'</span>, <span class="st">'Y'</span>, style <span class="op">=</span> <span class="st">'dashed'</span>)</span>
+<span id="cb1-5"><a></a>dot.edge(<span class="st">'ϵ'</span>,<span class="st">'Y'</span>)</span>
+<span id="cb1-6"><a></a>dot.edge(<span class="st">'ϵ'</span>,<span class="st">'X'</span>)</span>
+<span id="cb1-7"><a></a>dot.edge(<span class="st">'Z'</span>,<span class="st">'X'</span>)</span>
+<span id="cb1-8"><a></a>dot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<figure>
+<p><img data-src="iv_files/figure-revealjs/cell-2-output-1.svg"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="instrumental-variables-estimator" class="slide level2">
+<h2>Instrumental Variables Estimator</h2>
+<ul>
+<li>Assumed <span class="math inline">\(0 = \Er[Z_i \epsilon_i] = \Er[Z_i(y_i - X_i'\beta_0)]\)</span></li>
+<li>Estimate by solving <span class="math display">\[
+0 \approx \frac{1}{n} \sum_{i=1}^n Z_i(y_i - X_i'\hat{\beta}^{2SLS})
+\]</span></li>
+<li><span class="math inline">\(\hat{\beta}^{2SLS}  = (X'Z (Z'Z)^{-1} Z' X)^{-1} (X'Z(Z'Z)^{-1}Z'y)\)</span></li>
+</ul>
+</section>
+<section id="two-stage-least-squares" class="slide level2">
+<h2>Two Stage Least Squares</h2>
+<p><span class="math display">\[
+\begin{align*}
+\hat{\beta}^{2SLS} &amp; = (X'Z (Z'Z)^{-1} Z' X)^{-1} (X'Z(Z'Z)^{-1}Z'y) \\
+&amp; = (X'P_Z X)^{-1} (X' P_Z y) \\
+&amp; = ((P_Z X)'(P_Z X))^{-1} ((P_Z X)'y)
+\end{align*}
+\]</span></p>
+<ol type="1">
+<li>Regress <span class="math inline">\(X\)</span> on <span class="math inline">\(Z\)</span>, let <span class="math inline">\(\hat{X} = P_Z X\)</span></li>
+<li>Regress <span class="math inline">\(y\)</span> on <span class="math inline">\(\hat{X}\)</span></li>
+</ol>
+</section>
+<section id="iv-best-practices" class="slide level2">
+<h2>IV Best Practices</h2>
+<ul>
+<li>Report the first stage regression of <span class="math inline">\(X\)</span> on <span class="math inline">\(Z\)</span>
+<ul>
+<li>Check for relevance</li>
+</ul></li>
+<li>Report the reduced form regression of <span class="math inline">\(Y\)</span> on <span class="math inline">\(Z\)</span></li>
+<li>If relevance at all in doubt, use weak identification robust confidence intervals
+<ul>
+<li>E.g. <code>ivmodels.summary</code> with <code>test='lagrange multiplier'</code></li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="example-returns-to-education" class="title-slide slide level1 center">
+<h1>Example: Returns to Education</h1>
+
+</section>
+<section id="example-returns-to-education-1" class="slide level2">
+<h2>Example: Returns to Education</h2>
+<ul>
+<li>From <span class="citation" data-cites="ak1991">Angrist and Krueger (<a href="#/references" role="doc-biblioref" onclick="">1991</a>)</span></li>
+</ul>
+<div id="3eef1f9b" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">import</span> graphviz <span class="im">as</span> gr</span>
+<span id="cb2-2"><a></a></span>
+<span id="cb2-3"><a></a>g <span class="op">=</span> gr.Digraph()</span>
+<span id="cb2-4"><a></a>g.edge(<span class="st">'Education'</span>, <span class="st">'Earnings'</span>, style <span class="op">=</span> <span class="st">'dashed'</span>)</span>
+<span id="cb2-5"><a></a>g.edge(<span class="st">'Ability'</span>, <span class="st">'Education'</span>)</span>
+<span id="cb2-6"><a></a>g.edge(<span class="st">'Ability'</span>, <span class="st">'Earnings'</span>)</span>
+<span id="cb2-7"><a></a>g.edge(<span class="st">'?'</span>, <span class="st">'Education'</span>)</span>
+<span id="cb2-8"><a></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="iv_files/figure-revealjs/cell-3-output-1.svg" class="r-stretch"></section>
+<section id="example-returns-to-education-2" class="slide level2">
+<h2>Example: Returns to Education</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div id="80fa97c0" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>g <span class="op">=</span> gr.Digraph()</span>
+<span id="cb3-2"><a></a>g.edge(<span class="st">'Education'</span>, <span class="st">'Earnings'</span>, style <span class="op">=</span> <span class="st">'dashed'</span>)</span>
+<span id="cb3-3"><a></a>g.edge(<span class="st">'Ability'</span>, <span class="st">'Education'</span>)</span>
+<span id="cb3-4"><a></a>g.edge(<span class="st">'Ability'</span>, <span class="st">'Earnings'</span>)</span>
+<span id="cb3-5"><a></a>g.edge(<span class="st">'Quarter of Birth'</span>, <span class="st">'Education'</span>)</span>
+<span id="cb3-6"><a></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+<figure>
+<p><img data-src="iv_files/figure-revealjs/cell-4-output-1.svg"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div id="8613d26e" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-2"><a></a></span>
+<span id="cb4-3"><a></a>df <span class="op">=</span> pd.read_csv(<span class="st">'data/ak91.csv'</span>)</span>
+<span id="cb4-4"><a></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">log_wage</th>
+<th data-quarto-table-cell-role="th">years_of_schooling</th>
+<th data-quarto-table-cell-role="th">year_of_birth</th>
+<th data-quarto-table-cell-role="th">quarter_of_birth</th>
+<th data-quarto-table-cell-role="th">state_of_birth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>5.790019</td>
+<td>12.0</td>
+<td>30.0</td>
+<td>1.0</td>
+<td>45.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>5.952494</td>
+<td>11.0</td>
+<td>30.0</td>
+<td>1.0</td>
+<td>45.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>5.315949</td>
+<td>12.0</td>
+<td>30.0</td>
+<td>1.0</td>
+<td>45.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>5.595926</td>
+<td>12.0</td>
+<td>30.0</td>
+<td>1.0</td>
+<td>45.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>6.068915</td>
+<td>12.0</td>
+<td>30.0</td>
+<td>1.0</td>
+<td>37.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="example-returns-to-education-3" class="slide level2">
+<h2>Example: Returns to Education</h2>
+<ul>
+<li>We must assume that
+<ol type="1">
+<li>Relevance: <span class="math inline">\(\cov(QOB, Education) \neq 0\)</span></li>
+<li>Exogeneity: <span class="math inline">\(Earnings \perp QOB \mid Education\)</span></li>
+</ol></li>
+</ul>
+</section>
+<section id="example-relevance" class="slide level2">
+<h2>Example: Relevance</h2>
+<div id="e2fb7a92" class="cell columns column-output-location" data-execution_count="6">
+<div class="column">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-2"><a></a>group_data <span class="op">=</span> (df</span>
+<span id="cb5-3"><a></a>    .groupby([<span class="st">"year_of_birth"</span>, <span class="st">"quarter_of_birth"</span>])</span>
+<span id="cb5-4"><a></a>    [[<span class="st">"log_wage"</span>, <span class="st">"years_of_schooling"</span>]]</span>
+<span id="cb5-5"><a></a>    .mean()</span>
+<span id="cb5-6"><a></a>    .reset_index()</span>
+<span id="cb5-7"><a></a>    .assign(time_of_birth <span class="op">=</span> <span class="kw">lambda</span> d: d[<span class="st">"year_of_birth"</span>] <span class="op">+</span> (d[<span class="st">"quarter_of_birth"</span>])<span class="op">/</span><span class="dv">4</span>))</span>
+<span id="cb5-8"><a></a></span>
+<span id="cb5-9"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">6</span>))</span>
+<span id="cb5-10"><a></a>plt.plot(group_data[<span class="st">"time_of_birth"</span>], group_data[<span class="st">"years_of_schooling"</span>], zorder<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb5-11"><a></a><span class="cf">for</span> q <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>):</span>
+<span id="cb5-12"><a></a>    x <span class="op">=</span> group_data.query(<span class="ss">f"quarter_of_birth==</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">"</span>)[<span class="st">"time_of_birth"</span>]</span>
+<span id="cb5-13"><a></a>    y <span class="op">=</span> group_data.query(<span class="ss">f"quarter_of_birth==</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">"</span>)[<span class="st">"years_of_schooling"</span>]</span>
+<span id="cb5-14"><a></a>    plt.scatter(x, y, marker<span class="op">=</span><span class="st">"s"</span>, s<span class="op">=</span><span class="dv">200</span>, c<span class="op">=</span><span class="ss">f"C</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-15"><a></a>    plt.scatter(x, y, marker<span class="op">=</span><span class="ss">f"$</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">$"</span>, s<span class="op">=</span><span class="dv">100</span>, c<span class="op">=</span><span class="ss">f"white"</span>)</span>
+<span id="cb5-16"><a></a></span>
+<span id="cb5-17"><a></a>plt.title(<span class="st">"Years of Education by Quarter of Birth (first stage)"</span>)</span>
+<span id="cb5-18"><a></a>plt.xlabel(<span class="st">"Quarter of Birth"</span>)</span>
+<span id="cb5-19"><a></a>plt.ylabel(<span class="st">"Years of Schooling"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="iv_files/figure-revealjs/cell-6-output-1.png" width="523" height="523"></p>
+</figure>
+</div>
+</div>
+</div></div>
+</section>
+<section id="example-relevance-1" class="slide level2">
+<h2>Example: Relevance</h2>
+<div id="434777f0" class="cell columns column-output-location" data-execution_count="7">
+<div class="column">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="co"># Convert the quarter of birth to dummy variables</span></span>
+<span id="cb6-2"><a></a>factor_data <span class="op">=</span> df.assign(<span class="op">**</span>{<span class="ss">f"q</span><span class="sc">{</span><span class="bu">int</span>(q)<span class="sc">}</span><span class="ss">"</span>: (df[<span class="st">"quarter_of_birth"</span>] <span class="op">==</span> q).astype(<span class="bu">int</span>)</span>
+<span id="cb6-3"><a></a>                             <span class="cf">for</span> q <span class="kw">in</span> df[<span class="st">"quarter_of_birth"</span>].unique()})</span>
+<span id="cb6-4"><a></a></span>
+<span id="cb6-5"><a></a><span class="co"># Run the first stage regression</span></span>
+<span id="cb6-6"><a></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb6-7"><a></a></span>
+<span id="cb6-8"><a></a>first_stage <span class="op">=</span> smf.ols(<span class="st">"years_of_schooling ~ C(year_of_birth) + C(state_of_birth) + q4"</span>, data<span class="op">=</span>factor_data).fit()</span>
+<span id="cb6-9"><a></a></span>
+<span id="cb6-10"><a></a><span class="bu">print</span>(<span class="st">"q4 parameter estimate:, "</span>, first_stage.params[<span class="st">"q4"</span>])</span>
+<span id="cb6-11"><a></a><span class="bu">print</span>(<span class="st">"q4 p-value:, "</span>, first_stage.pvalues[<span class="st">"q4"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-stdout">
+<pre><code>q4 parameter estimate:,  0.10085809272786722
+q4 p-value:,  5.4648294166122615e-15</code></pre>
+</div>
+</div></div>
+</section>
+<section id="example-exogeneity" class="slide level2">
+<h2>Example: Exogeneity</h2>
+<ul>
+<li>No way to test the exogeneity assumption
+<ul>
+<li>Seems okay here</li>
+<li>Hard to come up with other reason why quarter of birth would affect earnings</li>
+</ul></li>
+</ul>
+</section>
+<section id="example-reduced-form" class="slide level2">
+<h2>Example: Reduced Form</h2>
+<div id="8444bef2" class="cell columns column-output-location" data-execution_count="8">
+<div class="column">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="co"># Plot the reduced form</span></span>
+<span id="cb8-2"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">6</span>))</span>
+<span id="cb8-3"><a></a>plt.plot(group_data[<span class="st">"time_of_birth"</span>], group_data[<span class="st">"log_wage"</span>], zorder<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb8-4"><a></a><span class="cf">for</span> q <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>):</span>
+<span id="cb8-5"><a></a>    x <span class="op">=</span> group_data.query(<span class="ss">f"quarter_of_birth==</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">"</span>)[<span class="st">"time_of_birth"</span>]</span>
+<span id="cb8-6"><a></a>    y <span class="op">=</span> group_data.query(<span class="ss">f"quarter_of_birth==</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">"</span>)[<span class="st">"log_wage"</span>]</span>
+<span id="cb8-7"><a></a>    plt.scatter(x, y, marker<span class="op">=</span><span class="st">"s"</span>, s<span class="op">=</span><span class="dv">200</span>, c<span class="op">=</span><span class="ss">f"C</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-8"><a></a>    plt.scatter(x, y, marker<span class="op">=</span><span class="ss">f"$</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">$"</span>, s<span class="op">=</span><span class="dv">100</span>, c<span class="op">=</span><span class="ss">f"white"</span>)</span>
+<span id="cb8-9"><a></a></span>
+<span id="cb8-10"><a></a>plt.title(<span class="st">"Average Weekly Wage by Quarter of Birth (reduced form)"</span>)</span>
+<span id="cb8-11"><a></a>plt.xlabel(<span class="st">"Year of Birth"</span>)</span>
+<span id="cb8-12"><a></a>plt.ylabel(<span class="st">"Log Weekly Earnings"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="iv_files/figure-revealjs/cell-8-output-1.png" width="538" height="523"></p>
+</figure>
+</div>
+</div>
+</div></div>
+</section>
+<section id="example-reduced-form-1" class="slide level2">
+<h2>Example: Reduced Form</h2>
+<div id="4ef26a26" class="cell columns column-output-location" data-execution_count="9">
+<div class="column">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="co"># Run the reduced form</span></span>
+<span id="cb9-2"><a></a>reduced_form <span class="op">=</span> smf.ols(<span class="st">"log_wage ~ C(year_of_birth) + C(state_of_birth) + q4"</span>, data<span class="op">=</span>factor_data).fit()</span>
+<span id="cb9-3"><a></a></span>
+<span id="cb9-4"><a></a><span class="bu">print</span>(<span class="st">"q4 parameter estimate:, "</span>, reduced_form.params[<span class="st">"q4"</span>])</span>
+<span id="cb9-5"><a></a><span class="bu">print</span>(<span class="st">"q4 p-value:, "</span>, reduced_form.pvalues[<span class="st">"q4"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-stdout">
+<pre><code>q4 parameter estimate:,  0.008603484260139821
+q4 p-value:,  0.001494912718366322</code></pre>
+</div>
+</div></div>
+</section>
+<section id="example-2sls" class="slide level2">
+<h2>Example: 2SLS</h2>
+<div id="1d70edd7" class="cell columns column-output-location" data-execution_count="10">
+<div class="column">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>ate_iv <span class="op">=</span> reduced_form.params[<span class="st">"q4"</span>] <span class="op">/</span> first_stage.params[<span class="st">"q4"</span>]</span>
+<span id="cb11-2"><a></a><span class="bu">print</span>(<span class="st">"ATE (IV):"</span>, ate_iv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-stdout">
+<pre><code>ATE (IV): 0.08530286492085</code></pre>
+</div>
+</div></div>
+</section>
+<section id="example-returns-to-education-4" class="slide level2">
+<h2>Example: Returns to Education</h2>
+<ul>
+<li>Use a package for IV
+<ul>
+<li><code>ivmodels</code> (best support for weak instrument robust inference)</li>
+<li><code>pyfixest.feols</code></li>
+<li><code>statsmodels.sandbox.regression.gmm.IV2SLS</code></li>
+<li><code>linearmodels.iv.IV2SLS</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="example-linearmodels" class="slide level2">
+<h2>Example: <code>linearmodels</code></h2>
+<div id="f315dfd0" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="im">from</span> linearmodels.iv <span class="im">import</span> IV2SLS</span>
+<span id="cb13-2"><a></a></span>
+<span id="cb13-3"><a></a>formula <span class="op">=</span> <span class="st">'log_wage ~ 1 + C(year_of_birth) + C(state_of_birth) + [years_of_schooling ~ q4]'</span></span>
+<span id="cb13-4"><a></a>iv <span class="op">=</span> IV2SLS.from_formula(formula, data<span class="op">=</span>factor_data).fit()</span>
+<span id="cb13-5"><a></a><span class="bu">print</span>(iv.summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                          IV-2SLS Estimation Summary                          
+==============================================================================
+Dep. Variable:               log_wage   R-squared:                      0.1217
+Estimator:                    IV-2SLS   Adj. R-squared:                 0.1215
+No. Observations:              329509   F-statistic:                 1.028e+04
+Date:                Mon, Nov 25 2024   P-value (F-stat)                0.0000
+Time:                        10:41:48   Distribution:                 chi2(60)
+Cov. Estimator:                robust                                         
+                                                                              
+                                     Parameter Estimates                                     
+=============================================================================================
+                           Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+---------------------------------------------------------------------------------------------
+Intercept                     4.7468     0.2904     16.348     0.0000      4.1777      5.3158
+C(year_of_birth)[T.31.0]     -0.0078     0.0063    -1.2384     0.2156     -0.0201      0.0045
+C(year_of_birth)[T.32.0]     -0.0145     0.0073    -1.9698     0.0489     -0.0288   -7.25e-05
+C(year_of_birth)[T.33.0]     -0.0174     0.0086    -2.0367     0.0417     -0.0342     -0.0007
+C(year_of_birth)[T.34.0]     -0.0217     0.0094    -2.3012     0.0214     -0.0401     -0.0032
+C(year_of_birth)[T.35.0]     -0.0344     0.0108    -3.1821     0.0015     -0.0556     -0.0132
+C(year_of_birth)[T.36.0]     -0.0347     0.0118    -2.9309     0.0034     -0.0579     -0.0115
+C(year_of_birth)[T.37.0]     -0.0410     0.0132    -3.0976     0.0020     -0.0670     -0.0151
+C(year_of_birth)[T.38.0]     -0.0433     0.0152    -2.8520     0.0043     -0.0730     -0.0135
+C(year_of_birth)[T.39.0]     -0.0547     0.0161    -3.3887     0.0007     -0.0864     -0.0231
+C(state_of_birth)[T.2.0]      0.2272     0.1060     2.1433     0.0321      0.0194      0.4350
+C(state_of_birth)[T.4.0]      0.1215     0.0404     3.0083     0.0026      0.0424      0.2007
+C(state_of_birth)[T.5.0]      0.0431     0.0123     3.5103     0.0004      0.0190      0.0671
+C(state_of_birth)[T.6.0]      0.1351     0.0557     2.4268     0.0152      0.0260      0.2442
+C(state_of_birth)[T.8.0]      0.0920     0.0435     2.1143     0.0345      0.0067      0.1774
+C(state_of_birth)[T.9.0]      0.1051     0.0429     2.4511     0.0142      0.0211      0.1891
+C(state_of_birth)[T.10.0]     0.0796     0.0280     2.8408     0.0045      0.0247      0.1346
+C(state_of_birth)[T.11.0]     0.1162     0.0572     2.0317     0.0422      0.0041      0.2282
+C(state_of_birth)[T.12.0]    -0.0157     0.0278    -0.5651     0.5720     -0.0701      0.0387
+C(state_of_birth)[T.13.0]    -0.0155     0.0119    -1.3003     0.1935     -0.0389      0.0079
+C(state_of_birth)[T.15.0]     0.1256     0.0575     2.1857     0.0288      0.0130      0.2382
+C(state_of_birth)[T.16.0]     0.0718     0.0497     1.4450     0.1485     -0.0256      0.1693
+C(state_of_birth)[T.17.0]     0.1762     0.0429     4.1080     0.0000      0.0921      0.2603
+C(state_of_birth)[T.18.0]     0.1341     0.0288     4.6494     0.0000      0.0775      0.1906
+C(state_of_birth)[T.19.0]     0.0735     0.0382     1.9251     0.0542     -0.0013      0.1483
+C(state_of_birth)[T.20.0]     0.0420     0.0462     0.9081     0.3638     -0.0486      0.1326
+C(state_of_birth)[T.21.0]     0.1194     0.0153     7.7839     0.0000      0.0893      0.1495
+C(state_of_birth)[T.22.0]     0.0883     0.0150     5.8957     0.0000      0.0589      0.1176
+C(state_of_birth)[T.23.0]    -0.0236     0.0219    -1.0779     0.2811     -0.0666      0.0193
+C(state_of_birth)[T.24.0]     0.1048     0.0225     4.6641     0.0000      0.0608      0.1489
+C(state_of_birth)[T.25.0]     0.0783     0.0463     1.6916     0.0907     -0.0124      0.1691
+C(state_of_birth)[T.26.0]     0.2035     0.0342     5.9550     0.0000      0.1365      0.2705
+C(state_of_birth)[T.27.0]     0.1236     0.0393     3.1445     0.0017      0.0466      0.2006
+C(state_of_birth)[T.28.0]    -0.0170     0.0133    -1.2800     0.2005     -0.0431      0.0090
+C(state_of_birth)[T.29.0]     0.0955     0.0273     3.4927     0.0005      0.0419      0.1491
+C(state_of_birth)[T.30.0]     0.0479     0.0469     1.0222     0.3067     -0.0440      0.1398
+C(state_of_birth)[T.31.0]     0.0610     0.0442     1.3793     0.1678     -0.0257      0.1476
+C(state_of_birth)[T.32.0]     0.1220     0.0609     2.0047     0.0450      0.0027      0.2413
+C(state_of_birth)[T.33.0]     0.0036     0.0294     0.1226     0.9024     -0.0540      0.0611
+C(state_of_birth)[T.34.0]     0.1390     0.0453     3.0702     0.0021      0.0503      0.2277
+C(state_of_birth)[T.35.0]     0.0552     0.0285     1.9373     0.0527     -0.0006      0.1110
+C(state_of_birth)[T.36.0]     0.1254     0.0517     2.4242     0.0153      0.0240      0.2268
+C(state_of_birth)[T.37.0]    -0.0562     0.0100    -5.6174     0.0000     -0.0758     -0.0366
+C(state_of_birth)[T.38.0]     0.1076     0.0360     2.9885     0.0028      0.0370      0.1781
+C(state_of_birth)[T.39.0]     0.1429     0.0328     4.3559     0.0000      0.0786      0.2071
+C(state_of_birth)[T.40.0]     0.0679     0.0349     1.9475     0.0515     -0.0004      0.1362
+C(state_of_birth)[T.41.0]     0.1069     0.0515     2.0749     0.0380      0.0059      0.2079
+C(state_of_birth)[T.42.0]     0.1103     0.0304     3.6256     0.0003      0.0507      0.1699
+C(state_of_birth)[T.44.0]     0.0236     0.0352     0.6715     0.5019     -0.0454      0.0927
+C(state_of_birth)[T.45.0]    -0.0723     0.0163    -4.4362     0.0000     -0.1043     -0.0404
+C(state_of_birth)[T.46.0]     0.0500     0.0419     1.1946     0.2323     -0.0320      0.1321
+C(state_of_birth)[T.47.0]     0.0513     0.0115     4.4653     0.0000      0.0288      0.0738
+C(state_of_birth)[T.48.0]     0.0708     0.0262     2.7014     0.0069      0.0194      0.1221
+C(state_of_birth)[T.49.0]     0.1001     0.0590     1.6968     0.0897     -0.0155      0.2158
+C(state_of_birth)[T.50.0]    -0.0508     0.0276    -1.8360     0.0664     -0.1049      0.0034
+C(state_of_birth)[T.51.0]     0.0362     0.0126     2.8697     0.0041      0.0115      0.0610
+C(state_of_birth)[T.53.0]     0.1533     0.0511     2.9998     0.0027      0.0532      0.2535
+C(state_of_birth)[T.54.0]     0.1256     0.0112     11.224     0.0000      0.1037      0.1476
+C(state_of_birth)[T.55.0]     0.1051     0.0337     3.1212     0.0018      0.0391      0.1711
+C(state_of_birth)[T.56.0]     0.1100     0.0548     2.0086     0.0446      0.0027      0.2174
+years_of_schooling            0.0853     0.0255     3.3399     0.0008      0.0352      0.1354
+=============================================================================================
+
+Endogenous: years_of_schooling
+Instruments: q4
+Robust Covariance (Heteroskedastic)
+Debiased: False</code></pre>
+</div>
+</div>
+</section>
+<section id="example-pyfixest" class="slide level2">
+<h2>Example: <code>pyfixest</code></h2>
+<div id="36a37d8b" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a><span class="im">import</span> pyfixest <span class="im">as</span> pf</span>
+<span id="cb15-2"><a></a>ivpf <span class="op">=</span> pf.feols(<span class="st">'log_wage ~ 1 | state_of_birth + year_of_birth | years_of_schooling ~ q4'</span>, data<span class="op">=</span>factor_data, vcov<span class="op">=</span><span class="st">"HC1"</span>)</span>
+<span id="cb15-3"><a></a>pf.etable(ivpf, <span class="bu">type</span><span class="op">=</span><span class="st">'md'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+            <div id="p3fKjY"></div>
+            <script type="text/javascript" data-lets-plot-script="library">
+                if(!window.letsPlotCallQueue) {
+                    window.letsPlotCallQueue = [];
+                }; 
+                window.letsPlotCall = function(f) {
+                    window.letsPlotCallQueue.push(f);
+                };
+                (function() {
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = "https://cdn.jsdelivr.net/gh/JetBrains/lets-plot@v4.5.1/js-package/distr/lets-plot.min.js";
+                    script.onload = function() {
+                        window.letsPlotCall = function(f) {f();};
+                        window.letsPlotCallQueue.forEach(function(f) {f();});
+                        window.letsPlotCallQueue = [];
+                        
+                    };
+                    script.onerror = function(event) {
+                        window.letsPlotCall = function(f) {};    // noop
+                        window.letsPlotCallQueue = [];
+                        var div = document.createElement("div");
+                        div.style.color = 'darkred';
+                        div.textContent = 'Error loading Lets-Plot JS';
+                        document.getElementById("p3fKjY").appendChild(div);
+                    };
+                    var e = document.getElementById("p3fKjY");
+                    e.appendChild(script);
+                })()
+            </script>
+            
+</div>
+<div class="cell-output cell-output-display">
+
+            <div id="GSmQpH"></div>
+            <script type="text/javascript" data-lets-plot-script="library">
+                if(!window.letsPlotCallQueue) {
+                    window.letsPlotCallQueue = [];
+                }; 
+                window.letsPlotCall = function(f) {
+                    window.letsPlotCallQueue.push(f);
+                };
+                (function() {
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = "https://cdn.jsdelivr.net/gh/JetBrains/lets-plot@v4.5.1/js-package/distr/lets-plot.min.js";
+                    script.onload = function() {
+                        window.letsPlotCall = function(f) {f();};
+                        window.letsPlotCallQueue.forEach(function(f) {f();});
+                        window.letsPlotCallQueue = [];
+                        
+                    };
+                    script.onerror = function(event) {
+                        window.letsPlotCall = function(f) {};    // noop
+                        window.letsPlotCallQueue = [];
+                        var div = document.createElement("div");
+                        div.style.color = 'darkred';
+                        div.textContent = 'Error loading Lets-Plot JS';
+                        document.getElementById("GSmQpH").appendChild(div);
+                    };
+                    var e = document.getElementById("GSmQpH");
+                    e.appendChild(script);
+                })()
+            </script>
+            
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>index                    est1
+------------------  ---------
+depvar               log_wage
+-----------------------------
+years_of_schooling  0.085***
+                      (0.026)
+-----------------------------
+year_of_birth               x
+state_of_birth              x
+-----------------------------
+Observations           329509
+S.E. type              hetero
+R2                          -
+-----------------------------
+</code></pre>
+</div>
+</div>
+</section>
+<section id="example-ivmodels" class="slide level2">
+<h2>Example: <code>ivmodels</code></h2>
+<div id="e9752fe6" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a><span class="im">from</span> patsy <span class="im">import</span> dmatrices</span>
+<span id="cb17-2"><a></a><span class="im">import</span> ivmodels</span>
+<span id="cb17-3"><a></a>y,X <span class="op">=</span> dmatrices(<span class="st">"log_wage ~ 0 + years_of_schooling"</span>, data<span class="op">=</span>factor_data, return_type<span class="op">=</span><span class="st">'dataframe'</span>)</span>
+<span id="cb17-4"><a></a>Z,controls <span class="op">=</span> dmatrices(<span class="st">"q4 ~  C(year_of_birth) + C(state_of_birth)"</span>, data<span class="op">=</span>factor_data, return_type<span class="op">=</span><span class="st">'dataframe'</span>)</span>
+<span id="cb17-5"><a></a>controls.drop(<span class="st">"Intercept"</span>, axis<span class="op">=</span><span class="dv">1</span>,inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb17-6"><a></a></span>
+<span id="cb17-7"><a></a>ivm <span class="op">=</span> ivmodels.KClass(<span class="dv">1</span>).fit(X<span class="op">=</span>X,y<span class="op">=</span>y,Z<span class="op">=</span>Z,C<span class="op">=</span>controls)</span>
+<span id="cb17-8"><a></a>sw <span class="op">=</span> ivm.summary(X<span class="op">=</span>X,y<span class="op">=</span>y,Z<span class="op">=</span>Z,C<span class="op">=</span>controls, test<span class="op">=</span><span class="st">'wald'</span>, feature_names<span class="op">=</span>[<span class="st">"years_of_schooling"</span>])</span>
+<span id="cb17-9"><a></a><span class="bu">print</span>(sw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Summary based on the wald test.
+
+                    estimate  statistic    p-value          conf. set
+years_of_schooling    0.0853      11.15  0.0008402  [0.03523, 0.1354]
+
+Endogenous model statistic: 11.15, p-value: 0.0008402
+(Multivariate) F-statistic: 61.09, p-value: 5.44e-15</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="weak-instruments" class="title-slide slide level1 center">
+<h1>Weak Instruments</h1>
+
+</section>
+<section id="weak-instruments-1" class="slide level2">
+<h2>Weak Instruments</h2>
+<ul>
+<li>One endogenous regressor, one instrument
+<ul>
+<li>Structural equation <span class="math display">\[
+y_i = \beta_0 + \beta_1 x_i + \epsilon_i
+\]</span></li>
+<li>First stage <span class="math display">\[
+x_i = \pi_0^x + \pi_1^x z_i + u_i^x
+\]</span></li>
+<li>Reduced Form <span class="math display">\[
+y_i = \pi_0^y + \pi_1^y z_i + u_i^y
+\]</span></li>
+</ul></li>
+<li><span class="math inline">\(\text{2SLS} = \frac{\text{Reduced Form}}{\text{First Stage}}\)</span></li>
+<li><span class="math inline">\(\hat{\beta}^{2SLS}_1 = \frac{\hat{\pi}_1^y}{\hat{\pi}_1^x}\)</span></li>
+</ul>
+</section>
+<section id="weak-instruments-2" class="slide level2">
+<h2>Weak Instruments</h2>
+<ul>
+<li><span class="math inline">\(\hat{\beta}^{2SLS}_1 = \frac{\hat{\pi}_1^y}{\hat{\pi}_1^x}\)</span></li>
+<li>If <span class="math inline">\(z\)</span> not relevant, then divide by <span class="math inline">\(0\)</span></li>
+<li>Even if <span class="math inline">\(z\)</span> relevant, if <span class="math inline">\(\hat{\pi}_1^x\)</span> is too likely near 0, then <span class="math inline">\(\hat{\beta}^{2SLS}_1\)</span> will be messed up
+<ul>
+<li>usual asymptotic normal distribution becomes a poor approximation to true finite sample distribution of <span class="math inline">\(\hat{\beta}^{2SLS}_1\)</span></li>
+</ul></li>
+<li>“too likely near 0” is more common than one might think</li>
+</ul>
+</section>
+<section id="weak-instrument-simulation" class="slide level2">
+<h2>Weak Instrument Simulation</h2>
+<ul>
+<li><p>First stage <span class="math inline">\(X = Z\gamma + e\)</span>, simulation with <span class="math inline">\(\Er[Z_i Z_i] = I\)</span> and <span class="math inline">\(e \sim N(0,0.25)\)</span>, so first stage <span class="math inline">\(t \approx \sqrt{n}\gamma/0.5\)</span></p></li>
+<li><p>Distribution of <span class="math inline">\(\hat{\beta}^{2SLS}\)</span> with <span class="math inline">\(\gamma = 1\)</span>, <span class="math inline">\(\gamma=0.5\)</span>, <span class="math inline">\(\gamma=0.2\)</span>, and <span class="math inline">\(\gamma=0.1\)</span> and <span class="math inline">\(n=100\)</span></p>
+<ul>
+<li>implies first stage t-statistics of <span class="math inline">\(20\)</span>, <span class="math inline">\(10\)</span>, <span class="math inline">\(4\)</span>, and <span class="math inline">\(2\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="weak-instrument-simulation-hatbeta2sls" class="slide level2">
+<h2>Weak Instrument Simulation : <span class="math inline">\(\hat{\beta}^{2SLS}\)</span></h2>
+<div id="596e1025" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb19-2"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb19-3"><a></a><span class="im">import</span> scipy</span>
+<span id="cb19-4"><a></a>n <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb19-5"><a></a>gamma <span class="op">=</span> [<span class="dv">1</span>,<span class="fl">0.5</span>, <span class="fl">0.2</span>,<span class="fl">0.1</span>]</span>
+<span id="cb19-6"><a></a>sig <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb19-7"><a></a>Exe<span class="op">=</span><span class="fl">1.0</span></span>
+<span id="cb19-8"><a></a></span>
+<span id="cb19-9"><a></a><span class="kw">def</span> simiv(n,gamma,sig, b0, Exe):</span>
+<span id="cb19-10"><a></a>   z <span class="op">=</span> np.random.randn(n)</span>
+<span id="cb19-11"><a></a>   xe <span class="op">=</span> np.random.randn(n)</span>
+<span id="cb19-12"><a></a>   x <span class="op">=</span> z<span class="op">*</span>gamma <span class="op">+</span> (xe<span class="op">*</span>Exe <span class="op">+</span> np.random.randn(n))<span class="op">/</span>np.sqrt(<span class="dv">1</span><span class="op">+</span>Exe<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>sig</span>
+<span id="cb19-13"><a></a>   e <span class="op">=</span> xe <span class="op">+</span> np.random.randn(n)</span>
+<span id="cb19-14"><a></a>   y <span class="op">=</span> x<span class="op">*</span>b0 <span class="op">+</span> e</span>
+<span id="cb19-15"><a></a>   <span class="cf">return</span>(y,x,z)</span>
+<span id="cb19-16"><a></a></span>
+<span id="cb19-17"><a></a><span class="kw">def</span> b2sls(y,x,z) :</span>
+<span id="cb19-18"><a></a>    <span class="cf">return</span>(np.dot(z,y)<span class="op">/</span>np.dot(z,x))</span>
+<span id="cb19-19"><a></a></span>
+<span id="cb19-20"><a></a>S <span class="op">=</span> <span class="dv">10_000</span></span>
+<span id="cb19-21"><a></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb19-22"><a></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,num<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="cb19-23"><a></a>b0 <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb19-24"><a></a></span>
+<span id="cb19-25"><a></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(gamma)):</span>
+<span id="cb19-26"><a></a>    se <span class="op">=</span> np.sqrt(<span class="dv">2</span><span class="op">/</span>n)<span class="op">/</span>(gamma[j])</span>
+<span id="cb19-27"><a></a>    phix <span class="op">=</span> scipy.stats.norm(loc<span class="op">=</span>b0,scale<span class="op">=</span>se).pdf(x<span class="op">*</span>se <span class="op">+</span> b0)</span>
+<span id="cb19-28"><a></a>    b <span class="op">=</span> np.array([(<span class="kw">lambda</span> x: b2sls(x[<span class="dv">0</span>],x[<span class="dv">1</span>],x[<span class="dv">2</span>]))(simiv(n,gamma[j],sig,b0,Exe)) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(S)])</span>
+<span id="cb19-29"><a></a>    sns.histplot(b, ax<span class="op">=</span>ax.flat[j], stat<span class="op">=</span><span class="st">'density'</span>)</span>
+<span id="cb19-30"><a></a>    ax.flat[j].set_title(<span class="ss">f"First stage E[t]=</span><span class="sc">{</span>np<span class="sc">.</span>sqrt(n)<span class="op">*</span>gamma[j]<span class="op">/</span>sig<span class="sc">:.3}</span><span class="ss">"</span>)</span>
+<span id="cb19-31"><a></a>    ax.flat[j].plot(x<span class="op">*</span>se<span class="op">+</span>b0,phix)</span>
+<span id="cb19-32"><a></a>    ax.flat[j].set_xlim(<span class="op">-</span><span class="dv">3</span><span class="op">*</span>se <span class="op">+</span><span class="dv">1</span>,<span class="dv">3</span><span class="op">*</span>se<span class="op">+</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="weak-instrument-simulation-hatbeta2sls-output" class="slide level2 output-location-slide"><h2>Weak Instrument Simulation : <span class="math inline">\(\hat{\beta}^{2SLS}\)</span></h2><div class="cell output-location-slide" data-execution_count="14">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="iv_files/figure-revealjs/cell-14-output-1.png" width="812" height="431"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="weak-instrument-simulation-t-stat" class="slide level2">
+<h2>Weak Instrument Simulation : t-stat</h2>
+<div id="b1536ccf" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a><span class="kw">def</span> t2sls(y,x,z, b0<span class="op">=</span><span class="dv">1</span>) :</span>
+<span id="cb20-2"><a></a>    b <span class="op">=</span> b2sls(y,x,z)</span>
+<span id="cb20-3"><a></a>    u <span class="op">=</span> y <span class="op">-</span> x<span class="op">*</span>b</span>
+<span id="cb20-4"><a></a>    se <span class="op">=</span> np.sqrt(u.var()<span class="op">*</span>np.dot(z,z)<span class="op">/</span>(np.dot(x,z)<span class="op">**</span><span class="dv">2</span>))</span>
+<span id="cb20-5"><a></a>    t <span class="op">=</span> (b<span class="op">-</span>b0)<span class="op">/</span>se</span>
+<span id="cb20-6"><a></a>    <span class="cf">return</span>(t)</span>
+<span id="cb20-7"><a></a></span>
+<span id="cb20-8"><a></a>S <span class="op">=</span> <span class="dv">10_000</span></span>
+<span id="cb20-9"><a></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb20-10"><a></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,num<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="cb20-11"><a></a>phix <span class="op">=</span> scipy.stats.norm.pdf(x)</span>
+<span id="cb20-12"><a></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(gamma)):</span>
+<span id="cb20-13"><a></a>    ts <span class="op">=</span> np.array([(<span class="kw">lambda</span> x: t2sls(x[<span class="dv">0</span>],x[<span class="dv">1</span>],x[<span class="dv">2</span>],b0<span class="op">=</span>b0))(simiv(n,gamma[j],sig,b0,Exe)) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(S)])</span>
+<span id="cb20-14"><a></a>    sns.histplot(ts, ax<span class="op">=</span>ax.flat[j], stat<span class="op">=</span><span class="st">'density'</span>)</span>
+<span id="cb20-15"><a></a>    ax.flat[j].set_title(<span class="ss">f"First stage E[t]=</span><span class="sc">{</span>np<span class="sc">.</span>sqrt(n)<span class="op">*</span>gamma[j]<span class="op">/</span>sig<span class="sc">:.3}</span><span class="ss">"</span>)</span>
+<span id="cb20-16"><a></a>    ax.flat[j].plot(x,phix)</span>
+<span id="cb20-17"><a></a>    ax.flat[j].set_xlim(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="weak-instrument-simulation-t-stat-output" class="slide level2 output-location-slide"><h2>Weak Instrument Simulation : t-stat</h2><div class="cell output-location-slide" data-execution_count="15">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="iv_files/figure-revealjs/cell-15-output-1.png" width="816" height="431"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="weak-instruments-3" class="slide level2">
+<h2>Weak Instruments</h2>
+<ul>
+<li>Lessons from simulation:
+<ul>
+<li>When <span class="math inline">\(\Er[Z_i X_i']\)</span> is small, usual asymptotic distribution is a poor approximation for the finite sample distribution of <span class="math inline">\(\hat{\beta}^{IV}\)</span></li>
+<li>The approximation can be poor even when <span class="math inline">\(H_0: \gamma = 0\)</span> in <span class="math inline">\(X = Z\gamma + e\)</span> would be rejected</li>
+</ul></li>
+</ul>
+</section>
+<section id="first-stage-f-statistic" class="slide level2">
+<h2>First stage F-statistic</h2>
+<ul>
+<li>Always report first stage “effective” F-statistic</li>
+</ul>
+<div id="6ce7d903" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a>y,x,z <span class="op">=</span> simiv(n,gamma[<span class="dv">3</span>],sig, b0, Exe)</span>
+<span id="cb21-2"><a></a>model<span class="op">=</span>pf.feols(<span class="st">'y ~ 1 | 0 | x ~ z'</span>, pd.DataFrame({<span class="st">'y'</span>:y,<span class="st">'x'</span>:x, <span class="st">'z'</span>: z}))</span>
+<span id="cb21-3"><a></a>model.IV_Diag()</span>
+<span id="cb21-4"><a></a>model._eff_F</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>np.float64(6.183024655354665)</code></pre>
+</div>
+</div>
+<ul>
+<li>If <span class="math inline">\(F &gt;&gt; 100\)</span>, everything okay
+<ul>
+<li>(old advice of <span class="math inline">\(F&gt;10\)</span> is not enough)</li>
+<li>Even larger needed if more instruments</li>
+</ul></li>
+<li>Else, use different method for confidence intervals and testing</li>
+</ul>
+</section>
+<section id="identification-robust-inference" class="slide level2">
+<h2>Identification Robust Inference</h2>
+<div>
+<ul>
+<li class="fragment"><p>Can we find a better approximation to the finite sample distribution when <span class="math inline">\(\Er[Z_i X_i']\)</span> is small?</p></li>
+<li class="fragment"><p>Yes, two approaches lead to the same answers:</p>
+<ol type="1">
+<li class="fragment">Require uniform (over values of <span class="math inline">\(\Er[Z_iX_i']\)</span>) converge</li>
+<li class="fragment">Weak instrument asymptotics (instead of <span class="math inline">\(\Er[Z_i X_i]\)</span> fixed with <span class="math inline">\(n\)</span>, suppose <span class="math inline">\(\Er[Z_i X_i'] = C/\sqrt{n}\)</span>)</li>
+</ol></li>
+<li class="fragment"><p>Identification robust tests:</p>
+<ul>
+<li class="fragment">Anderson Rubin (okay when just identified — number of instruments = number of endogenous regressors)</li>
+<li class="fragment">Conditional likelihood ratio</li>
+<li class="fragment">Lagrange multiplier</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="identification-robust-inference-1" class="slide level2">
+<h2>Identification Robust Inference</h2>
+<ul>
+<li><code>ivmodels</code> from <span class="citation" data-cites="londschien2024">Londschien and Bühlmann (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span> seems like best python package
+<ul>
+<li>convenient confidence intervals</li>
+<li>downside: assumes homoscedasticity</li>
+</ul></li>
+</ul>
+<div id="95e058e8" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a>y,X <span class="op">=</span> dmatrices(<span class="st">"log_wage ~ 0 + years_of_schooling"</span>, data<span class="op">=</span>factor_data, return_type<span class="op">=</span><span class="st">'dataframe'</span>)</span>
+<span id="cb23-2"><a></a>Z,controls <span class="op">=</span> dmatrices(<span class="st">"q4 ~  C(year_of_birth) + C(state_of_birth)"</span>, data<span class="op">=</span>factor_data, return_type<span class="op">=</span><span class="st">'dataframe'</span>)</span>
+<span id="cb23-3"><a></a>controls.drop(<span class="st">"Intercept"</span>, axis<span class="op">=</span><span class="dv">1</span>,inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb23-4"><a></a>ivm <span class="op">=</span> ivmodels.KClass(<span class="dv">1</span>).fit(X<span class="op">=</span>X,y<span class="op">=</span>y,Z<span class="op">=</span>Z,C<span class="op">=</span>controls)</span>
+<span id="cb23-5"><a></a>sa <span class="op">=</span> ivm.summary(X<span class="op">=</span>X,y<span class="op">=</span>y,Z<span class="op">=</span>Z,C<span class="op">=</span>controls, test<span class="op">=</span><span class="st">'anderson-rubin'</span>, feature_names<span class="op">=</span>[<span class="st">"years_of_schooling"</span>])</span>
+<span id="cb23-6"><a></a><span class="bu">print</span>(sa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Summary based on the anderson-rubin test.
+
+                    estimate  statistic   p-value          conf. set
+years_of_schooling    0.0853      10.09  0.001495  [0.03477, 0.1382]
+
+Endogenous model statistic: 10.09, p-value: 0.001495
+(Multivariate) F-statistic: 61.09, p-value: 5.44e-15</code></pre>
+</div>
+</div>
+</section>
+<section id="identification-robust-inference-2" class="slide level2">
+<h2>Identification Robust Inference</h2>
+<div id="cf05528f" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a></a>sl <span class="op">=</span> ivm.summary(X<span class="op">=</span>X,y<span class="op">=</span>y,Z<span class="op">=</span>Z,C<span class="op">=</span>controls, test<span class="op">=</span><span class="st">'lagrange multiplier'</span>, feature_names<span class="op">=</span>[<span class="st">"years_of_schooling"</span>])</span>
+<span id="cb25-2"><a></a><span class="bu">print</span>(sl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Summary based on the lagrange multiplier test.
+
+                    estimate  statistic   p-value          conf. set
+years_of_schooling    0.0853      10.09  0.001495  [0.03477, 0.1382]
+
+Endogenous model statistic: 10.09, p-value: 0.001495
+(Multivariate) F-statistic: 61.09, p-value: 5.44e-15</code></pre>
+</div>
+</div>
+</section>
+<section id="sources-and-further-reading" class="slide level2">
+<h2>Sources and Further Reading</h2>
+<ul>
+<li><p><a href="https://matheusfacure.github.io/python-causality-handbook/08-Instrumental-Variables.html">Chapter 8 and 9</a> of <span class="citation" data-cites="facure2022">Facure (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></p></li>
+<li><p>Chapters 6, 12, and 13 of <span class="citation" data-cites="causalml2024">Chernozhukov et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></p></li>
+<li><p><a href="https://www.theeffectbook.net/ch-InstrumentalVariables.html">The Effect: Chapter 19 - Instrumental Variables</a> <span class="citation" data-cites="hk2021">Huntington-Klein (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></p></li>
+</ul>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-ak1991" class="csl-entry" role="listitem">
+Angrist, Joshua D., and Alan B. Krueger. 1991. <span>“Does Compulsory School Attendance Affect Schooling and Earnings?”</span> <em>The Quarterly Journal of Economics</em> 106 (4): pp. 979–1014. <a href="http://www.jstor.org/stable/2937954">http://www.jstor.org/stable/2937954</a>.
+</div>
+<div id="ref-causalml2024" class="csl-entry" role="listitem">
+Chernozhukov, V., C. Hansen, N. Kallus, M. Spindler, and V. Syrgkanis. 2024. <em>Applied Causal Inference Powered by ML and AI</em>. <a href="https://causalml-book.org/">https://causalml-book.org/</a>.
+</div>
+<div id="ref-facure2022" class="csl-entry" role="listitem">
+Facure, Matheus. 2022. <em>Causal Inference for the Brave and True</em>. <a href="https://matheusfacure.github.io/python-causality-handbook/landing-page.html">https://matheusfacure.github.io/python-causality-handbook/landing-page.html</a>.
+</div>
+<div id="ref-hk2021" class="csl-entry" role="listitem">
+Huntington-Klein, Nick. 2021. <em>The Effect: An Introduction to Research Design and Causality</em>. CRC Press. <a href="https://theeffectbook.net/">https://theeffectbook.net/</a>.
+</div>
+<div id="ref-londschien2024" class="csl-entry" role="listitem">
+Londschien, Malte, and Peter Bühlmann. 2024. <span>“Weak-Instrument-Robust Subvector Inference in Instrumental Variables Regression: A Subvector Lagrange Multiplier Test and Properties of Subvector Anderson-Rubin Confidence Sets.”</span> <a href="https://arxiv.org/abs/2407.15256">https://arxiv.org/abs/2407.15256</a>.
+</div>
+</div>
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true,"theme":"whiteboard","boardmarkerWidth":2,"chalkWidth":2,"chalkEffect":0},
+'smaller': true,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        // Bounds for smallest/largest possible scale to apply to content
+        minScale: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
