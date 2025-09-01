@@ -2,7 +2,7 @@
 
 ## Quantitative Economics with Data Science Applications
 
-- **Class Time** Monday & Wednesday 12:30PM-2:00PM
+- **Class Time** Monday & Wednesday 9:30AM-11:00AM
 - **Instructor:** Paul Schrimpf, schrimpf@mail.ubc.ca
 - **Instructor:** Jesse Perla, jesse.perla@ubc.ca
 - **Teaching Assistant:** Bruno Esposito
