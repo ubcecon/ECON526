@@ -51,6 +51,7 @@ The course is structured into two parts:
 - **September 3**: [Linear Algebra Foundations](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html#extra-materials)
 
 - **September 8**: [Linear Algebra Foundations](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html#extra-materials)
+<!-- Started with LU Decomposition -->
 
 - **September 10**: [Least Squares, Uniqueness, and Regularization](https://jlperla.github.io/grad_econ_datascience/slides/least_squares.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/least_squares.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/least_squares.html#extra-materials)
 
