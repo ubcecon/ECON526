@@ -36,10 +36,11 @@ The course has one midterm, weekly to bi-weekly problem sets, and a final data p
 1. **September 8 Midnight:** [Problem Set 0](problem_sets/problem_set_0.pdf) - covers Math Camp material, so you can get started right away.
 2. **September 14 Midnight:** [Problem Set 1](problem_sets/problem_set_1.ipynb) - short assignment checking your installation of Jupyter.
 3. **September 21 Midnight:** [Problem Set 2](problem_sets/problem_set_2.ipynb)
-4. **September 28 Midnight:** [Problem Set 3](problem_sets/problem_set_3.ipynb) 
-5. **October 2 (LAB SESSION):** Midterm Logistics Practice <!-- and Review [Midterm Practice Problems](problem_sets/midterm_practice_1.ipynb) -->
-6. **October 8:** IN CLASS MIDTERM
-7. **End of Term (TBD):** Data Project Due
+4. **September 28 Midnight:** [Problem Set 3](problem_sets/problem_set_3.ipynb)
+5. **October 5 Midnight:** [Problem Set 4](problem_sets/problem_set_4.ipynb)
+6. **October 2 (LAB SESSION):** Midterm Logistics Practice <!-- and Review [Midterm Practice Problems](problem_sets/midterm_practice_1.ipynb) -->
+7. **October 8:** IN CLASS MIDTERM
+8. **End of Term (TBD):** Data Project Due
 
 See the `/problem_sets` folder within this repository for the problem sets as jupyter notebooks.
 - The `pyproject.toml` and `uv.lock` files provide the package setup.  Simple run `uv sync` (more details [here](https://jlperla.github.io/grad_econ_datascience/pages/setup.html))
@@ -68,7 +69,7 @@ The course is structured into two parts:
 -  **October 6**: [Stochastic Processes, Markov Chains, and Expectations](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html#extra-materials)
 -  **October 8 (IN CLASS MIDTERM)**
 -  **October 13 (Statutory holiday)**
--  **October 15**: [Stochastic Processes, Markov Chains, and Expectations](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html#extra-materials)
+-  **October 15**: Large Language Models and Embeddings
 
 <!-- More classes
 - October 20
