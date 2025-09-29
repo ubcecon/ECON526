@@ -38,9 +38,10 @@ The course has one midterm, weekly to bi-weekly problem sets, and a final data p
 3. **September 21 Midnight:** [Problem Set 2](problem_sets/problem_set_2.ipynb)
 4. **September 28 Midnight:** [Problem Set 3](problem_sets/problem_set_3.ipynb)
 5. **October 5 Midnight:** [Problem Set 4](problem_sets/problem_set_4.ipynb)
-6. **October 2 (LAB SESSION):** Midterm Logistics Practice <!-- and Review [Midterm Practice Problems](problem_sets/midterm_practice_1.ipynb) -->
-7. **October 8:** IN CLASS MIDTERM
-8. **End of Term (TBD):** Data Project Due
+6. **NOT TO HAND IN** [Midterm Practice Problems](problem_sets/midterm_practice.ipynb)
+7. **October 2 (LAB SESSION):** Midterm Logistics Practice
+8. **October 8:** IN CLASS MIDTERM
+9. **End of Term (TBD):** Data Project Due
 
 See the `/problem_sets` folder within this repository for the problem sets as jupyter notebooks.
 - The `pyproject.toml` and `uv.lock` files provide the package setup.  Simple run `uv sync` (more details [here](https://jlperla.github.io/grad_econ_datascience/pages/setup.html))
@@ -65,8 +66,8 @@ The course is structured into two parts:
 - **September 22**: [Latent Variables and Unsupervised Learning](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.html#extra-materials)
 - **September 24**: [Linear and Nonlinear Dynamics](https://jlperla.github.io/grad_econ_datascience/slides/dynamics.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/dynamics.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/dynamics.html#extra-materials)
 - **September 29**:  [Probability, Conditioning, and Independence](https://jlperla.github.io/grad_econ_datascience/slides/probability.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/probability.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/probability.html#extra-materials)
-- **October 1**: [Probability, Conditioning, and Independence](https://jlperla.github.io/grad_econ_datascience/slides/probability.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/probability.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/probability.html#extra-materials)
--  **October 6**: [Stochastic Processes, Markov Chains, and Expectations](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html#extra-materials)
+- **October 1**: [Probability, Conditioning, and Independence](https://jlperla.github.io/grad_econ_datascience/slides/probability.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/probability.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/probability.html#extra-materials) and start [Stochastic Processes, Markov Chains, and Expectations](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html#extra-materials)
+-  **October 6**: [Midterm Practice Problems](problem_sets/midterm_practice.ipynb) and [Stochastic Processes, Markov Chains, and Expectations](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html#extra-materials)
 -  **October 8 (IN CLASS MIDTERM)**
 -  **October 13 (Statutory holiday)**
 -  **October 15**: Large Language Models and Embeddings
@@ -93,7 +94,7 @@ The course is structured into two parts:
 
 Here is the [source](https://github.com/ubcecon/526) for my slides.
 
-See "Sources and Futher Reading" (2nd last slide) on each set of slides for additional reading.
+See "Sources and Further Reading" (2nd last slide) on each set of slides for additional reading.
 
 #### Important Dates
 
