@@ -70,7 +70,7 @@ The course is structured into two parts:
 -  **October 6**: [Midterm Practice Problems](problem_sets/midterm_practice.ipynb) and [Stochastic Processes, Markov Chains, and Expectations](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html#extra-materials)
 -  **October 8 (IN CLASS MIDTERM)**
 -  **October 13 (Statutory holiday)**
--  **October 15**: Large Language Models and Embeddings
+-  **October 15**: [Large Language Models and Embeddings](https://jlperla.github.io/grad_econ_datascience/slides/nlp_llm.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/nlp_llm.pdf),
 
 <!-- More classes
 - October 20
