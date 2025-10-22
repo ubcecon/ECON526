@@ -1579,14 +1579,14 @@
     "href": "uncertainty.html#references",
     "title": "Uncertainty Quantification",
     "section": "References",
-    "text": "References\n\n\n\n\nChernozhukov, V., C. Hansen, N. Kallus, M. Spindler, and V. Syrgkanis. 2024. Applied Causal Inference Powered by ML and AI. https://causalml-book.org/.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nRaič, Martin. 2019. “A multivariate Berry–Esseen theorem with explicit constants.” Bernoulli 25 (4A): 2824–53. https://doi.org/10.3150/18-BEJ1072."
+    "text": "References\n\n\n\n\nChernozhukov, V., C. Hansen, N. Kallus, M. Spindler, and V. Syrgkanis. 2024. Applied Causal Inference Powered by ML and AI. https://causalml-book.org/.\n\n\nChernozhukov, Victor, Denis Chetverikov, and Yuta Koike. 2023. “Nearly optimal central limit theorem and bootstrap approximations in high dimensions.” The Annals of Applied Probability 33 (3): 2374–2425. https://doi.org/10.1214/22-AAP1870.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nRaič, Martin. 2019. “A multivariate Berry–Esseen theorem with explicit constants.” Bernoulli 25 (4A): 2824–53. https://doi.org/10.3150/18-BEJ1072."
   },
   {
     "objectID": "uncertainty.html#sources-and-further-reading",
     "href": "uncertainty.html#sources-and-further-reading",
     "title": "Uncertainty Quantification",
     "section": "Sources and Further Reading",
-    "text": "Sources and Further Reading\n\nChapter 3 of Facure (2022)\nChapter 1 of Chernozhukov et al. (2024)"
+    "text": "Sources and Further Reading\n\nChapter 3 of Facure (2022)\nChapter 1 of V. Chernozhukov et al. (2024)"
   },
   {
     "objectID": "uncertainty.html#exact-estimator-distribution",
@@ -1628,7 +1628,7 @@
     "href": "uncertainty.html#central-limit-theorem",
     "title": "Uncertainty Quantification",
     "section": "Central Limit Theorem",
-    "text": "Central Limit Theorem\n\n\n\n\nBerry-Esseen Central Limit Theorem\n\n\nIf \\(X_i\\) are i.i.d. with \\(\\Er[X] = 0\\) and \\(\\var(X)=1\\), then \\[\n\\sup_{z \\in \\R} \\left\\vert\nP\\left(\\left[\\frac{1}{\\sqrt{n}} \\sum_{i=1}^n X_i\\right] \\leq z \\right) - \\Phi(z) \\right\\vert \\leq 0.5 \\Er[|X|^3]/\\sqrt{n}\n\\] where \\(\\Phi\\) is the normal CDF.\n\n\n\n\n\n\n\n\n\nMultivariate Central Limit Theorem\n\n\nIf \\(X_i \\in \\R^d\\) are i.i.d. with \\(\\Er[X] = 0\\) and \\(\\var(X)=I_d\\), then \\[\n\\sup_{A \\subset \\R^d, \\text{convex}} \\left\\vert\nP\\left(\\frac{1}{\\sqrt{n}} \\sum_{i=1}^n X_i \\in A \\right) - P(N(0,I_d) \\in A) \\right\\vert \\leq\n(42 d^{1/4} + 16) \\Er[\\Vert X \\Vert ^3]/\\sqrt{n}\n\\]\n1\n\n\n\n\n\nSee Raič (2019) for details."
+    "text": "Central Limit Theorem\n\n\n\n\nBerry-Esseen Central Limit Theorem\n\n\nIf \\(X_i\\) are i.i.d. with \\(\\Er[X] = 0\\) and \\(\\var(X)=1\\), then \\[\n\\sup_{z \\in \\R} \\left\\vert\nP\\left(\\left[\\frac{1}{\\sqrt{n}} \\sum_{i=1}^n X_i\\right] \\leq z \\right) - \\Phi(z) \\right\\vert \\leq 0.5 \\Er[|X|^3]/\\sqrt{n}\n\\] where \\(\\Phi\\) is the normal CDF.\n\n\n\n\n\n\n\n\n\nMultivariate Central Limit Theorem\n\n\nIf \\(X_i \\in \\R^d\\) are i.i.d. with \\(\\Er[X] = 0\\) and \\(\\var(X)=I_d\\), then \\[\n\\sup_{A \\subset \\R^d, \\text{convex}} \\left\\vert\nP\\left(\\frac{1}{\\sqrt{n}} \\sum_{i=1}^n X_i \\in A \\right) - P(N(0,I_d) \\in A) \\right\\vert \\leq\n(42 d^{1/4} + 16) \\Er[\\Vert X \\Vert ^3]/\\sqrt{n}\n\\]\n1\n\n\n\n\n\nSee Raič (2019) for details and Victor Chernozhukov, Chetverikov, and Koike (2023) for a similar result for higher dimensions (larger \\(d\\))"
   },
   {
     "objectID": "uncertainty.html#approximate-confidence-interval-1",
@@ -1726,7 +1726,7 @@
     "href": "uncertainty.html#high-dimensions",
     "title": "Uncertainty Quantification",
     "section": "High Dimensions",
-    "text": "High Dimensions\n\nNumber of parameters (\\(p\\)) large compared to sample size (\\(n\\))\nUsual asymptotics break down\nRisk of overfitting\nInference difficult, but possible\n\nChernozhukov et al. (2024) chapter 4\n\nMore later …"
+    "text": "High Dimensions\n\nNumber of parameters (\\(p\\)) large compared to sample size (\\(n\\))\nUsual asymptotics break down\nRisk of overfitting\nInference difficult, but possible\n\nV. Chernozhukov et al. (2024) chapter 4\n\nMore later …"
   },
   {
     "objectID": "uncertainty.html#simulating-distribution-of-gtheta",
