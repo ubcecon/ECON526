@@ -24,7 +24,7 @@ See [here](https://jlperla.github.io/grad_econ_datascience/pages/setup.html#quic
 - Get a [GitHub](www.github.com) ID and apply for the [Student Developer Pack](https://education.github.com/pack) to get further free features
 - We strongly recommend using [VS Code](https://code.visualstudio.com/) as your primary code editor and [uv](https://github.com/astral-sh/uv) for your python and package management.
 - After setup you can clone a variety of repositories onto your local machine using a terminal, using either git directly (e.g. in terminal go `git clone https://github.com/ubcecon/ECON526.git`), or [VS Code (recommended)](https://code.visualstudio.com/docs/sourcecontrol/intro-to-git#_clone-a-repository-locally).  See instructions and more other useful code repositories [here](https://jlperla.github.io/grad_econ_datascience/pages/setup.html#other-notebook-repositories)
-    
+
 
 ## Syllabus
 See [Syllabus](syllabus.md) for more details
@@ -41,7 +41,8 @@ The course has one midterm, weekly to bi-weekly problem sets, and a final data p
 6. **NOT TO HAND IN** [Midterm Practice Problems](problem_sets/midterm_practice.ipynb)
 7. **October 2 (LAB SESSION):** Midterm Logistics Practice
 8. **October 8:** IN CLASS MIDTERM
-9. **End of Term (TBD):** Data Project Due
+9. See Canvas for additional problem sets <!-- Listing things in 2 places is too much for me unless it's automated. -->
+10. **December 15:** Data Project Due
 
 See the `/problem_sets` folder within this repository for the problem sets as jupyter notebooks.
 - The `pyproject.toml` and `uv.lock` files provide the package setup.  Simple run `uv sync` (more details [here](https://jlperla.github.io/grad_econ_datascience/pages/setup.html))
