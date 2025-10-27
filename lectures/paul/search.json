@@ -1761,7 +1761,7 @@
     "href": "regression.html#multiple-regression",
     "title": "Linear Regression",
     "section": "Multiple Regression",
-    "text": "Multiple Regression\n\n\\(y \\in \\R^n\\), \\(X \\in \\R^{n \\times k}\\) \\[ %\n\\begin{align*}\n\\hat{\\beta} & \\in \\argmin_{\\beta} \\Vert y - X \\beta \\Vert_2^2 \\\\\n\\hat{\\beta} & \\in \\argmin_{\\beta} \\sum_{i=1}^n (y_i - x_i' \\beta)^2\n\\end{align*}\n\\]\nPopulation regression \\[\n\\begin{align*}\n\\beta_0 & \\in \\argmin_{\\beta} \\Er[(y - x'\\beta)^2] \\\\\n\\beta_0 & \\in \\argmin_{\\beta} \\Er[(\\Er[y|x] - x'\\beta)^2]\n\\end{align*}\n\\]\n\nbest linear approximation to conditional expectation"
+    "text": "Multiple Regression\n\n\\(y \\in \\R^n\\), \\(X \\in \\R^{n \\times k}\\) \\[ %\n\\begin{align*}\n\\hat{\\beta} & \\in \\argmin_{\\beta} \\Vert y - X \\beta \\Vert_2^2 \\\\\n\\hat{\\beta} & \\in \\argmin_{\\beta} \\sum_{i=1}^n (y_i - x_i' \\beta)^2\n\\end{align*}\n\\]"
   },
   {
     "objectID": "regression.html#large-sample-behavior",
@@ -1775,7 +1775,7 @@
     "href": "regression.html#ceteris-paribus",
     "title": "Linear Regression",
     "section": "Ceteris Paribus",
-    "text": "Ceteris Paribus\n\nRegression estimates \\(\\beta_0 \\in \\argmin_{\\beta} \\Er[(\\Er[y|x] - x'\\beta)^2]\\)\n\n\\(x'\\beta_0\\) is the best linear approximation to \\(\\Er[y|x]\\)\n\\(\\frac{\\partial}{\\partial x_1}\\Er[y|x] \\approx \\beta_{0,1}\\) is the change in \\(x_1\\) holding the rest of \\(x\\) constant"
+    "text": "Ceteris Paribus\n\nRegression estimates \\(\\beta_0 \\in \\argmin_{\\beta} \\Er[(\\Er[y|x] - x'\\beta)^2]\\)\n\n\\(x'\\beta_0\\) is the best linear approximation to \\(\\Er[y|x]\\)\nIf \\(\\Er[y|x]\\) is linear, then \\(\\frac{\\partial}{\\partial x_1}\\Er[y|x] = \\beta_{0,1}\\) is the change in \\(y\\) when changing \\(x_1\\) holding the rest of \\(x\\) constant"
   },
   {
     "objectID": "regression.html#example-gender-earnings-gap",
@@ -2763,5 +2763,19 @@
     "title": "Introduction to Causality and Potential Outcomes",
     "section": "Example Pfizer Covid Vaccine RCT",
     "text": "Example Pfizer Covid Vaccine RCT\n\n\n- All\n\n|  | Infection Rate per 1000|\n|---|---|\n|Treated| 0.45|\n|Control| 8.4|\n|Difference| -7.9|\n\n - 65+\n\n|  | Infection Rate per 1000|\n|---|---|\n|Treated| 0.25|\n|Control| 4.7|\n|Difference| -4.4|"
+  },
+  {
+    "objectID": "regression.html#model-free-interpretation-of-regression",
+    "href": "regression.html#model-free-interpretation-of-regression",
+    "title": "Linear Regression",
+    "section": "Model Free Interpretation of Regression",
+    "text": "Model Free Interpretation of Regression\n\nPopulation regression \\[\n\\begin{align*}\n\\beta_0 & \\in \\argmin_{\\beta} \\Er[(y - x'\\beta)^2] \\\\\n\\beta_0 & \\in \\argmin_{\\beta} \\Er[(\\Er[y|x] - x'\\beta)^2]\n\\end{align*}\n\\]\n\nbest linear approximation to conditional expectation\n\ncaution, can have \\(\\Er[y|x]\\) strictly increasing in \\(x_j\\), but \\(\\beta_{0,j} &lt; 0\\)."
+  },
+  {
+    "objectID": "regression.html#caution",
+    "href": "regression.html#caution",
+    "title": "Linear Regression",
+    "section": "Caution",
+    "text": "Caution\n\nRegression being a linear approximation to \\(\\Er[Y|X]\\) does not mean \\(\\beta\\) necessarily has the sign you want\nIn example below, \\(\\Er[Y|x_1=1, x_2] &gt; \\Er[Y|x_1=0,x_2]\\) for all \\(x_2\\), but \\(\\beta_1 &lt; 0\\)\n\n\nimport numpy as np\n\nn = 100_000\n\ndef EYX(x):\n    return -1.0 + 1.0 * x[1] if x[2] &gt; 0 else (1.0 + 0.1 * x[1])\n\nx2 = np.random.randn(n)\nx1 = (x2 * 3 + np.random.randn(n) &gt; 0).astype(float)\nX = np.column_stack((np.ones(n),x1, x2))\ny = np.array([EYX(row) for row in X]) + np.random.randn(n)\nbeta = np.linalg.lstsq(X, y, rcond=None)[0]\nprint(f\"beta_1 = {beta[1]:.3}\")\nmean_dEydx2 = np.mean([EYX([1,1,x2i]) - EYX([1,0,x2i]) for x2i in x2])\nprint(f\"mean( E[y|x1=1,x2] - E[y|x1=0,x2] ) = {mean_dEydx2:.3}\")\n\nbeta_1 = -0.163\nmean( E[y|x1=1,x2] - E[y|x1=0,x2] ) = 0.548"
   }
 ]
