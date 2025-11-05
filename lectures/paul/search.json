@@ -340,7 +340,7 @@
     "href": "did.html#introduction-1",
     "title": "Introduction to Difference in Differences",
     "section": "Introduction",
-    "text": "Introduction\n\nHave some policy applied to some observations but not others, and observe outcome before and after policy\nIdea: compare outcome before and after policy in treated and untreated group\nChange in outcome in treated group reflects both effect of policy and time trend, change in untreated group captures time trend"
+    "text": "Introduction\n\nContext:\n\nHave a policy applied to some observations but not others, and observe outcome before and after policy\n\nIdea:\n\nCompare outcome before and after policy in treated and untreated group\n\nChange in outcome in treated group reflects both effect of policy and time trend, change in untreated group captures time trend"
   },
   {
     "objectID": "did.html#example-impact-of-billboards",
@@ -382,7 +382,7 @@
     "href": "did.html#important-assumptions",
     "title": "Introduction to Difference in Differences",
     "section": "Important Assumptions",
-    "text": "Important Assumptions\n\nNo anticipation: \\(D_{i1}=1\\) does not affect \\(y_{i0}\\)\n\nbuilt into the potential outcomes notation we used, relax by allowing potential outcomes given sequence of \\(D\\), i.e. \\(y_{it}(D_{i0},D_{i1})\\)\n\nParallel trends: \\(\\Er[\\color{red}{y_{i1}(0)} - y_{i0}(0) |D_{i1}=1,D_{i0}=0] =  \\Er[y_{i1}(0) - y_{i0}(0) | D_{i1}=0], D_{i0}=0]\\)\n\nnot invariant to tranformations of \\(y\\)"
+    "text": "Important Assumptions\n\nNo anticipation: \\(D_{i1}=1\\) does not affect \\(y_{i0}\\)\n\nbuilt into the potential outcomes notation we used\ncould relax by allowing potential outcomes given sequence of \\(D\\), i.e. \\(y_{it}(D_{i0},D_{i1})\\), but then need different assumptions and estimator\n\nParallel trends: \\(\\Er[\\color{red}{y_{i1}(0)} - y_{i0}(0) |D_{i1}=1,D_{i0}=0] =  \\Er[y_{i1}(0) - y_{i0}(0) | D_{i1}=0, D_{i0}=0]\\)\n\nnot invariant to tranformations of \\(y\\)"
   },
   {
     "objectID": "did.html#estimation",
@@ -2777,5 +2777,40 @@
     "title": "Linear Regression",
     "section": "Caution",
     "text": "Caution\n\nRegression being a linear approximation to \\(\\Er[Y|X]\\) does not mean \\(\\beta\\) necessarily has the sign you want\nIn example below, \\(\\Er[Y|x_1=1, x_2] &gt; \\Er[Y|x_1=0,x_2]\\) for all \\(x_2\\), but \\(\\beta_1 &lt; 0\\)\n\n\nimport numpy as np\n\nn = 100_000\n\ndef EYX(x):\n    return -1.0 + 1.0 * x[1] if x[2] &gt; 0 else (1.0 + 0.1 * x[1])\n\nx2 = np.random.randn(n)\nx1 = (x2 * 3 + np.random.randn(n) &gt; 0).astype(float)\nX = np.column_stack((np.ones(n),x1, x2))\ny = np.array([EYX(row) for row in X]) + np.random.randn(n)\nbeta = np.linalg.lstsq(X, y, rcond=None)[0]\nprint(f\"beta_1 = {beta[1]:.3}\")\nmean_dEydx2 = np.mean([EYX([1,1,x2i]) - EYX([1,0,x2i]) for x2i in x2])\nprint(f\"mean( E[y|x1=1,x2] - E[y|x1=0,x2] ) = {mean_dEydx2:.3}\")\n\nbeta_1 = -0.163\nmean( E[y|x1=1,x2] - E[y|x1=0,x2] ) = 0.548"
+  },
+  {
+    "objectID": "did.html#parallel-trends-and-functional-form",
+    "href": "did.html#parallel-trends-and-functional-form",
+    "title": "Introduction to Difference in Differences",
+    "section": "Parallel Trends and Functional Form",
+    "text": "Parallel Trends and Functional Form\n\nParallel trends for an outcome does not imply parallel trends for functions of it\n\nFor example, \\[\n\\Er[\\color{red}{y_{i1}(0)} - y_{i0}(0) |D_{i1}=1,D_{i0}=0] =  \\Er[y_{i1}(0) - y_{i0}(0) | D_{i1}=0, D_{i0}=0]\n\\] does not imply \\[\n\\Er[\\log \\color{red}{y_{i1}(0)} - \\log y_{i0}(0) |D_{i1}=1,D_{i0}=0] =  \\Er[\\log y_{i1}(0) - \\log y_{i0}(0) | D_{i1}=0, D_{i0}=0]\n\\]"
+  },
+  {
+    "objectID": "did.html#parallel-trends-in-logs",
+    "href": "did.html#parallel-trends-in-logs",
+    "title": "Introduction to Difference in Differences",
+    "section": "Parallel Trends in Logs",
+    "text": "Parallel Trends in Logs\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n# Parameters\nn_periods = 5\nn_groups = 2\ngroup_names = ['Control', 'Treatment']\n\ntime = np.arange(n_periods)\ngroup = np.array([0, 1])  # 0: Control, 1: Treatment\n\nintercepts = [1, 5]  # Different starting points\ntrend = 1  # Same trend for both groups\n\n# Simulate outcomes\ndata = []\nfor g in group:\n    for t in time:\n        y = intercepts[g] + trend * t #+ np.random.normal(0,1)\n        data.append({'group': group_names[g], 'time': t, 'y': y})\n\ndf = pd.DataFrame(data)\ndf['log_y'] = np.log(df['y'])\n\n# Plot levels\nplt.figure(figsize=(12,5))\nplt.subplot(1,2,1)\nfor name, grp in df.groupby('group'):\n    plt.plot(grp['time'], grp['y'], label=name)\nplt.title('Outcome in Levels')\nplt.xlabel('Time')\nplt.ylabel('y')\nplt.legend()\n\n# Plot logs\nplt.subplot(1,2,2)\nfor name, grp in df.groupby('group'):\n    plt.plot(grp['time'], grp['log_y'], label=name)\nplt.title('Outcome in Logs')\nplt.xlabel('Time')\nplt.ylabel('log(y)')\nplt.legend()\n\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "did.html#parallel-trends-in-growth-rates",
+    "href": "did.html#parallel-trends-in-growth-rates",
+    "title": "Introduction to Difference in Differences",
+    "section": "Parallel Trends in Growth Rates",
+    "text": "Parallel Trends in Growth Rates\n\n# Parameters\nn_periods = 10\ngroup_names = ['Control', 'Treatment']\ninitials = [10, 9]  # Different starting values\ngrowth = [1.10, 1.07]\ngrowth_trend = -0.005\n\n# Simulate outcomes\ndata = []\nfor g, initial in enumerate(initials):\n    y = initials[g]\n    for t in range(n_periods):\n        data.append({'group': group_names[g], 'time': t, 'y': y})\n        y *= growth[g] + growth_trend * t\n\ndf = pd.DataFrame(data)\ndf['log_y'] = np.log(df['y'])\n\n# Compute growth rates (difference in logs)\ndf['growth_rate'] = df.groupby('group')['log_y'].diff()\n\n# Plot levels\nplt.figure(figsize=(15,4))\nplt.subplot(1,3,1)\nfor name, grp in df.groupby('group'):\n    plt.plot(grp['time'], grp['y'], label=name)\nplt.title('Outcome in Levels')\nplt.xlabel('Time')\nplt.ylabel('y')\nplt.legend()\n\n# Plot logs\nplt.subplot(1,3,2)\nfor name, grp in df.groupby('group'):\n    plt.plot(grp['time'], grp['log_y'], label=name)\nplt.title('Outcome in Logs')\nplt.xlabel('Time')\nplt.ylabel('log(y)')\nplt.legend()\n\n# Plot growth rates\nplt.subplot(1,3,3)\nfor name, grp in df.groupby('group'):\n    plt.plot(grp['time'], grp['growth_rate'], label=name)\nplt.title('Growth Rates (Δlog(y))')\nplt.xlabel('Time')\nplt.ylabel('Growth Rate')\nplt.legend()\n\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "did.html#parallel-trends-in-logs-output",
+    "href": "did.html#parallel-trends-in-logs-output",
+    "title": "Introduction to Difference in Differences",
+    "section": "Parallel Trends in Logs",
+    "text": "Parallel Trends in Logs"
+  },
+  {
+    "objectID": "did.html#parallel-trends-in-growth-rates-output",
+    "href": "did.html#parallel-trends-in-growth-rates-output",
+    "title": "Introduction to Difference in Differences",
+    "section": "Parallel Trends in Growth Rates",
+    "text": "Parallel Trends in Growth Rates"
   }
 ]
