@@ -39,7 +39,7 @@
     "href": "moredid.html#weights",
     "title": "Difference in Differences II",
     "section": "Weights",
-    "text": "Weights\n\n\ndef assigntreat(n, T, portiontreated):\n    treated = np.zeros((n, T), dtype=bool)\n    for t in range(1, T):\n        treated[:, t] = treated[:, t - 1]\n        if portiontreated[t] &gt; 0:\n            treated[:, t] = np.logical_or(treated[:, t-1], np.random.rand(n) &lt; portiontreated[t])\n    return treated\n\ndef weights(D):\n    D̈ = D - np.mean(D, axis=0) - np.mean(D, axis=1)[:, np.newaxis] + np.mean(D)\n    ω = D̈ / np.sum(D̈**2)\n    return ω\n\nn = 100\nT = 9\npt = np.zeros(T)\npt[T//2 + 1] = 0.5\nD = assigntreat(n, T,pt)\ny = np.random.randn(n, T)\nweighted_sum = np.sum(y * weights(D))\nprint(weighted_sum)\n\n\n-0.039688572216398835"
+    "text": "Weights\n\n\ndef assigntreat(n, T, portiontreated):\n    treated = np.zeros((n, T), dtype=bool)\n    for t in range(1, T):\n        treated[:, t] = treated[:, t - 1]\n        if portiontreated[t] &gt; 0:\n            treated[:, t] = np.logical_or(treated[:, t-1], np.random.rand(n) &lt; portiontreated[t])\n    return treated\n\ndef weights(D):\n    D̈ = D - np.mean(D, axis=0) - np.mean(D, axis=1)[:, np.newaxis] + np.mean(D)\n    ω = D̈ / np.sum(D̈**2)\n    return ω\n\nn = 100\nT = 9\npt = np.zeros(T)\npt[T//2 + 1] = 0.5\nD = assigntreat(n, T,pt)\ny = np.random.randn(n, T)\nweighted_sum = np.sum(y * weights(D))\nprint(weighted_sum)\n\n\n0.0009381949997168959"
   },
   {
     "objectID": "moredid.html#weights-with-single-treatment-time",
@@ -81,7 +81,7 @@
     "href": "moredid.html#what-to-do-1",
     "title": "Difference in Differences II",
     "section": "What to Do?",
-    "text": "What to Do?\n\nOption 1: Use an appropriate package\n\ndifferences\npyfixest (Gardner’s 2-stage estimator or Dube et al (2023) local projections)\ndoubleml (see chapter 16 of Chernozhukov et al. (2024))\nsee https://asjadnaqvi.github.io/DiD/ for more options (but none are python)"
+    "text": "What to Do?\n\nOption 1: Use an appropriate package\n\npyfixest see especially their docs on difference in differences\ncsdid\ndoubleml (see chapter 16 of Chernozhukov et al. (2024))\ndifferences\nsee https://asjadnaqvi.github.io/DiD/ for more options"
   },
   {
     "objectID": "moredid.html#what-to-do-2",
@@ -2055,7 +2055,7 @@
     "href": "moredid.html#using-a-package",
     "title": "Difference in Differences II",
     "section": "Using a package",
-    "text": "Using a package\n\n# check that it matches fixed effect estimate from a package\nimport pyfixest as pf\n\ndf = pd.DataFrame({\n    'id': np.repeat(np.arange(1, n + 1), T),\n    't': np.tile(np.arange(1, T + 1), n),\n    'y': y.flatten(),\n    'D': D.flatten()\n})\nresult=pf.feols('y ~ D | id + t', df, vcov={\"CRV1\": \"id\"})\nresult.summary()\n\n###\n\nEstimation:  OLS\nDep. var.: y, Fixed effects: id+t\nInference:  CRV1\nObservations:  900\n\n| Coefficient   |   Estimate |   Std. Error |   t value |   Pr(&gt;|t|) |   2.5% |   97.5% |\n|:--------------|-----------:|-------------:|----------:|-----------:|-------:|--------:|\n| D             |     -0.040 |        0.121 |    -0.329 |      0.743 | -0.279 |   0.200 |\n---\nRMSE: 0.911 R2: 0.151 R2 Within: 0.0"
+    "text": "Using a package\n\n# check that it matches fixed effect estimate from a package\nimport pyfixest as pf\n\ndf = pd.DataFrame({\n    'id': np.repeat(np.arange(1, n + 1), T),\n    't': np.tile(np.arange(1, T + 1), n),\n    'y': y.flatten(),\n    'D': D.flatten()\n})\nresult=pf.feols('y ~ D | id + t', df, vcov={\"CRV1\": \"id\"})\nresult.summary()\n\n###\n\nEstimation:  OLS\nDep. var.: y, Fixed effects: id+t\nInference:  CRV1\nObservations:  900\n\n| Coefficient   |   Estimate |   Std. Error |   t value |   Pr(&gt;|t|) |   2.5% |   97.5% |\n|:--------------|-----------:|-------------:|----------:|-----------:|-------:|--------:|\n| D             |      0.001 |        0.107 |     0.009 |      0.993 | -0.211 |   0.213 |\n---\nRMSE: 0.913 R2: 0.124 R2 Within: 0.0"
   },
   {
     "objectID": "fe.html#what-fixed-effects-cannot-fix",
@@ -2812,5 +2812,33 @@
     "title": "Introduction to Difference in Differences",
     "section": "Parallel Trends in Growth Rates",
     "text": "Parallel Trends in Growth Rates"
+  },
+  {
+    "objectID": "moredid.html#distribution-of-weights-with-a-single-treatment-time",
+    "href": "moredid.html#distribution-of-weights-with-a-single-treatment-time",
+    "title": "Difference in Differences II",
+    "section": "Distribution of Weights with a Single Treatment Time",
+    "text": "Distribution of Weights with a Single Treatment Time\n\n\nCode\ndef histweights(D, ω=weights(D)):\n    \"\"\"\n    D: np.ndarray, shape (n, T), binary treatment indicators\n    ω: np.ndarray, shape (n, T), weights\n    \"\"\"\n    n, T = D.shape\n\n    # Ever treated per unit (row)\n    evertreated = np.any(D, axis=1)  # shape (n,)\n    # After any treatment per time (column)\n    aftertreatment = np.any(D, axis=0)  # shape (T,)\n\n    # Create group labels for each (unit, time) pair\n    g = []\n    for i in range(n):\n        for t in range(T):\n            et = evertreated[i]\n            at = aftertreatment[t]\n            label = (\"Treated, \" if et else \"Control, \") + (\"After\" if at else \"Before\")\n            g.append(label)\n\n    # Flatten weights for histogram\n    ω_flat = ω.flatten()\n\n    # Plot grouped histogram\n    plt.figure(figsize=(9,3))\n    bins = np.histogram_bin_edges(ω_flat, bins='auto')\n    bin_width = np.diff(bins)[0]\n    bin_centers = bins[:-1] + bin_width / 2\n\n    unique_groups = sorted(set(g))\n    n_groups = len(unique_groups)\n    offsets = np.linspace(-bin_width/2, bin_width/2, n_groups, endpoint=False)\n\n    for idx, group in enumerate(unique_groups):\n        mask = np.array(g) == group\n        hist, _ = np.histogram(ω_flat[mask], bins=bins)\n        plt.bar(bin_centers + offsets[idx], hist, width=bin_width/(n_groups+0.5), label=group, align='center')\n\n    plt.title(\"Histogram of Weights\")\n    plt.xlabel(\"Weight\")\n    plt.ylabel(\"Frequency\")\n    plt.legend()\n    plt.tight_layout()\n    plt.show()\n\nhistweights(D)"
+  },
+  {
+    "objectID": "moredid.html#distribution-of-weights-with-early-and-late-treated",
+    "href": "moredid.html#distribution-of-weights-with-early-and-late-treated",
+    "title": "Difference in Differences II",
+    "section": "Distribution of Weights with Early and Late Treated",
+    "text": "Distribution of Weights with Early and Late Treated\n\nhistweights(D)"
+  },
+  {
+    "objectID": "moredid.html#using-pyfixest-cohort-by-time-estimates",
+    "href": "moredid.html#using-pyfixest-cohort-by-time-estimates",
+    "title": "Difference in Differences II",
+    "section": "Using pyfixest: Cohort by Time Estimates",
+    "text": "Using pyfixest: Cohort by Time Estimates\n\n\nCode\ndfc['first_treat_time'] = (\n    dfc.groupby('id').apply(\n        lambda g: g.loc[g['D'] == 1, 't'].iloc[0] if (g['D'] == 1).any() else 0\n    ).reindex(dfc['id']).values\n)\nfit_saturated = pf.event_study(\n    data=dfc,\n    yname=\"y\",\n    idname=\"id\",\n    tname=\"t\",\n    gname=\"first_treat_time\",\n    estimator=\"saturated\",\n)\n\nfit_saturated.iplot()"
+  },
+  {
+    "objectID": "moredid.html#using-pyfixest-aggregating-cohorts",
+    "href": "moredid.html#using-pyfixest-aggregating-cohorts",
+    "title": "Difference in Differences II",
+    "section": "Using pyfixest: Aggregating Cohorts",
+    "text": "Using pyfixest: Aggregating Cohorts\n\n\nCode\nfit_saturated.aggregate()\nfit_saturated.iplot_aggregate()"
   }
 ]
