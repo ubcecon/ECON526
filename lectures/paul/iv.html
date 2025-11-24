@@ -6,8 +6,8 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.25">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Paul Schrimpf">
   <title>ECON 526 – Instrumental Variables</title>
@@ -378,7 +378,7 @@ Y_i = \underbrace{X_i}_{\in \R^k}' \beta_0 + \epsilon_i
 </ol></li>
 </ul>
 </div><div class="column" style="width:50%;">
-<div id="d23af3c9" class="cell" data-execution_count="2">
+<div id="7dd29fa0" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> pyvis</span>
@@ -450,7 +450,7 @@ Y_i = \underbrace{X_i}_{\in \R^k}' \beta_0 + \epsilon_i
 <ul>
 <li>From <span class="citation" data-cites="ak1991">Angrist and Krueger (<a href="#/references" role="doc-biblioref" onclick="">1991</a>)</span></li>
 </ul>
-<div id="ca53d2a9" class="cell" data-execution_count="3">
+<div id="22066e00" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># import graphviz as gr</span></span>
@@ -477,7 +477,7 @@ Y_i = \underbrace{X_i}_{\in \R^k}' \beta_0 + \epsilon_i
 <h2>Example: Returns to Education</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="460e4c1a" class="cell" data-execution_count="4">
+<div id="fa555467" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>g <span class="op">=</span> pyvis.network.Network(notebook<span class="op">=</span><span class="va">True</span>,directed<span class="op">=</span><span class="va">True</span>, cdn_resources<span class="op">=</span><span class="st">'in_line'</span>, height<span class="op">=</span><span class="st">'400px'</span>, width<span class="op">=</span><span class="st">'400px'</span>)</span>
@@ -498,7 +498,7 @@ Y_i = \underbrace{X_i}_{\in \R^k}' \beta_0 + \epsilon_i
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="4c9283a2" class="cell" data-execution_count="5">
+<div id="ff575d8a" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb7-2"><a></a></span>
 <span id="cb7-3"><a></a>df <span class="op">=</span> pd.read_csv(<span class="st">'data/ak91.csv'</span>)</span>
@@ -591,7 +591,7 @@ Y_i = \underbrace{X_i}_{\in \R^k}' \beta_0 + \epsilon_i
 </section>
 <section id="example-relevance" class="slide level2">
 <h2>Example: Relevance</h2>
-<div id="b97d8271" class="cell columns column-output-location" data-execution_count="6">
+<div id="2606fc89" class="cell columns column-output-location" data-execution_count="5">
 <div class="column">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb8-2"><a></a>group_data <span class="op">=</span> (df</span>
@@ -624,7 +624,7 @@ Y_i = \underbrace{X_i}_{\in \R^k}' \beta_0 + \epsilon_i
 </section>
 <section id="example-relevance-1" class="slide level2">
 <h2>Example: Relevance</h2>
-<div id="b5c5f579" class="cell columns column-output-location" data-execution_count="7">
+<div id="d49f2c03" class="cell columns column-output-location" data-execution_count="6">
 <div class="column">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="co"># Convert the quarter of birth to dummy variables</span></span>
 <span id="cb9-2"><a></a>factor_data <span class="op">=</span> df.assign(<span class="op">**</span>{<span class="ss">f"q</span><span class="sc">{</span><span class="bu">int</span>(q)<span class="sc">}</span><span class="ss">"</span>: (df[<span class="st">"quarter_of_birth"</span>] <span class="op">==</span> q).astype(<span class="bu">int</span>)</span>
@@ -656,7 +656,7 @@ q4 p-value:,  5.4648294166225175e-15</code></pre>
 </section>
 <section id="example-reduced-form" class="slide level2">
 <h2>Example: Reduced Form</h2>
-<div id="97d5615b" class="cell columns column-output-location" data-execution_count="8">
+<div id="1efc36a0" class="cell columns column-output-location" data-execution_count="7">
 <div class="column">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="co"># Plot the reduced form</span></span>
 <span id="cb11-2"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">6</span>))</span>
@@ -682,7 +682,7 @@ q4 p-value:,  5.4648294166225175e-15</code></pre>
 </section>
 <section id="example-reduced-form-1" class="slide level2">
 <h2>Example: Reduced Form</h2>
-<div id="4d3067cb" class="cell columns column-output-location" data-execution_count="9">
+<div id="6d081594" class="cell columns column-output-location" data-execution_count="8">
 <div class="column">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="co"># Run the reduced form</span></span>
 <span id="cb12-2"><a></a>reduced_form <span class="op">=</span> smf.ols(<span class="st">"log_wage ~ C(year_of_birth) + C(state_of_birth) + q4"</span>, data<span class="op">=</span>factor_data).fit()</span>
@@ -698,7 +698,7 @@ q4 p-value:,  0.0014949127183653535</code></pre>
 </section>
 <section id="example-2sls" class="slide level2">
 <h2>Example: 2SLS</h2>
-<div id="2309c3aa" class="cell columns column-output-location" data-execution_count="10">
+<div id="3aa7c558" class="cell columns column-output-location" data-execution_count="9">
 <div class="column">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>ate_iv <span class="op">=</span> reduced_form.params[<span class="st">"q4"</span>] <span class="op">/</span> first_stage.params[<span class="st">"q4"</span>]</span>
 <span id="cb14-2"><a></a><span class="bu">print</span>(<span class="st">"ATE (IV):"</span>, ate_iv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -722,7 +722,7 @@ q4 p-value:,  0.0014949127183653535</code></pre>
 </section>
 <section id="example-linearmodels" class="slide level2">
 <h2>Example: <code>linearmodels</code></h2>
-<div id="a6215a5d" class="cell" data-execution_count="11">
+<div id="87311cdb" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="im">from</span> linearmodels.iv <span class="im">import</span> IV2SLS</span>
 <span id="cb16-2"><a></a></span>
 <span id="cb16-3"><a></a>formula <span class="op">=</span> <span class="st">'log_wage ~ 1 + C(year_of_birth) + C(state_of_birth) + [years_of_schooling ~ q4]'</span></span>
@@ -734,8 +734,8 @@ q4 p-value:,  0.0014949127183653535</code></pre>
 Dep. Variable:               log_wage   R-squared:                      0.1217
 Estimator:                    IV-2SLS   Adj. R-squared:                 0.1215
 No. Observations:              329509   F-statistic:                 1.028e+04
-Date:                Sat, Oct 18 2025   P-value (F-stat)                0.0000
-Time:                        09:43:26   Distribution:                 chi2(60)
+Date:                Mon, Nov 24 2025   P-value (F-stat)                0.0000
+Time:                        09:30:17   Distribution:                 chi2(60)
 Cov. Estimator:                robust                                         
                                                                               
                                      Parameter Estimates                                     
@@ -814,7 +814,7 @@ Debiased: False</code></pre>
 </section>
 <section id="example-pyfixest" class="slide level2">
 <h2>Example: <code>pyfixest</code></h2>
-<div id="a5cab788" class="cell" data-execution_count="12">
+<div id="1fcace5c" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="im">import</span> pyfixest <span class="im">as</span> pf</span>
 <span id="cb18-2"><a></a>ivpf <span class="op">=</span> pf.feols(<span class="st">'log_wage ~ 1 | state_of_birth + year_of_birth | years_of_schooling ~ q4'</span>, data<span class="op">=</span>factor_data, vcov<span class="op">=</span><span class="st">"HC1"</span>)</span>
 <span id="cb18-3"><a></a>pf.etable(ivpf, <span class="bu">type</span><span class="op">=</span><span class="st">'md'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -840,7 +840,7 @@ Adj. R2                     -
 </section>
 <section id="example-ivmodels" class="slide level2">
 <h2>Example: <code>ivmodels</code></h2>
-<div id="4887b499" class="cell" data-execution_count="13">
+<div id="6b87eb8e" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a><span class="im">from</span> patsy <span class="im">import</span> dmatrices</span>
 <span id="cb20-2"><a></a><span class="im">import</span> ivmodels</span>
 <span id="cb20-3"><a></a>y,X <span class="op">=</span> dmatrices(<span class="st">"log_wage ~ 0 + years_of_schooling"</span>, data<span class="op">=</span>factor_data, return_type<span class="op">=</span><span class="st">'dataframe'</span>)</span>
@@ -909,7 +909,7 @@ y_i = \pi_0^y + \pi_1^y z_i + u_i^y
 </section>
 <section id="weak-instrument-simulation-hatbeta2sls" class="slide level2">
 <h2>Weak Instrument Simulation : <span class="math inline">\(\hat{\beta}^{2SLS}\)</span></h2>
-<div id="dbe00aa7" class="cell" data-execution_count="14">
+<div id="a6b96dec" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb22-2"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb22-3"><a></a><span class="im">import</span> scipy</span>
@@ -941,21 +941,23 @@ y_i = \pi_0^y + \pi_1^y z_i + u_i^y
 <span id="cb22-29"><a></a>    sns.histplot(b, ax<span class="op">=</span>ax.flat[j], stat<span class="op">=</span><span class="st">'density'</span>)</span>
 <span id="cb22-30"><a></a>    ax.flat[j].set_title(<span class="ss">f"First stage E[t]=</span><span class="sc">{</span>np<span class="sc">.</span>sqrt(n)<span class="op">*</span>gamma[j]<span class="op">/</span>sig<span class="sc">:.3}</span><span class="ss">"</span>)</span>
 <span id="cb22-31"><a></a>    ax.flat[j].plot(x<span class="op">*</span>se<span class="op">+</span>b0,phix)</span>
-<span id="cb22-32"><a></a>    ax.flat[j].set_xlim(<span class="op">-</span><span class="dv">3</span><span class="op">*</span>se <span class="op">+</span><span class="dv">1</span>,<span class="dv">3</span><span class="op">*</span>se<span class="op">+</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb22-32"><a></a>    ax.flat[j].set_xlim(<span class="op">-</span><span class="dv">3</span><span class="op">*</span>se <span class="op">+</span><span class="dv">1</span>,<span class="dv">3</span><span class="op">*</span>se<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb22-33"><a></a></span>
+<span id="cb22-34"><a></a>fig.tight_layout()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
-<section id="weak-instrument-simulation-hatbeta2sls-output" class="slide level2 output-location-slide"><h2>Weak Instrument Simulation : <span class="math inline">\(\hat{\beta}^{2SLS}\)</span></h2><div class="cell output-location-slide" data-execution_count="14">
+<section id="weak-instrument-simulation-hatbeta2sls-output" class="slide level2 output-location-slide"><h2>Weak Instrument Simulation : <span class="math inline">\(\hat{\beta}^{2SLS}\)</span></h2><div class="cell output-location-slide" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="iv_files/figure-revealjs/cell-14-output-1.png" width="812" height="431"></p>
+<p><img data-src="iv_files/figure-revealjs/cell-14-output-1.png" width="950" height="470"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="weak-instrument-simulation-t-stat" class="slide level2">
 <h2>Weak Instrument Simulation : t-stat</h2>
-<div id="dd834d27" class="cell" data-execution_count="15">
+<div id="7010490b" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a><span class="kw">def</span> t2sls(y,x,z, b0<span class="op">=</span><span class="dv">1</span>) :</span>
 <span id="cb23-2"><a></a>    b <span class="op">=</span> b2sls(y,x,z)</span>
 <span id="cb23-3"><a></a>    u <span class="op">=</span> y <span class="op">-</span> x<span class="op">*</span>b</span>
@@ -972,15 +974,17 @@ y_i = \pi_0^y + \pi_1^y z_i + u_i^y
 <span id="cb23-14"><a></a>    sns.histplot(ts, ax<span class="op">=</span>ax.flat[j], stat<span class="op">=</span><span class="st">'density'</span>)</span>
 <span id="cb23-15"><a></a>    ax.flat[j].set_title(<span class="ss">f"First stage E[t]=</span><span class="sc">{</span>np<span class="sc">.</span>sqrt(n)<span class="op">*</span>gamma[j]<span class="op">/</span>sig<span class="sc">:.3}</span><span class="ss">"</span>)</span>
 <span id="cb23-16"><a></a>    ax.flat[j].plot(x,phix)</span>
-<span id="cb23-17"><a></a>    ax.flat[j].set_xlim(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb23-17"><a></a>    ax.flat[j].set_xlim(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>)</span>
+<span id="cb23-18"><a></a></span>
+<span id="cb23-19"><a></a>fig.tight_layout()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
-<section id="weak-instrument-simulation-t-stat-output" class="slide level2 output-location-slide"><h2>Weak Instrument Simulation : t-stat</h2><div class="cell output-location-slide" data-execution_count="15">
+<section id="weak-instrument-simulation-t-stat-output" class="slide level2 output-location-slide"><h2>Weak Instrument Simulation : t-stat</h2><div class="cell output-location-slide" data-execution_count="14">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="iv_files/figure-revealjs/cell-15-output-1.png" width="816" height="431"></p>
+<p><img data-src="iv_files/figure-revealjs/cell-15-output-1.png" width="950" height="470"></p>
 </figure>
 </div>
 </div>
@@ -999,13 +1003,13 @@ y_i = \pi_0^y + \pi_1^y z_i + u_i^y
 <ul>
 <li>Always report first stage “effective” F-statistic</li>
 </ul>
-<div id="0efe1659" class="cell" data-execution_count="16">
+<div id="8e90b9d1" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a></a>y,x,z <span class="op">=</span> simiv(n,gamma[<span class="dv">3</span>],sig, b0, Exe)</span>
 <span id="cb24-2"><a></a>model<span class="op">=</span>pf.feols(<span class="st">'y ~ 1 | 0 | x ~ z'</span>, pd.DataFrame({<span class="st">'y'</span>:y,<span class="st">'x'</span>:x, <span class="st">'z'</span>: z}))</span>
 <span id="cb24-3"><a></a>model.IV_Diag()</span>
 <span id="cb24-4"><a></a>model._eff_F</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="49">
-<pre><code>np.float64(4.699775142973795)</code></pre>
+<pre><code>np.float64(1.4088555184438487)</code></pre>
 </div>
 </div>
 <ul>
@@ -1043,7 +1047,7 @@ y_i = \pi_0^y + \pi_1^y z_i + u_i^y
 <li>downside: assumes homoscedasticity</li>
 </ul></li>
 </ul>
-<div id="243ec064" class="cell" data-execution_count="17">
+<div id="61f38c66" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a></a>y,X <span class="op">=</span> dmatrices(<span class="st">"log_wage ~ 0 + years_of_schooling"</span>, data<span class="op">=</span>factor_data, return_type<span class="op">=</span><span class="st">'dataframe'</span>)</span>
 <span id="cb26-2"><a></a>Z,controls <span class="op">=</span> dmatrices(<span class="st">"q4 ~  C(year_of_birth) + C(state_of_birth)"</span>, data<span class="op">=</span>factor_data, return_type<span class="op">=</span><span class="st">'dataframe'</span>)</span>
 <span id="cb26-3"><a></a>controls.drop(<span class="st">"Intercept"</span>, axis<span class="op">=</span><span class="dv">1</span>,inplace<span class="op">=</span><span class="va">True</span>)</span>
@@ -1063,7 +1067,7 @@ Endogenous model statistic: 10.09, p-value: 0.001495
 </section>
 <section id="identification-robust-inference-2" class="slide level2">
 <h2>Identification Robust Inference</h2>
-<div id="a5028d30" class="cell" data-execution_count="18">
+<div id="955b1093" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a></a>sl <span class="op">=</span> ivm.summary(X<span class="op">=</span>X,y<span class="op">=</span>y,Z<span class="op">=</span>Z,C<span class="op">=</span>controls, test<span class="op">=</span><span class="st">'lagrange multiplier'</span>, feature_names<span class="op">=</span>[<span class="st">"years_of_schooling"</span>])</span>
 <span id="cb28-2"><a></a><span class="bu">print</span>(sl)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
