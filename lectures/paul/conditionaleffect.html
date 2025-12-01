@@ -6,8 +6,8 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.25">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Paul Schrimpf">
   <title>ECON 526 – Treatment Heterogeneity and Conditional Effects</title>
@@ -682,7 +682,7 @@ E[y_i(1) - y_i(0) |X_i=x] = &amp; E[y_i(1)|X_i = x] - E[y_i(0)|X_i=x] \\
 <section id="generic-machine-learning-for-heterogeneous-effects-in-randomized-experiments" class="slide level2">
 <h2>Generic Machine Learning for Heterogeneous Effects in Randomized Experiments</h2>
 <ul>
-<li><span class="citation" data-cites="cddf2023">Victor Chernozhukov et al. (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span></li>
+<li><span class="citation" data-cites="cddf2023">Victor Chernozhukov et al. (<a href="#/references" role="doc-biblioref" onclick="">2025</a>)</span></li>
 <li>Designed based inference <span class="citation" data-cites="imai2022">Imai and Li (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></li>
 <li>Idea: use any machine learning estimator for <span class="math inline">\(E[y_i | d_i = 0, X_i=x ]\)</span></li>
 <li>Report and do inference on lower dimensional summaries of <span class="math inline">\(E[y_i(1) - y_i(0) |X_i=x]\)</span></li>
@@ -732,6 +732,9 @@ u_i
 </section>
 <section id="code" class="slide level2">
 <h2>Code</h2>
+<ul>
+<li>doubleml now has functions for <a href="https://docs.doubleml.org/stable/api/generated/doubleml.utils.DoubleMLBLP.html#doubleml.utils.DoubleMLBLP">CATE BLP</a> and <a href="https://docs.doubleml.org/stable/guide/heterogeneity.html#group-average-treatment-effects-gates">GATE</a>; use those instead of the code below</li>
+</ul>
 <div id="3b39f4c7" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="co"># for clustering standard errors</span></span>
 <span id="cb5-2"><a></a><span class="kw">def</span> get_treatment_se(fit, cluster_id, rows<span class="op">=</span><span class="va">None</span>):</span>
@@ -1508,7 +1511,7 @@ u_i
 <section id="sources-and-further-reading" class="slide level2">
 <h2>Sources and Further Reading</h2>
 <ul>
-<li>Section on generic ML for heterogeneous effects is based on <span class="citation" data-cites="cddf2023">Victor Chernozhukov et al. (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span> and my <a href="https://datascience.quantecon.org/applications/heterogeneity.html">earlier notes</a></li>
+<li>Section on generic ML for heterogeneous effects is based on <span class="citation" data-cites="cddf2023">Victor Chernozhukov et al. (<a href="#/references" role="doc-biblioref" onclick="">2025</a>)</span> and my <a href="https://datascience.quantecon.org/applications/heterogeneity.html">earlier notes</a></li>
 <li>Chapter 15 of <span class="citation" data-cites="causalml2024">V. Chernozhukov et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></li>
 </ul>
 </section>
@@ -1524,7 +1527,7 @@ Alatas, Vivi, Nur Cahyadi, Elisabeth Ekasari, Sarah Harmoun, Budi Hidayat, Edgar
 Chernozhukov, V., C. Hansen, N. Kallus, M. Spindler, and V. Syrgkanis. 2024. <em>Applied Causal Inference Powered by ML and AI</em>. <a href="https://causalml-book.org/">https://causalml-book.org/</a>.
 </div>
 <div id="ref-cddf2023" class="csl-entry" role="listitem">
-Chernozhukov, Victor, Mert Demirer, Esther Duflo, and Iván Fernández-Val. 2023. <span>“Generic Machine Learning Inference on Heterogenous Treatment Effects in Randomized Experiments, with an Application to Immunization in India.”</span>
+Chernozhukov, Victor, Mert Demirer, Esther Duflo, and Iván Fernández-Val. 2025. <span>“Fisher–Schultz Lecture: Generic Machine Learning Inference on Heterogeneous Treatment Effects in Randomized Experiments, with an Application to Immunization in India.”</span> <em>Econometrica</em> 93 (4): 1121–64. <a href="https://doi.org/10.3982/ECTA19303">https://doi.org/10.3982/ECTA19303</a>.
 </div>
 <div id="ref-imai2022" class="csl-entry" role="listitem">
 Imai, Kosuke, and Michael Lingzhi Li. 2022. <span>“Statistical Inference for Heterogeneous Treatment Effects Discovered by Generic Machine Learning in Randomized Experiments.”</span> In. <a href="https://api.semanticscholar.org/CorpusID:247762848">https://api.semanticscholar.org/CorpusID:247762848</a>.

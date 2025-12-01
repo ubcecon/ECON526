@@ -774,7 +774,7 @@
     "href": "conditionaleffect.html#generic-machine-learning-for-heterogeneous-effects-in-randomized-experiments",
     "title": "Treatment Heterogeneity and Conditional Effects",
     "section": "Generic Machine Learning for Heterogeneous Effects in Randomized Experiments",
-    "text": "Generic Machine Learning for Heterogeneous Effects in Randomized Experiments\n\nVictor Chernozhukov et al. (2023)\nDesigned based inference Imai and Li (2022)\nIdea: use any machine learning estimator for \\(E[y_i | d_i = 0, X_i=x ]\\)\nReport and do inference on lower dimensional summaries of \\(E[y_i(1) - y_i(0) |X_i=x]\\)"
+    "text": "Generic Machine Learning for Heterogeneous Effects in Randomized Experiments\n\nVictor Chernozhukov et al. (2025)\nDesigned based inference Imai and Li (2022)\nIdea: use any machine learning estimator for \\(E[y_i | d_i = 0, X_i=x ]\\)\nReport and do inference on lower dimensional summaries of \\(E[y_i(1) - y_i(0) |X_i=x]\\)"
   },
   {
     "objectID": "conditionaleffect.html#best-linear-projection-of-cate",
@@ -802,7 +802,7 @@
     "href": "conditionaleffect.html#code",
     "title": "Treatment Heterogeneity and Conditional Effects",
     "section": "Code",
-    "text": "Code\n\n# for clustering standard errors\ndef get_treatment_se(fit, cluster_id, rows=None):\n    if cluster_id is not None:\n        if rows is None:\n            rows = [True] * len(cluster_id)\n        vcov = sm.stats.sandwich_covariance.cov_cluster(fit, cluster_id.loc[rows])\n        return np.sqrt(np.diag(vcov))\n\n    return fit.HC0_se"
+    "text": "Code\n\ndoubleml now has functions for CATE BLP and GATE; use those instead of the code below\n\n\n# for clustering standard errors\ndef get_treatment_se(fit, cluster_id, rows=None):\n    if cluster_id is not None:\n        if rows is None:\n            rows = [True] * len(cluster_id)\n        vcov = sm.stats.sandwich_covariance.cov_cluster(fit, cluster_id.loc[rows])\n        return np.sqrt(np.diag(vcov))\n\n    return fit.HC0_se"
   },
   {
     "objectID": "conditionaleffect.html#code-1",
@@ -921,14 +921,14 @@
     "href": "conditionaleffect.html#sources-and-further-reading",
     "title": "Treatment Heterogeneity and Conditional Effects",
     "section": "Sources and Further Reading",
-    "text": "Sources and Further Reading\n\nSection on generic ML for heterogeneous effects is based on Victor Chernozhukov et al. (2023) and my earlier notes\nChapter 15 of V. Chernozhukov et al. (2024)"
+    "text": "Sources and Further Reading\n\nSection on generic ML for heterogeneous effects is based on Victor Chernozhukov et al. (2025) and my earlier notes\nChapter 15 of V. Chernozhukov et al. (2024)"
   },
   {
     "objectID": "conditionaleffect.html#references",
     "href": "conditionaleffect.html#references",
     "title": "Treatment Heterogeneity and Conditional Effects",
     "section": "References",
-    "text": "References\n\n\n\n\nAlatas, Vivi, Nur Cahyadi, Elisabeth Ekasari, Sarah Harmoun, Budi Hidayat, Edgar Janz, Jon Jellema, H Tuhiman, and M Wai-Poi. 2011. “Program Keluarga Harapan : Impact Evaluation of Indonesia’s Pilot Household Conditional Cash Transfer Program.” World Bank. http://documents.worldbank.org/curated/en/589171468266179965/Program-Keluarga-Harapan-impact-evaluation-of-Indonesias-Pilot-Household-Conditional-Cash-Transfer-Program.\n\n\nChernozhukov, V., C. Hansen, N. Kallus, M. Spindler, and V. Syrgkanis. 2024. Applied Causal Inference Powered by ML and AI. https://causalml-book.org/.\n\n\nChernozhukov, Victor, Mert Demirer, Esther Duflo, and Iván Fernández-Val. 2023. “Generic Machine Learning Inference on Heterogenous Treatment Effects in Randomized Experiments, with an Application to Immunization in India.”\n\n\nImai, Kosuke, and Michael Lingzhi Li. 2022. “Statistical Inference for Heterogeneous Treatment Effects Discovered by Generic Machine Learning in Randomized Experiments.” In. https://api.semanticscholar.org/CorpusID:247762848.\n\n\nTriyana, Margaret. 2016. “Do Health Care Providers Respond to Demand-Side Incentives? Evidence from Indonesia.” American Economic Journal: Economic Policy 8 (4): 255–88. https://doi.org/10.1257/pol.20140048."
+    "text": "References\n\n\n\n\nAlatas, Vivi, Nur Cahyadi, Elisabeth Ekasari, Sarah Harmoun, Budi Hidayat, Edgar Janz, Jon Jellema, H Tuhiman, and M Wai-Poi. 2011. “Program Keluarga Harapan : Impact Evaluation of Indonesia’s Pilot Household Conditional Cash Transfer Program.” World Bank. http://documents.worldbank.org/curated/en/589171468266179965/Program-Keluarga-Harapan-impact-evaluation-of-Indonesias-Pilot-Household-Conditional-Cash-Transfer-Program.\n\n\nChernozhukov, V., C. Hansen, N. Kallus, M. Spindler, and V. Syrgkanis. 2024. Applied Causal Inference Powered by ML and AI. https://causalml-book.org/.\n\n\nChernozhukov, Victor, Mert Demirer, Esther Duflo, and Iván Fernández-Val. 2025. “Fisher–Schultz Lecture: Generic Machine Learning Inference on Heterogeneous Treatment Effects in Randomized Experiments, with an Application to Immunization in India.” Econometrica 93 (4): 1121–64. https://doi.org/10.3982/ECTA19303.\n\n\nImai, Kosuke, and Michael Lingzhi Li. 2022. “Statistical Inference for Heterogeneous Treatment Effects Discovered by Generic Machine Learning in Randomized Experiments.” In. https://api.semanticscholar.org/CorpusID:247762848.\n\n\nTriyana, Margaret. 2016. “Do Health Care Providers Respond to Demand-Side Incentives? Evidence from Indonesia.” American Economic Journal: Economic Policy 8 (4): 255–88. https://doi.org/10.1257/pol.20140048."
   },
   {
     "objectID": "matching.html#setting",
