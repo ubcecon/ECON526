@@ -1,4 +1,4 @@
-# ECON526 - Fall 2025
+# ECON526 - Fall 2026
 
 This is a MA-level course in quantitative economics, data science, and causal inference in economics.
 
@@ -23,7 +23,7 @@ See [here](https://jlperla.github.io/grad_econ_datascience/pages/setup.html#quic
 
 - Get a [GitHub](www.github.com) ID and apply for the [Student Developer Pack](https://education.github.com/pack) to get further free features
 - We strongly recommend using [VS Code](https://code.visualstudio.com/) as your primary code editor and [uv](https://github.com/astral-sh/uv) for your python and package management.
-- After setup you can clone a variety of repositories onto your local machine using a terminal, using either git directly (e.g. in terminal go `git clone https://github.com/ubcecon/ECON526.git`), or [VS Code (recommended)](https://code.visualstudio.com/docs/sourcecontrol/intro-to-git#_clone-a-repository-locally).  See instructions and more other useful code repositories [here](https://jlperla.github.io/grad_econ_datascience/pages/setup.html#other-notebook-repositories)
+- After setup you can clone a variety of repositories onto your local machine using a terminal, using either git directly (e.g. in terminal go `git clone https://github.com/ubcecon/ECON526.git` and `https://github.com/jlperla/grad_econ_datascience_notebooks.git`, or [VS Code (recommended)](https://code.visualstudio.com/docs/sourcecontrol/intro-to-git#_clone-a-repository-locally).
 
 
 ## Syllabus
@@ -31,64 +31,14 @@ See [Syllabus](syllabus.md) for more details
 
 ## Problem Sets and Exams
 
-The course has one midterm, weekly to bi-weekly problem sets, and a final data project due the last day of class.
+The course has one or two midterms (depending on computer room scheduling), weekly to bi-weekly problem sets, and a final data project due at the end of term.
 
-1. **September 8 Midnight:** [Problem Set 0](problem_sets/problem_set_0.pdf) - covers Math Camp material, so you can get started right away.
-2. **September 14 Midnight:** [Problem Set 1](problem_sets/problem_set_1.ipynb) - short assignment checking your installation of Jupyter.
-3. **September 21 Midnight:** [Problem Set 2](problem_sets/problem_set_2.ipynb)
-4. **September 28 Midnight:** [Problem Set 3](problem_sets/problem_set_3.ipynb)
-5. **October 5 Midnight:** [Problem Set 4](problem_sets/problem_set_4.ipynb)
-6. **NOT TO HAND IN** [Midterm Practice Problems](problem_sets/midterm_practice.ipynb)
-7. **October 2 (LAB SESSION):** Midterm Logistics Practice
-8. **October 8:** IN CLASS MIDTERM
-9. See Canvas for additional problem sets <!-- Listing things in 2 places is too much for me unless it's automated. -->
-10. **December 15:** Data Project Due
-
-See the `/problem_sets` folder within this repository for the problem sets as jupyter notebooks.
-- The `pyproject.toml` and `uv.lock` files provide the package setup.  Simple run `uv sync` (more details [here](https://jlperla.github.io/grad_econ_datascience/pages/setup.html))
-- Problem Set 0 can be done on paper and scanned, but other problem sets must be submitted as `.ipynb` and exported `html` files.  See instructions [here](https://jlperla.github.io/grad_econ_datascience/pages/canvas_assignments.html)
-
-## Lectures
-The course is structured into two parts:
+See canvas and the two schedules for problem sets and lecture notes.
 
 ### Jesse
+See the [schedule](https://jlperla.github.io/grad_econ_datascience/pages/schedule.html) for all problem sets and lectures associated with the first half of the course.
 
-- **September 3**: [Linear Algebra Foundations](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html#extra-materials)
 
-- **September 8**: [Linear Algebra Foundations](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/linear_algebra_foundations.html#extra-materials)
-<!-- Started with LU Decomposition -->
-
-- **September 10**: [Least Squares, Uniqueness, and Regularization](https://jlperla.github.io/grad_econ_datascience/slides/least_squares.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/least_squares.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/least_squares.html#extra-materials)
-
-- **September 15**: [Applications of Linear Algebra and Eigenvalues](https://jlperla.github.io/grad_econ_datascience/slides/eigenvalue_applications.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/eigenvalue_applications.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/eigenvalue_applications.html#extra-materials)
-
-- **September 17**: [Latent Variables and Unsupervised Learning](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.html#extra-materials)
-
-- **September 22**: [Latent Variables and Unsupervised Learning](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/latent_variables.html#extra-materials)
-- **September 24**: [Linear and Nonlinear Dynamics](https://jlperla.github.io/grad_econ_datascience/slides/dynamics.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/dynamics.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/dynamics.html#extra-materials)
-- **September 29**:  [Probability, Conditioning, and Independence](https://jlperla.github.io/grad_econ_datascience/slides/probability.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/probability.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/probability.html#extra-materials)
-- **October 1**: [Probability, Conditioning, and Independence](https://jlperla.github.io/grad_econ_datascience/slides/probability.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/probability.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/probability.html#extra-materials) and start [Stochastic Processes, Markov Chains, and Expectations](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html#extra-materials)
--  **October 6**: [Midterm Practice Problems](problem_sets/midterm_practice.ipynb) and [Stochastic Processes, Markov Chains, and Expectations](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.pdf), and [Extra and Self Study Materials](https://jlperla.github.io/grad_econ_datascience/slides/stochastic_processes.html#extra-materials)
--  **October 8 (IN CLASS MIDTERM)**
--  **October 13 (Statutory holiday)**
--  **October 15**: [Large Language Models and Embeddings](https://jlperla.github.io/grad_econ_datascience/slides/nlp_llm.html), [PDF](https://jlperla.github.io/grad_econ_datascience/slides/nlp_llm.pdf),
-
-<!-- More classes
-- October 20
-- October 22
-- October 27
-- October 29
-- November 3
-- November 5
-- READING WEEK
-- November 17
-- November 18
-- November 24
-- November 26
-- December 1
-- December 3
-
--->
 ### Paul
 
 [Go here](https://ubcecon.github.io/ECON526/lectures/paul/) for a list of topics, reading, and slides.

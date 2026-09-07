@@ -1,4 +1,4 @@
-# ECON526 - Fall 2025
+# ECON526 - Fall 2026
 
 ## Quantitative Economics with Data Science Applications
 
@@ -20,21 +20,23 @@ There is no assigned physical textbook, but we will be using lecture notes from:
 Students are expected to have basic experience programming in python, either through self-study or through other coursework, and have familiarity with Jupyter.  
 
 **Assignments and Assessment**
-The course will have problem sets due roughly weekly, a midterm, and a final data project.
+The course will have problem sets due roughly weekly, one or two midterms depending on computer room scheduling, and a final data project.
 
 - Problem sets: 20% (total)
-- Midterm: 40%
+- Midterm(s): 40%
 - Final Data Project: 40%
 
-The midterm will likely be done in the computer lab.  We will have a practice session to accommodate ourselves with the Jupyter-based technology.
+Subject to scheduling, the midterms will be done self-scheduled in a computer lab, or in-class otherwise.
 
 ## Syllabus
 
 The course will cover the following topics:
 - Linear Algebra and Scientific Computing Tools
-- Difference Equations
 - Probability and Simulation
-- Markov Chains
+- Markov Chains and dynamics
+- Unsupervised learning, such as clustering and PCA
+- Supervised learning, such as regression and classification
+- Introduction to LLMs, text, and image data
 - Introduction to Deep Learning
 - Causal Models
 - Regression
