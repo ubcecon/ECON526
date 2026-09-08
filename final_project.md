@@ -1,6 +1,6 @@
 **ECON526 Final Project:**
 
-These guidelines may be subject to change over the next few days. Please check back for updates.
+These guidelines may be subject to change. Please check back for updates.
 
 The objective of the final project is to analyze the causal effect of some policy on an outcome. To achieve this, students should:
 
@@ -17,7 +17,7 @@ The objective of the final project is to analyze the causal effect of some polic
 
 4. Explain your identification strategy.
 
-5. Estimate the causal effect of the policy on the outcome: Students should use the data to estimate the causal effect of the policy on the outcome of interest. This may involve using a regression model, matching, difference-in-differences, instrumental variables, or some other model.
+5. Estimate the causal effect of the policy on the outcome: Students should use the data to estimate the causal effect of the policy on the outcome of interest. This may involve using a regression model, matching, difference-in-differences, instrumental variables, or some other model. Preferrably, you use a method covered in the course. If you use a method not covered, you should have a good reason for doing so.
 
 **Guidelines:**
 
@@ -31,12 +31,18 @@ The objective of the final project is to analyze the causal effect of some polic
 
 - The report should include a title that does not mention the course.
 
-- The accompanying code should be well-documented, commented, and easy to follow. It should also be reproducible, meaning that the code should always produce the same results when run from start to finish. <!-- This is especially important in the case of sampling, bootstrapping, or monte-carlo tests. -->
+- The accompanying code should be well-documented, commented, and easy to follow. It should also be reproducible, meaning that the code should always produce the same results when run from start to finish.
 
-- There is no minimum or maximum length for the report or the code, but it should be long enough to clearly explain the project and the results and include the necessary details.
+- There is no minimum or maximum length for the report or the code, but it should be long enough to clearly explain the project and the results and include the necessary details. Longer is not better. AI has made it all too easy to generate lots of low-information text. Be concise.
 
 - Similarly, there are no specific formatting requirements (e.g. double-spaced, APA style, etc.), but the report should be well-formatted and easy to read.
 
-- The first deadline is November 27, when you should submit a first draft of the code and report. You may make changes to the code and report until December 15.
-
 - You are free to use data from previously published studies. However, all sources should be cited. Further, you must explain what you do that is new or different from the previous work.
+
+- You are encouraged to share drafts of your project at any stage with the instructors and TAs.
+
+**Deadlines:**
+
+- November 13: a one page project proposal is due. This date is firm to allow time for peer-review. The proposal should be 1-2 pages. It should describe the research question, the causal effect to be studied, and the intended method.
+- November 16-November 25: exact date to be determined. Peer-review. In an exam environment (either in class or scheduled in a computer lab), each student will review 4 randomly assigned proposals.
+- December 18: project due.

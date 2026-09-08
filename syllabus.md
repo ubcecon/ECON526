@@ -17,7 +17,7 @@ There is no assigned physical textbook, but we will be using lecture notes from:
 - [QuantEcon Python and DataScience Lectures](https://quantecon.org/projects/#filter=lecture)
 
 
-Students are expected to have basic experience programming in python, either through self-study or through other coursework, and have familiarity with Jupyter.  
+Students are expected to have basic experience programming in python, either through self-study or through other coursework, and have familiarity with Jupyter.
 
 ## Assignments and Assessment
 The course will have problem sets due roughly weekly, one or two midterms depending on computer room scheduling, and a final data project.
@@ -36,7 +36,7 @@ The final project and project propoosal due dates will be established at the beg
 ## Syllabus
 
 The course will cover the following topics:
-- Numerical Linear Algebra 
+- Numerical Linear Algebra
 - Probability, Simulation, and Dynamics
 - Unsupervised learning, such as clustering and PCA
 - Supervised learning, such as regression and classification
@@ -99,7 +99,7 @@ UBC provides resources to support student learning and to maintain healthy lifes
 It is the policy of the Vancouver School of Economics to report all violations of UBC’s standards for academic integrity to the office of the Dean of Arts. All violations of academic integrity standards will result in a grade of zero on the relevant assessment (exam, paper, assignment etc.).  Students who do not have a previous offence may have the option to enter into a diversionary process with the Dean of Arts to resolve their misconduct (https://academicintegrity.ubc.ca/diversionary-process/). Any student who has a previous academic offence will be referred to the President’s Advisory Committee on Student Discipline (PACSD) (https://universitycounsel.ubc.ca/homepage/guides-and-resources/discipline/). PACSD may impose additional penalties including: a transcript notation indicating that the student has committed an academic offence, zero in the course, and/or suspension or expulsion from the University. You are personally responsible for understanding and following the UBC’s policies for academic integrity: https://vancouver.calendar.ubc.ca/campus-wide-policies-and-regulations/academic-honesty-and-standards. A Canvas module has been made available you for this purpose titled “Avoiding Academic Misconduct”. It is your responsibility to read the materials in that module before submitting any work in this course. Speak to your instructor if you have any questions regarding the standard for academic integrity at UBC and/or the VSE polices on academic misconduct.
 
 
-### VSE Policy Prohibiting the Hiring of Tutors: 
+### VSE Policy Prohibiting the Hiring of Tutors:
 
 The Vancouver School of Economics expressly prohibits any student from hiring a tutor and/or editor to assist with any portion of written work or academic research. If at any point you feel in need of additional writing support, please speak with your instructor and/or arrange for a writing consultation with UBC’s Centre for Writing and Scholarly Communication (https://writing.library.ubc.ca/). Additionally, you have access to research support through the UBC Library:  https://guides.library.ubc.ca/econ and https://guides.library.ubc.ca/econ490.
 
