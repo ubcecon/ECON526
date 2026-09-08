@@ -22,22 +22,23 @@ Students are expected to have basic experience programming in python, either thr
 **Assignments and Assessment**
 The course will have problem sets due roughly weekly, one or two midterms depending on computer room scheduling, and a final data project.
 
-- Problem sets: 20% (total)
-- Midterm(s): 40%
-- Final Data Project: 40%
+- Participation: 5%
+- Problem Sets: 10% (total)
+- Midterm(s): 35%
+- Project Proposal: 10%
+- Proposal Peer Review: 10%
+- Final Data Project: 30%
 
-Subject to scheduling, the midterms will be done self-scheduled in a computer lab, or in-class otherwise.
+Subject to scheduling, the midterm(s) will be done self-scheduled in a computer lab, or in-class otherwise.
 
 ## Syllabus
 
 The course will cover the following topics:
-- Linear Algebra and Scientific Computing Tools
-- Probability and Simulation
-- Markov Chains and dynamics
+- Numerical Linear Algebra 
+- Probability, Simulation, and Dynamics
 - Unsupervised learning, such as clustering and PCA
 - Supervised learning, such as regression and classification
 - Introduction to LLMs, text, and image data
-- Introduction to Deep Learning
 - Causal Models
 - Regression
 - Instrumental Variables

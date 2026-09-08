@@ -87,5 +87,5 @@ See "Sources and Further Reading" (2nd last slide) on each set of slides for add
 <!--     - https://datascience.quantecon.org/applications/heterogeneity.html -->
 <!-- - **time-permitting**: [Neural Networks](https://ubcecon.github.io/ECON526/paul/neuralnets.html) -->
 <!--    - Reading: [QuantEcon Datascience: Regression - Neural Networks](https://datascience.quantecon.org/tools/regression.html#neural-networks) -->
-- **December 15**
+- **December 15** Tentatively
     - **PROJECT DUE**
