@@ -19,7 +19,7 @@ There is no assigned physical textbook, but we will be using lecture notes from:
 
 Students are expected to have basic experience programming in python, either through self-study or through other coursework, and have familiarity with Jupyter.  
 
-**Assignments and Assessment**
+## Assignments and Assessment
 The course will have problem sets due roughly weekly, one or two midterms depending on computer room scheduling, and a final data project.
 
 - Participation: 5%
@@ -30,6 +30,8 @@ The course will have problem sets due roughly weekly, one or two midterms depend
 - Final Data Project: 30%
 
 Subject to scheduling, the midterm(s) will be done self-scheduled in a computer lab, or in-class otherwise.
+
+The final project and project propoosal due dates will be established at the beginning of the second part of the course.
 
 ## Syllabus
 
