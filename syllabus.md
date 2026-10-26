@@ -29,6 +29,8 @@ The course will have problem sets due roughly weekly, one or two midterms depend
 - Proposal Peer Review: 10%
 - Final Data Project: 30%
 
+Participation may be judged with iClcker or other in-class activities, and will be based on both attendance and engagement.
+
 Subject to scheduling, the midterm(s) will be done self-scheduled in a computer lab, or in-class otherwise.
 
 The final project and project propoosal due dates will be established at the beginning of the second part of the course.
