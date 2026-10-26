@@ -415,7 +415,7 @@ ATE = &amp; \Er[Y_i\mid D_i=1] - E[Y_i\mid D_i=0] \\
 <ul>
 <li><p>But standard error very slightly different</p></li>
 <li><p>Default of <code>smf.ols</code> assumes homoskedasticiy <span class="math inline">\(\Er[\epsilon^2|X] = \sigma^2\)</span></p></li>
-<li><p>With <span class="math inline">\(y\)</span> and <span class="math inline">\(T\)</span>, binary, <span class="math inline">\(\Er[\epsilon^2|T] = P(y=1|T)(1-P(y=1|T))\)</span></p></li>
+<li><p>With <span class="math inline">\(y\)</span> and <span class="math inline">\(D\)</span>, binary, <span class="math inline">\(\var(y|D) = \Er[\epsilon^2|D] = P(y=1|D)(1-P(y=1|D))\)</span></p></li>
 </ul>
 <div id="7cb32da8" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a>olshcse <span class="op">=</span> np.sqrt(np.diag(smf.ols(<span class="st">'infected ~ treat'</span>,data<span class="op">=</span>data.loc[data[<span class="st">'over65'</span>]<span class="op">==</span><span class="dv">1</span>]).fit(cov_type<span class="op">=</span><span class="st">"HC3"</span>).cov_params())[<span class="dv">1</span>])</span>
@@ -772,7 +772,7 @@ RMSE: 0.524 R2: 0.582 R2 Within: 0.314 </code></pre>
 <section id="regression-for-rcts-1" class="slide level2">
 <h2>Regression for RCTs</h2>
 <ul>
-<li><p>RCT with outcome <span class="math inline">\(Y\)</span>, treatment <span class="math inline">\(T\)</span>, other variables <span class="math inline">\(X\)</span></p></li>
+<li><p>RCT with outcome <span class="math inline">\(Y\)</span>, treatment <span class="math inline">\(D\)</span>, other variables <span class="math inline">\(X\)</span></p></li>
 <li><p>Should we estimate ATE in a regression that includes <span class="math inline">\(X\)</span>?</p></li>
 </ul>
 </section>
@@ -943,15 +943,15 @@ Standard errors in parentheses.
 </div>
 </div>
 </section>
-<section id="if-t-indep-x-interactive-model-reduces-variance" class="slide level2">
-<h2>If <span class="math inline">\(T \indep X\)</span>, Interactive Model Reduces Variance</h2>
+<section id="if-d-indep-x-interactive-model-reduces-variance" class="slide level2">
+<h2>If <span class="math inline">\(D \indep X\)</span>, Interactive Model Reduces Variance</h2>
 <ul>
-<li>Assume <span class="math inline">\(T \indep (X, Y(0), Y(1))\)</span>, <span class="math inline">\(T \in \{0,1\}\)</span>, <span class="math inline">\(\Er[X] = 0\)</span></li>
+<li>Assume <span class="math inline">\(D \indep (X, Y(0), Y(1))\)</span>, <span class="math inline">\(D \in \{0,1\}\)</span>, <span class="math inline">\(\Er[X] = 0\)</span></li>
 <li>Consider <span class="math display">\[
 \begin{align*}
-Y &amp; = \beta_0^s + \beta_1^s T + \epsilon^s \\
-Y &amp; = \beta_0^a + \beta_1^a T + X'\gamma^a_0 + \epsilon^a \\
-Y &amp; = \beta_0^i + \beta_1^i T + X'\gamma^i_0 + TX'\gamma^i_1 + \epsilon^s
+Y &amp; = \beta_0^s + \beta_1^s D + \epsilon^s \\
+Y &amp; = \beta_0^a + \beta_1^a D + X'\gamma^a_0 + \epsilon^a \\
+Y &amp; = \beta_0^i + \beta_1^i D + X'\gamma^i_0 + DX'\gamma^i_1 + \epsilon^s
 \end{align*}
 \]</span></li>
 <li>All are consistent <span class="math display">\[
@@ -1316,7 +1316,7 @@ Standard errors in parentheses.<br>
 </tbody>
 </table>
 <ul>
-<li>Treatment randomly assigned within each hospital, but with very different <span class="math inline">\(P(T=1|\text{hospital})\)</span></li>
+<li>Treatment randomly assigned within each hospital, but with very different <span class="math inline">\(P(D=1|\text{hospital})\)</span></li>
 </ul>
 </section>
 <section id="drug-trial-at-two-hospitals-2" class="slide level2 smaller">

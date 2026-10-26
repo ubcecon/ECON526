@@ -6,8 +6,8 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.25">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.19">
 
   <meta name="author" content="Paul Schrimpf">
   <title>ECON 526 – Uncertainty Quantification</title>
@@ -17,10 +17,16 @@
   <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -98,7 +104,6 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
-      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -115,7 +120,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-534cd8e3a96973385dffff3f4709048d.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -221,7 +226,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Paul Schrimpf 
+Paul Schrimpf
 </div>
 <div class="quarto-title-author-email">
 <a href="mailto:paul.schrimpf@ubc.ca">paul.schrimpf@ubc.ca</a>
@@ -326,35 +331,35 @@ Paul Schrimpf
 <div class="column" style="width:50%;">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
-<span id="cb1-2"><a></a></span>
-<span id="cb1-3"><a></a><span class="kw">class</span> binarybinaryrct :</span>
-<span id="cb1-4"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, NT, NU, NYT, NYU):</span>
-<span id="cb1-5"><a></a>        <span class="va">self</span>.NT<span class="op">=</span>NT</span>
-<span id="cb1-6"><a></a>        <span class="va">self</span>.NU<span class="op">=</span>NU</span>
-<span id="cb1-7"><a></a>        <span class="va">self</span>.NYT<span class="op">=</span>NYT</span>
-<span id="cb1-8"><a></a>        <span class="va">self</span>.NYU<span class="op">=</span>NYU</span>
-<span id="cb1-9"><a></a></span>
-<span id="cb1-10"><a></a>    <span class="kw">def</span> ATE(<span class="va">self</span>):</span>
-<span id="cb1-11"><a></a>        <span class="cf">return</span> (<span class="va">self</span>.NYT<span class="op">/</span><span class="va">self</span>.NT <span class="op">-</span> <span class="va">self</span>.NYU<span class="op">/</span><span class="va">self</span>.NU)</span>
-<span id="cb1-12"><a></a></span>
-<span id="cb1-13"><a></a>    <span class="kw">def</span> table(<span class="va">self</span>):</span>
-<span id="cb1-14"><a></a>        <span class="cf">return</span>(<span class="st">"|  | Infection Rate per 1000|</span><span class="ch">\n</span><span class="st">"</span><span class="op">+</span></span>
-<span id="cb1-15"><a></a>               <span class="st">"|---|---|</span><span class="ch">\n</span><span class="st">"</span></span>
-<span id="cb1-16"><a></a>               <span class="ss">f"|Treated| </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>NYT<span class="op">/</span><span class="va">self</span><span class="sc">.</span>NT<span class="op">*</span><span class="dv">1000</span><span class="sc">:.2}</span><span class="ss">|</span><span class="ch">\n</span><span class="ss">"</span> <span class="op">+</span></span>
-<span id="cb1-17"><a></a>               <span class="ss">f"|Control| </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>NYU<span class="op">/</span><span class="va">self</span><span class="sc">.</span>NU<span class="op">*</span><span class="dv">1000</span><span class="sc">:.2}</span><span class="ss">|</span><span class="ch">\n</span><span class="ss">"</span> <span class="op">+</span></span>
-<span id="cb1-18"><a></a>               <span class="ss">f"|Difference| </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>ATE()<span class="op">*</span><span class="dv">1000</span><span class="sc">:.2}</span><span class="ss">|</span><span class="ch">\n</span><span class="ss">"</span>)</span>
-<span id="cb1-19"><a></a>    <span class="kw">def</span> VE(<span class="va">self</span>):</span>
-<span id="cb1-20"><a></a>        tb <span class="op">=</span> sm.stats.Table2x2([[<span class="va">self</span>.NYT, <span class="va">self</span>.NT <span class="op">-</span> <span class="va">self</span>.NYT], [<span class="va">self</span>.NYU, <span class="va">self</span>.NU <span class="op">-</span> <span class="va">self</span>.NYU]])</span>
-<span id="cb1-21"><a></a>        ve<span class="op">=</span><span class="dv">1</span><span class="op">-</span>tb.riskratio</span>
-<span id="cb1-22"><a></a>        ci <span class="op">=</span> tb.riskratio_confint()</span>
-<span id="cb1-23"><a></a>        ci <span class="op">=</span> [<span class="dv">1</span><span class="op">-</span>ci[<span class="dv">1</span>],<span class="dv">1</span><span class="op">-</span>ci[<span class="dv">0</span>]]</span>
-<span id="cb1-24"><a></a>        <span class="cf">return</span>(ve,ci)</span>
-<span id="cb1-25"><a></a></span>
-<span id="cb1-26"><a></a>pfizerall <span class="op">=</span> binarybinaryrct(<span class="dv">19965</span>, <span class="dv">20172</span>, <span class="dv">9</span>, <span class="dv">169</span>)</span>
-<span id="cb1-27"><a></a>pfizer65 <span class="op">=</span> binarybinaryrct(<span class="dv">4044</span>, <span class="dv">4067</span>, <span class="dv">1</span>, <span class="dv">19</span>)</span>
-<span id="cb1-28"><a></a></span>
-<span id="cb1-29"><a></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">- All</span><span class="ch">\n\n</span><span class="st">"</span> <span class="op">+</span> pfizerall.table() <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st"> - 65+</span><span class="ch">\n\n</span><span class="st">"</span> <span class="op">+</span> pfizer65.table())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb1-2"><a aria-label="2"></a></span>
+<span id="cb1-3"><a aria-label="3"></a><span class="kw">class</span> binarybinaryrct :</span>
+<span id="cb1-4"><a aria-label="4"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, NT, NU, NYT, NYU):</span>
+<span id="cb1-5"><a aria-label="5"></a>        <span class="va">self</span>.NT<span class="op">=</span>NT</span>
+<span id="cb1-6"><a aria-label="6"></a>        <span class="va">self</span>.NU<span class="op">=</span>NU</span>
+<span id="cb1-7"><a aria-label="7"></a>        <span class="va">self</span>.NYT<span class="op">=</span>NYT</span>
+<span id="cb1-8"><a aria-label="8"></a>        <span class="va">self</span>.NYU<span class="op">=</span>NYU</span>
+<span id="cb1-9"><a aria-label="9"></a></span>
+<span id="cb1-10"><a aria-label="10"></a>    <span class="kw">def</span> ATE(<span class="va">self</span>):</span>
+<span id="cb1-11"><a aria-label="11"></a>        <span class="cf">return</span> (<span class="va">self</span>.NYT<span class="op">/</span><span class="va">self</span>.NT <span class="op">-</span> <span class="va">self</span>.NYU<span class="op">/</span><span class="va">self</span>.NU)</span>
+<span id="cb1-12"><a aria-label="12"></a></span>
+<span id="cb1-13"><a aria-label="13"></a>    <span class="kw">def</span> table(<span class="va">self</span>):</span>
+<span id="cb1-14"><a aria-label="14"></a>        <span class="cf">return</span>(<span class="st">"|  | Infection Rate per 1000|</span><span class="ch">\n</span><span class="st">"</span><span class="op">+</span></span>
+<span id="cb1-15"><a aria-label="15"></a>               <span class="st">"|---|---|</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb1-16"><a aria-label="16"></a>               <span class="ss">f"|Treated| </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>NYT<span class="op">/</span><span class="va">self</span><span class="sc">.</span>NT<span class="op">*</span><span class="dv">1000</span><span class="sc">:.2}</span><span class="ss">|</span><span class="ch">\n</span><span class="ss">"</span> <span class="op">+</span></span>
+<span id="cb1-17"><a aria-label="17"></a>               <span class="ss">f"|Control| </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>NYU<span class="op">/</span><span class="va">self</span><span class="sc">.</span>NU<span class="op">*</span><span class="dv">1000</span><span class="sc">:.2}</span><span class="ss">|</span><span class="ch">\n</span><span class="ss">"</span> <span class="op">+</span></span>
+<span id="cb1-18"><a aria-label="18"></a>               <span class="ss">f"|Difference| </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>ATE()<span class="op">*</span><span class="dv">1000</span><span class="sc">:.2}</span><span class="ss">|</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb1-19"><a aria-label="19"></a>    <span class="kw">def</span> VE(<span class="va">self</span>):</span>
+<span id="cb1-20"><a aria-label="20"></a>        tb <span class="op">=</span> sm.stats.Table2x2([[<span class="va">self</span>.NYT, <span class="va">self</span>.NT <span class="op">-</span> <span class="va">self</span>.NYT], [<span class="va">self</span>.NYU, <span class="va">self</span>.NU <span class="op">-</span> <span class="va">self</span>.NYU]])</span>
+<span id="cb1-21"><a aria-label="21"></a>        ve<span class="op">=</span><span class="dv">1</span><span class="op">-</span>tb.riskratio</span>
+<span id="cb1-22"><a aria-label="22"></a>        ci <span class="op">=</span> tb.riskratio_confint()</span>
+<span id="cb1-23"><a aria-label="23"></a>        ci <span class="op">=</span> [<span class="dv">1</span><span class="op">-</span>ci[<span class="dv">1</span>],<span class="dv">1</span><span class="op">-</span>ci[<span class="dv">0</span>]]</span>
+<span id="cb1-24"><a aria-label="24"></a>        <span class="cf">return</span>(ve,ci)</span>
+<span id="cb1-25"><a aria-label="25"></a></span>
+<span id="cb1-26"><a aria-label="26"></a>pfizerall <span class="op">=</span> binarybinaryrct(<span class="dv">19965</span>, <span class="dv">20172</span>, <span class="dv">9</span>, <span class="dv">169</span>)</span>
+<span id="cb1-27"><a aria-label="27"></a>pfizer65 <span class="op">=</span> binarybinaryrct(<span class="dv">4044</span>, <span class="dv">4067</span>, <span class="dv">1</span>, <span class="dv">19</span>)</span>
+<span id="cb1-28"><a aria-label="28"></a></span>
+<span id="cb1-29"><a aria-label="29"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">- All</span><span class="ch">\n\n</span><span class="st">"</span> <span class="op">+</span> pfizerall.table() <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st"> - 65+</span><span class="ch">\n\n</span><span class="st">"</span> <span class="op">+</span> pfizer65.table())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <ul>
 <li>All</li>
@@ -436,19 +441,19 @@ Paul Schrimpf
 </div><div class="column" style="width:25%;">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="kw">def</span> tablewithse(<span class="va">self</span>, scale<span class="op">=</span><span class="dv">1000</span>):</span>
-<span id="cb2-2"><a></a>    p1 <span class="op">=</span> <span class="va">self</span>.NYT<span class="op">/</span><span class="va">self</span>.NT</span>
-<span id="cb2-3"><a></a>    p0 <span class="op">=</span> <span class="va">self</span>.NYU<span class="op">/</span><span class="va">self</span>.NU</span>
-<span id="cb2-4"><a></a>    se <span class="op">=</span> (p1<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>p1)<span class="op">/</span><span class="va">self</span>.NT <span class="op">+</span> p0<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>p0)<span class="op">/</span><span class="va">self</span>.NU)<span class="op">**</span><span class="fl">0.5</span></span>
-<span id="cb2-5"><a></a>    <span class="cf">return</span>(<span class="ss">f"|  | Infection Rate per </span><span class="sc">{</span>scale<span class="sc">}</span><span class="ss">|</span><span class="ch">\n</span><span class="ss">"</span><span class="op">+</span></span>
-<span id="cb2-6"><a></a>           <span class="st">"|---|---|</span><span class="ch">\n</span><span class="st">"</span></span>
-<span id="cb2-7"><a></a>           <span class="ss">f"|Treated| </span><span class="sc">{</span>p1<span class="op">*</span>scale<span class="sc">:.2}</span><span class="ss"> (</span><span class="sc">{</span>scale<span class="op">*</span>(p1<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>p1)<span class="op">/</span><span class="va">self</span>.NT)<span class="op">**</span><span class="fl">0.5</span><span class="sc">:.2}</span><span class="ss">)|</span><span class="ch">\n</span><span class="ss">"</span> <span class="op">+</span></span>
-<span id="cb2-8"><a></a>           <span class="ss">f"|Control| </span><span class="sc">{</span>p0<span class="op">*</span>scale<span class="sc">:.2}</span><span class="ss"> (</span><span class="sc">{</span>scale<span class="op">*</span>(p0<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>p0)<span class="op">/</span><span class="va">self</span>.NU)<span class="op">**</span><span class="fl">0.5</span><span class="sc">:.2}</span><span class="ss">)|</span><span class="ch">\n</span><span class="ss">"</span> <span class="op">+</span></span>
-<span id="cb2-9"><a></a>           <span class="ss">f"|Difference| </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>ATE()<span class="op">*</span>scale<span class="sc">:.2}</span><span class="ss"> (</span><span class="sc">{</span>se<span class="op">*</span>scale<span class="sc">:.2}</span><span class="ss">)|</span><span class="ch">\n</span><span class="ss">"</span>)</span>
-<span id="cb2-10"><a></a></span>
-<span id="cb2-11"><a></a>binarybinaryrct.table <span class="op">=</span> tablewithse</span>
-<span id="cb2-12"><a></a></span>
-<span id="cb2-13"><a></a><span class="bu">print</span>(pfizerall.table())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="kw">def</span> tablewithse(<span class="va">self</span>, scale<span class="op">=</span><span class="dv">1000</span>):</span>
+<span id="cb2-2"><a aria-label="2"></a>    p1 <span class="op">=</span> <span class="va">self</span>.NYT<span class="op">/</span><span class="va">self</span>.NT</span>
+<span id="cb2-3"><a aria-label="3"></a>    p0 <span class="op">=</span> <span class="va">self</span>.NYU<span class="op">/</span><span class="va">self</span>.NU</span>
+<span id="cb2-4"><a aria-label="4"></a>    se <span class="op">=</span> (p1<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>p1)<span class="op">/</span><span class="va">self</span>.NT <span class="op">+</span> p0<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>p0)<span class="op">/</span><span class="va">self</span>.NU)<span class="op">**</span><span class="fl">0.5</span></span>
+<span id="cb2-5"><a aria-label="5"></a>    <span class="cf">return</span>(<span class="ss">f"|  | Infection Rate per </span><span class="sc">{</span>scale<span class="sc">}</span><span class="ss">|</span><span class="ch">\n</span><span class="ss">"</span><span class="op">+</span></span>
+<span id="cb2-6"><a aria-label="6"></a>           <span class="st">"|---|---|</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb2-7"><a aria-label="7"></a>           <span class="ss">f"|Treated| </span><span class="sc">{</span>p1<span class="op">*</span>scale<span class="sc">:.2}</span><span class="ss"> (</span><span class="sc">{</span>scale<span class="op">*</span>(p1<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>p1)<span class="op">/</span><span class="va">self</span>.NT)<span class="op">**</span><span class="fl">0.5</span><span class="sc">:.2}</span><span class="ss">)|</span><span class="ch">\n</span><span class="ss">"</span> <span class="op">+</span></span>
+<span id="cb2-8"><a aria-label="8"></a>           <span class="ss">f"|Control| </span><span class="sc">{</span>p0<span class="op">*</span>scale<span class="sc">:.2}</span><span class="ss"> (</span><span class="sc">{</span>scale<span class="op">*</span>(p0<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>p0)<span class="op">/</span><span class="va">self</span>.NU)<span class="op">**</span><span class="fl">0.5</span><span class="sc">:.2}</span><span class="ss">)|</span><span class="ch">\n</span><span class="ss">"</span> <span class="op">+</span></span>
+<span id="cb2-9"><a aria-label="9"></a>           <span class="ss">f"|Difference| </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>ATE()<span class="op">*</span>scale<span class="sc">:.2}</span><span class="ss"> (</span><span class="sc">{</span>se<span class="op">*</span>scale<span class="sc">:.2}</span><span class="ss">)|</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb2-10"><a aria-label="10"></a></span>
+<span id="cb2-11"><a aria-label="11"></a>binarybinaryrct.table <span class="op">=</span> tablewithse</span>
+<span id="cb2-12"><a aria-label="12"></a></span>
+<span id="cb2-13"><a aria-label="13"></a><span class="bu">print</span>(pfizerall.table())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <table class="caption-top">
 <thead>
@@ -496,21 +501,21 @@ P(ATE \in \widehat{CI}_\alpha) \approx \alpha
 </ul>
 <div id="cb58e89f" class="cell columns column-output-location" data-execution_count="4">
 <div class="column">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-2"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-3"><a></a></span>
-<span id="cb3-4"><a></a>ps <span class="op">=</span> [<span class="fl">0.1</span>, <span class="fl">0.05</span>, <span class="fl">0.01</span>]</span>
-<span id="cb3-5"><a></a>N <span class="op">=</span> <span class="dv">400</span></span>
-<span id="cb3-6"><a></a>S <span class="op">=</span> <span class="dv">100_000</span></span>
-<span id="cb3-7"><a></a><span class="cf">for</span> p <span class="kw">in</span> ps:</span>
-<span id="cb3-8"><a></a>    Y <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, p, (S, N))</span>
-<span id="cb3-9"><a></a>    Ybar <span class="op">=</span> Y.mean(axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb3-10"><a></a>    plt.hist(Ybar, bins<span class="op">=</span><span class="dv">20</span>, alpha<span class="op">=</span><span class="fl">0.5</span>,</span>
-<span id="cb3-11"><a></a>             label<span class="op">=</span><span class="ss">f"p₀=</span><span class="sc">{</span>p<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb3-12"><a></a></span>
-<span id="cb3-13"><a></a>plt.title(<span class="st">"Distribution of Sample Proportion"</span>)</span>
-<span id="cb3-14"><a></a>plt.legend()</span>
-<span id="cb3-15"><a></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a aria-label="2"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-3"><a aria-label="3"></a></span>
+<span id="cb3-4"><a aria-label="4"></a>ps <span class="op">=</span> [<span class="fl">0.1</span>, <span class="fl">0.05</span>, <span class="fl">0.01</span>]</span>
+<span id="cb3-5"><a aria-label="5"></a>N <span class="op">=</span> <span class="dv">400</span></span>
+<span id="cb3-6"><a aria-label="6"></a>S <span class="op">=</span> <span class="dv">100_000</span></span>
+<span id="cb3-7"><a aria-label="7"></a><span class="cf">for</span> p <span class="kw">in</span> ps:</span>
+<span id="cb3-8"><a aria-label="8"></a>    Y <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, p, (S, N))</span>
+<span id="cb3-9"><a aria-label="9"></a>    Ybar <span class="op">=</span> Y.mean(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-10"><a aria-label="10"></a>    plt.hist(Ybar, bins<span class="op">=</span><span class="dv">20</span>, alpha<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb3-11"><a aria-label="11"></a>             label<span class="op">=</span><span class="ss">f"p₀=</span><span class="sc">{</span>p<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-12"><a aria-label="12"></a></span>
+<span id="cb3-13"><a aria-label="13"></a>plt.title(<span class="st">"Distribution of Sample Proportion"</span>)</span>
+<span id="cb3-14"><a aria-label="14"></a>plt.legend()</span>
+<span id="cb3-15"><a aria-label="15"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column">
 <div class="cell-output cell-output-display">
 <div>
@@ -529,27 +534,27 @@ P(ATE \in \widehat{CI}_\alpha) \approx \alpha
 \]</span></li>
 </ul>
 <div id="c1cfbe6d" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="kw">def</span> proportioncisim(phat, n, level<span class="op">=</span><span class="fl">0.95</span>, S<span class="op">=</span><span class="dv">100_000</span>):</span>
-<span id="cb4-2"><a></a>    se <span class="op">=</span> (phat<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>phat)<span class="op">/</span>n)<span class="op">**</span><span class="fl">0.5</span></span>
-<span id="cb4-3"><a></a>    dp <span class="op">=</span> se<span class="op">/</span><span class="dv">20</span></span>
-<span id="cb4-4"><a></a>    p <span class="op">=</span> phat <span class="op">-</span> dp</span>
-<span id="cb4-5"><a></a>    <span class="cf">while</span> (<span class="bu">abs</span>(np.random.binomial(n,p, S)<span class="op">/</span>n<span class="op">-</span>p) <span class="op">&lt;=</span> <span class="bu">abs</span>((phat<span class="op">-</span>p))).mean() <span class="op">&lt;</span> level :</span>
-<span id="cb4-6"><a></a>        p <span class="op">=</span> p <span class="op">-</span> dp</span>
-<span id="cb4-7"><a></a>        <span class="cf">if</span> p <span class="op">&lt;</span> <span class="dv">0</span>:</span>
-<span id="cb4-8"><a></a>            <span class="cf">break</span></span>
-<span id="cb4-9"><a></a>    plo <span class="op">=</span> p</span>
-<span id="cb4-10"><a></a>    p <span class="op">=</span> phat <span class="op">+</span> dp</span>
-<span id="cb4-11"><a></a>    <span class="cf">while</span> (<span class="bu">abs</span>(np.random.binomial(n,p,S)<span class="op">/</span>n<span class="op">-</span>p) <span class="op">&lt;=</span> <span class="bu">abs</span>((phat<span class="op">-</span>p))).mean() <span class="op">&lt;</span> level :</span>
-<span id="cb4-12"><a></a>        p <span class="op">=</span> p <span class="op">+</span> dp</span>
-<span id="cb4-13"><a></a>        <span class="cf">if</span> p <span class="op">&lt;</span> <span class="dv">0</span>:</span>
-<span id="cb4-14"><a></a>            <span class="cf">break</span></span>
-<span id="cb4-15"><a></a>    phi <span class="op">=</span> p</span>
-<span id="cb4-16"><a></a></span>
-<span id="cb4-17"><a></a>    <span class="cf">return</span>(plo,phi)</span>
-<span id="cb4-18"><a></a></span>
-<span id="cb4-19"><a></a>phat <span class="op">=</span> <span class="fl">0.05</span></span>
-<span id="cb4-20"><a></a>n <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb4-21"><a></a>proportioncisim(phat, <span class="dv">100</span>, level<span class="op">=</span><span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="kw">def</span> proportioncisim(phat, n, level<span class="op">=</span><span class="fl">0.95</span>, S<span class="op">=</span><span class="dv">100_000</span>):</span>
+<span id="cb4-2"><a aria-label="2"></a>    se <span class="op">=</span> (phat<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>phat)<span class="op">/</span>n)<span class="op">**</span><span class="fl">0.5</span></span>
+<span id="cb4-3"><a aria-label="3"></a>    dp <span class="op">=</span> se<span class="op">/</span><span class="dv">20</span></span>
+<span id="cb4-4"><a aria-label="4"></a>    p <span class="op">=</span> phat <span class="op">-</span> dp</span>
+<span id="cb4-5"><a aria-label="5"></a>    <span class="cf">while</span> (<span class="bu">abs</span>(np.random.binomial(n,p, S)<span class="op">/</span>n<span class="op">-</span>p) <span class="op">&lt;=</span> <span class="bu">abs</span>((phat<span class="op">-</span>p))).mean() <span class="op">&lt;</span> level :</span>
+<span id="cb4-6"><a aria-label="6"></a>        p <span class="op">=</span> p <span class="op">-</span> dp</span>
+<span id="cb4-7"><a aria-label="7"></a>        <span class="cf">if</span> p <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb4-8"><a aria-label="8"></a>            <span class="cf">break</span></span>
+<span id="cb4-9"><a aria-label="9"></a>    plo <span class="op">=</span> p</span>
+<span id="cb4-10"><a aria-label="10"></a>    p <span class="op">=</span> phat <span class="op">+</span> dp</span>
+<span id="cb4-11"><a aria-label="11"></a>    <span class="cf">while</span> (<span class="bu">abs</span>(np.random.binomial(n,p,S)<span class="op">/</span>n<span class="op">-</span>p) <span class="op">&lt;=</span> <span class="bu">abs</span>((phat<span class="op">-</span>p))).mean() <span class="op">&lt;</span> level :</span>
+<span id="cb4-12"><a aria-label="12"></a>        p <span class="op">=</span> p <span class="op">+</span> dp</span>
+<span id="cb4-13"><a aria-label="13"></a>        <span class="cf">if</span> p <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb4-14"><a aria-label="14"></a>            <span class="cf">break</span></span>
+<span id="cb4-15"><a aria-label="15"></a>    phi <span class="op">=</span> p</span>
+<span id="cb4-16"><a aria-label="16"></a></span>
+<span id="cb4-17"><a aria-label="17"></a>    <span class="cf">return</span>(plo,phi)</span>
+<span id="cb4-18"><a aria-label="18"></a></span>
+<span id="cb4-19"><a aria-label="19"></a>phat <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb4-20"><a aria-label="20"></a>n <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb4-21"><a aria-label="21"></a>proportioncisim(phat, <span class="dv">100</span>, level<span class="op">=</span><span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>(0.024936331074641174, 0.10557596153014372)</code></pre>
 </div>
@@ -558,27 +563,27 @@ P(ATE \in \widehat{CI}_\alpha) \approx \alpha
 <section id="exact-confidence-interval-1" class="slide level2">
 <h2>Exact Confidence Interval</h2>
 <div id="9857b8a6" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="im">import</span> scipy</span>
-<span id="cb6-2"><a></a><span class="co">#| echo: true</span></span>
-<span id="cb6-3"><a></a><span class="kw">def</span> proportionci(phat, n, level<span class="op">=</span><span class="fl">0.95</span>):</span>
-<span id="cb6-4"><a></a>    se <span class="op">=</span> (phat<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>phat)<span class="op">/</span>n)<span class="op">**</span><span class="fl">0.5</span></span>
-<span id="cb6-5"><a></a>    dp <span class="op">=</span> se<span class="op">/</span><span class="dv">200</span></span>
-<span id="cb6-6"><a></a>    k <span class="op">=</span> <span class="bu">round</span>(phat<span class="op">*</span>n)</span>
-<span id="cb6-7"><a></a>    p <span class="op">=</span> phat <span class="op">-</span> dp</span>
-<span id="cb6-8"><a></a>    <span class="cf">while</span> (scipy.stats.binom.cdf(k,n,p) <span class="op">&lt;</span> (<span class="dv">1</span><span class="op">-</span>(<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>) ) :</span>
-<span id="cb6-9"><a></a>        p <span class="op">=</span> p <span class="op">-</span> dp</span>
-<span id="cb6-10"><a></a>        <span class="cf">if</span> (p <span class="op">&lt;</span> <span class="dv">0</span>):</span>
-<span id="cb6-11"><a></a>            <span class="cf">break</span></span>
-<span id="cb6-12"><a></a>    plo <span class="op">=</span> p</span>
-<span id="cb6-13"><a></a>    p <span class="op">=</span> phat <span class="op">+</span> dp</span>
-<span id="cb6-14"><a></a>    <span class="cf">while</span> (scipy.stats.binom.cdf(k,n,p) <span class="op">&gt;</span> (<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>) :</span>
-<span id="cb6-15"><a></a>        p <span class="op">=</span> p <span class="op">+</span> dp</span>
-<span id="cb6-16"><a></a>        <span class="cf">if</span> p <span class="op">&lt;</span> <span class="dv">0</span> :</span>
-<span id="cb6-17"><a></a>            <span class="cf">break</span></span>
-<span id="cb6-18"><a></a>    phi <span class="op">=</span> p</span>
-<span id="cb6-19"><a></a>    <span class="cf">return</span>(plo,phi)</span>
-<span id="cb6-20"><a></a></span>
-<span id="cb6-21"><a></a>proportionci(phat, n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="im">import</span> scipy</span>
+<span id="cb6-2"><a aria-label="2"></a><span class="co">#| echo: true</span></span>
+<span id="cb6-3"><a aria-label="3"></a><span class="kw">def</span> proportionci(phat, n, level<span class="op">=</span><span class="fl">0.95</span>):</span>
+<span id="cb6-4"><a aria-label="4"></a>    se <span class="op">=</span> (phat<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>phat)<span class="op">/</span>n)<span class="op">**</span><span class="fl">0.5</span></span>
+<span id="cb6-5"><a aria-label="5"></a>    dp <span class="op">=</span> se<span class="op">/</span><span class="dv">200</span></span>
+<span id="cb6-6"><a aria-label="6"></a>    k <span class="op">=</span> <span class="bu">round</span>(phat<span class="op">*</span>n)</span>
+<span id="cb6-7"><a aria-label="7"></a>    p <span class="op">=</span> phat <span class="op">-</span> dp</span>
+<span id="cb6-8"><a aria-label="8"></a>    <span class="cf">while</span> (scipy.stats.binom.cdf(k,n,p) <span class="op">&lt;</span> (<span class="dv">1</span><span class="op">-</span>(<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>) ) :</span>
+<span id="cb6-9"><a aria-label="9"></a>        p <span class="op">=</span> p <span class="op">-</span> dp</span>
+<span id="cb6-10"><a aria-label="10"></a>        <span class="cf">if</span> (p <span class="op">&lt;</span> <span class="dv">0</span>):</span>
+<span id="cb6-11"><a aria-label="11"></a>            <span class="cf">break</span></span>
+<span id="cb6-12"><a aria-label="12"></a>    plo <span class="op">=</span> p</span>
+<span id="cb6-13"><a aria-label="13"></a>    p <span class="op">=</span> phat <span class="op">+</span> dp</span>
+<span id="cb6-14"><a aria-label="14"></a>    <span class="cf">while</span> (scipy.stats.binom.cdf(k,n,p) <span class="op">&gt;</span> (<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>) :</span>
+<span id="cb6-15"><a aria-label="15"></a>        p <span class="op">=</span> p <span class="op">+</span> dp</span>
+<span id="cb6-16"><a aria-label="16"></a>        <span class="cf">if</span> p <span class="op">&lt;</span> <span class="dv">0</span> :</span>
+<span id="cb6-17"><a aria-label="17"></a>            <span class="cf">break</span></span>
+<span id="cb6-18"><a aria-label="18"></a>    phi <span class="op">=</span> p</span>
+<span id="cb6-19"><a aria-label="19"></a>    <span class="cf">return</span>(plo,phi)</span>
+<span id="cb6-20"><a aria-label="20"></a></span>
+<span id="cb6-21"><a aria-label="21"></a>proportionci(phat, n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>(0.022320991708517042, 0.11287711726057285)</code></pre>
 </div>
@@ -587,9 +592,9 @@ P(ATE \in \widehat{CI}_\alpha) \approx \alpha
 <section id="exact-confidence-interval-2" class="slide level2">
 <h2>Exact Confidence Interval</h2>
 <div id="a726df0b" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a>phat <span class="op">=</span> pfizerall.NYT<span class="op">/</span>pfizerall.NT</span>
-<span id="cb8-2"><a></a>plo, phi<span class="op">=</span>proportionci(phat,pfizerall.NT)</span>
-<span id="cb8-3"><a></a><span class="dv">1000</span><span class="op">*</span>plo, <span class="dv">1000</span><span class="op">*</span>phi</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a>phat <span class="op">=</span> pfizerall.NYT<span class="op">/</span>pfizerall.NT</span>
+<span id="cb8-2"><a aria-label="2"></a>plo, phi<span class="op">=</span>proportionci(phat,pfizerall.NT)</span>
+<span id="cb8-3"><a aria-label="3"></a><span class="dv">1000</span><span class="op">*</span>plo, <span class="dv">1000</span><span class="op">*</span>phi</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>(0.23971701200382992, 0.8556562725036012)</code></pre>
 </div>
@@ -638,45 +643,45 @@ P\left(\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i \in A \right) - P(N(0,I_d) \in A) \ri
 </div>
 </div>
 </div>
-<aside><ol class="aside-footnotes"><li id="fn1"><p>See <span class="citation" data-cites="raic2019">Raič (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> for details and <span class="citation" data-cites="cck2023">Victor Chernozhukov, Chetverikov, and Koike (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span> for a similar result for higher dimensions (larger <span class="math inline">\(d\)</span>)</p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>See <span class="citation" data-cites="raic2019">Raič (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> for details and <span class="citation" data-cites="cck2023">Chernozhukov et al. (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span> for a similar result for higher dimensions (larger <span class="math inline">\(d\)</span>)</p></li></ol></aside></section>
 <section id="simulated-illustration-of-berry-esseen-clt" class="slide level2">
 <h2>Simulated Illustration of Berry-Esseen CLT</h2>
 <div id="4b2a8983" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb10-2"><a></a><span class="kw">def</span> dgp(n, xhi<span class="op">=</span><span class="dv">2</span>):</span>
-<span id="cb10-3"><a></a>    p <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>xhi<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb10-4"><a></a>    xlo <span class="op">=</span> <span class="op">-</span>p<span class="op">*</span>xhi<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>p)</span>
-<span id="cb10-5"><a></a>    hi <span class="op">=</span> np.random.uniform(<span class="dv">0</span>,<span class="dv">1</span>,n)<span class="op">&lt;</span>p <span class="co"># so var(x)=1</span></span>
-<span id="cb10-6"><a></a>    x <span class="op">=</span> np.where(hi, xhi, xlo)</span>
-<span id="cb10-7"><a></a>    <span class="cf">return</span> x</span>
-<span id="cb10-8"><a></a></span>
-<span id="cb10-9"><a></a><span class="bu">print</span>(<span class="ss">f"var(x) is about </span><span class="sc">{</span>np<span class="sc">.</span>var(dgp(<span class="dv">100_000</span>))<span class="sc">:.2}</span><span class="ss">"</span>)</span>
-<span id="cb10-10"><a></a></span>
-<span id="cb10-11"><a></a><span class="kw">def</span> Ex3(xhi):</span>
-<span id="cb10-12"><a></a>    p <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>xhi<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb10-13"><a></a>    xlo <span class="op">=</span> <span class="op">-</span>p<span class="op">*</span>xhi<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>p)</span>
-<span id="cb10-14"><a></a>    <span class="cf">return</span> p<span class="op">*</span>xhi<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> (<span class="dv">1</span><span class="op">-</span>p)<span class="op">*-</span>xlo<span class="op">**</span><span class="dv">3</span></span>
-<span id="cb10-15"><a></a></span>
-<span id="cb10-16"><a></a>e3 <span class="op">=</span> np.mean(np.<span class="bu">pow</span>(np.<span class="bu">abs</span>(dgp(<span class="dv">100_000</span>)),<span class="dv">3</span>))</span>
-<span id="cb10-17"><a></a><span class="bu">print</span>(<span class="ss">f"E[|x|^3] is about </span><span class="sc">{</span>e3<span class="sc">:.2}</span><span class="ss">, exact is </span><span class="sc">{</span>Ex3(<span class="dv">5</span>)<span class="sc">:.2}</span><span class="ss">"</span>)</span>
-<span id="cb10-18"><a></a></span>
-<span id="cb10-19"><a></a><span class="kw">def</span> plotcdfwithbounds(dgp,  e3, n<span class="op">=</span>[<span class="dv">10</span>,<span class="dv">100</span>,<span class="dv">1000</span>], S<span class="op">=</span><span class="dv">9999</span>):</span>
-<span id="cb10-20"><a></a>    cmap <span class="op">=</span> sns.color_palette(<span class="st">"tab10"</span>)</span>
-<span id="cb10-21"><a></a>    x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">4.5</span>, <span class="fl">4.5</span>, num<span class="op">=</span><span class="dv">200</span>)</span>
-<span id="cb10-22"><a></a>    cdfx<span class="op">=</span> scipy.stats.norm().cdf(x)</span>
-<span id="cb10-23"><a></a>    plt.plot(x, cdfx, label<span class="op">=</span><span class="st">"Normal"</span>, color<span class="op">=</span><span class="st">"black"</span>, linestyle<span class="op">=</span><span class="st">"dashed"</span>)</span>
-<span id="cb10-24"><a></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(n)):</span>
-<span id="cb10-25"><a></a>        truedist <span class="op">=</span> [dgp(n[i]).mean()<span class="op">*</span>np.sqrt(n[i]) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(S)]</span>
-<span id="cb10-26"><a></a>        sns.ecdfplot(truedist, label<span class="op">=</span><span class="ss">f"n=</span><span class="sc">{</span>n[i]<span class="sc">}</span><span class="ss">"</span>, color<span class="op">=</span>cmap[i])</span>
-<span id="cb10-27"><a></a>        plt.fill_between(x, cdfx <span class="op">-</span> <span class="fl">0.5</span><span class="op">*</span>e3<span class="op">/</span>np.sqrt(n[i]), cdfx <span class="op">+</span> <span class="fl">0.5</span><span class="op">*</span>e3<span class="op">/</span>np.sqrt(n[i]), alpha<span class="op">=</span><span class="fl">0.2</span>, color<span class="op">=</span>cmap[i])</span>
-<span id="cb10-28"><a></a>    plt.legend()</span>
-<span id="cb10-29"><a></a>    plt.xlim(<span class="op">-</span><span class="fl">2.5</span>,<span class="fl">2.5</span>)</span>
-<span id="cb10-30"><a></a>    plt.ylim(<span class="dv">0</span>,<span class="dv">1</span>)</span>
-<span id="cb10-31"><a></a>    plt.title(<span class="st">"Distribution of Scaled Sample Mean"</span>)</span>
-<span id="cb10-32"><a></a>    <span class="cf">return</span>(plt.gcf())</span>
-<span id="cb10-33"><a></a></span>
-<span id="cb10-34"><a></a>fig<span class="op">=</span>plotcdfwithbounds(dgp, e3)</span>
-<span id="cb10-35"><a></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb10-2"><a aria-label="2"></a><span class="kw">def</span> dgp(n, xhi<span class="op">=</span><span class="dv">2</span>):</span>
+<span id="cb10-3"><a aria-label="3"></a>    p <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>xhi<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb10-4"><a aria-label="4"></a>    xlo <span class="op">=</span> <span class="op">-</span>p<span class="op">*</span>xhi<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>p)</span>
+<span id="cb10-5"><a aria-label="5"></a>    hi <span class="op">=</span> np.random.uniform(<span class="dv">0</span>,<span class="dv">1</span>,n)<span class="op">&lt;</span>p <span class="co"># so var(x)=1</span></span>
+<span id="cb10-6"><a aria-label="6"></a>    x <span class="op">=</span> np.where(hi, xhi, xlo)</span>
+<span id="cb10-7"><a aria-label="7"></a>    <span class="cf">return</span> x</span>
+<span id="cb10-8"><a aria-label="8"></a></span>
+<span id="cb10-9"><a aria-label="9"></a><span class="bu">print</span>(<span class="ss">f"var(x) is about </span><span class="sc">{</span>np<span class="sc">.</span>var(dgp(<span class="dv">100_000</span>))<span class="sc">:.2}</span><span class="ss">"</span>)</span>
+<span id="cb10-10"><a aria-label="10"></a></span>
+<span id="cb10-11"><a aria-label="11"></a><span class="kw">def</span> Ex3(xhi):</span>
+<span id="cb10-12"><a aria-label="12"></a>    p <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>xhi<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb10-13"><a aria-label="13"></a>    xlo <span class="op">=</span> <span class="op">-</span>p<span class="op">*</span>xhi<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>p)</span>
+<span id="cb10-14"><a aria-label="14"></a>    <span class="cf">return</span> p<span class="op">*</span>xhi<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> (<span class="dv">1</span><span class="op">-</span>p)<span class="op">*-</span>xlo<span class="op">**</span><span class="dv">3</span></span>
+<span id="cb10-15"><a aria-label="15"></a></span>
+<span id="cb10-16"><a aria-label="16"></a>e3 <span class="op">=</span> np.mean(np.<span class="bu">pow</span>(np.<span class="bu">abs</span>(dgp(<span class="dv">100_000</span>)),<span class="dv">3</span>))</span>
+<span id="cb10-17"><a aria-label="17"></a><span class="bu">print</span>(<span class="ss">f"E[|x|^3] is about </span><span class="sc">{</span>e3<span class="sc">:.2}</span><span class="ss">, exact is </span><span class="sc">{</span>Ex3(<span class="dv">5</span>)<span class="sc">:.2}</span><span class="ss">"</span>)</span>
+<span id="cb10-18"><a aria-label="18"></a></span>
+<span id="cb10-19"><a aria-label="19"></a><span class="kw">def</span> plotcdfwithbounds(dgp,  e3, n<span class="op">=</span>[<span class="dv">10</span>,<span class="dv">100</span>,<span class="dv">1000</span>], S<span class="op">=</span><span class="dv">9999</span>):</span>
+<span id="cb10-20"><a aria-label="20"></a>    cmap <span class="op">=</span> sns.color_palette(<span class="st">"tab10"</span>)</span>
+<span id="cb10-21"><a aria-label="21"></a>    x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">4.5</span>, <span class="fl">4.5</span>, num<span class="op">=</span><span class="dv">200</span>)</span>
+<span id="cb10-22"><a aria-label="22"></a>    cdfx<span class="op">=</span> scipy.stats.norm().cdf(x)</span>
+<span id="cb10-23"><a aria-label="23"></a>    plt.plot(x, cdfx, label<span class="op">=</span><span class="st">"Normal"</span>, color<span class="op">=</span><span class="st">"black"</span>, linestyle<span class="op">=</span><span class="st">"dashed"</span>)</span>
+<span id="cb10-24"><a aria-label="24"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(n)):</span>
+<span id="cb10-25"><a aria-label="25"></a>        truedist <span class="op">=</span> [dgp(n[i]).mean()<span class="op">*</span>np.sqrt(n[i]) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(S)]</span>
+<span id="cb10-26"><a aria-label="26"></a>        sns.ecdfplot(truedist, label<span class="op">=</span><span class="ss">f"n=</span><span class="sc">{</span>n[i]<span class="sc">}</span><span class="ss">"</span>, color<span class="op">=</span>cmap[i])</span>
+<span id="cb10-27"><a aria-label="27"></a>        plt.fill_between(x, cdfx <span class="op">-</span> <span class="fl">0.5</span><span class="op">*</span>e3<span class="op">/</span>np.sqrt(n[i]), cdfx <span class="op">+</span> <span class="fl">0.5</span><span class="op">*</span>e3<span class="op">/</span>np.sqrt(n[i]), alpha<span class="op">=</span><span class="fl">0.2</span>, color<span class="op">=</span>cmap[i])</span>
+<span id="cb10-28"><a aria-label="28"></a>    plt.legend()</span>
+<span id="cb10-29"><a aria-label="29"></a>    plt.xlim(<span class="op">-</span><span class="fl">2.5</span>,<span class="fl">2.5</span>)</span>
+<span id="cb10-30"><a aria-label="30"></a>    plt.ylim(<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb10-31"><a aria-label="31"></a>    plt.title(<span class="st">"Distribution of Scaled Sample Mean"</span>)</span>
+<span id="cb10-32"><a aria-label="32"></a>    <span class="cf">return</span>(plt.gcf())</span>
+<span id="cb10-33"><a aria-label="33"></a></span>
+<span id="cb10-34"><a aria-label="34"></a>fig<span class="op">=</span>plotcdfwithbounds(dgp, e3)</span>
+<span id="cb10-35"><a aria-label="35"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 <aside class="notes">
@@ -708,28 +713,28 @@ E[|x|^3] is about 1.7, exact is 4.8</code></pre>
 </div></section><section id="approximate-confidence-interval-1" class="slide level2">
 <h2>Approximate Confidence Interval</h2>
 <div id="fdb6b864" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="kw">def</span> normalci(estimate, se, level<span class="op">=</span><span class="fl">0.95</span>):</span>
-<span id="cb12-2"><a></a>    <span class="cf">return</span> (estimate <span class="op">+</span> se<span class="op">*</span>scipy.stats.norm.ppf((<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>),</span>
-<span id="cb12-3"><a></a>            estimate <span class="op">+</span> se<span class="op">*</span>scipy.stats.norm.ppf(<span class="dv">1</span><span class="op">-</span>(<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>))</span>
-<span id="cb12-4"><a></a></span>
-<span id="cb12-5"><a></a>phat <span class="op">=</span> pfizerall.NYT<span class="op">/</span>pfizerall.NT</span>
-<span id="cb12-6"><a></a>se <span class="op">=</span> (phat<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>phat)<span class="op">/</span>pfizerall.NT)<span class="op">**</span><span class="fl">0.5</span></span>
-<span id="cb12-7"><a></a>lo,hi<span class="op">=</span>normalci(phat, se)</span>
-<span id="cb12-8"><a></a>lo<span class="op">*</span><span class="dv">1000</span>, hi<span class="op">*</span><span class="dv">1000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a><span class="kw">def</span> normalci(estimate, se, level<span class="op">=</span><span class="fl">0.95</span>):</span>
+<span id="cb12-2"><a aria-label="2"></a>    <span class="cf">return</span> (estimate <span class="op">+</span> se<span class="op">*</span>scipy.stats.norm.ppf((<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>),</span>
+<span id="cb12-3"><a aria-label="3"></a>            estimate <span class="op">+</span> se<span class="op">*</span>scipy.stats.norm.ppf(<span class="dv">1</span><span class="op">-</span>(<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>))</span>
+<span id="cb12-4"><a aria-label="4"></a></span>
+<span id="cb12-5"><a aria-label="5"></a>phat <span class="op">=</span> pfizerall.NYT<span class="op">/</span>pfizerall.NT</span>
+<span id="cb12-6"><a aria-label="6"></a>se <span class="op">=</span> (phat<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>phat)<span class="op">/</span>pfizerall.NT)<span class="op">**</span><span class="fl">0.5</span></span>
+<span id="cb12-7"><a aria-label="7"></a>lo,hi<span class="op">=</span>normalci(phat, se)</span>
+<span id="cb12-8"><a aria-label="8"></a>lo<span class="op">*</span><span class="dv">1000</span>, hi<span class="op">*</span><span class="dv">1000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>(np.float64(0.1563452787741701), np.float64(0.7452324823077232))</code></pre>
 </div>
 </div>
 <div id="1eb4b290" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="kw">def</span> differenceci(e1,se1, e0, se0, level<span class="op">=</span><span class="fl">0.95</span>) :</span>
-<span id="cb14-2"><a></a>    diff <span class="op">=</span> e1 <span class="op">-</span> e0</span>
-<span id="cb14-3"><a></a>    se <span class="op">=</span> (se1<span class="op">*</span>se1 <span class="op">+</span> se0<span class="op">*</span>s0)<span class="op">**</span><span class="fl">0.5</span></span>
-<span id="cb14-4"><a></a>    <span class="cf">return</span>(normalci(diff, se, level<span class="op">=</span>level))</span>
-<span id="cb14-5"><a></a></span>
-<span id="cb14-6"><a></a>p0 <span class="op">=</span> pfizerall.NYU<span class="op">/</span>pfizerall.NU</span>
-<span id="cb14-7"><a></a>s0 <span class="op">=</span> (p0<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>p0)<span class="op">/</span>pfizerall.NU)<span class="op">**</span><span class="fl">0.5</span></span>
-<span id="cb14-8"><a></a>lo,hi<span class="op">=</span>differenceci(phat,se, p0, s0)</span>
-<span id="cb14-9"><a></a>lo<span class="op">*</span><span class="dv">1000</span>, hi<span class="op">*</span><span class="dv">1000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a><span class="kw">def</span> differenceci(e1,se1, e0, se0, level<span class="op">=</span><span class="fl">0.95</span>) :</span>
+<span id="cb14-2"><a aria-label="2"></a>    diff <span class="op">=</span> e1 <span class="op">-</span> e0</span>
+<span id="cb14-3"><a aria-label="3"></a>    se <span class="op">=</span> (se1<span class="op">*</span>se1 <span class="op">+</span> se0<span class="op">*</span>s0)<span class="op">**</span><span class="fl">0.5</span></span>
+<span id="cb14-4"><a aria-label="4"></a>    <span class="cf">return</span>(normalci(diff, se, level<span class="op">=</span>level))</span>
+<span id="cb14-5"><a aria-label="5"></a></span>
+<span id="cb14-6"><a aria-label="6"></a>p0 <span class="op">=</span> pfizerall.NYU<span class="op">/</span>pfizerall.NU</span>
+<span id="cb14-7"><a aria-label="7"></a>s0 <span class="op">=</span> (p0<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>p0)<span class="op">/</span>pfizerall.NU)<span class="op">**</span><span class="fl">0.5</span></span>
+<span id="cb14-8"><a aria-label="8"></a>lo,hi<span class="op">=</span>differenceci(phat,se, p0, s0)</span>
+<span id="cb14-9"><a aria-label="9"></a>lo<span class="op">*</span><span class="dv">1000</span>, hi<span class="op">*</span><span class="dv">1000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>(np.float64(-9.218976095611334), np.float64(-6.63534540961651))</code></pre>
 </div>
@@ -746,7 +751,7 @@ E[|x|^3] is about 1.7, exact is 4.8</code></pre>
 <li>Often report functions of estimates
 <ul>
 <li>E.g. <span class="math display">\[
-\text{vaccine efficacy} = 1 - \frac{\Er[Y|T=1]} {\Er[Y|T=0]}
+\text{vaccine efficacy} = 1 - \frac{\Er[Y|D=1]} {\Er[Y|D=0]}
 \]</span></li>
 </ul></li>
 </ul>
@@ -772,9 +777,9 @@ E[|x|^3] is about 1.7, exact is 4.8</code></pre>
 <ul>
 <li>E.g. vaccine efficacy
 <ul>
-<li><span class="math inline">\(\theta_0 = (\Er[Y|T=0], \Er[Y|t=1])\)</span></li>
+<li><span class="math inline">\(\theta_0 = (\Er[Y|D=0], \Er[Y|D=1])\)</span></li>
 <li><span class="math inline">\(g(\theta) = 1 - \theta_2/\theta_1\)</span></li>
-<li><span class="math inline">\(D(g)(\theta_0) = \begin{pmatrix} \frac{\Er[Y|T=1]}{\Er[Y|T=0]^2} &amp; -\frac{1}{\Er[Y|T=0]} \end{pmatrix}\)</span></li>
+<li><span class="math inline">\(D(g)(\theta_0) = \begin{pmatrix} \frac{\Er[Y|D=1]}{\Er[Y|D=0]^2} &amp; -\frac{1}{\Er[Y|D=0]} \end{pmatrix}\)</span></li>
 <li><span class="math inline">\(\Omega = \begin{pmatrix} p_0(1-p_0)/n_0 &amp; 0 \\ 0 &amp; p_1(1-p_1)/n_1 \end{pmatrix}\)</span></li>
 </ul></li>
 </ul>
@@ -782,21 +787,21 @@ E[|x|^3] is about 1.7, exact is 4.8</code></pre>
 <section id="delta-method-2" class="slide level2">
 <h2>Delta Method</h2>
 <div id="5050fcb0" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="im">import</span> torch</span>
-<span id="cb16-2"><a></a></span>
-<span id="cb16-3"><a></a>theta <span class="op">=</span> [p0, phat]</span>
-<span id="cb16-4"><a></a>Omega <span class="op">=</span> np.matrix([[s0<span class="op">**</span><span class="dv">2</span>, <span class="dv">0</span>], [<span class="dv">0</span>, se<span class="op">**</span><span class="dv">2</span>]])</span>
-<span id="cb16-5"><a></a><span class="kw">def</span> ve(theta) :</span>
-<span id="cb16-6"><a></a>    <span class="cf">return</span>(<span class="dv">1</span> <span class="op">-</span> theta[<span class="dv">1</span>]<span class="op">/</span>theta[<span class="dv">0</span>])</span>
-<span id="cb16-7"><a></a></span>
-<span id="cb16-8"><a></a><span class="kw">def</span> deltamethod(g, theta, Omega) :</span>
-<span id="cb16-9"><a></a>    x <span class="op">=</span> torch.tensor(theta, requires_grad<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb16-10"><a></a>    val <span class="op">=</span> g(x)</span>
-<span id="cb16-11"><a></a>    val.backward()</span>
-<span id="cb16-12"><a></a>    Dg <span class="op">=</span> x.grad.numpy()</span>
-<span id="cb16-13"><a></a>    <span class="cf">return</span>(Dg <span class="op">@</span> Omega <span class="op">@</span> Dg.transpose())</span>
-<span id="cb16-14"><a></a></span>
-<span id="cb16-15"><a></a><span class="bu">print</span>(<span class="ss">f"Efficacy among everyone is </span><span class="sc">{</span>ve(theta)<span class="sc">:.3}</span><span class="ss"> (</span><span class="sc">{</span>deltamethod(ve,theta,Omega)[<span class="dv">0</span>,<span class="dv">0</span>]<span class="op">**</span><span class="fl">0.5</span><span class="sc">:.2}</span><span class="ss">)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a><span class="im">import</span> torch</span>
+<span id="cb16-2"><a aria-label="2"></a></span>
+<span id="cb16-3"><a aria-label="3"></a>theta <span class="op">=</span> [p0, phat]</span>
+<span id="cb16-4"><a aria-label="4"></a>Omega <span class="op">=</span> np.matrix([[s0<span class="op">**</span><span class="dv">2</span>, <span class="dv">0</span>], [<span class="dv">0</span>, se<span class="op">**</span><span class="dv">2</span>]])</span>
+<span id="cb16-5"><a aria-label="5"></a><span class="kw">def</span> ve(theta) :</span>
+<span id="cb16-6"><a aria-label="6"></a>    <span class="cf">return</span>(<span class="dv">1</span> <span class="op">-</span> theta[<span class="dv">1</span>]<span class="op">/</span>theta[<span class="dv">0</span>])</span>
+<span id="cb16-7"><a aria-label="7"></a></span>
+<span id="cb16-8"><a aria-label="8"></a><span class="kw">def</span> deltamethod(g, theta, Omega) :</span>
+<span id="cb16-9"><a aria-label="9"></a>    x <span class="op">=</span> torch.tensor(theta, requires_grad<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-10"><a aria-label="10"></a>    val <span class="op">=</span> g(x)</span>
+<span id="cb16-11"><a aria-label="11"></a>    val.backward()</span>
+<span id="cb16-12"><a aria-label="12"></a>    Dg <span class="op">=</span> x.grad.numpy()</span>
+<span id="cb16-13"><a aria-label="13"></a>    <span class="cf">return</span>(Dg <span class="op">@</span> Omega <span class="op">@</span> Dg.transpose())</span>
+<span id="cb16-14"><a aria-label="14"></a></span>
+<span id="cb16-15"><a aria-label="15"></a><span class="bu">print</span>(<span class="ss">f"Efficacy among everyone is </span><span class="sc">{</span>ve(theta)<span class="sc">:.3}</span><span class="ss"> (</span><span class="sc">{</span>deltamethod(ve,theta,Omega)[<span class="dv">0</span>,<span class="dv">0</span>]<span class="op">**</span><span class="fl">0.5</span><span class="sc">:.2}</span><span class="ss">)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Efficacy among everyone is 0.946 (0.018)</code></pre>
 </div>
@@ -817,21 +822,21 @@ E[|x|^3] is about 1.7, exact is 4.8</code></pre>
 <h2>Simulated Distribution of Vaccine Efficacy</h2>
 <div id="a5da738c" class="cell columns column-output-location" data-execution_count="12">
 <div class="column">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="kw">def</span> simulateg(g,theta,Omega,S<span class="op">=</span><span class="dv">10_000</span>):</span>
-<span id="cb18-2"><a></a>    thetas <span class="op">=</span> np.random.multivariate_normal(theta, Omega, S)</span>
-<span id="cb18-3"><a></a>    gs <span class="op">=</span> np.apply_along_axis(g,<span class="dv">1</span>,thetas)</span>
-<span id="cb18-4"><a></a>    <span class="cf">return</span>(gs, ((gs<span class="op">-</span>g(theta))<span class="op">**</span><span class="dv">2</span>).mean())</span>
-<span id="cb18-5"><a></a></span>
-<span id="cb18-6"><a></a>gs, gv<span class="op">=</span>simulateg(ve, theta, Omega)</span>
-<span id="cb18-7"><a></a><span class="bu">print</span>(<span class="ss">f"simulation se = </span><span class="sc">{</span>gv<span class="op">**</span><span class="fl">0.5</span><span class="sc">:.2}</span><span class="ss">"</span>)</span>
-<span id="cb18-8"><a></a></span>
-<span id="cb18-9"><a></a>plt.hist(gs, bins<span class="op">=</span><span class="dv">50</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, density<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb18-10"><a></a>dse <span class="op">=</span> deltamethod(ve,theta,Omega)[<span class="dv">0</span>,<span class="dv">0</span>]<span class="op">**</span><span class="fl">0.5</span></span>
-<span id="cb18-11"><a></a>z <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,num<span class="op">=</span><span class="dv">100</span>)<span class="op">*</span>dse <span class="op">+</span> ve(theta)</span>
-<span id="cb18-12"><a></a>fdeltamethod <span class="op">=</span> scipy.stats.norm(loc<span class="op">=</span>ve(theta), scale<span class="op">=</span>dse).pdf</span>
-<span id="cb18-13"><a></a>plt.plot(z, fdeltamethod(z))</span>
-<span id="cb18-14"><a></a>plt.title(<span class="st">"Distribution of Vaccine Efficacy"</span>)</span>
-<span id="cb18-15"><a></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-label="1"></a><span class="kw">def</span> simulateg(g,theta,Omega,S<span class="op">=</span><span class="dv">10_000</span>):</span>
+<span id="cb18-2"><a aria-label="2"></a>    thetas <span class="op">=</span> np.random.multivariate_normal(theta, Omega, S)</span>
+<span id="cb18-3"><a aria-label="3"></a>    gs <span class="op">=</span> np.apply_along_axis(g,<span class="dv">1</span>,thetas)</span>
+<span id="cb18-4"><a aria-label="4"></a>    <span class="cf">return</span>(gs, ((gs<span class="op">-</span>g(theta))<span class="op">**</span><span class="dv">2</span>).mean())</span>
+<span id="cb18-5"><a aria-label="5"></a></span>
+<span id="cb18-6"><a aria-label="6"></a>gs, gv<span class="op">=</span>simulateg(ve, theta, Omega)</span>
+<span id="cb18-7"><a aria-label="7"></a><span class="bu">print</span>(<span class="ss">f"simulation se = </span><span class="sc">{</span>gv<span class="op">**</span><span class="fl">0.5</span><span class="sc">:.2}</span><span class="ss">"</span>)</span>
+<span id="cb18-8"><a aria-label="8"></a></span>
+<span id="cb18-9"><a aria-label="9"></a>plt.hist(gs, bins<span class="op">=</span><span class="dv">50</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, density<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb18-10"><a aria-label="10"></a>dse <span class="op">=</span> deltamethod(ve,theta,Omega)[<span class="dv">0</span>,<span class="dv">0</span>]<span class="op">**</span><span class="fl">0.5</span></span>
+<span id="cb18-11"><a aria-label="11"></a>z <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,num<span class="op">=</span><span class="dv">100</span>)<span class="op">*</span>dse <span class="op">+</span> ve(theta)</span>
+<span id="cb18-12"><a aria-label="12"></a>fdeltamethod <span class="op">=</span> scipy.stats.norm(loc<span class="op">=</span>ve(theta), scale<span class="op">=</span>dse).pdf</span>
+<span id="cb18-13"><a aria-label="13"></a>plt.plot(z, fdeltamethod(z))</span>
+<span id="cb18-14"><a aria-label="14"></a>plt.title(<span class="st">"Distribution of Vaccine Efficacy"</span>)</span>
+<span id="cb18-15"><a aria-label="15"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>simulation se = 0.019</code></pre>
@@ -867,43 +872,43 @@ E[|x|^3] is about 1.7, exact is 4.8</code></pre>
 <section id="bootstrap-2" class="slide level2">
 <h2>Bootstrap</h2>
 <div id="ccb6c41d" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a>np.random.seed(<span class="dv">6987</span>)</span>
-<span id="cb20-2"><a></a><span class="kw">def</span> dgp(n):</span>
-<span id="cb20-3"><a></a>    x <span class="op">=</span> np.exp(<span class="bu">abs</span>(np.random.normal(<span class="dv">0</span>,<span class="dv">1</span>,n)))</span>
-<span id="cb20-4"><a></a>    <span class="cf">return</span> x</span>
-<span id="cb20-5"><a></a></span>
-<span id="cb20-6"><a></a><span class="kw">def</span> estimator(x):</span>
-<span id="cb20-7"><a></a>    <span class="cf">return</span> np.mean(x)</span>
-<span id="cb20-8"><a></a></span>
-<span id="cb20-9"><a></a></span>
-<span id="cb20-10"><a></a><span class="kw">def</span> bootstrap(data, estimator, B<span class="op">=</span><span class="dv">999</span>):</span>
-<span id="cb20-11"><a></a>    n <span class="op">=</span> <span class="bu">len</span>(data)</span>
-<span id="cb20-12"><a></a>    est <span class="op">=</span> estimator(data)</span>
-<span id="cb20-13"><a></a>    bestimates <span class="op">=</span> [estimator(np.random.choice(data,size<span class="op">=</span>n, replace<span class="op">=</span><span class="va">True</span>))<span class="op">-</span>est <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(B)]</span>
-<span id="cb20-14"><a></a>    <span class="cf">return</span> bestimates</span>
-<span id="cb20-15"><a></a></span>
-<span id="cb20-16"><a></a><span class="kw">def</span> cltdistmean(data, B<span class="op">=</span><span class="dv">999</span>):</span>
-<span id="cb20-17"><a></a>    <span class="cf">return</span> np.random.normal(<span class="dv">0</span>,np.sqrt(np.var(data)<span class="op">/</span><span class="bu">len</span>(data)),B)</span>
-<span id="cb20-18"><a></a></span>
-<span id="cb20-19"><a></a>cmap <span class="op">=</span> sns.color_palette(<span class="st">"tab10"</span>)</span>
-<span id="cb20-20"><a></a>n <span class="op">=</span> <span class="dv">20</span></span>
-<span id="cb20-21"><a></a>B <span class="op">=</span> <span class="dv">999</span></span>
-<span id="cb20-22"><a></a>true <span class="op">=</span> estimator(dgp(n<span class="op">*</span><span class="dv">10_000</span>))</span>
-<span id="cb20-23"><a></a><span class="co"># simulate true distribution of estimator</span></span>
-<span id="cb20-24"><a></a>estsims <span class="op">=</span> [estimator(dgp(n)) <span class="op">-</span> true <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(S)]</span>
-<span id="cb20-25"><a></a>sns.ecdfplot(estsims, label<span class="op">=</span><span class="st">"True distribution"</span>, linewidth<span class="op">=</span><span class="dv">3</span>, color<span class="op">=</span><span class="st">"black"</span>)</span>
-<span id="cb20-26"><a></a><span class="cf">for</span> b <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
-<span id="cb20-27"><a></a>    data <span class="op">=</span> dgp(n)</span>
-<span id="cb20-28"><a></a>    sns.ecdfplot(bootstrap(data, estimator, B<span class="op">=</span>B), alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="ss">f"Bootstrap </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">"</span>, color<span class="op">=</span>cmap[b])</span>
-<span id="cb20-29"><a></a>    sns.ecdfplot(cltdistmean(data,B<span class="op">=</span><span class="dv">10</span><span class="op">*</span>B), alpha<span class="op">=</span><span class="fl">0.5</span>,</span>
-<span id="cb20-30"><a></a>                 label<span class="op">=</span><span class="ss">f"CLT </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">"</span>, color<span class="op">=</span>cmap[b], linestyle<span class="op">=</span><span class="st">'dashed'</span>)</span>
-<span id="cb20-31"><a></a></span>
-<span id="cb20-32"><a></a>sd<span class="op">=</span>np.std(estsims)</span>
-<span id="cb20-33"><a></a>plt.xlim(<span class="op">-</span><span class="fl">2.5</span><span class="op">*</span>sd,<span class="fl">2.5</span><span class="op">*</span>sd)</span>
-<span id="cb20-34"><a></a>plt.ylim(<span class="dv">0</span>,<span class="dv">1</span>)</span>
-<span id="cb20-35"><a></a>plt.legend()</span>
-<span id="cb20-36"><a></a>plt.title(<span class="ss">f"True CDF and Approximate CDFs for three data realizations with n=</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb20-37"><a></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a aria-label="1"></a>np.random.seed(<span class="dv">6987</span>)</span>
+<span id="cb20-2"><a aria-label="2"></a><span class="kw">def</span> dgp(n):</span>
+<span id="cb20-3"><a aria-label="3"></a>    x <span class="op">=</span> np.exp(<span class="bu">abs</span>(np.random.normal(<span class="dv">0</span>,<span class="dv">1</span>,n)))</span>
+<span id="cb20-4"><a aria-label="4"></a>    <span class="cf">return</span> x</span>
+<span id="cb20-5"><a aria-label="5"></a></span>
+<span id="cb20-6"><a aria-label="6"></a><span class="kw">def</span> estimator(x):</span>
+<span id="cb20-7"><a aria-label="7"></a>    <span class="cf">return</span> np.mean(x)</span>
+<span id="cb20-8"><a aria-label="8"></a></span>
+<span id="cb20-9"><a aria-label="9"></a></span>
+<span id="cb20-10"><a aria-label="10"></a><span class="kw">def</span> bootstrap(data, estimator, B<span class="op">=</span><span class="dv">999</span>):</span>
+<span id="cb20-11"><a aria-label="11"></a>    n <span class="op">=</span> <span class="bu">len</span>(data)</span>
+<span id="cb20-12"><a aria-label="12"></a>    est <span class="op">=</span> estimator(data)</span>
+<span id="cb20-13"><a aria-label="13"></a>    bestimates <span class="op">=</span> [estimator(np.random.choice(data,size<span class="op">=</span>n, replace<span class="op">=</span><span class="va">True</span>))<span class="op">-</span>est <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(B)]</span>
+<span id="cb20-14"><a aria-label="14"></a>    <span class="cf">return</span> bestimates</span>
+<span id="cb20-15"><a aria-label="15"></a></span>
+<span id="cb20-16"><a aria-label="16"></a><span class="kw">def</span> cltdistmean(data, B<span class="op">=</span><span class="dv">999</span>):</span>
+<span id="cb20-17"><a aria-label="17"></a>    <span class="cf">return</span> np.random.normal(<span class="dv">0</span>,np.sqrt(np.var(data)<span class="op">/</span><span class="bu">len</span>(data)),B)</span>
+<span id="cb20-18"><a aria-label="18"></a></span>
+<span id="cb20-19"><a aria-label="19"></a>cmap <span class="op">=</span> sns.color_palette(<span class="st">"tab10"</span>)</span>
+<span id="cb20-20"><a aria-label="20"></a>n <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb20-21"><a aria-label="21"></a>B <span class="op">=</span> <span class="dv">999</span></span>
+<span id="cb20-22"><a aria-label="22"></a>true <span class="op">=</span> estimator(dgp(n<span class="op">*</span><span class="dv">10_000</span>))</span>
+<span id="cb20-23"><a aria-label="23"></a><span class="co"># simulate true distribution of estimator</span></span>
+<span id="cb20-24"><a aria-label="24"></a>estsims <span class="op">=</span> [estimator(dgp(n)) <span class="op">-</span> true <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(S)]</span>
+<span id="cb20-25"><a aria-label="25"></a>sns.ecdfplot(estsims, label<span class="op">=</span><span class="st">"True distribution"</span>, linewidth<span class="op">=</span><span class="dv">3</span>, color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb20-26"><a aria-label="26"></a><span class="cf">for</span> b <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb20-27"><a aria-label="27"></a>    data <span class="op">=</span> dgp(n)</span>
+<span id="cb20-28"><a aria-label="28"></a>    sns.ecdfplot(bootstrap(data, estimator, B<span class="op">=</span>B), alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="ss">f"Bootstrap </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">"</span>, color<span class="op">=</span>cmap[b])</span>
+<span id="cb20-29"><a aria-label="29"></a>    sns.ecdfplot(cltdistmean(data,B<span class="op">=</span><span class="dv">10</span><span class="op">*</span>B), alpha<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb20-30"><a aria-label="30"></a>                 label<span class="op">=</span><span class="ss">f"CLT </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">"</span>, color<span class="op">=</span>cmap[b], linestyle<span class="op">=</span><span class="st">'dashed'</span>)</span>
+<span id="cb20-31"><a aria-label="31"></a></span>
+<span id="cb20-32"><a aria-label="32"></a>sd<span class="op">=</span>np.std(estsims)</span>
+<span id="cb20-33"><a aria-label="33"></a>plt.xlim(<span class="op">-</span><span class="fl">2.5</span><span class="op">*</span>sd,<span class="fl">2.5</span><span class="op">*</span>sd)</span>
+<span id="cb20-34"><a aria-label="34"></a>plt.ylim(<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb20-35"><a aria-label="35"></a>plt.legend()</span>
+<span id="cb20-36"><a aria-label="36"></a>plt.title(<span class="ss">f"True CDF and Approximate CDFs for three data realizations with n=</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb20-37"><a aria-label="37"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
@@ -933,42 +938,42 @@ t = \sqrt{n}(\bar{x} - \Er[x])/\hat{\sigma}_x \leadsto N(0, 1)
 <section id="bootstrap-for-pivotal-statistic" class="slide level2">
 <h2>Bootstrap for Pivotal Statistic</h2>
 <div id="f285a478" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a>np.random.seed(<span class="dv">6987</span>)</span>
-<span id="cb21-2"><a></a><span class="kw">def</span> estimator(data) :</span>
-<span id="cb21-3"><a></a>    <span class="cf">return</span> np.mean(data), np.std(data)<span class="op">/</span>np.sqrt(<span class="bu">len</span>(data))</span>
-<span id="cb21-4"><a></a></span>
-<span id="cb21-5"><a></a><span class="kw">def</span> tbootstrap(data, estimator, B<span class="op">=</span><span class="dv">999</span>):</span>
-<span id="cb21-6"><a></a>    n <span class="op">=</span> <span class="bu">len</span>(data)</span>
-<span id="cb21-7"><a></a>    bestimates <span class="op">=</span> np.zeros(B)</span>
-<span id="cb21-8"><a></a>    est <span class="op">=</span> estimator(data)</span>
-<span id="cb21-9"><a></a>    <span class="cf">for</span> b <span class="kw">in</span> <span class="bu">range</span>(B):</span>
-<span id="cb21-10"><a></a>        eb <span class="op">=</span> estimator(np.random.choice(data,size<span class="op">=</span>n, replace<span class="op">=</span><span class="va">True</span>))</span>
-<span id="cb21-11"><a></a>        bestimates[b] <span class="op">=</span> (eb[<span class="dv">0</span>]<span class="op">-</span>est[<span class="dv">0</span>])<span class="op">/</span>eb[<span class="dv">1</span>]</span>
-<span id="cb21-12"><a></a>    <span class="cf">return</span> bestimates</span>
-<span id="cb21-13"><a></a></span>
-<span id="cb21-14"><a></a>cmap <span class="op">=</span> sns.color_palette(<span class="st">"tab10"</span>)</span>
-<span id="cb21-15"><a></a>true <span class="op">=</span> estimator(dgp(n<span class="op">*</span><span class="dv">10_000</span>))</span>
-<span id="cb21-16"><a></a><span class="co"># simulate true distribution of estimator</span></span>
-<span id="cb21-17"><a></a>estsims <span class="op">=</span> np.zeros(S)</span>
-<span id="cb21-18"><a></a><span class="cf">for</span> s <span class="kw">in</span> <span class="bu">range</span>(S):</span>
-<span id="cb21-19"><a></a>    m, sd <span class="op">=</span> estimator(dgp(n))</span>
-<span id="cb21-20"><a></a>    estsims[s] <span class="op">=</span> (m<span class="op">-</span>true[<span class="dv">0</span>])<span class="op">/</span>sd</span>
-<span id="cb21-21"><a></a></span>
-<span id="cb21-22"><a></a>sns.ecdfplot(estsims, label<span class="op">=</span><span class="st">"True distribution"</span>, linewidth<span class="op">=</span><span class="dv">3</span>, color<span class="op">=</span><span class="st">"black"</span>)</span>
-<span id="cb21-23"><a></a><span class="cf">for</span> b <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
-<span id="cb21-24"><a></a>    data <span class="op">=</span> dgp(n)</span>
-<span id="cb21-25"><a></a>    sns.ecdfplot(tbootstrap(data, estimator, B<span class="op">=</span>B), alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="ss">f"Pivotal Bootstrap </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">"</span>, color<span class="op">=</span>cmap[b])</span>
-<span id="cb21-26"><a></a></span>
-<span id="cb21-27"><a></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">4.5</span>, <span class="fl">4.5</span>, num<span class="op">=</span><span class="dv">200</span>)</span>
-<span id="cb21-28"><a></a>cdfx<span class="op">=</span> scipy.stats.norm().cdf(x)</span>
-<span id="cb21-29"><a></a>plt.plot(x, cdfx, label<span class="op">=</span><span class="st">"Normal"</span>, color<span class="op">=</span><span class="st">"black"</span>, linestyle<span class="op">=</span><span class="st">"dashed"</span>)</span>
-<span id="cb21-30"><a></a></span>
-<span id="cb21-31"><a></a>sd<span class="op">=</span>np.std(estsims)</span>
-<span id="cb21-32"><a></a>plt.ylim(<span class="dv">0</span>,<span class="dv">1</span>)</span>
-<span id="cb21-33"><a></a>plt.xlim(<span class="op">-</span><span class="fl">2.5</span><span class="op">*</span>sd,<span class="fl">2.5</span><span class="op">*</span>sd)</span>
-<span id="cb21-34"><a></a>plt.legend()</span>
-<span id="cb21-35"><a></a>plt.title(<span class="ss">f"True CDF and Approximate CDFs for t-stat for three data realizations with n=</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb21-36"><a></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a aria-label="1"></a>np.random.seed(<span class="dv">6987</span>)</span>
+<span id="cb21-2"><a aria-label="2"></a><span class="kw">def</span> estimator(data) :</span>
+<span id="cb21-3"><a aria-label="3"></a>    <span class="cf">return</span> np.mean(data), np.std(data)<span class="op">/</span>np.sqrt(<span class="bu">len</span>(data))</span>
+<span id="cb21-4"><a aria-label="4"></a></span>
+<span id="cb21-5"><a aria-label="5"></a><span class="kw">def</span> tbootstrap(data, estimator, B<span class="op">=</span><span class="dv">999</span>):</span>
+<span id="cb21-6"><a aria-label="6"></a>    n <span class="op">=</span> <span class="bu">len</span>(data)</span>
+<span id="cb21-7"><a aria-label="7"></a>    bestimates <span class="op">=</span> np.zeros(B)</span>
+<span id="cb21-8"><a aria-label="8"></a>    est <span class="op">=</span> estimator(data)</span>
+<span id="cb21-9"><a aria-label="9"></a>    <span class="cf">for</span> b <span class="kw">in</span> <span class="bu">range</span>(B):</span>
+<span id="cb21-10"><a aria-label="10"></a>        eb <span class="op">=</span> estimator(np.random.choice(data,size<span class="op">=</span>n, replace<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb21-11"><a aria-label="11"></a>        bestimates[b] <span class="op">=</span> (eb[<span class="dv">0</span>]<span class="op">-</span>est[<span class="dv">0</span>])<span class="op">/</span>eb[<span class="dv">1</span>]</span>
+<span id="cb21-12"><a aria-label="12"></a>    <span class="cf">return</span> bestimates</span>
+<span id="cb21-13"><a aria-label="13"></a></span>
+<span id="cb21-14"><a aria-label="14"></a>cmap <span class="op">=</span> sns.color_palette(<span class="st">"tab10"</span>)</span>
+<span id="cb21-15"><a aria-label="15"></a>true <span class="op">=</span> estimator(dgp(n<span class="op">*</span><span class="dv">10_000</span>))</span>
+<span id="cb21-16"><a aria-label="16"></a><span class="co"># simulate true distribution of estimator</span></span>
+<span id="cb21-17"><a aria-label="17"></a>estsims <span class="op">=</span> np.zeros(S)</span>
+<span id="cb21-18"><a aria-label="18"></a><span class="cf">for</span> s <span class="kw">in</span> <span class="bu">range</span>(S):</span>
+<span id="cb21-19"><a aria-label="19"></a>    m, sd <span class="op">=</span> estimator(dgp(n))</span>
+<span id="cb21-20"><a aria-label="20"></a>    estsims[s] <span class="op">=</span> (m<span class="op">-</span>true[<span class="dv">0</span>])<span class="op">/</span>sd</span>
+<span id="cb21-21"><a aria-label="21"></a></span>
+<span id="cb21-22"><a aria-label="22"></a>sns.ecdfplot(estsims, label<span class="op">=</span><span class="st">"True distribution"</span>, linewidth<span class="op">=</span><span class="dv">3</span>, color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb21-23"><a aria-label="23"></a><span class="cf">for</span> b <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb21-24"><a aria-label="24"></a>    data <span class="op">=</span> dgp(n)</span>
+<span id="cb21-25"><a aria-label="25"></a>    sns.ecdfplot(tbootstrap(data, estimator, B<span class="op">=</span>B), alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="ss">f"Pivotal Bootstrap </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">"</span>, color<span class="op">=</span>cmap[b])</span>
+<span id="cb21-26"><a aria-label="26"></a></span>
+<span id="cb21-27"><a aria-label="27"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">4.5</span>, <span class="fl">4.5</span>, num<span class="op">=</span><span class="dv">200</span>)</span>
+<span id="cb21-28"><a aria-label="28"></a>cdfx<span class="op">=</span> scipy.stats.norm().cdf(x)</span>
+<span id="cb21-29"><a aria-label="29"></a>plt.plot(x, cdfx, label<span class="op">=</span><span class="st">"Normal"</span>, color<span class="op">=</span><span class="st">"black"</span>, linestyle<span class="op">=</span><span class="st">"dashed"</span>)</span>
+<span id="cb21-30"><a aria-label="30"></a></span>
+<span id="cb21-31"><a aria-label="31"></a>sd<span class="op">=</span>np.std(estsims)</span>
+<span id="cb21-32"><a aria-label="32"></a>plt.ylim(<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb21-33"><a aria-label="33"></a>plt.xlim(<span class="op">-</span><span class="fl">2.5</span><span class="op">*</span>sd,<span class="fl">2.5</span><span class="op">*</span>sd)</span>
+<span id="cb21-34"><a aria-label="34"></a>plt.legend()</span>
+<span id="cb21-35"><a aria-label="35"></a>plt.title(<span class="ss">f"True CDF and Approximate CDFs for t-stat for three data realizations with n=</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb21-36"><a aria-label="36"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
@@ -983,13 +988,13 @@ t = \sqrt{n}(\bar{x} - \Er[x])/\hat{\sigma}_x \leadsto N(0, 1)
 </div></section><section id="bootstrap-confidence-interval" class="slide level2">
 <h2>Bootstrap Confidence Interval</h2>
 <div id="1867866e" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a></a><span class="kw">def</span> bootstrapci(data, estimator, B<span class="op">=</span><span class="dv">999</span>, level<span class="op">=</span><span class="fl">0.95</span>):</span>
-<span id="cb22-2"><a></a>    estimates <span class="op">=</span> bootstrap(data, estimator, B)</span>
-<span id="cb22-3"><a></a>    lo <span class="op">=</span> np.percentile(estimates, <span class="dv">100</span><span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>) <span class="op">+</span> estimator(data)</span>
-<span id="cb22-4"><a></a>    hi <span class="op">=</span> np.percentile(estimates, <span class="dv">100</span><span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>(<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>)) <span class="op">+</span> estimator(data)</span>
-<span id="cb22-5"><a></a>    <span class="cf">return</span> lo, hi</span>
-<span id="cb22-6"><a></a></span>
-<span id="cb22-7"><a></a>bootstrapci(dgp(n), np.mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a><span class="kw">def</span> bootstrapci(data, estimator, B<span class="op">=</span><span class="dv">999</span>, level<span class="op">=</span><span class="fl">0.95</span>):</span>
+<span id="cb22-2"><a aria-label="2"></a>    estimates <span class="op">=</span> bootstrap(data, estimator, B)</span>
+<span id="cb22-3"><a aria-label="3"></a>    lo <span class="op">=</span> np.percentile(estimates, <span class="dv">100</span><span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>) <span class="op">+</span> estimator(data)</span>
+<span id="cb22-4"><a aria-label="4"></a>    hi <span class="op">=</span> np.percentile(estimates, <span class="dv">100</span><span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>(<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>)) <span class="op">+</span> estimator(data)</span>
+<span id="cb22-5"><a aria-label="5"></a>    <span class="cf">return</span> lo, hi</span>
+<span id="cb22-6"><a aria-label="6"></a></span>
+<span id="cb22-7"><a aria-label="7"></a>bootstrapci(dgp(n), np.mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>(np.float64(2.1750298043936604), np.float64(3.7622303748107635))</code></pre>
 </div>
@@ -1047,7 +1052,7 @@ t = \sqrt{n}(\bar{x} - \Er[x])/\hat{\sigma}_x \leadsto N(0, 1)
 <li>Risk of overfitting</li>
 <li>Inference difficult, but possible
 <ul>
-<li><span class="citation" data-cites="causalml2024">V. Chernozhukov et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span> chapter 4</li>
+<li><span class="citation" data-cites="causalml2024">Chernozhukov et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span> chapter 4</li>
 </ul></li>
 <li>More later …</li>
 </ul>
@@ -1056,19 +1061,19 @@ t = \sqrt{n}(\bar{x} - \Er[x])/\hat{\sigma}_x \leadsto N(0, 1)
 <h2>Sources and Further Reading</h2>
 <ul>
 <li><a href="https://matheusfacure.github.io/python-causality-handbook/03-Stats-Review-The-Most-Dangerous-Equation.html.html">Chapter 3</a> of <span class="citation" data-cites="facure2022">Facure (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></li>
-<li><a href="https://causalml-book.org/">Chapter 1</a> of <span class="citation" data-cites="causalml2024">V. Chernozhukov et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></li>
+<li><a href="https://causalml-book.org/">Chapter 1</a> of <span class="citation" data-cites="causalml2024">Chernozhukov et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></li>
 </ul>
 </section>
 <section id="references" class="slide level2 scrollable smaller">
 <h2>References</h2>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-causalml2024" class="csl-entry" role="listitem">
 Chernozhukov, V., C. Hansen, N. Kallus, M. Spindler, and V. Syrgkanis. 2024. <em>Applied Causal Inference Powered by ML and AI</em>. <a href="https://causalml-book.org/">https://causalml-book.org/</a>.
 </div>
 <div id="ref-cck2023" class="csl-entry" role="listitem">
-Chernozhukov, Victor, Denis Chetverikov, and Yuta Koike. 2023. <span>“<span class="nocase">Nearly optimal central limit theorem and bootstrap approximations in high dimensions</span>.”</span> <em>The Annals of Applied Probability</em> 33 (3): 2374–2425. <a href="https://doi.org/10.1214/22-AAP1870">https://doi.org/10.1214/22-AAP1870</a>.
+Chernozhukov, Victor, Denis Chetverikov, and Yuta Koike. 2023. <span>“<span class="nocase">Nearly optimal central limit theorem and bootstrap approximations in high dimensions</span>.”</span> <em>The Annals of Applied Probability</em> 33 (3): 2374–425. <a href="https://doi.org/10.1214/22-AAP1870">https://doi.org/10.1214/22-AAP1870</a>.
 </div>
 <div id="ref-facure2022" class="csl-entry" role="listitem">
 Facure, Matheus. 2022. <em>Causal Inference for the Brave and True</em>. <a href="https://matheusfacure.github.io/python-causality-handbook/landing-page.html">https://matheusfacure.github.io/python-causality-handbook/landing-page.html</a>.

@@ -282,7 +282,7 @@ Paul Schrimpf
 <ul>
 <li class="fragment">Treatment <span class="math inline">\(D_i \in \{0,1\}\)</span></li>
 <li class="fragment">Observed outcome <span class="math inline">\(Y_i\)</span></li>
-<li class="fragment">We want the causal effect of <span class="math inline">\(T\)</span> on <span class="math inline">\(Y\)</span>, but what does that mean?
+<li class="fragment">We want the causal effect of <span class="math inline">\(D\)</span> on <span class="math inline">\(Y\)</span>, but what does that mean?
 <ul>
 <li class="fragment">Potential outcomes give a rigorous definition</li>
 </ul></li>
@@ -373,7 +373,7 @@ APE = ATE + \underbrace{\begin{pmatrix} (\Er[Y_i(0) | D_i=1] - \Er[Y_i(0)|D_i=0]
 </section>
 <section id="selection-bias-example-1" class="slide level2">
 <h2>Selection Bias Example</h2>
-<div id="ddb4e7d3" class="cell" data-execution_count="2">
+<div id="1250e6ea" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -384,11 +384,11 @@ APE = ATE + \underbrace{\begin{pmatrix} (\Er[Y_i(0) | D_i=1] - \Er[Y_i(0)|D_i=0]
 <span id="cb1-6"><a aria-label="6"></a>        <span class="va">self</span>.Y1 <span class="op">=</span> np.random.normal(size<span class="op">=</span>n) <span class="op">+</span> ate</span>
 <span id="cb1-7"><a aria-label="7"></a>        <span class="va">self</span>.S0 <span class="op">=</span> <span class="va">self</span>.Y0 <span class="op">+</span> np.random.normal(size<span class="op">=</span>n)<span class="op">*</span>noisesd</span>
 <span id="cb1-8"><a aria-label="8"></a>        <span class="va">self</span>.S1 <span class="op">=</span> <span class="va">self</span>.Y1 <span class="op">+</span> np.random.normal(size<span class="op">=</span>n)<span class="op">*</span>noisesd</span>
-<span id="cb1-9"><a aria-label="9"></a>        <span class="va">self</span>.T <span class="op">=</span> (<span class="va">self</span>.S1 <span class="op">&gt;</span> <span class="va">self</span>.S0).astype(<span class="bu">int</span>)</span>
-<span id="cb1-10"><a aria-label="10"></a>        <span class="va">self</span>.Y <span class="op">=</span> <span class="va">self</span>.Y0 <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> <span class="va">self</span>.T) <span class="op">+</span> <span class="va">self</span>.Y1 <span class="op">*</span> <span class="va">self</span>.T</span>
+<span id="cb1-9"><a aria-label="9"></a>        <span class="va">self</span>.D <span class="op">=</span> (<span class="va">self</span>.S1 <span class="op">&gt;</span> <span class="va">self</span>.S0).astype(<span class="bu">int</span>)</span>
+<span id="cb1-10"><a aria-label="10"></a>        <span class="va">self</span>.Y <span class="op">=</span> <span class="va">self</span>.Y0 <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> <span class="va">self</span>.D) <span class="op">+</span> <span class="va">self</span>.Y1 <span class="op">*</span> <span class="va">self</span>.D</span>
 <span id="cb1-11"><a aria-label="11"></a></span>
 <span id="cb1-12"><a aria-label="12"></a>    <span class="kw">def</span> APE(<span class="va">self</span>):</span>
-<span id="cb1-13"><a aria-label="13"></a>        <span class="cf">return</span> np.mean(<span class="va">self</span>.Y[<span class="va">self</span>.T<span class="op">==</span><span class="dv">1</span>]) <span class="op">-</span> np.mean(<span class="va">self</span>.Y[<span class="va">self</span>.T<span class="op">==</span><span class="dv">0</span>])</span>
+<span id="cb1-13"><a aria-label="13"></a>        <span class="cf">return</span> np.mean(<span class="va">self</span>.Y[<span class="va">self</span>.D<span class="op">==</span><span class="dv">1</span>]) <span class="op">-</span> np.mean(<span class="va">self</span>.Y[<span class="va">self</span>.D<span class="op">==</span><span class="dv">0</span>])</span>
 <span id="cb1-14"><a aria-label="14"></a></span>
 <span id="cb1-15"><a aria-label="15"></a>    <span class="kw">def</span> ATE(<span class="va">self</span>):</span>
 <span id="cb1-16"><a aria-label="16"></a>        <span class="cf">return</span> np.mean(<span class="va">self</span>.Y1) <span class="op">-</span> np.mean(<span class="va">self</span>.Y0)</span>
@@ -397,10 +397,10 @@ APE = ATE + \underbrace{\begin{pmatrix} (\Er[Y_i(0) | D_i=1] - \Er[Y_i(0)|D_i=0]
 <span id="cb1-19"><a aria-label="19"></a>        <span class="cf">return</span> (<span class="va">self</span>.APE() <span class="op">-</span> <span class="va">self</span>.ATE())</span>
 <span id="cb1-20"><a aria-label="20"></a></span>
 <span id="cb1-21"><a aria-label="21"></a>    <span class="kw">def</span> selectionbias0(<span class="va">self</span>):</span>
-<span id="cb1-22"><a aria-label="22"></a>        <span class="cf">return</span> np.mean( <span class="va">self</span>.Y0[<span class="va">self</span>.T<span class="op">==</span><span class="dv">1</span>]) <span class="op">-</span> np.mean( <span class="va">self</span>.Y0[<span class="va">self</span>.T<span class="op">==</span><span class="dv">0</span>] )</span>
+<span id="cb1-22"><a aria-label="22"></a>        <span class="cf">return</span> np.mean( <span class="va">self</span>.Y0[<span class="va">self</span>.D<span class="op">==</span><span class="dv">1</span>]) <span class="op">-</span> np.mean( <span class="va">self</span>.Y0[<span class="va">self</span>.D<span class="op">==</span><span class="dv">0</span>] )</span>
 <span id="cb1-23"><a aria-label="23"></a></span>
 <span id="cb1-24"><a aria-label="24"></a>    <span class="kw">def</span> selectionbias1(<span class="va">self</span>):</span>
-<span id="cb1-25"><a aria-label="25"></a>        <span class="cf">return</span> np.mean( <span class="va">self</span>.Y1[<span class="va">self</span>.T<span class="op">==</span><span class="dv">1</span>]) <span class="op">-</span> np.mean(<span class="va">self</span>.Y1[<span class="va">self</span>.T<span class="op">==</span><span class="dv">0</span>] )</span>
+<span id="cb1-25"><a aria-label="25"></a>        <span class="cf">return</span> np.mean( <span class="va">self</span>.Y1[<span class="va">self</span>.D<span class="op">==</span><span class="dv">1</span>]) <span class="op">-</span> np.mean(<span class="va">self</span>.Y1[<span class="va">self</span>.D<span class="op">==</span><span class="dv">0</span>] )</span>
 <span id="cb1-26"><a aria-label="26"></a></span>
 <span id="cb1-27"><a aria-label="27"></a></span>
 <span id="cb1-28"><a aria-label="28"></a>s <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -414,7 +414,7 @@ APE = ATE + \underbrace{\begin{pmatrix} (\Er[Y_i(0) | D_i=1] - \Er[Y_i(0)|D_i=0]
 </details>
 </div>
 
-</section><section id="selection-bias-example-1-output" class="slide level2 output-location-slide"><h2>Selection Bias Example</h2><div class="cell output-location-slide" data-execution_count="2">
+</section><section id="selection-bias-example-1-output" class="slide level2 output-location-slide"><h2>Selection Bias Example</h2><div class="cell output-location-slide" data-execution_count="1">
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -499,7 +499,7 @@ APE = &amp; \Er[Y_i(1)|D_i=1] - \Er[Y_i(0)|D_i=0] \\
 </section>
 <section id="example-pfizer-covid-vaccine-rct-1" class="slide level2">
 <h2>Example Pfizer Covid Vaccine RCT</h2>
-<div id="eab55c17" class="cell" data-execution_count="3">
+<div id="81635eaf" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
 <span id="cb2-2"><a aria-label="2"></a></span>
 <span id="cb2-3"><a aria-label="3"></a><span class="kw">class</span> binarybinaryrct :</span>
@@ -532,7 +532,7 @@ APE = &amp; \Er[Y_i(1)|D_i=1] - \Er[Y_i(0)|D_i=0] \\
 </div>
 
 </section>
-<section id="example-pfizer-covid-vaccine-rct-1-output" class="slide level2 output-location-slide"><h2>Example Pfizer Covid Vaccine RCT</h2><div class="cell output-location-slide" data-execution_count="3">
+<section id="example-pfizer-covid-vaccine-rct-1-output" class="slide level2 output-location-slide"><h2>Example Pfizer Covid Vaccine RCT</h2><div class="cell output-location-slide" data-execution_count="2">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 - All

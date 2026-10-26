@@ -935,105 +935,105 @@
     "href": "matching.html#setting",
     "title": "Matching",
     "section": "Setting",
-    "text": "Setting\n\nPotential outcomes \\((Y(0), Y(1))\\)\nTreatment \\(T \\in \\{0,1\\}\\)\nObserve \\(Y = Y(T)\\)\nCovariates \\(X\\)\nAssume conditional independence \\((Y(0),Y(1)) \\perp T | X\\)\n\n\\[\n\\def\\Er{{\\mathrm{E}}}\n\\def\\En{{\\mathbb{En}}}\n\\def\\cov{{\\mathrm{Cov}}}\n\\def\\var{{\\mathrm{Var}}}\n\\def\\R{{\\mathbb{R}}}\n\\newcommand\\norm[1]{\\left\\lVert#1\\right\\rVert}\n\\def\\rank{{\\mathrm{rank}}}\n\\newcommand{\\inpr}{ \\overset{p^*_{\\scriptscriptstyle n}}{\\longrightarrow}}\n\\def\\inprob{{\\,{\\buildrel p \\over \\rightarrow}\\,}}\n\\def\\indist{\\,{\\buildrel d \\over \\rightarrow}\\,}\n\\DeclareMathOperator*{\\plim}{plim}\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\]"
+    "text": "Setting\n\nPotential outcomes \\((Y(0), Y(1))\\)\nTreatment \\(D \\in \\{0,1\\}\\)\nObserve \\(Y = Y(D)\\)\nCovariates \\(X\\)\nAssume conditional independence \\((Y(0),Y(1)) \\perp D | X\\)\n\n\\[\n\\def\\Er{{\\mathrm{E}}}\n\\def\\En{{\\mathbb{En}}}\n\\def\\cov{{\\mathrm{Cov}}}\n\\def\\var{{\\mathrm{Var}}}\n\\def\\R{{\\mathbb{R}}}\n\\newcommand\\norm[1]{\\left\\lVert#1\\right\\rVert}\n\\def\\rank{{\\mathrm{rank}}}\n\\newcommand{\\inpr}{ \\overset{p^*_{\\scriptscriptstyle n}}{\\longrightarrow}}\n\\def\\inprob{{\\,{\\buildrel p \\over \\rightarrow}\\,}}\n\\def\\indist{\\,{\\buildrel d \\over \\rightarrow}\\,}\n\\DeclareMathOperator*{\\plim}{plim}\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\]"
   },
   {
     "objectID": "matching.html#why-not-regression",
     "href": "matching.html#why-not-regression",
     "title": "Matching",
     "section": "Why not regression?",
-    "text": "Why not regression?\n\nAverage treatment effect \\[\nATE = \\int \\Er[Y|T=1,X=x] - \\Er[Y|T=0,X=x] dP(x)\n\\]\nRegression gives the best linear approximation to \\(\\Er[Y|T,X]\\), so why not just estimate linear regression \\[\nY_i = \\hat{\\alpha} D_i + X_i'\\hat{\\beta} + \\hat{\\epsilon}_i\n\\] and, and then use \\(\\hat{\\alpha}\\) as an estimate of the ATE?"
+    "text": "Why not regression?\n\nAverage treatment effect \\[\nATE = \\int \\Er[Y|D=1,X=x] - \\Er[Y|D=0,X=x] dP(x)\n\\]\nRegression gives the best linear approximation to \\(\\Er[Y|D,X]\\), so why not just estimate linear regression \\[\nY_i = \\hat{\\alpha} D_i + X_i'\\hat{\\beta} + \\hat{\\epsilon}_i\n\\] and, and then use \\(\\hat{\\alpha}\\) as an estimate of the ATE?"
   },
   {
     "objectID": "matching.html#why-not-regression-1",
     "href": "matching.html#why-not-regression-1",
     "title": "Matching",
     "section": "Why not regression?",
-    "text": "Why not regression?\n\nPartial out (Frish-Waugh-Lovell theorem) \\[\n\\begin{align*}\n\\hat{\\alpha} = & \\frac{\\frac{1}{n} \\sum_{i=1}^n Y_i (D_i - X_i'(X'X)^{-1}X'T)}\n  {\\frac{1}{n} \\sum_{i=1}^n (D_i - X_i'(X'X)^{-1}X'T)^2} \\\\\n  \\inprob & \\Er\\left[Y_i \\underbrace{\\frac{D_i - X_i'\\pi}{\\Er[(D_i - X_i'\\pi)^2]}}_{\\equiv \\omega(D_i,X_i)}\\right] \\\\\n  = & \\Er\\left[Y_{0,i} \\omega(D_i,X_i)\\right] + \\Er\\left[(Y_{1,i}-Y_{0,i}) \\omega(D_i,X_i)D_i\\right]\n\\end{align*}\n\\] where \\(\\pi = \\argmin_{\\tilde{\\pi}} \\Er[(D_i - X_i'\\tilde{\\pi})^2]\\)\nNote: \\(\\Er[\\omega(T,X)] = 0\\), \\(\\Er[T\\omega(T,X)] = 1\\)"
+    "text": "Why not regression?\n\nPartial out (Frish-Waugh-Lovell theorem) \\[\n\\begin{align*}\n\\hat{\\alpha} = & \\frac{\\frac{1}{n} \\sum_{i=1}^n Y_i (D_i - X_i'(X'X)^{-1}X'D)}\n  {\\frac{1}{n} \\sum_{i=1}^n (D_i - X_i'(X'X)^{-1}X'D)^2} \\\\\n  \\inprob & \\Er\\left[Y_i \\underbrace{\\frac{D_i - X_i'\\pi}{\\Er[(D_i - X_i'\\pi)^2]}}_{\\equiv \\omega(D_i,X_i)}\\right] \\\\\n  = & \\Er\\left[Y_{0,i} \\omega(D_i,X_i)\\right] + \\Er\\left[(Y_{1,i}-Y_{0,i}) \\omega(D_i,X_i)D_i\\right]\n\\end{align*}\n\\] where \\(\\pi = \\argmin_{\\tilde{\\pi}} \\Er[(D_i - X_i'\\tilde{\\pi})^2]\\)\nNote: \\(\\Er[\\omega(D,X)] = 0\\), \\(\\Er[D\\omega(D,X)] = 1\\)"
   },
   {
     "objectID": "matching.html#why-not-regression-2",
     "href": "matching.html#why-not-regression-2",
     "title": "Matching",
     "section": "Why not regression?",
-    "text": "Why not regression?\n\n\\(\\plim \\hat{\\alpha} = \\Er\\left[Y_{0,i} \\omega(D_i,X_i)\\right] + \\Er\\left[(Y_{1,i}-Y_{0,i}) \\omega(D_i,X_i)D_i\\right]\\)\nWhat can be in the range of \\(\\omega(T,X) = \\frac{T - X'\\pi}{\\Er[(D_i - X_i'\\pi)^2]}\\)?"
+    "text": "Why not regression?\n\n\\(\\plim \\hat{\\alpha} = \\Er\\left[Y_{0,i} \\omega(D_i,X_i)\\right] + \\Er\\left[(Y_{1,i}-Y_{0,i}) \\omega(D_i,X_i)D_i\\right]\\)\nWhat can be in the range of \\(\\omega(D,X) = \\frac{D - X'\\pi}{\\Er[(D_i - X_i'\\pi)^2]}\\)?"
   },
   {
     "objectID": "matching.html#why-not-regression-3",
     "href": "matching.html#why-not-regression-3",
     "title": "Matching",
     "section": "Why not regression?",
-    "text": "Why not regression?\n\n\nimports\nimport numpy as np\nfrom matplotlib import style\nfrom matplotlib import pyplot as plt\nimport scipy\nstyle.use(\"fivethirtyeight\")\n\n\n\nnp.random.seed(1234)\n\ndef simulate(n, pi=np.array([0,1])):\n    X = np.random.randn(n, len(pi))\n    X[:,0] = 1\n    P = np.clip(scipy.stats.norm.cdf(X @ pi), 0.05, 0.95)\n    T = 1*(np.random.rand(n) &lt; P)\n    Ey0x = np.zeros(n)\n    Ey1x = np.exp(3*(X[:,1]-2))\n    y0 = Ey0x + np.random.randn(n)\n    y1 = Ey1x + np.random.randn(n)\n    y = T*y1 + (1-T)*y0\n    return(X,T,y,y0,y1, Ey0x, Ey1x, P)\n\nX,T,y,y0,y1,Ey0x,Ey1x,P = simulate(4000)\n\npihat = np.linalg.solve(X.T @ X, X.T @ T)\nw = T - X @ pihat\nw = w/np.mean(w**2);"
+    "text": "Why not regression?\n\n\nimports\nimport numpy as np\nfrom matplotlib import style\nfrom matplotlib import pyplot as plt\nimport scipy\nstyle.use(\"fivethirtyeight\")\n\n\n\nnp.random.seed(1234)\n\ndef simulate(n, pi=np.array([0,1])):\n    X = np.random.randn(n, len(pi))\n    X[:,0] = 1\n    P = np.clip(scipy.stats.norm.cdf(X @ pi), 0.05, 0.95)\n    D = 1*(np.random.rand(n) &lt; P)\n    Ey0x = np.zeros(n)\n    Ey1x = np.exp(3*(X[:,1]-2))\n    y0 = Ey0x + np.random.randn(n)\n    y1 = Ey1x + np.random.randn(n)\n    y = D*y1 + (1-D)*y0\n    return(X,D,y,y0,y1, Ey0x, Ey1x, P)\n\nX,D,y,y0,y1,Ey0x,Ey1x,P = simulate(4000)\n\npihat = np.linalg.solve(X.T @ X, X.T @ D)\nw = D - X @ pihat\nw = w/np.mean(w**2);"
   },
   {
     "objectID": "matching.html#why-not-regression-4",
     "href": "matching.html#why-not-regression-4",
     "title": "Matching",
     "section": "Why not regression?",
-    "text": "Why not regression?\n\nTX = np.hstack((T.reshape(len(T),1),X))\nabhat = np.linalg.solve(TX.T @ TX, TX.T @ y)\nahat = abhat[0]\nprint(ahat)\n\n-0.11952795827329032\n\n\n\nnp.mean(y1-y0)\n\nnp.float64(0.1172689998868494)\n\n\n\nWeights, \\(\\omega(T,X)\\), are not all positive, so the regression estimate can be negative even if \\(\\Er[Y(1) | X] - \\Er[Y(0)|X]\\) is positive everywhere"
+    "text": "Why not regression?\n\nDX = np.hstack((D.reshape(len(D),1),X))\nabhat = np.linalg.solve(DX.T @ DX, DX.T @ y)\nahat = abhat[0]\nprint(ahat)\n\n-0.11952795827329032\n\n\n\nnp.mean(y1-y0)\n\nnp.float64(0.1172689998868494)\n\n\n\nWeights, \\(\\omega(D,X)\\), are not all positive, so the regression estimate can be negative even if \\(\\Er[Y(1) | X] - \\Er[Y(0)|X]\\) is positive everywhere"
   },
   {
     "objectID": "matching.html#why-not-regression-5",
     "href": "matching.html#why-not-regression-5",
     "title": "Matching",
     "section": "Why not regression?",
-    "text": "Why not regression?\n\n\nplot\nimport matplotlib.cm as cm\nfig, axes = plt.subplots(2, 1, figsize=(6, 6))\n\n# Create a scatter plot for the first panel (left)\naxes[0].scatter(X[:,1], w, c=T, cmap=cm.Dark2)\naxes[0].set_xlabel(\"X\")\naxes[0].set_ylabel(\"ωT\")\naxes[0].set_title(\"Weights\")\n\naxes[1].scatter(X[:,1], y1-y0, label=\"TE\")\naxes[1].set_xlabel(\"X\")\naxes[1].set_ylabel(\"Y₁ - Y₀\")\naxes[1].set_title(\"Treatment effects\")\nsort_idx = np.argsort(X[:,1])\naxes[1].plot(X[sort_idx,1], Ey1x[sort_idx]-Ey0x[sort_idx], label=\"E[y1-y0|x]\")\n\n# Display the plot\nplt.tight_layout()  # Ensure proper layout spacing\nplt.show()"
+    "text": "Why not regression?\n\n\nplot\nimport matplotlib.cm as cm\nfig, axes = plt.subplots(2, 1, figsize=(6, 6))\n\n# Create a scatter plot for the first panel (left)\naxes[0].scatter(X[:,1], w, c=D, cmap=cm.Dark2)\naxes[0].set_xlabel(\"X\")\naxes[0].set_ylabel(\"ωD\")\naxes[0].set_title(\"Weights\")\n\naxes[1].scatter(X[:,1], y1-y0, label=\"TE\")\naxes[1].set_xlabel(\"X\")\naxes[1].set_ylabel(\"Y₁ - Y₀\")\naxes[1].set_title(\"Treatment effects\")\nsort_idx = np.argsort(X[:,1])\naxes[1].plot(X[sort_idx,1], Ey1x[sort_idx]-Ey0x[sort_idx], label=\"E[y1-y0|x]\")\n\n# Display the plot\nplt.tight_layout()  # Ensure proper layout spacing\nplt.show()"
   },
   {
     "objectID": "matching.html#matching-1",
     "href": "matching.html#matching-1",
     "title": "Matching",
     "section": "Matching",
-    "text": "Matching\n\nIf not regression, then what? \\[\nATE = \\int \\Er[Y|T=1,X=x] - \\Er[Y|T=0,X=x] dP(x)\n\\]"
+    "text": "Matching\n\nIf not regression, then what? \\[\nATE = \\int \\Er[Y|D=1,X=x] - \\Er[Y|D=0,X=x] dP(x)\n\\]"
   },
   {
     "objectID": "matching.html#plug-in-estimator",
     "href": "matching.html#plug-in-estimator",
     "title": "Matching",
     "section": "Plug-in estimator",
-    "text": "Plug-in estimator\n\nPlug in estimator: \\[\n\\widehat{ATE} = \\frac{1}{n} \\sum_{i=1}^n \\left(\\hat{E}[Y|T=1,X=X_i] - \\hat{E}[Y|T=0,X=X_i] \\right)\n\\] where \\(\\hat{E}[Y|T,X]\\) is some flexible estimator for \\(\\Er[Y|T,X]\\)\n\nif \\(X\\) is discrete, \\(\\hat{E}\\) can be conditional averages or equivalently, “saturated” regression\nif \\(X\\) continuous, \\(\\hat{E}\\) can be some nonparametric regression estimator\nOriginal approaches to this problem used nearest neighbor matching to estimate \\(\\hat{E}[Y|T,X]\\)\n\nDownside:\n\nDifficult statistical properties — choice of tuning parameters, strong assumptions needed, failure of bootstrap for nearest neighbors Abadie and Imbens (2008)"
+    "text": "Plug-in estimator\n\nPlug in estimator: \\[\n\\widehat{ATE} = \\frac{1}{n} \\sum_{i=1}^n \\left(\\hat{E}[Y|D=1,X=X_i] - \\hat{E}[Y|D=0,X=X_i] \\right)\n\\] where \\(\\hat{E}[Y|D,X]\\) is some flexible estimator for \\(\\Er[Y|D,X]\\)\n\nif \\(X\\) is discrete, \\(\\hat{E}\\) can be conditional averages or equivalently, “saturated” regression\nif \\(X\\) continuous, \\(\\hat{E}\\) can be some nonparametric regression estimator\nOriginal approaches to this problem used nearest neighbor matching to estimate \\(\\hat{E}[Y|D,X]\\)\n\nDownside:\n\nDifficult statistical properties — choice of tuning parameters, strong assumptions needed, failure of bootstrap for nearest neighbors Abadie and Imbens (2008)"
   },
   {
     "objectID": "matching.html#propensity-score",
     "href": "matching.html#propensity-score",
     "title": "Matching",
     "section": "Propensity Score",
-    "text": "Propensity Score\n\nLet \\(p(X) = P(T=1|X=X)\\)\nNote: \\[\n\\begin{align*}\n\\Er[Y|X,T=1] - \\Er[Y|X,T=0] = & E\\left[\\frac{Y T}{p(X)}|X \\right] - E\\left[\\frac{Y(1-T)}{1-p(X)}|X \\right] \\\\\n= & E\\left[ Y \\frac{T - p(X)}{p(X)(1-p(X))} | X \\right]\n\\end{align*}\n\\]"
+    "text": "Propensity Score\n\nLet \\(p(X) = P(D=1|X=X)\\)\nNote: \\[\n\\begin{align*}\n\\Er[Y|X,D=1] - \\Er[Y|X,D=0] = & E\\left[\\frac{Y D}{p(X)}|X \\right] - E\\left[\\frac{Y(1-D)}{1-p(X)}|X \\right] \\\\\n= & E\\left[ Y \\frac{D - p(X)}{p(X)(1-p(X))} | X \\right]\n\\end{align*}\n\\]"
   },
   {
     "objectID": "matching.html#propensity-score-1",
     "href": "matching.html#propensity-score-1",
     "title": "Matching",
     "section": "Propensity Score",
-    "text": "Propensity Score\n\nso \\[\nATE = \\Er\\left[ \\frac{Y T}{p(X)} -  \\frac{Y(1-T)}{1-p(X)}\\right] = \\Er\\left[ Y \\frac{T - p(X)}{p(X)(1-p(X))} \\right]\n\\]"
+    "text": "Propensity Score\n\nso \\[\nATE = \\Er\\left[ \\frac{Y D}{p(X)} -  \\frac{Y(1-D)}{1-p(X)}\\right] = \\Er\\left[ Y \\frac{D - p(X)}{p(X)(1-p(X))} \\right]\n\\]"
   },
   {
     "objectID": "matching.html#inverse-propensity-weighting",
     "href": "matching.html#inverse-propensity-weighting",
     "title": "Matching",
     "section": "Inverse propensity weighting",
-    "text": "Inverse propensity weighting\n\nEstimator \\[\n\\widehat{ATE}^{IPW} = \\frac{1}{n} \\sum_{i=1}^n \\frac{Y_iD_i}{\\hat{p}(X_i)} - \\frac{Y_i(1-D_i)}{1-\\hat{p}(X_i)}\n\\] where \\(\\hat{p}(X)\\) is some flexible estimator for \\(P(T=1|X)\\)\nDownside:\n\nDifficult statistical properties — choice of tuning parameters, strong assumptions needed"
+    "text": "Inverse propensity weighting\n\nEstimator \\[\n\\widehat{ATE}^{IPW} = \\frac{1}{n} \\sum_{i=1}^n \\frac{Y_iD_i}{\\hat{p}(X_i)} - \\frac{Y_i(1-D_i)}{1-\\hat{p}(X_i)}\n\\] where \\(\\hat{p}(X)\\) is some flexible estimator for \\(P(D=1|X)\\)\nDownside:\n\nDifficult statistical properties — choice of tuning parameters, strong assumptions needed"
   },
   {
     "objectID": "matching.html#doubly-robust-estimator",
     "href": "matching.html#doubly-robust-estimator",
     "title": "Matching",
     "section": "Doubly Robust Estimator",
-    "text": "Doubly Robust Estimator\n\nCombines plug-in and IPW estimators\nEstimator \\[\n\\begin{align*}\n\\widehat{ATE}^{DR} = & \\frac{1}{n} \\sum_{i=1}^n \\hat{E}[Y|T=1,X=X_i] - \\hat{E}[Y|T=0,X=X_i] + \\\\\n& + \\frac{1}{n} \\sum_{i=1}^n  \\frac{D_i(Y_i - \\hat{E}[Y|T=1,X=X_i])}{\\hat{p}(X_i)} - \\\\\n& - \\frac{(1-D_i)(Y_i - \\hat{E}[Y|T=0,X=X_i])} {1-\\hat{p}(X_i)}\n\\end{align*}\n\\]"
+    "text": "Doubly Robust Estimator\n\nCombines plug-in and IPW estimators\nEstimator \\[\n\\begin{align*}\n\\widehat{ATE}^{DR} = & \\frac{1}{n} \\sum_{i=1}^n \\hat{E}[Y|D=1,X=X_i] - \\hat{E}[Y|D=0,X=X_i] + \\\\\n& + \\frac{1}{n} \\sum_{i=1}^n  \\frac{D_i(Y_i - \\hat{E}[Y|D=1,X=X_i])}{\\hat{p}(X_i)} - \\\\\n& - \\frac{(1-D_i)(Y_i - \\hat{E}[Y|D=0,X=X_i])} {1-\\hat{p}(X_i)}\n\\end{align*}\n\\]"
   },
   {
     "objectID": "matching.html#doubly-robust-estimator-1",
     "href": "matching.html#doubly-robust-estimator-1",
     "title": "Matching",
     "section": "Doubly Robust Estimator",
-    "text": "Doubly Robust Estimator\n\nDoubly robust in that:\n\nConsistent as long as either \\(\\hat{p}(X) \\inprob p(X)\\) or \\(\\hat{E}[Y|T,X] \\inprob \\Er[Y|T,X]\\)\nInsensitive to small changes in \\(\\hat{p}(X)\\) or \\(\\hat{E}[Y|T,X]\\)\n\nAllows nicer statistical properties\n\nWeaker assumptions needed\nAsymptotic distribution is the same as if \\(p(X)\\) and \\(\\Er[Y|T,X]\\) were known"
+    "text": "Doubly Robust Estimator\n\nDoubly robust in that:\n\nConsistent as long as either \\(\\hat{p}(X) \\inprob p(X)\\) or \\(\\hat{E}[Y|D,X] \\inprob \\Er[Y|D,X]\\)\nInsensitive to small changes in \\(\\hat{p}(X)\\) or \\(\\hat{E}[Y|D,X]\\)\n\nAllows nicer statistical properties\n\nWeaker assumptions needed\nAsymptotic distribution is the same as if \\(p(X)\\) and \\(\\Er[Y|D,X]\\) were known"
   },
   {
     "objectID": "matching.html#software",
     "href": "matching.html#software",
     "title": "Matching",
     "section": "Software",
-    "text": "Software\n\nAdvice: use the doubly robust estimator with nonparametric estimates for \\(\\hat{E}[Y|T,X]\\) and \\(\\hat{p}(X)\\)\nRecommended package:\n\ndoubleml"
+    "text": "Software\n\nAdvice: use the doubly robust estimator with nonparametric estimates for \\(\\hat{E}[Y|D,X]\\) and \\(\\hat{p}(X)\\)\nRecommended package:\n\ndoubleml"
   },
   {
     "objectID": "matching.html#software-1",
@@ -1047,7 +1047,7 @@
     "href": "matching.html#example-simulation",
     "title": "Matching",
     "section": "Example: simulation",
-    "text": "Example: simulation\n\nInfeasible estimator: average of \\(Y(1) - Y(0)\\)\n\n\nse = np.sqrt(np.var(y1-y0)/len(y1))\nate = np.mean(y1-y0)\nprint(f\"Infeasible estimator with potential outcomes observed = {ate:.2} with 95% CI = [{ate-1.96*se:.2},{ate+1.96*se:.2}]\\n\")\n\nInfeasible estimator with potential outcomes observed = 0.12 with 95% CI = [0.058,0.18]\n\n\n\n\nInfeasible estimator: doubly robust with true \\(\\Er[Y(T)|X]\\) and \\(p(X)\\)\n\n\naipw = Ey1x - Ey0x + T*(y - Ey1x)/P - (1-T)*(y - Ey0x)/(1-P)\nse = np.sqrt(np.var(aipw)/len(aipw))\nprint(f\"Infeasible estimator with true E[y1-y0|x] = and p(x) {np.mean(aipw):.2} with 95% CI = [{np.mean(aipw)-1.96*se:.2},{np.mean(aipw)+1.96*se:.2}]\\n\")\n\nInfeasible estimator with true E[y1-y0|x] = and p(x) 0.15 with 95% CI = [0.057,0.24]"
+    "text": "Example: simulation\n\nInfeasible estimator: average of \\(Y(1) - Y(0)\\)\n\n\nse = np.sqrt(np.var(y1-y0)/len(y1))\nate = np.mean(y1-y0)\nprint(f\"Infeasible estimator with potential outcomes observed = {ate:.2} with 95% CI = [{ate-1.96*se:.2},{ate+1.96*se:.2}]\\n\")\n\nInfeasible estimator with potential outcomes observed = 0.12 with 95% CI = [0.058,0.18]\n\n\n\n\nInfeasible estimator: doubly robust with true \\(\\Er[Y(T)|X]\\) and \\(p(X)\\)\n\n\naipw = Ey1x - Ey0x + D*(y - Ey1x)/P - (1-D)*(y - Ey0x)/(1-P)\nse = np.sqrt(np.var(aipw)/len(aipw))\nprint(f\"Infeasible estimator with true E[y1-y0|x] = and p(x) {np.mean(aipw):.2} with 95% CI = [{np.mean(aipw)-1.96*se:.2},{np.mean(aipw)+1.96*se:.2}]\\n\")\n\nInfeasible estimator with true E[y1-y0|x] = and p(x) 0.15 with 95% CI = [0.057,0.24]"
   },
   {
     "objectID": "matching.html#example-simulation-1",
@@ -1117,42 +1117,42 @@
     "href": "matching.html#propensity-score-matching",
     "title": "Matching",
     "section": "Propensity Score Matching",
-    "text": "Propensity Score Matching\n\ncateg = [\"ethnicity\", \"gender\", \"school_urbanicity\",\"success_expect\"]\ncont = [\"school_mindset\", \"school_achievement\", \"school_ethnic_minority\", \"school_poverty\", \"school_size\"]\n\ndata_with_categ = pd.concat([\n    data.drop(columns=categ), # dataset without the categorical features\n    pd.get_dummies(data[categ], columns=categ, drop_first=False)# categorical features converted to dummies\n], axis=1)\n\nprint(data_with_categ.shape)\nT = 'intervention'\nY = 'achievement_score'\nX = data_with_categ.columns.drop(['schoolid', T, Y])\n\n(10391, 38)"
+    "text": "Propensity Score Matching\n\ncateg = [\"ethnicity\", \"gender\", \"school_urbanicity\",\"success_expect\"]\ncont = [\"school_mindset\", \"school_achievement\", \"school_ethnic_minority\", \"school_poverty\", \"school_size\"]\n\ndata_with_categ = pd.concat([\n    data.drop(columns=categ), # dataset without the categorical features\n    pd.get_dummies(data[categ], columns=categ, drop_first=False)# categorical features converted to dummies\n], axis=1)\n\nprint(data_with_categ.shape)\nD = 'intervention'\nY = 'achievement_score'\nX = data_with_categ.columns.drop(['schoolid', D, Y])\n\n(10391, 38)"
   },
   {
     "objectID": "matching.html#propensity-score-matching-1",
     "href": "matching.html#propensity-score-matching-1",
     "title": "Matching",
     "section": "Propensity Score Matching",
-    "text": "Propensity Score Matching\n\nfrom sklearn.linear_model import LogisticRegression, LogisticRegressionCV\nfrom sklearn.neighbors import KNeighborsRegressor\nimport sklearn\n\ndef propensitymatching(T,Y,X,psmodel=LogisticRegressionCV(scoring='neg_log_loss'),neighbormodel=KNeighborsRegressor(n_neighbors=1,algorithm='auto',weights='uniform')):\n    pfit = psmodel.fit(X,T)\n    ps = pfit.predict_proba(X)[:,1]\n    ey1 = neighbormodel.fit(ps[T==1].reshape(-1,1),Y[T==1])\n    ey0 = sklearn.base.clone(neighbormodel).fit(ps[T==0].reshape(-1,1),Y[T==0])\n    tex = ey1.predict(ps.reshape(-1,1)) - ey0.predict(ps.reshape(-1,1))\n    ate = np.mean(tex)\n    return(ate, tex,ps)\n\nate,tex,ps=propensitymatching(data_with_categ[T],data_with_categ[Y],data_with_categ[X])\nprint(ate)\n\n0.41597431970511495"
+    "text": "Propensity Score Matching\n\nfrom sklearn.linear_model import LogisticRegression, LogisticRegressionCV\nfrom sklearn.neighbors import KNeighborsRegressor\nimport sklearn\n\ndef propensitymatching(D,Y,X,psmodel=LogisticRegressionCV(scoring='neg_log_loss'),neighbormodel=KNeighborsRegressor(n_neighbors=1,algorithm='auto',weights='uniform')):\n    pfit = psmodel.fit(X,D)\n    ps = pfit.predict_proba(X)[:,1]\n    ey1 = neighbormodel.fit(ps[D==1].reshape(-1,1),Y[D==1])\n    ey0 = sklearn.base.clone(neighbormodel).fit(ps[D==0].reshape(-1,1),Y[D==0])\n    tex = ey1.predict(ps.reshape(-1,1)) - ey0.predict(ps.reshape(-1,1))\n    ate = np.mean(tex)\n    return(ate, tex,ps)\n\nate,tex,ps=propensitymatching(data_with_categ[D],data_with_categ[Y],data_with_categ[X])\nprint(ate)\n\n0.41597431970511495"
   },
   {
     "objectID": "matching.html#propensity-score-matching-2",
     "href": "matching.html#propensity-score-matching-2",
     "title": "Matching",
     "section": "Propensity Score Matching",
-    "text": "Propensity Score Matching\n\n\nCode\nfig, ax = plt.subplots(2,1)\ntreat = data.intervention\nax[0].scatter(ps[treat==0],tex[treat==0],color=\"C2\")\nax[0].scatter(ps[treat==1],tex[treat==1],color=\"C3\")\nax[1].hist(ps[treat==0],bins=20,color=\"C2\",label=\"Untreated\")\nax[1].hist(ps[treat==1],bins=20,color=\"C3\",label=\"Treated\")\nax[1].set_xlabel(\"P(Treatment)\")\nax[1].set_ylabel(\"N\")\nax[0].set_ylabel(\"E[Y|T=1,P(X)] - E[Y|T=0,P(X)]\")\nplt.legend()\nplt.show()"
+    "text": "Propensity Score Matching\n\n\nCode\nfig, ax = plt.subplots(2,1)\ntreat = data.intervention\nax[0].scatter(ps[treat==0],tex[treat==0],color=\"C2\")\nax[0].scatter(ps[treat==1],tex[treat==1],color=\"C3\")\nax[1].hist(ps[treat==0],bins=20,color=\"C2\",label=\"Untreated\")\nax[1].hist(ps[treat==1],bins=20,color=\"C3\",label=\"Treated\")\nax[1].set_xlabel(\"P(Treatment)\")\nax[1].set_ylabel(\"N\")\nax[0].set_ylabel(\"E[Y|D=1,P(X)] - E[Y|D=0,P(X)]\")\nplt.legend()\nplt.show()"
   },
   {
     "objectID": "matching.html#inverse-propensity-weighting-1",
     "href": "matching.html#inverse-propensity-weighting-1",
     "title": "Matching",
     "section": "Inverse Propensity Weighting",
-    "text": "Inverse Propensity Weighting\n\ndef ipw(T,Y,X,psmodel=LogisticRegressionCV(scoring='neg_log_loss')):\n    pfit = psmodel.fit(X,T)\n    ps = pfit.predict_proba(X)[:,1]\n    ate=np.mean(Y*(T - ps)/(ps*(1-ps)))\n    return(ate,ps)\n\nate,ps = ipw(data_with_categ[T],data_with_categ[Y],data_with_categ[X])\nprint(ate)\n\n0.4425655754353837"
+    "text": "Inverse Propensity Weighting\n\ndef ipw(D,Y,X,psmodel=LogisticRegressionCV(scoring='neg_log_loss')):\n    pfit = psmodel.fit(X,D)\n    ps = pfit.predict_proba(X)[:,1]\n    ate=np.mean(Y*(D - ps)/(ps*(1-ps)))\n    return(ate,ps)\n\nate,ps = ipw(data_with_categ[D],data_with_categ[Y],data_with_categ[X])\nprint(ate)\n\n0.4425655754353837"
   },
   {
     "objectID": "matching.html#doubly-robust",
     "href": "matching.html#doubly-robust",
     "title": "Matching",
     "section": "Doubly Robust",
-    "text": "Doubly Robust\n\nfrom sklearn.ensemble import GradientBoostingRegressor, GradientBoostingClassifier\nfrom sklearn.linear_model import LassoCV, LogisticRegressionCV, ElasticNetCV\nfrom sklearn.preprocessing import PolynomialFeatures\n\ndef robustate(T,Y,X,psmodel=LogisticRegressionCV(scoring='neg_log_loss'),ymodel=LassoCV(), cluster=None):\n    pfit = psmodel.fit(X,T)\n    ps = pfit.predict_proba(X)[:,1]\n    ey1fit = ymodel.fit(X[T==1],Y[T==1])\n    ey0fit = sklearn.base.clone(ymodel).fit(X[T==0],Y[T==0])\n    ey1 = ey1fit.predict(X)\n    ey0 = ey0fit.predict(X)\n    ate_terms = ey1 - ey0 + T*(Y- ey1)/ps - (1-T)*(Y-ey0)/(1-ps)\n    ate = np.mean(ate_terms)\n    # check if cluster is None\n    if cluster is None :\n        ate_se = np.sqrt(np.var(ate_terms)/len(ate_terms))\n    else :\n        creg=smf.ols(\"y ~ 1\", pd.DataFrame({\"y\" : ate_terms})).fit(cov_type=\"cluster\", cov_kwds={'groups': cluster})\n        ate_se = np.sqrt(creg.cov_params().iloc[0,0])\n\n    return(ate, ate_se, ps, ey1,ey0)\n\nate,se,ps,ey1,ey0 = robustate(data_with_categ[T],data_with_categ[Y],data_with_categ[X],cluster=data_with_categ['schoolid'])\nprint(ate-1.96*se, ate, ate+1.96*se)\n\n0.33171463989742334 0.38327901657810853 0.43484339325879373\n\n\n1\nWe have glossed over some details needed for doubly robust estimation to have nice statistical properties. Those details matter and are not implemented correctly above. It is better to use doubleml instead."
+    "text": "Doubly Robust\n\nfrom sklearn.ensemble import GradientBoostingRegressor, GradientBoostingClassifier\nfrom sklearn.linear_model import LassoCV, LogisticRegressionCV, ElasticNetCV\nfrom sklearn.preprocessing import PolynomialFeatures\n\ndef robustate(D,Y,X,psmodel=LogisticRegressionCV(scoring='neg_log_loss'),ymodel=LassoCV(), cluster=None):\n    pfit = psmodel.fit(X,D)\n    ps = pfit.predict_proba(X)[:,1]\n    ey1fit = ymodel.fit(X[D==1],Y[D==1])\n    ey0fit = sklearn.base.clone(ymodel).fit(X[D==0],Y[D==0])\n    ey1 = ey1fit.predict(X)\n    ey0 = ey0fit.predict(X)\n    ate_terms = ey1 - ey0 + D*(Y- ey1)/ps - (1-D)*(Y-ey0)/(1-ps)\n    ate = np.mean(ate_terms)\n    # check if cluster is None\n    if cluster is None :\n        ate_se = np.sqrt(np.var(ate_terms)/len(ate_terms))\n    else :\n        creg=smf.ols(\"y ~ 1\", pd.DataFrame({\"y\" : ate_terms})).fit(cov_type=\"cluster\", cov_kwds={'groups': cluster})\n        ate_se = np.sqrt(creg.cov_params().iloc[0,0])\n\n    return(ate, ate_se, ps, ey1,ey0)\n\nate,se,ps,ey1,ey0 = robustate(data_with_categ[D],data_with_categ[Y],data_with_categ[X],cluster=data_with_categ['schoolid'])\nprint(ate-1.96*se, ate, ate+1.96*se)\n\n0.33171463989742334 0.38327901657810853 0.43484339325879373\n\n\n1\nWe have glossed over some details needed for doubly robust estimation to have nice statistical properties. Those details matter and are not implemented correctly above. It is better to use doubleml instead."
   },
   {
     "objectID": "matching.html#doubly-robust-1",
     "href": "matching.html#doubly-robust-1",
     "title": "Matching",
     "section": "Doubly Robust",
-    "text": "Doubly Robust\n\nbetter to use the doubleml package\n\n\nimport doubleml as dml\n\nm = LassoCV()\ng = LogisticRegressionCV(scoring='neg_log_loss')\ndmldata = dml.DoubleMLData(data_with_categ, Y,T,X.to_list())\ndmlATE = dml.DoubleMLAPOS(dmldata, m, g, treatment_levels=[0, 1])\ndmlATE.fit()\ndmlATE.summary\ndmlATE.causal_contrast(0).summary\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n2.5 %\n97.5 %\n\n\n\n\n1 vs 0\n0.382427\n0.017134\n22.319628\n0.0\n0.348844\n0.416009"
+    "text": "Doubly Robust\n\nbetter to use the doubleml package\n\n\nimport doubleml as dml\n\nm = LassoCV()\ng = LogisticRegressionCV(scoring='neg_log_loss')\ndmldata = dml.DoubleMLData(data_with_categ, Y,D,X.to_list())\ndmlATE = dml.DoubleMLAPOS(dmldata, m, g, treatment_levels=[0, 1])\ndmlATE.fit()\ndmlATE.summary\ndmlATE.causal_contrast(0).summary\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n2.5 %\n97.5 %\n\n\n\n\n1 vs 0\n0.382427\n0.017134\n22.319628\n0.0\n0.348844\n0.416009"
   },
   {
     "objectID": "matching.html#sources-and-further-reading",
@@ -1439,7 +1439,7 @@
     "href": "causality_intro.html#treatment",
     "title": "Introduction to Causality and Potential Outcomes",
     "section": "Treatment",
-    "text": "Treatment\n\nTreatment \\(D_i \\in \\{0,1\\}\\)\nObserved outcome \\(Y_i\\)\nWe want the causal effect of \\(T\\) on \\(Y\\), but what does that mean?\n\nPotential outcomes give a rigorous definition"
+    "text": "Treatment\n\nTreatment \\(D_i \\in \\{0,1\\}\\)\nObserved outcome \\(Y_i\\)\nWe want the causal effect of \\(D\\) on \\(Y\\), but what does that mean?\n\nPotential outcomes give a rigorous definition"
   },
   {
     "objectID": "causality_intro.html#potential-outcomes",
@@ -1579,14 +1579,14 @@
     "href": "uncertainty.html#references",
     "title": "Uncertainty Quantification",
     "section": "References",
-    "text": "References\n\n\n\n\nChernozhukov, V., C. Hansen, N. Kallus, M. Spindler, and V. Syrgkanis. 2024. Applied Causal Inference Powered by ML and AI. https://causalml-book.org/.\n\n\nChernozhukov, Victor, Denis Chetverikov, and Yuta Koike. 2023. “Nearly optimal central limit theorem and bootstrap approximations in high dimensions.” The Annals of Applied Probability 33 (3): 2374–2425. https://doi.org/10.1214/22-AAP1870.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nRaič, Martin. 2019. “A multivariate Berry–Esseen theorem with explicit constants.” Bernoulli 25 (4A): 2824–53. https://doi.org/10.3150/18-BEJ1072."
+    "text": "References\n\n\n\n\nChernozhukov, V., C. Hansen, N. Kallus, M. Spindler, and V. Syrgkanis. 2024. Applied Causal Inference Powered by ML and AI. https://causalml-book.org/.\n\n\nChernozhukov, Victor, Denis Chetverikov, and Yuta Koike. 2023. “Nearly optimal central limit theorem and bootstrap approximations in high dimensions.” The Annals of Applied Probability 33 (3): 2374–425. https://doi.org/10.1214/22-AAP1870.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nRaič, Martin. 2019. “A multivariate Berry–Esseen theorem with explicit constants.” Bernoulli 25 (4A): 2824–53. https://doi.org/10.3150/18-BEJ1072."
   },
   {
     "objectID": "uncertainty.html#sources-and-further-reading",
     "href": "uncertainty.html#sources-and-further-reading",
     "title": "Uncertainty Quantification",
     "section": "Sources and Further Reading",
-    "text": "Sources and Further Reading\n\nChapter 3 of Facure (2022)\nChapter 1 of V. Chernozhukov et al. (2024)"
+    "text": "Sources and Further Reading\n\nChapter 3 of Facure (2022)\nChapter 1 of Chernozhukov et al. (2024)"
   },
   {
     "objectID": "uncertainty.html#exact-estimator-distribution",
@@ -1628,7 +1628,7 @@
     "href": "uncertainty.html#central-limit-theorem",
     "title": "Uncertainty Quantification",
     "section": "Central Limit Theorem",
-    "text": "Central Limit Theorem\n\n\n\n\nBerry-Esseen Central Limit Theorem\n\n\nIf \\(X_i\\) are i.i.d. with \\(\\Er[X] = 0\\) and \\(\\var(X)=1\\), then \\[\n\\sup_{z \\in \\R} \\left\\vert\nP\\left(\\left[\\frac{1}{\\sqrt{n}} \\sum_{i=1}^n X_i\\right] \\leq z \\right) - \\Phi(z) \\right\\vert \\leq 0.5 \\Er[|X|^3]/\\sqrt{n}\n\\] where \\(\\Phi\\) is the normal CDF.\n\n\n\n\n\n\n\n\n\nMultivariate Central Limit Theorem\n\n\nIf \\(X_i \\in \\R^d\\) are i.i.d. with \\(\\Er[X] = 0\\) and \\(\\var(X)=I_d\\), then \\[\n\\sup_{A \\subset \\R^d, \\text{convex}} \\left\\vert\nP\\left(\\frac{1}{\\sqrt{n}} \\sum_{i=1}^n X_i \\in A \\right) - P(N(0,I_d) \\in A) \\right\\vert \\leq\n(42 d^{1/4} + 16) \\Er[\\Vert X \\Vert ^3]/\\sqrt{n}\n\\]\n1\n\n\n\n\n\nSee Raič (2019) for details and Victor Chernozhukov, Chetverikov, and Koike (2023) for a similar result for higher dimensions (larger \\(d\\))"
+    "text": "Central Limit Theorem\n\n\n\n\nBerry-Esseen Central Limit Theorem\n\n\nIf \\(X_i\\) are i.i.d. with \\(\\Er[X] = 0\\) and \\(\\var(X)=1\\), then \\[\n\\sup_{z \\in \\R} \\left\\vert\nP\\left(\\left[\\frac{1}{\\sqrt{n}} \\sum_{i=1}^n X_i\\right] \\leq z \\right) - \\Phi(z) \\right\\vert \\leq 0.5 \\Er[|X|^3]/\\sqrt{n}\n\\] where \\(\\Phi\\) is the normal CDF.\n\n\n\n\n\n\n\n\n\nMultivariate Central Limit Theorem\n\n\nIf \\(X_i \\in \\R^d\\) are i.i.d. with \\(\\Er[X] = 0\\) and \\(\\var(X)=I_d\\), then \\[\n\\sup_{A \\subset \\R^d, \\text{convex}} \\left\\vert\nP\\left(\\frac{1}{\\sqrt{n}} \\sum_{i=1}^n X_i \\in A \\right) - P(N(0,I_d) \\in A) \\right\\vert \\leq\n(42 d^{1/4} + 16) \\Er[\\Vert X \\Vert ^3]/\\sqrt{n}\n\\]\n1\n\n\n\n\n\nSee Raič (2019) for details and Chernozhukov et al. (2023) for a similar result for higher dimensions (larger \\(d\\))"
   },
   {
     "objectID": "uncertainty.html#approximate-confidence-interval-1",
@@ -1642,14 +1642,14 @@
     "href": "uncertainty.html#functions-of-estimates-1",
     "title": "Uncertainty Quantification",
     "section": "Functions of Estimates",
-    "text": "Functions of Estimates\n\nOften report functions of estimates\n\nE.g. \\[\n\\text{vaccine efficacy} = 1 - \\frac{\\Er[Y|T=1]} {\\Er[Y|T=0]}\n\\]"
+    "text": "Functions of Estimates\n\nOften report functions of estimates\n\nE.g. \\[\n\\text{vaccine efficacy} = 1 - \\frac{\\Er[Y|D=1]} {\\Er[Y|D=0]}\n\\]"
   },
   {
     "objectID": "uncertainty.html#delta-method",
     "href": "uncertainty.html#delta-method",
     "title": "Uncertainty Quantification",
     "section": "Delta Method",
-    "text": "Delta Method\n\n\n\n\nDelta Method\n\n\nIf 1. \\(\\sqrt{n} (\\hat{\\theta} - \\theta_0) \\leadsto N(0,\\Omega)\\)\n\n\\(g: \\R^k \\to \\R^m\\) is continuously differentiable\n\nThen \\(\\sqrt{n}(g(\\hat{\\theta}) - g(\\theta_0)) \\leadsto N\\left(0, D(g)(\\theta_0) \\Omega D(g)(\\theta_0) \\right)'\\)\n\n\n\n\n\nE.g. vaccine efficacy\n\n\\(\\theta_0 = (\\Er[Y|T=0], \\Er[Y|t=1])\\)\n\\(g(\\theta) = 1 - \\theta_2/\\theta_1\\)\n\\(D(g)(\\theta_0) = \\begin{pmatrix} \\frac{\\Er[Y|T=1]}{\\Er[Y|T=0]^2} & -\\frac{1}{\\Er[Y|T=0]} \\end{pmatrix}\\)\n\\(\\Omega = \\begin{pmatrix} p_0(1-p_0)/n_0 & 0 \\\\ 0 & p_1(1-p_1)/n_1 \\end{pmatrix}\\)"
+    "text": "Delta Method\n\n\n\n\nDelta Method\n\n\nIf 1. \\(\\sqrt{n} (\\hat{\\theta} - \\theta_0) \\leadsto N(0,\\Omega)\\)\n\n\\(g: \\R^k \\to \\R^m\\) is continuously differentiable\n\nThen \\(\\sqrt{n}(g(\\hat{\\theta}) - g(\\theta_0)) \\leadsto N\\left(0, D(g)(\\theta_0) \\Omega D(g)(\\theta_0) \\right)'\\)\n\n\n\n\n\nE.g. vaccine efficacy\n\n\\(\\theta_0 = (\\Er[Y|D=0], \\Er[Y|D=1])\\)\n\\(g(\\theta) = 1 - \\theta_2/\\theta_1\\)\n\\(D(g)(\\theta_0) = \\begin{pmatrix} \\frac{\\Er[Y|D=1]}{\\Er[Y|D=0]^2} & -\\frac{1}{\\Er[Y|D=0]} \\end{pmatrix}\\)\n\\(\\Omega = \\begin{pmatrix} p_0(1-p_0)/n_0 & 0 \\\\ 0 & p_1(1-p_1)/n_1 \\end{pmatrix}\\)"
   },
   {
     "objectID": "uncertainty.html#delta-method-2",
@@ -1726,7 +1726,7 @@
     "href": "uncertainty.html#high-dimensions",
     "title": "Uncertainty Quantification",
     "section": "High Dimensions",
-    "text": "High Dimensions\n\nNumber of parameters (\\(p\\)) large compared to sample size (\\(n\\))\nUsual asymptotics break down\nRisk of overfitting\nInference difficult, but possible\n\nV. Chernozhukov et al. (2024) chapter 4\n\nMore later …"
+    "text": "High Dimensions\n\nNumber of parameters (\\(p\\)) large compared to sample size (\\(n\\))\nUsual asymptotics break down\nRisk of overfitting\nInference difficult, but possible\n\nChernozhukov et al. (2024) chapter 4\n\nMore later …"
   },
   {
     "objectID": "uncertainty.html#simulating-distribution-of-gtheta",
@@ -1754,7 +1754,7 @@
     "href": "regression.html#heteroskedasticity-robust-standard-errors",
     "title": "Linear Regression",
     "section": "Heteroskedasticity Robust Standard Errors",
-    "text": "Heteroskedasticity Robust Standard Errors\n\nolsse = np.sqrt(np.diag(smf.ols('infected ~ treat',data=data.loc[data['over65']==1]).fit().cov_params())[1])\nprint(f\"OLS SE: {olsse}, manual SE: {ate[1]}\")\n\nOLS SE: 0.0011004170544556028, manual SE: 0.0010976149240857532\n\n\n\nBut standard error very slightly different\nDefault of smf.ols assumes homoskedasticiy \\(\\Er[\\epsilon^2|X] = \\sigma^2\\)\nWith \\(y\\) and \\(T\\), binary, \\(\\Er[\\epsilon^2|T] = P(y=1|T)(1-P(y=1|T))\\)\n\n\nolshcse = np.sqrt(np.diag(smf.ols('infected ~ treat',data=data.loc[data['over65']==1]).fit(cov_type=\"HC3\").cov_params())[1])\nprint(f\"OLS HC SE: {olshcse}, manual SE: {ate[1]}\")\n\nOLS HC SE: 0.0010977499295368124, manual SE: 0.0010976149240857532\n\n\n\nalways use heteroskedasticity robust standard errors"
+    "text": "Heteroskedasticity Robust Standard Errors\n\nolsse = np.sqrt(np.diag(smf.ols('infected ~ treat',data=data.loc[data['over65']==1]).fit().cov_params())[1])\nprint(f\"OLS SE: {olsse}, manual SE: {ate[1]}\")\n\nOLS SE: 0.0011004170544556028, manual SE: 0.0010976149240857532\n\n\n\nBut standard error very slightly different\nDefault of smf.ols assumes homoskedasticiy \\(\\Er[\\epsilon^2|X] = \\sigma^2\\)\nWith \\(y\\) and \\(D\\), binary, \\(\\var(y|D) = \\Er[\\epsilon^2|D] = P(y=1|D)(1-P(y=1|D))\\)\n\n\nolshcse = np.sqrt(np.diag(smf.ols('infected ~ treat',data=data.loc[data['over65']==1]).fit(cov_type=\"HC3\").cov_params())[1])\nprint(f\"OLS HC SE: {olshcse}, manual SE: {ate[1]}\")\n\nOLS HC SE: 0.0010977499295368124, manual SE: 0.0010976149240857532\n\n\n\nalways use heteroskedasticity robust standard errors"
   },
   {
     "objectID": "regression.html#multiple-regression",
@@ -1817,7 +1817,7 @@
     "href": "regression.html#regression-for-rcts-1",
     "title": "Linear Regression",
     "section": "Regression for RCTs",
-    "text": "Regression for RCTs\n\nRCT with outcome \\(Y\\), treatment \\(T\\), other variables \\(X\\)\nShould we estimate ATE in a regression that includes \\(X\\)?"
+    "text": "Regression for RCTs\n\nRCT with outcome \\(Y\\), treatment \\(D\\), other variables \\(X\\)\nShould we estimate ATE in a regression that includes \\(X\\)?"
   },
   {
     "objectID": "regression.html#simulated-rct",
@@ -1894,7 +1894,7 @@
     "href": "regression.html#drug-trial-at-two-hospitals-1",
     "title": "Linear Regression",
     "section": "Drug Trial at Two Hospitals",
-    "text": "Drug Trial at Two Hospitals\nprint(drug.groupby('hospital').mean().to_markdown())\n\n\n\nhospital\ntreatment\nseverity\ndays\n\n\n\n\n0\n0.0689655\n7.94499\n29.6207\n\n\n1\n0.941176\n19.758\n49.2157\n\n\n\n\nTreatment randomly assigned within each hospital, but with very different \\(P(T=1|\\text{hospital})\\)"
+    "text": "Drug Trial at Two Hospitals\nprint(drug.groupby('hospital').mean().to_markdown())\n\n\n\nhospital\ntreatment\nseverity\ndays\n\n\n\n\n0\n0.0689655\n7.94499\n29.6207\n\n\n1\n0.941176\n19.758\n49.2157\n\n\n\n\nTreatment randomly assigned within each hospital, but with very different \\(P(D=1|\\text{hospital})\\)"
   },
   {
     "objectID": "regression.html#drug-trial-at-two-hospitals-2",
@@ -2013,14 +2013,14 @@
     "href": "matching.html#example-choosing-flexible-estimators-1",
     "title": "Matching",
     "section": "Example: choosing flexible estimators",
-    "text": "Example: choosing flexible estimators\n\n\ngamma = 0.5\nnc = 100\nmodels = [\n    Pipeline([('rbf',RBFSampler(gamma=gamma, random_state=1, n_components=nc)),\n              ('logistic',LogisticRegressionCV(n_jobs=-1, scoring='neg_log_loss'))]),\n    Pipeline([('poly',PolynomialFeatures(degree=10)),\n              ('scale', StandardScaler()),\n              ('logistic',LogisticRegressionCV(n_jobs=-1, scoring='neg_log_loss'))]),\n    GradientBoostingClassifier(learning_rate=0.1)]\nfor m in models :\n    print(m)\n    print(f\"cross val log likelihood {cross_val_score(m, X, T, scoring='neg_log_loss', cv=5).mean():.4} \\n\\n\")\n\n\nPipeline(steps=[('rbf', RBFSampler(gamma=0.5, random_state=1)),\n                ('logistic',\n                 LogisticRegressionCV(n_jobs=-1, scoring='neg_log_loss'))])\ncross val log likelihood -0.5077 \n\n\nPipeline(steps=[('poly', PolynomialFeatures(degree=10)),\n                ('scale', StandardScaler()),\n                ('logistic',\n                 LogisticRegressionCV(n_jobs=-1, scoring='neg_log_loss'))])\ncross val log likelihood -0.5098 \n\n\nGradientBoostingClassifier()\ncross val log likelihood -0.5184"
+    "text": "Example: choosing flexible estimators\n\n\ngamma = 0.5\nnc = 100\nmodels = [\n    Pipeline([('rbf',RBFSampler(gamma=gamma, random_state=1, n_components=nc)),\n              ('logistic',LogisticRegressionCV(n_jobs=-1, scoring='neg_log_loss'))]),\n    Pipeline([('poly',PolynomialFeatures(degree=10)),\n              ('scale', StandardScaler()),\n              ('logistic',LogisticRegressionCV(n_jobs=-1, scoring='neg_log_loss'))]),\n    GradientBoostingClassifier(learning_rate=0.1)]\nfor m in models :\n    print(m)\n    print(f\"cross val log likelihood {cross_val_score(m, X, D, scoring='neg_log_loss', cv=5).mean():.4} \\n\\n\")\n\n\nPipeline(steps=[('rbf', RBFSampler(gamma=0.5, random_state=1)),\n                ('logistic',\n                 LogisticRegressionCV(n_jobs=-1, scoring='neg_log_loss'))])\ncross val log likelihood -0.5077 \n\n\nPipeline(steps=[('poly', PolynomialFeatures(degree=10)),\n                ('scale', StandardScaler()),\n                ('logistic',\n                 LogisticRegressionCV(n_jobs=-1, scoring='neg_log_loss'))])\ncross val log likelihood -0.5098 \n\n\nGradientBoostingClassifier()\ncross val log likelihood -0.5184"
   },
   {
     "objectID": "matching.html#example-checking-overlap",
     "href": "matching.html#example-checking-overlap",
     "title": "Matching",
     "section": "Example: Checking Overlap",
-    "text": "Example: Checking Overlap\n\nimport seaborn as sns\nimport matplotlib.pyplot as plt\nimport doubleml as dml\ng = Pipeline([('poly',PolynomialFeatures(degree=10)),\n              ('scale', StandardScaler()),\n              ('lasso',LassoCV(max_iter=10_000, n_jobs=-1, selection='random', tol=1e-2,\n                               alphas=10**np.linspace(-3,3,20)))])\nm = Pipeline([('rbf',RBFSampler(gamma=gamma, random_state=1, n_components=nc)),\n              ('logistic',LogisticRegressionCV(n_jobs=-1, scoring='neg_log_loss'))])\n\nm.fit(X,T)\n\ndef plotp(model,X,d):\n    fig,ax=plt.subplots()\n    p = model.predict_proba(X)\n    sns.histplot(p[d==0,1], kde = False,\n                 label = \"Untreated\", ax=ax)\n    sns.histplot(p[d==1,1], kde = False,\n                 label = \"Treated\", ax=ax)\n    ax.set_title('P(T|x)')\n    return(fig)\n\nfig=plotp(m, X, T)"
+    "text": "Example: Checking Overlap\n\nimport seaborn as sns\nimport matplotlib.pyplot as plt\nimport doubleml as dml\ng = Pipeline([('poly',PolynomialFeatures(degree=10)),\n              ('scale', StandardScaler()),\n              ('lasso',LassoCV(max_iter=10_000, n_jobs=-1, selection='random', tol=1e-2,\n                               alphas=10**np.linspace(-3,3,20)))])\nm = Pipeline([('rbf',RBFSampler(gamma=gamma, random_state=1, n_components=nc)),\n              ('logistic',LogisticRegressionCV(n_jobs=-1, scoring='neg_log_loss'))])\n\nm.fit(X,D)\n\ndef plotp(model,X,d):\n    fig,ax=plt.subplots()\n    p = model.predict_proba(X)\n    sns.histplot(p[d==0,1], kde = False,\n                 label = \"Untreated\", ax=ax)\n    sns.histplot(p[d==1,1], kde = False,\n                 label = \"Treated\", ax=ax)\n    ax.set_title('P(T|x)')\n    return(fig)\n\nfig=plotp(m, X, D)"
   },
   {
     "objectID": "matching.html#example-checking-overlap-output",
@@ -2034,7 +2034,7 @@
     "href": "matching.html#example-results",
     "title": "Matching",
     "section": "Example: Results",
-    "text": "Example: Results\n\ndmldata = dml.DoubleMLData.from_arrays(X, y, T)\ndmlATE = dml.DoubleMLAPOS(dmldata, g, m, treatment_levels=[0, 1])\ndmlATE.fit()\ndmlATE.summary\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n2.5 %\n97.5 %\n\n\n\n\n0\n-0.020833\n0.030509\n-0.682833\n0.494712\n-0.080630\n0.038964\n\n\n1\n0.132218\n0.038723\n3.414436\n0.000639\n0.056322\n0.208114\n\n\n\n\n\n\n\n\ndmlATE.causal_contrast(0).summary\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n2.5 %\n97.5 %\n\n\n\n\n1 vs 0\n0.153051\n0.049553\n3.088623\n0.002011\n0.055928\n0.250173\n\n\n\n\n\n\n\n\naipw = Ey1x - Ey0x + T*(y - Ey1x)/P - (1-T)*(y - Ey0x)/(1-P)\nse = np.sqrt(np.var(aipw)/len(aipw))\nprint(f\"Infeasible estimator with true E[y1-y0|x] = and p(x) {np.mean(aipw):.2} with 95% CI = [{np.mean(aipw)-1.96*se:.2},{np.mean(aipw)+1.96*se:.2}]\\n\")\n\nInfeasible estimator with true E[y1-y0|x] = and p(x) 0.15 with 95% CI = [0.057,0.24]"
+    "text": "Example: Results\n\ndmldata = dml.DoubleMLData.from_arrays(X, y, D)\ndmlATE = dml.DoubleMLAPOS(dmldata, g, m, treatment_levels=[0, 1])\ndmlATE.fit()\ndmlATE.summary\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n2.5 %\n97.5 %\n\n\n\n\n0\n-0.021409\n0.030553\n-0.700712\n0.483483\n-0.081292\n0.038474\n\n\n1\n0.133516\n0.038725\n3.447851\n0.000565\n0.057618\n0.209415\n\n\n\n\n\n\n\n\ndmlATE.causal_contrast(0).summary\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n2.5 %\n97.5 %\n\n\n\n\n1 vs 0\n0.154926\n0.049582\n3.124616\n0.00178\n0.057746\n0.252105\n\n\n\n\n\n\n\n\naipw = Ey1x - Ey0x + D*(y - Ey1x)/P - (1-D)*(y - Ey0x)/(1-P)\nse = np.sqrt(np.var(aipw)/len(aipw))\nprint(f\"Infeasible estimator with true E[y1-y0|x] = and p(x) {np.mean(aipw):.2} with 95% CI = [{np.mean(aipw)-1.96*se:.2},{np.mean(aipw)+1.96*se:.2}]\\n\")\n\nInfeasible estimator with true E[y1-y0|x] = and p(x) 0.15 with 95% CI = [0.057,0.24]"
   },
   {
     "objectID": "matching.html#visualizing-fit",
@@ -2748,7 +2748,7 @@
     "href": "causality_intro.html#selection-bias-example-1",
     "title": "Introduction to Causality and Potential Outcomes",
     "section": "Selection Bias Example",
-    "text": "Selection Bias Example\n\n\nCode\nimport numpy as np\nnp.random.seed(0)\nclass selectiondata:\n    def __init__(self, n=1000, noisesd=1.0, ate=0.5):\n        self.Y0 = np.random.normal(size=n)\n        self.Y1 = np.random.normal(size=n) + ate\n        self.S0 = self.Y0 + np.random.normal(size=n)*noisesd\n        self.S1 = self.Y1 + np.random.normal(size=n)*noisesd\n        self.T = (self.S1 &gt; self.S0).astype(int)\n        self.Y = self.Y0 * (1 - self.T) + self.Y1 * self.T\n\n    def APE(self):\n        return np.mean(self.Y[self.T==1]) - np.mean(self.Y[self.T==0])\n\n    def ATE(self):\n        return np.mean(self.Y1) - np.mean(self.Y0)\n\n    def selectionbias(self):\n        return (self.APE() - self.ATE())\n\n    def selectionbias0(self):\n        return np.mean( self.Y0[self.T==1]) - np.mean( self.Y0[self.T==0] )\n\n    def selectionbias1(self):\n        return np.mean( self.Y1[self.T==1]) - np.mean(self.Y1[self.T==0] )\n\n\ns = 0.5\neate = 0.5\ndata = selectiondata(n=10_000,noisesd=s, ate=eate)\n\nprint(\"|APE|ATE|Selection Bias|\\n\" +\n      \"|---|---|---|\\n\" +\n      f\"|{data.APE():.2}|{data.ATE():.2}|{data.selectionbias():.2}|\\n\"\n      f\"|σ={s:.2}|\\n\\n\")"
+    "text": "Selection Bias Example\n\n\nCode\nimport numpy as np\nnp.random.seed(0)\nclass selectiondata:\n    def __init__(self, n=1000, noisesd=1.0, ate=0.5):\n        self.Y0 = np.random.normal(size=n)\n        self.Y1 = np.random.normal(size=n) + ate\n        self.S0 = self.Y0 + np.random.normal(size=n)*noisesd\n        self.S1 = self.Y1 + np.random.normal(size=n)*noisesd\n        self.D = (self.S1 &gt; self.S0).astype(int)\n        self.Y = self.Y0 * (1 - self.D) + self.Y1 * self.D\n\n    def APE(self):\n        return np.mean(self.Y[self.D==1]) - np.mean(self.Y[self.D==0])\n\n    def ATE(self):\n        return np.mean(self.Y1) - np.mean(self.Y0)\n\n    def selectionbias(self):\n        return (self.APE() - self.ATE())\n\n    def selectionbias0(self):\n        return np.mean( self.Y0[self.D==1]) - np.mean( self.Y0[self.D==0] )\n\n    def selectionbias1(self):\n        return np.mean( self.Y1[self.D==1]) - np.mean(self.Y1[self.D==0] )\n\n\ns = 0.5\neate = 0.5\ndata = selectiondata(n=10_000,noisesd=s, ate=eate)\n\nprint(\"|APE|ATE|Selection Bias|\\n\" +\n      \"|---|---|---|\\n\" +\n      f\"|{data.APE():.2}|{data.ATE():.2}|{data.selectionbias():.2}|\\n\"\n      f\"|σ={s:.2}|\\n\\n\")"
   },
   {
     "objectID": "causality_intro.html#selection-bias-example-1-output",
@@ -3169,5 +3169,12 @@
     "title": "Overview of Causal Inference Methods",
     "section": "Conditional Treatment Effects",
     "text": "Conditional Treatment Effects"
+  },
+  {
+    "objectID": "regression.html#if-d-indep-x-interactive-model-reduces-variance",
+    "href": "regression.html#if-d-indep-x-interactive-model-reduces-variance",
+    "title": "Linear Regression",
+    "section": "If \\(D \\indep X\\), Interactive Model Reduces Variance",
+    "text": "If \\(D \\indep X\\), Interactive Model Reduces Variance\n\nAssume \\(D \\indep (X, Y(0), Y(1))\\), \\(D \\in \\{0,1\\}\\), \\(\\Er[X] = 0\\)\nConsider \\[\n\\begin{align*}\nY & = \\beta_0^s + \\beta_1^s D + \\epsilon^s \\\\\nY & = \\beta_0^a + \\beta_1^a D + X'\\gamma^a_0 + \\epsilon^a \\\\\nY & = \\beta_0^i + \\beta_1^i D + X'\\gamma^i_0 + DX'\\gamma^i_1 + \\epsilon^s\n\\end{align*}\n\\]\nAll are consistent \\[\n\\plim \\hat{\\beta}_1^s = \\plim \\hat{\\beta}_1^a = \\plim \\hat{\\beta}_1^i = ATE\n\\]\nInteractive has smaller asymptotic variance \\[\n\\var(\\hat{\\beta}_1^i) \\leq \\var(\\hat{\\beta}_1^s) \\text{ and } \\var(\\hat{\\beta}_1^i) \\leq \\var(\\hat{\\beta}_1^a)\n\\]"
   }
 ]
