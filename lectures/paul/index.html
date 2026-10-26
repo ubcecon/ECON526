@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,10 +10,16 @@
 
 <title>ECON 526: Quantitative Economics with Data Science Applications – ECON 526</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -25,7 +31,6 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -53,15 +58,14 @@ div.csl-indent {
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1aae24e1e8645269aaefe28949351ba8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-228d1cc238a677071ec6267dec21fc81.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -101,8 +105,6 @@ div.csl-indent {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">ECON 526</span>
     </a>
@@ -180,45 +182,47 @@ div.csl-indent {
 <section id="slides" class="level1">
 <h1>Slides</h1>
 <ol type="1">
-<li><a href="./causality_intro.html">Introduction to Causality</a>, <a href="causality_intro.ipynb">notebook</a>
+<li><p><a href="./causality_intro.html">Introduction to Causality</a>, <a href="causality_intro.ipynb">notebook</a></p>
 <ul>
 <li>Reading: <a href="https://chapters.causalml-book.org/CausalML_chap_2.pdf">Chapter 2</a> of <span class="citation" data-cites="causalml2024">Chernozhukov et al. (<a href="#ref-causalml2024" role="doc-biblioref">2024</a>)</span> or <a href="https://matheusfacure.github.io/python-causality-handbook/01-Introduction-To-Causality.html">Chapter 1</a> of <span class="citation" data-cites="facure2022">Facure (<a href="#ref-facure2022" role="doc-biblioref">2022</a>)</span></li>
 </ul></li>
-<li><a href="./uncertainty.html">Uncertainty Quantification</a>, <a href="uncertainty.ipynb">notebook</a>
+<li><p><a href="./methods_overview.html">Overview of Causal Inference Methods</a></p></li>
+<li><p><a href="./uncertainty.html">Uncertainty Quantification</a>, <a href="uncertainty.ipynb">notebook</a></p>
 <ul>
 <li><a href="https://matheusfacure.github.io/python-causality-handbook/03-Stats-Review-The-Most-Dangerous-Equation.html.html">Chapter 3</a> of <span class="citation" data-cites="facure2022">Facure (<a href="#ref-facure2022" role="doc-biblioref">2022</a>)</span></li>
 </ul></li>
-<li><a href="./regression.html">Linear regression</a>, <a href="regression.ipynb">notebook</a>
+<li><p><a href="./regression.html">Linear regression</a>, <a href="regression.ipynb">notebook</a></p>
 <ul>
 <li>Chapters 5-7 of <span class="citation" data-cites="facure2022">Facure (<a href="#ref-facure2022" role="doc-biblioref">2022</a>)</span> or Chapters 1-2 of <span class="citation" data-cites="causalml2024">Chernozhukov et al. (<a href="#ref-causalml2024" role="doc-biblioref">2024</a>)</span></li>
 </ul></li>
-<li><a href="./matching.html">Matching slides</a>, <a href="matching.ipynb">notebook</a>
+<li><p><a href="./matching.html">Matching slides</a>, <a href="matching.ipynb">notebook</a></p>
 <ul>
 <li><a href="https://matheusfacure.github.io/python-causality-handbook/10-Matching.html">Chapters 10-12</a> of <span class="citation" data-cites="facure2022">Facure (<a href="#ref-facure2022" role="doc-biblioref">2022</a>)</span></li>
 <li><a href="https://theeffectbook.net/ch-Matching.html">Chapter 14</a> of <span class="citation" data-cites="hk2021">Huntington-Klein (<a href="#ref-hk2021" role="doc-biblioref">2021</a>)</span></li>
 <li>Chapters 5 and 10 of <span class="citation" data-cites="causalml2024">Chernozhukov et al. (<a href="#ref-causalml2024" role="doc-biblioref">2024</a>)</span></li>
 </ul></li>
-<li><a href="./did.html">Introduction to difference in differences</a>, <a href="did.ipynb">notebook</a>
+<li><p><a href="./did.html">Introduction to difference in differences</a>, <a href="did.ipynb">notebook</a></p>
 <ul>
 <li>Reading: <a href="https://matheusfacure.github.io/python-causality-handbook/13-Difference-in-Differences.html">chapter 13</a> of <span class="citation" data-cites="facure2022">Facure (<a href="#ref-facure2022" role="doc-biblioref">2022</a>)</span></li>
 </ul></li>
-<li><a href="./fe.html">Fixed Effects</a>, <a href="fe.ipynb">notebook</a>
+<li><p><a href="./fe.html">Fixed Effects</a>, <a href="fe.ipynb">notebook</a></p>
 <ul>
 <li>Reading: <a href="https://matheusfacure.github.io/python-causality-handbook/14-Panel-Data-and-Fixed-Effects.html">chapter 14</a> of <span class="citation" data-cites="facure2022">Facure (<a href="#ref-facure2022" role="doc-biblioref">2022</a>)</span></li>
 </ul></li>
-<li><a href="./moredid.html">Advanced difference in differences</a>, <a href="moredid.ipynb">notebook</a>
+<li><p><a href="./moredid.html">Advanced difference in differences</a>, <a href="moredid.ipynb">notebook</a></p>
 <ul>
 <li>Reading: <a href="https://matheusfacure.github.io/python-causality-handbook/24-The-Diff-in-Diff-Saga.html">chapter 24</a> of <span class="citation" data-cites="facure2022">Facure (<a href="#ref-facure2022" role="doc-biblioref">2022</a>)</span>, <span class="citation" data-cites="roth2023">Roth et al. (<a href="#ref-roth2023" role="doc-biblioref">2023</a>)</span>, <span class="citation" data-cites="dd2022">Chaisemartin and D’Haultfœuille (<a href="#ref-dd2022" role="doc-biblioref">2022</a>)</span></li>
 </ul></li>
-<li><a href="./iv.html">Instrumental Variables</a>, <a href="iv.ipynb">notebook</a>
+<li><p><a href="./iv.html">Instrumental Variables</a>, <a href="iv.ipynb">notebook</a></p>
 <ul>
 <li>Reading: <a href="https://matheusfacure.github.io/python-causality-handbook/08-Instrumental-Variables.html">Chapter 8 and 9</a> of <span class="citation" data-cites="facure2022">Facure (<a href="#ref-facure2022" role="doc-biblioref">2022</a>)</span></li>
 </ul></li>
-<li><a href="./syntheticcontrol.html">Synthetic Control</a>, <a href="syntheticcontrol.ipynb">notebook</a>
+<li><p><a href="./syntheticcontrol.html">Synthetic Control</a>, <a href="syntheticcontrol.ipynb">notebook</a></p>
 <ul>
 <li>Reading: <span class="citation" data-cites="abadie2021">Abadie (<a href="#ref-abadie2021" role="doc-biblioref">2021</a>)</span>,<a href="https://matheusfacure.github.io/python-causality-handbook/15-Synthetic-Control.html">chapter 15</a> of <span class="citation" data-cites="facure2022">Facure (<a href="#ref-facure2022" role="doc-biblioref">2022</a>)</span></li>
 </ul></li>
-<li><a href="./doubleml.html">Debiased Machine Learning</a>, <a href="doubleml.ipynb">notebook</a></li>
+<li><p><a href="./rdd.html">Regression discontinuity</a>, <a href="rdd.ipynb">notebook</a></p></li>
+<li><p><a href="./doubleml.html">Debiased Machine Learning</a>, <a href="doubleml.ipynb">notebook</a></p></li>
 </ol>
 <ul>
 <li>Reading: <a href="https://datascience.quantecon.org/applications/ml_in_economics.html#estimation-of-nuisance-functions">QuantEcon: ML in Economics</a></li>
@@ -229,9 +233,8 @@ div.csl-indent {
 <ul>
 <li>Reading: <a href="https://datascience.quantecon.org/applications/heterogeneity.html">QuantEcon: Heterogeneity</a></li>
 </ul>
-<ol start="13" type="1">
-<li><p><a href="./rdd.html">Regression discontinuity</a>, <a href="rdd.ipynb">notebook</a></p></li>
-<li><p><a href="./neuralnets.html">Neural Networks</a>, <a href="neuralnets.ipynb">notebook</a></p></li>
+<ol start="12" type="1">
+<li><a href="./neuralnets.html">Neural Networks</a>, <a href="neuralnets.ipynb">notebook</a></li>
 </ol>
 <ul>
 <li>Reading: <a href="https://datascience.quantecon.org/tools/regression.html#neural-networks">QuantEcon Datascience: Regression - Neural Networks</a></li>
@@ -241,7 +244,7 @@ div.csl-indent {
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-abadie2021" class="csl-entry" role="listitem">
 Abadie, Alberto. 2021. <span>“Using Synthetic Controls: Feasibility, Data Requirements, and Methodological Aspects.”</span> <em>Journal of Economic Literature</em> 59 (2): 391–425. <a href="https://doi.org/10.1257/jel.20191450">https://doi.org/10.1257/jel.20191450</a>.
 </div>

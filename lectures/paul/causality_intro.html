@@ -6,8 +6,8 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.25">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.19">
 
   <meta name="author" content="Paul Schrimpf">
   <title>ECON 526 – Introduction to Causality and Potential Outcomes</title>
@@ -17,10 +17,16 @@
   <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -98,7 +104,6 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
-      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -115,7 +120,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-534cd8e3a96973385dffff3f4709048d.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -221,7 +226,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Paul Schrimpf 
+Paul Schrimpf
 </div>
 <div class="quarto-title-author-email">
 <a href="mailto:paul.schrimpf@ubc.ca">paul.schrimpf@ubc.ca</a>
@@ -275,7 +280,7 @@ Paul Schrimpf
 <section id="treatment" class="slide level2">
 <h2>Treatment</h2>
 <ul>
-<li class="fragment"><span class="math inline">\(T_i \in \{0,1\}\)</span></li>
+<li class="fragment">Treatment <span class="math inline">\(D_i \in \{0,1\}\)</span></li>
 <li class="fragment">Observed outcome <span class="math inline">\(Y_i\)</span></li>
 <li class="fragment">We want the causal effect of <span class="math inline">\(T\)</span> on <span class="math inline">\(Y\)</span>, but what does that mean?
 <ul>
@@ -286,11 +291,11 @@ Paul Schrimpf
 <section id="potential-outcomes" class="slide level2">
 <h2>Potential Outcomes</h2>
 <ul>
-<li>Potential outcomes <span class="math inline">\(Y_i(0), Y_i(1)\)</span> if <span class="math inline">\(T_i = 0\)</span> or <span class="math inline">\(1\)</span></li>
-<li>Observe <span class="math inline">\(Y_i = Y_i(T_i)\)</span></li>
+<li>Potential outcomes <span class="math inline">\(Y_i(0), Y_i(1)\)</span> if <span class="math inline">\(D_i = 0\)</span> or <span class="math inline">\(1\)</span></li>
+<li>Observe <span class="math inline">\(Y_i = Y_i(D_i)\)</span></li>
 </ul>
 <ul>
-<li class="fragment">Assume: <strong>No Interference</strong>: <span class="math inline">\((Y_i(0), Y_i(1))\)</span> is unaffected by <span class="math inline">\(T_j\)</span> for <span class="math inline">\(j \neq i\)</span>
+<li class="fragment">Assume: <strong>No Interference</strong>: <span class="math inline">\((Y_i(0), Y_i(1))\)</span> is unaffected by <span class="math inline">\(D_j\)</span> for <span class="math inline">\(j \neq i\)</span>
 <ul>
 <li class="fragment">aka Stable Unit-Treatment Value Assumption (SUTVA)</li>
 </ul></li>
@@ -317,9 +322,9 @@ ATE = \Er[Y_i(1) - Y_i(0)]
 <section id="average-population-effect" class="slide level2">
 <h2>Average Population Effect</h2>
 <ul>
-<li>Can estimate <span class="math inline">\(\Er[Y_i(d)|T_i=d]\)</span></li>
+<li>Can estimate <span class="math inline">\(\Er[Y_i(d)|D_i=d]\)</span></li>
 <li>Average population effect <span class="math display">\[
-APE = \Er[Y_i(1)|T_i=1] - \Er[Y_i(0)|T_i=0]
+APE = \Er[Y_i(1)|D_i=1] - \Er[Y_i(0)|D_i=0]
 \]</span></li>
 <li>How does it compare to the ATE?</li>
 </ul>
@@ -330,11 +335,11 @@ APE = \Er[Y_i(1)|T_i=1] - \Er[Y_i(0)|T_i=0]
 <li>Comparing ATE and average population effect <span class="math display">\[ %
 \begin{align*}
 ATE = &amp; \Er[Y_i(1) - Y_i(0)] \\
-= &amp; \overbrace{\Er[Y_i(1) - Y_i(0) | T_i=1]}^{\text{avg treatment effect  on treated}} P(T_i=1) + \overbrace{\Er[Y_i(1) - Y_i(0) | T_i=0]}^{\text{avg treatment effect on untreated}} P(T_i=0) \\
-= &amp; \left(APE + \overbrace{\Er[Y_i(0)|T_i=0] - \Er[Y_i(0)|T_i=1]}^{\text{selection bias}}\right)
-  P(T_i=1) + \\
-&amp; +  \left(APE + \underbrace{\Er[Y_i(1)|T_i=0] - \Er[Y_i(1)|T_i=1]}_{\text{selection bias}}\right)
-P(T_i=0)
+= &amp; \overbrace{\Er[Y_i(1) - Y_i(0) | D_i=1]}^{\text{avg treatment effect  on treated}} P(D_i=1) + \overbrace{\Er[Y_i(1) - Y_i(0) | D_i=0]}^{\text{avg treatment effect on untreated}} P(D_i=0) \\
+= &amp; \left(APE + \overbrace{\Er[Y_i(0)|D_i=0] - \Er[Y_i(0)|D_i=1]}^{\text{selection bias}}\right)
+  P(D_i=1) + \\
+&amp; +  \left(APE + \underbrace{\Er[Y_i(1)|D_i=0] - \Er[Y_i(1)|D_i=1]}_{\text{selection bias}}\right)
+P(D_i=0)
 \end{align*}
 \]</span></li>
 </ul>
@@ -343,8 +348,8 @@ P(T_i=0)
 <h2>Selection Bias</h2>
 <ul>
 <li>Or, <span class="math display">\[ %
-APE = ATE + \underbrace{\begin{pmatrix} (\Er[Y_i(0) | T_i=1] - \Er[Y_i(0)|T_i=0])P(T_i=1) + \\
-  + (\Er[Y_i(1) | T_i=1] - \Er[Y_i(1)|T_i=0])P(T_i=0)
+APE = ATE + \underbrace{\begin{pmatrix} (\Er[Y_i(0) | D_i=1] - \Er[Y_i(0)|D_i=0])P(D_i=1) + \\
+  + (\Er[Y_i(1) | D_i=1] - \Er[Y_i(1)|D_i=0])P(D_i=0)
 \end{pmatrix}}_{\text{selection bias}}
 \]</span></li>
 <li>Selection bias is nonzero if the treated and untreated groups would be different even if everyone had been treated or untreated</li>
@@ -354,9 +359,9 @@ APE = ATE + \underbrace{\begin{pmatrix} (\Er[Y_i(0) | T_i=1] - \Er[Y_i(0)|T_i=0]
 <section id="selection-bias-example" class="slide level2">
 <h2>Selection Bias Example</h2>
 <ul>
-<li>People have some (possibly noisy) information about <span class="math inline">\(Y_i(0), Y_i(1)\)</span> and choose <span class="math inline">\(T_i\)</span> they prefer
+<li>People have some (possibly noisy) information about <span class="math inline">\(Y_i(0), Y_i(1)\)</span> and choose <span class="math inline">\(D_i\)</span> they prefer
 <ul>
-<li>e.g.&nbsp;<span class="math inline">\(T_i = \arg\max_{d\in \{0,1\}} \Er[U(Y_i(d)) | \mathcal{I}_i]\)</span></li>
+<li>e.g.&nbsp;<span class="math inline">\(D_i = \arg\max_{d\in \{0,1\}} \Er[U(Y_i(d)) | \mathcal{I}_i]\)</span></li>
 </ul></li>
 <li>Simulation
 <ul>
@@ -371,41 +376,41 @@ APE = ATE + \underbrace{\begin{pmatrix} (\Er[Y_i(0) | T_i=1] - \Er[Y_i(0)|T_i=0]
 <div id="ddb4e7d3" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a></a>np.random.seed(<span class="dv">0</span>)</span>
-<span id="cb1-3"><a></a><span class="kw">class</span> selectiondata:</span>
-<span id="cb1-4"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, n<span class="op">=</span><span class="dv">1000</span>, noisesd<span class="op">=</span><span class="fl">1.0</span>, ate<span class="op">=</span><span class="fl">0.5</span>):</span>
-<span id="cb1-5"><a></a>        <span class="va">self</span>.Y0 <span class="op">=</span> np.random.normal(size<span class="op">=</span>n)</span>
-<span id="cb1-6"><a></a>        <span class="va">self</span>.Y1 <span class="op">=</span> np.random.normal(size<span class="op">=</span>n) <span class="op">+</span> ate</span>
-<span id="cb1-7"><a></a>        <span class="va">self</span>.S0 <span class="op">=</span> <span class="va">self</span>.Y0 <span class="op">+</span> np.random.normal(size<span class="op">=</span>n)<span class="op">*</span>noisesd</span>
-<span id="cb1-8"><a></a>        <span class="va">self</span>.S1 <span class="op">=</span> <span class="va">self</span>.Y1 <span class="op">+</span> np.random.normal(size<span class="op">=</span>n)<span class="op">*</span>noisesd</span>
-<span id="cb1-9"><a></a>        <span class="va">self</span>.T <span class="op">=</span> (<span class="va">self</span>.S1 <span class="op">&gt;</span> <span class="va">self</span>.S0).astype(<span class="bu">int</span>)</span>
-<span id="cb1-10"><a></a>        <span class="va">self</span>.Y <span class="op">=</span> <span class="va">self</span>.Y0 <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> <span class="va">self</span>.T) <span class="op">+</span> <span class="va">self</span>.Y1 <span class="op">*</span> <span class="va">self</span>.T</span>
-<span id="cb1-11"><a></a></span>
-<span id="cb1-12"><a></a>    <span class="kw">def</span> APE(<span class="va">self</span>):</span>
-<span id="cb1-13"><a></a>        <span class="cf">return</span> np.mean(<span class="va">self</span>.Y[<span class="va">self</span>.T<span class="op">==</span><span class="dv">1</span>]) <span class="op">-</span> np.mean(<span class="va">self</span>.Y[<span class="va">self</span>.T<span class="op">==</span><span class="dv">0</span>])</span>
-<span id="cb1-14"><a></a></span>
-<span id="cb1-15"><a></a>    <span class="kw">def</span> ATE(<span class="va">self</span>):</span>
-<span id="cb1-16"><a></a>        <span class="cf">return</span> np.mean(<span class="va">self</span>.Y1) <span class="op">-</span> np.mean(<span class="va">self</span>.Y0)</span>
-<span id="cb1-17"><a></a></span>
-<span id="cb1-18"><a></a>    <span class="kw">def</span> selectionbias(<span class="va">self</span>):</span>
-<span id="cb1-19"><a></a>        <span class="cf">return</span> (<span class="va">self</span>.APE() <span class="op">-</span> <span class="va">self</span>.ATE())</span>
-<span id="cb1-20"><a></a></span>
-<span id="cb1-21"><a></a>    <span class="kw">def</span> selectionbias0(<span class="va">self</span>):</span>
-<span id="cb1-22"><a></a>        <span class="cf">return</span> np.mean( <span class="va">self</span>.Y0[<span class="va">self</span>.T<span class="op">==</span><span class="dv">1</span>]) <span class="op">-</span> np.mean( <span class="va">self</span>.Y0[<span class="va">self</span>.T<span class="op">==</span><span class="dv">0</span>] )</span>
-<span id="cb1-23"><a></a></span>
-<span id="cb1-24"><a></a>    <span class="kw">def</span> selectionbias1(<span class="va">self</span>):</span>
-<span id="cb1-25"><a></a>        <span class="cf">return</span> np.mean( <span class="va">self</span>.Y1[<span class="va">self</span>.T<span class="op">==</span><span class="dv">1</span>]) <span class="op">-</span> np.mean(<span class="va">self</span>.Y1[<span class="va">self</span>.T<span class="op">==</span><span class="dv">0</span>] )</span>
-<span id="cb1-26"><a></a></span>
-<span id="cb1-27"><a></a></span>
-<span id="cb1-28"><a></a>s <span class="op">=</span> <span class="fl">0.5</span></span>
-<span id="cb1-29"><a></a>eate <span class="op">=</span> <span class="fl">0.5</span></span>
-<span id="cb1-30"><a></a>data <span class="op">=</span> selectiondata(n<span class="op">=</span><span class="dv">10_000</span>,noisesd<span class="op">=</span>s, ate<span class="op">=</span>eate)</span>
-<span id="cb1-31"><a></a></span>
-<span id="cb1-32"><a></a><span class="bu">print</span>(<span class="st">"|APE|ATE|Selection Bias|</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span></span>
-<span id="cb1-33"><a></a>      <span class="st">"|---|---|---|</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span></span>
-<span id="cb1-34"><a></a>      <span class="ss">f"|</span><span class="sc">{</span>data<span class="sc">.</span>APE()<span class="sc">:.2}</span><span class="ss">|</span><span class="sc">{</span>data<span class="sc">.</span>ATE()<span class="sc">:.2}</span><span class="ss">|</span><span class="sc">{</span>data<span class="sc">.</span>selectionbias()<span class="sc">:.2}</span><span class="ss">|</span><span class="ch">\n</span><span class="ss">"</span></span>
-<span id="cb1-35"><a></a>      <span class="ss">f"|σ=</span><span class="sc">{</span>s<span class="sc">:.2}</span><span class="ss">|</span><span class="ch">\n\n</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a aria-label="2"></a>np.random.seed(<span class="dv">0</span>)</span>
+<span id="cb1-3"><a aria-label="3"></a><span class="kw">class</span> selectiondata:</span>
+<span id="cb1-4"><a aria-label="4"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, n<span class="op">=</span><span class="dv">1000</span>, noisesd<span class="op">=</span><span class="fl">1.0</span>, ate<span class="op">=</span><span class="fl">0.5</span>):</span>
+<span id="cb1-5"><a aria-label="5"></a>        <span class="va">self</span>.Y0 <span class="op">=</span> np.random.normal(size<span class="op">=</span>n)</span>
+<span id="cb1-6"><a aria-label="6"></a>        <span class="va">self</span>.Y1 <span class="op">=</span> np.random.normal(size<span class="op">=</span>n) <span class="op">+</span> ate</span>
+<span id="cb1-7"><a aria-label="7"></a>        <span class="va">self</span>.S0 <span class="op">=</span> <span class="va">self</span>.Y0 <span class="op">+</span> np.random.normal(size<span class="op">=</span>n)<span class="op">*</span>noisesd</span>
+<span id="cb1-8"><a aria-label="8"></a>        <span class="va">self</span>.S1 <span class="op">=</span> <span class="va">self</span>.Y1 <span class="op">+</span> np.random.normal(size<span class="op">=</span>n)<span class="op">*</span>noisesd</span>
+<span id="cb1-9"><a aria-label="9"></a>        <span class="va">self</span>.T <span class="op">=</span> (<span class="va">self</span>.S1 <span class="op">&gt;</span> <span class="va">self</span>.S0).astype(<span class="bu">int</span>)</span>
+<span id="cb1-10"><a aria-label="10"></a>        <span class="va">self</span>.Y <span class="op">=</span> <span class="va">self</span>.Y0 <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> <span class="va">self</span>.T) <span class="op">+</span> <span class="va">self</span>.Y1 <span class="op">*</span> <span class="va">self</span>.T</span>
+<span id="cb1-11"><a aria-label="11"></a></span>
+<span id="cb1-12"><a aria-label="12"></a>    <span class="kw">def</span> APE(<span class="va">self</span>):</span>
+<span id="cb1-13"><a aria-label="13"></a>        <span class="cf">return</span> np.mean(<span class="va">self</span>.Y[<span class="va">self</span>.T<span class="op">==</span><span class="dv">1</span>]) <span class="op">-</span> np.mean(<span class="va">self</span>.Y[<span class="va">self</span>.T<span class="op">==</span><span class="dv">0</span>])</span>
+<span id="cb1-14"><a aria-label="14"></a></span>
+<span id="cb1-15"><a aria-label="15"></a>    <span class="kw">def</span> ATE(<span class="va">self</span>):</span>
+<span id="cb1-16"><a aria-label="16"></a>        <span class="cf">return</span> np.mean(<span class="va">self</span>.Y1) <span class="op">-</span> np.mean(<span class="va">self</span>.Y0)</span>
+<span id="cb1-17"><a aria-label="17"></a></span>
+<span id="cb1-18"><a aria-label="18"></a>    <span class="kw">def</span> selectionbias(<span class="va">self</span>):</span>
+<span id="cb1-19"><a aria-label="19"></a>        <span class="cf">return</span> (<span class="va">self</span>.APE() <span class="op">-</span> <span class="va">self</span>.ATE())</span>
+<span id="cb1-20"><a aria-label="20"></a></span>
+<span id="cb1-21"><a aria-label="21"></a>    <span class="kw">def</span> selectionbias0(<span class="va">self</span>):</span>
+<span id="cb1-22"><a aria-label="22"></a>        <span class="cf">return</span> np.mean( <span class="va">self</span>.Y0[<span class="va">self</span>.T<span class="op">==</span><span class="dv">1</span>]) <span class="op">-</span> np.mean( <span class="va">self</span>.Y0[<span class="va">self</span>.T<span class="op">==</span><span class="dv">0</span>] )</span>
+<span id="cb1-23"><a aria-label="23"></a></span>
+<span id="cb1-24"><a aria-label="24"></a>    <span class="kw">def</span> selectionbias1(<span class="va">self</span>):</span>
+<span id="cb1-25"><a aria-label="25"></a>        <span class="cf">return</span> np.mean( <span class="va">self</span>.Y1[<span class="va">self</span>.T<span class="op">==</span><span class="dv">1</span>]) <span class="op">-</span> np.mean(<span class="va">self</span>.Y1[<span class="va">self</span>.T<span class="op">==</span><span class="dv">0</span>] )</span>
+<span id="cb1-26"><a aria-label="26"></a></span>
+<span id="cb1-27"><a aria-label="27"></a></span>
+<span id="cb1-28"><a aria-label="28"></a>s <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb1-29"><a aria-label="29"></a>eate <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb1-30"><a aria-label="30"></a>data <span class="op">=</span> selectiondata(n<span class="op">=</span><span class="dv">10_000</span>,noisesd<span class="op">=</span>s, ate<span class="op">=</span>eate)</span>
+<span id="cb1-31"><a aria-label="31"></a></span>
+<span id="cb1-32"><a aria-label="32"></a><span class="bu">print</span>(<span class="st">"|APE|ATE|Selection Bias|</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span></span>
+<span id="cb1-33"><a aria-label="33"></a>      <span class="st">"|---|---|---|</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span></span>
+<span id="cb1-34"><a aria-label="34"></a>      <span class="ss">f"|</span><span class="sc">{</span>data<span class="sc">.</span>APE()<span class="sc">:.2}</span><span class="ss">|</span><span class="sc">{</span>data<span class="sc">.</span>ATE()<span class="sc">:.2}</span><span class="ss">|</span><span class="sc">{</span>data<span class="sc">.</span>selectionbias()<span class="sc">:.2}</span><span class="ss">|</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="cb1-35"><a aria-label="35"></a>      <span class="ss">f"|σ=</span><span class="sc">{</span>s<span class="sc">:.2}</span><span class="ss">|</span><span class="ch">\n\n</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 
@@ -441,14 +446,14 @@ APE = ATE + \underbrace{\begin{pmatrix} (\Er[Y_i(0) | T_i=1] - \Er[Y_i(0)|T_i=0]
 <h2>Random Experiment</h2>
 <ul>
 <li>Assign treatment randomly <span class="math display">\[
-T_i \indep (Y_i(0),Y_i(1))
+D_i \indep (Y_i(0),Y_i(1))
 \]</span></li>
 <li>Implies <span class="math display">\[
-\Er[Y_i(1) | T_i=1] = \Er[Y_i(1)] \text{ and } \Er[Y_i(0) | T_i=0] = \Er[Y_i(0)]
+\Er[Y_i(1) | D_i=1] = \Er[Y_i(1)] \text{ and } \Er[Y_i(0) | D_i=0] = \Er[Y_i(0)]
 \]</span></li>
 <li>So <span class="math display">\[
 \begin{align*}
-APE = &amp; \Er[Y_i(1)|T_i=1] - \Er[Y_i(0)|T_i=0] \\
+APE = &amp; \Er[Y_i(1)|D_i=1] - \Er[Y_i(0)|D_i=0] \\
   = &amp; \Er[Y_i(1)] - \Er[Y_i(0)] \\
   = &amp; ATE
 \end{align*}
@@ -495,35 +500,35 @@ APE = &amp; \Er[Y_i(1)|T_i=1] - \Er[Y_i(0)|T_i=0] \\
 <section id="example-pfizer-covid-vaccine-rct-1" class="slide level2">
 <h2>Example Pfizer Covid Vaccine RCT</h2>
 <div id="eab55c17" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
-<span id="cb2-2"><a></a></span>
-<span id="cb2-3"><a></a><span class="kw">class</span> binarybinaryrct :</span>
-<span id="cb2-4"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, NT, NU, NYT, NYU):</span>
-<span id="cb2-5"><a></a>        <span class="va">self</span>.NT<span class="op">=</span>NT</span>
-<span id="cb2-6"><a></a>        <span class="va">self</span>.NU<span class="op">=</span>NU</span>
-<span id="cb2-7"><a></a>        <span class="va">self</span>.NYT<span class="op">=</span>NYT</span>
-<span id="cb2-8"><a></a>        <span class="va">self</span>.NYU<span class="op">=</span>NYU</span>
-<span id="cb2-9"><a></a></span>
-<span id="cb2-10"><a></a>    <span class="kw">def</span> ATE(<span class="va">self</span>):</span>
-<span id="cb2-11"><a></a>        <span class="cf">return</span> (<span class="va">self</span>.NYT<span class="op">/</span><span class="va">self</span>.NT <span class="op">-</span> <span class="va">self</span>.NYU<span class="op">/</span><span class="va">self</span>.NU)</span>
-<span id="cb2-12"><a></a></span>
-<span id="cb2-13"><a></a>    <span class="kw">def</span> table(<span class="va">self</span>):</span>
-<span id="cb2-14"><a></a>        <span class="cf">return</span>(<span class="st">"|  | Infection Rate per 1000|</span><span class="ch">\n</span><span class="st">"</span><span class="op">+</span></span>
-<span id="cb2-15"><a></a>               <span class="st">"|---|---|</span><span class="ch">\n</span><span class="st">"</span></span>
-<span id="cb2-16"><a></a>               <span class="ss">f"|Treated| </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>NYT<span class="op">/</span><span class="va">self</span><span class="sc">.</span>NT<span class="op">*</span><span class="dv">1000</span><span class="sc">:.2}</span><span class="ss">|</span><span class="ch">\n</span><span class="ss">"</span> <span class="op">+</span></span>
-<span id="cb2-17"><a></a>               <span class="ss">f"|Control| </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>NYU<span class="op">/</span><span class="va">self</span><span class="sc">.</span>NU<span class="op">*</span><span class="dv">1000</span><span class="sc">:.2}</span><span class="ss">|</span><span class="ch">\n</span><span class="ss">"</span> <span class="op">+</span></span>
-<span id="cb2-18"><a></a>               <span class="ss">f"|Difference| </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>ATE()<span class="op">*</span><span class="dv">1000</span><span class="sc">:.2}</span><span class="ss">|</span><span class="ch">\n</span><span class="ss">"</span>)</span>
-<span id="cb2-19"><a></a>    <span class="kw">def</span> VE(<span class="va">self</span>):</span>
-<span id="cb2-20"><a></a>        tb <span class="op">=</span> sm.stats.Table2x2([[<span class="va">self</span>.NYT, <span class="va">self</span>.NT <span class="op">-</span> <span class="va">self</span>.NYT], [<span class="va">self</span>.NYU, <span class="va">self</span>.NU <span class="op">-</span> <span class="va">self</span>.NYU]])</span>
-<span id="cb2-21"><a></a>        ve<span class="op">=</span><span class="dv">1</span><span class="op">-</span>tb.riskratio</span>
-<span id="cb2-22"><a></a>        ci <span class="op">=</span> tb.riskratio_confint()</span>
-<span id="cb2-23"><a></a>        ci <span class="op">=</span> [<span class="dv">1</span><span class="op">-</span>ci[<span class="dv">1</span>],<span class="dv">1</span><span class="op">-</span>ci[<span class="dv">0</span>]]</span>
-<span id="cb2-24"><a></a>        <span class="cf">return</span>(ve,ci)</span>
-<span id="cb2-25"><a></a></span>
-<span id="cb2-26"><a></a>pfizerall <span class="op">=</span> binarybinaryrct(<span class="dv">19965</span>, <span class="dv">20172</span>, <span class="dv">9</span>, <span class="dv">169</span>)</span>
-<span id="cb2-27"><a></a>pfizer65 <span class="op">=</span> binarybinaryrct(<span class="dv">4044</span>, <span class="dv">4067</span>, <span class="dv">1</span>, <span class="dv">19</span>)</span>
-<span id="cb2-28"><a></a></span>
-<span id="cb2-29"><a></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">- All</span><span class="ch">\n\n</span><span class="st">"</span> <span class="op">+</span> pfizerall.table() <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st"> - 65+</span><span class="ch">\n\n</span><span class="st">"</span> <span class="op">+</span> pfizer65.table())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb2-2"><a aria-label="2"></a></span>
+<span id="cb2-3"><a aria-label="3"></a><span class="kw">class</span> binarybinaryrct :</span>
+<span id="cb2-4"><a aria-label="4"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, NT, NU, NYT, NYU):</span>
+<span id="cb2-5"><a aria-label="5"></a>        <span class="va">self</span>.NT<span class="op">=</span>NT</span>
+<span id="cb2-6"><a aria-label="6"></a>        <span class="va">self</span>.NU<span class="op">=</span>NU</span>
+<span id="cb2-7"><a aria-label="7"></a>        <span class="va">self</span>.NYT<span class="op">=</span>NYT</span>
+<span id="cb2-8"><a aria-label="8"></a>        <span class="va">self</span>.NYU<span class="op">=</span>NYU</span>
+<span id="cb2-9"><a aria-label="9"></a></span>
+<span id="cb2-10"><a aria-label="10"></a>    <span class="kw">def</span> ATE(<span class="va">self</span>):</span>
+<span id="cb2-11"><a aria-label="11"></a>        <span class="cf">return</span> (<span class="va">self</span>.NYT<span class="op">/</span><span class="va">self</span>.NT <span class="op">-</span> <span class="va">self</span>.NYU<span class="op">/</span><span class="va">self</span>.NU)</span>
+<span id="cb2-12"><a aria-label="12"></a></span>
+<span id="cb2-13"><a aria-label="13"></a>    <span class="kw">def</span> table(<span class="va">self</span>):</span>
+<span id="cb2-14"><a aria-label="14"></a>        <span class="cf">return</span>(<span class="st">"|  | Infection Rate per 1000|</span><span class="ch">\n</span><span class="st">"</span><span class="op">+</span></span>
+<span id="cb2-15"><a aria-label="15"></a>               <span class="st">"|---|---|</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb2-16"><a aria-label="16"></a>               <span class="ss">f"|Treated| </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>NYT<span class="op">/</span><span class="va">self</span><span class="sc">.</span>NT<span class="op">*</span><span class="dv">1000</span><span class="sc">:.2}</span><span class="ss">|</span><span class="ch">\n</span><span class="ss">"</span> <span class="op">+</span></span>
+<span id="cb2-17"><a aria-label="17"></a>               <span class="ss">f"|Control| </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>NYU<span class="op">/</span><span class="va">self</span><span class="sc">.</span>NU<span class="op">*</span><span class="dv">1000</span><span class="sc">:.2}</span><span class="ss">|</span><span class="ch">\n</span><span class="ss">"</span> <span class="op">+</span></span>
+<span id="cb2-18"><a aria-label="18"></a>               <span class="ss">f"|Difference| </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>ATE()<span class="op">*</span><span class="dv">1000</span><span class="sc">:.2}</span><span class="ss">|</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb2-19"><a aria-label="19"></a>    <span class="kw">def</span> VE(<span class="va">self</span>):</span>
+<span id="cb2-20"><a aria-label="20"></a>        tb <span class="op">=</span> sm.stats.Table2x2([[<span class="va">self</span>.NYT, <span class="va">self</span>.NT <span class="op">-</span> <span class="va">self</span>.NYT], [<span class="va">self</span>.NYU, <span class="va">self</span>.NU <span class="op">-</span> <span class="va">self</span>.NYU]])</span>
+<span id="cb2-21"><a aria-label="21"></a>        ve<span class="op">=</span><span class="dv">1</span><span class="op">-</span>tb.riskratio</span>
+<span id="cb2-22"><a aria-label="22"></a>        ci <span class="op">=</span> tb.riskratio_confint()</span>
+<span id="cb2-23"><a aria-label="23"></a>        ci <span class="op">=</span> [<span class="dv">1</span><span class="op">-</span>ci[<span class="dv">1</span>],<span class="dv">1</span><span class="op">-</span>ci[<span class="dv">0</span>]]</span>
+<span id="cb2-24"><a aria-label="24"></a>        <span class="cf">return</span>(ve,ci)</span>
+<span id="cb2-25"><a aria-label="25"></a></span>
+<span id="cb2-26"><a aria-label="26"></a>pfizerall <span class="op">=</span> binarybinaryrct(<span class="dv">19965</span>, <span class="dv">20172</span>, <span class="dv">9</span>, <span class="dv">169</span>)</span>
+<span id="cb2-27"><a aria-label="27"></a>pfizer65 <span class="op">=</span> binarybinaryrct(<span class="dv">4044</span>, <span class="dv">4067</span>, <span class="dv">1</span>, <span class="dv">19</span>)</span>
+<span id="cb2-28"><a aria-label="28"></a></span>
+<span id="cb2-29"><a aria-label="29"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">- All</span><span class="ch">\n\n</span><span class="st">"</span> <span class="op">+</span> pfizerall.table() <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st"> - 65+</span><span class="ch">\n\n</span><span class="st">"</span> <span class="op">+</span> pfizer65.table())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
@@ -559,7 +564,7 @@ APE = &amp; \Er[Y_i(1)|T_i=1] - \Er[Y_i(0)|T_i=0] \\
 <h2>References</h2>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-causalml2024" class="csl-entry" role="listitem">
 Chernozhukov, V., C. Hansen, N. Kallus, M. Spindler, and V. Syrgkanis. 2024. <em>Applied Causal Inference Powered by ML and AI</em>. <a href="https://causalml-book.org/">https://causalml-book.org/</a>.
 </div>

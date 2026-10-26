@@ -6,8 +6,8 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.25">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.19">
 
   <meta name="author" content="Paul Schrimpf">
   <title>ECON 526 – Neural Networks</title>
@@ -17,10 +17,16 @@
   <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -95,7 +101,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-534cd8e3a96973385dffff3f4709048d.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -201,7 +207,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Paul Schrimpf 
+Paul Schrimpf
 </div>
         <p class="quarto-title-affiliation">
             University of British Columbia
@@ -272,27 +278,27 @@ f(x_i; \mathbf{w},\mathbf{b}) =
 </section>
 <section id="activation-functions" class="slide level2">
 <h2>Activation functions</h2>
-<div id="3a5591bf" class="cell" data-execution_count="2">
+<div id="908c43b7" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
-<span id="cb1-4"><a></a><span class="im">import</span> torch</span>
-<span id="cb1-5"><a></a><span class="co"># plot 4 activation functions</span></span>
-<span id="cb1-6"><a></a>x <span class="op">=</span> torch.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">100</span>)</span>
-<span id="cb1-7"><a></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span>
-<span id="cb1-8"><a></a>ax <span class="op">=</span> ax.flatten()</span>
-<span id="cb1-9"><a></a>ax[<span class="dv">0</span>].plot(x, nn.ReLU()(x))</span>
-<span id="cb1-10"><a></a>ax[<span class="dv">0</span>].set_title(<span class="st">"ReLU"</span>)</span>
-<span id="cb1-11"><a></a>ax[<span class="dv">1</span>].plot(x, nn.Tanh()(x))</span>
-<span id="cb1-12"><a></a>ax[<span class="dv">1</span>].set_title(<span class="st">"Tanh"</span>)</span>
-<span id="cb1-13"><a></a>ax[<span class="dv">2</span>].plot(x, nn.Sigmoid()(x))</span>
-<span id="cb1-14"><a></a>ax[<span class="dv">2</span>].set_title(<span class="st">"Sigmoid"</span>)</span>
-<span id="cb1-15"><a></a>ax[<span class="dv">3</span>].plot(x, nn.Softplus()(x))</span>
-<span id="cb1-16"><a></a>ax[<span class="dv">3</span>].set_title(<span class="st">"Softplus"</span>)</span>
-<span id="cb1-17"><a></a>fig.tight_layout()</span>
-<span id="cb1-18"><a></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a aria-label="2"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a aria-label="3"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
+<span id="cb1-4"><a aria-label="4"></a><span class="im">import</span> torch</span>
+<span id="cb1-5"><a aria-label="5"></a><span class="co"># plot 4 activation functions</span></span>
+<span id="cb1-6"><a aria-label="6"></a>x <span class="op">=</span> torch.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">100</span>)</span>
+<span id="cb1-7"><a aria-label="7"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span>
+<span id="cb1-8"><a aria-label="8"></a>ax <span class="op">=</span> ax.flatten()</span>
+<span id="cb1-9"><a aria-label="9"></a>ax[<span class="dv">0</span>].plot(x, nn.ReLU()(x))</span>
+<span id="cb1-10"><a aria-label="10"></a>ax[<span class="dv">0</span>].set_title(<span class="st">"ReLU"</span>)</span>
+<span id="cb1-11"><a aria-label="11"></a>ax[<span class="dv">1</span>].plot(x, nn.Tanh()(x))</span>
+<span id="cb1-12"><a aria-label="12"></a>ax[<span class="dv">1</span>].set_title(<span class="st">"Tanh"</span>)</span>
+<span id="cb1-13"><a aria-label="13"></a>ax[<span class="dv">2</span>].plot(x, nn.Sigmoid()(x))</span>
+<span id="cb1-14"><a aria-label="14"></a>ax[<span class="dv">2</span>].set_title(<span class="st">"Sigmoid"</span>)</span>
+<span id="cb1-15"><a aria-label="15"></a>ax[<span class="dv">3</span>].plot(x, nn.Softplus()(x))</span>
+<span id="cb1-16"><a aria-label="16"></a>ax[<span class="dv">3</span>].set_title(<span class="st">"Softplus"</span>)</span>
+<span id="cb1-17"><a aria-label="17"></a>fig.tight_layout()</span>
+<span id="cb1-18"><a aria-label="18"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -305,22 +311,22 @@ f(x_i; \mathbf{w},\mathbf{b}) =
 </section>
 <section id="single-layer-perceptron-1" class="slide level2">
 <h2>Single Layer Perceptron</h2>
-<div id="a1277ba9" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
-<span id="cb2-2"><a></a><span class="im">import</span> torch</span>
-<span id="cb2-3"><a></a><span class="kw">class</span> SingleLayerPerceptron(nn.Module):</span>
-<span id="cb2-4"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, d, m, activation<span class="op">=</span>nn.ReLU()):</span>
-<span id="cb2-5"><a></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb2-6"><a></a>        <span class="va">self</span>.d <span class="op">=</span> d</span>
-<span id="cb2-7"><a></a>        <span class="va">self</span>.m <span class="op">=</span> m</span>
-<span id="cb2-8"><a></a>        <span class="va">self</span>.activation <span class="op">=</span> activation</span>
-<span id="cb2-9"><a></a>        <span class="va">self</span>.w0 <span class="op">=</span> nn.Parameter(torch.randn(d, m))</span>
-<span id="cb2-10"><a></a>        <span class="va">self</span>.b0 <span class="op">=</span> nn.Parameter(torch.randn(m))</span>
-<span id="cb2-11"><a></a>        <span class="va">self</span>.w1 <span class="op">=</span> nn.Parameter(torch.randn(m))</span>
-<span id="cb2-12"><a></a>        <span class="va">self</span>.b1 <span class="op">=</span> nn.Parameter(torch.randn(<span class="dv">1</span>))</span>
-<span id="cb2-13"><a></a></span>
-<span id="cb2-14"><a></a>    <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
-<span id="cb2-15"><a></a>        <span class="cf">return</span> <span class="va">self</span>.activation(x <span class="op">@</span> <span class="va">self</span>.w0 <span class="op">+</span> <span class="va">self</span>.b0) <span class="op">@</span> <span class="va">self</span>.w1 <span class="op">+</span> <span class="va">self</span>.b1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="187ef590" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
+<span id="cb2-2"><a aria-label="2"></a><span class="im">import</span> torch</span>
+<span id="cb2-3"><a aria-label="3"></a><span class="kw">class</span> SingleLayerPerceptron(nn.Module):</span>
+<span id="cb2-4"><a aria-label="4"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, d, m, activation<span class="op">=</span>nn.ReLU()):</span>
+<span id="cb2-5"><a aria-label="5"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb2-6"><a aria-label="6"></a>        <span class="va">self</span>.d <span class="op">=</span> d</span>
+<span id="cb2-7"><a aria-label="7"></a>        <span class="va">self</span>.m <span class="op">=</span> m</span>
+<span id="cb2-8"><a aria-label="8"></a>        <span class="va">self</span>.activation <span class="op">=</span> activation</span>
+<span id="cb2-9"><a aria-label="9"></a>        <span class="va">self</span>.w0 <span class="op">=</span> nn.Parameter(torch.randn(d, m))</span>
+<span id="cb2-10"><a aria-label="10"></a>        <span class="va">self</span>.b0 <span class="op">=</span> nn.Parameter(torch.randn(m))</span>
+<span id="cb2-11"><a aria-label="11"></a>        <span class="va">self</span>.w1 <span class="op">=</span> nn.Parameter(torch.randn(m))</span>
+<span id="cb2-12"><a aria-label="12"></a>        <span class="va">self</span>.b1 <span class="op">=</span> nn.Parameter(torch.randn(<span class="dv">1</span>))</span>
+<span id="cb2-13"><a aria-label="13"></a></span>
+<span id="cb2-14"><a aria-label="14"></a>    <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
+<span id="cb2-15"><a aria-label="15"></a>        <span class="cf">return</span> <span class="va">self</span>.activation(x <span class="op">@</span> <span class="va">self</span>.w0 <span class="op">+</span> <span class="va">self</span>.b0) <span class="op">@</span> <span class="va">self</span>.w1 <span class="op">+</span> <span class="va">self</span>.b1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="regression" class="slide level2">
@@ -395,39 +401,39 @@ f(x_i; \mathbf{w},\mathbf{b}) =
 </section>
 <section id="gradient-descent-1" class="slide level2">
 <h2>Gradient Descent</h2>
-<div id="072b5539" class="cell" data-execution_count="4">
+<div id="3fd6fa4a" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>n <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb3-2"><a></a>sigma <span class="op">=</span> <span class="fl">0.1</span></span>
-<span id="cb3-3"><a></a>torch.manual_seed(<span class="dv">987</span>)</span>
-<span id="cb3-4"><a></a>x <span class="op">=</span> torch.randn(n,<span class="dv">1</span>)</span>
-<span id="cb3-5"><a></a>f <span class="op">=</span> np.vectorize(<span class="kw">lambda</span> x:  np.sin(x)<span class="op">+</span>np.exp(<span class="op">-</span>x<span class="op">*</span>x)<span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>np.<span class="bu">abs</span>(x)))</span>
-<span id="cb3-6"><a></a>y <span class="op">=</span> torch.tensor(f(x), dtype<span class="op">=</span>torch.float32) <span class="op">+</span> sigma<span class="op">*</span>torch.randn(x.shape)</span>
-<span id="cb3-7"><a></a>slp <span class="op">=</span> SingleLayerPerceptron(<span class="dv">1</span>, <span class="dv">20</span>, nn.ReLU())</span>
-<span id="cb3-8"><a></a>lossfn <span class="op">=</span> nn.MSELoss()</span>
-<span id="cb3-9"><a></a>xlin <span class="op">=</span> torch.linspace(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">100</span>)</span>
-<span id="cb3-10"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb3-11"><a></a>epochs <span class="op">=</span> <span class="dv">1000</span></span>
-<span id="cb3-12"><a></a>stepscale <span class="op">=</span> <span class="fl">0.1</span></span>
-<span id="cb3-13"><a></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(epochs):</span>
-<span id="cb3-14"><a></a>    <span class="cf">if</span> (i <span class="op">%</span> <span class="dv">50</span>) <span class="op">==</span> <span class="dv">0</span> :</span>
-<span id="cb3-15"><a></a>        ax.plot(xlin,slp(xlin.reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)).data, alpha<span class="op">=</span>i<span class="op">/</span>epochs, color<span class="op">=</span><span class="st">'k'</span>)</span>
-<span id="cb3-16"><a></a>        slp.zero_grad()</span>
-<span id="cb3-17"><a></a>    loss <span class="op">=</span> lossfn(y.flatten(),slp(x))</span>
-<span id="cb3-18"><a></a>    <span class="co">#print(f"{i}: {loss.item()}")</span></span>
-<span id="cb3-19"><a></a>    <span class="co"># calculate gradient</span></span>
-<span id="cb3-20"><a></a>    loss.backward()</span>
-<span id="cb3-21"><a></a>    <span class="co"># access gradient &amp; use to descend</span></span>
-<span id="cb3-22"><a></a>    <span class="cf">for</span> p <span class="kw">in</span> slp.parameters():</span>
-<span id="cb3-23"><a></a>        <span class="cf">if</span> p.requires_grad:</span>
-<span id="cb3-24"><a></a>            p.data <span class="op">=</span> p.data <span class="op">-</span> stepscale<span class="op">*</span>p.grad.data</span>
-<span id="cb3-25"><a></a>            p.grad.data.zero_()</span>
-<span id="cb3-26"><a></a>    slp.zero_grad()</span>
-<span id="cb3-27"><a></a></span>
-<span id="cb3-28"><a></a>ax.plot(xlin, f(xlin), label<span class="op">=</span><span class="st">"f"</span>, lw<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb3-29"><a></a>ax.scatter(x.flatten(),y.flatten())</span>
-<span id="cb3-30"><a></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb3-2"><a aria-label="2"></a>sigma <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="cb3-3"><a aria-label="3"></a>torch.manual_seed(<span class="dv">987</span>)</span>
+<span id="cb3-4"><a aria-label="4"></a>x <span class="op">=</span> torch.randn(n,<span class="dv">1</span>)</span>
+<span id="cb3-5"><a aria-label="5"></a>f <span class="op">=</span> np.vectorize(<span class="kw">lambda</span> x:  np.sin(x)<span class="op">+</span>np.exp(<span class="op">-</span>x<span class="op">*</span>x)<span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>np.<span class="bu">abs</span>(x)))</span>
+<span id="cb3-6"><a aria-label="6"></a>y <span class="op">=</span> torch.tensor(f(x), dtype<span class="op">=</span>torch.float32) <span class="op">+</span> sigma<span class="op">*</span>torch.randn(x.shape)</span>
+<span id="cb3-7"><a aria-label="7"></a>slp <span class="op">=</span> SingleLayerPerceptron(<span class="dv">1</span>, <span class="dv">20</span>, nn.ReLU())</span>
+<span id="cb3-8"><a aria-label="8"></a>lossfn <span class="op">=</span> nn.MSELoss()</span>
+<span id="cb3-9"><a aria-label="9"></a>xlin <span class="op">=</span> torch.linspace(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">100</span>)</span>
+<span id="cb3-10"><a aria-label="10"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb3-11"><a aria-label="11"></a>epochs <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb3-12"><a aria-label="12"></a>stepscale <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="cb3-13"><a aria-label="13"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(epochs):</span>
+<span id="cb3-14"><a aria-label="14"></a>    <span class="cf">if</span> (i <span class="op">%</span> <span class="dv">50</span>) <span class="op">==</span> <span class="dv">0</span> :</span>
+<span id="cb3-15"><a aria-label="15"></a>        ax.plot(xlin,slp(xlin.reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)).data, alpha<span class="op">=</span>i<span class="op">/</span>epochs, color<span class="op">=</span><span class="st">'k'</span>)</span>
+<span id="cb3-16"><a aria-label="16"></a>        slp.zero_grad()</span>
+<span id="cb3-17"><a aria-label="17"></a>    loss <span class="op">=</span> lossfn(y.flatten(),slp(x))</span>
+<span id="cb3-18"><a aria-label="18"></a>    <span class="co">#print(f"{i}: {loss.item()}")</span></span>
+<span id="cb3-19"><a aria-label="19"></a>    <span class="co"># calculate gradient</span></span>
+<span id="cb3-20"><a aria-label="20"></a>    loss.backward()</span>
+<span id="cb3-21"><a aria-label="21"></a>    <span class="co"># access gradient &amp; use to descend</span></span>
+<span id="cb3-22"><a aria-label="22"></a>    <span class="cf">for</span> p <span class="kw">in</span> slp.parameters():</span>
+<span id="cb3-23"><a aria-label="23"></a>        <span class="cf">if</span> p.requires_grad:</span>
+<span id="cb3-24"><a aria-label="24"></a>            p.data <span class="op">=</span> p.data <span class="op">-</span> stepscale<span class="op">*</span>p.grad.data</span>
+<span id="cb3-25"><a aria-label="25"></a>            p.grad.data.zero_()</span>
+<span id="cb3-26"><a aria-label="26"></a>    slp.zero_grad()</span>
+<span id="cb3-27"><a aria-label="27"></a></span>
+<span id="cb3-28"><a aria-label="28"></a>ax.plot(xlin, f(xlin), label<span class="op">=</span><span class="st">"f"</span>, lw<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb3-29"><a aria-label="29"></a>ax.scatter(x.flatten(),y.flatten())</span>
+<span id="cb3-30"><a aria-label="30"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -440,52 +446,1052 @@ f(x_i; \mathbf{w},\mathbf{b}) =
 </section>
 <section id="multi-layer-perceptron" class="slide level2">
 <h2>Multi Layer Perceptron</h2>
-<div id="d671e7b7" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="kw">def</span> multilayer(d,width,depth,activation<span class="op">=</span>nn.ReLU()):</span>
-<span id="cb4-2"><a></a>    mlp <span class="op">=</span> nn.Sequential(</span>
-<span id="cb4-3"><a></a>        nn.Linear(d,width),</span>
-<span id="cb4-4"><a></a>        activation</span>
-<span id="cb4-5"><a></a>    )</span>
-<span id="cb4-6"><a></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(depth<span class="op">-</span><span class="dv">1</span>):</span>
-<span id="cb4-7"><a></a>        mlp.add_module(<span class="ss">f"layer </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>,nn.Linear(width, width))</span>
-<span id="cb4-8"><a></a>        mlp.add_module(<span class="ss">f"activation </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>,activation)</span>
-<span id="cb4-9"><a></a></span>
-<span id="cb4-10"><a></a></span>
-<span id="cb4-11"><a></a>    mlp.add_module(<span class="st">"output"</span>,nn.Linear(width,<span class="dv">1</span>))</span>
-<span id="cb4-12"><a></a>    <span class="cf">return</span>(mlp)</span>
-<span id="cb4-13"><a></a></span>
-<span id="cb4-14"><a></a>mlp<span class="op">=</span>multilayer(<span class="dv">2</span>, <span class="dv">10</span>, <span class="dv">1</span>, nn.ReLU())</span>
-<span id="cb4-15"><a></a></span>
-<span id="cb4-16"><a></a><span class="kw">def</span> count_parameters(model):</span>
-<span id="cb4-17"><a></a>    <span class="cf">return</span> <span class="bu">sum</span>(p.numel() <span class="cf">for</span> p <span class="kw">in</span> model.parameters() <span class="cf">if</span> p.requires_grad)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="b08c7ee6" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="kw">def</span> multilayer(d,width,depth,activation<span class="op">=</span>nn.ReLU()):</span>
+<span id="cb4-2"><a aria-label="2"></a>    mlp <span class="op">=</span> nn.Sequential(</span>
+<span id="cb4-3"><a aria-label="3"></a>        nn.Linear(d,width, bias<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb4-4"><a aria-label="4"></a>        activation</span>
+<span id="cb4-5"><a aria-label="5"></a>    )</span>
+<span id="cb4-6"><a aria-label="6"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(depth<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb4-7"><a aria-label="7"></a>        mlp.add_module(<span class="ss">f"layer </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>,nn.Linear(width, width))</span>
+<span id="cb4-8"><a aria-label="8"></a>        mlp.add_module(<span class="ss">f"activation </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>,activation)</span>
+<span id="cb4-9"><a aria-label="9"></a></span>
+<span id="cb4-10"><a aria-label="10"></a></span>
+<span id="cb4-11"><a aria-label="11"></a>    mlp.add_module(<span class="st">"output"</span>,nn.Linear(width,<span class="dv">1</span>))</span>
+<span id="cb4-12"><a aria-label="12"></a>    <span class="cf">return</span>(mlp)</span>
+<span id="cb4-13"><a aria-label="13"></a></span>
+<span id="cb4-14"><a aria-label="14"></a>mlp<span class="op">=</span>multilayer(<span class="dv">2</span>, <span class="dv">10</span>, <span class="dv">1</span>, nn.ReLU())</span>
+<span id="cb4-15"><a aria-label="15"></a></span>
+<span id="cb4-16"><a aria-label="16"></a><span class="kw">def</span> count_parameters(model):</span>
+<span id="cb4-17"><a aria-label="17"></a>    <span class="cf">return</span> <span class="bu">sum</span>(p.numel() <span class="cf">for</span> p <span class="kw">in</span> model.parameters() <span class="cf">if</span> p.requires_grad)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="multi-layer-perceptron-1" class="slide level2">
 <h2>Multi Layer Perceptron</h2>
-<div id="1942c769" class="cell" data-execution_count="6">
+<div id="fc2ebf58" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>mlp <span class="op">=</span> multilayer(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">4</span>,nn.ReLU())</span>
-<span id="cb5-2"><a></a><span class="bu">print</span>(count_parameters(mlp))</span>
-<span id="cb5-3"><a></a>optimizer <span class="op">=</span> torch.optim.Adam(mlp.parameters(), lr<span class="op">=</span><span class="fl">0.01</span>)</span>
-<span id="cb5-4"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb5-5"><a></a>epochs <span class="op">=</span> <span class="dv">1000</span></span>
-<span id="cb5-6"><a></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(epochs):</span>
-<span id="cb5-7"><a></a>    <span class="cf">if</span> (i <span class="op">%</span> <span class="dv">50</span>) <span class="op">==</span> <span class="dv">0</span> :</span>
-<span id="cb5-8"><a></a>        ax.plot(xlin,mlp(xlin.reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)).data, alpha<span class="op">=</span>i<span class="op">/</span>epochs, color<span class="op">=</span><span class="st">'k'</span>)</span>
-<span id="cb5-9"><a></a>        mlp.zero_grad()</span>
-<span id="cb5-10"><a></a>    loss <span class="op">=</span> lossfn(y,mlp(x))</span>
-<span id="cb5-11"><a></a>    <span class="co">#print(f"{i}: {loss.item()}")</span></span>
-<span id="cb5-12"><a></a>    optimizer.zero_grad()</span>
-<span id="cb5-13"><a></a>    loss.backward()</span>
-<span id="cb5-14"><a></a>    optimizer.step()</span>
-<span id="cb5-15"><a></a></span>
-<span id="cb5-16"><a></a>ax.plot(xlin, f(xlin), label<span class="op">=</span><span class="st">"f"</span>, lw<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb5-17"><a></a>ax.scatter(x.flatten(),y.flatten())</span>
-<span id="cb5-18"><a></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a>mlp <span class="op">=</span> multilayer(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">4</span>,nn.ReLU())</span>
+<span id="cb5-2"><a aria-label="2"></a><span class="bu">print</span>(count_parameters(mlp))</span>
+<span id="cb5-3"><a aria-label="3"></a>optimizer <span class="op">=</span> torch.optim.Adam(mlp.parameters(), lr<span class="op">=</span><span class="fl">0.01</span>)</span>
+<span id="cb5-4"><a aria-label="4"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb5-5"><a aria-label="5"></a>epochs <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb5-6"><a aria-label="6"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(epochs):</span>
+<span id="cb5-7"><a aria-label="7"></a>    <span class="cf">if</span> (i <span class="op">%</span> <span class="dv">50</span>) <span class="op">==</span> <span class="dv">0</span> :</span>
+<span id="cb5-8"><a aria-label="8"></a>        ax.plot(xlin,mlp(xlin.reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)).data, alpha<span class="op">=</span>i<span class="op">/</span>epochs, color<span class="op">=</span><span class="st">'k'</span>)</span>
+<span id="cb5-9"><a aria-label="9"></a>        mlp.zero_grad()</span>
+<span id="cb5-10"><a aria-label="10"></a>    loss <span class="op">=</span> lossfn(y,mlp(x))</span>
+<span id="cb5-11"><a aria-label="11"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>loss<span class="sc">.</span>item()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-12"><a aria-label="12"></a>    optimizer.zero_grad()</span>
+<span id="cb5-13"><a aria-label="13"></a>    loss.backward()</span>
+<span id="cb5-14"><a aria-label="14"></a>    optimizer.step()</span>
+<span id="cb5-15"><a aria-label="15"></a></span>
+<span id="cb5-16"><a aria-label="16"></a>ax.plot(xlin, f(xlin), label<span class="op">=</span><span class="st">"f"</span>, lw<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb5-17"><a aria-label="17"></a>ax.scatter(x.flatten(),y.flatten())</span>
+<span id="cb5-18"><a aria-label="18"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>73</code></pre>
+<pre><code>73
+0: 0.5855244398117065
+1: 0.5788913369178772
+2: 0.572568416595459
+3: 0.5664961934089661
+4: 0.5606109499931335
+5: 0.554928719997406
+6: 0.5494657754898071
+7: 0.5442381501197815
+8: 0.5392615795135498
+9: 0.5345514416694641
+10: 0.5301225781440735
+11: 0.5259891748428345
+12: 0.5221643447875977
+13: 0.518659770488739
+14: 0.5154853463172913
+15: 0.5126491189002991
+16: 0.510155975818634
+17: 0.5080077052116394
+18: 0.5062022805213928
+19: 0.5047329068183899
+20: 0.503587543964386
+21: 0.5027486681938171
+22: 0.5021921396255493
+23: 0.5018877983093262
+24: 0.5017994046211243
+25: 0.5018856525421143
+26: 0.5021015405654907
+27: 0.502400815486908
+28: 0.5027384757995605
+29: 0.5030739307403564
+30: 0.5033730268478394
+31: 0.5036104321479797
+32: 0.5037701725959778
+33: 0.5038456320762634
+34: 0.5038385987281799
+35: 0.5037573575973511
+36: 0.5036147832870483
+37: 0.5034269094467163
+38: 0.5032098293304443
+39: 0.5029798746109009
+40: 0.5027512907981873
+41: 0.5025356411933899
+42: 0.5023422241210938
+43: 0.5021766424179077
+44: 0.502042293548584
+45: 0.5019398331642151
+46: 0.5018678903579712
+47: 0.5018234252929688
+48: 0.5018025040626526
+49: 0.5018004775047302
+50: 0.5018125772476196
+51: 0.501833975315094
+52: 0.5018603205680847
+53: 0.5018879771232605
+54: 0.5019139647483826
+55: 0.5019357800483704
+56: 0.5019521713256836
+57: 0.5019620656967163
+58: 0.5019654631614685
+59: 0.5019624829292297
+60: 0.5019541382789612
+61: 0.5019411444664001
+62: 0.5019248127937317
+63: 0.5019065737724304
+64: 0.5018875598907471
+65: 0.5018687844276428
+66: 0.5018513202667236
+67: 0.5018360018730164
+68: 0.5018231868743896
+69: 0.5018131732940674
+70: 0.5018060207366943
+71: 0.501801609992981
+72: 0.5017996430397034
+73: 0.5017995238304138
+74: 0.5018008947372437
+75: 0.5018033385276794
+76: 0.5018061399459839
+77: 0.5018091201782227
+78: 0.501811683177948
+79: 0.5018137097358704
+80: 0.5018149614334106
+81: 0.5018154382705688
+82: 0.5018151998519897
+83: 0.5018142461776733
+84: 0.501812756061554
+85: 0.5018108487129211
+86: 0.5018088817596436
+87: 0.5018067955970764
+88: 0.5018048286437988
+89: 0.5018031597137451
+90: 0.5018016695976257
+91: 0.5018005967140198
+92: 0.5017998218536377
+93: 0.501799464225769
+94: 0.5017993450164795
+95: 0.501799464225769
+96: 0.5017997026443481
+97: 0.5018000602722168
+98: 0.5018004179000854
+99: 0.5018007159233093
+100: 0.5018010139465332
+101: 0.5018011331558228
+102: 0.5018011927604675
+103: 0.5018011927604675
+104: 0.501801073551178
+105: 0.5018008947372437
+106: 0.5018006563186646
+107: 0.5018003582954407
+108: 0.5018001794815063
+109: 0.5017999410629272
+110: 0.5017997622489929
+111: 0.5017995238304138
+112: 0.5017994046211243
+113: 0.5017993450164795
+114: 0.5017993450164795
+115: 0.5017993450164795
+116: 0.5017993450164795
+117: 0.5017994046211243
+118: 0.5017994046211243
+119: 0.501799464225769
+120: 0.5017995238304138
+121: 0.5017995238304138
+122: 0.5017996430397034
+123: 0.5017995238304138
+124: 0.5017995834350586
+125: 0.5017995238304138
+126: 0.5017995238304138
+127: 0.5017994046211243
+128: 0.5017994046211243
+129: 0.5017994046211243
+130: 0.5017994046211243
+131: 0.5017994046211243
+132: 0.5017993450164795
+133: 0.5017993450164795
+134: 0.5017993450164795
+135: 0.5017993450164795
+136: 0.5017993450164795
+137: 0.5017994046211243
+138: 0.5017994046211243
+139: 0.5017994046211243
+140: 0.5017993450164795
+141: 0.5017994046211243
+142: 0.5017993450164795
+143: 0.5017994046211243
+144: 0.5017993450164795
+145: 0.501799464225769
+146: 0.5017993450164795
+147: 0.5017994046211243
+148: 0.5017993450164795
+149: 0.5017993450164795
+150: 0.5017994046211243
+151: 0.5017993450164795
+152: 0.5017993450164795
+153: 0.5017994046211243
+154: 0.5017993450164795
+155: 0.5017993450164795
+156: 0.5017993450164795
+157: 0.5017993450164795
+158: 0.5017993450164795
+159: 0.5017993450164795
+160: 0.5017994046211243
+161: 0.5017994046211243
+162: 0.5017993450164795
+163: 0.5017993450164795
+164: 0.5017993450164795
+165: 0.5017993450164795
+166: 0.5017993450164795
+167: 0.5017994046211243
+168: 0.5017994046211243
+169: 0.5017994046211243
+170: 0.5017994046211243
+171: 0.5017993450164795
+172: 0.5017994046211243
+173: 0.5017993450164795
+174: 0.5017993450164795
+175: 0.5017993450164795
+176: 0.5017993450164795
+177: 0.5017993450164795
+178: 0.5017993450164795
+179: 0.5017993450164795
+180: 0.5017994046211243
+181: 0.5017993450164795
+182: 0.5017993450164795
+183: 0.5017994046211243
+184: 0.5017993450164795
+185: 0.5017994046211243
+186: 0.5017993450164795
+187: 0.5017993450164795
+188: 0.5017993450164795
+189: 0.5017993450164795
+190: 0.5017994046211243
+191: 0.5017993450164795
+192: 0.5017993450164795
+193: 0.5017992854118347
+194: 0.5017993450164795
+195: 0.5017993450164795
+196: 0.5017994046211243
+197: 0.5017993450164795
+198: 0.5017993450164795
+199: 0.5017994046211243
+200: 0.5017993450164795
+201: 0.5017993450164795
+202: 0.5017993450164795
+203: 0.5017993450164795
+204: 0.5017993450164795
+205: 0.5017993450164795
+206: 0.5017993450164795
+207: 0.5017993450164795
+208: 0.5017994046211243
+209: 0.5017993450164795
+210: 0.5017993450164795
+211: 0.5017993450164795
+212: 0.5017993450164795
+213: 0.5017993450164795
+214: 0.5017993450164795
+215: 0.5017994046211243
+216: 0.5017993450164795
+217: 0.5017993450164795
+218: 0.5017994046211243
+219: 0.5017993450164795
+220: 0.5017993450164795
+221: 0.5017993450164795
+222: 0.5017993450164795
+223: 0.5017993450164795
+224: 0.5017993450164795
+225: 0.5017993450164795
+226: 0.5017993450164795
+227: 0.5017993450164795
+228: 0.5017993450164795
+229: 0.5017993450164795
+230: 0.5017993450164795
+231: 0.5017993450164795
+232: 0.5017994046211243
+233: 0.5017993450164795
+234: 0.5017993450164795
+235: 0.5017994046211243
+236: 0.5017993450164795
+237: 0.5017993450164795
+238: 0.5017993450164795
+239: 0.5017993450164795
+240: 0.5017993450164795
+241: 0.5017993450164795
+242: 0.5017993450164795
+243: 0.5017993450164795
+244: 0.5017993450164795
+245: 0.5017993450164795
+246: 0.5017993450164795
+247: 0.5017993450164795
+248: 0.5017993450164795
+249: 0.5017994046211243
+250: 0.5017994046211243
+251: 0.5017993450164795
+252: 0.5017994046211243
+253: 0.5017993450164795
+254: 0.5017993450164795
+255: 0.5017993450164795
+256: 0.5017993450164795
+257: 0.5017993450164795
+258: 0.5017993450164795
+259: 0.5017993450164795
+260: 0.5017993450164795
+261: 0.5017993450164795
+262: 0.5017993450164795
+263: 0.5017993450164795
+264: 0.5017993450164795
+265: 0.5017993450164795
+266: 0.5017993450164795
+267: 0.5017993450164795
+268: 0.5017993450164795
+269: 0.5017993450164795
+270: 0.5017994046211243
+271: 0.5017993450164795
+272: 0.5017993450164795
+273: 0.5017993450164795
+274: 0.5017993450164795
+275: 0.5017993450164795
+276: 0.5017993450164795
+277: 0.5017993450164795
+278: 0.5017993450164795
+279: 0.5017994046211243
+280: 0.5017994046211243
+281: 0.5017993450164795
+282: 0.5017993450164795
+283: 0.5017993450164795
+284: 0.5017993450164795
+285: 0.5017993450164795
+286: 0.5017993450164795
+287: 0.5017993450164795
+288: 0.5017993450164795
+289: 0.5017993450164795
+290: 0.5017993450164795
+291: 0.5017993450164795
+292: 0.5017993450164795
+293: 0.5017993450164795
+294: 0.5017993450164795
+295: 0.5017993450164795
+296: 0.5017993450164795
+297: 0.5017993450164795
+298: 0.5017993450164795
+299: 0.5017993450164795
+300: 0.5017993450164795
+301: 0.5017993450164795
+302: 0.5017993450164795
+303: 0.5017993450164795
+304: 0.5017993450164795
+305: 0.5017993450164795
+306: 0.5017993450164795
+307: 0.5017993450164795
+308: 0.5017993450164795
+309: 0.5017993450164795
+310: 0.5017993450164795
+311: 0.5017993450164795
+312: 0.5017993450164795
+313: 0.5017993450164795
+314: 0.5017993450164795
+315: 0.5017993450164795
+316: 0.5017993450164795
+317: 0.5017993450164795
+318: 0.5017993450164795
+319: 0.5017993450164795
+320: 0.5017993450164795
+321: 0.5017993450164795
+322: 0.5017993450164795
+323: 0.5017993450164795
+324: 0.5017993450164795
+325: 0.5017993450164795
+326: 0.5017993450164795
+327: 0.5017993450164795
+328: 0.5017993450164795
+329: 0.5017993450164795
+330: 0.5017993450164795
+331: 0.5017993450164795
+332: 0.5017993450164795
+333: 0.5017993450164795
+334: 0.5017993450164795
+335: 0.5017993450164795
+336: 0.5017993450164795
+337: 0.5017993450164795
+338: 0.5017993450164795
+339: 0.5017993450164795
+340: 0.5017993450164795
+341: 0.5017993450164795
+342: 0.5017993450164795
+343: 0.5017993450164795
+344: 0.5017993450164795
+345: 0.5017993450164795
+346: 0.5017993450164795
+347: 0.5017993450164795
+348: 0.5017993450164795
+349: 0.5017993450164795
+350: 0.5017993450164795
+351: 0.5017993450164795
+352: 0.5017993450164795
+353: 0.5017993450164795
+354: 0.5017993450164795
+355: 0.5017993450164795
+356: 0.5017993450164795
+357: 0.5017993450164795
+358: 0.5017993450164795
+359: 0.5017993450164795
+360: 0.5017993450164795
+361: 0.5017993450164795
+362: 0.5017993450164795
+363: 0.5017993450164795
+364: 0.5017993450164795
+365: 0.5017993450164795
+366: 0.5017993450164795
+367: 0.5017993450164795
+368: 0.5017993450164795
+369: 0.5017993450164795
+370: 0.5017993450164795
+371: 0.5017993450164795
+372: 0.5017993450164795
+373: 0.5017993450164795
+374: 0.5017993450164795
+375: 0.5017993450164795
+376: 0.5017993450164795
+377: 0.5017993450164795
+378: 0.5017993450164795
+379: 0.5017993450164795
+380: 0.5017993450164795
+381: 0.5017993450164795
+382: 0.5017993450164795
+383: 0.5017993450164795
+384: 0.5017993450164795
+385: 0.5017993450164795
+386: 0.5017993450164795
+387: 0.5017993450164795
+388: 0.5017993450164795
+389: 0.5017993450164795
+390: 0.5017993450164795
+391: 0.5017993450164795
+392: 0.5017993450164795
+393: 0.5017993450164795
+394: 0.5017993450164795
+395: 0.5017993450164795
+396: 0.5017993450164795
+397: 0.5017993450164795
+398: 0.5017993450164795
+399: 0.5017993450164795
+400: 0.5017993450164795
+401: 0.5017993450164795
+402: 0.5017993450164795
+403: 0.5017993450164795
+404: 0.5017993450164795
+405: 0.5017993450164795
+406: 0.5017993450164795
+407: 0.5017993450164795
+408: 0.5017993450164795
+409: 0.5017993450164795
+410: 0.5017993450164795
+411: 0.5017993450164795
+412: 0.5017993450164795
+413: 0.5017993450164795
+414: 0.5017993450164795
+415: 0.5017993450164795
+416: 0.5017993450164795
+417: 0.5017993450164795
+418: 0.5017993450164795
+419: 0.5017993450164795
+420: 0.5017993450164795
+421: 0.5017993450164795
+422: 0.5017993450164795
+423: 0.5017993450164795
+424: 0.5017993450164795
+425: 0.5017993450164795
+426: 0.5017993450164795
+427: 0.5017993450164795
+428: 0.5017993450164795
+429: 0.5017993450164795
+430: 0.5017993450164795
+431: 0.5017993450164795
+432: 0.5017993450164795
+433: 0.5017993450164795
+434: 0.5017993450164795
+435: 0.5017993450164795
+436: 0.5017993450164795
+437: 0.5017993450164795
+438: 0.5017993450164795
+439: 0.5017993450164795
+440: 0.5017993450164795
+441: 0.5017993450164795
+442: 0.5017993450164795
+443: 0.5017993450164795
+444: 0.5017993450164795
+445: 0.5017993450164795
+446: 0.5017993450164795
+447: 0.5017993450164795
+448: 0.5017993450164795
+449: 0.5017993450164795
+450: 0.5017993450164795
+451: 0.5017993450164795
+452: 0.5017993450164795
+453: 0.5017993450164795
+454: 0.5017993450164795
+455: 0.5017993450164795
+456: 0.5017993450164795
+457: 0.5017993450164795
+458: 0.5017993450164795
+459: 0.5017993450164795
+460: 0.5017993450164795
+461: 0.5017993450164795
+462: 0.5017993450164795
+463: 0.5017993450164795
+464: 0.5017993450164795
+465: 0.5017993450164795
+466: 0.5017993450164795
+467: 0.5017993450164795
+468: 0.5017993450164795
+469: 0.5017993450164795
+470: 0.5017993450164795
+471: 0.5017993450164795
+472: 0.5017993450164795
+473: 0.5017993450164795
+474: 0.5017993450164795
+475: 0.5017993450164795
+476: 0.5017993450164795
+477: 0.5017993450164795
+478: 0.5017993450164795
+479: 0.5017993450164795
+480: 0.5017993450164795
+481: 0.5017993450164795
+482: 0.5017993450164795
+483: 0.5017993450164795
+484: 0.5017993450164795
+485: 0.5017993450164795
+486: 0.5017993450164795
+487: 0.5017993450164795
+488: 0.5017993450164795
+489: 0.5017993450164795
+490: 0.5017993450164795
+491: 0.5017993450164795
+492: 0.5017993450164795
+493: 0.5017993450164795
+494: 0.5017993450164795
+495: 0.5017993450164795
+496: 0.5017993450164795
+497: 0.5017993450164795
+498: 0.5017993450164795
+499: 0.5017993450164795
+500: 0.5017993450164795
+501: 0.5017993450164795
+502: 0.5017993450164795
+503: 0.5017993450164795
+504: 0.5017993450164795
+505: 0.5017993450164795
+506: 0.5017993450164795
+507: 0.5017993450164795
+508: 0.5017993450164795
+509: 0.5017993450164795
+510: 0.5017993450164795
+511: 0.5017993450164795
+512: 0.5017993450164795
+513: 0.5017993450164795
+514: 0.5017993450164795
+515: 0.5017993450164795
+516: 0.5017993450164795
+517: 0.5017993450164795
+518: 0.5017993450164795
+519: 0.5017993450164795
+520: 0.5017993450164795
+521: 0.5017993450164795
+522: 0.5017993450164795
+523: 0.5017993450164795
+524: 0.5017993450164795
+525: 0.5017993450164795
+526: 0.5017993450164795
+527: 0.5017993450164795
+528: 0.5017993450164795
+529: 0.5017993450164795
+530: 0.5017993450164795
+531: 0.5017993450164795
+532: 0.5017993450164795
+533: 0.5017993450164795
+534: 0.5017993450164795
+535: 0.5017993450164795
+536: 0.5017993450164795
+537: 0.5017993450164795
+538: 0.5017993450164795
+539: 0.5017993450164795
+540: 0.5017993450164795
+541: 0.5017993450164795
+542: 0.5017993450164795
+543: 0.5017993450164795
+544: 0.5017993450164795
+545: 0.5017993450164795
+546: 0.5017993450164795
+547: 0.5017993450164795
+548: 0.5017993450164795
+549: 0.5017993450164795
+550: 0.5017993450164795
+551: 0.5017993450164795
+552: 0.5017993450164795
+553: 0.5017993450164795
+554: 0.5017993450164795
+555: 0.5017993450164795
+556: 0.5017993450164795
+557: 0.5017993450164795
+558: 0.5017993450164795
+559: 0.5017993450164795
+560: 0.5017993450164795
+561: 0.5017993450164795
+562: 0.5017993450164795
+563: 0.5017993450164795
+564: 0.5017993450164795
+565: 0.5017993450164795
+566: 0.5017993450164795
+567: 0.5017993450164795
+568: 0.5017993450164795
+569: 0.5017993450164795
+570: 0.5017993450164795
+571: 0.5017993450164795
+572: 0.5017993450164795
+573: 0.5017993450164795
+574: 0.5017993450164795
+575: 0.5017993450164795
+576: 0.5017993450164795
+577: 0.5017993450164795
+578: 0.5017993450164795
+579: 0.5017993450164795
+580: 0.5017993450164795
+581: 0.5017993450164795
+582: 0.5017993450164795
+583: 0.5017993450164795
+584: 0.5017993450164795
+585: 0.5017993450164795
+586: 0.5017993450164795
+587: 0.5017993450164795
+588: 0.5017993450164795
+589: 0.5017993450164795
+590: 0.5017993450164795
+591: 0.5017993450164795
+592: 0.5017993450164795
+593: 0.5017993450164795
+594: 0.5017993450164795
+595: 0.5017993450164795
+596: 0.5017993450164795
+597: 0.5017993450164795
+598: 0.5017993450164795
+599: 0.5017993450164795
+600: 0.5017993450164795
+601: 0.5017993450164795
+602: 0.5017993450164795
+603: 0.5017993450164795
+604: 0.5017993450164795
+605: 0.5017993450164795
+606: 0.5017993450164795
+607: 0.5017993450164795
+608: 0.5017993450164795
+609: 0.5017993450164795
+610: 0.5017993450164795
+611: 0.5017993450164795
+612: 0.5017993450164795
+613: 0.5017993450164795
+614: 0.5017993450164795
+615: 0.5017993450164795
+616: 0.5017993450164795
+617: 0.5017993450164795
+618: 0.5017993450164795
+619: 0.5017993450164795
+620: 0.5017993450164795
+621: 0.5017993450164795
+622: 0.5017993450164795
+623: 0.5017993450164795
+624: 0.5017993450164795
+625: 0.5017993450164795
+626: 0.5017993450164795
+627: 0.5017993450164795
+628: 0.5017993450164795
+629: 0.5017993450164795
+630: 0.5017993450164795
+631: 0.5017993450164795
+632: 0.5017993450164795
+633: 0.5017993450164795
+634: 0.5017993450164795
+635: 0.5017993450164795
+636: 0.5017993450164795
+637: 0.5017993450164795
+638: 0.5017993450164795
+639: 0.5017993450164795
+640: 0.5017993450164795
+641: 0.5017993450164795
+642: 0.5017993450164795
+643: 0.5017993450164795
+644: 0.5017993450164795
+645: 0.5017993450164795
+646: 0.5017993450164795
+647: 0.5017993450164795
+648: 0.5017993450164795
+649: 0.5017993450164795
+650: 0.5017993450164795
+651: 0.5017993450164795
+652: 0.5017993450164795
+653: 0.5017993450164795
+654: 0.5017993450164795
+655: 0.5017993450164795
+656: 0.5017993450164795
+657: 0.5017993450164795
+658: 0.5017993450164795
+659: 0.5017993450164795
+660: 0.5017993450164795
+661: 0.5017993450164795
+662: 0.5017993450164795
+663: 0.5017993450164795
+664: 0.5017993450164795
+665: 0.5017993450164795
+666: 0.5017993450164795
+667: 0.5017993450164795
+668: 0.5017993450164795
+669: 0.5017993450164795
+670: 0.5017993450164795
+671: 0.5017993450164795
+672: 0.5017993450164795
+673: 0.5017993450164795
+674: 0.5017993450164795
+675: 0.5017993450164795
+676: 0.5017993450164795
+677: 0.5017993450164795
+678: 0.5017993450164795
+679: 0.5017993450164795
+680: 0.5017993450164795
+681: 0.5017993450164795
+682: 0.5017993450164795
+683: 0.5017993450164795
+684: 0.5017993450164795
+685: 0.5017993450164795
+686: 0.5017993450164795
+687: 0.5017993450164795
+688: 0.5017993450164795
+689: 0.5017993450164795
+690: 0.5017993450164795
+691: 0.5017993450164795
+692: 0.5017993450164795
+693: 0.5017993450164795
+694: 0.5017993450164795
+695: 0.5017993450164795
+696: 0.5017993450164795
+697: 0.5017993450164795
+698: 0.5017993450164795
+699: 0.5017993450164795
+700: 0.5017993450164795
+701: 0.5017993450164795
+702: 0.5017993450164795
+703: 0.5017993450164795
+704: 0.5017993450164795
+705: 0.5017993450164795
+706: 0.5017993450164795
+707: 0.5017993450164795
+708: 0.5017993450164795
+709: 0.5017993450164795
+710: 0.5017993450164795
+711: 0.5017993450164795
+712: 0.5017993450164795
+713: 0.5017993450164795
+714: 0.5017993450164795
+715: 0.5017993450164795
+716: 0.5017993450164795
+717: 0.5017993450164795
+718: 0.5017993450164795
+719: 0.5017993450164795
+720: 0.5017993450164795
+721: 0.5017993450164795
+722: 0.5017993450164795
+723: 0.5017993450164795
+724: 0.5017993450164795
+725: 0.5017993450164795
+726: 0.5017993450164795
+727: 0.5017993450164795
+728: 0.5017993450164795
+729: 0.5017993450164795
+730: 0.5017993450164795
+731: 0.5017993450164795
+732: 0.5017993450164795
+733: 0.5017993450164795
+734: 0.5017993450164795
+735: 0.5017993450164795
+736: 0.5017993450164795
+737: 0.5017993450164795
+738: 0.5017993450164795
+739: 0.5017993450164795
+740: 0.5017993450164795
+741: 0.5017993450164795
+742: 0.5017993450164795
+743: 0.5017993450164795
+744: 0.5017993450164795
+745: 0.5017993450164795
+746: 0.5017993450164795
+747: 0.5017993450164795
+748: 0.5017993450164795
+749: 0.5017993450164795
+750: 0.5017993450164795
+751: 0.5017993450164795
+752: 0.5017993450164795
+753: 0.5017993450164795
+754: 0.5017993450164795
+755: 0.5017993450164795
+756: 0.5017993450164795
+757: 0.5017993450164795
+758: 0.5017993450164795
+759: 0.5017993450164795
+760: 0.5017993450164795
+761: 0.5017993450164795
+762: 0.5017993450164795
+763: 0.5017993450164795
+764: 0.5017993450164795
+765: 0.5017993450164795
+766: 0.5017993450164795
+767: 0.5017993450164795
+768: 0.5017993450164795
+769: 0.5017993450164795
+770: 0.5017993450164795
+771: 0.5017993450164795
+772: 0.5017993450164795
+773: 0.5017993450164795
+774: 0.5017993450164795
+775: 0.5017993450164795
+776: 0.5017993450164795
+777: 0.5017993450164795
+778: 0.5017993450164795
+779: 0.5017993450164795
+780: 0.5017993450164795
+781: 0.5017993450164795
+782: 0.5017993450164795
+783: 0.5017993450164795
+784: 0.5017993450164795
+785: 0.5017993450164795
+786: 0.5017993450164795
+787: 0.5017993450164795
+788: 0.5017993450164795
+789: 0.5017993450164795
+790: 0.5017993450164795
+791: 0.5017993450164795
+792: 0.5017993450164795
+793: 0.5017993450164795
+794: 0.5017993450164795
+795: 0.5017993450164795
+796: 0.5017993450164795
+797: 0.5017993450164795
+798: 0.5017993450164795
+799: 0.5017993450164795
+800: 0.5017993450164795
+801: 0.5017993450164795
+802: 0.5017993450164795
+803: 0.5017993450164795
+804: 0.5017993450164795
+805: 0.5017993450164795
+806: 0.5017993450164795
+807: 0.5017993450164795
+808: 0.5017993450164795
+809: 0.5017993450164795
+810: 0.5017993450164795
+811: 0.5017993450164795
+812: 0.5017993450164795
+813: 0.5017993450164795
+814: 0.5017993450164795
+815: 0.5017993450164795
+816: 0.5017993450164795
+817: 0.5017993450164795
+818: 0.5017993450164795
+819: 0.5017993450164795
+820: 0.5017993450164795
+821: 0.5017993450164795
+822: 0.5017993450164795
+823: 0.5017993450164795
+824: 0.5017993450164795
+825: 0.5017993450164795
+826: 0.5017993450164795
+827: 0.5017993450164795
+828: 0.5017993450164795
+829: 0.5017993450164795
+830: 0.5017993450164795
+831: 0.5017993450164795
+832: 0.5017993450164795
+833: 0.5017993450164795
+834: 0.5017993450164795
+835: 0.5017993450164795
+836: 0.5017993450164795
+837: 0.5017993450164795
+838: 0.5017993450164795
+839: 0.5017993450164795
+840: 0.5017993450164795
+841: 0.5017993450164795
+842: 0.5017993450164795
+843: 0.5017993450164795
+844: 0.5017993450164795
+845: 0.5017993450164795
+846: 0.5017993450164795
+847: 0.5017993450164795
+848: 0.5017993450164795
+849: 0.5017993450164795
+850: 0.5017993450164795
+851: 0.5017993450164795
+852: 0.5017993450164795
+853: 0.5017993450164795
+854: 0.5017993450164795
+855: 0.5017993450164795
+856: 0.5017993450164795
+857: 0.5017993450164795
+858: 0.5017993450164795
+859: 0.5017993450164795
+860: 0.5017993450164795
+861: 0.5017993450164795
+862: 0.5017993450164795
+863: 0.5017993450164795
+864: 0.5017993450164795
+865: 0.5017993450164795
+866: 0.5017993450164795
+867: 0.5017993450164795
+868: 0.5017993450164795
+869: 0.5017993450164795
+870: 0.5017993450164795
+871: 0.5017993450164795
+872: 0.5017993450164795
+873: 0.5017993450164795
+874: 0.5017993450164795
+875: 0.5017993450164795
+876: 0.5017993450164795
+877: 0.5017993450164795
+878: 0.5017993450164795
+879: 0.5017993450164795
+880: 0.5017993450164795
+881: 0.5017993450164795
+882: 0.5017993450164795
+883: 0.5017993450164795
+884: 0.5017993450164795
+885: 0.5017993450164795
+886: 0.5017993450164795
+887: 0.5017993450164795
+888: 0.5017993450164795
+889: 0.5017993450164795
+890: 0.5017993450164795
+891: 0.5017993450164795
+892: 0.5017993450164795
+893: 0.5017993450164795
+894: 0.5017993450164795
+895: 0.5017993450164795
+896: 0.5017993450164795
+897: 0.5017993450164795
+898: 0.5017993450164795
+899: 0.5017993450164795
+900: 0.5017993450164795
+901: 0.5017993450164795
+902: 0.5017993450164795
+903: 0.5017993450164795
+904: 0.5017993450164795
+905: 0.5017993450164795
+906: 0.5017993450164795
+907: 0.5017993450164795
+908: 0.5017993450164795
+909: 0.5017993450164795
+910: 0.5017993450164795
+911: 0.5017993450164795
+912: 0.5017993450164795
+913: 0.5017993450164795
+914: 0.5017993450164795
+915: 0.5017993450164795
+916: 0.5017993450164795
+917: 0.5017993450164795
+918: 0.5017993450164795
+919: 0.5017993450164795
+920: 0.5017993450164795
+921: 0.5017993450164795
+922: 0.5017993450164795
+923: 0.5017993450164795
+924: 0.5017993450164795
+925: 0.5017993450164795
+926: 0.5017993450164795
+927: 0.5017993450164795
+928: 0.5017993450164795
+929: 0.5017993450164795
+930: 0.5017993450164795
+931: 0.5017993450164795
+932: 0.5017993450164795
+933: 0.5017993450164795
+934: 0.5017993450164795
+935: 0.5017993450164795
+936: 0.5017993450164795
+937: 0.5017993450164795
+938: 0.5017993450164795
+939: 0.5017993450164795
+940: 0.5017993450164795
+941: 0.5017993450164795
+942: 0.5017993450164795
+943: 0.5017993450164795
+944: 0.5017993450164795
+945: 0.5017993450164795
+946: 0.5017993450164795
+947: 0.5017993450164795
+948: 0.5017993450164795
+949: 0.5017993450164795
+950: 0.5017993450164795
+951: 0.5017993450164795
+952: 0.5017993450164795
+953: 0.5017993450164795
+954: 0.5017993450164795
+955: 0.5017993450164795
+956: 0.5017993450164795
+957: 0.5017993450164795
+958: 0.5017993450164795
+959: 0.5017993450164795
+960: 0.5017993450164795
+961: 0.5017993450164795
+962: 0.5017993450164795
+963: 0.5017993450164795
+964: 0.5017993450164795
+965: 0.5017993450164795
+966: 0.5017993450164795
+967: 0.5017993450164795
+968: 0.5017993450164795
+969: 0.5017993450164795
+970: 0.5017993450164795
+971: 0.5017993450164795
+972: 0.5017993450164795
+973: 0.5017993450164795
+974: 0.5017993450164795
+975: 0.5017993450164795
+976: 0.5017993450164795
+977: 0.5017993450164795
+978: 0.5017993450164795
+979: 0.5017993450164795
+980: 0.5017993450164795
+981: 0.5017993450164795
+982: 0.5017993450164795
+983: 0.5017993450164795
+984: 0.5017993450164795
+985: 0.5017993450164795
+986: 0.5017993450164795
+987: 0.5017993450164795
+988: 0.5017993450164795
+989: 0.5017993450164795
+990: 0.5017993450164795
+991: 0.5017993450164795
+992: 0.5017993450164795
+993: 0.5017993450164795
+994: 0.5017993450164795
+995: 0.5017993450164795
+996: 0.5017993450164795
+997: 0.5017993450164795
+998: 0.5017993450164795
+999: 0.5017993450164795</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
@@ -515,71 +1521,71 @@ f(x_i; \mathbf{w},\mathbf{b}) =
 </section>
 <section id="double-descent" class="slide level2">
 <h2>Double Descent</h2>
-<div id="f9582523" class="cell" data-execution_count="7">
+<div id="867aeac3" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="im">from</span> joblib <span class="im">import</span> Parallel, delayed</span>
-<span id="cb7-2"><a></a><span class="co">#device = 'cuda' if torch.cuda.is_available() else 'cpu'</span></span>
-<span id="cb7-3"><a></a>device <span class="op">=</span> <span class="st">'cpu'</span> <span class="co"># problem is small, so not much help from cuda</span></span>
-<span id="cb7-4"><a></a>num_epochs <span class="op">=</span> <span class="dv">50</span></span>
-<span id="cb7-5"><a></a>sims <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb7-6"><a></a>maxw <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb7-7"><a></a></span>
-<span id="cb7-8"><a></a><span class="kw">def</span> doubledescentdemo(x, y, xtest, ytest, f, device<span class="op">=</span>device,</span>
-<span id="cb7-9"><a></a>                      num_epochs<span class="op">=</span>num_epochs, sims<span class="op">=</span>sims,</span>
-<span id="cb7-10"><a></a>                      maxw<span class="op">=</span>maxw, lr<span class="op">=</span><span class="fl">0.1</span>):</span>
-<span id="cb7-11"><a></a>    x<span class="op">=</span>x.to(device)</span>
-<span id="cb7-12"><a></a>    y<span class="op">=</span>y.to(device).reshape(x.shape[<span class="dv">0</span>],<span class="dv">1</span>)</span>
-<span id="cb7-13"><a></a>    fx <span class="op">=</span> f(x.T).reshape(y.shape).to(device)</span>
-<span id="cb7-14"><a></a>    ytest <span class="op">=</span> ytest.to(device).reshape(xtest.shape[<span class="dv">0</span>],<span class="dv">1</span>)</span>
-<span id="cb7-15"><a></a>    xtest <span class="op">=</span> xtest.to(device)</span>
-<span id="cb7-16"><a></a>    loss_fn <span class="op">=</span> nn.MSELoss().to(device)</span>
-<span id="cb7-17"><a></a></span>
-<span id="cb7-18"><a></a>    losses <span class="op">=</span> np.zeros([maxw,num_epochs,sims])</span>
-<span id="cb7-19"><a></a>    nonoise <span class="op">=</span> np.zeros([maxw,num_epochs,sims])</span>
-<span id="cb7-20"><a></a></span>
-<span id="cb7-21"><a></a>    <span class="kw">def</span> dd(w):</span>
-<span id="cb7-22"><a></a>        mlp <span class="op">=</span> multilayer(x.shape[<span class="dv">1</span>],w<span class="op">+</span><span class="dv">1</span>,<span class="dv">1</span>,nn.ReLU()).to(device)</span>
-<span id="cb7-23"><a></a>        optimizer <span class="op">=</span> torch.optim.Adam(mlp.parameters(), lr<span class="op">=</span>lr)</span>
-<span id="cb7-24"><a></a>        losses <span class="op">=</span> np.zeros(num_epochs)</span>
-<span id="cb7-25"><a></a>        nonoise<span class="op">=</span>np.zeros(num_epochs)</span>
-<span id="cb7-26"><a></a>        <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(num_epochs):</span>
-<span id="cb7-27"><a></a>            y_pred <span class="op">=</span> mlp(x)</span>
-<span id="cb7-28"><a></a>            loss <span class="op">=</span> loss_fn(y_pred, y)</span>
-<span id="cb7-29"><a></a>            optimizer.zero_grad()</span>
-<span id="cb7-30"><a></a>            loss.backward()</span>
-<span id="cb7-31"><a></a>            optimizer.step()</span>
-<span id="cb7-32"><a></a>            losses[n] <span class="op">=</span> loss_fn(mlp(xtest),ytest).item()</span>
-<span id="cb7-33"><a></a>            nonoise[n] <span class="op">=</span> loss_fn(y_pred, fx)</span>
-<span id="cb7-34"><a></a>            mlp.zero_grad()</span>
-<span id="cb7-35"><a></a>        <span class="cf">return</span>([losses, nonoise])</span>
-<span id="cb7-36"><a></a></span>
-<span id="cb7-37"><a></a>    <span class="cf">for</span> w <span class="kw">in</span> <span class="bu">range</span>(maxw):</span>
-<span id="cb7-38"><a></a>        foo<span class="op">=</span><span class="kw">lambda</span> s: dd(w)</span>
-<span id="cb7-39"><a></a>        <span class="bu">print</span>(<span class="ss">f"width </span><span class="sc">{</span>w<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb7-40"><a></a>        results <span class="op">=</span> Parallel(n_jobs<span class="op">=</span><span class="dv">20</span>)(delayed(foo)(s) <span class="cf">for</span> s <span class="kw">in</span> <span class="bu">range</span>(sims))</span>
-<span id="cb7-41"><a></a></span>
-<span id="cb7-42"><a></a>        <span class="cf">for</span> s <span class="kw">in</span> <span class="bu">range</span>(sims):</span>
-<span id="cb7-43"><a></a>            losses[w,:,s] <span class="op">=</span> results[s][<span class="dv">0</span>]</span>
-<span id="cb7-44"><a></a>            nonoise[w,:,s] <span class="op">=</span> results[s][<span class="dv">1</span>]</span>
-<span id="cb7-45"><a></a>    <span class="cf">return</span>([losses, nonoise])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="im">from</span> joblib <span class="im">import</span> Parallel, delayed</span>
+<span id="cb7-2"><a aria-label="2"></a><span class="co">#device = 'cuda' if torch.cuda.is_available() else 'cpu'</span></span>
+<span id="cb7-3"><a aria-label="3"></a>device <span class="op">=</span> <span class="st">'cpu'</span> <span class="co"># problem is small, so not much help from cuda</span></span>
+<span id="cb7-4"><a aria-label="4"></a>num_epochs <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb7-5"><a aria-label="5"></a>sims <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb7-6"><a aria-label="6"></a>maxw <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb7-7"><a aria-label="7"></a></span>
+<span id="cb7-8"><a aria-label="8"></a><span class="kw">def</span> doubledescentdemo(x, y, xtest, ytest, f, device<span class="op">=</span>device,</span>
+<span id="cb7-9"><a aria-label="9"></a>                      num_epochs<span class="op">=</span>num_epochs, sims<span class="op">=</span>sims,</span>
+<span id="cb7-10"><a aria-label="10"></a>                      maxw<span class="op">=</span>maxw, lr<span class="op">=</span><span class="fl">0.1</span>):</span>
+<span id="cb7-11"><a aria-label="11"></a>    x<span class="op">=</span>x.to(device)</span>
+<span id="cb7-12"><a aria-label="12"></a>    y<span class="op">=</span>y.to(device).reshape(x.shape[<span class="dv">0</span>],<span class="dv">1</span>)</span>
+<span id="cb7-13"><a aria-label="13"></a>    fx <span class="op">=</span> f(x.T).reshape(y.shape).to(device)</span>
+<span id="cb7-14"><a aria-label="14"></a>    ytest <span class="op">=</span> ytest.to(device).reshape(xtest.shape[<span class="dv">0</span>],<span class="dv">1</span>)</span>
+<span id="cb7-15"><a aria-label="15"></a>    xtest <span class="op">=</span> xtest.to(device)</span>
+<span id="cb7-16"><a aria-label="16"></a>    loss_fn <span class="op">=</span> nn.MSELoss().to(device)</span>
+<span id="cb7-17"><a aria-label="17"></a></span>
+<span id="cb7-18"><a aria-label="18"></a>    losses <span class="op">=</span> np.zeros([maxw,num_epochs,sims])</span>
+<span id="cb7-19"><a aria-label="19"></a>    nonoise <span class="op">=</span> np.zeros([maxw,num_epochs,sims])</span>
+<span id="cb7-20"><a aria-label="20"></a></span>
+<span id="cb7-21"><a aria-label="21"></a>    <span class="kw">def</span> dd(w):</span>
+<span id="cb7-22"><a aria-label="22"></a>        mlp <span class="op">=</span> multilayer(x.shape[<span class="dv">1</span>],w<span class="op">+</span><span class="dv">1</span>,<span class="dv">1</span>,nn.ReLU()).to(device)</span>
+<span id="cb7-23"><a aria-label="23"></a>        optimizer <span class="op">=</span> torch.optim.Adam(mlp.parameters(), lr<span class="op">=</span>lr)</span>
+<span id="cb7-24"><a aria-label="24"></a>        losses <span class="op">=</span> np.zeros(num_epochs)</span>
+<span id="cb7-25"><a aria-label="25"></a>        nonoise<span class="op">=</span>np.zeros(num_epochs)</span>
+<span id="cb7-26"><a aria-label="26"></a>        <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(num_epochs):</span>
+<span id="cb7-27"><a aria-label="27"></a>            y_pred <span class="op">=</span> mlp(x)</span>
+<span id="cb7-28"><a aria-label="28"></a>            loss <span class="op">=</span> loss_fn(y_pred, y)</span>
+<span id="cb7-29"><a aria-label="29"></a>            optimizer.zero_grad()</span>
+<span id="cb7-30"><a aria-label="30"></a>            loss.backward()</span>
+<span id="cb7-31"><a aria-label="31"></a>            optimizer.step()</span>
+<span id="cb7-32"><a aria-label="32"></a>            losses[n] <span class="op">=</span> loss_fn(mlp(xtest),ytest).item()</span>
+<span id="cb7-33"><a aria-label="33"></a>            nonoise[n] <span class="op">=</span> loss_fn(y_pred, fx)</span>
+<span id="cb7-34"><a aria-label="34"></a>            mlp.zero_grad()</span>
+<span id="cb7-35"><a aria-label="35"></a>        <span class="cf">return</span>([losses, nonoise])</span>
+<span id="cb7-36"><a aria-label="36"></a></span>
+<span id="cb7-37"><a aria-label="37"></a>    <span class="cf">for</span> w <span class="kw">in</span> <span class="bu">range</span>(maxw):</span>
+<span id="cb7-38"><a aria-label="38"></a>        foo<span class="op">=</span><span class="kw">lambda</span> s: dd(w)</span>
+<span id="cb7-39"><a aria-label="39"></a>        <span class="bu">print</span>(<span class="ss">f"width </span><span class="sc">{</span>w<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-40"><a aria-label="40"></a>        results <span class="op">=</span> Parallel(n_jobs<span class="op">=</span><span class="dv">20</span>)(delayed(foo)(s) <span class="cf">for</span> s <span class="kw">in</span> <span class="bu">range</span>(sims))</span>
+<span id="cb7-41"><a aria-label="41"></a></span>
+<span id="cb7-42"><a aria-label="42"></a>        <span class="cf">for</span> s <span class="kw">in</span> <span class="bu">range</span>(sims):</span>
+<span id="cb7-43"><a aria-label="43"></a>            losses[w,:,s] <span class="op">=</span> results[s][<span class="dv">0</span>]</span>
+<span id="cb7-44"><a aria-label="44"></a>            nonoise[w,:,s] <span class="op">=</span> results[s][<span class="dv">1</span>]</span>
+<span id="cb7-45"><a aria-label="45"></a>    <span class="cf">return</span>([losses, nonoise])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
 <section id="double-descent-1" class="slide level2">
 <h2>Double Descent</h2>
-<div id="3b08f4e4" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.exp(x[<span class="dv">0</span>]<span class="op">-</span>x[<span class="dv">1</span>])</span>
-<span id="cb8-2"><a></a>n <span class="op">=</span> <span class="dv">20</span></span>
-<span id="cb8-3"><a></a>torch.manual_seed(<span class="dv">1234</span>)</span>
-<span id="cb8-4"><a></a>dimx <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb8-5"><a></a>x <span class="op">=</span> torch.rand(n,dimx)</span>
-<span id="cb8-6"><a></a>xtest <span class="op">=</span> torch.rand(n,dimx)</span>
-<span id="cb8-7"><a></a>sigma <span class="op">=</span> <span class="fl">1.5</span></span>
-<span id="cb8-8"><a></a>y <span class="op">=</span> f(x.T) <span class="op">+</span> sigma<span class="op">*</span>torch.randn(x.shape[<span class="dv">0</span>])</span>
-<span id="cb8-9"><a></a>ytest <span class="op">=</span> f(xtest.T) <span class="op">+</span> sigma<span class="op">*</span>torch.randn(xtest.shape[<span class="dv">0</span>])</span>
-<span id="cb8-10"><a></a>lr <span class="op">=</span> <span class="fl">0.01</span></span>
-<span id="cb8-11"><a></a>dd <span class="op">=</span> doubledescentdemo(x, y, xtest, ytest, f, lr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="bd4ae339" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.exp(x[<span class="dv">0</span>]<span class="op">-</span>x[<span class="dv">1</span>])</span>
+<span id="cb8-2"><a aria-label="2"></a>n <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb8-3"><a aria-label="3"></a>torch.manual_seed(<span class="dv">1234</span>)</span>
+<span id="cb8-4"><a aria-label="4"></a>dimx <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb8-5"><a aria-label="5"></a>x <span class="op">=</span> torch.rand(n,dimx)</span>
+<span id="cb8-6"><a aria-label="6"></a>xtest <span class="op">=</span> torch.rand(n,dimx)</span>
+<span id="cb8-7"><a aria-label="7"></a>sigma <span class="op">=</span> <span class="fl">1.5</span></span>
+<span id="cb8-8"><a aria-label="8"></a>y <span class="op">=</span> f(x.T) <span class="op">+</span> sigma<span class="op">*</span>torch.randn(x.shape[<span class="dv">0</span>])</span>
+<span id="cb8-9"><a aria-label="9"></a>ytest <span class="op">=</span> f(xtest.T) <span class="op">+</span> sigma<span class="op">*</span>torch.randn(xtest.shape[<span class="dv">0</span>])</span>
+<span id="cb8-10"><a aria-label="10"></a>lr <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb8-11"><a aria-label="11"></a>dd <span class="op">=</span> doubledescentdemo(x, y, xtest, ytest, f, lr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>width 0</code></pre>
 </div>
@@ -598,39 +1604,39 @@ width 9</code></pre>
 </section>
 <section id="double-descent-2" class="slide level2">
 <h2>Double Descent</h2>
-<div id="6c7e15bc" class="cell" data-execution_count="9">
+<div id="df0e6a3f" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="kw">def</span> plotdd(losses, nonoise):</span>
-<span id="cb11-2"><a></a>    fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">2</span>)</span>
-<span id="cb11-3"><a></a>    ax <span class="op">=</span> ax.flatten()</span>
-<span id="cb11-4"><a></a>    ax[<span class="dv">0</span>].imshow(losses, cmap<span class="op">=</span><span class="st">'plasma'</span>)</span>
-<span id="cb11-5"><a></a>    ax[<span class="dv">0</span>].set_title(<span class="st">'Test Loss'</span>)</span>
-<span id="cb11-6"><a></a>    ax[<span class="dv">0</span>].set_xlabel(<span class="st">'epoch'</span>)</span>
-<span id="cb11-7"><a></a>    ax[<span class="dv">0</span>].set_ylabel(<span class="st">'width'</span>)</span>
-<span id="cb11-8"><a></a>    ax[<span class="dv">1</span>].imshow(nonoise, cmap<span class="op">=</span><span class="st">'plasma'</span>)</span>
-<span id="cb11-9"><a></a>    ax[<span class="dv">1</span>].set_title(<span class="st">'error in f'</span>)</span>
-<span id="cb11-10"><a></a>    ax[<span class="dv">1</span>].set_xlabel(<span class="st">'epoch'</span>)</span>
-<span id="cb11-11"><a></a>    ax[<span class="dv">1</span>].set_ylabel(<span class="st">'width'</span>)</span>
-<span id="cb11-12"><a></a></span>
-<span id="cb11-13"><a></a>    ws <span class="op">=</span> [<span class="dv">0</span>,<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">8</span>]  <span class="co">#10, 12, 19]</span></span>
-<span id="cb11-14"><a></a>    <span class="cf">for</span> w <span class="kw">in</span> ws:</span>
-<span id="cb11-15"><a></a>        ax[<span class="dv">2</span>].plot(<span class="bu">range</span>(losses.shape[<span class="dv">1</span>]),losses[w,:], label<span class="op">=</span><span class="ss">f"width=</span><span class="sc">{</span>w<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb11-16"><a></a>        ax[<span class="dv">3</span>].plot(<span class="bu">range</span>(nonoise.shape[<span class="dv">1</span>]),nonoise[w,:], label<span class="op">=</span><span class="ss">f"width=</span><span class="sc">{</span>w<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb11-17"><a></a></span>
-<span id="cb11-18"><a></a>    ax[<span class="dv">2</span>].set_xlabel(<span class="st">'epoch'</span>)</span>
-<span id="cb11-19"><a></a>    ax[<span class="dv">2</span>].set_ylabel(<span class="st">'test loss'</span>)</span>
-<span id="cb11-20"><a></a>    ax[<span class="dv">2</span>].legend()</span>
-<span id="cb11-21"><a></a>    ax[<span class="dv">3</span>].set_xlabel(<span class="st">'epoch'</span>)</span>
-<span id="cb11-22"><a></a>    ax[<span class="dv">3</span>].set_ylabel(<span class="st">'error in f'</span>)</span>
-<span id="cb11-23"><a></a>    ax[<span class="dv">3</span>].legend()</span>
-<span id="cb11-24"><a></a></span>
-<span id="cb11-25"><a></a>    fig.tight_layout()</span>
-<span id="cb11-26"><a></a></span>
-<span id="cb11-27"><a></a>    <span class="cf">return</span>(fig)</span>
-<span id="cb11-28"><a></a></span>
-<span id="cb11-29"><a></a>fig<span class="op">=</span>plotdd(dd[<span class="dv">0</span>].mean(axis<span class="op">=</span><span class="dv">2</span>), dd[<span class="dv">1</span>].mean(axis<span class="op">=</span><span class="dv">2</span>))</span>
-<span id="cb11-30"><a></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a><span class="kw">def</span> plotdd(losses, nonoise):</span>
+<span id="cb11-2"><a aria-label="2"></a>    fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb11-3"><a aria-label="3"></a>    ax <span class="op">=</span> ax.flatten()</span>
+<span id="cb11-4"><a aria-label="4"></a>    ax[<span class="dv">0</span>].imshow(losses, cmap<span class="op">=</span><span class="st">'plasma'</span>)</span>
+<span id="cb11-5"><a aria-label="5"></a>    ax[<span class="dv">0</span>].set_title(<span class="st">'Test Loss'</span>)</span>
+<span id="cb11-6"><a aria-label="6"></a>    ax[<span class="dv">0</span>].set_xlabel(<span class="st">'epoch'</span>)</span>
+<span id="cb11-7"><a aria-label="7"></a>    ax[<span class="dv">0</span>].set_ylabel(<span class="st">'width'</span>)</span>
+<span id="cb11-8"><a aria-label="8"></a>    ax[<span class="dv">1</span>].imshow(nonoise, cmap<span class="op">=</span><span class="st">'plasma'</span>)</span>
+<span id="cb11-9"><a aria-label="9"></a>    ax[<span class="dv">1</span>].set_title(<span class="st">'error in f'</span>)</span>
+<span id="cb11-10"><a aria-label="10"></a>    ax[<span class="dv">1</span>].set_xlabel(<span class="st">'epoch'</span>)</span>
+<span id="cb11-11"><a aria-label="11"></a>    ax[<span class="dv">1</span>].set_ylabel(<span class="st">'width'</span>)</span>
+<span id="cb11-12"><a aria-label="12"></a></span>
+<span id="cb11-13"><a aria-label="13"></a>    ws <span class="op">=</span> [<span class="dv">0</span>,<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">8</span>]  <span class="co">#10, 12, 19]</span></span>
+<span id="cb11-14"><a aria-label="14"></a>    <span class="cf">for</span> w <span class="kw">in</span> ws:</span>
+<span id="cb11-15"><a aria-label="15"></a>        ax[<span class="dv">2</span>].plot(<span class="bu">range</span>(losses.shape[<span class="dv">1</span>]),losses[w,:], label<span class="op">=</span><span class="ss">f"width=</span><span class="sc">{</span>w<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb11-16"><a aria-label="16"></a>        ax[<span class="dv">3</span>].plot(<span class="bu">range</span>(nonoise.shape[<span class="dv">1</span>]),nonoise[w,:], label<span class="op">=</span><span class="ss">f"width=</span><span class="sc">{</span>w<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb11-17"><a aria-label="17"></a></span>
+<span id="cb11-18"><a aria-label="18"></a>    ax[<span class="dv">2</span>].set_xlabel(<span class="st">'epoch'</span>)</span>
+<span id="cb11-19"><a aria-label="19"></a>    ax[<span class="dv">2</span>].set_ylabel(<span class="st">'test loss'</span>)</span>
+<span id="cb11-20"><a aria-label="20"></a>    ax[<span class="dv">2</span>].legend()</span>
+<span id="cb11-21"><a aria-label="21"></a>    ax[<span class="dv">3</span>].set_xlabel(<span class="st">'epoch'</span>)</span>
+<span id="cb11-22"><a aria-label="22"></a>    ax[<span class="dv">3</span>].set_ylabel(<span class="st">'error in f'</span>)</span>
+<span id="cb11-23"><a aria-label="23"></a>    ax[<span class="dv">3</span>].legend()</span>
+<span id="cb11-24"><a aria-label="24"></a></span>
+<span id="cb11-25"><a aria-label="25"></a>    fig.tight_layout()</span>
+<span id="cb11-26"><a aria-label="26"></a></span>
+<span id="cb11-27"><a aria-label="27"></a>    <span class="cf">return</span>(fig)</span>
+<span id="cb11-28"><a aria-label="28"></a></span>
+<span id="cb11-29"><a aria-label="29"></a>fig<span class="op">=</span>plotdd(dd[<span class="dv">0</span>].mean(axis<span class="op">=</span><span class="dv">2</span>), dd[<span class="dv">1</span>].mean(axis<span class="op">=</span><span class="dv">2</span>))</span>
+<span id="cb11-30"><a aria-label="30"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -643,13 +1649,13 @@ width 9</code></pre>
 </section>
 <section id="double-descent-low-noise" class="slide level2">
 <h2>Double Descent: Low Noise</h2>
-<div id="a8a8891d" class="cell" data-execution_count="10">
+<div id="1eef2388" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a>sigma <span class="op">=</span> <span class="fl">0.01</span></span>
-<span id="cb12-2"><a></a>y <span class="op">=</span> f(x.T) <span class="op">+</span> sigma<span class="op">*</span>torch.randn(x.shape[<span class="dv">0</span>])</span>
-<span id="cb12-3"><a></a>ytest <span class="op">=</span> f(xtest.T) <span class="op">+</span> sigma<span class="op">*</span>torch.randn(xtest.shape[<span class="dv">0</span>])</span>
-<span id="cb12-4"><a></a>ddlowsig <span class="op">=</span> doubledescentdemo(x,y,xtest,ytest,f, lr<span class="op">=</span><span class="fl">0.05</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a>sigma <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb12-2"><a aria-label="2"></a>y <span class="op">=</span> f(x.T) <span class="op">+</span> sigma<span class="op">*</span>torch.randn(x.shape[<span class="dv">0</span>])</span>
+<span id="cb12-3"><a aria-label="3"></a>ytest <span class="op">=</span> f(xtest.T) <span class="op">+</span> sigma<span class="op">*</span>torch.randn(xtest.shape[<span class="dv">0</span>])</span>
+<span id="cb12-4"><a aria-label="4"></a>ddlowsig <span class="op">=</span> doubledescentdemo(x,y,xtest,ytest,f, lr<span class="op">=</span><span class="fl">0.05</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>width 0
@@ -667,11 +1673,11 @@ width 9</code></pre>
 </section>
 <section id="double-descent-low-noise-1" class="slide level2">
 <h2>Double Descent: Low Noise</h2>
-<div id="70d7c702" class="cell" data-execution_count="11">
+<div id="3067fdca" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>fig<span class="op">=</span>plotdd(ddlowsig[<span class="dv">0</span>].mean(axis<span class="op">=</span><span class="dv">2</span>), ddlowsig[<span class="dv">1</span>].mean(axis<span class="op">=</span><span class="dv">2</span>))</span>
-<span id="cb14-2"><a></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a>fig<span class="op">=</span>plotdd(ddlowsig[<span class="dv">0</span>].mean(axis<span class="op">=</span><span class="dv">2</span>), ddlowsig[<span class="dv">1</span>].mean(axis<span class="op">=</span><span class="dv">2</span>))</span>
+<span id="cb14-2"><a aria-label="2"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
