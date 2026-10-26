@@ -23,7 +23,7 @@ The objective of the final project is to analyze the causal effect of some polic
 
 - The final project should be completed alone or with a single partner in a group of 2. If you choose to work with a partner, both students should submit the final report and both students will receive the same grade.
 
-- The project should include two documents, a PDF report and a Jupyter notebook.
+- The project should include two documents: a PDF report and a Jupyter notebook (or other well-documented, reproducible, collection of code).
 
 - The report should be written in clear, concise language and should be well-organized. It should include the following sections: Introduction, Data, Methods, Results, and Conclusion.
 
@@ -33,16 +33,16 @@ The objective of the final project is to analyze the causal effect of some polic
 
 - The accompanying code should be well-documented, commented, and easy to follow. It should also be reproducible, meaning that the code should always produce the same results when run from start to finish.
 
-- There is no minimum or maximum length for the report or the code, but it should be long enough to clearly explain the project and the results and include the necessary details. Longer is not better. AI has made it all too easy to generate lots of low-information text. Be concise.
+- Aim for a maximum length of 2500 words (about 10 pages if double spaced with a 12 point font, although it may be longer with figures and tables) for the report. There is no minimum length. Longer is not better. AI has made it all too easy to generate lots of low-information text. Be concise.
 
 - Similarly, there are no specific formatting requirements (e.g. double-spaced, APA style, etc.), but the report should be well-formatted and easy to read.
 
-- You are free to use data from previously published studies. However, all sources should be cited. Further, you must explain what you do that is new or different from the previous work.
+- You are free to use data from previously published studies. All sources should be cited. You must explain what you do that is new or different from the previous work.
 
 - You are encouraged to share drafts of your project at any stage with the instructors and TAs.
 
 **Deadlines:**
 
-- November 13: a one page project proposal is due. This date is firm to allow time for peer-review. The proposal should be 1-2 pages. It should describe the research question, the causal effect to be studied, and the intended method.
+- November 13: a one page project proposal is due. This date is firm to allow time for peer-review. The proposal should be 1-2 pages. It should describe the research question, the causal effect to be studied, the intended method, and the intended data.
 - November 16-November 25: exact date to be determined. Peer-review. In an exam environment (either in class or scheduled in a computer lab), each student will review 4 randomly assigned proposals.
 - December 18: project due.
