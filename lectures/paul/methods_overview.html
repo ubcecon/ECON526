@@ -304,7 +304,7 @@ Y(1), Y(0) | D \, \Rightarrow\, \Er[Y(1) | D = 1] - \Er[Y(0) | D = 0] = \Er[Y(1)
 </section>
 <section id="randomized-experiment" class="slide level2">
 <h2>Randomized experiment</h2>
-<div id="6d73c6e7" class="cell" data-execution_count="2">
+<div id="6d73c6e7" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -349,7 +349,7 @@ Y(1), Y(0) \indep D | X
 </section>
 <section id="matching" class="slide level2">
 <h2>Matching</h2>
-<div id="001005bd" class="cell" data-execution_count="3">
+<div id="001005bd" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -367,35 +367,25 @@ Y(1), Y(0) \indep D | X
 <section id="difference-in-differences-compare-changes" class="slide level2">
 <h2>Difference in differences: compare changes</h2>
 <ul>
-<li><strong>The district expands tutoring in some schools this year, but not in others.</strong> Compare graduation rates before and after the expansion:</li>
-</ul>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th></th>
-<th style="text-align: right;">Before</th>
-<th style="text-align: right;">After</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Expansion schools</td>
-<td style="text-align: right;"><span class="math inline">\(Y_0(1)\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(Y_1(1)\)</span></td>
-</tr>
-<tr class="even">
-<td>Other schools</td>
-<td style="text-align: right;"><span class="math inline">\(Y_0(0)\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(Y_1(0)\)</span></td>
-</tr>
-</tbody>
-</table>
+<li><p><strong>The district expands tutoring in some schools this year, but not in others.</strong> Compare graduation rates before and after the expansion:</p>
 <ul>
-<li><p>Difference in difference: <span class="math display">\[
-\underbrace{(Y_1(1)-Y_0(0))}_{\text{treated city's change}}
--\underbrace{(Y_1(1)-Y_0(0))}_{\text{comparison city's change}}
-\]</span></p></li>
-<li><p>The other schools’ change stands in for expansion schools’ missing no-tutoring-expansion trend.</p></li>
+<li>Potential outcomes <span class="math inline">\(Y_{it}(d)\)</span>
+<ul>
+<li>Making these only depend on current <span class="math inline">\(d\)</span> implies (i) no anticipation (ii) no spillovers</li>
+</ul></li>
+<li>Observe <span class="math inline">\(Y_{it} = Y_{it}(D_{it})\)</span></li>
+</ul></li>
+</ul>
+<p>Observed Outcomes | | Before | After | |—|—:|—:| | Expansion schools | <span class="math inline">\(Y_{i0}(0)\)</span> | <span class="math inline">\(Y_{i1}(1)\)</span> | | Other schools | <span class="math inline">\(Y_{j0}(0)\)</span> | <span class="math inline">\(Y_{j1}(0)\)</span> |</p>
+<ul>
+<li>Difference in difference:</li>
+</ul>
+<p><span class="math display">\[
+\underbrace{(Y_{i1}(1)-Y_{i0}(0))}_{\text{treated school's change}}
+-\underbrace{(Y_{j1}(1)-Y_{j0}(0))}_{\text{comparison school's change}}
+\]</span></p>
+<ul>
+<li>The other schools’ change stands in for expansion schools’ missing no-tutoring-expansion trend.</li>
 </ul>
 </section>
 <section id="difference-in-differences" class="slide level2">
@@ -410,12 +400,17 @@ Y(1), Y(0) \indep D | X
 </div>
 <div class="callout-content">
 <p><strong>Key assumption: parallel trends.</strong> Without the expansion, graduation rates in the two sets of schools would have changed similarly. <span class="math display">\[
-\underbrace{\Er[Y_1(0) - Y_0(0) | D=1]}_{\text{unobserved}} = \underbrace{\Er[Y_1(0) - Y_0(0) | D=0]}_{\text{observed}}
+\underbrace{\Er[\textcolor{red}{Y_{i1}(0)} - Y_{i0}(0) | D_{i1}=1]}_{\text{\textcolor{red}{unobserved}}} = \underbrace{\Er[Y_{i1}(0) - Y_{i0}(0) | D_{i1}=0]}_{\text{observed}}
+\]</span> - Implies: <span class="math display">\[
+\begin{align*}
+\text{DiD} = &amp; \Er[Y_{i1}(1) - Y_{i0}(0) | D_{i1}=1] - \Er[Y_{i1}(0) - Y_{i0}(0) | D_{i1}=0] \\
+= &amp; \Er[Y_{i1}(1) - Y_{i0}(0) | D_{i1}=1] - \Er[\textcolor{red}{Y_{i1}(0)} - Y_{i0}(0) | D_{i1}=1] \\
+= &amp; \Er[Y_{i1}(1) - \textcolor{red}{Y_{i1}(0)} | D_{i1}=1] = \text{ATT}
 \]</span></p>
 </div>
 </div>
 </div>
-<div id="2ac28643" class="cell" data-execution_count="4">
+<div id="2ac28643" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -424,6 +419,28 @@ Y(1), Y(0) \indep D | X
 </div>
 </div>
 </div>
+</section>
+<section id="assessing-parallel-trends" class="slide level2">
+<h2>Assessing Parallel Trends</h2>
+<ul>
+<li>Thinking about how treatment was assigned helps assess plausibility of parallel trends</li>
+<li>Self-selection into treatment can be problematic
+<ul>
+<li>E.g. if schools expanded tutoring because teachers noticed that students were increasingly struggling and the teachers expected graduation rates to fall
+<ul>
+<li><span class="math inline">\(\Er[\textcolor{red}{Y_{i1}(0)} - Y_{i0}(0) | D_{i1}=1] \neq \Er[Y_{i1}(0) - Y_{i0}(0) | D_{i1}=0]\)</span></li>
+<li>Might show up in pre-treatment trends, if observe <span class="math inline">\(t=-1\)</span>, can check whether <span class="math display">\[
+   \Er[Y_{i,0}(0) - Y_{i,-1}(0) | D_{i1}=1] = \Er[Y_{i,0}(0) - Y_{i,-1}(0) | D_{i1}=0]$
+   \]</span></li>
+</ul></li>
+</ul></li>
+<li>Conditioning can sometimes help
+<ul>
+<li>Conditional parallel trends <span class="math display">\[
+\Er[\textcolor{red}{Y_{i1}(0)} - Y_{i0}(0) | D_{i1}=1, X_i] \neq \Er[Y_{i1}(0) - Y_{i0}(0) | D_{i1}=0, X_i]
+\]</span></li>
+</ul></li>
+</ul>
 </section>
 <section id="synthetic-control-build-a-comparison-district" class="slide level2">
 <h2>Synthetic control: build a comparison district</h2>
@@ -437,7 +454,7 @@ Y(1), Y(0) \indep D | X
 </section>
 <section id="synthetic-control" class="slide level2">
 <h2>Synthetic Control</h2>
-<div id="1d92e358" class="cell" data-execution_count="5">
+<div id="1d92e358" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -458,7 +475,13 @@ Y(1), Y(0) \indep D | X
 <li>Synthetic Control:
 <ul>
 <li>best for one or few treated units, many untreated units, many pre-treatment periods</li>
-<li>Assumption: convex combination of untreated units resembles treat unit</li>
+<li>Assumption: convex combination of untreated units resembles treated unit
+<ul>
+<li>Valid if untreated potential outcome follows a factor model <span class="math display">\[
+Y_{it}(0) = X_{it}' \beta + \underbrace{\lambda_i'
+\theta_t}_{\text{unobserved interactive effects (or factors)}} + \epsilon_{it}
+\]</span></li>
+</ul></li>
 </ul></li>
 </ul>
 </div><div class="column" style="width:50%;">
@@ -481,15 +504,20 @@ Y(1), Y(0) \indep D | X
 <p>Return to the tutoring lottery: some students offered a place do not attend, while a few students not offered find tutoring elsewhere.</p>
 <p><strong>Lottery offer</strong> <span class="math inline">\(\longrightarrow\)</span> <strong>tutoring attendance</strong> <span class="math inline">\(\longrightarrow\)</span> <strong>graduation</strong></p>
 <ul>
-<li>The offer can instrument for attendance if it changes participation.</li>
-<li>The offer must be unrelated to other causes of graduation.</li>
-<li>It must affect graduation through tutoring, not through another channel.</li>
+<li>The offer, <span class="math inline">\(Z_i\)</span>, can instrument for attendance if it changes participation. <span class="math display">\[ \cov(Z_i,D_i) \neq 0 \]</span></li>
+<li>The offer must be unrelated to other causes of graduation. <span class="math display">\[
+Z_i \indep Y(0), Y(1), D(z)
+\]</span></li>
+<li>It must affect graduation through tutoring, not through another channel.
+<ul>
+<li>Potential outcomes are <span class="math inline">\(Y(D(Z))\)</span>, not <span class="math inline">\(Y(D,Z)\)</span>.</li>
+</ul></li>
 </ul>
-<p>Under additional assumptions, IV estimates an effect for students whose tutoring attendance responds to the offer—not necessarily for everyone.</p>
+<p>IV estimates an effect for students whose tutoring attendance responds to the offer—not necessarily for everyone.</p>
 </section>
 <section id="iv" class="slide level2">
 <h2>IV</h2>
-<div id="cd7bcd90" class="cell" data-execution_count="6">
+<div id="cd7bcd90" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -510,6 +538,9 @@ Y(1), Y(0) \indep D | X
 </div><div class="column" style="width:50%;">
 <p><strong>Why might that work?</strong></p>
 <p>Students very close to the cutoff may be similar. If graduation rates would otherwise change smoothly around 60, a jump in graduation identifies the effect of <strong>eligibility</strong>. If eligibility affects graduation only by changing tutoring attendance, the cutoff can also identify a local effect of tutoring for students whose attendance it changes.</p>
+<ul>
+<li>Assumption: continuity of <span class="math inline">\(\Er[Y(1)|R=r]\)</span> and <span class="math inline">\(\Er[Y(0)|R=r]\)</span></li>
+</ul>
 </div></div>
 <ul>
 <li><strong>Watch for:</strong> students or teachers manipulating scores near the threshold. The estimate is local to students around the cutoff.</li>
@@ -517,7 +548,7 @@ Y(1), Y(0) \indep D | X
 </section>
 <section id="regression-discontinuity" class="slide level2">
 <h2>Regression Discontinuity</h2>
-<div id="2c4c6042" class="cell" data-execution_count="7">
+<div id="2c4c6042" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -532,28 +563,6 @@ Y(1), Y(0) \indep D | X
 <h1>Flexible Estimation and Effects</h1>
 
 </section>
-<section id="machine-learning-can-help-estimatenot-identify" class="slide level2">
-<h2>Machine learning can help estimate—not identify</h2>
-<p>Want to estimate tutoring effects while accounting for many student characteristics?</p>
-<ul>
-<li>Flexible models can predict outcomes and treatment using covariates.</li>
-<li>Debiased machine learning combines these predictions to estimate an effect while limiting overfitting bias.</li>
-<li>Cross-fitting separates model training from effect estimation.</li>
-</ul>
-<div class="callout callout-warning callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Warning</strong></p>
-</div>
-<div class="callout-content">
-<p>DML does not make unmeasured confounding disappear. It still needs identifying assumptions, such as conditional exchangeability or a valid instrument.</p>
-</div>
-</div>
-</div>
-</section>
 <section id="does-tutoring-help-everyone-equally" class="slide level2">
 <h2>Does tutoring help everyone equally?</h2>
 <p>An average effect can hide important differences:</p>
@@ -566,13 +575,14 @@ Y(1), Y(0) \indep D | X
 <p>Can the method identify effects for those groups? Were the groups chosen before looking at results?</p>
 </div></div>
 <ul>
-<li>Searching many subgroups can produce impressive-looking patterns by chance. Treat discovered heterogeneity skeptically.</li>
+<li><p>I.e. interested in conditional treatment effects, <span class="math inline">\(\Er[Y(1) - Y(0) | X]\)</span></p></li>
+<li><p>Searching many subgroups can produce impressive-looking patterns by chance. Treat discovered heterogeneity skeptically.</p></li>
 </ul>
 </section>
 <section id="conditional-treatment-effects" class="slide level2">
 <h2>Conditional Treatment Effects</h2>
 <p>Simulate a randomized tutoring study where the true effect is <strong>the same in every group</strong>. Explore 15 categories anyway: some nominal 95% confidence intervals may miss the common effect just by chance.</p>
-<div id="93830e5c" class="cell" data-execution_count="8">
+<div id="93830e5c" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -581,6 +591,16 @@ Y(1), Y(0) \indep D | X
 </div>
 </div>
 </div>
+</section>
+<section id="distribution-effects" class="slide level2">
+<h2>Distribution Effects</h2>
+<ul>
+<li>Instead of (conditional) average effects, we can look at changes in distribution
+<ul>
+<li>Distribution functions: <span class="math inline">\(F_{Y(1)}(y) - F_{Y(0)}(y)\)</span></li>
+<li>Quantiles: <span class="math inline">\(Q_{\tau}(Y(1)) - Q_{\tau}(Y(0))\)</span></li>
+</ul></li>
+</ul>
 </section></section>
 <section>
 <section id="project-proposal" class="title-slide slide level1 center">

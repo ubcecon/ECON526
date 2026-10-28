@@ -2895,7 +2895,7 @@
     "href": "methods_overview.html#difference-in-differences-compare-changes",
     "title": "Overview of Causal Inference Methods",
     "section": "Difference in differences: compare changes",
-    "text": "Difference in differences: compare changes\n\nThe district expands tutoring in some schools this year, but not in others. Compare graduation rates before and after the expansion:\n\n\n\n\n\nBefore\nAfter\n\n\n\n\nExpansion schools\n\\(Y_0(1)\\)\n\\(Y_1(1)\\)\n\n\nOther schools\n\\(Y_0(0)\\)\n\\(Y_1(0)\\)\n\n\n\n\nDifference in difference: \\[\n\\underbrace{(Y_1(1)-Y_0(0))}_{\\text{treated city's change}}\n-\\underbrace{(Y_1(1)-Y_0(0))}_{\\text{comparison city's change}}\n\\]\nThe other schools’ change stands in for expansion schools’ missing no-tutoring-expansion trend."
+    "text": "Difference in differences: compare changes\n\nThe district expands tutoring in some schools this year, but not in others. Compare graduation rates before and after the expansion:\n\nPotential outcomes \\(Y_{it}(d)\\)\n\nMaking these only depend on current \\(d\\) implies (i) no anticipation (ii) no spillovers\n\nObserve \\(Y_{it} = Y_{it}(D_{it})\\)\n\n\nObserved Outcomes | | Before | After | |—|—:|—:| | Expansion schools | \\(Y_{i0}(0)\\) | \\(Y_{i1}(1)\\) | | Other schools | \\(Y_{j0}(0)\\) | \\(Y_{j1}(0)\\) |\n\nDifference in difference:\n\n\\[\n\\underbrace{(Y_{i1}(1)-Y_{i0}(0))}_{\\text{treated school's change}}\n-\\underbrace{(Y_{j1}(1)-Y_{j0}(0))}_{\\text{comparison school's change}}\n\\]\n\nThe other schools’ change stands in for expansion schools’ missing no-tutoring-expansion trend."
   },
   {
     "objectID": "methods_overview.html#fixed-effects-useful-bookkeeping-not-a-design-by-themselves",
@@ -2916,14 +2916,14 @@
     "href": "methods_overview.html#instrumental-variables-use-an-external-nudge",
     "title": "Overview of Causal Inference Methods",
     "section": "Instrumental variables: use an external nudge",
-    "text": "Instrumental variables: use an external nudge\nReturn to the tutoring lottery: some students offered a place do not attend, while a few students not offered find tutoring elsewhere.\nLottery offer \\(\\longrightarrow\\) tutoring attendance \\(\\longrightarrow\\) graduation\n\nThe offer can instrument for attendance if it changes participation.\nThe offer must be unrelated to other causes of graduation.\nIt must affect graduation through tutoring, not through another channel.\n\nUnder additional assumptions, IV estimates an effect for students whose tutoring attendance responds to the offer—not necessarily for everyone."
+    "text": "Instrumental variables: use an external nudge\nReturn to the tutoring lottery: some students offered a place do not attend, while a few students not offered find tutoring elsewhere.\nLottery offer \\(\\longrightarrow\\) tutoring attendance \\(\\longrightarrow\\) graduation\n\nThe offer, \\(Z_i\\), can instrument for attendance if it changes participation. \\[ \\cov(Z_i,D_i) \\neq 0 \\]\nThe offer must be unrelated to other causes of graduation. \\[\nZ_i \\indep Y(0), Y(1), D(z)\n\\]\nIt must affect graduation through tutoring, not through another channel.\n\nPotential outcomes are \\(Y(D(Z))\\), not \\(Y(D,Z)\\).\n\n\nIV estimates an effect for students whose tutoring attendance responds to the offer—not necessarily for everyone."
   },
   {
     "objectID": "methods_overview.html#regression-discontinuity-compare-just-around-the-line",
     "href": "methods_overview.html#regression-discontinuity-compare-just-around-the-line",
     "title": "Overview of Causal Inference Methods",
     "section": "Regression discontinuity: compare just around the line",
-    "text": "Regression discontinuity: compare just around the line\n\n\n\nA school offers tutoring to students whose baseline math score is below 60.\nCompare students scoring just below and just above 60—not students far apart in preparation.\n\n\nWhy might that work?\nStudents very close to the cutoff may be similar. If graduation rates would otherwise change smoothly around 60, a jump in graduation identifies the effect of eligibility. If eligibility affects graduation only by changing tutoring attendance, the cutoff can also identify a local effect of tutoring for students whose attendance it changes.\n\n\nWatch for: students or teachers manipulating scores near the threshold. The estimate is local to students around the cutoff."
+    "text": "Regression discontinuity: compare just around the line\n\n\n\nA school offers tutoring to students whose baseline math score is below 60.\nCompare students scoring just below and just above 60—not students far apart in preparation.\n\n\nWhy might that work?\nStudents very close to the cutoff may be similar. If graduation rates would otherwise change smoothly around 60, a jump in graduation identifies the effect of eligibility. If eligibility affects graduation only by changing tutoring attendance, the cutoff can also identify a local effect of tutoring for students whose attendance it changes.\n\nAssumption: continuity of \\(\\Er[Y(1)|R=r]\\) and \\(\\Er[Y(0)|R=r]\\)\n\n\n\nWatch for: students or teachers manipulating scores near the threshold. The estimate is local to students around the cutoff."
   },
   {
     "objectID": "methods_overview.html#machine-learning-can-help-estimatenot-identify",
@@ -2937,7 +2937,7 @@
     "href": "methods_overview.html#does-tutoring-help-everyone-equally",
     "title": "Overview of Causal Inference Methods",
     "section": "Does tutoring help everyone equally?",
-    "text": "Does tutoring help everyone equally?\nAn average effect can hide important differences:\n\n\nAsk\nIs tutoring more effective for students with weaker prior preparation?\n\nThen check\nCan the method identify effects for those groups? Were the groups chosen before looking at results?\n\n\nSearching many subgroups can produce impressive-looking patterns by chance. Treat discovered heterogeneity skeptically."
+    "text": "Does tutoring help everyone equally?\nAn average effect can hide important differences:\n\n\nAsk\nIs tutoring more effective for students with weaker prior preparation?\n\nThen check\nCan the method identify effects for those groups? Were the groups chosen before looking at results?\n\n\nI.e. interested in conditional treatment effects, \\(\\Er[Y(1) - Y(0) | X]\\)\nSearching many subgroups can produce impressive-looking patterns by chance. Treat discovered heterogeneity skeptically."
   },
   {
     "objectID": "methods_overview.html#a-causal-proposal-in-four-moves",
@@ -2979,7 +2979,7 @@
     "href": "methods_overview.html#synthetic-control-or-difference-in-differences",
     "title": "Overview of Causal Inference Methods",
     "section": "Synthetic Control or Difference in Differences?",
-    "text": "Synthetic Control or Difference in Differences?\n\nBoth need panel data with some units treated, others untreated\n\n\n\n\nSynthetic Control:\n\nbest for one or few treated units, many untreated units, many pre-treatment periods\nAssumption: convex combination of untreated units resembles treat unit\n\n\n\n\nDifference in differences:\n\nmany treated and untreated units, okay with fewer periods\nAssumption: Parallel trends"
+    "text": "Synthetic Control or Difference in Differences?\n\nBoth need panel data with some units treated, others untreated\n\n\n\n\nSynthetic Control:\n\nbest for one or few treated units, many untreated units, many pre-treatment periods\nAssumption: convex combination of untreated units resembles treated unit\n\nValid if untreated potential outcome follows a factor model \\[\nY_{it}(0) = X_{it}' \\beta + \\underbrace{\\lambda_i'\n\\theta_t}_{\\text{unobserved interactive effects (or factors)}} + \\epsilon_{it}\n\\]\n\n\n\n\n\nDifference in differences:\n\nmany treated and untreated units, okay with fewer periods\nAssumption: Parallel trends"
   },
   {
     "objectID": "methods_overview.html#random-assignment-the-clean-benchmark-output",
@@ -3098,7 +3098,7 @@
     "href": "methods_overview.html#difference-in-differences",
     "title": "Overview of Causal Inference Methods",
     "section": "Difference in differences",
-    "text": "Difference in differences\n\n\n\n\n\n\nNote\n\n\nKey assumption: parallel trends. Without the expansion, graduation rates in the two sets of schools would have changed similarly. \\[\n\\underbrace{\\Er[Y_1(0) - Y_0(0) | D=1]}_{\\text{unobserved}} = \\underbrace{\\Er[Y_1(0) - Y_0(0) | D=0]}_{\\text{observed}}\n\\]"
+    "text": "Difference in differences\n\n\n\n\n\n\nNote\n\n\nKey assumption: parallel trends. Without the expansion, graduation rates in the two sets of schools would have changed similarly. \\[\n\\underbrace{\\Er[\\textcolor{red}{Y_{i1}(0)} - Y_{i0}(0) | D_{i1}=1]}_{\\text{\\textcolor{red}{unobserved}}} = \\underbrace{\\Er[Y_{i1}(0) - Y_{i0}(0) | D_{i1}=0]}_{\\text{observed}}\n\\] - Implies: \\[\n\\begin{align*}\n\\text{DiD} = & \\Er[Y_{i1}(1) - Y_{i0}(0) | D_{i1}=1] - \\Er[Y_{i1}(0) - Y_{i0}(0) | D_{i1}=0] \\\\\n= & \\Er[Y_{i1}(1) - Y_{i0}(0) | D_{i1}=1] - \\Er[\\textcolor{red}{Y_{i1}(0)} - Y_{i0}(0) | D_{i1}=1] \\\\\n= & \\Er[Y_{i1}(1) - \\textcolor{red}{Y_{i1}(0)} | D_{i1}=1] = \\text{ATT}\n\\]"
   },
   {
     "objectID": "methods_overview.html#difference-in-differences-output",
@@ -3176,5 +3176,19 @@
     "title": "Linear Regression",
     "section": "If \\(D \\indep X\\), Interactive Model Reduces Variance",
     "text": "If \\(D \\indep X\\), Interactive Model Reduces Variance\n\nAssume \\(D \\indep (X, Y(0), Y(1))\\), \\(D \\in \\{0,1\\}\\), \\(\\Er[X] = 0\\)\nConsider \\[\n\\begin{align*}\nY & = \\beta_0^s + \\beta_1^s D + \\epsilon^s \\\\\nY & = \\beta_0^a + \\beta_1^a D + X'\\gamma^a_0 + \\epsilon^a \\\\\nY & = \\beta_0^i + \\beta_1^i D + X'\\gamma^i_0 + DX'\\gamma^i_1 + \\epsilon^s\n\\end{align*}\n\\]\nAll are consistent \\[\n\\plim \\hat{\\beta}_1^s = \\plim \\hat{\\beta}_1^a = \\plim \\hat{\\beta}_1^i = ATE\n\\]\nInteractive has smaller asymptotic variance \\[\n\\var(\\hat{\\beta}_1^i) \\leq \\var(\\hat{\\beta}_1^s) \\text{ and } \\var(\\hat{\\beta}_1^i) \\leq \\var(\\hat{\\beta}_1^a)\n\\]"
+  },
+  {
+    "objectID": "methods_overview.html#assessing-parallel-trends",
+    "href": "methods_overview.html#assessing-parallel-trends",
+    "title": "Overview of Causal Inference Methods",
+    "section": "Assessing Parallel Trends",
+    "text": "Assessing Parallel Trends\n\nThinking about how treatment was assigned helps assess plausibility of parallel trends\nSelf-selection into treatment can be problematic\n\nE.g. if schools expanded tutoring because teachers noticed that students were increasingly struggling and the teachers expected graduation rates to fall\n\n\\(\\Er[\\textcolor{red}{Y_{i1}(0)} - Y_{i0}(0) | D_{i1}=1] \\neq \\Er[Y_{i1}(0) - Y_{i0}(0) | D_{i1}=0]\\)\nMight show up in pre-treatment trends, if observe \\(t=-1\\), can check whether \\[\n   \\Er[Y_{i,0}(0) - Y_{i,-1}(0) | D_{i1}=1] = \\Er[Y_{i,0}(0) - Y_{i,-1}(0) | D_{i1}=0]$\n   \\]\n\n\nConditioning can sometimes help\n\nConditional parallel trends \\[\n\\Er[\\textcolor{red}{Y_{i1}(0)} - Y_{i0}(0) | D_{i1}=1, X_i] \\neq \\Er[Y_{i1}(0) - Y_{i0}(0) | D_{i1}=0, X_i]\n\\]"
+  },
+  {
+    "objectID": "methods_overview.html#distribution-effects",
+    "href": "methods_overview.html#distribution-effects",
+    "title": "Overview of Causal Inference Methods",
+    "section": "Distribution Effects",
+    "text": "Distribution Effects\n\nInstead of (conditional) average effects, we can look at changes in distribution\n\nDistribution functions: \\(F_{Y(1)}(y) - F_{Y(0)}(y)\\)\nQuantiles: \\(Q_{\\tau}(Y(1)) - Q_{\\tau}(Y(0))\\)"
   }
 ]
