@@ -6,14 +6,14 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.19">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.11.9">
 
   <meta name="author" content="Paul Schrimpf">
   <title>ECON 526 – Uncertainty Quantification</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
@@ -120,7 +120,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-00ad5a49dff614330cd349bcec985ec3.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -238,7 +238,7 @@ Paul Schrimpf
 </div>
 
 </section><section id="TOC">
-<nav role="doc-toc"> 
+<nav role="doc-toc" aria-labelledby="toc-title">
 <h2 id="toc-title">Table of contents</h2>
 <ul>
 <li><a href="#/overview" id="/toc-overview">Overview</a></li>
@@ -413,8 +413,8 @@ Paul Schrimpf
 </table>
 </div><div class="column" style="width:50%;">
 <ul>
-<li>We see the sample ATE of the Vaccine on infections per 1000 people</li>
-<li>Sample ATE is random, how confident can we be that it is near the population ATE?</li>
+<li>The table shows the sample ATE of the vaccine on infections per 1000 people</li>
+<li>The sample ATE is random: how confident can we be that it is close to the population ATE?</li>
 </ul>
 </div></div>
 </section></section>
@@ -431,7 +431,7 @@ Paul Schrimpf
 <li><p><strong>Standard Error</strong> = standard deviation of an estimator</p></li>
 <li><p>In this example, ATE is difference of two proportions, so <span class="math display">\[
 \begin{align*}
-  \var(ATE) &amp; = \var(\hat{p}_1 - \hat{p}_0) \\
+  \var(\widehat{ATE}) &amp; = \var(\hat{p}_1 - \hat{p}_0) \\
   &amp; = \var(\hat{p}_1) + \var(\hat{p}_0) \\
   &amp; = \var\left(\frac{1}{N_1} \sum_{i=1}^{N_1} Y_i \right) + \var\left(\frac{1}{N_0} \sum_{i=1}^{N_0} Y_i \right) \\
   &amp; = \frac{1}{N_1} \hat{p}_1(1-\hat{p}_1) + \frac{1}{N_0} \hat{p}_0(1-\hat{p}_0)
@@ -453,7 +453,8 @@ Paul Schrimpf
 <span id="cb2-10"><a aria-label="10"></a></span>
 <span id="cb2-11"><a aria-label="11"></a>binarybinaryrct.table <span class="op">=</span> tablewithse</span>
 <span id="cb2-12"><a aria-label="12"></a></span>
-<span id="cb2-13"><a aria-label="13"></a><span class="bu">print</span>(pfizerall.table())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-13"><a aria-label="13"></a><span class="bu">print</span>(pfizerall.table())</span>
+<span id="cb2-14"><a aria-label="14"></a><span class="bu">print</span>(pfizer65.table())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <table class="caption-top">
 <thead>
@@ -477,6 +478,28 @@ Paul Schrimpf
 </tr>
 </tbody>
 </table>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>Infection Rate per 1000</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Treated</td>
+<td>0.25 (0.25)</td>
+</tr>
+<tr class="even">
+<td>Control</td>
+<td>4.7 (1.1)</td>
+</tr>
+<tr class="odd">
+<td>Difference</td>
+<td>-4.4 (1.1)</td>
+</tr>
+</tbody>
+</table>
 </div></div>
 </section></section>
 <section>
@@ -487,8 +510,8 @@ Paul Schrimpf
 <section id="confidence-intervals-1" class="slide level2">
 <h2>Confidence Intervals</h2>
 <ul>
-<li>Function of data constructed such that <span class="math display">\[
-P(ATE \in \widehat{CI}_\alpha) \approx \alpha
+<li>A function of the data constructed so that <span class="math display">\[
+P(\widehat{ATE} \in \widehat{CI}_{\alpha}) \approx 1-\alpha
 \]</span></li>
 <li>Can create if we know the (approximate) distribution of the data or the estimate</li>
 </ul>
@@ -496,10 +519,10 @@ P(ATE \in \widehat{CI}_\alpha) \approx \alpha
 <section id="exact-estimator-distribution" class="slide level2">
 <h2>Exact Estimator Distribution</h2>
 <ul>
-<li>Confidence interval for <span class="math inline">\(P(Y)\)</span> with <span class="math inline">\(Y_i \in \{0,1\}\)</span>, i.i.d.</li>
+<li>Confidence interval for <span class="math inline">\(p = P(Y=1)\)</span> with i.i.d. <span class="math inline">\(Y_i \in \{0,1\}\)</span></li>
 <li>Given <span class="math inline">\(P(Y)=p\)</span> can calculate or simulate distribution of <span class="math inline">\(\hat{p} = \frac{1}{n} \sum Y_i\)</span></li>
 </ul>
-<div id="cb58e89f" class="cell columns column-output-location" data-execution_count="4">
+<div id="3606605a" class="cell columns column-output-location" data-execution_count="3">
 <div class="column">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a aria-label="2"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -520,7 +543,7 @@ P(ATE \in \widehat{CI}_\alpha) \approx \alpha
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="uncertainty_files/figure-revealjs/cell-4-output-1.png" width="815" height="431"></p>
+<p><img data-src="uncertainty_files/figure-revealjs/cell-4-output-1.png" width="820" height="431"></p>
 </figure>
 </div>
 </div>
@@ -529,11 +552,11 @@ P(ATE \in \widehat{CI}_\alpha) \approx \alpha
 <section id="exact-confidence-interval" class="slide level2">
 <h2>Exact Confidence Interval</h2>
 <ul>
-<li>Knowing distribution of <span class="math inline">\(\hat{p}\)</span> given <span class="math inline">\(p\)</span> can compute <span class="math inline">\(P(|\hat{p}-p|\geq |\hat{p}_{obs} - p|)\)</span> <span class="math display">\[
-\widehat{CI}_\alpha(\hat{p}_{obs}) = \{p: P(|\hat{p}-p| \leq |\hat{p}_{obs} - p|) \leq \alpha \}
+<li>Knowing the distribution of <span class="math inline">\(\hat{p}\)</span> given <span class="math inline">\(p\)</span>, we can compute <span class="math inline">\(P(|\hat{p}-p| \leq |\hat{p}_{obs}-p|)\)</span> for each candidate <span class="math inline">\(p\)</span> and keep the values of <span class="math inline">\(p\)</span> for which it is below <span class="math inline">\(1-\alpha\)</span> <span class="math display">\[
+\widehat{CI}_{\alpha}(\hat{p}_{obs}) = \{p: P(|\hat{p}-p| \leq |\hat{p}_{obs} - p|) \leq 1-\alpha \}
 \]</span></li>
 </ul>
-<div id="c1cfbe6d" class="cell" data-execution_count="5">
+<div id="5ae36df9" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="kw">def</span> proportioncisim(phat, n, level<span class="op">=</span><span class="fl">0.95</span>, S<span class="op">=</span><span class="dv">100_000</span>):</span>
 <span id="cb4-2"><a aria-label="2"></a>    se <span class="op">=</span> (phat<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>phat)<span class="op">/</span>n)<span class="op">**</span><span class="fl">0.5</span></span>
 <span id="cb4-3"><a aria-label="3"></a>    dp <span class="op">=</span> se<span class="op">/</span><span class="dv">20</span></span>
@@ -546,7 +569,7 @@ P(ATE \in \widehat{CI}_\alpha) \approx \alpha
 <span id="cb4-10"><a aria-label="10"></a>    p <span class="op">=</span> phat <span class="op">+</span> dp</span>
 <span id="cb4-11"><a aria-label="11"></a>    <span class="cf">while</span> (<span class="bu">abs</span>(np.random.binomial(n,p,S)<span class="op">/</span>n<span class="op">-</span>p) <span class="op">&lt;=</span> <span class="bu">abs</span>((phat<span class="op">-</span>p))).mean() <span class="op">&lt;</span> level :</span>
 <span id="cb4-12"><a aria-label="12"></a>        p <span class="op">=</span> p <span class="op">+</span> dp</span>
-<span id="cb4-13"><a aria-label="13"></a>        <span class="cf">if</span> p <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb4-13"><a aria-label="13"></a>        <span class="cf">if</span> p <span class="op">&gt;</span> <span class="dv">1</span>:</span>
 <span id="cb4-14"><a aria-label="14"></a>            <span class="cf">break</span></span>
 <span id="cb4-15"><a aria-label="15"></a>    phi <span class="op">=</span> p</span>
 <span id="cb4-16"><a aria-label="16"></a></span>
@@ -562,36 +585,37 @@ P(ATE \in \widehat{CI}_\alpha) \approx \alpha
 </section>
 <section id="exact-confidence-interval-1" class="slide level2">
 <h2>Exact Confidence Interval</h2>
-<div id="9857b8a6" class="cell" data-execution_count="6">
+<div id="b213a0e0" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="im">import</span> scipy</span>
-<span id="cb6-2"><a aria-label="2"></a><span class="co">#| echo: true</span></span>
-<span id="cb6-3"><a aria-label="3"></a><span class="kw">def</span> proportionci(phat, n, level<span class="op">=</span><span class="fl">0.95</span>):</span>
-<span id="cb6-4"><a aria-label="4"></a>    se <span class="op">=</span> (phat<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>phat)<span class="op">/</span>n)<span class="op">**</span><span class="fl">0.5</span></span>
-<span id="cb6-5"><a aria-label="5"></a>    dp <span class="op">=</span> se<span class="op">/</span><span class="dv">200</span></span>
-<span id="cb6-6"><a aria-label="6"></a>    k <span class="op">=</span> <span class="bu">round</span>(phat<span class="op">*</span>n)</span>
-<span id="cb6-7"><a aria-label="7"></a>    p <span class="op">=</span> phat <span class="op">-</span> dp</span>
-<span id="cb6-8"><a aria-label="8"></a>    <span class="cf">while</span> (scipy.stats.binom.cdf(k,n,p) <span class="op">&lt;</span> (<span class="dv">1</span><span class="op">-</span>(<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>) ) :</span>
-<span id="cb6-9"><a aria-label="9"></a>        p <span class="op">=</span> p <span class="op">-</span> dp</span>
-<span id="cb6-10"><a aria-label="10"></a>        <span class="cf">if</span> (p <span class="op">&lt;</span> <span class="dv">0</span>):</span>
-<span id="cb6-11"><a aria-label="11"></a>            <span class="cf">break</span></span>
-<span id="cb6-12"><a aria-label="12"></a>    plo <span class="op">=</span> p</span>
-<span id="cb6-13"><a aria-label="13"></a>    p <span class="op">=</span> phat <span class="op">+</span> dp</span>
-<span id="cb6-14"><a aria-label="14"></a>    <span class="cf">while</span> (scipy.stats.binom.cdf(k,n,p) <span class="op">&gt;</span> (<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>) :</span>
-<span id="cb6-15"><a aria-label="15"></a>        p <span class="op">=</span> p <span class="op">+</span> dp</span>
-<span id="cb6-16"><a aria-label="16"></a>        <span class="cf">if</span> p <span class="op">&lt;</span> <span class="dv">0</span> :</span>
-<span id="cb6-17"><a aria-label="17"></a>            <span class="cf">break</span></span>
-<span id="cb6-18"><a aria-label="18"></a>    phi <span class="op">=</span> p</span>
-<span id="cb6-19"><a aria-label="19"></a>    <span class="cf">return</span>(plo,phi)</span>
-<span id="cb6-20"><a aria-label="20"></a></span>
-<span id="cb6-21"><a aria-label="21"></a>proportionci(phat, n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>(0.022320991708517042, 0.11287711726057285)</code></pre>
+<span id="cb6-2"><a aria-label="2"></a><span class="kw">def</span> proportionci(phat, n, level<span class="op">=</span><span class="fl">0.95</span>):</span>
+<span id="cb6-3"><a aria-label="3"></a>    se <span class="op">=</span> (phat<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>phat)<span class="op">/</span>n)<span class="op">**</span><span class="fl">0.5</span></span>
+<span id="cb6-4"><a aria-label="4"></a>    dp <span class="op">=</span> se<span class="op">/</span><span class="dv">200</span></span>
+<span id="cb6-5"><a aria-label="5"></a>    k <span class="op">=</span> <span class="bu">round</span>(phat<span class="op">*</span>n)</span>
+<span id="cb6-6"><a aria-label="6"></a>    p <span class="op">=</span> phat <span class="op">-</span> dp</span>
+<span id="cb6-7"><a aria-label="7"></a>    <span class="cf">while</span> (scipy.stats.binom.cdf(k,n,p) <span class="op">&lt;</span> (<span class="dv">1</span><span class="op">-</span>(<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>) ) :</span>
+<span id="cb6-8"><a aria-label="8"></a>        p <span class="op">=</span> p <span class="op">-</span> dp</span>
+<span id="cb6-9"><a aria-label="9"></a>        <span class="cf">if</span> (p <span class="op">&lt;</span> <span class="dv">0</span>):</span>
+<span id="cb6-10"><a aria-label="10"></a>            <span class="cf">break</span></span>
+<span id="cb6-11"><a aria-label="11"></a>    plo <span class="op">=</span> p</span>
+<span id="cb6-12"><a aria-label="12"></a>    p <span class="op">=</span> phat <span class="op">+</span> dp</span>
+<span id="cb6-13"><a aria-label="13"></a>    <span class="cf">while</span> (scipy.stats.binom.cdf(k,n,p) <span class="op">&gt;</span> (<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>) :</span>
+<span id="cb6-14"><a aria-label="14"></a>        p <span class="op">=</span> p <span class="op">+</span> dp</span>
+<span id="cb6-15"><a aria-label="15"></a>        <span class="cf">if</span> p <span class="op">&gt;</span> <span class="dv">1</span> :</span>
+<span id="cb6-16"><a aria-label="16"></a>            <span class="cf">break</span></span>
+<span id="cb6-17"><a aria-label="17"></a>    phi <span class="op">=</span> p</span>
+<span id="cb6-18"><a aria-label="18"></a>    <span class="cf">return</span>(plo,phi)</span>
+<span id="cb6-19"><a aria-label="19"></a></span>
+<span id="cb6-20"><a aria-label="20"></a><span class="bu">print</span>(<span class="st">"Simulation-based:"</span>, proportioncisim(<span class="fl">0.05</span>, <span class="dv">100</span>, level<span class="op">=</span><span class="fl">0.95</span>, S<span class="op">=</span><span class="dv">10_000</span>))</span>
+<span id="cb6-21"><a aria-label="21"></a><span class="bu">print</span>(<span class="st">"Quantile-based:  "</span>, proportionci(<span class="fl">0.05</span>, <span class="dv">100</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simulation-based: (0.024936331074641174, 0.10557596153014372)
+Quantile-based:   (0.022320991708517042, 0.11287711726057285)</code></pre>
 </div>
 </div>
 </section>
 <section id="exact-confidence-interval-2" class="slide level2">
 <h2>Exact Confidence Interval</h2>
-<div id="a726df0b" class="cell" data-execution_count="7">
+<div id="9f6e2f7f" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a>phat <span class="op">=</span> pfizerall.NYT<span class="op">/</span>pfizerall.NT</span>
 <span id="cb8-2"><a aria-label="2"></a>plo, phi<span class="op">=</span>proportionci(phat,pfizerall.NT)</span>
 <span id="cb8-3"><a aria-label="3"></a><span class="dv">1000</span><span class="op">*</span>plo, <span class="dv">1000</span><span class="op">*</span>phi</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -646,7 +670,7 @@ P\left(\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i \in A \right) - P(N(0,I_d) \in A) \ri
 <aside><ol class="aside-footnotes"><li id="fn1"><p>See <span class="citation" data-cites="raic2019">Raič (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> for details and <span class="citation" data-cites="cck2023">Chernozhukov et al. (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span> for a similar result for higher dimensions (larger <span class="math inline">\(d\)</span>)</p></li></ol></aside></section>
 <section id="simulated-illustration-of-berry-esseen-clt" class="slide level2">
 <h2>Simulated Illustration of Berry-Esseen CLT</h2>
-<div id="4b2a8983" class="cell" data-execution_count="8">
+<div id="5ccfae57" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb10-2"><a aria-label="2"></a><span class="kw">def</span> dgp(n, xhi<span class="op">=</span><span class="dv">2</span>):</span>
 <span id="cb10-3"><a aria-label="3"></a>    p <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>xhi<span class="op">**</span><span class="dv">2</span>)</span>
@@ -663,7 +687,7 @@ P\left(\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i \in A \right) - P(N(0,I_d) \in A) \ri
 <span id="cb10-14"><a aria-label="14"></a>    <span class="cf">return</span> p<span class="op">*</span>xhi<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> (<span class="dv">1</span><span class="op">-</span>p)<span class="op">*-</span>xlo<span class="op">**</span><span class="dv">3</span></span>
 <span id="cb10-15"><a aria-label="15"></a></span>
 <span id="cb10-16"><a aria-label="16"></a>e3 <span class="op">=</span> np.mean(np.<span class="bu">pow</span>(np.<span class="bu">abs</span>(dgp(<span class="dv">100_000</span>)),<span class="dv">3</span>))</span>
-<span id="cb10-17"><a aria-label="17"></a><span class="bu">print</span>(<span class="ss">f"E[|x|^3] is about </span><span class="sc">{</span>e3<span class="sc">:.2}</span><span class="ss">, exact is </span><span class="sc">{</span>Ex3(<span class="dv">5</span>)<span class="sc">:.2}</span><span class="ss">"</span>)</span>
+<span id="cb10-17"><a aria-label="17"></a><span class="bu">print</span>(<span class="ss">f"E[|x|^3] is about </span><span class="sc">{</span>e3<span class="sc">:.2}</span><span class="ss">, exact is </span><span class="sc">{</span>Ex3(<span class="dv">2</span>)<span class="sc">:.2}</span><span class="ss">"</span>)</span>
 <span id="cb10-18"><a aria-label="18"></a></span>
 <span id="cb10-19"><a aria-label="19"></a><span class="kw">def</span> plotcdfwithbounds(dgp,  e3, n<span class="op">=</span>[<span class="dv">10</span>,<span class="dv">100</span>,<span class="dv">1000</span>], S<span class="op">=</span><span class="dv">9999</span>):</span>
 <span id="cb10-20"><a aria-label="20"></a>    cmap <span class="op">=</span> sns.color_palette(<span class="st">"tab10"</span>)</span>
@@ -680,12 +704,12 @@ P\left(\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i \in A \right) - P(N(0,I_d) \in A) \ri
 <span id="cb10-31"><a aria-label="31"></a>    plt.title(<span class="st">"Distribution of Scaled Sample Mean"</span>)</span>
 <span id="cb10-32"><a aria-label="32"></a>    <span class="cf">return</span>(plt.gcf())</span>
 <span id="cb10-33"><a aria-label="33"></a></span>
-<span id="cb10-34"><a aria-label="34"></a>fig<span class="op">=</span>plotcdfwithbounds(dgp, e3)</span>
+<span id="cb10-34"><a aria-label="34"></a>fig<span class="op">=</span>plotcdfwithbounds(dgp, Ex3(<span class="dv">2</span>))</span>
 <span id="cb10-35"><a aria-label="35"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 <aside class="notes">
-<p>This particular DGP of a skewed distribution with two points of support is the worst in terms of getting close to the bound. Esseen showed the best error is greater than <span class="math inline">\(0.4 \Er[|X|^3]/\sqrt{n}\)</span> for a similar distribution.</p>
+<p>This particular DGP of a skewed distribution with two points of support is the worst in terms of getting close to the bound. Esseen showed the best possible error is at least <span class="math inline">\(0.4 \Er[|X|^3]/\sqrt{n}\)</span> for a similar distribution.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -698,10 +722,10 @@ P\left(\frac{1}{\sqrt{n}} \sum_{i=1}^n X_i \in A \right) - P(N(0,I_d) \in A) \ri
           display:block!important;
       }</style></aside>
 </section>
-<section id="simulated-illustration-of-berry-esseen-clt-output" class="slide level2 output-location-slide"><h2>Simulated Illustration of Berry-Esseen CLT</h2><div class="cell output-location-slide" data-execution_count="8">
+<section id="simulated-illustration-of-berry-esseen-clt-output" class="slide level2 output-location-slide"><h2>Simulated Illustration of Berry-Esseen CLT</h2><div class="cell output-location-slide" data-execution_count="7">
 <div class="cell-output cell-output-stdout">
 <pre><code>var(x) is about 1.0
-E[|x|^3] is about 1.7, exact is 4.8</code></pre>
+E[|x|^3] is about 1.7, exact is 1.7</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
@@ -712,7 +736,7 @@ E[|x|^3] is about 1.7, exact is 4.8</code></pre>
 </div>
 </div></section><section id="approximate-confidence-interval-1" class="slide level2">
 <h2>Approximate Confidence Interval</h2>
-<div id="fdb6b864" class="cell" data-execution_count="9">
+<div id="95e3b3bb" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a><span class="kw">def</span> normalci(estimate, se, level<span class="op">=</span><span class="fl">0.95</span>):</span>
 <span id="cb12-2"><a aria-label="2"></a>    <span class="cf">return</span> (estimate <span class="op">+</span> se<span class="op">*</span>scipy.stats.norm.ppf((<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>),</span>
 <span id="cb12-3"><a aria-label="3"></a>            estimate <span class="op">+</span> se<span class="op">*</span>scipy.stats.norm.ppf(<span class="dv">1</span><span class="op">-</span>(<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>))</span>
@@ -725,10 +749,10 @@ E[|x|^3] is about 1.7, exact is 4.8</code></pre>
 <pre><code>(np.float64(0.1563452787741701), np.float64(0.7452324823077232))</code></pre>
 </div>
 </div>
-<div id="1eb4b290" class="cell" data-execution_count="10">
+<div id="133459e7" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a><span class="kw">def</span> differenceci(e1,se1, e0, se0, level<span class="op">=</span><span class="fl">0.95</span>) :</span>
 <span id="cb14-2"><a aria-label="2"></a>    diff <span class="op">=</span> e1 <span class="op">-</span> e0</span>
-<span id="cb14-3"><a aria-label="3"></a>    se <span class="op">=</span> (se1<span class="op">*</span>se1 <span class="op">+</span> se0<span class="op">*</span>s0)<span class="op">**</span><span class="fl">0.5</span></span>
+<span id="cb14-3"><a aria-label="3"></a>    se <span class="op">=</span> (se1<span class="op">*</span>se1 <span class="op">+</span> se0<span class="op">*</span>se0)<span class="op">**</span><span class="fl">0.5</span></span>
 <span id="cb14-4"><a aria-label="4"></a>    <span class="cf">return</span>(normalci(diff, se, level<span class="op">=</span>level))</span>
 <span id="cb14-5"><a aria-label="5"></a></span>
 <span id="cb14-6"><a aria-label="6"></a>p0 <span class="op">=</span> pfizerall.NYU<span class="op">/</span>pfizerall.NU</span>
@@ -765,11 +789,13 @@ E[|x|^3] is about 1.7, exact is 4.8</code></pre>
 <p><strong>Delta Method</strong></p>
 </div>
 <div class="callout-content">
-<p>If 1. <span class="math inline">\(\sqrt{n} (\hat{\theta} - \theta_0) \leadsto N(0,\Omega)\)</span></p>
+<p>If 1. <span class="math inline">\(\hat{\theta} \leadsto N(\theta_0,\Omega)\)</span></p>
 <ol start="2" type="1">
 <li><span class="math inline">\(g: \R^k \to \R^m\)</span> is continuously differentiable</li>
 </ol>
-<p>Then <span class="math inline">\(\sqrt{n}(g(\hat{\theta}) - g(\theta_0)) \leadsto N\left(0, D(g)(\theta_0) \Omega D(g)(\theta_0) \right)'\)</span></p>
+<p>Then <span class="math display">\[
+g(\hat{\theta}) \leadsto N\left(g(\theta_0), D(g)(\theta_0) \Omega D(g)(\theta_0)'\right)
+\]</span></p>
 </div>
 </div>
 </div>
@@ -786,11 +812,11 @@ E[|x|^3] is about 1.7, exact is 4.8</code></pre>
 </section>
 <section id="delta-method-2" class="slide level2">
 <h2>Delta Method</h2>
-<div id="5050fcb0" class="cell" data-execution_count="11">
+<div id="e17fecf5" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a><span class="im">import</span> torch</span>
 <span id="cb16-2"><a aria-label="2"></a></span>
 <span id="cb16-3"><a aria-label="3"></a>theta <span class="op">=</span> [p0, phat]</span>
-<span id="cb16-4"><a aria-label="4"></a>Omega <span class="op">=</span> np.matrix([[s0<span class="op">**</span><span class="dv">2</span>, <span class="dv">0</span>], [<span class="dv">0</span>, se<span class="op">**</span><span class="dv">2</span>]])</span>
+<span id="cb16-4"><a aria-label="4"></a>Omega <span class="op">=</span> np.array([[s0<span class="op">**</span><span class="dv">2</span>, <span class="dv">0</span>], [<span class="dv">0</span>, se<span class="op">**</span><span class="dv">2</span>]])</span>
 <span id="cb16-5"><a aria-label="5"></a><span class="kw">def</span> ve(theta) :</span>
 <span id="cb16-6"><a aria-label="6"></a>    <span class="cf">return</span>(<span class="dv">1</span> <span class="op">-</span> theta[<span class="dv">1</span>]<span class="op">/</span>theta[<span class="dv">0</span>])</span>
 <span id="cb16-7"><a aria-label="7"></a></span>
@@ -799,9 +825,9 @@ E[|x|^3] is about 1.7, exact is 4.8</code></pre>
 <span id="cb16-10"><a aria-label="10"></a>    val <span class="op">=</span> g(x)</span>
 <span id="cb16-11"><a aria-label="11"></a>    val.backward()</span>
 <span id="cb16-12"><a aria-label="12"></a>    Dg <span class="op">=</span> x.grad.numpy()</span>
-<span id="cb16-13"><a aria-label="13"></a>    <span class="cf">return</span>(Dg <span class="op">@</span> Omega <span class="op">@</span> Dg.transpose())</span>
+<span id="cb16-13"><a aria-label="13"></a>    <span class="cf">return</span>(<span class="bu">float</span>(Dg <span class="op">@</span> Omega <span class="op">@</span> Dg.transpose()))</span>
 <span id="cb16-14"><a aria-label="14"></a></span>
-<span id="cb16-15"><a aria-label="15"></a><span class="bu">print</span>(<span class="ss">f"Efficacy among everyone is </span><span class="sc">{</span>ve(theta)<span class="sc">:.3}</span><span class="ss"> (</span><span class="sc">{</span>deltamethod(ve,theta,Omega)[<span class="dv">0</span>,<span class="dv">0</span>]<span class="op">**</span><span class="fl">0.5</span><span class="sc">:.2}</span><span class="ss">)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb16-15"><a aria-label="15"></a><span class="bu">print</span>(<span class="ss">f"Efficacy among everyone is </span><span class="sc">{</span>ve(theta)<span class="sc">:.3}</span><span class="ss"> (</span><span class="sc">{</span>deltamethod(ve,theta,Omega)<span class="op">**</span><span class="fl">0.5</span><span class="sc">:.2}</span><span class="ss">)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Efficacy among everyone is 0.946 (0.018)</code></pre>
 </div>
@@ -810,17 +836,17 @@ E[|x|^3] is about 1.7, exact is 4.8</code></pre>
 <section id="simulating-distribution-of-gtheta" class="slide level2">
 <h2>Simulating Distribution of <span class="math inline">\(g(\theta)\)</span></h2>
 <ul>
-<li>Suppose <span class="math inline">\(\sqrt{n} (\hat{\theta} - \theta_0) \leadsto N(0,\Omega)\)</span></li>
-<li>Create <span class="math inline">\(\tilde{\theta}_s \sim N(\hat{\theta}, \Omega/n)\)</span>
+<li>Suppose <span class="math inline">\(\hat{\theta} \leadsto N(\theta_0, \Omega)\)</span></li>
+<li>Draw <span class="math inline">\(\tilde{\theta}_s \sim N(\hat{\theta}, \Omega)\)</span>
 <ul>
-<li>so <span class="math inline">\(\sqrt{n}(\tilde{\theta}_s - \hat{\theta}) \sim N(0,\Omega)\)</span></li>
+<li>so <span class="math inline">\(\tilde{\theta}_s - \hat{\theta} \sim N(0,\Omega)\)</span></li>
 </ul></li>
-<li>and <span class="math inline">\(\sqrt{n}(g(\theta_{s}) - g(\hat{\theta})) \approx \sqrt{n}(g(\hat{\theta}) - g(\theta_0))\)</span></li>
+<li>Then <span class="math inline">\(g(\tilde{\theta}_s) - g(\hat{\theta}) \approx g(\hat{\theta}) - g(\theta_0)\)</span></li>
 </ul>
 </section>
 <section id="simulated-distribution-of-vaccine-efficacy" class="slide level2">
 <h2>Simulated Distribution of Vaccine Efficacy</h2>
-<div id="a5da738c" class="cell columns column-output-location" data-execution_count="12">
+<div id="7c9848fd" class="cell columns column-output-location" data-execution_count="11">
 <div class="column">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-label="1"></a><span class="kw">def</span> simulateg(g,theta,Omega,S<span class="op">=</span><span class="dv">10_000</span>):</span>
 <span id="cb18-2"><a aria-label="2"></a>    thetas <span class="op">=</span> np.random.multivariate_normal(theta, Omega, S)</span>
@@ -831,7 +857,7 @@ E[|x|^3] is about 1.7, exact is 4.8</code></pre>
 <span id="cb18-7"><a aria-label="7"></a><span class="bu">print</span>(<span class="ss">f"simulation se = </span><span class="sc">{</span>gv<span class="op">**</span><span class="fl">0.5</span><span class="sc">:.2}</span><span class="ss">"</span>)</span>
 <span id="cb18-8"><a aria-label="8"></a></span>
 <span id="cb18-9"><a aria-label="9"></a>plt.hist(gs, bins<span class="op">=</span><span class="dv">50</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, density<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb18-10"><a aria-label="10"></a>dse <span class="op">=</span> deltamethod(ve,theta,Omega)[<span class="dv">0</span>,<span class="dv">0</span>]<span class="op">**</span><span class="fl">0.5</span></span>
+<span id="cb18-10"><a aria-label="10"></a>dse <span class="op">=</span> deltamethod(ve,theta,Omega)<span class="op">**</span><span class="fl">0.5</span></span>
 <span id="cb18-11"><a aria-label="11"></a>z <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,num<span class="op">=</span><span class="dv">100</span>)<span class="op">*</span>dse <span class="op">+</span> ve(theta)</span>
 <span id="cb18-12"><a aria-label="12"></a>fdeltamethod <span class="op">=</span> scipy.stats.norm(loc<span class="op">=</span>ve(theta), scale<span class="op">=</span>dse).pdf</span>
 <span id="cb18-13"><a aria-label="13"></a>plt.plot(z, fdeltamethod(z))</span>
@@ -839,7 +865,7 @@ E[|x|^3] is about 1.7, exact is 4.8</code></pre>
 <span id="cb18-15"><a aria-label="15"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
-<pre><code>simulation se = 0.019</code></pre>
+<pre><code>simulation se = 0.018</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
@@ -849,6 +875,26 @@ E[|x|^3] is about 1.7, exact is 4.8</code></pre>
 </div>
 </div>
 </div></div>
+</section>
+<section id="comparing-vaccine-efficacy-intervals" class="slide level2">
+<h2>Comparing Vaccine Efficacy Intervals</h2>
+<ul>
+<li>All three approaches should give similar results</li>
+<li>Statsmodels computes a Wald interval on the log risk-ratio scale, which is the same idea as the delta method</li>
+</ul>
+<div id="c03161bd" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a aria-label="1"></a>vesim <span class="op">=</span> np.percentile(gs, [<span class="fl">2.5</span>, <span class="fl">97.5</span>])</span>
+<span id="cb20-2"><a aria-label="2"></a>vedm <span class="op">=</span> normalci(ve(theta), deltamethod(ve,theta,Omega))</span>
+<span id="cb20-3"><a aria-label="3"></a>vesm <span class="op">=</span> pfizerall.VE()[<span class="dv">1</span>]</span>
+<span id="cb20-4"><a aria-label="4"></a><span class="bu">print</span>(<span class="ss">f"Simulation:  [</span><span class="sc">{</span>vesim[<span class="dv">0</span>]<span class="sc">:.3}</span><span class="ss">, </span><span class="sc">{</span>vesim[<span class="dv">1</span>]<span class="sc">:.3}</span><span class="ss">]"</span>)</span>
+<span id="cb20-5"><a aria-label="5"></a><span class="bu">print</span>(<span class="ss">f"Delta method: [</span><span class="sc">{</span>vedm[<span class="dv">0</span>]<span class="sc">:.3}</span><span class="ss">, </span><span class="sc">{</span>vedm[<span class="dv">1</span>]<span class="sc">:.3}</span><span class="ss">]"</span>)</span>
+<span id="cb20-6"><a aria-label="6"></a><span class="bu">print</span>(<span class="ss">f"Statsmodels:  [</span><span class="sc">{</span>vesm[<span class="dv">0</span>]<span class="sc">:.3}</span><span class="ss">, </span><span class="sc">{</span>vesm[<span class="dv">1</span>]<span class="sc">:.3}</span><span class="ss">]"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simulation:  [0.908, 0.981]
+Delta method: [0.946, 0.947]
+Statsmodels:  [0.895, 0.972]</code></pre>
+</div>
+</div>
 </section></section>
 <section>
 <section id="bootstrap" class="title-slide slide level1 center">
@@ -871,44 +917,44 @@ E[|x|^3] is about 1.7, exact is 4.8</code></pre>
 </section>
 <section id="bootstrap-2" class="slide level2">
 <h2>Bootstrap</h2>
-<div id="ccb6c41d" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a aria-label="1"></a>np.random.seed(<span class="dv">6987</span>)</span>
-<span id="cb20-2"><a aria-label="2"></a><span class="kw">def</span> dgp(n):</span>
-<span id="cb20-3"><a aria-label="3"></a>    x <span class="op">=</span> np.exp(<span class="bu">abs</span>(np.random.normal(<span class="dv">0</span>,<span class="dv">1</span>,n)))</span>
-<span id="cb20-4"><a aria-label="4"></a>    <span class="cf">return</span> x</span>
-<span id="cb20-5"><a aria-label="5"></a></span>
-<span id="cb20-6"><a aria-label="6"></a><span class="kw">def</span> estimator(x):</span>
-<span id="cb20-7"><a aria-label="7"></a>    <span class="cf">return</span> np.mean(x)</span>
-<span id="cb20-8"><a aria-label="8"></a></span>
-<span id="cb20-9"><a aria-label="9"></a></span>
-<span id="cb20-10"><a aria-label="10"></a><span class="kw">def</span> bootstrap(data, estimator, B<span class="op">=</span><span class="dv">999</span>):</span>
-<span id="cb20-11"><a aria-label="11"></a>    n <span class="op">=</span> <span class="bu">len</span>(data)</span>
-<span id="cb20-12"><a aria-label="12"></a>    est <span class="op">=</span> estimator(data)</span>
-<span id="cb20-13"><a aria-label="13"></a>    bestimates <span class="op">=</span> [estimator(np.random.choice(data,size<span class="op">=</span>n, replace<span class="op">=</span><span class="va">True</span>))<span class="op">-</span>est <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(B)]</span>
-<span id="cb20-14"><a aria-label="14"></a>    <span class="cf">return</span> bestimates</span>
-<span id="cb20-15"><a aria-label="15"></a></span>
-<span id="cb20-16"><a aria-label="16"></a><span class="kw">def</span> cltdistmean(data, B<span class="op">=</span><span class="dv">999</span>):</span>
-<span id="cb20-17"><a aria-label="17"></a>    <span class="cf">return</span> np.random.normal(<span class="dv">0</span>,np.sqrt(np.var(data)<span class="op">/</span><span class="bu">len</span>(data)),B)</span>
-<span id="cb20-18"><a aria-label="18"></a></span>
-<span id="cb20-19"><a aria-label="19"></a>cmap <span class="op">=</span> sns.color_palette(<span class="st">"tab10"</span>)</span>
-<span id="cb20-20"><a aria-label="20"></a>n <span class="op">=</span> <span class="dv">20</span></span>
-<span id="cb20-21"><a aria-label="21"></a>B <span class="op">=</span> <span class="dv">999</span></span>
-<span id="cb20-22"><a aria-label="22"></a>true <span class="op">=</span> estimator(dgp(n<span class="op">*</span><span class="dv">10_000</span>))</span>
-<span id="cb20-23"><a aria-label="23"></a><span class="co"># simulate true distribution of estimator</span></span>
-<span id="cb20-24"><a aria-label="24"></a>estsims <span class="op">=</span> [estimator(dgp(n)) <span class="op">-</span> true <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(S)]</span>
-<span id="cb20-25"><a aria-label="25"></a>sns.ecdfplot(estsims, label<span class="op">=</span><span class="st">"True distribution"</span>, linewidth<span class="op">=</span><span class="dv">3</span>, color<span class="op">=</span><span class="st">"black"</span>)</span>
-<span id="cb20-26"><a aria-label="26"></a><span class="cf">for</span> b <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
-<span id="cb20-27"><a aria-label="27"></a>    data <span class="op">=</span> dgp(n)</span>
-<span id="cb20-28"><a aria-label="28"></a>    sns.ecdfplot(bootstrap(data, estimator, B<span class="op">=</span>B), alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="ss">f"Bootstrap </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">"</span>, color<span class="op">=</span>cmap[b])</span>
-<span id="cb20-29"><a aria-label="29"></a>    sns.ecdfplot(cltdistmean(data,B<span class="op">=</span><span class="dv">10</span><span class="op">*</span>B), alpha<span class="op">=</span><span class="fl">0.5</span>,</span>
-<span id="cb20-30"><a aria-label="30"></a>                 label<span class="op">=</span><span class="ss">f"CLT </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">"</span>, color<span class="op">=</span>cmap[b], linestyle<span class="op">=</span><span class="st">'dashed'</span>)</span>
-<span id="cb20-31"><a aria-label="31"></a></span>
-<span id="cb20-32"><a aria-label="32"></a>sd<span class="op">=</span>np.std(estsims)</span>
-<span id="cb20-33"><a aria-label="33"></a>plt.xlim(<span class="op">-</span><span class="fl">2.5</span><span class="op">*</span>sd,<span class="fl">2.5</span><span class="op">*</span>sd)</span>
-<span id="cb20-34"><a aria-label="34"></a>plt.ylim(<span class="dv">0</span>,<span class="dv">1</span>)</span>
-<span id="cb20-35"><a aria-label="35"></a>plt.legend()</span>
-<span id="cb20-36"><a aria-label="36"></a>plt.title(<span class="ss">f"True CDF and Approximate CDFs for three data realizations with n=</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb20-37"><a aria-label="37"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="388cfda0" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a>np.random.seed(<span class="dv">6987</span>)</span>
+<span id="cb22-2"><a aria-label="2"></a><span class="kw">def</span> lognormal_dgp(n):</span>
+<span id="cb22-3"><a aria-label="3"></a>    x <span class="op">=</span> np.exp(<span class="bu">abs</span>(np.random.normal(<span class="dv">0</span>,<span class="dv">1</span>,n)))</span>
+<span id="cb22-4"><a aria-label="4"></a>    <span class="cf">return</span> x</span>
+<span id="cb22-5"><a aria-label="5"></a></span>
+<span id="cb22-6"><a aria-label="6"></a><span class="kw">def</span> estimator(x):</span>
+<span id="cb22-7"><a aria-label="7"></a>    <span class="cf">return</span> np.mean(x)</span>
+<span id="cb22-8"><a aria-label="8"></a></span>
+<span id="cb22-9"><a aria-label="9"></a></span>
+<span id="cb22-10"><a aria-label="10"></a><span class="kw">def</span> bootstrap(data, estimator, B<span class="op">=</span><span class="dv">999</span>):</span>
+<span id="cb22-11"><a aria-label="11"></a>    n <span class="op">=</span> <span class="bu">len</span>(data)</span>
+<span id="cb22-12"><a aria-label="12"></a>    est <span class="op">=</span> estimator(data)</span>
+<span id="cb22-13"><a aria-label="13"></a>    bestimates <span class="op">=</span> [estimator(np.random.choice(data,size<span class="op">=</span>n, replace<span class="op">=</span><span class="va">True</span>))<span class="op">-</span>est <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(B)]</span>
+<span id="cb22-14"><a aria-label="14"></a>    <span class="cf">return</span> bestimates</span>
+<span id="cb22-15"><a aria-label="15"></a></span>
+<span id="cb22-16"><a aria-label="16"></a><span class="kw">def</span> cltdistmean(data, B<span class="op">=</span><span class="dv">999</span>):</span>
+<span id="cb22-17"><a aria-label="17"></a>    <span class="cf">return</span> np.random.normal(<span class="dv">0</span>,np.sqrt(np.var(data)<span class="op">/</span><span class="bu">len</span>(data)),B)</span>
+<span id="cb22-18"><a aria-label="18"></a></span>
+<span id="cb22-19"><a aria-label="19"></a>cmap <span class="op">=</span> sns.color_palette(<span class="st">"tab10"</span>)</span>
+<span id="cb22-20"><a aria-label="20"></a>n <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb22-21"><a aria-label="21"></a>B <span class="op">=</span> <span class="dv">999</span></span>
+<span id="cb22-22"><a aria-label="22"></a>true <span class="op">=</span> estimator(lognormal_dgp(n<span class="op">*</span><span class="dv">10_000</span>))</span>
+<span id="cb22-23"><a aria-label="23"></a><span class="co"># simulate true distribution of estimator</span></span>
+<span id="cb22-24"><a aria-label="24"></a>estsims <span class="op">=</span> [estimator(lognormal_dgp(n)) <span class="op">-</span> true <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(S)]</span>
+<span id="cb22-25"><a aria-label="25"></a>sns.ecdfplot(estsims, label<span class="op">=</span><span class="st">"True distribution"</span>, linewidth<span class="op">=</span><span class="dv">3</span>, color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb22-26"><a aria-label="26"></a><span class="cf">for</span> b <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb22-27"><a aria-label="27"></a>    data <span class="op">=</span> lognormal_dgp(n)</span>
+<span id="cb22-28"><a aria-label="28"></a>    sns.ecdfplot(bootstrap(data, estimator, B<span class="op">=</span>B), alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="ss">f"Bootstrap </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">"</span>, color<span class="op">=</span>cmap[b])</span>
+<span id="cb22-29"><a aria-label="29"></a>    sns.ecdfplot(cltdistmean(data,B<span class="op">=</span><span class="dv">10</span><span class="op">*</span>B), alpha<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb22-30"><a aria-label="30"></a>                 label<span class="op">=</span><span class="ss">f"CLT </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">"</span>, color<span class="op">=</span>cmap[b], linestyle<span class="op">=</span><span class="st">'dashed'</span>)</span>
+<span id="cb22-31"><a aria-label="31"></a></span>
+<span id="cb22-32"><a aria-label="32"></a>sd<span class="op">=</span>np.std(estsims)</span>
+<span id="cb22-33"><a aria-label="33"></a>plt.xlim(<span class="op">-</span><span class="fl">2.5</span><span class="op">*</span>sd,<span class="fl">2.5</span><span class="op">*</span>sd)</span>
+<span id="cb22-34"><a aria-label="34"></a>plt.ylim(<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb22-35"><a aria-label="35"></a>plt.legend()</span>
+<span id="cb22-36"><a aria-label="36"></a>plt.title(<span class="ss">f"True CDF and Approximate CDFs for three data realizations with n=</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb22-37"><a aria-label="37"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
@@ -916,7 +962,7 @@ E[|x|^3] is about 1.7, exact is 4.8</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="uncertainty_files/figure-revealjs/cell-13-output-1.png" width="812" height="431"></p>
+<p><img data-src="uncertainty_files/figure-revealjs/cell-14-output-1.png" width="812" height="431"></p>
 </figure>
 </div>
 </div>
@@ -937,43 +983,43 @@ t = \sqrt{n}(\bar{x} - \Er[x])/\hat{\sigma}_x \leadsto N(0, 1)
 </section>
 <section id="bootstrap-for-pivotal-statistic" class="slide level2">
 <h2>Bootstrap for Pivotal Statistic</h2>
-<div id="f285a478" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a aria-label="1"></a>np.random.seed(<span class="dv">6987</span>)</span>
-<span id="cb21-2"><a aria-label="2"></a><span class="kw">def</span> estimator(data) :</span>
-<span id="cb21-3"><a aria-label="3"></a>    <span class="cf">return</span> np.mean(data), np.std(data)<span class="op">/</span>np.sqrt(<span class="bu">len</span>(data))</span>
-<span id="cb21-4"><a aria-label="4"></a></span>
-<span id="cb21-5"><a aria-label="5"></a><span class="kw">def</span> tbootstrap(data, estimator, B<span class="op">=</span><span class="dv">999</span>):</span>
-<span id="cb21-6"><a aria-label="6"></a>    n <span class="op">=</span> <span class="bu">len</span>(data)</span>
-<span id="cb21-7"><a aria-label="7"></a>    bestimates <span class="op">=</span> np.zeros(B)</span>
-<span id="cb21-8"><a aria-label="8"></a>    est <span class="op">=</span> estimator(data)</span>
-<span id="cb21-9"><a aria-label="9"></a>    <span class="cf">for</span> b <span class="kw">in</span> <span class="bu">range</span>(B):</span>
-<span id="cb21-10"><a aria-label="10"></a>        eb <span class="op">=</span> estimator(np.random.choice(data,size<span class="op">=</span>n, replace<span class="op">=</span><span class="va">True</span>))</span>
-<span id="cb21-11"><a aria-label="11"></a>        bestimates[b] <span class="op">=</span> (eb[<span class="dv">0</span>]<span class="op">-</span>est[<span class="dv">0</span>])<span class="op">/</span>eb[<span class="dv">1</span>]</span>
-<span id="cb21-12"><a aria-label="12"></a>    <span class="cf">return</span> bestimates</span>
-<span id="cb21-13"><a aria-label="13"></a></span>
-<span id="cb21-14"><a aria-label="14"></a>cmap <span class="op">=</span> sns.color_palette(<span class="st">"tab10"</span>)</span>
-<span id="cb21-15"><a aria-label="15"></a>true <span class="op">=</span> estimator(dgp(n<span class="op">*</span><span class="dv">10_000</span>))</span>
-<span id="cb21-16"><a aria-label="16"></a><span class="co"># simulate true distribution of estimator</span></span>
-<span id="cb21-17"><a aria-label="17"></a>estsims <span class="op">=</span> np.zeros(S)</span>
-<span id="cb21-18"><a aria-label="18"></a><span class="cf">for</span> s <span class="kw">in</span> <span class="bu">range</span>(S):</span>
-<span id="cb21-19"><a aria-label="19"></a>    m, sd <span class="op">=</span> estimator(dgp(n))</span>
-<span id="cb21-20"><a aria-label="20"></a>    estsims[s] <span class="op">=</span> (m<span class="op">-</span>true[<span class="dv">0</span>])<span class="op">/</span>sd</span>
-<span id="cb21-21"><a aria-label="21"></a></span>
-<span id="cb21-22"><a aria-label="22"></a>sns.ecdfplot(estsims, label<span class="op">=</span><span class="st">"True distribution"</span>, linewidth<span class="op">=</span><span class="dv">3</span>, color<span class="op">=</span><span class="st">"black"</span>)</span>
-<span id="cb21-23"><a aria-label="23"></a><span class="cf">for</span> b <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
-<span id="cb21-24"><a aria-label="24"></a>    data <span class="op">=</span> dgp(n)</span>
-<span id="cb21-25"><a aria-label="25"></a>    sns.ecdfplot(tbootstrap(data, estimator, B<span class="op">=</span>B), alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="ss">f"Pivotal Bootstrap </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">"</span>, color<span class="op">=</span>cmap[b])</span>
-<span id="cb21-26"><a aria-label="26"></a></span>
-<span id="cb21-27"><a aria-label="27"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">4.5</span>, <span class="fl">4.5</span>, num<span class="op">=</span><span class="dv">200</span>)</span>
-<span id="cb21-28"><a aria-label="28"></a>cdfx<span class="op">=</span> scipy.stats.norm().cdf(x)</span>
-<span id="cb21-29"><a aria-label="29"></a>plt.plot(x, cdfx, label<span class="op">=</span><span class="st">"Normal"</span>, color<span class="op">=</span><span class="st">"black"</span>, linestyle<span class="op">=</span><span class="st">"dashed"</span>)</span>
-<span id="cb21-30"><a aria-label="30"></a></span>
-<span id="cb21-31"><a aria-label="31"></a>sd<span class="op">=</span>np.std(estsims)</span>
-<span id="cb21-32"><a aria-label="32"></a>plt.ylim(<span class="dv">0</span>,<span class="dv">1</span>)</span>
-<span id="cb21-33"><a aria-label="33"></a>plt.xlim(<span class="op">-</span><span class="fl">2.5</span><span class="op">*</span>sd,<span class="fl">2.5</span><span class="op">*</span>sd)</span>
-<span id="cb21-34"><a aria-label="34"></a>plt.legend()</span>
-<span id="cb21-35"><a aria-label="35"></a>plt.title(<span class="ss">f"True CDF and Approximate CDFs for t-stat for three data realizations with n=</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb21-36"><a aria-label="36"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="5e82aacc" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a>np.random.seed(<span class="dv">6987</span>)</span>
+<span id="cb23-2"><a aria-label="2"></a><span class="kw">def</span> estimator(data) :</span>
+<span id="cb23-3"><a aria-label="3"></a>    <span class="cf">return</span> np.mean(data), np.std(data)<span class="op">/</span>np.sqrt(<span class="bu">len</span>(data))</span>
+<span id="cb23-4"><a aria-label="4"></a></span>
+<span id="cb23-5"><a aria-label="5"></a><span class="kw">def</span> tbootstrap(data, estimator, B<span class="op">=</span><span class="dv">999</span>):</span>
+<span id="cb23-6"><a aria-label="6"></a>    n <span class="op">=</span> <span class="bu">len</span>(data)</span>
+<span id="cb23-7"><a aria-label="7"></a>    bestimates <span class="op">=</span> np.zeros(B)</span>
+<span id="cb23-8"><a aria-label="8"></a>    est <span class="op">=</span> estimator(data)</span>
+<span id="cb23-9"><a aria-label="9"></a>    <span class="cf">for</span> b <span class="kw">in</span> <span class="bu">range</span>(B):</span>
+<span id="cb23-10"><a aria-label="10"></a>        eb <span class="op">=</span> estimator(np.random.choice(data,size<span class="op">=</span>n, replace<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb23-11"><a aria-label="11"></a>        bestimates[b] <span class="op">=</span> (eb[<span class="dv">0</span>]<span class="op">-</span>est[<span class="dv">0</span>])<span class="op">/</span>eb[<span class="dv">1</span>]</span>
+<span id="cb23-12"><a aria-label="12"></a>    <span class="cf">return</span> bestimates</span>
+<span id="cb23-13"><a aria-label="13"></a></span>
+<span id="cb23-14"><a aria-label="14"></a>cmap <span class="op">=</span> sns.color_palette(<span class="st">"tab10"</span>)</span>
+<span id="cb23-15"><a aria-label="15"></a>true <span class="op">=</span> estimator(lognormal_dgp(n<span class="op">*</span><span class="dv">10_000</span>))</span>
+<span id="cb23-16"><a aria-label="16"></a><span class="co"># simulate true distribution of estimator</span></span>
+<span id="cb23-17"><a aria-label="17"></a>estsims <span class="op">=</span> np.zeros(S)</span>
+<span id="cb23-18"><a aria-label="18"></a><span class="cf">for</span> s <span class="kw">in</span> <span class="bu">range</span>(S):</span>
+<span id="cb23-19"><a aria-label="19"></a>    m, sd <span class="op">=</span> estimator(lognormal_dgp(n))</span>
+<span id="cb23-20"><a aria-label="20"></a>    estsims[s] <span class="op">=</span> (m<span class="op">-</span>true[<span class="dv">0</span>])<span class="op">/</span>sd</span>
+<span id="cb23-21"><a aria-label="21"></a></span>
+<span id="cb23-22"><a aria-label="22"></a>sns.ecdfplot(estsims, label<span class="op">=</span><span class="st">"True distribution"</span>, linewidth<span class="op">=</span><span class="dv">3</span>, color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb23-23"><a aria-label="23"></a><span class="cf">for</span> b <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb23-24"><a aria-label="24"></a>    data <span class="op">=</span> lognormal_dgp(n)</span>
+<span id="cb23-25"><a aria-label="25"></a>    sns.ecdfplot(tbootstrap(data, estimator, B<span class="op">=</span>B), alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="ss">f"Pivotal Bootstrap </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">"</span>, color<span class="op">=</span>cmap[b])</span>
+<span id="cb23-26"><a aria-label="26"></a></span>
+<span id="cb23-27"><a aria-label="27"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">4.5</span>, <span class="fl">4.5</span>, num<span class="op">=</span><span class="dv">200</span>)</span>
+<span id="cb23-28"><a aria-label="28"></a>cdfx<span class="op">=</span> scipy.stats.norm().cdf(x)</span>
+<span id="cb23-29"><a aria-label="29"></a>plt.plot(x, cdfx, label<span class="op">=</span><span class="st">"Normal"</span>, color<span class="op">=</span><span class="st">"black"</span>, linestyle<span class="op">=</span><span class="st">"dashed"</span>)</span>
+<span id="cb23-30"><a aria-label="30"></a></span>
+<span id="cb23-31"><a aria-label="31"></a>sd<span class="op">=</span>np.std(estsims)</span>
+<span id="cb23-32"><a aria-label="32"></a>plt.ylim(<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb23-33"><a aria-label="33"></a>plt.xlim(<span class="op">-</span><span class="fl">2.5</span><span class="op">*</span>sd,<span class="fl">2.5</span><span class="op">*</span>sd)</span>
+<span id="cb23-34"><a aria-label="34"></a>plt.legend()</span>
+<span id="cb23-35"><a aria-label="35"></a>plt.title(<span class="ss">f"True CDF and Approximate CDFs for t-stat for three data realizations with n=</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb23-36"><a aria-label="36"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
@@ -981,21 +1027,21 @@ t = \sqrt{n}(\bar{x} - \Er[x])/\hat{\sigma}_x \leadsto N(0, 1)
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="uncertainty_files/figure-revealjs/cell-14-output-1.png" width="812" height="431"></p>
+<p><img data-src="uncertainty_files/figure-revealjs/cell-15-output-1.png" width="812" height="431"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="bootstrap-confidence-interval" class="slide level2">
 <h2>Bootstrap Confidence Interval</h2>
-<div id="1867866e" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a><span class="kw">def</span> bootstrapci(data, estimator, B<span class="op">=</span><span class="dv">999</span>, level<span class="op">=</span><span class="fl">0.95</span>):</span>
-<span id="cb22-2"><a aria-label="2"></a>    estimates <span class="op">=</span> bootstrap(data, estimator, B)</span>
-<span id="cb22-3"><a aria-label="3"></a>    lo <span class="op">=</span> np.percentile(estimates, <span class="dv">100</span><span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>) <span class="op">+</span> estimator(data)</span>
-<span id="cb22-4"><a aria-label="4"></a>    hi <span class="op">=</span> np.percentile(estimates, <span class="dv">100</span><span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>(<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>)) <span class="op">+</span> estimator(data)</span>
-<span id="cb22-5"><a aria-label="5"></a>    <span class="cf">return</span> lo, hi</span>
-<span id="cb22-6"><a aria-label="6"></a></span>
-<span id="cb22-7"><a aria-label="7"></a>bootstrapci(dgp(n), np.mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div id="09f4aa05" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a><span class="kw">def</span> bootstrapci(data, estimator, B<span class="op">=</span><span class="dv">999</span>, level<span class="op">=</span><span class="fl">0.95</span>):</span>
+<span id="cb24-2"><a aria-label="2"></a>    estimates <span class="op">=</span> bootstrap(data, estimator, B)</span>
+<span id="cb24-3"><a aria-label="3"></a>    lo <span class="op">=</span> np.percentile(estimates, <span class="dv">100</span><span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>) <span class="op">+</span> estimator(data)</span>
+<span id="cb24-4"><a aria-label="4"></a>    hi <span class="op">=</span> np.percentile(estimates, <span class="dv">100</span><span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>(<span class="dv">1</span><span class="op">-</span>level)<span class="op">/</span><span class="dv">2</span>)) <span class="op">+</span> estimator(data)</span>
+<span id="cb24-5"><a aria-label="5"></a>    <span class="cf">return</span> lo, hi</span>
+<span id="cb24-6"><a aria-label="6"></a></span>
+<span id="cb24-7"><a aria-label="7"></a>bootstrapci(lognormal_dgp(n), np.mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>(np.float64(2.1750298043936604), np.float64(3.7622303748107635))</code></pre>
 </div>
 </div>
@@ -1008,9 +1054,9 @@ t = \sqrt{n}(\bar{x} - \Er[x])/\hat{\sigma}_x \leadsto N(0, 1)
 <section id="multiple-testing" class="slide level2">
 <h2>Multiple Testing</h2>
 <ul>
-<li>If construct many confidence intervals, there is high change at least one will not contain the true parameter
+<li>If we construct many confidence intervals, there is a high chance that at least one will not contain the true parameter
 <ul>
-<li>65% chance with twenty 95% confidence intervals</li>
+<li>~64% chance with twenty 95% confidence intervals</li>
 </ul></li>
 <li>Trying many things and only focusing on “statistically significant” results only leads to spurious conclusions</li>
 </ul>
@@ -1060,7 +1106,7 @@ t = \sqrt{n}(\bar{x} - \Er[x])/\hat{\sigma}_x \leadsto N(0, 1)
 <section id="sources-and-further-reading" class="slide level2">
 <h2>Sources and Further Reading</h2>
 <ul>
-<li><a href="https://matheusfacure.github.io/python-causality-handbook/03-Stats-Review-The-Most-Dangerous-Equation.html.html">Chapter 3</a> of <span class="citation" data-cites="facure2022">Facure (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></li>
+<li><a href="https://matheusfacure.github.io/python-causality-handbook/03-Stats-Review-The-Most-Dangerous-Equation.html">Chapter 3</a> of <span class="citation" data-cites="facure2022">Facure (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></li>
 <li><a href="https://causalml-book.org/">Chapter 1</a> of <span class="citation" data-cites="causalml2024">Chernozhukov et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></li>
 </ul>
 </section>
@@ -1120,7 +1166,7 @@ Raič, Martin. 2019. <span>“<span class="nocase">A multivariate Berry–Esseen
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"\u003ci class=\"fas fa-gear\">\u003c/i>","content":"\u003cul class=\"slide-menu-items\">\n\u003cli class=\"slide-tool-item active\" data-item=\"0\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\">\u003ckbd>f\u003c/kbd> Fullscreen\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"1\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\">\u003ckbd>s\u003c/kbd> Speaker View\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"2\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\">\u003ckbd>o\u003c/kbd> Slide Overview\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"3\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\">\u003ckbd>e\u003c/kbd> PDF Export Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"4\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\">\u003ckbd>r\u003c/kbd> Scroll View Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"5\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\">\u003ckbd>b\u003c/kbd> Toggle Chalkboard\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"6\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\">\u003ckbd>c\u003c/kbd> Toggle Notes Canvas\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"7\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\">\u003ckbd>d\u003c/kbd> Download Drawings\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"8\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\">\u003ckbd>?\u003c/kbd> Keyboard Help\u003c/a>\u003c/li>\n\u003c/ul>"}],"openButton":true,"openButtonLabel":"Slide menu"},
 'chalkboard': {"buttons":true,"theme":"whiteboard","boardmarkerWidth":2,"chalkWidth":2,"chalkEffect":0},
 'smaller': true,
  
@@ -1379,7 +1425,8 @@ Raič, Martin. 2019. <span>“<span class="nocase">A multivariate Berry–Esseen
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
           // Inspect non-navigation links and adorn them if external
-         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          window.quartoDecorateExternalLinks = function (root) {
+         var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
           for (var i=0; i<links.length; i++) {
             const link = links[i];
             if (!isInternal(link.href)) {
@@ -1388,8 +1435,69 @@ Raič, Martin. 2019. <span>“<span class="nocase">A multivariate Berry–Esseen
               if (link.dataset.originalHref !== undefined) {
                 link.href = link.dataset.originalHref;
               }
+              if (!link.classList.contains('no-external-icon')) {
+              }
             }
           }
+          };
+          window.quartoDecorateExternalLinks(window.document);
+        // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+        // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+        const hideOnEscAndFocusOut = {
+          name: 'hideOnEscAndFocusOut',
+          defaultValue: true,
+          fn(instance) {
+            const dismiss = () => {
+              // A show scheduled by the trigger delay would otherwise reopen it
+              instance.clearDelayTimeouts();
+              instance.hide();
+            };
+            const onKeyDown = (event) => {
+              if (event.key !== 'Escape') {
+                return;
+              }
+              // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+              // except an open reveal.js slide menu, which Esc should close too.
+              // The menu handles keys only when its keyboard option is on.
+              const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+                window.Reveal.getConfig().menu?.keyboard !== false;
+              if (!menuHandlesEsc) {
+                event.stopPropagation();
+              }
+              if (instance.popper.contains(window.document.activeElement)) {
+                // Disabled while refocusing so the focus trigger does not reopen it
+                instance.disable();
+                instance.reference.focus();
+                instance.enable();
+              }
+              dismiss();
+            };
+            const onFocusOut = (event) => {
+              const target = event.relatedTarget;
+              if (target && !instance.reference.contains(target) &&
+                  !instance.popper.contains(target)) {
+                dismiss();
+              }
+            };
+            // On the trigger too: a click trigger (code-annotations: select) has no
+            // blur handling. Attached for the instance's lifetime so leaving the
+            // trigger also cancels a show still pending on the trigger delay.
+            instance.reference.addEventListener('focusout', onFocusOut);
+            return {
+              onShow() {
+                window.document.addEventListener('keydown', onKeyDown, true);
+                instance.popper.addEventListener('focusout', onFocusOut);
+              },
+              onHide() {
+                window.document.removeEventListener('keydown', onKeyDown, true);
+                instance.popper.removeEventListener('focusout', onFocusOut);
+              },
+              onDestroy() {
+                instance.reference.removeEventListener('focusout', onFocusOut);
+              },
+            };
+          },
+        };
         function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
           const config = {
             allowHTML: true,
@@ -1403,6 +1511,7 @@ Raič, Martin. 2019. <span>“<span class="nocase">A multivariate Berry–Esseen
             interactiveBorder: 10,
             theme: 'light-border',
             placement: 'bottom-start',
+            plugins: [hideOnEscAndFocusOut],
           };
           if (contentFn) {
             config.content = contentFn;
