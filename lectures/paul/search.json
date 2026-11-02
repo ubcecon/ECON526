@@ -1572,7 +1572,7 @@
     "href": "uncertainty.html#exact-confidence-interval",
     "title": "Uncertainty Quantification",
     "section": "Exact Confidence Interval",
-    "text": "Exact Confidence Interval\n\nKnowing the distribution of \\(\\hat{p}\\) given \\(p\\), we can compute \\(P(|\\hat{p}-p| \\leq |\\hat{p}_{obs}-p|)\\) for each candidate \\(p\\) and keep the values of \\(p\\) for which it is below \\(1-\\alpha\\) \\[\n\\widehat{CI}_{\\alpha}(\\hat{p}_{obs}) = \\{p: P(|\\hat{p}-p| \\leq |\\hat{p}_{obs} - p|) \\leq 1-\\alpha \\}\n\\]\n\n\ndef proportioncisim(phat, n, level=0.95, S=100_000):\n    se = (phat*(1-phat)/n)**0.5\n    dp = se/20\n    p = phat - dp\n    while (abs(np.random.binomial(n,p, S)/n-p) &lt;= abs((phat-p))).mean() &lt; level :\n        p = p - dp\n        if p &lt; 0:\n            break\n    plo = p\n    p = phat + dp\n    while (abs(np.random.binomial(n,p,S)/n-p) &lt;= abs((phat-p))).mean() &lt; level :\n        p = p + dp\n        if p &gt; 1:\n            break\n    phi = p\n\n    return(plo,phi)\n\nphat = 0.05\nn = 100\nproportioncisim(phat, 100, level=0.95)\n\n(0.024936331074641174, 0.10557596153014372)"
+    "text": "Exact Confidence Interval\n\nKnowing the distribution of \\(\\hat{p}\\) given \\(p\\), we can compute \\(P(|\\hat{p}-p| \\leq |\\hat{p}_{obs}-p|)\\) for each candidate \\(p\\) and keep the values of \\(p\\) for which it is below \\(1-\\alpha\\) \\[\n\\widehat{CI}_{\\alpha}(\\hat{p}_{obs}) = \\{p: P(|\\hat{p}-p| \\leq |\\hat{p}_{obs} - p|) \\leq 1-\\alpha \\}\n\\]\n\n\ndef proportioncisim(phat, n, level=0.95, S=100_000):\n    se = (phat*(1-phat)/n)**0.5\n    dp = se/20 if se &gt; 0 else 1/(20*n)\n    p = phat - dp\n    while (abs(np.random.binomial(n,p, S)/n-p) &lt;= abs((phat-p))).mean() &lt; level :\n        p = p - dp\n        if p &lt; 0:\n            break\n    plo = max(p, 0.0)\n    p = phat + dp\n    while (abs(np.random.binomial(n,p,S)/n-p) &lt;= abs((phat-p))).mean() &lt; level :\n        p = p + dp\n        if p &gt; 1:\n            break\n    phi = min(p, 1.0)\n\n    return(plo,phi)\n\nphat = 0.05\nn = 100\nproportioncisim(phat, 100, level=0.95)\n\n(0.024936331074641174, 0.10557596153014372)"
   },
   {
     "objectID": "uncertainty.html#references",
@@ -1600,7 +1600,7 @@
     "href": "uncertainty.html#exact-confidence-interval-1",
     "title": "Uncertainty Quantification",
     "section": "Exact Confidence Interval",
-    "text": "Exact Confidence Interval\n\nimport scipy\ndef proportionci(phat, n, level=0.95):\n    se = (phat*(1-phat)/n)**0.5\n    dp = se/200\n    k = round(phat*n)\n    p = phat - dp\n    while (scipy.stats.binom.cdf(k,n,p) &lt; (1-(1-level)/2) ) :\n        p = p - dp\n        if (p &lt; 0):\n            break\n    plo = p\n    p = phat + dp\n    while (scipy.stats.binom.cdf(k,n,p) &gt; (1-level)/2) :\n        p = p + dp\n        if p &gt; 1 :\n            break\n    phi = p\n    return(plo,phi)\n\nprint(\"Simulation-based:\", proportioncisim(0.05, 100, level=0.95, S=10_000))\nprint(\"Quantile-based:  \", proportionci(0.05, 100))\n\nSimulation-based: (0.024936331074641174, 0.10557596153014372)\nQuantile-based:   (0.022320991708517042, 0.11287711726057285)"
+    "text": "Exact Confidence Interval\n\nimport scipy\ndef proportionci(phat, n, level=0.95):\n    se = (phat*(1-phat)/n)**0.5\n    dp = se/200 if se &gt; 0 else 1/(200*n)\n    k = round(phat*n)\n    if k == 0:\n        plo = 0.0\n    else:\n        p = phat - dp\n        while (scipy.stats.binom.cdf(k-1,n,p) &lt; (1-(1-level)/2) ) :\n            p = p - dp\n            if (p &lt; 0):\n                break\n        plo = max(p, 0.0)\n    p = phat + dp\n    while (scipy.stats.binom.cdf(k,n,p) &gt; (1-level)/2) :\n        p = p + dp\n        if p &gt; 1 :\n            break\n    phi = min(p, 1.0)\n    return(plo,phi)\n\nprint(\"Simulation-based:\", proportioncisim(0.05, 100, level=0.95, S=10_000))\nprint(\"Quantile-based:  \", proportionci(0.05, 100))\n\nSimulation-based: (0.024936331074641174, 0.10557596153014372)\nQuantile-based:   (0.016327505661148555, 0.11287711726057285)"
   },
   {
     "objectID": "uncertainty.html#standard-errors-1",
@@ -1614,7 +1614,7 @@
     "href": "uncertainty.html#confidence-intervals-1",
     "title": "Uncertainty Quantification",
     "section": "Confidence Intervals",
-    "text": "Confidence Intervals\n\nA function of the data constructed so that \\[\nP(\\widehat{ATE} \\in \\widehat{CI}_{\\alpha}) \\approx 1-\\alpha\n\\]\nCan create if we know the (approximate) distribution of the data or the estimate"
+    "text": "Confidence Intervals\n\nA function of the data constructed so that \\[\nP(ATE \\in \\widehat{CI}_{\\alpha}) \\approx 1-\\alpha\n\\]\nCan create if we know the (approximate) distribution of the data or the estimate"
   },
   {
     "objectID": "uncertainty.html#approximate-confidence-interval",
@@ -1670,7 +1670,7 @@
     "href": "uncertainty.html#exact-confidence-interval-2",
     "title": "Uncertainty Quantification",
     "section": "Exact Confidence Interval",
-    "text": "Exact Confidence Interval\n\nphat = pfizerall.NYT/pfizerall.NT\nplo, phi=proportionci(phat,pfizerall.NT)\n1000*plo, 1000*phi\n\n(0.23971701200382992, 0.8556562725036012)"
+    "text": "Exact Confidence Interval\n\nphat = pfizerall.NYT/pfizerall.NT\nplo, phi=proportionci(phat,pfizerall.NT)\n1000*plo, 1000*phi\n\n(0.20591546722030588, 0.8556562725036012)"
   },
   {
     "objectID": "uncertainty.html#bootstrap-1",
@@ -1684,7 +1684,7 @@
     "href": "uncertainty.html#bootstrap-2",
     "title": "Uncertainty Quantification",
     "section": "Bootstrap",
-    "text": "Bootstrap\n\nnp.random.seed(6987)\ndef lognormal_dgp(n):\n    x = np.exp(abs(np.random.normal(0,1,n)))\n    return x\n\ndef estimator(x):\n    return np.mean(x)\n\n\ndef bootstrap(data, estimator, B=999):\n    n = len(data)\n    est = estimator(data)\n    bestimates = [estimator(np.random.choice(data,size=n, replace=True))-est for _ in range(B)]\n    return bestimates\n\ndef cltdistmean(data, B=999):\n    return np.random.normal(0,np.sqrt(np.var(data)/len(data)),B)\n\ncmap = sns.color_palette(\"tab10\")\nn = 20\nB = 999\ntrue = estimator(lognormal_dgp(n*10_000))\n# simulate true distribution of estimator\nestsims = [estimator(lognormal_dgp(n)) - true for _ in range(S)]\nsns.ecdfplot(estsims, label=\"True distribution\", linewidth=3, color=\"black\")\nfor b in range(3):\n    data = lognormal_dgp(n)\n    sns.ecdfplot(bootstrap(data, estimator, B=B), alpha=0.5, label=f\"Bootstrap {b}\", color=cmap[b])\n    sns.ecdfplot(cltdistmean(data,B=10*B), alpha=0.5,\n                 label=f\"CLT {b}\", color=cmap[b], linestyle='dashed')\n\nsd=np.std(estsims)\nplt.xlim(-2.5*sd,2.5*sd)\nplt.ylim(0,1)\nplt.legend()\nplt.title(f\"True CDF and Approximate CDFs for three data realizations with n={n}\")\nplt.show()"
+    "text": "Bootstrap\n\nnp.random.seed(6987)\ndef lognormal_dgp(n):\n    x = np.exp(abs(np.random.normal(0,1,n)))\n    return x\n\ndef estimator(x):\n    return np.mean(x)\n\n\ndef bootstrap(data, estimator, B=999):\n    n = len(data)\n    est = estimator(data)\n    bestimates = [estimator(np.random.choice(data,size=n, replace=True))-est for _ in range(B)]\n    return bestimates\n\ndef cltdistmean(data, B=999):\n    return np.random.normal(0,np.sqrt(np.var(data)/len(data)),B)\n\ncmap = sns.color_palette(\"tab10\")\nn = 20\nB = 999\nS = 10_000\ntrue = estimator(lognormal_dgp(n*10_000))\n# simulate true distribution of estimator\nestsims = [estimator(lognormal_dgp(n)) - true for _ in range(S)]\nsns.ecdfplot(estsims, label=\"True distribution\", linewidth=3, color=\"black\")\nfor b in range(3):\n    data = lognormal_dgp(n)\n    sns.ecdfplot(bootstrap(data, estimator, B=B), alpha=0.5, label=f\"Bootstrap {b}\", color=cmap[b])\n    sns.ecdfplot(cltdistmean(data,B=10*B), alpha=0.5,\n                 label=f\"CLT {b}\", color=cmap[b], linestyle='dashed')\n\nsd=np.std(estsims)\nplt.xlim(-2.5*sd,2.5*sd)\nplt.ylim(0,1)\nplt.legend()\nplt.title(f\"True CDF and Approximate CDFs for three data realizations with n={n}\")\nplt.show()"
   },
   {
     "objectID": "uncertainty.html#bootstrap-2-output",
@@ -1698,7 +1698,7 @@
     "href": "uncertainty.html#bootstrap-confidence-interval",
     "title": "Uncertainty Quantification",
     "section": "Bootstrap Confidence Interval",
-    "text": "Bootstrap Confidence Interval\n\ndef bootstrapci(data, estimator, B=999, level=0.95):\n    estimates = bootstrap(data, estimator, B)\n    lo = np.percentile(estimates, 100*(1-level)/2) + estimator(data)\n    hi = np.percentile(estimates, 100*(1-(1-level)/2)) + estimator(data)\n    return lo, hi\n\nbootstrapci(lognormal_dgp(n), np.mean)\n\n(np.float64(2.1750298043936604), np.float64(3.7622303748107635))"
+    "text": "Bootstrap Confidence Interval\n\ndef bootstrapci(data, estimator, B=999, level=0.95):\n    estimates = bootstrap(data, estimator, B)\n    lo = np.percentile(estimates, 100*(1-level)/2) + estimator(data)\n    hi = np.percentile(estimates, 100*(1-(1-level)/2)) + estimator(data)\n    return lo, hi\n\nbootstrapci(lognormal_dgp(n), np.mean)\n\n(np.float64(2.530361017259394), np.float64(6.029203101991069))"
   },
   {
     "objectID": "uncertainty.html#multiple-testing",
@@ -1978,7 +1978,7 @@
     "href": "uncertainty.html#simulated-illustration-of-berry-esseen-clt-output",
     "title": "Uncertainty Quantification",
     "section": "Simulated Illustration of Berry-Esseen CLT",
-    "text": "Simulated Illustration of Berry-Esseen CLT\n\nvar(x) is about 0.99\nE[|x|^3] is about 1.7, exact is 1.7"
+    "text": "Simulated Illustration of Berry-Esseen CLT\n\nvar(x) is about 1.0\nE[|x|^3] is about 1.7, exact is 1.7"
   },
   {
     "objectID": "uncertainty.html#bootstrap-for-pivotal-statistic-output",
@@ -3203,6 +3203,6 @@
     "href": "uncertainty.html#comparing-vaccine-efficacy-intervals",
     "title": "Uncertainty Quantification",
     "section": "Comparing Vaccine Efficacy Intervals",
-    "text": "Comparing Vaccine Efficacy Intervals\n\nAll three approaches should give similar results\nStatsmodels computes a Wald interval on the log risk-ratio scale, which is the same idea as the delta method\n\n\nvesim = np.percentile(gs, [2.5, 97.5])\nvedm = normalci(ve(theta), np.sqrt(deltamethod(ve,theta,Omega)))\nvesm = pfizerall.VE()[1]\nprint(f\"Simulation:  [{vesim[0]:.3}, {vesim[1]:.3}]\")\nprint(f\"Delta method: [{vedm[0]:.3}, {vedm[1]:.3}]\")\nprint(f\"Statsmodels:  [{vesm[0]:.3}, {vesm[1]:.3}]\")\n\nSimulation:  [0.908, 0.981]\nDelta method: [0.91, 0.982]\nStatsmodels:  [0.895, 0.972]"
+    "text": "Comparing Vaccine Efficacy Intervals\n\nAll three approaches should give similar results\nStatsmodels computes a Wald interval on the log risk-ratio scale, which is the same idea as the delta method\n\n\nvesim = np.percentile(gs, [2.5, 97.5])\nvedm = normalci(ve(theta), np.sqrt(deltamethod(ve,theta,Omega)))\nvesm = pfizerall.VE()[1]\nprint(f\"Simulation:  [{vesim[0]:.3}, {vesim[1]:.3}]\")\nprint(f\"Delta method: [{vedm[0]:.3}, {vedm[1]:.3}]\")\nprint(f\"Statsmodels:  [{vesm[0]:.3}, {vesm[1]:.3}]\")\n\nSimulation:  [0.909, 0.982]\nDelta method: [0.91, 0.982]\nStatsmodels:  [0.895, 0.972]"
   }
 ]
