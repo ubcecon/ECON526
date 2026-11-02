@@ -1740,7 +1740,7 @@
     "href": "uncertainty.html#simulated-distribution-of-vaccine-efficacy",
     "title": "Uncertainty Quantification",
     "section": "Simulated Distribution of Vaccine Efficacy",
-    "text": "Simulated Distribution of Vaccine Efficacy\n\n\ndef simulateg(g,theta,Omega,S=10_000):\n    thetas = np.random.multivariate_normal(theta, Omega, S)\n    gs = np.apply_along_axis(g,1,thetas)\n    return(gs, ((gs-g(theta))**2).mean())\n\ngs, gv=simulateg(ve, theta, Omega)\nprint(f\"simulation se = {gv**0.5:.2}\")\n\nplt.hist(gs, bins=50, alpha=0.5, density=True)\ndse = deltamethod(ve,theta,Omega)**0.5\nz = np.linspace(-3,3,num=100)*dse + ve(theta)\nfdeltamethod = scipy.stats.norm(loc=ve(theta), scale=dse).pdf\nplt.plot(z, fdeltamethod(z))\nplt.title(\"Distribution of Vaccine Efficacy\")\nplt.show()\n\n\nsimulation se = 0.018"
+    "text": "Simulated Distribution of Vaccine Efficacy\n\n\ndef simulateg(g,theta,Omega,S=10_000):\n    thetas = np.random.multivariate_normal(theta, Omega, S)\n    gs = np.apply_along_axis(g,1,thetas)\n    return(gs, ((gs-g(theta))**2).mean())\n\ngs, gv=simulateg(ve, theta, Omega)\nprint(f\"simulation se = {gv**0.5:.2}\")\n\nplt.hist(gs, bins=50, alpha=0.5, density=True)\ndse = deltamethod(ve,theta,Omega)**0.5\nz = np.linspace(-3,3,num=100)*dse + ve(theta)\nfdeltamethod = scipy.stats.norm(loc=ve(theta), scale=dse).pdf\nplt.plot(z, fdeltamethod(z))\nplt.title(\"Distribution of Vaccine Efficacy\")\nplt.show()\n\n\nsimulation se = 0.019"
   },
   {
     "objectID": "regression.html#regression-for-rct",
@@ -1978,7 +1978,7 @@
     "href": "uncertainty.html#simulated-illustration-of-berry-esseen-clt-output",
     "title": "Uncertainty Quantification",
     "section": "Simulated Illustration of Berry-Esseen CLT",
-    "text": "Simulated Illustration of Berry-Esseen CLT\n\nvar(x) is about 1.0\nE[|x|^3] is about 1.7, exact is 1.7"
+    "text": "Simulated Illustration of Berry-Esseen CLT\n\nvar(x) is about 0.99\nE[|x|^3] is about 1.7, exact is 1.7"
   },
   {
     "objectID": "uncertainty.html#bootstrap-for-pivotal-statistic-output",
@@ -3203,6 +3203,6 @@
     "href": "uncertainty.html#comparing-vaccine-efficacy-intervals",
     "title": "Uncertainty Quantification",
     "section": "Comparing Vaccine Efficacy Intervals",
-    "text": "Comparing Vaccine Efficacy Intervals\n\nAll three approaches should give similar results\nStatsmodels computes a Wald interval on the log risk-ratio scale, which is the same idea as the delta method\n\n\nvesim = np.percentile(gs, [2.5, 97.5])\nvedm = normalci(ve(theta), deltamethod(ve,theta,Omega))\nvesm = pfizerall.VE()[1]\nprint(f\"Simulation:  [{vesim[0]:.3}, {vesim[1]:.3}]\")\nprint(f\"Delta method: [{vedm[0]:.3}, {vedm[1]:.3}]\")\nprint(f\"Statsmodels:  [{vesm[0]:.3}, {vesm[1]:.3}]\")\n\nSimulation:  [0.908, 0.981]\nDelta method: [0.946, 0.947]\nStatsmodels:  [0.895, 0.972]"
+    "text": "Comparing Vaccine Efficacy Intervals\n\nAll three approaches should give similar results\nStatsmodels computes a Wald interval on the log risk-ratio scale, which is the same idea as the delta method\n\n\nvesim = np.percentile(gs, [2.5, 97.5])\nvedm = normalci(ve(theta), np.sqrt(deltamethod(ve,theta,Omega)))\nvesm = pfizerall.VE()[1]\nprint(f\"Simulation:  [{vesim[0]:.3}, {vesim[1]:.3}]\")\nprint(f\"Delta method: [{vedm[0]:.3}, {vedm[1]:.3}]\")\nprint(f\"Statsmodels:  [{vesm[0]:.3}, {vesm[1]:.3}]\")\n\nSimulation:  [0.908, 0.981]\nDelta method: [0.91, 0.982]\nStatsmodels:  [0.895, 0.972]"
   }
 ]
