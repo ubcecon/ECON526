@@ -6,14 +6,14 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.19">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.11.9">
 
   <meta name="author" content="Paul Schrimpf">
   <title>ECON 526 – Linear Regression</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
@@ -120,7 +120,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-00ad5a49dff614330cd349bcec985ec3.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -238,11 +238,12 @@ Paul Schrimpf
 </div>
 
 </section><section id="TOC">
-<nav role="doc-toc"> 
+<nav role="doc-toc" aria-labelledby="toc-title">
 <h2 id="toc-title">Table of contents</h2>
 <ul>
 <li><a href="#/review-of-linear-regression" id="/toc-review-of-linear-regression">Review of Linear Regression</a></li>
 <li><a href="#/regression-for-rcts" id="/toc-regression-for-rcts">Regression for RCTs</a></li>
+<li><a href="#/examples" id="/toc-examples">Examples</a></li>
 </ul>
 </nav>
 </section>
@@ -270,7 +271,7 @@ Paul Schrimpf
 <ul>
 <li>Create a dataframe to represent the Pfizer Covid vaccine trial</li>
 </ul>
-<div id="cd775e3e" class="cell" data-execution_count="2">
+<div id="39869334" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -283,7 +284,7 @@ Paul Schrimpf
 <span id="cb1-8"><a aria-label="8"></a><span class="im">import</span> requests</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="6ed09286" class="cell" data-execution_count="3">
+<div id="21099c6d" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="kw">def</span> pfizerrctdata():</span>
@@ -365,7 +366,7 @@ Paul Schrimpf
 </section>
 <section id="ate" class="slide level2">
 <h2>ATE</h2>
-<div id="f0af5ce9" class="cell" data-execution_count="4">
+<div id="eabfda27" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="kw">def</span> ATE(data, treatment<span class="op">=</span><span class="st">'treat'</span>, y<span class="op">=</span><span class="st">'infected'</span>):</span>
@@ -395,21 +396,21 @@ ATE = &amp; \Er[Y_i\mid D_i=1] - E[Y_i\mid D_i=0] \\
 \]</span></li>
 </ul></li>
 </ul>
-<div id="a7e75549" class="cell" data-execution_count="5">
+<div id="23aa74ae" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a>reg<span class="op">=</span>smf.ols(<span class="st">'infected ~ treat'</span>, data<span class="op">=</span>data.loc[data[<span class="st">'over65'</span>]<span class="op">==</span><span class="dv">1</span>,:]).fit()</span>
-<span id="cb5-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="ss">f"regression estimate=</span><span class="sc">{</span>reg<span class="sc">.</span>params[<span class="dv">1</span>]<span class="sc">:3}</span><span class="ss">, se=</span><span class="sc">{</span>reg<span class="sc">.</span>bse[<span class="dv">1</span>]<span class="sc">:5}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="ss">f"regression estimate=</span><span class="sc">{</span>reg<span class="sc">.</span>params<span class="sc">.</span>iloc[<span class="dv">1</span>]<span class="sc">:3}</span><span class="ss">, se=</span><span class="sc">{</span>reg<span class="sc">.</span>bse<span class="sc">.</span>iloc[<span class="dv">1</span>]<span class="sc">:5}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>regression estimate=-0.004424468296488705, se=0.0011004170544556028</code></pre>
+<pre><code>regression estimate=-0.004424468296488705, se=0.0011004170544556035</code></pre>
 </div>
 </div>
 </section>
 <section id="heteroskedasticity-robust-standard-errors" class="slide level2">
 <h2>Heteroskedasticity Robust Standard Errors</h2>
-<div id="950bb4d3" class="cell" data-execution_count="6">
+<div id="448b62a4" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a>olsse <span class="op">=</span> np.sqrt(np.diag(smf.ols(<span class="st">'infected ~ treat'</span>,data<span class="op">=</span>data.loc[data[<span class="st">'over65'</span>]<span class="op">==</span><span class="dv">1</span>]).fit().cov_params())[<span class="dv">1</span>])</span>
 <span id="cb7-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="ss">f"OLS SE: </span><span class="sc">{</span>olsse<span class="sc">}</span><span class="ss">, manual SE: </span><span class="sc">{</span>ate[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>OLS SE: 0.0011004170544556028, manual SE: 0.0010976149240857532</code></pre>
+<pre><code>OLS SE: 0.0011004170544556035, manual SE: 0.0010976149240857532</code></pre>
 </div>
 </div>
 <ul>
@@ -417,11 +418,11 @@ ATE = &amp; \Er[Y_i\mid D_i=1] - E[Y_i\mid D_i=0] \\
 <li><p>Default of <code>smf.ols</code> assumes homoskedasticiy <span class="math inline">\(\Er[\epsilon^2|X] = \sigma^2\)</span></p></li>
 <li><p>With <span class="math inline">\(y\)</span> and <span class="math inline">\(D\)</span>, binary, <span class="math inline">\(\var(y|D) = \Er[\epsilon^2|D] = P(y=1|D)(1-P(y=1|D))\)</span></p></li>
 </ul>
-<div id="7cb32da8" class="cell" data-execution_count="7">
+<div id="3bc373bd" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a>olshcse <span class="op">=</span> np.sqrt(np.diag(smf.ols(<span class="st">'infected ~ treat'</span>,data<span class="op">=</span>data.loc[data[<span class="st">'over65'</span>]<span class="op">==</span><span class="dv">1</span>]).fit(cov_type<span class="op">=</span><span class="st">"HC3"</span>).cov_params())[<span class="dv">1</span>])</span>
 <span id="cb9-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="ss">f"OLS HC SE: </span><span class="sc">{</span>olshcse<span class="sc">}</span><span class="ss">, manual SE: </span><span class="sc">{</span>ate[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>OLS HC SE: 0.0010977499295368124, manual SE: 0.0010976149240857532</code></pre>
+<pre><code>OLS HC SE: 0.0010977499295368122, manual SE: 0.0010976149240857532</code></pre>
 </div>
 </div>
 <ul>
@@ -460,7 +461,7 @@ ATE = &amp; \Er[Y_i\mid D_i=1] - E[Y_i\mid D_i=0] \\
 <li><p>Regression being a linear approximation to <span class="math inline">\(\Er[Y|X]\)</span> does not mean <span class="math inline">\(\beta\)</span> necessarily has the sign you want</p></li>
 <li><p>In example below, <span class="math inline">\(\Er[Y|x_1=1, x_2] &gt; \Er[Y|x_1=0,x_2]\)</span> for all <span class="math inline">\(x_2\)</span>, but <span class="math inline">\(\beta_1 &lt; 0\)</span></p></li>
 </ul>
-<div id="6ed5c3fb" class="cell" data-execution_count="8">
+<div id="4ad27b9d" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb11-2"><a aria-label="2"></a></span>
 <span id="cb11-3"><a aria-label="3"></a>n <span class="op">=</span> <span class="dv">100_000</span></span>
@@ -477,8 +478,8 @@ ATE = &amp; \Er[Y_i\mid D_i=1] - E[Y_i\mid D_i=0] \\
 <span id="cb11-14"><a aria-label="14"></a>mean_dEydx2 <span class="op">=</span> np.mean([EYX([<span class="dv">1</span>,<span class="dv">1</span>,x2i]) <span class="op">-</span> EYX([<span class="dv">1</span>,<span class="dv">0</span>,x2i]) <span class="cf">for</span> x2i <span class="kw">in</span> x2])</span>
 <span id="cb11-15"><a aria-label="15"></a><span class="bu">print</span>(<span class="ss">f"mean( E[y|x1=1,x2] - E[y|x1=0,x2] ) = </span><span class="sc">{</span>mean_dEydx2<span class="sc">:.3}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>beta_1 = -0.163
-mean( E[y|x1=1,x2] - E[y|x1=0,x2] ) = 0.548</code></pre>
+<pre><code>beta_1 = -0.156
+mean( E[y|x1=1,x2] - E[y|x1=0,x2] ) = 0.55</code></pre>
 </div>
 </div>
 </section>
@@ -506,7 +507,7 @@ mean( E[y|x1=1,x2] - E[y|x1=0,x2] ) = 0.548</code></pre>
 </section>
 <section id="example-gender-earnings-gap" class="slide level2 smaller">
 <h2>Example: Gender Earnings Gap</h2>
-<div id="e6d17d13" class="cell" data-execution_count="9">
+<div id="9872155f" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a><span class="im">import</span> os</span>
 <span id="cb13-2"><a aria-label="2"></a><span class="im">import</span> requests</span>
 <span id="cb13-3"><a aria-label="3"></a>url <span class="op">=</span> <span class="st">'https://www.nber.org/morg/annual/morg23.dta'</span></span>
@@ -541,7 +542,7 @@ mean( E[y|x1=1,x2] - E[y|x1=0,x2] ) = 0.548</code></pre>
 </div>
 
 </section>
-<section id="example-gender-earnings-gap-output" class="slide level2 smaller output-location-slide"><h2>Example: Gender Earnings Gap</h2><div class="cell output-location-slide" data-execution_count="9">
+<section id="example-gender-earnings-gap-output" class="slide level2 smaller output-location-slide"><h2>Example: Gender Earnings Gap</h2><div class="cell output-location-slide" data-execution_count="8">
 <div class="cell-output cell-output-display" data-execution_count="8">
 <table class="simpletable caption-top">
 <tbody>
@@ -692,24 +693,24 @@ Standard errors in parentheses.<br>
 <ul>
 <li>Multiple regression of <span class="math inline">\(y\)</span> on <span class="math inline">\(x\)</span> and <span class="math inline">\(w\)</span>, or</li>
 </ul>
-<div id="fd8ee34a" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a>smf.ols(formula<span class="op">=</span><span class="st">"log_earn ~ female + log_hourslw + log_uhours"</span>, data<span class="op">=</span>cps, missing<span class="op">=</span><span class="st">"drop"</span>).fit(cov_type<span class="op">=</span><span class="st">"HC3"</span>).params[<span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="9d1c5b14" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a>smf.ols(formula<span class="op">=</span><span class="st">"log_earn ~ female + log_hourslw + log_uhours"</span>, data<span class="op">=</span>cps, missing<span class="op">=</span><span class="st">"drop"</span>).fit(cov_type<span class="op">=</span><span class="st">"HC3"</span>).params.iloc[<span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
-<pre><code>np.float64(-0.13177744005735198)</code></pre>
+<pre><code>np.float64(-0.13177744005734943)</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
 <li>Bivariate regression of residuals from regressing <span class="math inline">\(y\)</span> on <span class="math inline">\(w\)</span>, on the residuals from regression <span class="math inline">\(x\)</span> on <span class="math inline">\(w\)</span></li>
 </ul>
-<div id="267bdfb9" class="cell" data-execution_count="11">
+<div id="597963ca" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a>ey<span class="op">=</span>smf.ols(formula<span class="op">=</span><span class="st">"log_earn ~ log_hourslw + log_uhours"</span>, data<span class="op">=</span>cps, missing<span class="op">=</span><span class="st">"drop"</span>).fit().resid</span>
 <span id="cb16-2"><a aria-label="2"></a>ex<span class="op">=</span>smf.ols(formula<span class="op">=</span><span class="st">"I(1*female) ~ log_hourslw + log_uhours"</span>, data<span class="op">=</span>cps, missing<span class="op">=</span><span class="st">"drop"</span>).fit().resid</span>
 <span id="cb16-3"><a aria-label="3"></a>edf <span class="op">=</span> pd.concat([ex,ey],axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb16-4"><a aria-label="4"></a>edf.columns<span class="op">=</span>[<span class="st">'ex'</span>,<span class="st">'ey'</span>]</span>
-<span id="cb16-5"><a aria-label="5"></a>smf.ols(<span class="st">'ey ~ ex'</span>, data<span class="op">=</span>edf).fit(cov_type<span class="op">=</span><span class="st">"HC3"</span>).params[<span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb16-5"><a aria-label="5"></a>smf.ols(<span class="st">'ey ~ ex'</span>, data<span class="op">=</span>edf).fit(cov_type<span class="op">=</span><span class="st">"HC3"</span>).params.iloc[<span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
-<pre><code>np.float64(-0.13176431840840097)</code></pre>
+<pre><code>np.float64(-0.131764318408401)</code></pre>
 </div>
 </div>
 </div></div>
@@ -734,7 +735,7 @@ y_i = \beta_0 + x_i \beta + w_i'\gamma + u_i
 </section>
 <section id="gender-wage-gap-with-more-conditioning" class="slide level2">
 <h2>Gender Wage Gap with More Conditioning</h2>
-<div id="d3bfbac5" class="cell" data-execution_count="12">
+<div id="2e7459df" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-label="1"></a><span class="im">import</span> pyfixest <span class="im">as</span> pf</span>
 <span id="cb18-2"><a aria-label="2"></a></span>
 <span id="cb18-3"><a aria-label="3"></a>controls<span class="op">=</span><span class="st">"age + I(age**2) | race + grade92 + unionmme + unioncov +  ind17 + occ18"</span></span>
@@ -744,9 +745,10 @@ y_i = \beta_0 + x_i \beta + w_i'\gamma + u_i
 <pre><code>###
 
 Estimation:  OLS
-Dep. var.: log_earn, Fixed effects: race+grade92+unionmme+unioncov+ind17+occ18
+Dep. var.: log_earn, Fixed effects: race + grade92 + unionmme + unioncov +  ind17 + occ18
+sample: None = all
 Inference:  hetero
-Observations:  104607
+Observations:  104605
 
 | Coefficient       |   Estimate |   Std. Error |   t value |   Pr(&gt;|t|) |   2.5% |   97.5% |
 |:------------------|-----------:|-------------:|----------:|-----------:|-------:|--------:|
@@ -754,7 +756,7 @@ Observations:  104607
 | wasmarried        |      0.082 |        0.009 |     9.532 |      0.000 |  0.065 |   0.099 |
 | married           |      0.126 |        0.005 |    23.115 |      0.000 |  0.115 |   0.137 |
 | log_hourslw       |      0.044 |        0.007 |     6.623 |      0.000 |  0.031 |   0.058 |
-| log_uhours        |      0.988 |        0.011 |    93.299 |      0.000 |  0.967 |   1.009 |
+| log_uhours        |      0.988 |        0.011 |    93.300 |      0.000 |  0.967 |   1.009 |
 | age               |      0.003 |        0.000 |    19.689 |      0.000 |  0.003 |   0.003 |
 | I(age ** 2)       |     -0.000 |        0.000 |    -1.170 |      0.242 | -0.000 |   0.000 |
 | female:wasmarried |     -0.059 |        0.011 |    -5.485 |      0.000 | -0.080 |  -0.038 |
@@ -781,7 +783,7 @@ RMSE: 0.524 R2: 0.582 R2 Within: 0.314 </code></pre>
 <ul>
 <li>from <span class="citation" data-cites="causalml2024">Chernozhukov et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span> chapter 2 (who got the setup from Roth)</li>
 </ul>
-<div id="113c7a60" class="cell" data-execution_count="13">
+<div id="724384f4" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a aria-label="1"></a>np.random.seed(<span class="dv">54</span>)</span>
 <span id="cb20-2"><a aria-label="2"></a>n <span class="op">=</span> <span class="dv">1000</span>             <span class="co"># sample size</span></span>
 <span id="cb20-3"><a aria-label="3"></a>Z <span class="op">=</span> np.random.normal(size<span class="op">=</span>n)         <span class="co"># generate Z</span></span>
@@ -802,7 +804,7 @@ RMSE: 0.524 R2: 0.582 R2 Within: 0.314 </code></pre>
 </section>
 <section id="simulated-rct-1" class="slide level2">
 <h2>Simulated RCT</h2>
-<div id="e1dd2366" class="cell" data-execution_count="14">
+<div id="656c3a26" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a>hc <span class="op">=</span> <span class="st">'HC0'</span></span>
 <span id="cb22-2"><a aria-label="2"></a>m1<span class="op">=</span>smf.ols(<span class="st">'Y ~ D'</span>,data<span class="op">=</span>data).fit(cov_type<span class="op">=</span>hc)</span>
 <span id="cb22-3"><a aria-label="3"></a>madd<span class="op">=</span>smf.ols(<span class="st">'Y ~ D + Z'</span>,data<span class="op">=</span>data).fit(cov_type<span class="op">=</span>hc)</span>
@@ -864,7 +866,7 @@ Standard errors in parentheses.
 </section>
 <section id="simulated-rct-2" class="slide level2">
 <h2>Simulated RCT</h2>
-<div id="39997890" class="cell" data-execution_count="15">
+<div id="e45159ed" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a>minteract<span class="op">=</span>smf.ols(<span class="st">'Y ~ D + Z*D'</span>,data<span class="op">=</span>data).fit(cov_type<span class="op">=</span>hc)</span>
 <span id="cb23-2"><a aria-label="2"></a>summary_col([m1, madd, minteract],model_names<span class="op">=</span>[<span class="st">'simple'</span>,<span class="st">'additive'</span>,<span class="st">'interactive'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
@@ -961,6 +963,190 @@ Y &amp; = \beta_0^i + \beta_1^i D + X'\gamma^i_0 + DX'\gamma^i_1 + \epsilon^s
 \var(\hat{\beta}_1^i) \leq \var(\hat{\beta}_1^s) \text{ and } \var(\hat{\beta}_1^i) \leq \var(\hat{\beta}_1^a)
 \]</span></li>
 </ul>
+</section></section>
+<section>
+<section id="examples" class="title-slide slide level1 center">
+<h1>Examples</h1>
+
+</section>
+<section id="oregon-health-insurance-experiment" class="slide level2">
+<h2>Oregon Health Insurance Experiment</h2>
+<ul>
+<li><span class="citation" data-cites="finkelstein2012oregon">Finkelstein et al. (<a href="#/references" role="doc-biblioref" onclick="">2012</a>)</span></li>
+<li>Lottery-based Medicaid expansion in Oregon.</li>
+<li>Treatment: selected in the lottery.</li>
+<li>Outcome: any doctor visit in the in-person survey.</li>
+<li>Randomization was not i.i.d. across household sizes: lottery odds varied with the number of eligible household members.</li>
+</ul>
+</section>
+<section id="ptreatmentnumber-eligible-in-household" class="slide level2">
+<h2>P(treatment|number eligible in household)</h2>
+<div id="8a13c5f3" class="cell" data-execution_count="15">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a>ohie <span class="op">=</span> pd.read_csv(<span class="st">"data/replication/ohie_analysis.csv"</span>)</span>
+<span id="cb24-2"><a aria-label="2"></a>ohie <span class="op">=</span> ohie.dropna(subset<span class="op">=</span>[<span class="st">"doc_any"</span>, <span class="st">"treatment"</span>, <span class="st">"numhh"</span>, <span class="st">"weight"</span>]).copy()</span>
+<span id="cb24-3"><a aria-label="3"></a>ohie[<span class="st">"numhh"</span>] <span class="op">=</span> ohie[<span class="st">"numhh"</span>].astype(<span class="bu">int</span>)</span>
+<span id="cb24-4"><a aria-label="4"></a></span>
+<span id="cb24-5"><a aria-label="5"></a>prob_table <span class="op">=</span> (</span>
+<span id="cb24-6"><a aria-label="6"></a>    ohie.groupby(<span class="st">"numhh"</span>)</span>
+<span id="cb24-7"><a aria-label="7"></a>    .agg(P_treated<span class="op">=</span>(<span class="st">"treatment"</span>, <span class="st">"mean"</span>), N<span class="op">=</span>(<span class="st">"treatment"</span>, <span class="st">"size"</span>))</span>
+<span id="cb24-8"><a aria-label="8"></a>    .reset_index()</span>
+<span id="cb24-9"><a aria-label="9"></a>)</span>
+<span id="cb24-10"><a aria-label="10"></a><span class="bu">print</span>(prob_table.<span class="bu">round</span>(<span class="dv">3</span>).to_markdown(index<span class="op">=</span><span class="va">False</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>|   numhh |   P_treated |    N |
+|--------:|------------:|-----:|
+|       1 |       0.493 | 9235 |
+|       2 |       0.613 | 2952 |
+|       3 |       0.889 |   18 |</code></pre>
+</div>
+</div>
+</section>
+<section id="etreatment-effectnumber-eligible-in-household" class="slide level2">
+<h2>E[Treatment Effect|number eligible in household]</h2>
+<div id="aae6659c" class="cell" data-execution_count="16">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a aria-label="1"></a>ohie_effects <span class="op">=</span> []</span>
+<span id="cb26-2"><a aria-label="2"></a><span class="cf">for</span> h <span class="kw">in</span> <span class="bu">sorted</span>(ohie[<span class="st">"numhh"</span>].unique()):</span>
+<span id="cb26-3"><a aria-label="3"></a>    g <span class="op">=</span> ohie[ohie[<span class="st">"numhh"</span>] <span class="op">==</span> h]</span>
+<span id="cb26-4"><a aria-label="4"></a>    m <span class="op">=</span> smf.ols(<span class="st">"doc_any ~ treatment"</span>, data<span class="op">=</span>g, eval_env<span class="op">=</span><span class="dv">0</span>).fit(cov_type<span class="op">=</span><span class="st">"HC3"</span>)</span>
+<span id="cb26-5"><a aria-label="5"></a>    ci <span class="op">=</span> m.conf_int().loc[<span class="st">"treatment"</span>]</span>
+<span id="cb26-6"><a aria-label="6"></a>    ohie_effects.append({</span>
+<span id="cb26-7"><a aria-label="7"></a>        <span class="st">"Household size"</span>: h,</span>
+<span id="cb26-8"><a aria-label="8"></a>        <span class="st">"Effect on P(doctor visit)"</span>: m.params[<span class="st">"treatment"</span>],</span>
+<span id="cb26-9"><a aria-label="9"></a>        <span class="st">"SE"</span>: m.bse[<span class="st">"treatment"</span>],</span>
+<span id="cb26-10"><a aria-label="10"></a>        <span class="st">"CI low"</span>: ci.iloc[<span class="dv">0</span>],</span>
+<span id="cb26-11"><a aria-label="11"></a>        <span class="st">"CI high"</span>: ci.iloc[<span class="dv">1</span>],</span>
+<span id="cb26-12"><a aria-label="12"></a>        <span class="st">"N"</span>: <span class="bu">int</span>(m.nobs),</span>
+<span id="cb26-13"><a aria-label="13"></a>    })</span>
+<span id="cb26-14"><a aria-label="14"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> pd.DataFrame(ohie_effects).<span class="bu">round</span>(<span class="dv">3</span>).to_markdown(index<span class="op">=</span><span class="va">False</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+|   Household size |   Effect on P(doctor visit) |    SE |   CI low |   CI high |    N |
+|-----------------:|----------------------------:|------:|---------:|----------:|-----:|
+|                1 |                       0.035 | 0.01  |    0.016 |     0.054 | 9235 |
+|                2 |                       0.039 | 0.018 |    0.003 |     0.075 | 2952 |
+|                3 |                       0.125 | 0.719 |   -1.284 |     1.534 |   18 |</code></pre>
+</div>
+</div>
+<ul>
+<li>But unconditional average is lower</li>
+</ul>
+<div id="a554dd87" class="cell" data-execution_count="17">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a aria-label="1"></a><span class="bu">print</span>(smf.ols(<span class="st">"doc_any ~ treatment"</span>, data<span class="op">=</span>ohie, eval_env<span class="op">=</span><span class="dv">0</span>).fit(cov_type<span class="op">=</span><span class="st">"HC3"</span>).summary().tables[<span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>==============================================================================
+                 coef    std err          z      P&gt;|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      0.6539      0.006    104.918      0.000       0.642       0.666
+treatment      0.0301      0.009      3.530      0.000       0.013       0.047
+==============================================================================</code></pre>
+</div>
+</div>
+<ul>
+<li><code>numhh</code> is an omitted variable</li>
+</ul>
+</section>
+<section id="etreatment-effect" class="slide level2">
+<h2>E[Treatment Effect]</h2>
+<ul>
+<li>Could take <span class="math inline">\(\Er[\Delta y] = \sum_{n} \Er[\Delta y | numhh=n] P(numhh=n)\)</span></li>
+<li>Or in a saturated regression with demeaned <code>numhh</code> dummies</li>
+</ul>
+<div id="499cd05d" class="cell" data-execution_count="18">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb30-2"><a aria-label="2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb30-3"><a aria-label="3"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb30-4"><a aria-label="4"></a><span class="im">from</span> patsy.state <span class="im">import</span> stateful_transform</span>
+<span id="cb30-5"><a aria-label="5"></a></span>
+<span id="cb30-6"><a aria-label="6"></a></span>
+<span id="cb30-7"><a aria-label="7"></a><span class="kw">class</span> _DemeanedDummies:</span>
+<span id="cb30-8"><a aria-label="8"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb30-9"><a aria-label="9"></a>        <span class="va">self</span>.categories_ <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb30-10"><a aria-label="10"></a>        <span class="va">self</span>.means_ <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb30-11"><a aria-label="11"></a>        <span class="va">self</span>._total_n <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb30-12"><a aria-label="12"></a>        <span class="va">self</span>._sum <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb30-13"><a aria-label="13"></a></span>
+<span id="cb30-14"><a aria-label="14"></a>    <span class="kw">def</span> memorize_chunk(<span class="va">self</span>, x):</span>
+<span id="cb30-15"><a aria-label="15"></a>        cat <span class="op">=</span> pd.Categorical(x)</span>
+<span id="cb30-16"><a aria-label="16"></a>        <span class="cf">if</span> <span class="va">self</span>.categories_ <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb30-17"><a aria-label="17"></a>            <span class="va">self</span>.categories_ <span class="op">=</span> cat.categories</span>
+<span id="cb30-18"><a aria-label="18"></a></span>
+<span id="cb30-19"><a aria-label="19"></a>        dummies <span class="op">=</span> pd.get_dummies(cat, drop_first<span class="op">=</span><span class="va">True</span>, dtype<span class="op">=</span><span class="bu">float</span>).to_numpy()</span>
+<span id="cb30-20"><a aria-label="20"></a>        chunk_sum <span class="op">=</span> dummies.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb30-21"><a aria-label="21"></a></span>
+<span id="cb30-22"><a aria-label="22"></a>        <span class="cf">if</span> <span class="va">self</span>._sum <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb30-23"><a aria-label="23"></a>            <span class="va">self</span>._sum <span class="op">=</span> chunk_sum</span>
+<span id="cb30-24"><a aria-label="24"></a>        <span class="cf">else</span>:</span>
+<span id="cb30-25"><a aria-label="25"></a>            <span class="va">self</span>._sum <span class="op">+=</span> chunk_sum</span>
+<span id="cb30-26"><a aria-label="26"></a>        <span class="va">self</span>._total_n <span class="op">+=</span> <span class="bu">len</span>(dummies)</span>
+<span id="cb30-27"><a aria-label="27"></a></span>
+<span id="cb30-28"><a aria-label="28"></a>    <span class="kw">def</span> memorize_finish(<span class="va">self</span>):</span>
+<span id="cb30-29"><a aria-label="29"></a>        <span class="va">self</span>.means_ <span class="op">=</span> <span class="va">self</span>._sum <span class="op">/</span> <span class="va">self</span>._total_n</span>
+<span id="cb30-30"><a aria-label="30"></a></span>
+<span id="cb30-31"><a aria-label="31"></a>    <span class="kw">def</span> transform(<span class="va">self</span>, x):</span>
+<span id="cb30-32"><a aria-label="32"></a>        cat <span class="op">=</span> pd.Categorical(x, categories<span class="op">=</span><span class="va">self</span>.categories_)</span>
+<span id="cb30-33"><a aria-label="33"></a>        dummies <span class="op">=</span> pd.get_dummies(cat, drop_first<span class="op">=</span><span class="va">True</span>, dtype<span class="op">=</span><span class="bu">float</span>).to_numpy()</span>
+<span id="cb30-34"><a aria-label="34"></a>        <span class="cf">return</span> dummies <span class="op">-</span> <span class="va">self</span>.means_</span>
+<span id="cb30-35"><a aria-label="35"></a></span>
+<span id="cb30-36"><a aria-label="36"></a></span>
+<span id="cb30-37"><a aria-label="37"></a>center_dummies <span class="op">=</span> stateful_transform(_DemeanedDummies)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="c45eebd8" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a aria-label="1"></a><span class="bu">print</span>(smf.ols(<span class="st">"doc_any ~ treatment*center_dummies(numhh)"</span>, data<span class="op">=</span>ohie).fit(cov_type<span class="op">=</span><span class="st">"HC3"</span>).summary().tables[<span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>======================================================================================================
+                                         coef    std err          z      P&gt;|z|      [0.025      0.975]
+------------------------------------------------------------------------------------------------------
+Intercept                              0.6506      0.006    102.151      0.000       0.638       0.663
+treatment                              0.0362      0.009      4.194      0.000       0.019       0.053
+center_dummies(numhh)[0]              -0.0678      0.016     -4.217      0.000      -0.099      -0.036
+center_dummies(numhh)[1]              -0.1672      0.707     -0.236      0.813      -1.553       1.219
+treatment:center_dummies(numhh)[0]     0.0044      0.021      0.214      0.831      -0.036       0.045
+treatment:center_dummies(numhh)[1]     0.0900      0.719      0.125      0.900      -1.319       1.499
+======================================================================================================</code></pre>
+</div>
+</div>
+</section>
+<section id="interactive-has-smaller-variance" class="slide level2">
+<h2>Interactive Has Smaller Variance</h2>
+<div id="beedc185" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a aria-label="1"></a>c1 <span class="op">=</span> smf.ols(<span class="st">"doc_any ~ treatment"</span>, data<span class="op">=</span>ohie.query(<span class="st">"numhh==2"</span>)).fit(cov_type<span class="op">=</span><span class="st">"HC3"</span>)</span>
+<span id="cb33-2"><a aria-label="2"></a>c2 <span class="op">=</span> smf.ols(<span class="st">"doc_any ~ treatment + center(educ)"</span>, data<span class="op">=</span>ohie.query(<span class="st">"numhh==2"</span>)).fit(cov_type<span class="op">=</span><span class="st">"HC3"</span>)</span>
+<span id="cb33-3"><a aria-label="3"></a>c3 <span class="op">=</span> smf.ols(<span class="st">"doc_any ~ treatment*center(educ)"</span>, data<span class="op">=</span>ohie.query(<span class="st">"numhh==2"</span>)).fit(cov_type<span class="op">=</span><span class="st">"HC3"</span>)</span>
+<span id="cb33-4"><a aria-label="4"></a><span class="im">from</span> statsmodels.iolib.summary2 <span class="im">import</span> summary_col</span>
+<span id="cb33-5"><a aria-label="5"></a></span>
+<span id="cb33-6"><a aria-label="6"></a><span class="bu">print</span>(summary_col([c1,c2,c3], stars<span class="op">=</span><span class="va">True</span>, float_format<span class="op">=</span><span class="st">"</span><span class="sc">%.5f</span><span class="st">"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+========================================================
+                       doc_any I  doc_any II doc_any III
+--------------------------------------------------------
+Intercept              0.59947*** 0.60122*** 0.60137*** 
+                       (0.01452)  (0.01445)  (0.01445)  
+treatment              0.03940**  0.03655**  0.03646**  
+                       (0.01839)  (0.01833)  (0.01833)  
+center(educ)                      0.04709*** 0.05112*** 
+                                  (0.00924)  (0.01510)  
+treatment:center(educ)                       -0.00658   
+                                             (0.01910)  
+R-squared              0.00157    0.01006    0.01010    
+R-squared Adj.         0.00123    0.00939    0.00909    
+========================================================
+Standard errors in parentheses.
+* p&lt;.1, ** p&lt;.05, ***p&lt;.01</code></pre>
+</div>
+</div>
 </section>
 <section id="collections-and-payment-reminders" class="slide level2">
 <h2>Collections and Payment Reminders</h2>
@@ -982,20 +1168,20 @@ Y &amp; = \beta_0^i + \beta_1^i D + X'\gamma^i_0 + DX'\gamma^i_1 + \epsilon^s
 </div></aside></section>
 <section id="collections-and-payment-reminders-1" class="slide level2">
 <h2>Collections and Payment Reminders</h2>
-<div id="8a427d9b" class="cell" data-execution_count="16">
+<div id="c913c0a0" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a>filename <span class="op">=</span> <span class="st">'data/collections_email.csv'</span></span>
-<span id="cb24-2"><a aria-label="2"></a>url <span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/matheusfacure/python-causality-handbook/refs/heads/master/causal-inference-for-the-brave-and-true/data/collections_email.csv'</span></span>
-<span id="cb24-3"><a aria-label="3"></a><span class="cf">if</span> <span class="kw">not</span> os.path.exists(filename):</span>
-<span id="cb24-4"><a aria-label="4"></a>    response <span class="op">=</span> requests.get(url)</span>
-<span id="cb24-5"><a aria-label="5"></a>    <span class="cf">with</span> <span class="bu">open</span>(filename, <span class="st">'wb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb24-6"><a aria-label="6"></a>        <span class="bu">file</span>.write(response.content)</span>
-<span id="cb24-7"><a aria-label="7"></a></span>
-<span id="cb24-8"><a aria-label="8"></a>data <span class="op">=</span> pd.read_csv(filename)</span>
-<span id="cb24-9"><a aria-label="9"></a>data.describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a aria-label="1"></a>filename <span class="op">=</span> <span class="st">'data/collections_email.csv'</span></span>
+<span id="cb35-2"><a aria-label="2"></a>url <span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/matheusfacure/python-causality-handbook/refs/heads/master/causal-inference-for-the-brave-and-true/data/collections_email.csv'</span></span>
+<span id="cb35-3"><a aria-label="3"></a><span class="cf">if</span> <span class="kw">not</span> os.path.exists(filename):</span>
+<span id="cb35-4"><a aria-label="4"></a>    response <span class="op">=</span> requests.get(url)</span>
+<span id="cb35-5"><a aria-label="5"></a>    <span class="cf">with</span> <span class="bu">open</span>(filename, <span class="st">'wb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb35-6"><a aria-label="6"></a>        <span class="bu">file</span>.write(response.content)</span>
+<span id="cb35-7"><a aria-label="7"></a></span>
+<span id="cb35-8"><a aria-label="8"></a>data <span class="op">=</span> pd.read_csv(filename)</span>
+<span id="cb35-9"><a aria-label="9"></a>data.describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="21">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -1105,16 +1291,16 @@ Y &amp; = \beta_0^i + \beta_1^i D + X'\gamma^i_0 + DX'\gamma^i_1 + \epsilon^s
 </section>
 <section id="collections-and-payment-reminders-2" class="slide level2 smaller">
 <h2>Collections and Payment Reminders</h2>
-<div id="1a881bfa" class="cell" data-execution_count="17">
+<div id="ebe936b2" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a aria-label="1"></a>lm <span class="op">=</span> <span class="bu">list</span>()</span>
-<span id="cb25-2"><a aria-label="2"></a>lm.append(smf.ols(formula<span class="op">=</span><span class="st">"payments ~ email"</span>, data<span class="op">=</span>data).fit(cov_type<span class="op">=</span><span class="st">'HC3'</span>))</span>
-<span id="cb25-3"><a aria-label="3"></a>lm.append(smf.ols(formula<span class="op">=</span><span class="st">"payments ~ email + credit_limit + risk_score"</span>,data<span class="op">=</span>data).fit(cov_type<span class="op">=</span><span class="st">'HC3'</span>))</span>
-<span id="cb25-4"><a aria-label="4"></a>lm.append(smf.ols(formula<span class="op">=</span><span class="st">"payments ~ email + credit_limit + risk_score + opened + agreement"</span>,data<span class="op">=</span>data).fit(cov_type<span class="op">=</span><span class="st">'HC3'</span>))</span>
-<span id="cb25-5"><a aria-label="5"></a>summary_col(lm, stars<span class="op">=</span><span class="va">True</span>, model_names<span class="op">=</span>[<span class="ss">f"</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(lm))])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a aria-label="1"></a>lm <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb36-2"><a aria-label="2"></a>lm.append(smf.ols(formula<span class="op">=</span><span class="st">"payments ~ email"</span>, data<span class="op">=</span>data).fit(cov_type<span class="op">=</span><span class="st">'HC3'</span>))</span>
+<span id="cb36-3"><a aria-label="3"></a>lm.append(smf.ols(formula<span class="op">=</span><span class="st">"payments ~ email + credit_limit + risk_score"</span>,data<span class="op">=</span>data).fit(cov_type<span class="op">=</span><span class="st">'HC3'</span>))</span>
+<span id="cb36-4"><a aria-label="4"></a>lm.append(smf.ols(formula<span class="op">=</span><span class="st">"payments ~ email + credit_limit + risk_score + opened + agreement"</span>,data<span class="op">=</span>data).fit(cov_type<span class="op">=</span><span class="st">'HC3'</span>))</span>
+<span id="cb36-5"><a aria-label="5"></a>summary_col(lm, stars<span class="op">=</span><span class="va">True</span>, model_names<span class="op">=</span>[<span class="ss">f"</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(lm))])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div class="cell-output cell-output-display" data-execution_count="22">
 <table class="simpletable caption-top">
 <tbody>
 <tr class="odd">
@@ -1223,8 +1409,8 @@ Standard errors in parentheses.<br>
 <li>What conclusions can we draw?</li>
 </ul>
 </section>
-<section id="bad-controls-or-mediators-or-colliders" class="slide level2">
-<h2>“Bad controls” or Mediators or Colliders</h2>
+<section id="bad-controls-mediators-and-colliders" class="slide level2">
+<h2>“Bad controls”, Mediators, and Colliders</h2>
 
 <aside><div>
 <p><span class="citation" data-cites="facure2022">Facure (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> calls controlling for <code>opened</code> and <code>agreement</code> “selection bias,” but in economics, we would not call it that. We would refer to <code>opened</code> and <code>agreement</code> as bad controls because they mediate the outcome of interest. We would not want hold them constant because part of how <code>email</code> affects <code>payments</code> is by changing <code>opened</code> and <code>agreement</code>.</p>
@@ -1234,15 +1420,15 @@ Standard errors in parentheses.<br>
 <h2>Drug Trial at Two Hospitals</h2>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a aria-label="1"></a>filename <span class="op">=</span> <span class="st">'data/hospital_treatment.csv'</span></span>
-<span id="cb26-2"><a aria-label="2"></a>url <span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/matheusfacure/python-causality-handbook/refs/heads/master/causal-inference-for-the-brave-and-true/data/hospital_treatment.csv'</span></span>
-<span id="cb26-3"><a aria-label="3"></a><span class="cf">if</span> <span class="kw">not</span> os.path.exists(filename):</span>
-<span id="cb26-4"><a aria-label="4"></a>    response <span class="op">=</span> requests.get(url)</span>
-<span id="cb26-5"><a aria-label="5"></a>    <span class="cf">with</span> <span class="bu">open</span>(filename, <span class="st">'wb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb26-6"><a aria-label="6"></a>        <span class="bu">file</span>.write(response.content)</span>
-<span id="cb26-7"><a aria-label="7"></a></span>
-<span id="cb26-8"><a aria-label="8"></a>drug <span class="op">=</span> pd.read_csv(filename)</span>
-<span id="cb26-9"><a aria-label="9"></a><span class="bu">print</span>(drug.<span class="bu">apply</span>([np.mean, np.std]).to_markdown() <span class="op">+</span> <span class="ss">f"</span><span class="ch">\n</span><span class="ss">| N    | </span><span class="sc">{</span><span class="bu">len</span>(drug)<span class="sc">}</span><span class="ss">     |</span><span class="ch">\n</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a aria-label="1"></a>filename <span class="op">=</span> <span class="st">'data/hospital_treatment.csv'</span></span>
+<span id="cb37-2"><a aria-label="2"></a>url <span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/matheusfacure/python-causality-handbook/refs/heads/master/causal-inference-for-the-brave-and-true/data/hospital_treatment.csv'</span></span>
+<span id="cb37-3"><a aria-label="3"></a><span class="cf">if</span> <span class="kw">not</span> os.path.exists(filename):</span>
+<span id="cb37-4"><a aria-label="4"></a>    response <span class="op">=</span> requests.get(url)</span>
+<span id="cb37-5"><a aria-label="5"></a>    <span class="cf">with</span> <span class="bu">open</span>(filename, <span class="st">'wb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb37-6"><a aria-label="6"></a>        <span class="bu">file</span>.write(response.content)</span>
+<span id="cb37-7"><a aria-label="7"></a></span>
+<span id="cb37-8"><a aria-label="8"></a>drug <span class="op">=</span> pd.read_csv(filename)</span>
+<span id="cb37-9"><a aria-label="9"></a><span class="bu">print</span>(drug.<span class="bu">apply</span>([np.mean, np.std]).to_markdown() <span class="op">+</span> <span class="ss">f"</span><span class="ch">\n</span><span class="ss">| N    | </span><span class="sc">{</span><span class="bu">len</span>(drug)<span class="sc">}</span><span class="ss">     |</span><span class="ch">\n</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <table class="caption-top">
 <thead>
@@ -1290,7 +1476,7 @@ Standard errors in parentheses.<br>
 </div></aside></section>
 <section id="drug-trial-at-two-hospitals-1" class="slide level2">
 <h2>Drug Trial at Two Hospitals</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a aria-label="1"></a><span class="bu">print</span>(drug.groupby(<span class="st">'hospital'</span>).mean().to_markdown())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a aria-label="1"></a><span class="bu">print</span>(drug.groupby(<span class="st">'hospital'</span>).mean().to_markdown())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -1321,19 +1507,19 @@ Standard errors in parentheses.<br>
 </section>
 <section id="drug-trial-at-two-hospitals-2" class="slide level2 smaller">
 <h2>Drug Trial at Two Hospitals</h2>
-<div id="198b87d8" class="cell" data-execution_count="20">
+<div id="3e098e9e" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a aria-label="1"></a>models <span class="op">=</span> [</span>
-<span id="cb28-2"><a aria-label="2"></a>    smf.ols(<span class="st">"days ~ treatment"</span>, data<span class="op">=</span>drug).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>),</span>
-<span id="cb28-3"><a aria-label="3"></a>    smf.ols(<span class="st">"days ~ treatment"</span>, data<span class="op">=</span>drug.query(<span class="st">"hospital==0"</span>)).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>),</span>
-<span id="cb28-4"><a aria-label="4"></a>    smf.ols(<span class="st">"days ~ treatment"</span>, data<span class="op">=</span>drug.query(<span class="st">"hospital==1"</span>)).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>),</span>
-<span id="cb28-5"><a aria-label="5"></a>    smf.ols(<span class="st">"days ~ treatment + severity "</span>, data<span class="op">=</span>drug).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>),</span>
-<span id="cb28-6"><a aria-label="6"></a>    smf.ols(<span class="st">"days ~ treatment + severity + hospital"</span>, data<span class="op">=</span>drug).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>),</span>
-<span id="cb28-7"><a aria-label="7"></a>    ]</span>
-<span id="cb28-8"><a aria-label="8"></a>summary_col(models, model_names<span class="op">=</span>[<span class="st">'all'</span>,<span class="st">'hosp 0'</span>, <span class="st">'hosp 1'</span>, <span class="st">'all'</span>, <span class="st">'all'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a aria-label="1"></a>models <span class="op">=</span> [</span>
+<span id="cb39-2"><a aria-label="2"></a>    smf.ols(<span class="st">"days ~ treatment"</span>, data<span class="op">=</span>drug).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>),</span>
+<span id="cb39-3"><a aria-label="3"></a>    smf.ols(<span class="st">"days ~ treatment"</span>, data<span class="op">=</span>drug.query(<span class="st">"hospital==0"</span>)).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>),</span>
+<span id="cb39-4"><a aria-label="4"></a>    smf.ols(<span class="st">"days ~ treatment"</span>, data<span class="op">=</span>drug.query(<span class="st">"hospital==1"</span>)).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>),</span>
+<span id="cb39-5"><a aria-label="5"></a>    smf.ols(<span class="st">"days ~ treatment + severity "</span>, data<span class="op">=</span>drug).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>),</span>
+<span id="cb39-6"><a aria-label="6"></a>    smf.ols(<span class="st">"days ~ treatment + severity + hospital"</span>, data<span class="op">=</span>drug).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>),</span>
+<span id="cb39-7"><a aria-label="7"></a>    ]</span>
+<span id="cb39-8"><a aria-label="8"></a>summary_col(models, model_names<span class="op">=</span>[<span class="st">'all'</span>,<span class="st">'hosp 0'</span>, <span class="st">'hosp 1'</span>, <span class="st">'all'</span>, <span class="st">'all'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="19">
+<div class="cell-output cell-output-display" data-execution_count="25">
 <table class="simpletable caption-top">
 <tbody>
 <tr class="odd">
@@ -1444,21 +1630,21 @@ Standard errors in parentheses.
 </section>
 <section id="drug-trial-at-two-hospitals-4" class="slide level2 smaller">
 <h2>Drug Trial at Two Hospitals</h2>
-<div id="ab3b6a00" class="cell" data-execution_count="21">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a aria-label="1"></a>drug[<span class="st">'severity_c'</span>] <span class="op">=</span> drug[<span class="st">'severity'</span>] <span class="op">-</span> drug[<span class="st">'severity'</span>].mean()</span>
-<span id="cb29-2"><a aria-label="2"></a>drug[<span class="st">'hospital_c'</span>] <span class="op">=</span> drug[<span class="st">'hospital'</span>] <span class="op">-</span> drug[<span class="st">'hospital'</span>].mean()</span>
-<span id="cb29-3"><a aria-label="3"></a>drug[<span class="st">'hs_c'</span>] <span class="op">=</span> drug[<span class="st">'severity'</span>]<span class="op">*</span>drug[<span class="st">'hospital'</span>] <span class="op">-</span> np.mean(drug[<span class="st">'severity'</span>]<span class="op">*</span>drug[<span class="st">'hospital'</span>])</span>
-<span id="cb29-4"><a aria-label="4"></a>models <span class="op">=</span> [</span>
-<span id="cb29-5"><a aria-label="5"></a>    smf.ols(<span class="st">"days ~ treatment*severity_c"</span>, data<span class="op">=</span>drug).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>),</span>
-<span id="cb29-6"><a aria-label="6"></a>    smf.ols(<span class="st">"days ~ treatment*hospital_c"</span>, data<span class="op">=</span>drug).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>),</span>
-<span id="cb29-7"><a aria-label="7"></a>    smf.ols(<span class="st">"days ~ treatment*(hospital_c + severity_c + hs_c)"</span>, data<span class="op">=</span>drug).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>)</span>
-<span id="cb29-8"><a aria-label="8"></a>]</span>
-<span id="cb29-9"><a aria-label="9"></a>summary_col(models, model_names<span class="op">=</span>[<span class="st">'I'</span>,<span class="st">'II'</span>,<span class="st">'III'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="da9a17fa" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a aria-label="1"></a>drug[<span class="st">'severity_c'</span>] <span class="op">=</span> drug[<span class="st">'severity'</span>] <span class="op">-</span> drug[<span class="st">'severity'</span>].mean()</span>
+<span id="cb40-2"><a aria-label="2"></a>drug[<span class="st">'hospital_c'</span>] <span class="op">=</span> drug[<span class="st">'hospital'</span>] <span class="op">-</span> drug[<span class="st">'hospital'</span>].mean()</span>
+<span id="cb40-3"><a aria-label="3"></a>drug[<span class="st">'hs_c'</span>] <span class="op">=</span> drug[<span class="st">'severity'</span>]<span class="op">*</span>drug[<span class="st">'hospital'</span>] <span class="op">-</span> np.mean(drug[<span class="st">'severity'</span>]<span class="op">*</span>drug[<span class="st">'hospital'</span>])</span>
+<span id="cb40-4"><a aria-label="4"></a>models <span class="op">=</span> [</span>
+<span id="cb40-5"><a aria-label="5"></a>    smf.ols(<span class="st">"days ~ treatment*severity_c"</span>, data<span class="op">=</span>drug).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>),</span>
+<span id="cb40-6"><a aria-label="6"></a>    smf.ols(<span class="st">"days ~ treatment*hospital_c"</span>, data<span class="op">=</span>drug).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>),</span>
+<span id="cb40-7"><a aria-label="7"></a>    smf.ols(<span class="st">"days ~ treatment*(hospital_c + severity_c + hs_c)"</span>, data<span class="op">=</span>drug).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>)</span>
+<span id="cb40-8"><a aria-label="8"></a>]</span>
+<span id="cb40-9"><a aria-label="9"></a>summary_col(models, model_names<span class="op">=</span>[<span class="st">'I'</span>,<span class="st">'II'</span>,<span class="st">'III'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
-<section id="drug-trial-at-two-hospitals-4-output" class="slide level2 smaller output-location-slide"><h2>Drug Trial at Two Hospitals</h2><div class="cell output-location-slide" data-execution_count="21">
-<div class="cell-output cell-output-display" data-execution_count="20">
+<section id="drug-trial-at-two-hospitals-4-output" class="slide level2 smaller output-location-slide"><h2>Drug Trial at Two Hospitals</h2><div class="cell output-location-slide" data-execution_count="26">
+<div class="cell-output cell-output-display" data-execution_count="26">
 <table class="simpletable caption-top">
 <tbody>
 <tr class="odd">
@@ -1595,6 +1781,7 @@ Standard errors in parentheses.
 <li><p>Chapters <a href="https://matheusfacure.github.io/python-causality-handbook/05-The-Unreasonable-Effectiveness-of-Linear-Regression.html">5</a>, <a href="https://matheusfacure.github.io/python-causality-handbook/06-Grouped-and-Dummy-Regression.html">6</a> , and <a href="https://matheusfacure.github.io/python-causality-handbook/07-Beyond-Confounders.html#bad-controls-selection-bias">7</a> of <span class="citation" data-cites="facure2022">Facure (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></p></li>
 <li><p><span class="citation" data-cites="causalml2024">Chernozhukov et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span> chapters 1 and 2</p></li>
 <li><p><a href="https://www.theeffectbook.net/ch-StatisticalAdjustment.html">The Effect: Chapter 13 - Regression</a> <span class="citation" data-cites="hk2021">Huntington-Klein (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></p></li>
+<li><p><a href="./regression_realdata.html">Real-data versions of these examples</a></p></li>
 </ul>
 </section>
 <section id="references" class="slide level2 smaller scrollable">
@@ -1607,6 +1794,9 @@ Chernozhukov, V., C. Hansen, N. Kallus, M. Spindler, and V. Syrgkanis. 2024. <em
 </div>
 <div id="ref-facure2022" class="csl-entry" role="listitem">
 Facure, Matheus. 2022. <em>Causal Inference for the Brave and True</em>. <a href="https://matheusfacure.github.io/python-causality-handbook/landing-page.html">https://matheusfacure.github.io/python-causality-handbook/landing-page.html</a>.
+</div>
+<div id="ref-finkelstein2012oregon" class="csl-entry" role="listitem">
+Finkelstein, Amy, Sarah Taubman, Bill Wright, et al. 2012. <span>“The Oregon Health Insurance Experiment: Evidence from the First Year.”</span> <em>Quarterly Journal of Economics</em> 127 (3): 1057–106. <a href="https://doi.org/10.1093/qje/qjs020">https://doi.org/10.1093/qje/qjs020</a>.
 </div>
 <div id="ref-heckman1976" class="csl-entry" role="listitem">
 Heckman, James J. 1976. <span>“The Common Structure of Statistical Models of Truncation, Sample Selection and Limited Dependent Variables and a Simple Estimator for Such Models.”</span> <em>Annals of Economic and Social Measurement</em> 5: 475–92. <a href="https://api.semanticscholar.org/CorpusID:117935755">https://api.semanticscholar.org/CorpusID:117935755</a>.
@@ -1658,7 +1848,7 @@ Huntington-Klein, Nick. 2021. <em>The Effect: An Introduction to Research Design
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"\u003ci class=\"fas fa-gear\">\u003c/i>","content":"\u003cul class=\"slide-menu-items\">\n\u003cli class=\"slide-tool-item active\" data-item=\"0\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\">\u003ckbd>f\u003c/kbd> Fullscreen\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"1\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\">\u003ckbd>s\u003c/kbd> Speaker View\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"2\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\">\u003ckbd>o\u003c/kbd> Slide Overview\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"3\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\">\u003ckbd>e\u003c/kbd> PDF Export Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"4\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\">\u003ckbd>r\u003c/kbd> Scroll View Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"5\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\">\u003ckbd>b\u003c/kbd> Toggle Chalkboard\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"6\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\">\u003ckbd>c\u003c/kbd> Toggle Notes Canvas\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"7\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\">\u003ckbd>d\u003c/kbd> Download Drawings\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"8\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\">\u003ckbd>?\u003c/kbd> Keyboard Help\u003c/a>\u003c/li>\n\u003c/ul>"}],"openButton":true,"openButtonLabel":"Slide menu"},
 'chalkboard': {"buttons":true,"theme":"whiteboard","boardmarkerWidth":2,"chalkWidth":2,"chalkEffect":0},
 'smaller': false,
  
@@ -1917,7 +2107,8 @@ Huntington-Klein, Nick. 2021. <em>The Effect: An Introduction to Research Design
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
           // Inspect non-navigation links and adorn them if external
-         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          window.quartoDecorateExternalLinks = function (root) {
+         var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
           for (var i=0; i<links.length; i++) {
             const link = links[i];
             if (!isInternal(link.href)) {
@@ -1926,8 +2117,69 @@ Huntington-Klein, Nick. 2021. <em>The Effect: An Introduction to Research Design
               if (link.dataset.originalHref !== undefined) {
                 link.href = link.dataset.originalHref;
               }
+              if (!link.classList.contains('no-external-icon')) {
+              }
             }
           }
+          };
+          window.quartoDecorateExternalLinks(window.document);
+        // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+        // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+        const hideOnEscAndFocusOut = {
+          name: 'hideOnEscAndFocusOut',
+          defaultValue: true,
+          fn(instance) {
+            const dismiss = () => {
+              // A show scheduled by the trigger delay would otherwise reopen it
+              instance.clearDelayTimeouts();
+              instance.hide();
+            };
+            const onKeyDown = (event) => {
+              if (event.key !== 'Escape') {
+                return;
+              }
+              // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+              // except an open reveal.js slide menu, which Esc should close too.
+              // The menu handles keys only when its keyboard option is on.
+              const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+                window.Reveal.getConfig().menu?.keyboard !== false;
+              if (!menuHandlesEsc) {
+                event.stopPropagation();
+              }
+              if (instance.popper.contains(window.document.activeElement)) {
+                // Disabled while refocusing so the focus trigger does not reopen it
+                instance.disable();
+                instance.reference.focus();
+                instance.enable();
+              }
+              dismiss();
+            };
+            const onFocusOut = (event) => {
+              const target = event.relatedTarget;
+              if (target && !instance.reference.contains(target) &&
+                  !instance.popper.contains(target)) {
+                dismiss();
+              }
+            };
+            // On the trigger too: a click trigger (code-annotations: select) has no
+            // blur handling. Attached for the instance's lifetime so leaving the
+            // trigger also cancels a show still pending on the trigger delay.
+            instance.reference.addEventListener('focusout', onFocusOut);
+            return {
+              onShow() {
+                window.document.addEventListener('keydown', onKeyDown, true);
+                instance.popper.addEventListener('focusout', onFocusOut);
+              },
+              onHide() {
+                window.document.removeEventListener('keydown', onKeyDown, true);
+                instance.popper.removeEventListener('focusout', onFocusOut);
+              },
+              onDestroy() {
+                instance.reference.removeEventListener('focusout', onFocusOut);
+              },
+            };
+          },
+        };
         function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
           const config = {
             allowHTML: true,
@@ -1941,6 +2193,7 @@ Huntington-Klein, Nick. 2021. <em>The Effect: An Introduction to Research Design
             interactiveBorder: 10,
             theme: 'light-border',
             placement: 'bottom-start',
+            plugins: [hideOnEscAndFocusOut],
           };
           if (contentFn) {
             config.content = contentFn;

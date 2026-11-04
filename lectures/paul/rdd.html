@@ -6,21 +6,27 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.25">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.11.9">
 
   <meta name="author" content="Paul Schrimpf">
   <title>ECON 526 – Regression Discontinuity</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -98,7 +104,6 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
-      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -115,7 +120,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-534cd8e3a96973385dffff3f4709048d.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-00ad5a49dff614330cd349bcec985ec3.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -224,7 +229,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Paul Schrimpf 
+Paul Schrimpf
 </div>
 <div class="quarto-title-author-email">
 <a href="mailto:paul.schrimpf@ubc.ca">paul.schrimpf@ubc.ca</a>
@@ -236,7 +241,7 @@ Paul Schrimpf
 </div>
 
 </section><section id="TOC">
-<nav role="doc-toc"> 
+<nav role="doc-toc" aria-labelledby="toc-title">
 <h2 id="toc-title">Table of contents</h2>
 <ul>
 <li><a href="#/introduction" id="/toc-introduction">Introduction</a></li>
@@ -284,32 +289,32 @@ Paul Schrimpf
 </ul></li>
 </ul>
 </div><div class="column" style="width:50%;">
-<div id="a3970a92" class="cell" data-execution_count="2">
+<div id="6c6512b4" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a></a>plt.style.use(<span class="st">'tableau-colorblind10'</span>)</span>
-<span id="cb1-4"><a></a></span>
-<span id="cb1-5"><a></a><span class="kw">def</span> pdr(r):</span>
-<span id="cb1-6"><a></a>    <span class="cf">if</span> (r <span class="op">&lt;</span> <span class="dv">0</span>):</span>
-<span id="cb1-7"><a></a>        <span class="cf">return</span> <span class="dv">0</span> <span class="co">#0.2/(1+np.exp(-r))</span></span>
-<span id="cb1-8"><a></a>    <span class="cf">else</span>:</span>
-<span id="cb1-9"><a></a>        <span class="cf">return</span> <span class="dv">1</span> <span class="co"># 0.8/(1+0.5*np.exp(-r))</span></span>
-<span id="cb1-10"><a></a></span>
-<span id="cb1-11"><a></a><span class="kw">def</span> plotp(ax, pdr):</span>
-<span id="cb1-12"><a></a>    r <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">500</span>)</span>
-<span id="cb1-13"><a></a>    ax.plot(r, <span class="bu">list</span>(<span class="bu">map</span>(pdr,r)), color<span class="op">=</span><span class="st">'C0'</span>)</span>
-<span id="cb1-14"><a></a>    ax.set_xlabel(<span class="st">'R'</span>)</span>
-<span id="cb1-15"><a></a>    ax.set_ylabel(<span class="st">'Pr(D=1|R)'</span>)</span>
-<span id="cb1-16"><a></a>    <span class="cf">return</span>(ax)</span>
-<span id="cb1-17"><a></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>))</span>
-<span id="cb1-18"><a></a>ax <span class="op">=</span> plotp(ax,pdr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a aria-label="2"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a aria-label="3"></a>plt.style.use(<span class="st">'tableau-colorblind10'</span>)</span>
+<span id="cb1-4"><a aria-label="4"></a></span>
+<span id="cb1-5"><a aria-label="5"></a><span class="kw">def</span> pdr(r):</span>
+<span id="cb1-6"><a aria-label="6"></a>    <span class="cf">if</span> (r <span class="op">&lt;</span> <span class="dv">0</span>):</span>
+<span id="cb1-7"><a aria-label="7"></a>        <span class="cf">return</span> <span class="dv">0</span> <span class="co">#0.2/(1+np.exp(-r))</span></span>
+<span id="cb1-8"><a aria-label="8"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-9"><a aria-label="9"></a>        <span class="cf">return</span> <span class="dv">1</span> <span class="co"># 0.8/(1+0.5*np.exp(-r))</span></span>
+<span id="cb1-10"><a aria-label="10"></a></span>
+<span id="cb1-11"><a aria-label="11"></a><span class="kw">def</span> plotp(ax, pdr):</span>
+<span id="cb1-12"><a aria-label="12"></a>    r <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">500</span>)</span>
+<span id="cb1-13"><a aria-label="13"></a>    ax.plot(r, <span class="bu">list</span>(<span class="bu">map</span>(pdr,r)), color<span class="op">=</span><span class="st">'C0'</span>)</span>
+<span id="cb1-14"><a aria-label="14"></a>    ax.set_xlabel(<span class="st">'R'</span>)</span>
+<span id="cb1-15"><a aria-label="15"></a>    ax.set_ylabel(<span class="st">'Pr(D=1|R)'</span>)</span>
+<span id="cb1-16"><a aria-label="16"></a>    <span class="cf">return</span>(ax)</span>
+<span id="cb1-17"><a aria-label="17"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>))</span>
+<span id="cb1-18"><a aria-label="18"></a>ax <span class="op">=</span> plotp(ax,pdr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="rdd_files/figure-revealjs/cell-2-output-1.png" width="441" height="429"></p>
+<p><img data-src="rdd_files/figure-revealjs/cell-2-output-1.png" width="441" height="430"></p>
 </figure>
 </div>
 </div>
@@ -345,44 +350,44 @@ Paul Schrimpf
 <li>Idea: size of discontinuity in <span class="math inline">\(\Er[Y|R]\)</span> is related to a treatment effect</li>
 </ul>
 </div><div class="column" style="width:40%;">
-<div id="31bcddc7" class="cell" data-execution_count="3">
+<div id="4a75f10c" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-2"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-3"><a></a>plt.style.use(<span class="st">'tableau-colorblind10'</span>)</span>
-<span id="cb2-4"><a></a></span>
-<span id="cb2-5"><a></a><span class="kw">def</span> Ey(d,r) :</span>
-<span id="cb2-6"><a></a>    <span class="cf">if</span> d <span class="op">&lt;</span> <span class="fl">0.1</span> :</span>
-<span id="cb2-7"><a></a>        <span class="cf">return</span> <span class="fl">0.5</span><span class="op">*</span>(r<span class="op">+</span><span class="fl">0.2</span>)<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="fl">0.1</span><span class="op">*</span>(r<span class="op">+</span><span class="fl">0.2</span>)<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb2-8"><a></a>    <span class="cf">else</span> :</span>
-<span id="cb2-9"><a></a>        <span class="cf">return</span> <span class="dv">2</span> <span class="op">+</span> <span class="fl">0.3</span><span class="op">*</span>r<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> r</span>
-<span id="cb2-10"><a></a></span>
-<span id="cb2-11"><a></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">4</span>,<span class="dv">7</span>))</span>
-<span id="cb2-12"><a></a>ax[<span class="dv">0</span>] <span class="op">=</span> plotp(ax[<span class="dv">0</span>],pdr)</span>
-<span id="cb2-13"><a></a></span>
-<span id="cb2-14"><a></a><span class="kw">def</span> plotey(ax,Ey,pdr) :</span>
-<span id="cb2-15"><a></a>    r <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>,<span class="op">-</span><span class="fl">0.01</span>,<span class="dv">100</span>)</span>
-<span id="cb2-16"><a></a>    ax.plot(r, <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> r: Ey(<span class="dv">0</span>,r),r)), color<span class="op">=</span><span class="st">'C0'</span>, label<span class="op">=</span><span class="st">"E[Y(0)|R]"</span>)</span>
-<span id="cb2-17"><a></a>    r <span class="op">=</span> np.linspace(<span class="dv">2</span>,<span class="fl">0.01</span>,<span class="dv">100</span>)</span>
-<span id="cb2-18"><a></a>    ax.plot(r, <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> r: Ey(<span class="dv">0</span>,r),r)), color<span class="op">=</span><span class="st">'C0'</span>, linestyle<span class="op">=</span><span class="st">":"</span>)</span>
-<span id="cb2-19"><a></a>    r <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>,<span class="op">-</span><span class="fl">0.01</span>,<span class="dv">100</span>)</span>
-<span id="cb2-20"><a></a>    ax.plot(r, <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> r: Ey(<span class="dv">1</span>,r),r)), color<span class="op">=</span><span class="st">'C1'</span>, linestyle<span class="op">=</span><span class="st">":"</span>)</span>
-<span id="cb2-21"><a></a>    r <span class="op">=</span> np.linspace(<span class="dv">2</span>,<span class="fl">0.01</span>,<span class="dv">100</span>)</span>
-<span id="cb2-22"><a></a>    ax.plot(r, <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> r: Ey(<span class="dv">1</span>,r),r)), color<span class="op">=</span><span class="st">'C1'</span>, label<span class="op">=</span><span class="st">"E[Y(1)|R]"</span>)</span>
-<span id="cb2-23"><a></a>    r <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">200</span>)</span>
-<span id="cb2-24"><a></a>    ax.plot(r,<span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> r: pdr(r)<span class="op">*</span>Ey(<span class="dv">1</span>,r) <span class="op">+</span> (<span class="dv">1</span><span class="op">-</span>pdr(r))<span class="op">*</span>Ey(<span class="dv">0</span>,r),r)), color<span class="op">=</span><span class="st">'C2'</span>, label<span class="op">=</span><span class="st">"E[Y|R]"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb2-25"><a></a>    ax.legend()</span>
-<span id="cb2-26"><a></a>    ax.set_xlabel(<span class="st">'R'</span>)</span>
-<span id="cb2-27"><a></a>    ax.set_ylabel(<span class="st">'E[Y(d)|R]'</span>)</span>
-<span id="cb2-28"><a></a>    <span class="cf">return</span>(ax)</span>
-<span id="cb2-29"><a></a></span>
-<span id="cb2-30"><a></a>ax[<span class="dv">1</span>] <span class="op">=</span> plotey(ax[<span class="dv">1</span>],Ey,pdr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a aria-label="2"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a aria-label="3"></a>plt.style.use(<span class="st">'tableau-colorblind10'</span>)</span>
+<span id="cb2-4"><a aria-label="4"></a></span>
+<span id="cb2-5"><a aria-label="5"></a><span class="kw">def</span> Ey(d,r) :</span>
+<span id="cb2-6"><a aria-label="6"></a>    <span class="cf">if</span> d <span class="op">&lt;</span> <span class="fl">0.1</span> :</span>
+<span id="cb2-7"><a aria-label="7"></a>        <span class="cf">return</span> <span class="fl">0.5</span><span class="op">*</span>(r<span class="op">+</span><span class="fl">0.2</span>)<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="fl">0.1</span><span class="op">*</span>(r<span class="op">+</span><span class="fl">0.2</span>)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb2-8"><a aria-label="8"></a>    <span class="cf">else</span> :</span>
+<span id="cb2-9"><a aria-label="9"></a>        <span class="cf">return</span> <span class="dv">2</span> <span class="op">+</span> <span class="fl">0.3</span><span class="op">*</span>r<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> r</span>
+<span id="cb2-10"><a aria-label="10"></a></span>
+<span id="cb2-11"><a aria-label="11"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">4</span>,<span class="dv">7</span>))</span>
+<span id="cb2-12"><a aria-label="12"></a>ax[<span class="dv">0</span>] <span class="op">=</span> plotp(ax[<span class="dv">0</span>],pdr)</span>
+<span id="cb2-13"><a aria-label="13"></a></span>
+<span id="cb2-14"><a aria-label="14"></a><span class="kw">def</span> plotey(ax,Ey,pdr) :</span>
+<span id="cb2-15"><a aria-label="15"></a>    r <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>,<span class="op">-</span><span class="fl">0.01</span>,<span class="dv">100</span>)</span>
+<span id="cb2-16"><a aria-label="16"></a>    ax.plot(r, <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> r: Ey(<span class="dv">0</span>,r),r)), color<span class="op">=</span><span class="st">'C0'</span>, label<span class="op">=</span><span class="st">"E[Y(0)|R]"</span>)</span>
+<span id="cb2-17"><a aria-label="17"></a>    r <span class="op">=</span> np.linspace(<span class="dv">2</span>,<span class="fl">0.01</span>,<span class="dv">100</span>)</span>
+<span id="cb2-18"><a aria-label="18"></a>    ax.plot(r, <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> r: Ey(<span class="dv">0</span>,r),r)), color<span class="op">=</span><span class="st">'C0'</span>, linestyle<span class="op">=</span><span class="st">":"</span>)</span>
+<span id="cb2-19"><a aria-label="19"></a>    r <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>,<span class="op">-</span><span class="fl">0.01</span>,<span class="dv">100</span>)</span>
+<span id="cb2-20"><a aria-label="20"></a>    ax.plot(r, <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> r: Ey(<span class="dv">1</span>,r),r)), color<span class="op">=</span><span class="st">'C1'</span>, linestyle<span class="op">=</span><span class="st">":"</span>)</span>
+<span id="cb2-21"><a aria-label="21"></a>    r <span class="op">=</span> np.linspace(<span class="dv">2</span>,<span class="fl">0.01</span>,<span class="dv">100</span>)</span>
+<span id="cb2-22"><a aria-label="22"></a>    ax.plot(r, <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> r: Ey(<span class="dv">1</span>,r),r)), color<span class="op">=</span><span class="st">'C1'</span>, label<span class="op">=</span><span class="st">"E[Y(1)|R]"</span>)</span>
+<span id="cb2-23"><a aria-label="23"></a>    r <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">200</span>)</span>
+<span id="cb2-24"><a aria-label="24"></a>    ax.plot(r,<span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> r: pdr(r)<span class="op">*</span>Ey(<span class="dv">1</span>,r) <span class="op">+</span> (<span class="dv">1</span><span class="op">-</span>pdr(r))<span class="op">*</span>Ey(<span class="dv">0</span>,r),r)), color<span class="op">=</span><span class="st">'C2'</span>, label<span class="op">=</span><span class="st">"E[Y|R]"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb2-25"><a aria-label="25"></a>    ax.legend()</span>
+<span id="cb2-26"><a aria-label="26"></a>    ax.set_xlabel(<span class="st">'R'</span>)</span>
+<span id="cb2-27"><a aria-label="27"></a>    ax.set_ylabel(<span class="st">'E[Y(d)|R]'</span>)</span>
+<span id="cb2-28"><a aria-label="28"></a>    <span class="cf">return</span>(ax)</span>
+<span id="cb2-29"><a aria-label="29"></a></span>
+<span id="cb2-30"><a aria-label="30"></a>ax[<span class="dv">1</span>] <span class="op">=</span> plotey(ax[<span class="dv">1</span>],Ey,pdr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="rdd_files/figure-revealjs/cell-3-output-1.png" width="366" height="577"></p>
+<p><img data-src="rdd_files/figure-revealjs/cell-3-output-1.png" width="367" height="578"></p>
 </figure>
 </div>
 </div>
@@ -408,22 +413,22 @@ Paul Schrimpf
 </section>
 <section id="data" class="slide level2">
 <h2>Data</h2>
-<div id="c6ec3de9" class="cell" data-execution_count="4">
+<div id="25334d04" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>n <span class="op">=</span> <span class="dv">1_000</span></span>
-<span id="cb3-2"><a></a>sig <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb3-3"><a></a>fig,ax<span class="op">=</span>plt.subplots()</span>
-<span id="cb3-4"><a></a>r <span class="op">=</span> np.random.rand(n)<span class="op">*</span><span class="dv">4</span><span class="op">-</span><span class="dv">2</span></span>
-<span id="cb3-5"><a></a>y <span class="op">=</span> np.vectorize(<span class="kw">lambda</span> r: Ey(np.sign(r)<span class="op">*</span><span class="dv">2</span><span class="op">+</span><span class="dv">1</span>,r) <span class="op">+</span> np.random.randn()<span class="op">*</span>sig)(r)</span>
-<span id="cb3-6"><a></a>ax <span class="op">=</span>plotey(ax,Ey,pdr)</span>
-<span id="cb3-7"><a></a>ax.scatter(r,y,color<span class="op">=</span><span class="st">'C2'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>,s<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb3-8"><a></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a>n <span class="op">=</span> <span class="dv">1_000</span></span>
+<span id="cb3-2"><a aria-label="2"></a>sig <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb3-3"><a aria-label="3"></a>fig,ax<span class="op">=</span>plt.subplots()</span>
+<span id="cb3-4"><a aria-label="4"></a>r <span class="op">=</span> np.random.rand(n)<span class="op">*</span><span class="dv">4</span><span class="op">-</span><span class="dv">2</span></span>
+<span id="cb3-5"><a aria-label="5"></a>y <span class="op">=</span> np.vectorize(<span class="kw">lambda</span> r: Ey(np.sign(r)<span class="op">*</span><span class="dv">2</span><span class="op">+</span><span class="dv">1</span>,r) <span class="op">+</span> np.random.randn()<span class="op">*</span>sig)(r)</span>
+<span id="cb3-6"><a aria-label="6"></a>ax <span class="op">=</span>plotey(ax,Ey,pdr)</span>
+<span id="cb3-7"><a aria-label="7"></a>ax.scatter(r,y,color<span class="op">=</span><span class="st">'C2'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>,s<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-8"><a aria-label="8"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="rdd_files/figure-revealjs/cell-4-output-1.png" width="824" height="429"></p>
+<p><img data-src="rdd_files/figure-revealjs/cell-4-output-1.png" width="812" height="430"></p>
 </figure>
 </div>
 </div>
@@ -434,25 +439,25 @@ Paul Schrimpf
 <ul>
 <li>Fit regression to left and right of discontinuity using only observations near the cutoffs</li>
 </ul>
-<div id="75f99123" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb4-2"><a></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
-<span id="cb4-3"><a></a><span class="im">from</span> statsmodels.iolib.summary2 <span class="im">import</span> summary_col</span>
-<span id="cb4-4"><a></a></span>
-<span id="cb4-5"><a></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'y'</span>:y,<span class="st">'r'</span>:r})</span>
-<span id="cb4-6"><a></a></span>
-<span id="cb4-7"><a></a><span class="kw">def</span> rdd(df, h, c<span class="op">=</span><span class="dv">0</span>, R<span class="op">=</span><span class="st">'r'</span>, Y<span class="op">=</span><span class="st">'y'</span>) :</span>
-<span id="cb4-8"><a></a>    wdf <span class="op">=</span> df.loc[np.<span class="bu">abs</span>(df[R]<span class="op">-</span>c)<span class="op">&lt;=</span>h]</span>
-<span id="cb4-9"><a></a>    m<span class="op">=</span>smf.ols(<span class="ss">f'</span><span class="sc">{</span>Y<span class="sc">}</span><span class="ss"> ~ I(</span><span class="sc">{</span>R<span class="sc">}</span><span class="ss">-c)*I(</span><span class="sc">{</span>R<span class="sc">}</span><span class="ss">&gt;c)'</span>,wdf).fit(cov_type<span class="op">=</span><span class="st">"HC3"</span>)</span>
-<span id="cb4-10"><a></a>    <span class="cf">return</span>(m)</span>
-<span id="cb4-11"><a></a></span>
-<span id="cb4-12"><a></a>bandwidths<span class="op">=</span>[<span class="fl">.25</span>, <span class="fl">0.5</span>, <span class="fl">1.</span>, <span class="fl">2.</span>]</span>
-<span id="cb4-13"><a></a>models <span class="op">=</span> [rdd(df,h) <span class="cf">for</span> h <span class="kw">in</span> bandwidths]</span>
-<span id="cb4-14"><a></a>summary_col(models, model_names<span class="op">=</span>[<span class="ss">f"h=</span><span class="sc">{</span>h<span class="sc">:.2}</span><span class="ss">"</span> <span class="cf">for</span> h <span class="kw">in</span> bandwidths])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="097d909c" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-2"><a aria-label="2"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb4-3"><a aria-label="3"></a><span class="im">from</span> statsmodels.iolib.summary2 <span class="im">import</span> summary_col</span>
+<span id="cb4-4"><a aria-label="4"></a></span>
+<span id="cb4-5"><a aria-label="5"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'y'</span>:y,<span class="st">'r'</span>:r})</span>
+<span id="cb4-6"><a aria-label="6"></a></span>
+<span id="cb4-7"><a aria-label="7"></a><span class="kw">def</span> rdd(df, h, c<span class="op">=</span><span class="dv">0</span>, R<span class="op">=</span><span class="st">'r'</span>, Y<span class="op">=</span><span class="st">'y'</span>) :</span>
+<span id="cb4-8"><a aria-label="8"></a>    wdf <span class="op">=</span> df.loc[np.<span class="bu">abs</span>(df[R]<span class="op">-</span>c)<span class="op">&lt;=</span>h]</span>
+<span id="cb4-9"><a aria-label="9"></a>    m<span class="op">=</span>smf.ols(<span class="ss">f'</span><span class="sc">{</span>Y<span class="sc">}</span><span class="ss"> ~ I(</span><span class="sc">{</span>R<span class="sc">}</span><span class="ss">-c)*I(</span><span class="sc">{</span>R<span class="sc">}</span><span class="ss">&gt;c)'</span>,wdf).fit(cov_type<span class="op">=</span><span class="st">"HC3"</span>)</span>
+<span id="cb4-10"><a aria-label="10"></a>    <span class="cf">return</span>(m)</span>
+<span id="cb4-11"><a aria-label="11"></a></span>
+<span id="cb4-12"><a aria-label="12"></a>bandwidths<span class="op">=</span>[<span class="fl">.25</span>, <span class="fl">0.5</span>, <span class="fl">1.</span>, <span class="fl">2.</span>]</span>
+<span id="cb4-13"><a aria-label="13"></a>models <span class="op">=</span> [rdd(df,h) <span class="cf">for</span> h <span class="kw">in</span> bandwidths]</span>
+<span id="cb4-14"><a aria-label="14"></a>summary_col(models, model_names<span class="op">=</span>[<span class="ss">f"h=</span><span class="sc">{</span>h<span class="sc">:.2}</span><span class="ss">"</span> <span class="cf">for</span> h <span class="kw">in</span> bandwidths])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
-<section id="estimation-output" class="slide level2 output-location-slide"><h2>Estimation</h2><div class="cell output-location-slide" data-execution_count="5">
+<section id="estimation-output" class="slide level2 output-location-slide"><h2>Estimation</h2><div class="cell output-location-slide" data-execution_count="4">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <table class="simpletable caption-top">
 <tbody>
@@ -465,73 +470,73 @@ Paul Schrimpf
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">Intercept</th>
-<td>0.4863</td>
-<td>0.9287</td>
-<td>0.6551</td>
-<td>0.5983</td>
+<td>0.2059</td>
+<td>0.1212</td>
+<td>0.0433</td>
+<td>0.5637</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th"></th>
-<td>(0.5177)</td>
-<td>(0.3872)</td>
-<td>(0.2677)</td>
-<td>(0.1910)</td>
+<td>(0.5307)</td>
+<td>(0.3757)</td>
+<td>(0.2530)</td>
+<td>(0.1832)</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">I(r &gt; c)[T.True]</th>
-<td>3.1391</td>
-<td>1.0377</td>
-<td>1.3319</td>
-<td>0.6969</td>
+<td>1.7960</td>
+<td>1.1814</td>
+<td>1.4613</td>
+<td>0.5790</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th"></th>
-<td>(0.8266)</td>
-<td>(0.6178)</td>
-<td>(0.3905)</td>
-<td>(0.2704)</td>
+<td>(0.7434)</td>
+<td>(0.5237)</td>
+<td>(0.3625)</td>
+<td>(0.2598)</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">I(r - c)</th>
-<td>-2.3451</td>
-<td>2.8042</td>
-<td>1.3378</td>
-<td>1.0197</td>
+<td>0.4165</td>
+<td>0.0871</td>
+<td>0.0412</td>
+<td>1.0159</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th"></th>
-<td>(3.8122)</td>
-<td>(1.3789)</td>
-<td>(0.4447)</td>
-<td>(0.1652)</td>
+<td>(3.3145)</td>
+<td>(1.3676)</td>
+<td>(0.4374)</td>
+<td>(0.1589)</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">I(r - c):I(r &gt; c)[T.True]</th>
-<td>-9.2769</td>
-<td>-2.0312</td>
-<td>-0.4992</td>
-<td>1.1414</td>
+<td>-4.9707</td>
+<td>2.4149</td>
+<td>1.4342</td>
+<td>1.3131</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th"></th>
-<td>(5.3322)</td>
-<td>(2.1534)</td>
-<td>(0.6495)</td>
-<td>(0.2293)</td>
+<td>(4.9772)</td>
+<td>(1.8067)</td>
+<td>(0.6080)</td>
+<td>(0.2250)</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">R-squared</th>
-<td>0.1409</td>
-<td>0.1960</td>
-<td>0.2851</td>
-<td>0.5434</td>
+<td>0.1000</td>
+<td>0.1757</td>
+<td>0.2449</td>
+<td>0.5624</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">R-squared Adj.</th>
-<td>0.1164</td>
-<td>0.1851</td>
-<td>0.2807</td>
-<td>0.5420</td>
+<td>0.0809</td>
+<td>0.1660</td>
+<td>0.2402</td>
+<td>0.5611</td>
 </tr>
 </tbody>
 </table>
@@ -540,29 +545,29 @@ Standard errors in parentheses.
 </div>
 </div></section><section id="plotting-estimates" class="slide level2">
 <h2>Plotting Estimates</h2>
-<div id="1bff7906" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="kw">def</span> plotrdd(ax,df, h, c<span class="op">=</span><span class="dv">0</span>, R<span class="op">=</span><span class="st">'r'</span>,Y<span class="op">=</span><span class="st">'y'</span>, Ey<span class="op">=</span>Ey) :</span>
-<span id="cb5-2"><a></a>    df <span class="op">=</span> df.sort_values(R)</span>
-<span id="cb5-3"><a></a>    m <span class="op">=</span> rdd(df,h,c,R,Y)</span>
-<span id="cb5-4"><a></a>    df.plot.scatter(x<span class="op">=</span>R,y<span class="op">=</span>Y,ax<span class="op">=</span>ax,color<span class="op">=</span><span class="st">"C2"</span>,alpha<span class="op">=</span><span class="fl">0.5</span>,s<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb5-5"><a></a>    df.assign(predictions<span class="op">=</span>m.fittedvalues).plot(x<span class="op">=</span>R, y<span class="op">=</span><span class="st">"predictions"</span>,label<span class="op">=</span><span class="st">'Estimate'</span>, ax<span class="op">=</span>ax, color<span class="op">=</span><span class="st">"C3"</span>)</span>
-<span id="cb5-6"><a></a>    df.assign(Ey0<span class="op">=</span>df[R].<span class="bu">apply</span>(<span class="kw">lambda</span> r: Ey(<span class="dv">0</span>,r))).plot(x<span class="op">=</span>R,y<span class="op">=</span><span class="st">'Ey0'</span>,label<span class="op">=</span><span class="st">"E[Y(0)|R]"</span>,ax<span class="op">=</span>ax,color<span class="op">=</span><span class="st">"C0"</span>,linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
-<span id="cb5-7"><a></a>    df.assign(Ey1<span class="op">=</span>df[R].<span class="bu">apply</span>(<span class="kw">lambda</span> r: Ey(<span class="dv">1</span>,r))).plot(x<span class="op">=</span>R,y<span class="op">=</span><span class="st">'Ey1'</span>,label<span class="op">=</span><span class="st">"E[Y(1)|R]"</span>,ax<span class="op">=</span>ax,color<span class="op">=</span><span class="st">"C1"</span>,linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
-<span id="cb5-8"><a></a>    <span class="co">#ax.get_legend().remove()</span></span>
-<span id="cb5-9"><a></a>    <span class="cf">return</span>(ax)</span>
-<span id="cb5-10"><a></a></span>
-<span id="cb5-11"><a></a>fig,ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
-<span id="cb5-12"><a></a><span class="cf">for</span> (i,h) <span class="kw">in</span> <span class="bu">enumerate</span>(bandwidths) :</span>
-<span id="cb5-13"><a></a>    plotrdd(ax.flat[i],df,h)</span>
-<span id="cb5-14"><a></a>    ax.flat[i].set_title(<span class="ss">f"h=</span><span class="sc">{</span>h<span class="sc">:.2}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="96134d85" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="kw">def</span> plotrdd(ax,df, h, c<span class="op">=</span><span class="dv">0</span>, R<span class="op">=</span><span class="st">'r'</span>,Y<span class="op">=</span><span class="st">'y'</span>, Ey<span class="op">=</span>Ey) :</span>
+<span id="cb5-2"><a aria-label="2"></a>    df <span class="op">=</span> df.sort_values(R)</span>
+<span id="cb5-3"><a aria-label="3"></a>    m <span class="op">=</span> rdd(df,h,c,R,Y)</span>
+<span id="cb5-4"><a aria-label="4"></a>    df.plot.scatter(x<span class="op">=</span>R,y<span class="op">=</span>Y,ax<span class="op">=</span>ax,color<span class="op">=</span><span class="st">"C2"</span>,alpha<span class="op">=</span><span class="fl">0.5</span>,s<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb5-5"><a aria-label="5"></a>    df.assign(predictions<span class="op">=</span>m.fittedvalues).plot(x<span class="op">=</span>R, y<span class="op">=</span><span class="st">"predictions"</span>,label<span class="op">=</span><span class="st">'Estimate'</span>, ax<span class="op">=</span>ax, color<span class="op">=</span><span class="st">"C3"</span>)</span>
+<span id="cb5-6"><a aria-label="6"></a>    df.assign(Ey0<span class="op">=</span>df[R].<span class="bu">apply</span>(<span class="kw">lambda</span> r: Ey(<span class="dv">0</span>,r))).plot(x<span class="op">=</span>R,y<span class="op">=</span><span class="st">'Ey0'</span>,label<span class="op">=</span><span class="st">"E[Y(0)|R]"</span>,ax<span class="op">=</span>ax,color<span class="op">=</span><span class="st">"C0"</span>,linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb5-7"><a aria-label="7"></a>    df.assign(Ey1<span class="op">=</span>df[R].<span class="bu">apply</span>(<span class="kw">lambda</span> r: Ey(<span class="dv">1</span>,r))).plot(x<span class="op">=</span>R,y<span class="op">=</span><span class="st">'Ey1'</span>,label<span class="op">=</span><span class="st">"E[Y(1)|R]"</span>,ax<span class="op">=</span>ax,color<span class="op">=</span><span class="st">"C1"</span>,linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb5-8"><a aria-label="8"></a>    <span class="co">#ax.get_legend().remove()</span></span>
+<span id="cb5-9"><a aria-label="9"></a>    <span class="cf">return</span>(ax)</span>
+<span id="cb5-10"><a aria-label="10"></a></span>
+<span id="cb5-11"><a aria-label="11"></a>fig,ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
+<span id="cb5-12"><a aria-label="12"></a><span class="cf">for</span> (i,h) <span class="kw">in</span> <span class="bu">enumerate</span>(bandwidths) :</span>
+<span id="cb5-13"><a aria-label="13"></a>    plotrdd(ax.flat[i],df,h)</span>
+<span id="cb5-14"><a aria-label="14"></a>    ax.flat[i].set_title(<span class="ss">f"h=</span><span class="sc">{</span>h<span class="sc">:.2}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
-<section id="plotting-estimates-output" class="slide level2 output-location-slide"><h2>Plotting Estimates</h2><div class="cell output-location-slide" data-execution_count="6">
+<section id="plotting-estimates-output" class="slide level2 output-location-slide"><h2>Plotting Estimates</h2><div class="cell output-location-slide" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="rdd_files/figure-revealjs/cell-6-output-1.png" width="810" height="449"></p>
+<p><img data-src="rdd_files/figure-revealjs/cell-6-output-1.png" width="811" height="450"></p>
 </figure>
 </div>
 </div>
@@ -589,33 +594,33 @@ Standard errors in parentheses.
 <li><code>binselect='esmv'</code> or <code>'qsmv'</code></li>
 </ol></li>
 </ul></li>
-<li>See <span class="citation" data-cites="cattaneo2019">Cattaneo, Idrobo, and Titiunik (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> section 3 and <span class="citation" data-cites="binscatter2024">Cattaneo et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></li>
+<li>See <span class="citation" data-cites="cattaneo2019">Cattaneo et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> section 3 and <span class="citation" data-cites="binscatter2024">Cattaneo, Crump, et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></li>
 </ul>
 </div><div class="column" style="width:40%;">
-<div id="c277460f" class="cell" data-execution_count="7">
+<div id="0a737043" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="im">import</span> rdrobust</span>
-<span id="cb6-2"><a></a>rdp <span class="op">=</span> rdrobust.rdplot(df.y,df.r,c<span class="op">=</span><span class="dv">0</span>,hide<span class="op">=</span><span class="va">True</span>, binselect<span class="op">=</span><span class="st">'es'</span>)</span>
-<span id="cb6-3"><a></a>fg,ax<span class="op">=</span>plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>,<span class="dv">6</span>))</span>
-<span id="cb6-4"><a></a>pltdf <span class="op">=</span> rdp.vars_bins</span>
-<span id="cb6-5"><a></a>pltdf.plot.scatter(x<span class="op">=</span><span class="st">'rdplot_mean_bin'</span>,y<span class="op">=</span><span class="st">'rdplot_mean_y'</span>, color<span class="op">=</span><span class="st">'black'</span>,ax<span class="op">=</span>ax,label<span class="op">=</span><span class="st">'IMSE optimal bins'</span>)</span>
-<span id="cb6-6"><a></a>ax.set_xlabel(<span class="st">'R'</span>)</span>
-<span id="cb6-7"><a></a>ax.set_ylabel(<span class="st">'Y'</span>)</span>
-<span id="cb6-8"><a></a>ax.errorbar(x<span class="op">=</span>pltdf.rdplot_mean_bin,y<span class="op">=</span>pltdf.rdplot_mean_y,</span>
-<span id="cb6-9"><a></a>             yerr<span class="op">=</span>[pltdf.rdplot_mean_y<span class="op">-</span>pltdf.rdplot_ci_l,pltdf.rdplot_ci_r <span class="op">-</span> pltdf.rdplot_mean_y],</span>
-<span id="cb6-10"><a></a>             ls<span class="op">=</span><span class="st">'none'</span>,color<span class="op">=</span><span class="st">"black"</span>)</span>
-<span id="cb6-11"><a></a>rdp <span class="op">=</span> rdrobust.rdplot(df.y,df.r,c<span class="op">=</span><span class="dv">0</span>,hide<span class="op">=</span><span class="va">True</span>, binselect<span class="op">=</span><span class="st">'esmv'</span>)</span>
-<span id="cb6-12"><a></a>pltdf <span class="op">=</span> rdp.vars_bins</span>
-<span id="cb6-13"><a></a>pltdf.plot.scatter(x<span class="op">=</span><span class="st">'rdplot_mean_bin'</span>,y<span class="op">=</span><span class="st">'rdplot_mean_y'</span>, color<span class="op">=</span><span class="st">'C4'</span>,ax<span class="op">=</span>ax,label<span class="op">=</span><span class="st">'Variance mimicking bins'</span>)</span>
-<span id="cb6-14"><a></a>df.plot.scatter(x<span class="op">=</span><span class="st">'r'</span>,y<span class="op">=</span><span class="st">'y'</span>,color<span class="op">=</span><span class="st">'C2'</span>,s<span class="op">=</span><span class="dv">1</span>,alpha<span class="op">=</span><span class="fl">0.5</span>,label<span class="op">=</span><span class="va">None</span>,ax<span class="op">=</span>ax)</span>
-<span id="cb6-15"><a></a>ax.legend()</span>
-<span id="cb6-16"><a></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="im">import</span> rdrobust</span>
+<span id="cb6-2"><a aria-label="2"></a>rdp <span class="op">=</span> rdrobust.rdplot(df.y,df.r,c<span class="op">=</span><span class="dv">0</span>,hide<span class="op">=</span><span class="va">True</span>, binselect<span class="op">=</span><span class="st">'es'</span>)</span>
+<span id="cb6-3"><a aria-label="3"></a>fg,ax<span class="op">=</span>plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>,<span class="dv">6</span>))</span>
+<span id="cb6-4"><a aria-label="4"></a>pltdf <span class="op">=</span> rdp.vars_bins</span>
+<span id="cb6-5"><a aria-label="5"></a>pltdf.plot.scatter(x<span class="op">=</span><span class="st">'rdplot_mean_bin'</span>,y<span class="op">=</span><span class="st">'rdplot_mean_y'</span>, color<span class="op">=</span><span class="st">'black'</span>,ax<span class="op">=</span>ax,label<span class="op">=</span><span class="st">'IMSE optimal bins'</span>)</span>
+<span id="cb6-6"><a aria-label="6"></a>ax.set_xlabel(<span class="st">'R'</span>)</span>
+<span id="cb6-7"><a aria-label="7"></a>ax.set_ylabel(<span class="st">'Y'</span>)</span>
+<span id="cb6-8"><a aria-label="8"></a>ax.errorbar(x<span class="op">=</span>pltdf.rdplot_mean_bin,y<span class="op">=</span>pltdf.rdplot_mean_y,</span>
+<span id="cb6-9"><a aria-label="9"></a>             yerr<span class="op">=</span>[pltdf.rdplot_mean_y<span class="op">-</span>pltdf.rdplot_ci_l,pltdf.rdplot_ci_r <span class="op">-</span> pltdf.rdplot_mean_y],</span>
+<span id="cb6-10"><a aria-label="10"></a>             ls<span class="op">=</span><span class="st">'none'</span>,color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb6-11"><a aria-label="11"></a>rdp <span class="op">=</span> rdrobust.rdplot(df.y,df.r,c<span class="op">=</span><span class="dv">0</span>,hide<span class="op">=</span><span class="va">True</span>, binselect<span class="op">=</span><span class="st">'esmv'</span>)</span>
+<span id="cb6-12"><a aria-label="12"></a>pltdf <span class="op">=</span> rdp.vars_bins</span>
+<span id="cb6-13"><a aria-label="13"></a>pltdf.plot.scatter(x<span class="op">=</span><span class="st">'rdplot_mean_bin'</span>,y<span class="op">=</span><span class="st">'rdplot_mean_y'</span>, color<span class="op">=</span><span class="st">'C4'</span>,ax<span class="op">=</span>ax,label<span class="op">=</span><span class="st">'Variance mimicking bins'</span>)</span>
+<span id="cb6-14"><a aria-label="14"></a>df.plot.scatter(x<span class="op">=</span><span class="st">'r'</span>,y<span class="op">=</span><span class="st">'y'</span>,color<span class="op">=</span><span class="st">'C2'</span>,s<span class="op">=</span><span class="dv">1</span>,alpha<span class="op">=</span><span class="fl">0.5</span>,label<span class="op">=</span><span class="va">None</span>,ax<span class="op">=</span>ax)</span>
+<span id="cb6-15"><a aria-label="15"></a>ax.legend()</span>
+<span id="cb6-16"><a aria-label="16"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="rdd_files/figure-revealjs/cell-7-output-1.png" width="377" height="503"></p>
+<p><img data-src="rdd_files/figure-revealjs/cell-7-output-1.png" width="365" height="504"></p>
 </figure>
 </div>
 </div>
@@ -634,11 +639,14 @@ Standard errors in parentheses.
 </section>
 <section id="bandwidth-selection-1" class="slide level2">
 <h2>Bandwidth Selection</h2>
-<div id="ef905083" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>rd <span class="op">=</span> rdrobust.rdrobust(df.y,df.r, kernel<span class="op">=</span><span class="st">"uniform"</span>,  bwselect<span class="op">=</span><span class="st">"msetwo"</span>)</span>
-<span id="cb7-2"><a></a>rd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
+<div id="59ae4dc5" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a>rd <span class="op">=</span> rdrobust.rdrobust(df.y,df.r, kernel<span class="op">=</span><span class="st">"uniform"</span>,  bwselect<span class="op">=</span><span class="st">"msetwo"</span>)</span>
+<span id="cb7-2"><a aria-label="2"></a>rd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>Call: rdrobust
+
+Sharp RD estimates using local polynomial regression.
+
 Number of Observations:                  1000
 Polynomial Order Est. (p):                  1
 Polynomial Order Bias (q):                  2
@@ -648,20 +656,17 @@ Var-Cov Estimator:                         NN
 
                                 Left      Right
 ------------------------------------------------
-Number of Observations           475        525
-Number of Unique Obs.            475        525
-Number of Effective Obs.         133        134
-Bandwidth Estimation           0.567      0.603
-Bandwidth Bias                 0.972      1.066
-rho (h/b)                      0.583      0.565
+Number of Observations           497        503
+Number of Unique Obs.            497        503
+Number of Effective Obs.         117        173
+Bandwidth Estimation            0.48      0.676
+Bandwidth Bias                 0.917      1.122
+rho (h/b)                      0.523      0.602
 
-Method             Coef.     S.E.   t-stat    P&gt;|t|       95% CI      
+Method             Coef.     S.E.   z-stat    P&gt;|z|       95% CI      
 -------------------------------------------------------------------------
-Conventional       0.905    0.539    1.681   9.278e-02     [-0.15, 1.961]
-Robust                 -        -    1.297   1.945e-01    [-0.427, 2.098]</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="7">
-<pre><code></code></pre>
+Conventional       1.186    0.486    2.439   1.471e-02     [0.233, 2.139]
+Robust                 -        -    2.116   3.434e-02     [0.087, 2.278]</code></pre>
 </div>
 </div>
 </section>
@@ -671,7 +676,7 @@ Robust                 -        -    1.297   1.945e-01    [-0.427, 2.098]</code>
 <li>Optimal <code>h</code> has <span class="math inline">\(\mathrm{Bias}^2 = \var\)</span></li>
 <li>Need to correct for bias for confidence intervals to be correct</li>
 <li>Use “Robust” interval reported by <code>rdrobust</code></li>
-<li>See section 4.3 of <span class="citation" data-cites="cattaneo2019">Cattaneo, Idrobo, and Titiunik (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span></li>
+<li>See section 4.3 of <span class="citation" data-cites="cattaneo2019">Cattaneo et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span></li>
 </ul>
 </section>
 <section id="kernel-weighting" class="slide level2">
@@ -683,11 +688,14 @@ Robust                 -        -    1.297   1.945e-01    [-0.427, 2.098]</code>
 <li>“triangular” kernel is best</li>
 </ul>
 </div><div class="column" style="width:60%;">
-<div id="a8e44b8c" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>rd <span class="op">=</span> rdrobust.rdrobust(df.y,df.r, kernel<span class="op">=</span><span class="st">"triangular"</span>,  bwselect<span class="op">=</span><span class="st">"msetwo"</span>)</span>
-<span id="cb10-2"><a></a>rd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
+<div id="f18f1c65" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a>rd <span class="op">=</span> rdrobust.rdrobust(df.y,df.r, kernel<span class="op">=</span><span class="st">"triangular"</span>,  bwselect<span class="op">=</span><span class="st">"msetwo"</span>)</span>
+<span id="cb9-2"><a aria-label="2"></a>rd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>Call: rdrobust
+
+Sharp RD estimates using local polynomial regression.
+
 Number of Observations:                  1000
 Polynomial Order Est. (p):                  1
 Polynomial Order Bias (q):                  2
@@ -697,20 +705,17 @@ Var-Cov Estimator:                         NN
 
                                 Left      Right
 ------------------------------------------------
-Number of Observations           475        525
-Number of Unique Obs.            475        525
-Number of Effective Obs.         159        147
-Bandwidth Estimation           0.673      0.644
-Bandwidth Bias                 1.071      1.085
-rho (h/b)                      0.629      0.594
+Number of Observations           497        503
+Number of Unique Obs.            497        503
+Number of Effective Obs.         139        188
+Bandwidth Estimation           0.553      0.733
+Bandwidth Bias                 0.871      1.043
+rho (h/b)                      0.635      0.703
 
-Method             Coef.     S.E.   t-stat    P&gt;|t|       95% CI      
+Method             Coef.     S.E.   z-stat    P&gt;|z|       95% CI      
 -------------------------------------------------------------------------
-Conventional       1.287    0.564    2.283   2.242e-02     [0.182, 2.391]
-Robust                 -        -     1.91   5.613e-02    [-0.033, 2.587]</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="8">
-<pre><code></code></pre>
+Conventional       1.198    0.502    2.386   1.701e-02     [0.214, 2.182]
+Robust                 -        -    1.914   5.562e-02     [-0.028, 2.33]</code></pre>
 </div>
 </div>
 </div></div>
@@ -725,13 +730,13 @@ Robust                 -        -     1.91   5.613e-02    [-0.033, 2.587]</code>
 </section>
 <section id="manipulation-of-running-variable-1" class="slide level2">
 <h2>Manipulation of Running Variable</h2>
-<div id="6fea26d6" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a>fig,ax<span class="op">=</span>plt.subplots()</span>
-<span id="cb13-2"><a></a>ax.hist(x<span class="op">=</span>df.r[df.r<span class="op">&lt;=</span><span class="dv">0</span>],bins<span class="op">=</span><span class="dv">20</span>,color<span class="op">=</span><span class="st">"C0"</span>)</span>
-<span id="cb13-3"><a></a>ax.hist(x<span class="op">=</span>df.r[df.r<span class="op">&gt;</span><span class="dv">0</span>],bins<span class="op">=</span><span class="dv">20</span>,color<span class="op">=</span><span class="st">"C1"</span>)</span>
-<span id="cb13-4"><a></a>ax.set_xlim(<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>)</span>
-<span id="cb13-5"><a></a>ax.axvline(<span class="dv">0</span>,color<span class="op">=</span><span class="st">"black"</span>)</span>
-<span id="cb13-6"><a></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="981b1232" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a>fig,ax<span class="op">=</span>plt.subplots()</span>
+<span id="cb11-2"><a aria-label="2"></a>ax.hist(x<span class="op">=</span>df.r[df.r<span class="op">&lt;=</span><span class="dv">0</span>],bins<span class="op">=</span><span class="dv">20</span>,color<span class="op">=</span><span class="st">"C0"</span>)</span>
+<span id="cb11-3"><a aria-label="3"></a>ax.hist(x<span class="op">=</span>df.r[df.r<span class="op">&gt;</span><span class="dv">0</span>],bins<span class="op">=</span><span class="dv">20</span>,color<span class="op">=</span><span class="st">"C1"</span>)</span>
+<span id="cb11-4"><a aria-label="4"></a>ax.set_xlim(<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb11-5"><a aria-label="5"></a>ax.axvline(<span class="dv">0</span>,color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb11-6"><a aria-label="6"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -749,12 +754,15 @@ Robust                 -        -     1.91   5.613e-02    [-0.033, 2.587]</code>
 <li>If have data on outcomes not affected by treatment (e.g.&nbsp;if predetermined) can check that RD estimate for them is 0</li>
 </ul>
 </div><div class="column" style="width:60%;">
-<div id="68b91091" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>df.x <span class="op">=</span> np.sin(<span class="dv">2</span><span class="op">*</span>df.r)<span class="op">*</span>np.exp(<span class="fl">0.5</span><span class="op">*</span>df.r) <span class="op">+</span> np.random.randn(df.shape[<span class="dv">0</span>])</span>
-<span id="cb14-2"><a></a>rdx <span class="op">=</span> rdrobust.rdrobust(df.x,df.r, kernel<span class="op">=</span><span class="st">"triangular"</span>,  bwselect<span class="op">=</span><span class="st">"msetwo"</span>)</span>
-<span id="cb14-3"><a></a>rdx</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
+<div id="e7c0f45f" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a>df.x <span class="op">=</span> np.sin(<span class="dv">2</span><span class="op">*</span>df.r)<span class="op">*</span>np.exp(<span class="fl">0.5</span><span class="op">*</span>df.r) <span class="op">+</span> np.random.randn(df.shape[<span class="dv">0</span>])</span>
+<span id="cb12-2"><a aria-label="2"></a>rdx <span class="op">=</span> rdrobust.rdrobust(df.x,df.r, kernel<span class="op">=</span><span class="st">"triangular"</span>,  bwselect<span class="op">=</span><span class="st">"msetwo"</span>)</span>
+<span id="cb12-3"><a aria-label="3"></a>rdx</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>Call: rdrobust
+
+Sharp RD estimates using local polynomial regression.
+
 Number of Observations:                  1000
 Polynomial Order Est. (p):                  1
 Polynomial Order Bias (q):                  2
@@ -764,28 +772,25 @@ Var-Cov Estimator:                         NN
 
                                 Left      Right
 ------------------------------------------------
-Number of Observations           475        525
-Number of Unique Obs.            475        525
-Number of Effective Obs.         170        131
-Bandwidth Estimation           0.726      0.588
-Bandwidth Bias                 1.121      1.216
-rho (h/b)                      0.648      0.483
+Number of Observations           497        503
+Number of Unique Obs.            497        503
+Number of Effective Obs.         132        127
+Bandwidth Estimation           0.527      0.472
+Bandwidth Bias                  0.95      0.734
+rho (h/b)                      0.555      0.643
 
-Method             Coef.     S.E.   t-stat    P&gt;|t|       95% CI      
+Method             Coef.     S.E.   z-stat    P&gt;|z|       95% CI      
 -------------------------------------------------------------------------
-Conventional       0.187    0.316    0.593   5.534e-01    [-0.432, 0.806]
-Robust                 -        -     0.15   8.810e-01    [-0.653, 0.762]</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="10">
-<pre><code></code></pre>
+Conventional      -0.147    0.267   -0.552   5.810e-01     [-0.67, 0.375]
+Robust                 -        -   -0.721   4.707e-01    [-0.821, 0.379]</code></pre>
 </div>
 </div>
 </div></div>
 </section>
 <section id="placebo-tests-1" class="slide level2">
 <h2>Placebo Tests</h2>
-<div id="ad236a50" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a>rdpx <span class="op">=</span> rdrobust.rdplot(df.x,df.r,c<span class="op">=</span><span class="dv">0</span>,hide<span class="op">=</span><span class="va">False</span>, binselect<span class="op">=</span><span class="st">'es'</span>,x_label<span class="op">=</span><span class="st">"R"</span>,y_label<span class="op">=</span><span class="st">"x"</span>,ci<span class="op">=</span><span class="dv">95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="0f363b66" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a>rdpx <span class="op">=</span> rdrobust.rdplot(df.x,df.r,c<span class="op">=</span><span class="dv">0</span>,hide<span class="op">=</span><span class="va">False</span>, binselect<span class="op">=</span><span class="st">'es'</span>,x_label<span class="op">=</span><span class="st">"R"</span>,y_label<span class="op">=</span><span class="st">"x"</span>,ci<span class="op">=</span><span class="dv">95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -810,22 +815,22 @@ Robust                 -        -     0.15   8.810e-01    [-0.653, 0.762]</code>
 <li>Idea: use discontinuity as instrument for treatment</li>
 </ul>
 </div><div class="column" style="width:50%;">
-<div id="bfea652e" class="cell" data-execution_count="13">
+<div id="08e8a53a" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="kw">def</span> pdr(r):</span>
-<span id="cb18-2"><a></a>    <span class="cf">if</span> (r <span class="op">&lt;</span> <span class="dv">0</span>):</span>
-<span id="cb18-3"><a></a>        <span class="cf">return</span> <span class="fl">0.2</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>np.exp(<span class="op">-</span>r))</span>
-<span id="cb18-4"><a></a>    <span class="cf">else</span>:</span>
-<span id="cb18-5"><a></a>        <span class="cf">return</span> <span class="fl">0.8</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span><span class="fl">0.5</span><span class="op">*</span>np.exp(<span class="op">-</span>r))</span>
-<span id="cb18-6"><a></a></span>
-<span id="cb18-7"><a></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>))</span>
-<span id="cb18-8"><a></a>ax <span class="op">=</span> plotp(ax,pdr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a><span class="kw">def</span> pdr(r):</span>
+<span id="cb15-2"><a aria-label="2"></a>    <span class="cf">if</span> (r <span class="op">&lt;</span> <span class="dv">0</span>):</span>
+<span id="cb15-3"><a aria-label="3"></a>        <span class="cf">return</span> <span class="fl">0.2</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>np.exp(<span class="op">-</span>r))</span>
+<span id="cb15-4"><a aria-label="4"></a>    <span class="cf">else</span>:</span>
+<span id="cb15-5"><a aria-label="5"></a>        <span class="cf">return</span> <span class="fl">0.8</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span><span class="fl">0.5</span><span class="op">*</span>np.exp(<span class="op">-</span>r))</span>
+<span id="cb15-6"><a aria-label="6"></a></span>
+<span id="cb15-7"><a aria-label="7"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>))</span>
+<span id="cb15-8"><a aria-label="8"></a>ax <span class="op">=</span> plotp(ax,pdr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="rdd_files/figure-revealjs/cell-13-output-1.png" width="441" height="429"></p>
+<p><img data-src="rdd_files/figure-revealjs/cell-13-output-1.png" width="441" height="430"></p>
 </figure>
 </div>
 </div>
@@ -835,7 +840,7 @@ Robust                 -        -     0.15   8.810e-01    [-0.653, 0.762]</code>
 <section id="merit-based-financial-aid-for-low-income-students" class="slide level2">
 <h2>Merit Based Financial Aid for Low-Income Students</h2>
 <ul>
-<li><span class="citation" data-cites="lrs2020">Londoño-Vélez, Rodríguez, and Sánchez (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span> (also used as example in <span class="citation" data-cites="cattaneo2024">Cattaneo, Idrobo, and Titiunik (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span>)</li>
+<li><span class="citation" data-cites="lrs2020">Londoño-Vélez et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span> (also used as example in <span class="citation" data-cites="cattaneo2024">Cattaneo, Idrobo, et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span>)</li>
 <li>Full undergraduate tuition available if
 <ol type="1">
 <li>Standardized test <span class="math inline">\(\geq\)</span> 91%-tile</li>
@@ -848,10 +853,10 @@ Robust                 -        -     0.15   8.810e-01    [-0.653, 0.762]</code>
 </section>
 <section id="merit-based-financial-aid-for-low-income-students-1" class="slide level2">
 <h2>Merit Based Financial Aid for Low-Income Students</h2>
-<div id="09a9e473" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a>lrs_all <span class="op">=</span> pd.read_stata(<span class="st">'data/data_RD.dta'</span>)</span>
-<span id="cb19-2"><a></a>lrs <span class="op">=</span> lrs_all.loc[lrs_all.eligible_saber11<span class="op">==</span><span class="dv">1</span>] <span class="co">#</span></span>
-<span id="cb19-3"><a></a>lrs.columns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="26779d85" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a>lrs_all <span class="op">=</span> pd.read_stata(<span class="st">'data/data_RD.dta'</span>)</span>
+<span id="cb16-2"><a aria-label="2"></a>lrs <span class="op">=</span> lrs_all.loc[lrs_all.eligible_saber11<span class="op">==</span><span class="dv">1</span>] <span class="co">#</span></span>
+<span id="cb16-3"><a aria-label="3"></a>lrs.columns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>Index(['running_saber11_placebo', 'running_saber11', 'running_sisben',
        'eligible_saber11', 'eligible_sisben', 'eligible_spp', 'sisben_area',
@@ -866,19 +871,19 @@ Robust                 -        -     0.15   8.810e-01    [-0.653, 0.762]</code>
        'icfes_schoolsch1', 'icfes_schoolsch2', 'icfes_schoolsch3',
        'icfes_schoolsch4', 'icfes_schoolsch5', 'icfes_score_20132',
        'icfes_score_20142'],
-      dtype='object')</code></pre>
+      dtype='str')</code></pre>
 </div>
 </div>
 </section>
 <section id="first-stage-effect-on-receiving-tuition-subsidy" class="slide level2">
 <h2>First Stage: Effect on Receiving Tuition Subsidy</h2>
-<div id="289e4066" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a>df<span class="op">=</span>lrs[[<span class="st">"running_sisben"</span>,<span class="st">"beneficiary_spp"</span>,<span class="st">"icfes_score_20142"</span>,<span class="st">"spadies_any"</span>,<span class="st">"spadies_hq"</span>]].dropna()</span>
-<span id="cb21-2"><a></a>rdrobust.rdplot(df.beneficiary_spp, df.running_sisben, binselect<span class="op">=</span><span class="st">'esmv'</span>, x_label<span class="op">=</span><span class="st">"Wealth Index"</span>,y_label<span class="op">=</span><span class="st">"P(D|wealth)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="a27d3ee9" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-label="1"></a>df<span class="op">=</span>lrs[[<span class="st">"running_sisben"</span>,<span class="st">"beneficiary_spp"</span>,<span class="st">"icfes_score_20142"</span>,<span class="st">"spadies_any"</span>,<span class="st">"spadies_hq"</span>]].dropna()</span>
+<span id="cb18-2"><a aria-label="2"></a>rdrobust.rdplot(df.beneficiary_spp, df.running_sisben, binselect<span class="op">=</span><span class="st">'esmv'</span>, x_label<span class="op">=</span><span class="st">"Wealth Index"</span>,y_label<span class="op">=</span><span class="st">"P(D|wealth)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
-<section id="first-stage-effect-on-receiving-tuition-subsidy-output" class="slide level2 output-location-slide"><h2>First Stage: Effect on Receiving Tuition Subsidy</h2><div class="cell output-location-slide" data-execution_count="15">
+<section id="first-stage-effect-on-receiving-tuition-subsidy-output" class="slide level2 output-location-slide"><h2>First Stage: Effect on Receiving Tuition Subsidy</h2><div class="cell output-location-slide" data-execution_count="14">
 <div class="cell-output cell-output-stdout">
 <pre><code>Mass points detected in the running variable.
 Warning: not enough variability in the outcome variable below the threshold</code></pre>
@@ -890,7 +895,7 @@ Warning: not enough variability in the outcome variable below the threshold</cod
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>Call: rdplot
 Number of Observations:                 23132
 Kernel:                               Uniform
@@ -900,7 +905,7 @@ Polynomial Order Est. (p):                  4
 ------------------------------------------------
 Number of Observations          7709      15423
 Number of Effective Obs         7709      15423
-Bandwith poly. fit (h)         43.48      56.23
+Bandwidth poly. fit (h)        43.48      56.23
 Number of bins scale               1          1
 Bins Selected                      1        234
 Average Bin Length             43.48       0.24
@@ -913,18 +918,19 @@ Implied scale                    nan      29.25
 WIMSE variance weight            nan        0.0
 WIMSE bias weight                nan        1.0</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="14">
-<pre><code></code></pre>
-</div>
 </div></section><section id="first-stage-effect-on-receiving-tuition-subsidy-1" class="slide level2">
 <h2>First Stage: Effect on Receiving Tuition Subsidy</h2>
-<div id="c2a6714a" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a></a>fs <span class="op">=</span> rdrobust.rdrobust(df.beneficiary_spp, df.running_sisben, kernel<span class="op">=</span><span class="st">"triangular"</span>,  bwselect<span class="op">=</span><span class="st">"mserd"</span>)</span>
-<span id="cb25-2"><a></a>fs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="a460c2a3" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a aria-label="1"></a>fs <span class="op">=</span> rdrobust.rdrobust(df.beneficiary_spp, df.running_sisben, kernel<span class="op">=</span><span class="st">"triangular"</span>,  bwselect<span class="op">=</span><span class="st">"mserd"</span>)</span>
+<span id="cb21-2"><a aria-label="2"></a>fs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Mass points detected in the running variable.
-Mass points detected in the running variable.
-Call: rdrobust
+<pre><code>Mass points detected in the running variable.</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>Call: rdrobust
+
+Sharp RD estimates using local polynomial regression.
+
 Number of Observations:                 23132
 Polynomial Order Est. (p):                  1
 Polynomial Order Bias (q):                  2
@@ -936,29 +942,26 @@ Var-Cov Estimator:                         NN
 ------------------------------------------------
 Number of Observations          7709      15423
 Number of Unique Obs.           3644       9327
-Number of Effective Obs.        6600       7466
-Bandwidth Estimation           18.51      18.51
-Bandwidth Bias                28.994     28.994
+Number of Effective Obs.        6595       7462
+Bandwidth Estimation          18.509     18.509
+Bandwidth Bias                28.993     28.993
 rho (h/b)                      0.638      0.638
 
-Method             Coef.     S.E.   t-stat    P&gt;|t|       95% CI      
+Method             Coef.     S.E.   z-stat    P&gt;|z|       95% CI      
 -------------------------------------------------------------------------
-Conventional       0.625    0.012   51.592   0.000e+00     [0.601, 0.649]
-Robust                 -        -   43.114   0.000e+00     [0.595, 0.652]</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="15">
-<pre><code></code></pre>
+Conventional       0.625    0.012   51.594   0.000e+00     [0.601, 0.649]
+Robust                 -        -   43.117   0.000e+00     [0.595, 0.652]</code></pre>
 </div>
 </div>
 </section>
 <section id="reduced-form-effect-on-postsecondary-enrollment" class="slide level2">
 <h2>Reduced Form: Effect on Postsecondary Enrollment</h2>
-<div id="49f8b632" class="cell" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a></a>rdrobust.rdplot(df.spadies_any, df.running_sisben, binselect<span class="op">=</span><span class="st">'esmv'</span>, x_label<span class="op">=</span><span class="st">"Wealth Index"</span>,y_label<span class="op">=</span><span class="st">"P(postsecondary|wealth)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="1b336cb9" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a>rdrobust.rdplot(df.spadies_any, df.running_sisben, binselect<span class="op">=</span><span class="st">'esmv'</span>, x_label<span class="op">=</span><span class="st">"Wealth Index"</span>,y_label<span class="op">=</span><span class="st">"P(postsecondary|wealth)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
-<section id="reduced-form-effect-on-postsecondary-enrollment-output" class="slide level2 output-location-slide"><h2>Reduced Form: Effect on Postsecondary Enrollment</h2><div class="cell output-location-slide" data-execution_count="17">
+<section id="reduced-form-effect-on-postsecondary-enrollment-output" class="slide level2 output-location-slide"><h2>Reduced Form: Effect on Postsecondary Enrollment</h2><div class="cell output-location-slide" data-execution_count="16">
 <div class="cell-output cell-output-stdout">
 <pre><code>Mass points detected in the running variable.</code></pre>
 </div>
@@ -969,7 +972,7 @@ Robust                 -        -   43.114   0.000e+00     [0.595, 0.652]</code>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>Call: rdplot
 Number of Observations:                 23132
 Kernel:                               Uniform
@@ -979,7 +982,7 @@ Polynomial Order Est. (p):                  4
 ------------------------------------------------
 Number of Observations          7709      15423
 Number of Effective Obs         7709      15423
-Bandwith poly. fit (h)         43.48      56.23
+Bandwidth poly. fit (h)        43.48      56.23
 Number of bins scale               1          1
 Bins Selected                    232        238
 Average Bin Length             0.196      0.236
@@ -992,18 +995,19 @@ Implied scale                   46.4     26.444
 WIMSE variance weight            0.0        0.0
 WIMSE bias weight                1.0        1.0</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="16">
-<pre><code></code></pre>
-</div>
 </div></section><section id="reduced-form-effect-on-postsecondary-enrollment-1" class="slide level2">
 <h2>Reduced Form: Effect on Postsecondary Enrollment</h2>
-<div id="d9908cf6" class="cell" data-execution_count="18">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a></a>rf <span class="op">=</span> rdrobust.rdrobust(df.spadies_any, df.running_sisben, kernel<span class="op">=</span><span class="st">"triangular"</span>,  bwselect<span class="op">=</span><span class="st">"mserd"</span>)</span>
-<span id="cb32-2"><a></a>rf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="1694208d" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a aria-label="1"></a>rf <span class="op">=</span> rdrobust.rdrobust(df.spadies_any, df.running_sisben, kernel<span class="op">=</span><span class="st">"triangular"</span>,  bwselect<span class="op">=</span><span class="st">"mserd"</span>)</span>
+<span id="cb27-2"><a aria-label="2"></a>rf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Mass points detected in the running variable.
-Mass points detected in the running variable.
-Call: rdrobust
+<pre><code>Mass points detected in the running variable.</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<pre><code>Call: rdrobust
+
+Sharp RD estimates using local polynomial regression.
+
 Number of Observations:                 23132
 Polynomial Order Est. (p):                  1
 Polynomial Order Bias (q):                  2
@@ -1020,13 +1024,10 @@ Bandwidth Estimation           9.042      9.042
 Bandwidth Bias                14.404     14.404
 rho (h/b)                      0.628      0.628
 
-Method             Coef.     S.E.   t-stat    P&gt;|t|       95% CI      
+Method             Coef.     S.E.   z-stat    P&gt;|z|       95% CI      
 -------------------------------------------------------------------------
-Conventional       0.269    0.023   11.709   1.144e-31     [0.224, 0.314]
-Robust                 -        -   10.048   9.410e-24     [0.221, 0.328]</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="17">
-<pre><code></code></pre>
+Conventional       0.269    0.023    11.71   1.134e-31     [0.224, 0.314]
+Robust                 -        -   10.048   9.347e-24     [0.221, 0.328]</code></pre>
 </div>
 </div>
 </section>
@@ -1059,13 +1060,17 @@ Robust                 -        -   10.048   9.410e-24     [0.221, 0.328]</code>
 </section>
 <section id="late-1" class="slide level2">
 <h2>LATE</h2>
-<div id="e2dea5fd" class="cell" data-execution_count="19">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a></a>late <span class="op">=</span> rdrobust.rdrobust(df.spadies_any, df.running_sisben, fuzzy<span class="op">=</span>df.beneficiary_spp)</span>
-<span id="cb35-2"><a></a>late</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="da9ce29b" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a aria-label="1"></a>late <span class="op">=</span> rdrobust.rdrobust(df.spadies_any, df.running_sisben, fuzzy<span class="op">=</span>df.beneficiary_spp)</span>
+<span id="cb30-2"><a aria-label="2"></a>late</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Mass points detected in the running variable.
-Mass points detected in the running variable.
-Call: rdrobust
+<pre><code>Mass points detected in the running variable.</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>Call: rdrobust
+
+Fuzzy RD estimates using local polynomial regression.
+
 Number of Observations:                 23132
 Polynomial Order Est. (p):                  1
 Polynomial Order Bias (q):                  2
@@ -1082,13 +1087,16 @@ Bandwidth Estimation           9.042      9.042
 Bandwidth Bias                14.404     14.404
 rho (h/b)                      0.628      0.628
 
-Method             Coef.     S.E.   t-stat    P&gt;|t|       95% CI      
+Method             Coef.     S.E.   z-stat    P&gt;|z|       95% CI      
 -------------------------------------------------------------------------
-Conventional       0.434    0.034   12.773   2.322e-37     [0.368, 0.501]
-Robust                 -        -   11.026   2.856e-28     [0.366, 0.524]</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="18">
-<pre><code></code></pre>
+Conventional       0.434    0.034   12.773   2.313e-37     [0.368, 0.501]
+Robust                 -        -   11.026   2.847e-28     [0.366, 0.524]
+
+First-Stage Estimates.
+Method             Coef.     S.E.   z-stat    P&gt;|z|       95% CI      
+-------------------------------------------------------------------------
+Conventional       0.619    0.017   35.863  1.174e-281     [0.585, 0.653]
+Robust                 -        -    29.89  2.661e-196     [0.575, 0.656]</code></pre>
 </div>
 </div>
 </section>
@@ -1097,7 +1105,7 @@ Robust                 -        -   11.026   2.856e-28     [0.366, 0.524]</code>
 <ul>
 <li><span class="citation" data-cites="facure2022">Facure (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> <a href="https://matheusfacure.github.io/python-causality-handbook/16-Regression-Discontinuity-Design.html">chapter 16</a></li>
 <li><span class="citation" data-cites="causalml2024">Chernozhukov et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span> chapter 17</li>
-<li><span class="citation" data-cites="cattaneo2019">Cattaneo, Idrobo, and Titiunik (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> and <span class="citation" data-cites="cattaneo2024">Cattaneo, Idrobo, and Titiunik (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></li>
+<li><span class="citation" data-cites="cattaneo2019">Cattaneo et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> and <span class="citation" data-cites="cattaneo2024">Cattaneo, Idrobo, et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></li>
 <li>https://rdpackages.github.io/</li>
 </ul>
 </section>
@@ -1105,9 +1113,9 @@ Robust                 -        -   11.026   2.856e-28     [0.366, 0.524]</code>
 <h2>References</h2>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-binscatter2024" class="csl-entry" role="listitem">
-Cattaneo, Matias D., Richard K. Crump, Max H. Farrell, and Yingjie Feng. 2024. <span>“On Binscatter.”</span> <em>American Economic Review</em> 114 (5): 1488–1514. <a href="https://doi.org/10.1257/aer.20221576">https://doi.org/10.1257/aer.20221576</a>.
+Cattaneo, Matias D., Richard K. Crump, Max H. Farrell, and Yingjie Feng. 2024. <span>“On Binscatter.”</span> <em>American Economic Review</em> 114 (5): 1488–514. <a href="https://doi.org/10.1257/aer.20221576">https://doi.org/10.1257/aer.20221576</a>.
 </div>
 <div id="ref-cattaneo2024" class="csl-entry" role="listitem">
 Cattaneo, Matias D., Nicolas Idrobo, and Rocío Titiunik. 2024. <em>A Practical Introduction to Regression Discontinuity Designs: Extensions</em>. Cambridge University Press. <a href="https://doi.org/10.1017/9781009441896">https://doi.org/10.1017/9781009441896</a>.
@@ -1162,7 +1170,7 @@ Londoño-Vélez, Juliana, Catherine Rodríguez, and Fabio Sánchez. 2020. <span>
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"\u003ci class=\"fas fa-gear\">\u003c/i>","content":"\u003cul class=\"slide-menu-items\">\n\u003cli class=\"slide-tool-item active\" data-item=\"0\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\">\u003ckbd>f\u003c/kbd> Fullscreen\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"1\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\">\u003ckbd>s\u003c/kbd> Speaker View\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"2\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\">\u003ckbd>o\u003c/kbd> Slide Overview\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"3\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\">\u003ckbd>e\u003c/kbd> PDF Export Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"4\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\">\u003ckbd>r\u003c/kbd> Scroll View Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"5\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\">\u003ckbd>b\u003c/kbd> Toggle Chalkboard\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"6\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\">\u003ckbd>c\u003c/kbd> Toggle Notes Canvas\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"7\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\">\u003ckbd>d\u003c/kbd> Download Drawings\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"8\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\">\u003ckbd>?\u003c/kbd> Keyboard Help\u003c/a>\u003c/li>\n\u003c/ul>"}],"openButton":true,"openButtonLabel":"Slide menu"},
 'chalkboard': {"buttons":true,"theme":"whiteboard","boardmarkerWidth":2,"chalkWidth":2,"chalkEffect":0},
 'smaller': true,
  
@@ -1421,7 +1429,8 @@ Londoño-Vélez, Juliana, Catherine Rodríguez, and Fabio Sánchez. 2020. <span>
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
           // Inspect non-navigation links and adorn them if external
-         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          window.quartoDecorateExternalLinks = function (root) {
+         var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
           for (var i=0; i<links.length; i++) {
             const link = links[i];
             if (!isInternal(link.href)) {
@@ -1430,8 +1439,69 @@ Londoño-Vélez, Juliana, Catherine Rodríguez, and Fabio Sánchez. 2020. <span>
               if (link.dataset.originalHref !== undefined) {
                 link.href = link.dataset.originalHref;
               }
+              if (!link.classList.contains('no-external-icon')) {
+              }
             }
           }
+          };
+          window.quartoDecorateExternalLinks(window.document);
+        // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+        // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+        const hideOnEscAndFocusOut = {
+          name: 'hideOnEscAndFocusOut',
+          defaultValue: true,
+          fn(instance) {
+            const dismiss = () => {
+              // A show scheduled by the trigger delay would otherwise reopen it
+              instance.clearDelayTimeouts();
+              instance.hide();
+            };
+            const onKeyDown = (event) => {
+              if (event.key !== 'Escape') {
+                return;
+              }
+              // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+              // except an open reveal.js slide menu, which Esc should close too.
+              // The menu handles keys only when its keyboard option is on.
+              const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+                window.Reveal.getConfig().menu?.keyboard !== false;
+              if (!menuHandlesEsc) {
+                event.stopPropagation();
+              }
+              if (instance.popper.contains(window.document.activeElement)) {
+                // Disabled while refocusing so the focus trigger does not reopen it
+                instance.disable();
+                instance.reference.focus();
+                instance.enable();
+              }
+              dismiss();
+            };
+            const onFocusOut = (event) => {
+              const target = event.relatedTarget;
+              if (target && !instance.reference.contains(target) &&
+                  !instance.popper.contains(target)) {
+                dismiss();
+              }
+            };
+            // On the trigger too: a click trigger (code-annotations: select) has no
+            // blur handling. Attached for the instance's lifetime so leaving the
+            // trigger also cancels a show still pending on the trigger delay.
+            instance.reference.addEventListener('focusout', onFocusOut);
+            return {
+              onShow() {
+                window.document.addEventListener('keydown', onKeyDown, true);
+                instance.popper.addEventListener('focusout', onFocusOut);
+              },
+              onHide() {
+                window.document.removeEventListener('keydown', onKeyDown, true);
+                instance.popper.removeEventListener('focusout', onFocusOut);
+              },
+              onDestroy() {
+                instance.reference.removeEventListener('focusout', onFocusOut);
+              },
+            };
+          },
+        };
         function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
           const config = {
             allowHTML: true,
@@ -1445,6 +1515,7 @@ Londoño-Vélez, Juliana, Catherine Rodríguez, and Fabio Sánchez. 2020. <span>
             interactiveBorder: 10,
             theme: 'light-border',
             placement: 'bottom-start',
+            plugins: [hideOnEscAndFocusOut],
           };
           if (contentFn) {
             config.content = contentFn;

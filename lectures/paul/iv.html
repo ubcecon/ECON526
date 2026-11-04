@@ -6,21 +6,27 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.26">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.11.9">
 
   <meta name="author" content="Paul Schrimpf">
   <title>ECON 526 – Instrumental Variables</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -98,7 +104,6 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
-      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -115,7 +120,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-534cd8e3a96973385dffff3f4709048d.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-00ad5a49dff614330cd349bcec985ec3.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -224,7 +229,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Paul Schrimpf 
+Paul Schrimpf
 </div>
 <div class="quarto-title-author-email">
 <a href="mailto:paul.schrimpf@ubc.ca">paul.schrimpf@ubc.ca</a>
@@ -236,7 +241,7 @@ Paul Schrimpf
 </div>
 
 </section><section id="TOC">
-<nav role="doc-toc"> 
+<nav role="doc-toc" aria-labelledby="toc-title">
 <h2 id="toc-title">Table of contents</h2>
 <ul>
 <li><a href="#/introduction" id="/toc-introduction">Introduction</a></li>
@@ -378,25 +383,25 @@ Y_i = \underbrace{X_i}_{\in \R^k}' \beta_0 + \epsilon_i
 </ol></li>
 </ul>
 </div><div class="column" style="width:50%;">
-<div id="7dd29fa0" class="cell" data-execution_count="1">
+<div id="80d2af9c" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> pyvis</span>
-<span id="cb1-2"><a></a></span>
-<span id="cb1-3"><a></a>g <span class="op">=</span> pyvis.network.Network(notebook<span class="op">=</span><span class="va">True</span>,directed<span class="op">=</span><span class="va">True</span>, cdn_resources<span class="op">=</span><span class="st">'in_line'</span>, height<span class="op">=</span><span class="st">'300px'</span>, width<span class="op">=</span><span class="st">'400px'</span>)</span>
-<span id="cb1-4"><a></a>g.add_nodes([<span class="st">'X'</span>, <span class="st">'Y'</span>, <span class="st">'Z'</span>, <span class="st">'ϵ'</span>])</span>
-<span id="cb1-5"><a></a>g.add_edge(<span class="st">'X'</span>, <span class="st">'Y'</span>)</span>
-<span id="cb1-6"><a></a>g.add_edge(<span class="st">'ϵ'</span>,<span class="st">'Y'</span>)</span>
-<span id="cb1-7"><a></a>g.add_edge(<span class="st">'ϵ'</span>,<span class="st">'X'</span>)</span>
-<span id="cb1-8"><a></a>g.add_edge(<span class="st">'Z'</span>,<span class="st">'X'</span>)</span>
-<span id="cb1-9"><a></a>g.show(<span class="st">"generiv_iv.html"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> pyvis</span>
+<span id="cb1-2"><a aria-label="2"></a></span>
+<span id="cb1-3"><a aria-label="3"></a>g <span class="op">=</span> pyvis.network.Network(notebook<span class="op">=</span><span class="va">True</span>,directed<span class="op">=</span><span class="va">True</span>, cdn_resources<span class="op">=</span><span class="st">'in_line'</span>, height<span class="op">=</span><span class="st">'300px'</span>, width<span class="op">=</span><span class="st">'400px'</span>)</span>
+<span id="cb1-4"><a aria-label="4"></a>g.add_nodes([<span class="st">'X'</span>, <span class="st">'Y'</span>, <span class="st">'Z'</span>, <span class="st">'ϵ'</span>])</span>
+<span id="cb1-5"><a aria-label="5"></a>g.add_edge(<span class="st">'X'</span>, <span class="st">'Y'</span>)</span>
+<span id="cb1-6"><a aria-label="6"></a>g.add_edge(<span class="st">'ϵ'</span>,<span class="st">'Y'</span>)</span>
+<span id="cb1-7"><a aria-label="7"></a>g.add_edge(<span class="st">'ϵ'</span>,<span class="st">'X'</span>)</span>
+<span id="cb1-8"><a aria-label="8"></a>g.add_edge(<span class="st">'Z'</span>,<span class="st">'X'</span>)</span>
+<span id="cb1-9"><a aria-label="9"></a>g.show(<span class="st">"generiv_iv.html"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>generiv_iv.html</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="35">
+<div class="cell-output cell-output-display" data-execution_count="1">
 
-        <iframe width="400px" height="300px" src="generiv_iv.html" frameborder="0" allowfullscreen=""></iframe>
+        <iframe width="400px" height="300px" src="generiv_iv.html" frameborder="0" allowfullscreen="" referrerpolicy="strict-origin-when-cross-origin"></iframe>
         
 </div>
 </div>
@@ -450,25 +455,25 @@ Y_i = \underbrace{X_i}_{\in \R^k}' \beta_0 + \epsilon_i
 <ul>
 <li>From <span class="citation" data-cites="ak1991">Angrist and Krueger (<a href="#/references" role="doc-biblioref" onclick="">1991</a>)</span></li>
 </ul>
-<div id="22066e00" class="cell" data-execution_count="2">
+<div id="7f85663d" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># import graphviz as gr</span></span>
-<span id="cb3-2"><a></a></span>
-<span id="cb3-3"><a></a>g <span class="op">=</span> pyvis.network.Network(notebook<span class="op">=</span><span class="va">True</span>,directed<span class="op">=</span><span class="va">True</span>, cdn_resources<span class="op">=</span><span class="st">'in_line'</span>, height<span class="op">=</span><span class="st">'400px'</span>, width<span class="op">=</span><span class="st">'500px'</span>)</span>
-<span id="cb3-4"><a></a>g.add_nodes([<span class="st">'Education'</span>,<span class="st">'Earnings'</span>,<span class="st">'Ability'</span>,<span class="st">'?'</span>])</span>
-<span id="cb3-5"><a></a>g.add_edge(<span class="st">'Education'</span>, <span class="st">'Earnings'</span>)</span>
-<span id="cb3-6"><a></a>g.add_edge(<span class="st">'Ability'</span>,<span class="st">'Education'</span>)</span>
-<span id="cb3-7"><a></a>g.add_edge(<span class="st">'Ability'</span>,<span class="st">'Earnings'</span>)</span>
-<span id="cb3-8"><a></a>g.add_edge(<span class="st">'?'</span>,<span class="st">'Education'</span>)</span>
-<span id="cb3-9"><a></a>g.show(<span class="st">"ee0_iv.html"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="co"># import graphviz as gr</span></span>
+<span id="cb3-2"><a aria-label="2"></a></span>
+<span id="cb3-3"><a aria-label="3"></a>g <span class="op">=</span> pyvis.network.Network(notebook<span class="op">=</span><span class="va">True</span>,directed<span class="op">=</span><span class="va">True</span>, cdn_resources<span class="op">=</span><span class="st">'in_line'</span>, height<span class="op">=</span><span class="st">'400px'</span>, width<span class="op">=</span><span class="st">'500px'</span>)</span>
+<span id="cb3-4"><a aria-label="4"></a>g.add_nodes([<span class="st">'Education'</span>,<span class="st">'Earnings'</span>,<span class="st">'Ability'</span>,<span class="st">'?'</span>])</span>
+<span id="cb3-5"><a aria-label="5"></a>g.add_edge(<span class="st">'Education'</span>, <span class="st">'Earnings'</span>)</span>
+<span id="cb3-6"><a aria-label="6"></a>g.add_edge(<span class="st">'Ability'</span>,<span class="st">'Education'</span>)</span>
+<span id="cb3-7"><a aria-label="7"></a>g.add_edge(<span class="st">'Ability'</span>,<span class="st">'Earnings'</span>)</span>
+<span id="cb3-8"><a aria-label="8"></a>g.add_edge(<span class="st">'?'</span>,<span class="st">'Education'</span>)</span>
+<span id="cb3-9"><a aria-label="9"></a>g.show(<span class="st">"ee0_iv.html"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>ee0_iv.html</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="36">
+<div class="cell-output cell-output-display" data-execution_count="2">
 
-        <iframe width="500px" height="400px" src="ee0_iv.html" frameborder="0" allowfullscreen=""></iframe>
+        <iframe width="500px" height="400px" src="ee0_iv.html" frameborder="0" allowfullscreen="" referrerpolicy="strict-origin-when-cross-origin"></iframe>
         
 </div>
 </div>
@@ -477,33 +482,33 @@ Y_i = \underbrace{X_i}_{\in \R^k}' \beta_0 + \epsilon_i
 <h2>Example: Returns to Education</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="fa555467" class="cell" data-execution_count="3">
+<div id="43190226" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>g <span class="op">=</span> pyvis.network.Network(notebook<span class="op">=</span><span class="va">True</span>,directed<span class="op">=</span><span class="va">True</span>, cdn_resources<span class="op">=</span><span class="st">'in_line'</span>, height<span class="op">=</span><span class="st">'400px'</span>, width<span class="op">=</span><span class="st">'400px'</span>)</span>
-<span id="cb5-2"><a></a>g.add_nodes([<span class="st">'Education'</span>,<span class="st">'Earnings'</span>,<span class="st">'Ability'</span>,<span class="st">'Quarter of Birth'</span>])</span>
-<span id="cb5-3"><a></a>g.add_edge(<span class="st">'Education'</span>, <span class="st">'Earnings'</span>)</span>
-<span id="cb5-4"><a></a>g.add_edge(<span class="st">'Ability'</span>,<span class="st">'Education'</span>)</span>
-<span id="cb5-5"><a></a>g.add_edge(<span class="st">'Ability'</span>,<span class="st">'Earnings'</span>)</span>
-<span id="cb5-6"><a></a>g.add_edge(<span class="st">'Quarter of Birth'</span>,<span class="st">'Education'</span>)</span>
-<span id="cb5-7"><a></a>g.show(<span class="st">"ee_iv.html"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a>g <span class="op">=</span> pyvis.network.Network(notebook<span class="op">=</span><span class="va">True</span>,directed<span class="op">=</span><span class="va">True</span>, cdn_resources<span class="op">=</span><span class="st">'in_line'</span>, height<span class="op">=</span><span class="st">'400px'</span>, width<span class="op">=</span><span class="st">'400px'</span>)</span>
+<span id="cb5-2"><a aria-label="2"></a>g.add_nodes([<span class="st">'Education'</span>,<span class="st">'Earnings'</span>,<span class="st">'Ability'</span>,<span class="st">'Quarter of Birth'</span>])</span>
+<span id="cb5-3"><a aria-label="3"></a>g.add_edge(<span class="st">'Education'</span>, <span class="st">'Earnings'</span>)</span>
+<span id="cb5-4"><a aria-label="4"></a>g.add_edge(<span class="st">'Ability'</span>,<span class="st">'Education'</span>)</span>
+<span id="cb5-5"><a aria-label="5"></a>g.add_edge(<span class="st">'Ability'</span>,<span class="st">'Earnings'</span>)</span>
+<span id="cb5-6"><a aria-label="6"></a>g.add_edge(<span class="st">'Quarter of Birth'</span>,<span class="st">'Education'</span>)</span>
+<span id="cb5-7"><a aria-label="7"></a>g.show(<span class="st">"ee_iv.html"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>ee_iv.html</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="37">
+<div class="cell-output cell-output-display" data-execution_count="3">
 
-        <iframe width="400px" height="400px" src="ee_iv.html" frameborder="0" allowfullscreen=""></iframe>
+        <iframe width="400px" height="400px" src="ee_iv.html" frameborder="0" allowfullscreen="" referrerpolicy="strict-origin-when-cross-origin"></iframe>
         
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="ff575d8a" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb7-2"><a></a></span>
-<span id="cb7-3"><a></a>df <span class="op">=</span> pd.read_csv(<span class="st">'data/ak91.csv'</span>)</span>
-<span id="cb7-4"><a></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="38">
+<div id="06e6affb" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-2"><a aria-label="2"></a></span>
+<span id="cb7-3"><a aria-label="3"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'data/ak91.csv'</span>)</span>
+<span id="cb7-4"><a aria-label="4"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -591,32 +596,32 @@ Y_i = \underbrace{X_i}_{\in \R^k}' \beta_0 + \epsilon_i
 </section>
 <section id="example-relevance" class="slide level2">
 <h2>Example: Relevance</h2>
-<div id="2606fc89" class="cell columns column-output-location" data-execution_count="5">
+<div id="cfa0c221" class="cell columns column-output-location" data-execution_count="5">
 <div class="column">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb8-2"><a></a>group_data <span class="op">=</span> (df</span>
-<span id="cb8-3"><a></a>    .groupby([<span class="st">"year_of_birth"</span>, <span class="st">"quarter_of_birth"</span>])</span>
-<span id="cb8-4"><a></a>    [[<span class="st">"log_wage"</span>, <span class="st">"years_of_schooling"</span>]]</span>
-<span id="cb8-5"><a></a>    .mean()</span>
-<span id="cb8-6"><a></a>    .reset_index()</span>
-<span id="cb8-7"><a></a>    .assign(time_of_birth <span class="op">=</span> <span class="kw">lambda</span> d: d[<span class="st">"year_of_birth"</span>] <span class="op">+</span> (d[<span class="st">"quarter_of_birth"</span>])<span class="op">/</span><span class="dv">4</span>))</span>
-<span id="cb8-8"><a></a></span>
-<span id="cb8-9"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">6</span>))</span>
-<span id="cb8-10"><a></a>plt.plot(group_data[<span class="st">"time_of_birth"</span>], group_data[<span class="st">"years_of_schooling"</span>], zorder<span class="op">=-</span><span class="dv">1</span>)</span>
-<span id="cb8-11"><a></a><span class="cf">for</span> q <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>):</span>
-<span id="cb8-12"><a></a>    x <span class="op">=</span> group_data.query(<span class="ss">f"quarter_of_birth==</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">"</span>)[<span class="st">"time_of_birth"</span>]</span>
-<span id="cb8-13"><a></a>    y <span class="op">=</span> group_data.query(<span class="ss">f"quarter_of_birth==</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">"</span>)[<span class="st">"years_of_schooling"</span>]</span>
-<span id="cb8-14"><a></a>    plt.scatter(x, y, marker<span class="op">=</span><span class="st">"s"</span>, s<span class="op">=</span><span class="dv">200</span>, c<span class="op">=</span><span class="ss">f"C</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb8-15"><a></a>    plt.scatter(x, y, marker<span class="op">=</span><span class="ss">f"$</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">$"</span>, s<span class="op">=</span><span class="dv">100</span>, c<span class="op">=</span><span class="ss">f"white"</span>)</span>
-<span id="cb8-16"><a></a></span>
-<span id="cb8-17"><a></a>plt.title(<span class="st">"Years of Education by Quarter of Birth (first stage)"</span>)</span>
-<span id="cb8-18"><a></a>plt.xlabel(<span class="st">"Quarter of Birth"</span>)</span>
-<span id="cb8-19"><a></a>plt.ylabel(<span class="st">"Years of Schooling"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb8-2"><a aria-label="2"></a>group_data <span class="op">=</span> (df</span>
+<span id="cb8-3"><a aria-label="3"></a>    .groupby([<span class="st">"year_of_birth"</span>, <span class="st">"quarter_of_birth"</span>])</span>
+<span id="cb8-4"><a aria-label="4"></a>    [[<span class="st">"log_wage"</span>, <span class="st">"years_of_schooling"</span>]]</span>
+<span id="cb8-5"><a aria-label="5"></a>    .mean()</span>
+<span id="cb8-6"><a aria-label="6"></a>    .reset_index()</span>
+<span id="cb8-7"><a aria-label="7"></a>    .assign(time_of_birth <span class="op">=</span> <span class="kw">lambda</span> d: d[<span class="st">"year_of_birth"</span>] <span class="op">+</span> (d[<span class="st">"quarter_of_birth"</span>])<span class="op">/</span><span class="dv">4</span>))</span>
+<span id="cb8-8"><a aria-label="8"></a></span>
+<span id="cb8-9"><a aria-label="9"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">6</span>))</span>
+<span id="cb8-10"><a aria-label="10"></a>plt.plot(group_data[<span class="st">"time_of_birth"</span>], group_data[<span class="st">"years_of_schooling"</span>], zorder<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb8-11"><a aria-label="11"></a><span class="cf">for</span> q <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>):</span>
+<span id="cb8-12"><a aria-label="12"></a>    x <span class="op">=</span> group_data.query(<span class="ss">f"quarter_of_birth==</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">"</span>)[<span class="st">"time_of_birth"</span>]</span>
+<span id="cb8-13"><a aria-label="13"></a>    y <span class="op">=</span> group_data.query(<span class="ss">f"quarter_of_birth==</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">"</span>)[<span class="st">"years_of_schooling"</span>]</span>
+<span id="cb8-14"><a aria-label="14"></a>    plt.scatter(x, y, marker<span class="op">=</span><span class="st">"s"</span>, s<span class="op">=</span><span class="dv">200</span>, c<span class="op">=</span><span class="ss">f"C</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-15"><a aria-label="15"></a>    plt.scatter(x, y, marker<span class="op">=</span><span class="ss">f"$</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">$"</span>, s<span class="op">=</span><span class="dv">100</span>, c<span class="op">=</span><span class="ss">f"white"</span>)</span>
+<span id="cb8-16"><a aria-label="16"></a></span>
+<span id="cb8-17"><a aria-label="17"></a>plt.title(<span class="st">"Years of Education by Quarter of Birth (first stage)"</span>)</span>
+<span id="cb8-18"><a aria-label="18"></a>plt.xlabel(<span class="st">"Quarter of Birth"</span>)</span>
+<span id="cb8-19"><a aria-label="19"></a>plt.ylabel(<span class="st">"Years of Schooling"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="iv_files/figure-revealjs/cell-6-output-1.png" width="523" height="523"></p>
+<p><img data-src="iv_files/figure-revealjs/cell-6-output-1.png" width="524" height="525"></p>
 </figure>
 </div>
 </div>
@@ -624,23 +629,23 @@ Y_i = \underbrace{X_i}_{\in \R^k}' \beta_0 + \epsilon_i
 </section>
 <section id="example-relevance-1" class="slide level2">
 <h2>Example: Relevance</h2>
-<div id="d49f2c03" class="cell columns column-output-location" data-execution_count="6">
+<div id="7a54a8c1" class="cell columns column-output-location" data-execution_count="6">
 <div class="column">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="co"># Convert the quarter of birth to dummy variables</span></span>
-<span id="cb9-2"><a></a>factor_data <span class="op">=</span> df.assign(<span class="op">**</span>{<span class="ss">f"q</span><span class="sc">{</span><span class="bu">int</span>(q)<span class="sc">}</span><span class="ss">"</span>: (df[<span class="st">"quarter_of_birth"</span>] <span class="op">==</span> q).astype(<span class="bu">int</span>)</span>
-<span id="cb9-3"><a></a>                             <span class="cf">for</span> q <span class="kw">in</span> df[<span class="st">"quarter_of_birth"</span>].unique()})</span>
-<span id="cb9-4"><a></a></span>
-<span id="cb9-5"><a></a><span class="co"># Run the first stage regression</span></span>
-<span id="cb9-6"><a></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
-<span id="cb9-7"><a></a></span>
-<span id="cb9-8"><a></a>first_stage <span class="op">=</span> smf.ols(<span class="st">"years_of_schooling ~ C(year_of_birth) + C(state_of_birth) + q4"</span>, data<span class="op">=</span>factor_data).fit()</span>
-<span id="cb9-9"><a></a></span>
-<span id="cb9-10"><a></a><span class="bu">print</span>(<span class="st">"q4 parameter estimate:, "</span>, first_stage.params[<span class="st">"q4"</span>])</span>
-<span id="cb9-11"><a></a><span class="bu">print</span>(<span class="st">"q4 p-value:, "</span>, first_stage.pvalues[<span class="st">"q4"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a><span class="co"># Convert the quarter of birth to dummy variables</span></span>
+<span id="cb9-2"><a aria-label="2"></a>factor_data <span class="op">=</span> df.assign(<span class="op">**</span>{<span class="ss">f"q</span><span class="sc">{</span><span class="bu">int</span>(q)<span class="sc">}</span><span class="ss">"</span>: (df[<span class="st">"quarter_of_birth"</span>] <span class="op">==</span> q).astype(<span class="bu">int</span>)</span>
+<span id="cb9-3"><a aria-label="3"></a>                             <span class="cf">for</span> q <span class="kw">in</span> df[<span class="st">"quarter_of_birth"</span>].unique()})</span>
+<span id="cb9-4"><a aria-label="4"></a></span>
+<span id="cb9-5"><a aria-label="5"></a><span class="co"># Run the first stage regression</span></span>
+<span id="cb9-6"><a aria-label="6"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb9-7"><a aria-label="7"></a></span>
+<span id="cb9-8"><a aria-label="8"></a>first_stage <span class="op">=</span> smf.ols(<span class="st">"years_of_schooling ~ C(year_of_birth) + C(state_of_birth) + q4"</span>, data<span class="op">=</span>factor_data).fit()</span>
+<span id="cb9-9"><a aria-label="9"></a></span>
+<span id="cb9-10"><a aria-label="10"></a><span class="bu">print</span>(<span class="st">"q4 parameter estimate:, "</span>, first_stage.params[<span class="st">"q4"</span>])</span>
+<span id="cb9-11"><a aria-label="11"></a><span class="bu">print</span>(<span class="st">"q4 p-value:, "</span>, first_stage.pvalues[<span class="st">"q4"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
-<pre><code>q4 parameter estimate:,  0.10085809272786406
-q4 p-value:,  5.4648294166225175e-15</code></pre>
+<pre><code>q4 parameter estimate:,  0.10085809272787
+q4 p-value:,  5.464829416603008e-15</code></pre>
 </div>
 </div></div>
 </section>
@@ -656,25 +661,25 @@ q4 p-value:,  5.4648294166225175e-15</code></pre>
 </section>
 <section id="example-reduced-form" class="slide level2">
 <h2>Example: Reduced Form</h2>
-<div id="1efc36a0" class="cell columns column-output-location" data-execution_count="7">
+<div id="72dacb2e" class="cell columns column-output-location" data-execution_count="7">
 <div class="column">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="co"># Plot the reduced form</span></span>
-<span id="cb11-2"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">6</span>))</span>
-<span id="cb11-3"><a></a>plt.plot(group_data[<span class="st">"time_of_birth"</span>], group_data[<span class="st">"log_wage"</span>], zorder<span class="op">=-</span><span class="dv">1</span>)</span>
-<span id="cb11-4"><a></a><span class="cf">for</span> q <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>):</span>
-<span id="cb11-5"><a></a>    x <span class="op">=</span> group_data.query(<span class="ss">f"quarter_of_birth==</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">"</span>)[<span class="st">"time_of_birth"</span>]</span>
-<span id="cb11-6"><a></a>    y <span class="op">=</span> group_data.query(<span class="ss">f"quarter_of_birth==</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">"</span>)[<span class="st">"log_wage"</span>]</span>
-<span id="cb11-7"><a></a>    plt.scatter(x, y, marker<span class="op">=</span><span class="st">"s"</span>, s<span class="op">=</span><span class="dv">200</span>, c<span class="op">=</span><span class="ss">f"C</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb11-8"><a></a>    plt.scatter(x, y, marker<span class="op">=</span><span class="ss">f"$</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">$"</span>, s<span class="op">=</span><span class="dv">100</span>, c<span class="op">=</span><span class="ss">f"white"</span>)</span>
-<span id="cb11-9"><a></a></span>
-<span id="cb11-10"><a></a>plt.title(<span class="st">"Average Weekly Wage by Quarter of Birth (reduced form)"</span>)</span>
-<span id="cb11-11"><a></a>plt.xlabel(<span class="st">"Year of Birth"</span>)</span>
-<span id="cb11-12"><a></a>plt.ylabel(<span class="st">"Log Weekly Earnings"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a><span class="co"># Plot the reduced form</span></span>
+<span id="cb11-2"><a aria-label="2"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">6</span>))</span>
+<span id="cb11-3"><a aria-label="3"></a>plt.plot(group_data[<span class="st">"time_of_birth"</span>], group_data[<span class="st">"log_wage"</span>], zorder<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb11-4"><a aria-label="4"></a><span class="cf">for</span> q <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>):</span>
+<span id="cb11-5"><a aria-label="5"></a>    x <span class="op">=</span> group_data.query(<span class="ss">f"quarter_of_birth==</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">"</span>)[<span class="st">"time_of_birth"</span>]</span>
+<span id="cb11-6"><a aria-label="6"></a>    y <span class="op">=</span> group_data.query(<span class="ss">f"quarter_of_birth==</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">"</span>)[<span class="st">"log_wage"</span>]</span>
+<span id="cb11-7"><a aria-label="7"></a>    plt.scatter(x, y, marker<span class="op">=</span><span class="st">"s"</span>, s<span class="op">=</span><span class="dv">200</span>, c<span class="op">=</span><span class="ss">f"C</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb11-8"><a aria-label="8"></a>    plt.scatter(x, y, marker<span class="op">=</span><span class="ss">f"$</span><span class="sc">{</span>q<span class="sc">}</span><span class="ss">$"</span>, s<span class="op">=</span><span class="dv">100</span>, c<span class="op">=</span><span class="ss">f"white"</span>)</span>
+<span id="cb11-9"><a aria-label="9"></a></span>
+<span id="cb11-10"><a aria-label="10"></a>plt.title(<span class="st">"Average Weekly Wage by Quarter of Birth (reduced form)"</span>)</span>
+<span id="cb11-11"><a aria-label="11"></a>plt.xlabel(<span class="st">"Year of Birth"</span>)</span>
+<span id="cb11-12"><a aria-label="12"></a>plt.ylabel(<span class="st">"Log Weekly Earnings"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="iv_files/figure-revealjs/cell-8-output-1.png" width="538" height="523"></p>
+<p><img data-src="iv_files/figure-revealjs/cell-8-output-1.png" width="539" height="525"></p>
 </figure>
 </div>
 </div>
@@ -682,29 +687,29 @@ q4 p-value:,  5.4648294166225175e-15</code></pre>
 </section>
 <section id="example-reduced-form-1" class="slide level2">
 <h2>Example: Reduced Form</h2>
-<div id="6d081594" class="cell columns column-output-location" data-execution_count="8">
+<div id="30d342c3" class="cell columns column-output-location" data-execution_count="8">
 <div class="column">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="co"># Run the reduced form</span></span>
-<span id="cb12-2"><a></a>reduced_form <span class="op">=</span> smf.ols(<span class="st">"log_wage ~ C(year_of_birth) + C(state_of_birth) + q4"</span>, data<span class="op">=</span>factor_data).fit()</span>
-<span id="cb12-3"><a></a></span>
-<span id="cb12-4"><a></a><span class="bu">print</span>(<span class="st">"q4 parameter estimate:, "</span>, reduced_form.params[<span class="st">"q4"</span>])</span>
-<span id="cb12-5"><a></a><span class="bu">print</span>(<span class="st">"q4 p-value:, "</span>, reduced_form.pvalues[<span class="st">"q4"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a><span class="co"># Run the reduced form</span></span>
+<span id="cb12-2"><a aria-label="2"></a>reduced_form <span class="op">=</span> smf.ols(<span class="st">"log_wage ~ C(year_of_birth) + C(state_of_birth) + q4"</span>, data<span class="op">=</span>factor_data).fit()</span>
+<span id="cb12-3"><a aria-label="3"></a></span>
+<span id="cb12-4"><a aria-label="4"></a><span class="bu">print</span>(<span class="st">"q4 parameter estimate:, "</span>, reduced_form.params[<span class="st">"q4"</span>])</span>
+<span id="cb12-5"><a aria-label="5"></a><span class="bu">print</span>(<span class="st">"q4 p-value:, "</span>, reduced_form.pvalues[<span class="st">"q4"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
-<pre><code>q4 parameter estimate:,  0.00860348426014032
-q4 p-value:,  0.0014949127183653535</code></pre>
+<pre><code>q4 parameter estimate:,  0.008603484260140903
+q4 p-value:,  0.0014949127183642756</code></pre>
 </div>
 </div></div>
 </section>
 <section id="example-2sls" class="slide level2">
 <h2>Example: 2SLS</h2>
-<div id="3aa7c558" class="cell columns column-output-location" data-execution_count="9">
+<div id="b2a1b223" class="cell columns column-output-location" data-execution_count="9">
 <div class="column">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>ate_iv <span class="op">=</span> reduced_form.params[<span class="st">"q4"</span>] <span class="op">/</span> first_stage.params[<span class="st">"q4"</span>]</span>
-<span id="cb14-2"><a></a><span class="bu">print</span>(<span class="st">"ATE (IV):"</span>, ate_iv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a>ate_iv <span class="op">=</span> reduced_form.params[<span class="st">"q4"</span>] <span class="op">/</span> first_stage.params[<span class="st">"q4"</span>]</span>
+<span id="cb14-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="st">"ATE (IV):"</span>, ate_iv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
-<pre><code>ATE (IV): 0.08530286492085763</code></pre>
+<pre><code>ATE (IV): 0.08530286492085838</code></pre>
 </div>
 </div></div>
 </section>
@@ -722,20 +727,20 @@ q4 p-value:,  0.0014949127183653535</code></pre>
 </section>
 <section id="example-linearmodels" class="slide level2">
 <h2>Example: <code>linearmodels</code></h2>
-<div id="87311cdb" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="im">from</span> linearmodels.iv <span class="im">import</span> IV2SLS</span>
-<span id="cb16-2"><a></a></span>
-<span id="cb16-3"><a></a>formula <span class="op">=</span> <span class="st">'log_wage ~ 1 + C(year_of_birth) + C(state_of_birth) + [years_of_schooling ~ q4]'</span></span>
-<span id="cb16-4"><a></a>iv <span class="op">=</span> IV2SLS.from_formula(formula, data<span class="op">=</span>factor_data).fit()</span>
-<span id="cb16-5"><a></a><span class="bu">print</span>(iv.summary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="3b980fec" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a><span class="im">from</span> linearmodels.iv <span class="im">import</span> IV2SLS</span>
+<span id="cb16-2"><a aria-label="2"></a></span>
+<span id="cb16-3"><a aria-label="3"></a>formula <span class="op">=</span> <span class="st">'log_wage ~ 1 + C(year_of_birth) + C(state_of_birth) + [years_of_schooling ~ q4]'</span></span>
+<span id="cb16-4"><a aria-label="4"></a>iv <span class="op">=</span> IV2SLS.from_formula(formula, data<span class="op">=</span>factor_data).fit()</span>
+<span id="cb16-5"><a aria-label="5"></a><span class="bu">print</span>(iv.summary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                          IV-2SLS Estimation Summary                          
 ==============================================================================
 Dep. Variable:               log_wage   R-squared:                      0.1217
 Estimator:                    IV-2SLS   Adj. R-squared:                 0.1215
 No. Observations:              329509   F-statistic:                 1.028e+04
-Date:                Mon, Nov 24 2025   P-value (F-stat)                0.0000
-Time:                        09:30:17   Distribution:                 chi2(60)
+Date:                Tue, Nov 03 2026   P-value (F-stat)                0.0000
+Time:                        07:41:54   Distribution:                 chi2(60)
 Cov. Estimator:                robust                                         
                                                                               
                                      Parameter Estimates                                     
@@ -814,47 +819,39 @@ Debiased: False</code></pre>
 </section>
 <section id="example-pyfixest" class="slide level2">
 <h2>Example: <code>pyfixest</code></h2>
-<div id="1fcace5c" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="im">import</span> pyfixest <span class="im">as</span> pf</span>
-<span id="cb18-2"><a></a>ivpf <span class="op">=</span> pf.feols(<span class="st">'log_wage ~ 1 | state_of_birth + year_of_birth | years_of_schooling ~ q4'</span>, data<span class="op">=</span>factor_data, vcov<span class="op">=</span><span class="st">"HC1"</span>)</span>
-<span id="cb18-3"><a></a>pf.etable(ivpf, <span class="bu">type</span><span class="op">=</span><span class="st">'md'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="a8889e4d" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-label="1"></a><span class="im">import</span> pyfixest <span class="im">as</span> pf</span>
+<span id="cb18-2"><a aria-label="2"></a>ivpf <span class="op">=</span> pf.feols(<span class="st">'log_wage ~ 1 | state_of_birth + year_of_birth | years_of_schooling ~ q4'</span>, data<span class="op">=</span>factor_data, vcov<span class="op">=</span><span class="st">"HC1"</span>)</span>
+<span id="cb18-3"><a aria-label="3"></a>pf.etable(ivpf, <span class="bu">type</span><span class="op">=</span><span class="st">'md'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>index                    est1
-------------------  ---------
-depvar               log_wage
------------------------------
-years_of_schooling  0.085***
-                      (0.026)
-state_of_birth              x
------------------------------
-year_of_birth               x
-Observations           329509
------------------------------
-S.E. type              hetero
-R2                          -
-Adj. R2                     -
------------------------------
-</code></pre>
+<pre><code>|                                | ('log_wage', '(1)')   |
+|:-------------------------------|:----------------------|
+| ('coef', 'years_of_schooling') | 0.085***              |
+|                                |  (0.026)              |
+| ('fe', 'state_of_birth')       | -                     |
+| ('fe', 'year_of_birth')        | -                     |
+| ('stats', 'Observations')      | 329,509               |
+| ('stats', 'R²')                | -                     |</code></pre>
 </div>
 </div>
 </section>
 <section id="example-ivmodels" class="slide level2">
 <h2>Example: <code>ivmodels</code></h2>
-<div id="6b87eb8e" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a><span class="im">from</span> patsy <span class="im">import</span> dmatrices</span>
-<span id="cb20-2"><a></a><span class="im">import</span> ivmodels</span>
-<span id="cb20-3"><a></a>y,X <span class="op">=</span> dmatrices(<span class="st">"log_wage ~ 0 + years_of_schooling"</span>, data<span class="op">=</span>factor_data, return_type<span class="op">=</span><span class="st">'dataframe'</span>)</span>
-<span id="cb20-4"><a></a>Z,controls <span class="op">=</span> dmatrices(<span class="st">"q4 ~  C(year_of_birth) + C(state_of_birth)"</span>, data<span class="op">=</span>factor_data, return_type<span class="op">=</span><span class="st">'dataframe'</span>)</span>
-<span id="cb20-5"><a></a>controls.drop(<span class="st">"Intercept"</span>, axis<span class="op">=</span><span class="dv">1</span>,inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb20-6"><a></a></span>
-<span id="cb20-7"><a></a>ivm <span class="op">=</span> ivmodels.KClass(<span class="dv">1</span>).fit(X<span class="op">=</span>X,y<span class="op">=</span>y,Z<span class="op">=</span>Z,C<span class="op">=</span>controls)</span>
-<span id="cb20-8"><a></a>sw <span class="op">=</span> ivm.summary(X<span class="op">=</span>X,y<span class="op">=</span>y,Z<span class="op">=</span>Z,C<span class="op">=</span>controls, test<span class="op">=</span><span class="st">'wald'</span>, feature_names<span class="op">=</span>[<span class="st">"years_of_schooling"</span>])</span>
-<span id="cb20-9"><a></a><span class="bu">print</span>(sw)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="5b9aae92" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a aria-label="1"></a><span class="im">from</span> patsy <span class="im">import</span> dmatrices</span>
+<span id="cb20-2"><a aria-label="2"></a><span class="im">import</span> ivmodels</span>
+<span id="cb20-3"><a aria-label="3"></a>y,X <span class="op">=</span> dmatrices(<span class="st">"log_wage ~ 0 + years_of_schooling"</span>, data<span class="op">=</span>factor_data, return_type<span class="op">=</span><span class="st">'dataframe'</span>)</span>
+<span id="cb20-4"><a aria-label="4"></a>Z,controls <span class="op">=</span> dmatrices(<span class="st">"q4 ~  C(year_of_birth) + C(state_of_birth)"</span>, data<span class="op">=</span>factor_data, return_type<span class="op">=</span><span class="st">'dataframe'</span>)</span>
+<span id="cb20-5"><a aria-label="5"></a>controls.drop(<span class="st">"Intercept"</span>, axis<span class="op">=</span><span class="dv">1</span>,inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb20-6"><a aria-label="6"></a></span>
+<span id="cb20-7"><a aria-label="7"></a>ivm <span class="op">=</span> ivmodels.KClass(<span class="dv">1</span>).fit(X<span class="op">=</span>X,y<span class="op">=</span>y,Z<span class="op">=</span>Z,C<span class="op">=</span>controls)</span>
+<span id="cb20-8"><a aria-label="8"></a>sw <span class="op">=</span> ivm.summary(X<span class="op">=</span>X,y<span class="op">=</span>y,Z<span class="op">=</span>Z,C<span class="op">=</span>controls, test<span class="op">=</span><span class="st">'wald'</span>, feature_names<span class="op">=</span>[<span class="st">"years_of_schooling"</span>])</span>
+<span id="cb20-9"><a aria-label="9"></a><span class="bu">print</span>(sw)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Summary based on the wald test.
 
-                    estimate  statistic    p-value          conf. set
-years_of_schooling    0.0853      11.15  0.0008402  [0.03523, 0.1354]
+                    estimate  statistic    p-value                conf. set
+years_of_schooling    0.0853      11.15  0.0008402  [0.03523+0j, 0.1354+0j]
 
 Endogenous model statistic: 11.15, p-value: 0.0008402
 (Multivariate) F-statistic: 61.09, p-value: 5.44e-15</code></pre>
@@ -909,41 +906,41 @@ y_i = \pi_0^y + \pi_1^y z_i + u_i^y
 </section>
 <section id="weak-instrument-simulation-hatbeta2sls" class="slide level2">
 <h2>Weak Instrument Simulation : <span class="math inline">\(\hat{\beta}^{2SLS}\)</span></h2>
-<div id="a6b96dec" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb22-2"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb22-3"><a></a><span class="im">import</span> scipy</span>
-<span id="cb22-4"><a></a>n <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb22-5"><a></a>gamma <span class="op">=</span> [<span class="dv">1</span>,<span class="fl">0.5</span>, <span class="fl">0.2</span>,<span class="fl">0.1</span>]</span>
-<span id="cb22-6"><a></a>sig <span class="op">=</span> <span class="fl">0.5</span></span>
-<span id="cb22-7"><a></a>Exe<span class="op">=</span><span class="fl">1.0</span></span>
-<span id="cb22-8"><a></a></span>
-<span id="cb22-9"><a></a><span class="kw">def</span> simiv(n,gamma,sig, b0, Exe):</span>
-<span id="cb22-10"><a></a>   z <span class="op">=</span> np.random.randn(n)</span>
-<span id="cb22-11"><a></a>   xe <span class="op">=</span> np.random.randn(n)</span>
-<span id="cb22-12"><a></a>   x <span class="op">=</span> z<span class="op">*</span>gamma <span class="op">+</span> (xe<span class="op">*</span>Exe <span class="op">+</span> np.random.randn(n))<span class="op">/</span>np.sqrt(<span class="dv">1</span><span class="op">+</span>Exe<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>sig</span>
-<span id="cb22-13"><a></a>   e <span class="op">=</span> xe <span class="op">+</span> np.random.randn(n)</span>
-<span id="cb22-14"><a></a>   y <span class="op">=</span> x<span class="op">*</span>b0 <span class="op">+</span> e</span>
-<span id="cb22-15"><a></a>   <span class="cf">return</span>(y,x,z)</span>
-<span id="cb22-16"><a></a></span>
-<span id="cb22-17"><a></a><span class="kw">def</span> b2sls(y,x,z) :</span>
-<span id="cb22-18"><a></a>    <span class="cf">return</span>(np.dot(z,y)<span class="op">/</span>np.dot(z,x))</span>
-<span id="cb22-19"><a></a></span>
-<span id="cb22-20"><a></a>S <span class="op">=</span> <span class="dv">10_000</span></span>
-<span id="cb22-21"><a></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">2</span>)</span>
-<span id="cb22-22"><a></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,num<span class="op">=</span><span class="dv">300</span>)</span>
-<span id="cb22-23"><a></a>b0 <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb22-24"><a></a></span>
-<span id="cb22-25"><a></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(gamma)):</span>
-<span id="cb22-26"><a></a>    se <span class="op">=</span> np.sqrt(<span class="dv">2</span><span class="op">/</span>n)<span class="op">/</span>(gamma[j])</span>
-<span id="cb22-27"><a></a>    phix <span class="op">=</span> scipy.stats.norm(loc<span class="op">=</span>b0,scale<span class="op">=</span>se).pdf(x<span class="op">*</span>se <span class="op">+</span> b0)</span>
-<span id="cb22-28"><a></a>    b <span class="op">=</span> np.array([(<span class="kw">lambda</span> x: b2sls(x[<span class="dv">0</span>],x[<span class="dv">1</span>],x[<span class="dv">2</span>]))(simiv(n,gamma[j],sig,b0,Exe)) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(S)])</span>
-<span id="cb22-29"><a></a>    sns.histplot(b, ax<span class="op">=</span>ax.flat[j], stat<span class="op">=</span><span class="st">'density'</span>)</span>
-<span id="cb22-30"><a></a>    ax.flat[j].set_title(<span class="ss">f"First stage E[t]=</span><span class="sc">{</span>np<span class="sc">.</span>sqrt(n)<span class="op">*</span>gamma[j]<span class="op">/</span>sig<span class="sc">:.3}</span><span class="ss">"</span>)</span>
-<span id="cb22-31"><a></a>    ax.flat[j].plot(x<span class="op">*</span>se<span class="op">+</span>b0,phix)</span>
-<span id="cb22-32"><a></a>    ax.flat[j].set_xlim(<span class="op">-</span><span class="dv">3</span><span class="op">*</span>se <span class="op">+</span><span class="dv">1</span>,<span class="dv">3</span><span class="op">*</span>se<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb22-33"><a></a></span>
-<span id="cb22-34"><a></a>fig.tight_layout()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="5089a8ce" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb22-2"><a aria-label="2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb22-3"><a aria-label="3"></a><span class="im">import</span> scipy</span>
+<span id="cb22-4"><a aria-label="4"></a>n <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb22-5"><a aria-label="5"></a>gamma <span class="op">=</span> [<span class="dv">1</span>,<span class="fl">0.5</span>, <span class="fl">0.2</span>,<span class="fl">0.1</span>]</span>
+<span id="cb22-6"><a aria-label="6"></a>sig <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb22-7"><a aria-label="7"></a>Exe<span class="op">=</span><span class="fl">1.0</span></span>
+<span id="cb22-8"><a aria-label="8"></a></span>
+<span id="cb22-9"><a aria-label="9"></a><span class="kw">def</span> simiv(n,gamma,sig, b0, Exe):</span>
+<span id="cb22-10"><a aria-label="10"></a>   z <span class="op">=</span> np.random.randn(n)</span>
+<span id="cb22-11"><a aria-label="11"></a>   xe <span class="op">=</span> np.random.randn(n)</span>
+<span id="cb22-12"><a aria-label="12"></a>   x <span class="op">=</span> z<span class="op">*</span>gamma <span class="op">+</span> (xe<span class="op">*</span>Exe <span class="op">+</span> np.random.randn(n))<span class="op">/</span>np.sqrt(<span class="dv">1</span><span class="op">+</span>Exe<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>sig</span>
+<span id="cb22-13"><a aria-label="13"></a>   e <span class="op">=</span> xe <span class="op">+</span> np.random.randn(n)</span>
+<span id="cb22-14"><a aria-label="14"></a>   y <span class="op">=</span> x<span class="op">*</span>b0 <span class="op">+</span> e</span>
+<span id="cb22-15"><a aria-label="15"></a>   <span class="cf">return</span>(y,x,z)</span>
+<span id="cb22-16"><a aria-label="16"></a></span>
+<span id="cb22-17"><a aria-label="17"></a><span class="kw">def</span> b2sls(y,x,z) :</span>
+<span id="cb22-18"><a aria-label="18"></a>    <span class="cf">return</span>(np.dot(z,y)<span class="op">/</span>np.dot(z,x))</span>
+<span id="cb22-19"><a aria-label="19"></a></span>
+<span id="cb22-20"><a aria-label="20"></a>S <span class="op">=</span> <span class="dv">10_000</span></span>
+<span id="cb22-21"><a aria-label="21"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb22-22"><a aria-label="22"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,num<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="cb22-23"><a aria-label="23"></a>b0 <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb22-24"><a aria-label="24"></a></span>
+<span id="cb22-25"><a aria-label="25"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(gamma)):</span>
+<span id="cb22-26"><a aria-label="26"></a>    se <span class="op">=</span> np.sqrt(<span class="dv">2</span><span class="op">/</span>n)<span class="op">/</span>(gamma[j])</span>
+<span id="cb22-27"><a aria-label="27"></a>    phix <span class="op">=</span> scipy.stats.norm(loc<span class="op">=</span>b0,scale<span class="op">=</span>se).pdf(x<span class="op">*</span>se <span class="op">+</span> b0)</span>
+<span id="cb22-28"><a aria-label="28"></a>    b <span class="op">=</span> np.array([(<span class="kw">lambda</span> x: b2sls(x[<span class="dv">0</span>],x[<span class="dv">1</span>],x[<span class="dv">2</span>]))(simiv(n,gamma[j],sig,b0,Exe)) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(S)])</span>
+<span id="cb22-29"><a aria-label="29"></a>    sns.histplot(b, ax<span class="op">=</span>ax.flat[j], stat<span class="op">=</span><span class="st">'density'</span>)</span>
+<span id="cb22-30"><a aria-label="30"></a>    ax.flat[j].set_title(<span class="ss">f"First stage E[t]=</span><span class="sc">{</span>np<span class="sc">.</span>sqrt(n)<span class="op">*</span>gamma[j]<span class="op">/</span>sig<span class="sc">:.3}</span><span class="ss">"</span>)</span>
+<span id="cb22-31"><a aria-label="31"></a>    ax.flat[j].plot(x<span class="op">*</span>se<span class="op">+</span>b0,phix)</span>
+<span id="cb22-32"><a aria-label="32"></a>    ax.flat[j].set_xlim(<span class="op">-</span><span class="dv">3</span><span class="op">*</span>se <span class="op">+</span><span class="dv">1</span>,<span class="dv">3</span><span class="op">*</span>se<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb22-33"><a aria-label="33"></a></span>
+<span id="cb22-34"><a aria-label="34"></a>fig.tight_layout()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
@@ -951,32 +948,32 @@ y_i = \pi_0^y + \pi_1^y z_i + u_i^y
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="iv_files/figure-revealjs/cell-14-output-1.png" width="950" height="470"></p>
+<p><img data-src="iv_files/figure-revealjs/cell-14-output-1.png" width="952" height="470"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="weak-instrument-simulation-t-stat" class="slide level2">
 <h2>Weak Instrument Simulation : t-stat</h2>
-<div id="7010490b" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a><span class="kw">def</span> t2sls(y,x,z, b0<span class="op">=</span><span class="dv">1</span>) :</span>
-<span id="cb23-2"><a></a>    b <span class="op">=</span> b2sls(y,x,z)</span>
-<span id="cb23-3"><a></a>    u <span class="op">=</span> y <span class="op">-</span> x<span class="op">*</span>b</span>
-<span id="cb23-4"><a></a>    se <span class="op">=</span> np.sqrt(u.var()<span class="op">*</span>np.dot(z,z)<span class="op">/</span>(np.dot(x,z)<span class="op">**</span><span class="dv">2</span>))</span>
-<span id="cb23-5"><a></a>    t <span class="op">=</span> (b<span class="op">-</span>b0)<span class="op">/</span>se</span>
-<span id="cb23-6"><a></a>    <span class="cf">return</span>(t)</span>
-<span id="cb23-7"><a></a></span>
-<span id="cb23-8"><a></a>S <span class="op">=</span> <span class="dv">10_000</span></span>
-<span id="cb23-9"><a></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">2</span>)</span>
-<span id="cb23-10"><a></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,num<span class="op">=</span><span class="dv">300</span>)</span>
-<span id="cb23-11"><a></a>phix <span class="op">=</span> scipy.stats.norm.pdf(x)</span>
-<span id="cb23-12"><a></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(gamma)):</span>
-<span id="cb23-13"><a></a>    ts <span class="op">=</span> np.array([(<span class="kw">lambda</span> x: t2sls(x[<span class="dv">0</span>],x[<span class="dv">1</span>],x[<span class="dv">2</span>],b0<span class="op">=</span>b0))(simiv(n,gamma[j],sig,b0,Exe)) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(S)])</span>
-<span id="cb23-14"><a></a>    sns.histplot(ts, ax<span class="op">=</span>ax.flat[j], stat<span class="op">=</span><span class="st">'density'</span>)</span>
-<span id="cb23-15"><a></a>    ax.flat[j].set_title(<span class="ss">f"First stage E[t]=</span><span class="sc">{</span>np<span class="sc">.</span>sqrt(n)<span class="op">*</span>gamma[j]<span class="op">/</span>sig<span class="sc">:.3}</span><span class="ss">"</span>)</span>
-<span id="cb23-16"><a></a>    ax.flat[j].plot(x,phix)</span>
-<span id="cb23-17"><a></a>    ax.flat[j].set_xlim(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>)</span>
-<span id="cb23-18"><a></a></span>
-<span id="cb23-19"><a></a>fig.tight_layout()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="9212785d" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a><span class="kw">def</span> t2sls(y,x,z, b0<span class="op">=</span><span class="dv">1</span>) :</span>
+<span id="cb23-2"><a aria-label="2"></a>    b <span class="op">=</span> b2sls(y,x,z)</span>
+<span id="cb23-3"><a aria-label="3"></a>    u <span class="op">=</span> y <span class="op">-</span> x<span class="op">*</span>b</span>
+<span id="cb23-4"><a aria-label="4"></a>    se <span class="op">=</span> np.sqrt(u.var()<span class="op">*</span>np.dot(z,z)<span class="op">/</span>(np.dot(x,z)<span class="op">**</span><span class="dv">2</span>))</span>
+<span id="cb23-5"><a aria-label="5"></a>    t <span class="op">=</span> (b<span class="op">-</span>b0)<span class="op">/</span>se</span>
+<span id="cb23-6"><a aria-label="6"></a>    <span class="cf">return</span>(t)</span>
+<span id="cb23-7"><a aria-label="7"></a></span>
+<span id="cb23-8"><a aria-label="8"></a>S <span class="op">=</span> <span class="dv">10_000</span></span>
+<span id="cb23-9"><a aria-label="9"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb23-10"><a aria-label="10"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,num<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="cb23-11"><a aria-label="11"></a>phix <span class="op">=</span> scipy.stats.norm.pdf(x)</span>
+<span id="cb23-12"><a aria-label="12"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(gamma)):</span>
+<span id="cb23-13"><a aria-label="13"></a>    ts <span class="op">=</span> np.array([(<span class="kw">lambda</span> x: t2sls(x[<span class="dv">0</span>],x[<span class="dv">1</span>],x[<span class="dv">2</span>],b0<span class="op">=</span>b0))(simiv(n,gamma[j],sig,b0,Exe)) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(S)])</span>
+<span id="cb23-14"><a aria-label="14"></a>    sns.histplot(ts, ax<span class="op">=</span>ax.flat[j], stat<span class="op">=</span><span class="st">'density'</span>)</span>
+<span id="cb23-15"><a aria-label="15"></a>    ax.flat[j].set_title(<span class="ss">f"First stage E[t]=</span><span class="sc">{</span>np<span class="sc">.</span>sqrt(n)<span class="op">*</span>gamma[j]<span class="op">/</span>sig<span class="sc">:.3}</span><span class="ss">"</span>)</span>
+<span id="cb23-16"><a aria-label="16"></a>    ax.flat[j].plot(x,phix)</span>
+<span id="cb23-17"><a aria-label="17"></a>    ax.flat[j].set_xlim(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>)</span>
+<span id="cb23-18"><a aria-label="18"></a></span>
+<span id="cb23-19"><a aria-label="19"></a>fig.tight_layout()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
@@ -984,7 +981,7 @@ y_i = \pi_0^y + \pi_1^y z_i + u_i^y
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="iv_files/figure-revealjs/cell-15-output-1.png" width="950" height="470"></p>
+<p><img data-src="iv_files/figure-revealjs/cell-15-output-1.png" width="953" height="470"></p>
 </figure>
 </div>
 </div>
@@ -1003,13 +1000,13 @@ y_i = \pi_0^y + \pi_1^y z_i + u_i^y
 <ul>
 <li>Always report first stage “effective” F-statistic</li>
 </ul>
-<div id="8e90b9d1" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a></a>y,x,z <span class="op">=</span> simiv(n,gamma[<span class="dv">3</span>],sig, b0, Exe)</span>
-<span id="cb24-2"><a></a>model<span class="op">=</span>pf.feols(<span class="st">'y ~ 1 | 0 | x ~ z'</span>, pd.DataFrame({<span class="st">'y'</span>:y,<span class="st">'x'</span>:x, <span class="st">'z'</span>: z}))</span>
-<span id="cb24-3"><a></a>model.IV_Diag()</span>
-<span id="cb24-4"><a></a>model._eff_F</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="49">
-<pre><code>np.float64(1.4088555184438487)</code></pre>
+<div id="2d7e88c3" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a>y,x,z <span class="op">=</span> simiv(n,gamma[<span class="dv">3</span>],sig, b0, Exe)</span>
+<span id="cb24-2"><a aria-label="2"></a>model<span class="op">=</span>pf.feols(<span class="st">'y ~ 1 | 0 | x ~ z'</span>, pd.DataFrame({<span class="st">'y'</span>:y,<span class="st">'x'</span>:x, <span class="st">'z'</span>: z}))</span>
+<span id="cb24-3"><a aria-label="3"></a>model.IV_Diag()</span>
+<span id="cb24-4"><a aria-label="4"></a>model._eff_F</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>np.float64(4.551876351976276)</code></pre>
 </div>
 </div>
 <ul>
@@ -1047,18 +1044,18 @@ y_i = \pi_0^y + \pi_1^y z_i + u_i^y
 <li>downside: assumes homoscedasticity</li>
 </ul></li>
 </ul>
-<div id="61f38c66" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a></a>y,X <span class="op">=</span> dmatrices(<span class="st">"log_wage ~ 0 + years_of_schooling"</span>, data<span class="op">=</span>factor_data, return_type<span class="op">=</span><span class="st">'dataframe'</span>)</span>
-<span id="cb26-2"><a></a>Z,controls <span class="op">=</span> dmatrices(<span class="st">"q4 ~  C(year_of_birth) + C(state_of_birth)"</span>, data<span class="op">=</span>factor_data, return_type<span class="op">=</span><span class="st">'dataframe'</span>)</span>
-<span id="cb26-3"><a></a>controls.drop(<span class="st">"Intercept"</span>, axis<span class="op">=</span><span class="dv">1</span>,inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb26-4"><a></a>ivm <span class="op">=</span> ivmodels.KClass(<span class="dv">1</span>).fit(X<span class="op">=</span>X,y<span class="op">=</span>y,Z<span class="op">=</span>Z,C<span class="op">=</span>controls)</span>
-<span id="cb26-5"><a></a>sa <span class="op">=</span> ivm.summary(X<span class="op">=</span>X,y<span class="op">=</span>y,Z<span class="op">=</span>Z,C<span class="op">=</span>controls, test<span class="op">=</span><span class="st">'anderson-rubin'</span>, feature_names<span class="op">=</span>[<span class="st">"years_of_schooling"</span>])</span>
-<span id="cb26-6"><a></a><span class="bu">print</span>(sa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="de45916b" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a aria-label="1"></a>y,X <span class="op">=</span> dmatrices(<span class="st">"log_wage ~ 0 + years_of_schooling"</span>, data<span class="op">=</span>factor_data, return_type<span class="op">=</span><span class="st">'dataframe'</span>)</span>
+<span id="cb26-2"><a aria-label="2"></a>Z,controls <span class="op">=</span> dmatrices(<span class="st">"q4 ~  C(year_of_birth) + C(state_of_birth)"</span>, data<span class="op">=</span>factor_data, return_type<span class="op">=</span><span class="st">'dataframe'</span>)</span>
+<span id="cb26-3"><a aria-label="3"></a>controls.drop(<span class="st">"Intercept"</span>, axis<span class="op">=</span><span class="dv">1</span>,inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb26-4"><a aria-label="4"></a>ivm <span class="op">=</span> ivmodels.KClass(<span class="dv">1</span>).fit(X<span class="op">=</span>X,y<span class="op">=</span>y,Z<span class="op">=</span>Z,C<span class="op">=</span>controls)</span>
+<span id="cb26-5"><a aria-label="5"></a>sa <span class="op">=</span> ivm.summary(X<span class="op">=</span>X,y<span class="op">=</span>y,Z<span class="op">=</span>Z,C<span class="op">=</span>controls, test<span class="op">=</span><span class="st">'anderson-rubin'</span>, feature_names<span class="op">=</span>[<span class="st">"years_of_schooling"</span>])</span>
+<span id="cb26-6"><a aria-label="6"></a><span class="bu">print</span>(sa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Summary based on the anderson-rubin test.
 
-                    estimate  statistic   p-value          conf. set
-years_of_schooling    0.0853      10.09  0.001495  [0.03477, 0.1382]
+                    estimate  statistic   p-value                conf. set
+years_of_schooling    0.0853      10.09  0.001495  [0.03477+0j, 0.1382+0j]
 
 Endogenous model statistic: 10.09, p-value: 0.001495
 (Multivariate) F-statistic: 61.09, p-value: 5.44e-15</code></pre>
@@ -1067,14 +1064,14 @@ Endogenous model statistic: 10.09, p-value: 0.001495
 </section>
 <section id="identification-robust-inference-2" class="slide level2">
 <h2>Identification Robust Inference</h2>
-<div id="955b1093" class="cell" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a></a>sl <span class="op">=</span> ivm.summary(X<span class="op">=</span>X,y<span class="op">=</span>y,Z<span class="op">=</span>Z,C<span class="op">=</span>controls, test<span class="op">=</span><span class="st">'lagrange multiplier'</span>, feature_names<span class="op">=</span>[<span class="st">"years_of_schooling"</span>])</span>
-<span id="cb28-2"><a></a><span class="bu">print</span>(sl)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="7f368c81" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a aria-label="1"></a>sl <span class="op">=</span> ivm.summary(X<span class="op">=</span>X,y<span class="op">=</span>y,Z<span class="op">=</span>Z,C<span class="op">=</span>controls, test<span class="op">=</span><span class="st">'lagrange multiplier'</span>, feature_names<span class="op">=</span>[<span class="st">"years_of_schooling"</span>])</span>
+<span id="cb28-2"><a aria-label="2"></a><span class="bu">print</span>(sl)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Summary based on the lagrange multiplier test.
 
-                    estimate  statistic   p-value          conf. set
-years_of_schooling    0.0853      10.09  0.001495  [0.03477, 0.1382]
+                    estimate  statistic   p-value                conf. set
+years_of_schooling    0.0853      10.09  0.001495  [0.03477+0j, 0.1382+0j]
 
 Endogenous model statistic: 10.09, p-value: 0.001495
 (Multivariate) F-statistic: 61.09, p-value: 5.44e-15</code></pre>
@@ -1093,7 +1090,7 @@ Endogenous model statistic: 10.09, p-value: 0.001495
 <h2>References</h2>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-ak1991" class="csl-entry" role="listitem">
 Angrist, Joshua D., and Alan B. Krueger. 1991. <span>“Does Compulsory School Attendance Affect Schooling and Earnings?”</span> <em>The Quarterly Journal of Economics</em> 106 (4): pp. 979–1014. <a href="http://www.jstor.org/stable/2937954">http://www.jstor.org/stable/2937954</a>.
 </div>
@@ -1107,7 +1104,7 @@ Facure, Matheus. 2022. <em>Causal Inference for the Brave and True</em>. <a href
 Huntington-Klein, Nick. 2021. <em>The Effect: An Introduction to Research Design and Causality</em>. CRC Press. <a href="https://theeffectbook.net/">https://theeffectbook.net/</a>.
 </div>
 <div id="ref-londschien2024" class="csl-entry" role="listitem">
-Londschien, Malte, and Peter Bühlmann. 2024. <span>“Weak-Instrument-Robust Subvector Inference in Instrumental Variables Regression: A Subvector Lagrange Multiplier Test and Properties of Subvector Anderson-Rubin Confidence Sets.”</span> <a href="https://arxiv.org/abs/2407.15256">https://arxiv.org/abs/2407.15256</a>.
+Londschien, Malte, and Peter Bühlmann. 2024. <em>Weak-Instrument-Robust Subvector Inference in Instrumental Variables Regression: A Subvector Lagrange Multiplier Test and Properties of Subvector Anderson-Rubin Confidence Sets</em>. <a href="https://arxiv.org/abs/2407.15256">https://arxiv.org/abs/2407.15256</a>.
 </div>
 </div>
 </section></section>
@@ -1147,7 +1144,7 @@ Londschien, Malte, and Peter Bühlmann. 2024. <span>“Weak-Instrument-Robust Su
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"\u003ci class=\"fas fa-gear\">\u003c/i>","content":"\u003cul class=\"slide-menu-items\">\n\u003cli class=\"slide-tool-item active\" data-item=\"0\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\">\u003ckbd>f\u003c/kbd> Fullscreen\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"1\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\">\u003ckbd>s\u003c/kbd> Speaker View\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"2\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\">\u003ckbd>o\u003c/kbd> Slide Overview\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"3\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\">\u003ckbd>e\u003c/kbd> PDF Export Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"4\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\">\u003ckbd>r\u003c/kbd> Scroll View Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"5\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\">\u003ckbd>b\u003c/kbd> Toggle Chalkboard\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"6\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\">\u003ckbd>c\u003c/kbd> Toggle Notes Canvas\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"7\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\">\u003ckbd>d\u003c/kbd> Download Drawings\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"8\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\">\u003ckbd>?\u003c/kbd> Keyboard Help\u003c/a>\u003c/li>\n\u003c/ul>"}],"openButton":true,"openButtonLabel":"Slide menu"},
 'chalkboard': {"buttons":true,"theme":"whiteboard","boardmarkerWidth":2,"chalkWidth":2,"chalkEffect":0},
 'smaller': true,
  
@@ -1406,7 +1403,8 @@ Londschien, Malte, and Peter Bühlmann. 2024. <span>“Weak-Instrument-Robust Su
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
           // Inspect non-navigation links and adorn them if external
-         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          window.quartoDecorateExternalLinks = function (root) {
+         var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
           for (var i=0; i<links.length; i++) {
             const link = links[i];
             if (!isInternal(link.href)) {
@@ -1415,8 +1413,69 @@ Londschien, Malte, and Peter Bühlmann. 2024. <span>“Weak-Instrument-Robust Su
               if (link.dataset.originalHref !== undefined) {
                 link.href = link.dataset.originalHref;
               }
+              if (!link.classList.contains('no-external-icon')) {
+              }
             }
           }
+          };
+          window.quartoDecorateExternalLinks(window.document);
+        // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+        // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+        const hideOnEscAndFocusOut = {
+          name: 'hideOnEscAndFocusOut',
+          defaultValue: true,
+          fn(instance) {
+            const dismiss = () => {
+              // A show scheduled by the trigger delay would otherwise reopen it
+              instance.clearDelayTimeouts();
+              instance.hide();
+            };
+            const onKeyDown = (event) => {
+              if (event.key !== 'Escape') {
+                return;
+              }
+              // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+              // except an open reveal.js slide menu, which Esc should close too.
+              // The menu handles keys only when its keyboard option is on.
+              const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+                window.Reveal.getConfig().menu?.keyboard !== false;
+              if (!menuHandlesEsc) {
+                event.stopPropagation();
+              }
+              if (instance.popper.contains(window.document.activeElement)) {
+                // Disabled while refocusing so the focus trigger does not reopen it
+                instance.disable();
+                instance.reference.focus();
+                instance.enable();
+              }
+              dismiss();
+            };
+            const onFocusOut = (event) => {
+              const target = event.relatedTarget;
+              if (target && !instance.reference.contains(target) &&
+                  !instance.popper.contains(target)) {
+                dismiss();
+              }
+            };
+            // On the trigger too: a click trigger (code-annotations: select) has no
+            // blur handling. Attached for the instance's lifetime so leaving the
+            // trigger also cancels a show still pending on the trigger delay.
+            instance.reference.addEventListener('focusout', onFocusOut);
+            return {
+              onShow() {
+                window.document.addEventListener('keydown', onKeyDown, true);
+                instance.popper.addEventListener('focusout', onFocusOut);
+              },
+              onHide() {
+                window.document.removeEventListener('keydown', onKeyDown, true);
+                instance.popper.removeEventListener('focusout', onFocusOut);
+              },
+              onDestroy() {
+                instance.reference.removeEventListener('focusout', onFocusOut);
+              },
+            };
+          },
+        };
         function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
           const config = {
             allowHTML: true,
@@ -1430,6 +1489,7 @@ Londschien, Malte, and Peter Bühlmann. 2024. <span>“Weak-Instrument-Robust Su
             interactiveBorder: 10,
             theme: 'light-border',
             placement: 'bottom-start',
+            plugins: [hideOnEscAndFocusOut],
           };
           if (contentFn) {
             config.content = contentFn;

@@ -6,21 +6,27 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.25">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.11.9">
 
   <meta name="author" content="Paul Schrimpf">
   <title>ECON 526 – Introduction to Difference in Differences</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -98,7 +104,6 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
-      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -115,7 +120,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-534cd8e3a96973385dffff3f4709048d.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-00ad5a49dff614330cd349bcec985ec3.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -224,7 +229,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Paul Schrimpf 
+Paul Schrimpf
 </div>
         <p class="quarto-title-affiliation">
             University of British Columbia
@@ -233,7 +238,7 @@ Paul Schrimpf
 </div>
 
 </section><section id="TOC">
-<nav role="doc-toc"> 
+<nav role="doc-toc" aria-labelledby="toc-title">
 <h2 id="toc-title">Table of contents</h2>
 <ul>
 <li><a href="#/introduction" id="/toc-introduction">Introduction</a></li>
@@ -271,22 +276,22 @@ Paul Schrimpf
 </section>
 <section id="example-impact-of-billboards-1" class="slide level2">
 <h2>Example: Impact of Billboards</h2>
-<div id="df4eb878" class="cell" data-execution_count="1">
+<div id="59c22935" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> warnings</span>
-<span id="cb1-2"><a></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
-<span id="cb1-3"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-4"><a></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
-<span id="cb1-5"><a></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
-<span id="cb1-6"><a></a></span>
-<span id="cb1-7"><a></a>datadir<span class="op">=</span><span class="st">"./data"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-2"><a aria-label="2"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
+<span id="cb1-3"><a aria-label="3"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a aria-label="4"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a aria-label="5"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb1-6"><a aria-label="6"></a></span>
+<span id="cb1-7"><a aria-label="7"></a>datadir<span class="op">=</span><span class="st">"./data"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="594ea81b" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>data <span class="op">=</span> pd.read_csv(datadir <span class="op">+</span> <span class="st">"/billboard_impact.csv"</span>)</span>
-<span id="cb2-2"><a></a>data.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div id="808982dd" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a>data <span class="op">=</span> pd.read_csv(datadir <span class="op">+</span> <span class="st">"/billboard_impact.csv"</span>)</span>
+<span id="cb2-2"><a aria-label="2"></a>data.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -351,10 +356,10 @@ Paul Schrimpf
 </section>
 <section id="means-and-differences" class="slide level2">
 <h2>Means and Differences</h2>
-<div id="299effd9" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>tbl <span class="op">=</span> data.groupby([<span class="st">'jul'</span>,<span class="st">'poa'</span>]).mean().unstack()</span>
-<span id="cb3-2"><a></a>tbl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div id="1a938316" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a>tbl <span class="op">=</span> data.groupby([<span class="st">'jul'</span>,<span class="st">'poa'</span>]).mean().unstack()</span>
+<span id="cb3-2"><a aria-label="2"></a>tbl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -408,27 +413,27 @@ Paul Schrimpf
 </div>
 </div>
 </div>
-<div id="0f25a9f8" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>tbl.diff(axis<span class="op">=</span><span class="dv">0</span>).iloc[<span class="dv">1</span>,:]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div id="2a211021" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a>tbl.diff(axis<span class="op">=</span><span class="dv">0</span>).iloc[<span class="dv">1</span>,:]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>          poa
 deposits  0      34.523192
           1      41.047750
 Name: 1, dtype: float64</code></pre>
 </div>
 </div>
-<div id="e6b5ffa8" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>tbl.diff(axis<span class="op">=</span><span class="dv">1</span>).iloc[:,<span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div id="9646780b" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a>tbl.diff(axis<span class="op">=</span><span class="dv">1</span>).iloc[:,<span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>jul
 0   -125.626308
 1   -119.101750
 Name: (deposits, 1), dtype: float64</code></pre>
 </div>
 </div>
-<div id="313ec5cf" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a>tbl.diff(axis<span class="op">=</span><span class="dv">0</span>).diff(axis<span class="op">=</span><span class="dv">1</span>).iloc[<span class="dv">1</span>,<span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div id="5af5ab85" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a>tbl.diff(axis<span class="op">=</span><span class="dv">0</span>).diff(axis<span class="op">=</span><span class="dv">1</span>).iloc[<span class="dv">1</span>,<span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>np.float64(6.524557692307688)</code></pre>
 </div>
 </div>
@@ -512,23 +517,23 @@ y_{it} = \delta_t + \alpha 1\{D_{i1}=1\} + \beta D_{it} + \epsilon_{it}
 </section>
 <section id="visualizing-difference-in-differences" class="slide level2">
 <h2>Visualizing Difference in Differences</h2>
-<div id="46a7b36e" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>poa_before <span class="op">=</span> data.query(<span class="st">"poa==1 &amp; jul==0"</span>)[<span class="st">"deposits"</span>].mean()</span>
-<span id="cb10-2"><a></a>poa_after <span class="op">=</span> data.query(<span class="st">"poa==1 &amp; jul==1"</span>)[<span class="st">"deposits"</span>].mean()</span>
-<span id="cb10-3"><a></a>fl_before <span class="op">=</span> data.query(<span class="st">"poa==0 &amp; jul==0"</span>)[<span class="st">"deposits"</span>].mean()</span>
-<span id="cb10-4"><a></a>fl_after <span class="op">=</span> data.query(<span class="st">"poa==0 &amp; jul==1"</span>)[<span class="st">"deposits"</span>].mean()</span>
-<span id="cb10-5"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
-<span id="cb10-6"><a></a>plt.plot([<span class="st">"May"</span>, <span class="st">"Jul"</span>], [fl_before, fl_after], label<span class="op">=</span><span class="st">"FL"</span>, lw<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb10-7"><a></a>plt.plot([<span class="st">"May"</span>, <span class="st">"Jul"</span>], [poa_before, poa_after], label<span class="op">=</span><span class="st">"POA"</span>, lw<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb10-8"><a></a></span>
-<span id="cb10-9"><a></a>plt.plot([<span class="st">"May"</span>, <span class="st">"Jul"</span>], [poa_before, poa_before<span class="op">+</span>(fl_after<span class="op">-</span>fl_before)],</span>
-<span id="cb10-10"><a></a>         label<span class="op">=</span><span class="st">"Counterfactual"</span>, lw<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"C2"</span>, ls<span class="op">=</span><span class="st">"-."</span>)</span>
-<span id="cb10-11"><a></a></span>
-<span id="cb10-12"><a></a>plt.legend()<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="3bef23f7" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a>poa_before <span class="op">=</span> data.query(<span class="st">"poa==1 &amp; jul==0"</span>)[<span class="st">"deposits"</span>].mean()</span>
+<span id="cb10-2"><a aria-label="2"></a>poa_after <span class="op">=</span> data.query(<span class="st">"poa==1 &amp; jul==1"</span>)[<span class="st">"deposits"</span>].mean()</span>
+<span id="cb10-3"><a aria-label="3"></a>fl_before <span class="op">=</span> data.query(<span class="st">"poa==0 &amp; jul==0"</span>)[<span class="st">"deposits"</span>].mean()</span>
+<span id="cb10-4"><a aria-label="4"></a>fl_after <span class="op">=</span> data.query(<span class="st">"poa==0 &amp; jul==1"</span>)[<span class="st">"deposits"</span>].mean()</span>
+<span id="cb10-5"><a aria-label="5"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
+<span id="cb10-6"><a aria-label="6"></a>plt.plot([<span class="st">"May"</span>, <span class="st">"Jul"</span>], [fl_before, fl_after], label<span class="op">=</span><span class="st">"FL"</span>, lw<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb10-7"><a aria-label="7"></a>plt.plot([<span class="st">"May"</span>, <span class="st">"Jul"</span>], [poa_before, poa_after], label<span class="op">=</span><span class="st">"POA"</span>, lw<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb10-8"><a aria-label="8"></a></span>
+<span id="cb10-9"><a aria-label="9"></a>plt.plot([<span class="st">"May"</span>, <span class="st">"Jul"</span>], [poa_before, poa_before<span class="op">+</span>(fl_after<span class="op">-</span>fl_before)],</span>
+<span id="cb10-10"><a aria-label="10"></a>         label<span class="op">=</span><span class="st">"Counterfactual"</span>, lw<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"C2"</span>, ls<span class="op">=</span><span class="st">"-."</span>)</span>
+<span id="cb10-11"><a aria-label="11"></a></span>
+<span id="cb10-12"><a aria-label="12"></a>plt.legend()<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="did_files/figure-revealjs/cell-8-output-1.png" width="798" height="411"></p>
+<p><img data-src="did_files/figure-revealjs/cell-8-output-1.png" width="798" height="412"></p>
 </figure>
 </div>
 </div>
@@ -536,10 +541,10 @@ y_{it} = \delta_t + \alpha 1\{D_{i1}=1\} + \beta D_{it} + \epsilon_{it}
 </section>
 <section id="estimation-via-regression" class="slide level2">
 <h2>Estimation via Regression</h2>
-<div id="92daff1b" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="im">from</span> statsmodels.iolib.summary2 <span class="im">import</span> summary_col</span>
-<span id="cb11-2"><a></a>summary_col(smf.ols(<span class="st">'deposits ~ poa*jul'</span>, data<span class="op">=</span>data).fit(cov_type<span class="op">=</span><span class="st">"HC3"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div id="2cb4b69d" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a><span class="im">from</span> statsmodels.iolib.summary2 <span class="im">import</span> summary_col</span>
+<span id="cb11-2"><a aria-label="2"></a>summary_col(smf.ols(<span class="st">'deposits ~ poa*jul'</span>, data<span class="op">=</span>data).fit(cov_type<span class="op">=</span><span class="st">"HC3"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
 <table class="simpletable caption-top">
 <tbody>
 <tr class="odd">
@@ -608,53 +613,53 @@ Standard errors in parentheses.
 </section>
 <section id="parallel-trends-in-logs" class="slide level2">
 <h2>Parallel Trends in Logs</h2>
-<div id="19a09587" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb12-2"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb12-3"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb12-4"><a></a></span>
-<span id="cb12-5"><a></a><span class="co"># Parameters</span></span>
-<span id="cb12-6"><a></a>n_periods <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb12-7"><a></a>n_groups <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb12-8"><a></a>group_names <span class="op">=</span> [<span class="st">'Control'</span>, <span class="st">'Treatment'</span>]</span>
-<span id="cb12-9"><a></a></span>
-<span id="cb12-10"><a></a>time <span class="op">=</span> np.arange(n_periods)</span>
-<span id="cb12-11"><a></a>group <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">1</span>])  <span class="co"># 0: Control, 1: Treatment</span></span>
-<span id="cb12-12"><a></a></span>
-<span id="cb12-13"><a></a>intercepts <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">5</span>]  <span class="co"># Different starting points</span></span>
-<span id="cb12-14"><a></a>trend <span class="op">=</span> <span class="dv">1</span>  <span class="co"># Same trend for both groups</span></span>
-<span id="cb12-15"><a></a></span>
-<span id="cb12-16"><a></a><span class="co"># Simulate outcomes</span></span>
-<span id="cb12-17"><a></a>data <span class="op">=</span> []</span>
-<span id="cb12-18"><a></a><span class="cf">for</span> g <span class="kw">in</span> group:</span>
-<span id="cb12-19"><a></a>    <span class="cf">for</span> t <span class="kw">in</span> time:</span>
-<span id="cb12-20"><a></a>        y <span class="op">=</span> intercepts[g] <span class="op">+</span> trend <span class="op">*</span> t <span class="co">#+ np.random.normal(0,1)</span></span>
-<span id="cb12-21"><a></a>        data.append({<span class="st">'group'</span>: group_names[g], <span class="st">'time'</span>: t, <span class="st">'y'</span>: y})</span>
-<span id="cb12-22"><a></a></span>
-<span id="cb12-23"><a></a>df <span class="op">=</span> pd.DataFrame(data)</span>
-<span id="cb12-24"><a></a>df[<span class="st">'log_y'</span>] <span class="op">=</span> np.log(df[<span class="st">'y'</span>])</span>
-<span id="cb12-25"><a></a></span>
-<span id="cb12-26"><a></a><span class="co"># Plot levels</span></span>
-<span id="cb12-27"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">5</span>))</span>
-<span id="cb12-28"><a></a>plt.subplot(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>)</span>
-<span id="cb12-29"><a></a><span class="cf">for</span> name, grp <span class="kw">in</span> df.groupby(<span class="st">'group'</span>):</span>
-<span id="cb12-30"><a></a>    plt.plot(grp[<span class="st">'time'</span>], grp[<span class="st">'y'</span>], label<span class="op">=</span>name)</span>
-<span id="cb12-31"><a></a>plt.title(<span class="st">'Outcome in Levels'</span>)</span>
-<span id="cb12-32"><a></a>plt.xlabel(<span class="st">'Time'</span>)</span>
-<span id="cb12-33"><a></a>plt.ylabel(<span class="st">'y'</span>)</span>
-<span id="cb12-34"><a></a>plt.legend()</span>
-<span id="cb12-35"><a></a></span>
-<span id="cb12-36"><a></a><span class="co"># Plot logs</span></span>
-<span id="cb12-37"><a></a>plt.subplot(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>)</span>
-<span id="cb12-38"><a></a><span class="cf">for</span> name, grp <span class="kw">in</span> df.groupby(<span class="st">'group'</span>):</span>
-<span id="cb12-39"><a></a>    plt.plot(grp[<span class="st">'time'</span>], grp[<span class="st">'log_y'</span>], label<span class="op">=</span>name)</span>
-<span id="cb12-40"><a></a>plt.title(<span class="st">'Outcome in Logs'</span>)</span>
-<span id="cb12-41"><a></a>plt.xlabel(<span class="st">'Time'</span>)</span>
-<span id="cb12-42"><a></a>plt.ylabel(<span class="st">'log(y)'</span>)</span>
-<span id="cb12-43"><a></a>plt.legend()</span>
-<span id="cb12-44"><a></a></span>
-<span id="cb12-45"><a></a>plt.tight_layout()</span>
-<span id="cb12-46"><a></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="c5b1d84e" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb12-2"><a aria-label="2"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb12-3"><a aria-label="3"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb12-4"><a aria-label="4"></a></span>
+<span id="cb12-5"><a aria-label="5"></a><span class="co"># Parameters</span></span>
+<span id="cb12-6"><a aria-label="6"></a>n_periods <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb12-7"><a aria-label="7"></a>n_groups <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb12-8"><a aria-label="8"></a>group_names <span class="op">=</span> [<span class="st">'Control'</span>, <span class="st">'Treatment'</span>]</span>
+<span id="cb12-9"><a aria-label="9"></a></span>
+<span id="cb12-10"><a aria-label="10"></a>time <span class="op">=</span> np.arange(n_periods)</span>
+<span id="cb12-11"><a aria-label="11"></a>group <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">1</span>])  <span class="co"># 0: Control, 1: Treatment</span></span>
+<span id="cb12-12"><a aria-label="12"></a></span>
+<span id="cb12-13"><a aria-label="13"></a>intercepts <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">5</span>]  <span class="co"># Different starting points</span></span>
+<span id="cb12-14"><a aria-label="14"></a>trend <span class="op">=</span> <span class="dv">1</span>  <span class="co"># Same trend for both groups</span></span>
+<span id="cb12-15"><a aria-label="15"></a></span>
+<span id="cb12-16"><a aria-label="16"></a><span class="co"># Simulate outcomes</span></span>
+<span id="cb12-17"><a aria-label="17"></a>data <span class="op">=</span> []</span>
+<span id="cb12-18"><a aria-label="18"></a><span class="cf">for</span> g <span class="kw">in</span> group:</span>
+<span id="cb12-19"><a aria-label="19"></a>    <span class="cf">for</span> t <span class="kw">in</span> time:</span>
+<span id="cb12-20"><a aria-label="20"></a>        y <span class="op">=</span> intercepts[g] <span class="op">+</span> trend <span class="op">*</span> t <span class="co">#+ np.random.normal(0,1)</span></span>
+<span id="cb12-21"><a aria-label="21"></a>        data.append({<span class="st">'group'</span>: group_names[g], <span class="st">'time'</span>: t, <span class="st">'y'</span>: y})</span>
+<span id="cb12-22"><a aria-label="22"></a></span>
+<span id="cb12-23"><a aria-label="23"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb12-24"><a aria-label="24"></a>df[<span class="st">'log_y'</span>] <span class="op">=</span> np.log(df[<span class="st">'y'</span>])</span>
+<span id="cb12-25"><a aria-label="25"></a></span>
+<span id="cb12-26"><a aria-label="26"></a><span class="co"># Plot levels</span></span>
+<span id="cb12-27"><a aria-label="27"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">5</span>))</span>
+<span id="cb12-28"><a aria-label="28"></a>plt.subplot(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>)</span>
+<span id="cb12-29"><a aria-label="29"></a><span class="cf">for</span> name, grp <span class="kw">in</span> df.groupby(<span class="st">'group'</span>):</span>
+<span id="cb12-30"><a aria-label="30"></a>    plt.plot(grp[<span class="st">'time'</span>], grp[<span class="st">'y'</span>], label<span class="op">=</span>name)</span>
+<span id="cb12-31"><a aria-label="31"></a>plt.title(<span class="st">'Outcome in Levels'</span>)</span>
+<span id="cb12-32"><a aria-label="32"></a>plt.xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb12-33"><a aria-label="33"></a>plt.ylabel(<span class="st">'y'</span>)</span>
+<span id="cb12-34"><a aria-label="34"></a>plt.legend()</span>
+<span id="cb12-35"><a aria-label="35"></a></span>
+<span id="cb12-36"><a aria-label="36"></a><span class="co"># Plot logs</span></span>
+<span id="cb12-37"><a aria-label="37"></a>plt.subplot(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb12-38"><a aria-label="38"></a><span class="cf">for</span> name, grp <span class="kw">in</span> df.groupby(<span class="st">'group'</span>):</span>
+<span id="cb12-39"><a aria-label="39"></a>    plt.plot(grp[<span class="st">'time'</span>], grp[<span class="st">'log_y'</span>], label<span class="op">=</span>name)</span>
+<span id="cb12-40"><a aria-label="40"></a>plt.title(<span class="st">'Outcome in Logs'</span>)</span>
+<span id="cb12-41"><a aria-label="41"></a>plt.xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb12-42"><a aria-label="42"></a>plt.ylabel(<span class="st">'log(y)'</span>)</span>
+<span id="cb12-43"><a aria-label="43"></a>plt.legend()</span>
+<span id="cb12-44"><a aria-label="44"></a></span>
+<span id="cb12-45"><a aria-label="45"></a>plt.tight_layout()</span>
+<span id="cb12-46"><a aria-label="46"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
@@ -662,64 +667,64 @@ Standard errors in parentheses.
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="did_files/figure-revealjs/cell-10-output-1.png" width="1142" height="470"></p>
+<p><img data-src="did_files/figure-revealjs/cell-10-output-1.png" width="1143" height="471"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="parallel-trends-in-growth-rates" class="slide level2">
 <h2>Parallel Trends in Growth Rates</h2>
-<div id="0c7199dc" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="co"># Parameters</span></span>
-<span id="cb13-2"><a></a>n_periods <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb13-3"><a></a>group_names <span class="op">=</span> [<span class="st">'Control'</span>, <span class="st">'Treatment'</span>]</span>
-<span id="cb13-4"><a></a>initials <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">9</span>]  <span class="co"># Different starting values</span></span>
-<span id="cb13-5"><a></a>growth <span class="op">=</span> [<span class="fl">1.10</span>, <span class="fl">1.07</span>]</span>
-<span id="cb13-6"><a></a>growth_trend <span class="op">=</span> <span class="op">-</span><span class="fl">0.005</span></span>
-<span id="cb13-7"><a></a></span>
-<span id="cb13-8"><a></a><span class="co"># Simulate outcomes</span></span>
-<span id="cb13-9"><a></a>data <span class="op">=</span> []</span>
-<span id="cb13-10"><a></a><span class="cf">for</span> g, initial <span class="kw">in</span> <span class="bu">enumerate</span>(initials):</span>
-<span id="cb13-11"><a></a>    y <span class="op">=</span> initials[g]</span>
-<span id="cb13-12"><a></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(n_periods):</span>
-<span id="cb13-13"><a></a>        data.append({<span class="st">'group'</span>: group_names[g], <span class="st">'time'</span>: t, <span class="st">'y'</span>: y})</span>
-<span id="cb13-14"><a></a>        y <span class="op">*=</span> growth[g] <span class="op">+</span> growth_trend <span class="op">*</span> t</span>
-<span id="cb13-15"><a></a></span>
-<span id="cb13-16"><a></a>df <span class="op">=</span> pd.DataFrame(data)</span>
-<span id="cb13-17"><a></a>df[<span class="st">'log_y'</span>] <span class="op">=</span> np.log(df[<span class="st">'y'</span>])</span>
-<span id="cb13-18"><a></a></span>
-<span id="cb13-19"><a></a><span class="co"># Compute growth rates (difference in logs)</span></span>
-<span id="cb13-20"><a></a>df[<span class="st">'growth_rate'</span>] <span class="op">=</span> df.groupby(<span class="st">'group'</span>)[<span class="st">'log_y'</span>].diff()</span>
-<span id="cb13-21"><a></a></span>
-<span id="cb13-22"><a></a><span class="co"># Plot levels</span></span>
-<span id="cb13-23"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">15</span>,<span class="dv">4</span>))</span>
-<span id="cb13-24"><a></a>plt.subplot(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">1</span>)</span>
-<span id="cb13-25"><a></a><span class="cf">for</span> name, grp <span class="kw">in</span> df.groupby(<span class="st">'group'</span>):</span>
-<span id="cb13-26"><a></a>    plt.plot(grp[<span class="st">'time'</span>], grp[<span class="st">'y'</span>], label<span class="op">=</span>name)</span>
-<span id="cb13-27"><a></a>plt.title(<span class="st">'Outcome in Levels'</span>)</span>
-<span id="cb13-28"><a></a>plt.xlabel(<span class="st">'Time'</span>)</span>
-<span id="cb13-29"><a></a>plt.ylabel(<span class="st">'y'</span>)</span>
-<span id="cb13-30"><a></a>plt.legend()</span>
-<span id="cb13-31"><a></a></span>
-<span id="cb13-32"><a></a><span class="co"># Plot logs</span></span>
-<span id="cb13-33"><a></a>plt.subplot(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>)</span>
-<span id="cb13-34"><a></a><span class="cf">for</span> name, grp <span class="kw">in</span> df.groupby(<span class="st">'group'</span>):</span>
-<span id="cb13-35"><a></a>    plt.plot(grp[<span class="st">'time'</span>], grp[<span class="st">'log_y'</span>], label<span class="op">=</span>name)</span>
-<span id="cb13-36"><a></a>plt.title(<span class="st">'Outcome in Logs'</span>)</span>
-<span id="cb13-37"><a></a>plt.xlabel(<span class="st">'Time'</span>)</span>
-<span id="cb13-38"><a></a>plt.ylabel(<span class="st">'log(y)'</span>)</span>
-<span id="cb13-39"><a></a>plt.legend()</span>
-<span id="cb13-40"><a></a></span>
-<span id="cb13-41"><a></a><span class="co"># Plot growth rates</span></span>
-<span id="cb13-42"><a></a>plt.subplot(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">3</span>)</span>
-<span id="cb13-43"><a></a><span class="cf">for</span> name, grp <span class="kw">in</span> df.groupby(<span class="st">'group'</span>):</span>
-<span id="cb13-44"><a></a>    plt.plot(grp[<span class="st">'time'</span>], grp[<span class="st">'growth_rate'</span>], label<span class="op">=</span>name)</span>
-<span id="cb13-45"><a></a>plt.title(<span class="st">'Growth Rates (Δlog(y))'</span>)</span>
-<span id="cb13-46"><a></a>plt.xlabel(<span class="st">'Time'</span>)</span>
-<span id="cb13-47"><a></a>plt.ylabel(<span class="st">'Growth Rate'</span>)</span>
-<span id="cb13-48"><a></a>plt.legend()</span>
-<span id="cb13-49"><a></a></span>
-<span id="cb13-50"><a></a>plt.tight_layout()</span>
-<span id="cb13-51"><a></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="df54ba6e" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a><span class="co"># Parameters</span></span>
+<span id="cb13-2"><a aria-label="2"></a>n_periods <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb13-3"><a aria-label="3"></a>group_names <span class="op">=</span> [<span class="st">'Control'</span>, <span class="st">'Treatment'</span>]</span>
+<span id="cb13-4"><a aria-label="4"></a>initials <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">9</span>]  <span class="co"># Different starting values</span></span>
+<span id="cb13-5"><a aria-label="5"></a>growth <span class="op">=</span> [<span class="fl">1.10</span>, <span class="fl">1.07</span>]</span>
+<span id="cb13-6"><a aria-label="6"></a>growth_trend <span class="op">=</span> <span class="op">-</span><span class="fl">0.005</span></span>
+<span id="cb13-7"><a aria-label="7"></a></span>
+<span id="cb13-8"><a aria-label="8"></a><span class="co"># Simulate outcomes</span></span>
+<span id="cb13-9"><a aria-label="9"></a>data <span class="op">=</span> []</span>
+<span id="cb13-10"><a aria-label="10"></a><span class="cf">for</span> g, initial <span class="kw">in</span> <span class="bu">enumerate</span>(initials):</span>
+<span id="cb13-11"><a aria-label="11"></a>    y <span class="op">=</span> initials[g]</span>
+<span id="cb13-12"><a aria-label="12"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(n_periods):</span>
+<span id="cb13-13"><a aria-label="13"></a>        data.append({<span class="st">'group'</span>: group_names[g], <span class="st">'time'</span>: t, <span class="st">'y'</span>: y})</span>
+<span id="cb13-14"><a aria-label="14"></a>        y <span class="op">*=</span> growth[g] <span class="op">+</span> growth_trend <span class="op">*</span> t</span>
+<span id="cb13-15"><a aria-label="15"></a></span>
+<span id="cb13-16"><a aria-label="16"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb13-17"><a aria-label="17"></a>df[<span class="st">'log_y'</span>] <span class="op">=</span> np.log(df[<span class="st">'y'</span>])</span>
+<span id="cb13-18"><a aria-label="18"></a></span>
+<span id="cb13-19"><a aria-label="19"></a><span class="co"># Compute growth rates (difference in logs)</span></span>
+<span id="cb13-20"><a aria-label="20"></a>df[<span class="st">'growth_rate'</span>] <span class="op">=</span> df.groupby(<span class="st">'group'</span>)[<span class="st">'log_y'</span>].diff()</span>
+<span id="cb13-21"><a aria-label="21"></a></span>
+<span id="cb13-22"><a aria-label="22"></a><span class="co"># Plot levels</span></span>
+<span id="cb13-23"><a aria-label="23"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">15</span>,<span class="dv">4</span>))</span>
+<span id="cb13-24"><a aria-label="24"></a>plt.subplot(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">1</span>)</span>
+<span id="cb13-25"><a aria-label="25"></a><span class="cf">for</span> name, grp <span class="kw">in</span> df.groupby(<span class="st">'group'</span>):</span>
+<span id="cb13-26"><a aria-label="26"></a>    plt.plot(grp[<span class="st">'time'</span>], grp[<span class="st">'y'</span>], label<span class="op">=</span>name)</span>
+<span id="cb13-27"><a aria-label="27"></a>plt.title(<span class="st">'Outcome in Levels'</span>)</span>
+<span id="cb13-28"><a aria-label="28"></a>plt.xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb13-29"><a aria-label="29"></a>plt.ylabel(<span class="st">'y'</span>)</span>
+<span id="cb13-30"><a aria-label="30"></a>plt.legend()</span>
+<span id="cb13-31"><a aria-label="31"></a></span>
+<span id="cb13-32"><a aria-label="32"></a><span class="co"># Plot logs</span></span>
+<span id="cb13-33"><a aria-label="33"></a>plt.subplot(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>)</span>
+<span id="cb13-34"><a aria-label="34"></a><span class="cf">for</span> name, grp <span class="kw">in</span> df.groupby(<span class="st">'group'</span>):</span>
+<span id="cb13-35"><a aria-label="35"></a>    plt.plot(grp[<span class="st">'time'</span>], grp[<span class="st">'log_y'</span>], label<span class="op">=</span>name)</span>
+<span id="cb13-36"><a aria-label="36"></a>plt.title(<span class="st">'Outcome in Logs'</span>)</span>
+<span id="cb13-37"><a aria-label="37"></a>plt.xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb13-38"><a aria-label="38"></a>plt.ylabel(<span class="st">'log(y)'</span>)</span>
+<span id="cb13-39"><a aria-label="39"></a>plt.legend()</span>
+<span id="cb13-40"><a aria-label="40"></a></span>
+<span id="cb13-41"><a aria-label="41"></a><span class="co"># Plot growth rates</span></span>
+<span id="cb13-42"><a aria-label="42"></a>plt.subplot(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">3</span>)</span>
+<span id="cb13-43"><a aria-label="43"></a><span class="cf">for</span> name, grp <span class="kw">in</span> df.groupby(<span class="st">'group'</span>):</span>
+<span id="cb13-44"><a aria-label="44"></a>    plt.plot(grp[<span class="st">'time'</span>], grp[<span class="st">'growth_rate'</span>], label<span class="op">=</span>name)</span>
+<span id="cb13-45"><a aria-label="45"></a>plt.title(<span class="st">'Growth Rates (Δlog(y))'</span>)</span>
+<span id="cb13-46"><a aria-label="46"></a>plt.xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb13-47"><a aria-label="47"></a>plt.ylabel(<span class="st">'Growth Rate'</span>)</span>
+<span id="cb13-48"><a aria-label="48"></a>plt.legend()</span>
+<span id="cb13-49"><a aria-label="49"></a></span>
+<span id="cb13-50"><a aria-label="50"></a>plt.tight_layout()</span>
+<span id="cb13-51"><a aria-label="51"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
@@ -727,7 +732,7 @@ Standard errors in parentheses.
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="did_files/figure-revealjs/cell-11-output-1.png" width="1430" height="374"></p>
+<p><img data-src="did_files/figure-revealjs/cell-11-output-1.png" width="1431" height="375"></p>
 </figure>
 </div>
 </div>
@@ -749,7 +754,7 @@ Standard errors in parentheses.
 <h2>References</h2>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-facure2022" class="csl-entry" role="listitem">
 Facure, Matheus. 2022. <em>Causal Inference for the Brave and True</em>. <a href="https://matheusfacure.github.io/python-causality-handbook/landing-page.html">https://matheusfacure.github.io/python-causality-handbook/landing-page.html</a>.
 </div>
@@ -791,7 +796,7 @@ Facure, Matheus. 2022. <em>Causal Inference for the Brave and True</em>. <a href
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"\u003ci class=\"fas fa-gear\">\u003c/i>","content":"\u003cul class=\"slide-menu-items\">\n\u003cli class=\"slide-tool-item active\" data-item=\"0\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\">\u003ckbd>f\u003c/kbd> Fullscreen\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"1\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\">\u003ckbd>s\u003c/kbd> Speaker View\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"2\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\">\u003ckbd>o\u003c/kbd> Slide Overview\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"3\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\">\u003ckbd>e\u003c/kbd> PDF Export Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"4\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\">\u003ckbd>r\u003c/kbd> Scroll View Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"5\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\">\u003ckbd>b\u003c/kbd> Toggle Chalkboard\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"6\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\">\u003ckbd>c\u003c/kbd> Toggle Notes Canvas\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"7\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\">\u003ckbd>d\u003c/kbd> Download Drawings\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"8\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\">\u003ckbd>?\u003c/kbd> Keyboard Help\u003c/a>\u003c/li>\n\u003c/ul>"}],"openButton":true,"openButtonLabel":"Slide menu"},
 'chalkboard': {"buttons":true,"theme":"whiteboard","boardmarkerWidth":2,"chalkWidth":2,"chalkEffect":0},
 'smaller': false,
  
@@ -1050,7 +1055,8 @@ Facure, Matheus. 2022. <em>Causal Inference for the Brave and True</em>. <a href
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
           // Inspect non-navigation links and adorn them if external
-         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          window.quartoDecorateExternalLinks = function (root) {
+         var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
           for (var i=0; i<links.length; i++) {
             const link = links[i];
             if (!isInternal(link.href)) {
@@ -1059,8 +1065,69 @@ Facure, Matheus. 2022. <em>Causal Inference for the Brave and True</em>. <a href
               if (link.dataset.originalHref !== undefined) {
                 link.href = link.dataset.originalHref;
               }
+              if (!link.classList.contains('no-external-icon')) {
+              }
             }
           }
+          };
+          window.quartoDecorateExternalLinks(window.document);
+        // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+        // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+        const hideOnEscAndFocusOut = {
+          name: 'hideOnEscAndFocusOut',
+          defaultValue: true,
+          fn(instance) {
+            const dismiss = () => {
+              // A show scheduled by the trigger delay would otherwise reopen it
+              instance.clearDelayTimeouts();
+              instance.hide();
+            };
+            const onKeyDown = (event) => {
+              if (event.key !== 'Escape') {
+                return;
+              }
+              // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+              // except an open reveal.js slide menu, which Esc should close too.
+              // The menu handles keys only when its keyboard option is on.
+              const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+                window.Reveal.getConfig().menu?.keyboard !== false;
+              if (!menuHandlesEsc) {
+                event.stopPropagation();
+              }
+              if (instance.popper.contains(window.document.activeElement)) {
+                // Disabled while refocusing so the focus trigger does not reopen it
+                instance.disable();
+                instance.reference.focus();
+                instance.enable();
+              }
+              dismiss();
+            };
+            const onFocusOut = (event) => {
+              const target = event.relatedTarget;
+              if (target && !instance.reference.contains(target) &&
+                  !instance.popper.contains(target)) {
+                dismiss();
+              }
+            };
+            // On the trigger too: a click trigger (code-annotations: select) has no
+            // blur handling. Attached for the instance's lifetime so leaving the
+            // trigger also cancels a show still pending on the trigger delay.
+            instance.reference.addEventListener('focusout', onFocusOut);
+            return {
+              onShow() {
+                window.document.addEventListener('keydown', onKeyDown, true);
+                instance.popper.addEventListener('focusout', onFocusOut);
+              },
+              onHide() {
+                window.document.removeEventListener('keydown', onKeyDown, true);
+                instance.popper.removeEventListener('focusout', onFocusOut);
+              },
+              onDestroy() {
+                instance.reference.removeEventListener('focusout', onFocusOut);
+              },
+            };
+          },
+        };
         function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
           const config = {
             allowHTML: true,
@@ -1074,6 +1141,7 @@ Facure, Matheus. 2022. <em>Causal Inference for the Brave and True</em>. <a href
             interactiveBorder: 10,
             theme: 'light-border',
             placement: 'bottom-start',
+            plugins: [hideOnEscAndFocusOut],
           };
           if (contentFn) {
             config.content = contentFn;

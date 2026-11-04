@@ -6,21 +6,27 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.25">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.11.9">
 
   <meta name="author" content="Paul Schrimpf">
   <title>ECON 526 – Fixed Effects</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -98,7 +104,6 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
-      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -115,7 +120,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-534cd8e3a96973385dffff3f4709048d.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-00ad5a49dff614330cd349bcec985ec3.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -221,7 +226,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Paul Schrimpf 
+Paul Schrimpf
 </div>
         <p class="quarto-title-affiliation">
             University of British Columbia
@@ -230,7 +235,7 @@ Paul Schrimpf
 </div>
 
 </section><section id="TOC">
-<nav role="doc-toc"> 
+<nav role="doc-toc" aria-labelledby="toc-title">
 <h2 id="toc-title">Table of contents</h2>
 <ul>
 <li><a href="#/introduction" id="/toc-introduction">Introduction</a></li>
@@ -310,43 +315,43 @@ y_{it} = X_{it}'\beta + \alpha_i + \epsilon_{it}
 </section>
 <section id="ols" class="slide level2">
 <h2>OLS</h2>
-<div id="3147d4b4" class="cell" data-execution_count="2">
+<div id="7b7ee9c0" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>imports</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> warnings</span>
-<span id="cb1-2"><a></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
-<span id="cb1-3"><a></a></span>
-<span id="cb1-4"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-5"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-6"><a></a><span class="im">from</span> matplotlib <span class="im">import</span> style</span>
-<span id="cb1-7"><a></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
-<span id="cb1-8"><a></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
-<span id="cb1-9"><a></a>style.use(<span class="st">"fivethirtyeight"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-2"><a aria-label="2"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
+<span id="cb1-3"><a aria-label="3"></a></span>
+<span id="cb1-4"><a aria-label="4"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-5"><a aria-label="5"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-6"><a aria-label="6"></a><span class="im">from</span> matplotlib <span class="im">import</span> style</span>
+<span id="cb1-7"><a aria-label="7"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb1-8"><a aria-label="8"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb1-9"><a aria-label="9"></a>style.use(<span class="st">"fivethirtyeight"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p><sup>1</sup></p>
-<div id="412505bc" class="cell" data-execution_count="3">
+<div id="2235d7c6" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>toy_panel <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb2-2"><a></a>    <span class="st">"mkt_costs"</span>:[<span class="dv">5</span>,<span class="dv">4</span>,<span class="fl">3.5</span>,<span class="dv">3</span>, <span class="dv">10</span>,<span class="fl">9.5</span>,<span class="dv">9</span>,<span class="dv">8</span>, <span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>, <span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">6</span>,<span class="dv">4</span>],</span>
-<span id="cb2-3"><a></a>    <span class="st">"purchase"</span>:[<span class="dv">12</span>,<span class="dv">9</span>,<span class="fl">7.5</span>,<span class="dv">7</span>, <span class="dv">9</span>,<span class="dv">7</span>,<span class="fl">6.5</span>,<span class="dv">5</span>, <span class="dv">15</span>,<span class="fl">14.5</span>,<span class="dv">14</span>,<span class="dv">13</span>, <span class="dv">11</span>,<span class="fl">9.5</span>,<span class="dv">8</span>,<span class="dv">5</span>],</span>
-<span id="cb2-4"><a></a>    <span class="st">"city"</span>:[<span class="st">"C0"</span>,<span class="st">"C0"</span>,<span class="st">"C0"</span>,<span class="st">"C0"</span>, <span class="st">"C2"</span>,<span class="st">"C2"</span>,<span class="st">"C2"</span>,<span class="st">"C2"</span>, <span class="st">"C1"</span>,<span class="st">"C1"</span>,<span class="st">"C1"</span>,<span class="st">"C1"</span>, <span class="st">"C3"</span>,<span class="st">"C3"</span>,<span class="st">"C3"</span>,<span class="st">"C3"</span>]</span>
-<span id="cb2-5"><a></a>})</span>
-<span id="cb2-6"><a></a></span>
-<span id="cb2-7"><a></a>m <span class="op">=</span> smf.ols(<span class="st">"purchase ~ mkt_costs"</span>, data<span class="op">=</span>toy_panel).fit()</span>
-<span id="cb2-8"><a></a></span>
-<span id="cb2-9"><a></a>plt.scatter(toy_panel.mkt_costs, toy_panel.purchase)</span>
-<span id="cb2-10"><a></a>plt.plot(toy_panel.mkt_costs, m.fittedvalues, c<span class="op">=</span><span class="st">"C5"</span>, label<span class="op">=</span><span class="st">"Regression Line"</span>)</span>
-<span id="cb2-11"><a></a>plt.xlabel(<span class="st">"Marketing Costs (in 1000)"</span>)</span>
-<span id="cb2-12"><a></a>plt.ylabel(<span class="st">"In-app Purchase (in 1000)"</span>)</span>
-<span id="cb2-13"><a></a>plt.title(<span class="st">"Simple OLS Model"</span>)</span>
-<span id="cb2-14"><a></a>plt.legend()<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a>toy_panel <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb2-2"><a aria-label="2"></a>    <span class="st">"mkt_costs"</span>:[<span class="dv">5</span>,<span class="dv">4</span>,<span class="fl">3.5</span>,<span class="dv">3</span>, <span class="dv">10</span>,<span class="fl">9.5</span>,<span class="dv">9</span>,<span class="dv">8</span>, <span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>, <span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">6</span>,<span class="dv">4</span>],</span>
+<span id="cb2-3"><a aria-label="3"></a>    <span class="st">"purchase"</span>:[<span class="dv">12</span>,<span class="dv">9</span>,<span class="fl">7.5</span>,<span class="dv">7</span>, <span class="dv">9</span>,<span class="dv">7</span>,<span class="fl">6.5</span>,<span class="dv">5</span>, <span class="dv">15</span>,<span class="fl">14.5</span>,<span class="dv">14</span>,<span class="dv">13</span>, <span class="dv">11</span>,<span class="fl">9.5</span>,<span class="dv">8</span>,<span class="dv">5</span>],</span>
+<span id="cb2-4"><a aria-label="4"></a>    <span class="st">"city"</span>:[<span class="st">"C0"</span>,<span class="st">"C0"</span>,<span class="st">"C0"</span>,<span class="st">"C0"</span>, <span class="st">"C2"</span>,<span class="st">"C2"</span>,<span class="st">"C2"</span>,<span class="st">"C2"</span>, <span class="st">"C1"</span>,<span class="st">"C1"</span>,<span class="st">"C1"</span>,<span class="st">"C1"</span>, <span class="st">"C3"</span>,<span class="st">"C3"</span>,<span class="st">"C3"</span>,<span class="st">"C3"</span>]</span>
+<span id="cb2-5"><a aria-label="5"></a>})</span>
+<span id="cb2-6"><a aria-label="6"></a></span>
+<span id="cb2-7"><a aria-label="7"></a>m <span class="op">=</span> smf.ols(<span class="st">"purchase ~ mkt_costs"</span>, data<span class="op">=</span>toy_panel).fit()</span>
+<span id="cb2-8"><a aria-label="8"></a></span>
+<span id="cb2-9"><a aria-label="9"></a>plt.scatter(toy_panel.mkt_costs, toy_panel.purchase)</span>
+<span id="cb2-10"><a aria-label="10"></a>plt.plot(toy_panel.mkt_costs, m.fittedvalues, c<span class="op">=</span><span class="st">"C5"</span>, label<span class="op">=</span><span class="st">"Regression Line"</span>)</span>
+<span id="cb2-11"><a aria-label="11"></a>plt.xlabel(<span class="st">"Marketing Costs (in 1000)"</span>)</span>
+<span id="cb2-12"><a aria-label="12"></a>plt.ylabel(<span class="st">"In-app Purchase (in 1000)"</span>)</span>
+<span id="cb2-13"><a aria-label="13"></a>plt.title(<span class="st">"Simple OLS Model"</span>)</span>
+<span id="cb2-14"><a aria-label="14"></a>plt.legend()<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="fe_files/figure-revealjs/cell-3-output-1.png" width="910" height="487"></p>
+<p><img data-src="fe_files/figure-revealjs/cell-3-output-1.png" width="911" height="488"></p>
 </figure>
 </div>
 </div>
@@ -355,26 +360,26 @@ y_{it} = X_{it}'\beta + \alpha_i + \epsilon_{it}
 <section id="fixed-effects-within" class="slide level2">
 <h2>Fixed Effects / Within</h2>
 <p><sup>1</sup></p>
-<div id="0d0f3369" class="cell" data-execution_count="4">
+<div id="1726d9a9" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>fe <span class="op">=</span> smf.ols(<span class="st">"purchase ~ mkt_costs + C(city)"</span>, data<span class="op">=</span>toy_panel).fit()</span>
-<span id="cb3-2"><a></a></span>
-<span id="cb3-3"><a></a>fe_toy <span class="op">=</span> toy_panel.assign(y_hat <span class="op">=</span> fe.fittedvalues)</span>
-<span id="cb3-4"><a></a></span>
-<span id="cb3-5"><a></a>plt.scatter(toy_panel.mkt_costs, toy_panel.purchase, c<span class="op">=</span>toy_panel.city)</span>
-<span id="cb3-6"><a></a><span class="cf">for</span> city <span class="kw">in</span> fe_toy[<span class="st">"city"</span>].unique():</span>
-<span id="cb3-7"><a></a>    plot_df <span class="op">=</span> fe_toy.query(<span class="ss">f"city=='</span><span class="sc">{</span>city<span class="sc">}</span><span class="ss">'"</span>)</span>
-<span id="cb3-8"><a></a>    plt.plot(plot_df.mkt_costs, plot_df.y_hat, c<span class="op">=</span><span class="st">"C5"</span>)</span>
-<span id="cb3-9"><a></a></span>
-<span id="cb3-10"><a></a>plt.title(<span class="st">"Fixed Effect Model"</span>)</span>
-<span id="cb3-11"><a></a>plt.xlabel(<span class="st">"Marketing Costs (in 1000)"</span>)</span>
-<span id="cb3-12"><a></a>plt.ylabel(<span class="st">"In-app Purchase (in 1000)"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a>fe <span class="op">=</span> smf.ols(<span class="st">"purchase ~ mkt_costs + C(city)"</span>, data<span class="op">=</span>toy_panel).fit()</span>
+<span id="cb3-2"><a aria-label="2"></a></span>
+<span id="cb3-3"><a aria-label="3"></a>fe_toy <span class="op">=</span> toy_panel.assign(y_hat <span class="op">=</span> fe.fittedvalues)</span>
+<span id="cb3-4"><a aria-label="4"></a></span>
+<span id="cb3-5"><a aria-label="5"></a>plt.scatter(toy_panel.mkt_costs, toy_panel.purchase, c<span class="op">=</span>toy_panel.city)</span>
+<span id="cb3-6"><a aria-label="6"></a><span class="cf">for</span> city <span class="kw">in</span> fe_toy[<span class="st">"city"</span>].unique():</span>
+<span id="cb3-7"><a aria-label="7"></a>    plot_df <span class="op">=</span> fe_toy.query(<span class="ss">f"city=='</span><span class="sc">{</span>city<span class="sc">}</span><span class="ss">'"</span>)</span>
+<span id="cb3-8"><a aria-label="8"></a>    plt.plot(plot_df.mkt_costs, plot_df.y_hat, c<span class="op">=</span><span class="st">"C5"</span>)</span>
+<span id="cb3-9"><a aria-label="9"></a></span>
+<span id="cb3-10"><a aria-label="10"></a>plt.title(<span class="st">"Fixed Effect Model"</span>)</span>
+<span id="cb3-11"><a aria-label="11"></a>plt.xlabel(<span class="st">"Marketing Costs (in 1000)"</span>)</span>
+<span id="cb3-12"><a aria-label="12"></a>plt.ylabel(<span class="st">"In-app Purchase (in 1000)"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="fe_files/figure-revealjs/cell-4-output-1.png" width="910" height="487"></p>
+<p><img data-src="fe_files/figure-revealjs/cell-4-output-1.png" width="911" height="488"></p>
 </figure>
 </div>
 </div>
@@ -417,23 +422,24 @@ y_{it} - \bar{y}_i  = (X_{it} - \bar{X}_i)'\beta + (\epsilon_{it} - \bar{\epsilo
 <li><span class="math inline">\(X_{it}\)</span> affected by past <span class="math inline">\(y\)</span></li>
 <li>“Nickell bias”</li>
 </ul></li>
-<li>See <span class="citation" data-cites="chen2019">Chen, Chernozhukov, and Fernández-Val (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> for bias correction under weak exogeneity, <span class="math inline">\(\Er[X_{it} \epsilon_{is}] = 0\)</span> for <span class="math inline">\(t \leq s\)</span></li>
+<li>See <span class="citation" data-cites="chen2019">Chen et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> for bias correction under weak exogeneity, <span class="math inline">\(\Er[X_{it} \epsilon_{is}] = 0\)</span> for <span class="math inline">\(t \leq s\)</span></li>
 </ul>
 </section>
 <section id="standard-errors" class="slide level2">
 <h2>Standard Errors</h2>
 <ul>
 <li>Generally, good idea to use clustered standard errors, clustered on <span class="math inline">\(i\)</span></li>
-<li>See <span class="citation" data-cites="mackinon2023">MacKinnon, Nielsen, and Webb (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span> for guide to clustered standard errors</li>
+<li>See <span class="citation" data-cites="mackinon2023">MacKinnon et al. (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span> for guide to clustered standard errors</li>
 </ul>
-<div id="43ecc4d0" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">import</span> pyfixest <span class="im">as</span> pf</span>
-<span id="cb4-2"><a></a>pf.feols(<span class="st">'purchase ~ mkt_costs | city'</span>, data<span class="op">=</span>toy_panel, vcov<span class="op">=</span>{<span class="st">'CRV1'</span>: <span class="st">'city'</span>}).summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="725357ba" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="im">import</span> pyfixest <span class="im">as</span> pf</span>
+<span id="cb4-2"><a aria-label="2"></a>pf.feols(<span class="st">'purchase ~ mkt_costs | city'</span>, data<span class="op">=</span>toy_panel, vcov<span class="op">=</span>{<span class="st">'CRV1'</span>: <span class="st">'city'</span>}).summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>###
 
 Estimation:  OLS
 Dep. var.: purchase, Fixed effects: city
+sample: None = all
 Inference:  CRV1
 Observations:  16
 
@@ -466,7 +472,7 @@ RMSE: 0.689 R2: 0.954 R2 Within: 0.832 </code></pre>
 <h2>References</h2>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-chen2019" class="csl-entry" role="listitem">
 Chen, Shuowen, Victor Chernozhukov, and Iván Fernández-Val. 2019. <span>“Mastering Panel Metrics: Causal Impact of Democracy on Growth.”</span> <em>AEA Papers and Proceedings</em> 109 (May): 77–82. <a href="https://doi.org/10.1257/pandp.20191071">https://doi.org/10.1257/pandp.20191071</a>.
 </div>
@@ -518,7 +524,7 @@ MacKinnon, James G., Morten Ørregaard Nielsen, and Matthew D. Webb. 2023. <span
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"\u003ci class=\"fas fa-gear\">\u003c/i>","content":"\u003cul class=\"slide-menu-items\">\n\u003cli class=\"slide-tool-item active\" data-item=\"0\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\">\u003ckbd>f\u003c/kbd> Fullscreen\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"1\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\">\u003ckbd>s\u003c/kbd> Speaker View\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"2\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\">\u003ckbd>o\u003c/kbd> Slide Overview\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"3\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\">\u003ckbd>e\u003c/kbd> PDF Export Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"4\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\">\u003ckbd>r\u003c/kbd> Scroll View Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"5\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\">\u003ckbd>b\u003c/kbd> Toggle Chalkboard\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"6\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\">\u003ckbd>c\u003c/kbd> Toggle Notes Canvas\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"7\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\">\u003ckbd>d\u003c/kbd> Download Drawings\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"8\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\">\u003ckbd>?\u003c/kbd> Keyboard Help\u003c/a>\u003c/li>\n\u003c/ul>"}],"openButton":true,"openButtonLabel":"Slide menu"},
 'chalkboard': {"buttons":true,"theme":"whiteboard","boardmarkerWidth":2,"chalkWidth":2,"chalkEffect":0},
 'smaller': false,
  
@@ -777,7 +783,8 @@ MacKinnon, James G., Morten Ørregaard Nielsen, and Matthew D. Webb. 2023. <span
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
           // Inspect non-navigation links and adorn them if external
-         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          window.quartoDecorateExternalLinks = function (root) {
+         var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
           for (var i=0; i<links.length; i++) {
             const link = links[i];
             if (!isInternal(link.href)) {
@@ -786,8 +793,69 @@ MacKinnon, James G., Morten Ørregaard Nielsen, and Matthew D. Webb. 2023. <span
               if (link.dataset.originalHref !== undefined) {
                 link.href = link.dataset.originalHref;
               }
+              if (!link.classList.contains('no-external-icon')) {
+              }
             }
           }
+          };
+          window.quartoDecorateExternalLinks(window.document);
+        // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+        // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+        const hideOnEscAndFocusOut = {
+          name: 'hideOnEscAndFocusOut',
+          defaultValue: true,
+          fn(instance) {
+            const dismiss = () => {
+              // A show scheduled by the trigger delay would otherwise reopen it
+              instance.clearDelayTimeouts();
+              instance.hide();
+            };
+            const onKeyDown = (event) => {
+              if (event.key !== 'Escape') {
+                return;
+              }
+              // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+              // except an open reveal.js slide menu, which Esc should close too.
+              // The menu handles keys only when its keyboard option is on.
+              const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+                window.Reveal.getConfig().menu?.keyboard !== false;
+              if (!menuHandlesEsc) {
+                event.stopPropagation();
+              }
+              if (instance.popper.contains(window.document.activeElement)) {
+                // Disabled while refocusing so the focus trigger does not reopen it
+                instance.disable();
+                instance.reference.focus();
+                instance.enable();
+              }
+              dismiss();
+            };
+            const onFocusOut = (event) => {
+              const target = event.relatedTarget;
+              if (target && !instance.reference.contains(target) &&
+                  !instance.popper.contains(target)) {
+                dismiss();
+              }
+            };
+            // On the trigger too: a click trigger (code-annotations: select) has no
+            // blur handling. Attached for the instance's lifetime so leaving the
+            // trigger also cancels a show still pending on the trigger delay.
+            instance.reference.addEventListener('focusout', onFocusOut);
+            return {
+              onShow() {
+                window.document.addEventListener('keydown', onKeyDown, true);
+                instance.popper.addEventListener('focusout', onFocusOut);
+              },
+              onHide() {
+                window.document.removeEventListener('keydown', onKeyDown, true);
+                instance.popper.removeEventListener('focusout', onFocusOut);
+              },
+              onDestroy() {
+                instance.reference.removeEventListener('focusout', onFocusOut);
+              },
+            };
+          },
+        };
         function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
           const config = {
             allowHTML: true,
@@ -801,6 +869,7 @@ MacKinnon, James G., Morten Ørregaard Nielsen, and Matthew D. Webb. 2023. <span
             interactiveBorder: 10,
             theme: 'light-border',
             placement: 'bottom-start',
+            plugins: [hideOnEscAndFocusOut],
           };
           if (contentFn) {
             config.content = contentFn;

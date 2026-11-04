@@ -6,21 +6,27 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.26">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.11.9">
 
   <meta name="author" content="Paul Schrimpf">
   <title>ECON 526 – Double / Debiased Machine Learning</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -98,7 +104,6 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
-      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -115,7 +120,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-534cd8e3a96973385dffff3f4709048d.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-00ad5a49dff614330cd349bcec985ec3.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -224,7 +229,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Paul Schrimpf 
+Paul Schrimpf
 </div>
         <p class="quarto-title-affiliation">
             University of British Columbia
@@ -233,7 +238,7 @@ Paul Schrimpf
 </div>
 
 </section><section id="TOC">
-<nav role="doc-toc"> 
+<nav role="doc-toc" aria-labelledby="toc-title">
 <h2 id="toc-title">Table of contents</h2>
 <ul>
 <li><a href="#/introduction" id="/toc-introduction">Introduction</a></li>
@@ -470,7 +475,7 @@ c = &amp; \En[v_i(\mu(x_i) - \hat{\mu}(x_i))] \\
 d = &amp; \En[(m(x_i) - \hat{m}(x_i))(\mu(x_i) - \hat{\mu}(x_i))]
 \end{align*}
 \]</span></p>
-<p>with <span class="math inline">\(v_i = d_i - \Er[d_i | x_i]\)</span>. The term <span class="math inline">\(a\)</span> is well behaved and <span class="math inline">\(\sqrt{n}a \leadsto N(0,\Sigma)\)</span> under standard conditions. Although terms <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span> appear similar to the problematic term in the initial estimator, they are better behaved because <span class="math inline">\(\Er[v|x] = 0\)</span> and <span class="math inline">\(\Er[\epsilon|x] = 0\)</span>. This makes it possible, but difficult to show that <span class="math inline">\(\sqrt{n}b \to_p = 0\)</span> and <span class="math inline">\(\sqrt{n} c \to_p = 0\)</span>, see e.g. <span class="citation" data-cites="belloni2014">Belloni, Chernozhukov, and Hansen (<a href="#/references" role="doc-biblioref" onclick="">2014</a>)</span>. However, the conditions on <span class="math inline">\(\hat{m}\)</span> and <span class="math inline">\(\hat{\mu}\)</span> needed to show this are slightly restrictive, and appropriate conditions might not be known for all estimators. <span class="citation" data-cites="chernozhukov2018">Chernozhukov et al. (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span> describe a sample splitting modification to <span class="math inline">\(\hat{\theta}\)</span> that allows <span class="math inline">\(\sqrt{n} b\)</span> and <span class="math inline">\(\sqrt{n} c\)</span> to vanish under weaker conditions (essentially the same rate condition as needed for <span class="math inline">\(\sqrt{n} d\)</span> to vanish.)</p>
+<p>with <span class="math inline">\(v_i = d_i - \Er[d_i | x_i]\)</span>. The term <span class="math inline">\(a\)</span> is well behaved and <span class="math inline">\(\sqrt{n}a \leadsto N(0,\Sigma)\)</span> under standard conditions. Although terms <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span> appear similar to the problematic term in the initial estimator, they are better behaved because <span class="math inline">\(\Er[v|x] = 0\)</span> and <span class="math inline">\(\Er[\epsilon|x] = 0\)</span>. This makes it possible, but difficult to show that <span class="math inline">\(\sqrt{n}b \to_p = 0\)</span> and <span class="math inline">\(\sqrt{n} c \to_p = 0\)</span>, see e.g. <span class="citation" data-cites="belloni2014">Belloni et al. (<a href="#/references" role="doc-biblioref" onclick="">2014</a>)</span>. However, the conditions on <span class="math inline">\(\hat{m}\)</span> and <span class="math inline">\(\hat{\mu}\)</span> needed to show this are slightly restrictive, and appropriate conditions might not be known for all estimators. <span class="citation" data-cites="chernozhukov2018">Chernozhukov et al. (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span> describe a sample splitting modification to <span class="math inline">\(\hat{\theta}\)</span> that allows <span class="math inline">\(\sqrt{n} b\)</span> and <span class="math inline">\(\sqrt{n} c\)</span> to vanish under weaker conditions (essentially the same rate condition as needed for <span class="math inline">\(\sqrt{n} d\)</span> to vanish.)</p>
 <p>The last term, <span class="math inline">\(d\)</span>, is a considerable improvement upon the first estimator. Instead of involving the error in one estimate, it now involes the product of the error in two estimates. By the Cauchy-Schwarz inequality, <span class="math display">\[
 d \leq \sqrt{\En[(m(x_i) - \hat{m}(x_i))^2]} \sqrt{\En[(\mu(x_i) - \hat{\mu}(x_i))^2]}.
 \]</span> So if the estimates of <span class="math inline">\(m\)</span> and <span class="math inline">\(\mu\)</span> converge at rates faster than <span class="math inline">\(n^{-1/4}\)</span>, then <span class="math inline">\(\sqrt{n} d \to_p 0\)</span>. This <span class="math inline">\(n^{-1/4}\)</span> rate is reached by many machine learning estimators.</p>
@@ -605,7 +610,7 @@ f_\theta(x) = \Er[y|x] - \theta \partial_x \log p(x) + f''(x) + f'(x) \partial_x
 <li><p>Riesz representer</p></li>
 </ul>
 <aside class="notes">
-<p><span class="citation" data-cites="chernozhukov2018">Chernozhukov et al. (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span> show how to construct orthogonal scores in a few examples via concentrating out and projection. <span class="citation" data-cites="chernozhukov2015">Chernozhukov, Hansen, and Spindler (<a href="#/references" role="doc-biblioref" onclick="">2015</a>)</span> also discusses creating orthogonal scores.</p>
+<p><span class="citation" data-cites="chernozhukov2018">Chernozhukov et al. (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span> show how to construct orthogonal scores in a few examples via concentrating out and projection. <span class="citation" data-cites="chernozhukov2015">Chernozhukov et al. (<a href="#/references" role="doc-biblioref" onclick="">2015</a>)</span> also discusses creating orthogonal scores.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -625,45 +630,45 @@ f_\theta(x) = \Er[y|x] - \theta \partial_x \log p(x) + f''(x) + f'(x) \partial_x
 </section>
 <section id="data" class="slide level2">
 <h2>Data</h2>
-<div id="d7c80b00" class="cell" data-execution_count="1">
+<div id="40e27917" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>imports</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-2"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-4"><a></a></span>
-<span id="cb1-5"><a></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_predict</span>
-<span id="cb1-6"><a></a><span class="im">from</span> sklearn <span class="im">import</span> linear_model</span>
-<span id="cb1-7"><a></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> PolynomialFeatures</span>
-<span id="cb1-8"><a></a><span class="im">import</span> statsmodels <span class="im">as</span> sm</span>
-<span id="cb1-9"><a></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
-<span id="cb1-10"><a></a><span class="im">from</span> statsmodels.iolib.summary2 <span class="im">import</span> summary_col</span>
-<span id="cb1-11"><a></a><span class="im">import</span> os</span>
-<span id="cb1-12"><a></a><span class="im">import</span> requests</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a aria-label="2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a aria-label="3"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a aria-label="4"></a></span>
+<span id="cb1-5"><a aria-label="5"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_predict</span>
+<span id="cb1-6"><a aria-label="6"></a><span class="im">from</span> sklearn <span class="im">import</span> linear_model</span>
+<span id="cb1-7"><a aria-label="7"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> PolynomialFeatures</span>
+<span id="cb1-8"><a aria-label="8"></a><span class="im">import</span> statsmodels <span class="im">as</span> sm</span>
+<span id="cb1-9"><a aria-label="9"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb1-10"><a aria-label="10"></a><span class="im">from</span> statsmodels.iolib.summary2 <span class="im">import</span> summary_col</span>
+<span id="cb1-11"><a aria-label="11"></a><span class="im">import</span> os</span>
+<span id="cb1-12"><a aria-label="12"></a><span class="im">import</span> requests</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="5218f6c3" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>url <span class="op">=</span> <span class="st">'https://www.nber.org/morg/annual/morg23.dta'</span></span>
-<span id="cb2-2"><a></a>local_filename <span class="op">=</span> <span class="st">'data/morg23.dta'</span></span>
-<span id="cb2-3"><a></a></span>
-<span id="cb2-4"><a></a><span class="cf">if</span> <span class="kw">not</span> os.path.exists(local_filename):</span>
-<span id="cb2-5"><a></a>    response <span class="op">=</span> requests.get(url)</span>
-<span id="cb2-6"><a></a>    <span class="cf">with</span> <span class="bu">open</span>(local_filename, <span class="st">'wb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb2-7"><a></a>        <span class="bu">file</span>.write(response.content)</span>
-<span id="cb2-8"><a></a></span>
-<span id="cb2-9"><a></a>cpsall<span class="op">=</span>pd.read_stata(local_filename)</span>
-<span id="cb2-10"><a></a><span class="co"># take subset of data just to reduce computation time</span></span>
-<span id="cb2-11"><a></a>cps <span class="op">=</span> cpsall.sample(<span class="dv">30000</span>, replace<span class="op">=</span><span class="va">False</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb2-12"><a></a>cps[<span class="st">"female"</span>] <span class="op">=</span> (cps.sex<span class="op">==</span><span class="dv">2</span>)</span>
-<span id="cb2-13"><a></a>cps[<span class="st">"log_earn"</span>] <span class="op">=</span> np.log(cps[<span class="st">"earnwke"</span>])</span>
-<span id="cb2-14"><a></a>cps[<span class="st">"log_uhours"</span>] <span class="op">=</span> np.log(cps.uhourse)</span>
-<span id="cb2-15"><a></a>cps[<span class="st">"log_hourslw"</span>] <span class="op">=</span> np.log(cps.hourslw)</span>
-<span id="cb2-16"><a></a>cps.replace(<span class="op">-</span>np.inf, np.nan, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-17"><a></a>cps[<span class="st">"nevermarried"</span>] <span class="op">=</span> cps.marital<span class="op">==</span><span class="dv">7</span></span>
-<span id="cb2-18"><a></a>cps[<span class="st">"wasmarried"</span>] <span class="op">=</span> (cps.marital <span class="op">&gt;=</span> <span class="dv">4</span>) <span class="op">&amp;</span> (cps.marital <span class="op">&lt;=</span> <span class="dv">6</span>)</span>
-<span id="cb2-19"><a></a>cps[<span class="st">"married"</span>] <span class="op">=</span> cps.marital <span class="op">&lt;=</span> <span class="dv">3</span></span>
-<span id="cb2-20"><a></a></span>
-<span id="cb2-21"><a></a>cps.describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="93eec2a5" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a>url <span class="op">=</span> <span class="st">'https://www.nber.org/morg/annual/morg23.dta'</span></span>
+<span id="cb2-2"><a aria-label="2"></a>local_filename <span class="op">=</span> <span class="st">'data/morg23.dta'</span></span>
+<span id="cb2-3"><a aria-label="3"></a></span>
+<span id="cb2-4"><a aria-label="4"></a><span class="cf">if</span> <span class="kw">not</span> os.path.exists(local_filename):</span>
+<span id="cb2-5"><a aria-label="5"></a>    response <span class="op">=</span> requests.get(url)</span>
+<span id="cb2-6"><a aria-label="6"></a>    <span class="cf">with</span> <span class="bu">open</span>(local_filename, <span class="st">'wb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb2-7"><a aria-label="7"></a>        <span class="bu">file</span>.write(response.content)</span>
+<span id="cb2-8"><a aria-label="8"></a></span>
+<span id="cb2-9"><a aria-label="9"></a>cpsall<span class="op">=</span>pd.read_stata(local_filename)</span>
+<span id="cb2-10"><a aria-label="10"></a><span class="co"># take subset of data just to reduce computation time</span></span>
+<span id="cb2-11"><a aria-label="11"></a>cps <span class="op">=</span> cpsall.sample(<span class="dv">30000</span>, replace<span class="op">=</span><span class="va">False</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb2-12"><a aria-label="12"></a>cps[<span class="st">"female"</span>] <span class="op">=</span> (cps.sex<span class="op">==</span><span class="dv">2</span>)</span>
+<span id="cb2-13"><a aria-label="13"></a>cps[<span class="st">"log_earn"</span>] <span class="op">=</span> np.log(cps[<span class="st">"earnwke"</span>])</span>
+<span id="cb2-14"><a aria-label="14"></a>cps[<span class="st">"log_uhours"</span>] <span class="op">=</span> np.log(cps.uhourse)</span>
+<span id="cb2-15"><a aria-label="15"></a>cps[<span class="st">"log_hourslw"</span>] <span class="op">=</span> np.log(cps.hourslw)</span>
+<span id="cb2-16"><a aria-label="16"></a>cps.replace(<span class="op">-</span>np.inf, np.nan, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-17"><a aria-label="17"></a>cps[<span class="st">"nevermarried"</span>] <span class="op">=</span> cps.marital<span class="op">==</span><span class="dv">7</span></span>
+<span id="cb2-18"><a aria-label="18"></a>cps[<span class="st">"wasmarried"</span>] <span class="op">=</span> (cps.marital <span class="op">&gt;=</span> <span class="dv">4</span>) <span class="op">&amp;</span> (cps.marital <span class="op">&lt;=</span> <span class="dv">6</span>)</span>
+<span id="cb2-19"><a aria-label="19"></a>cps[<span class="st">"married"</span>] <span class="op">=</span> cps.marital <span class="op">&lt;=</span> <span class="dv">3</span></span>
+<span id="cb2-20"><a aria-label="20"></a></span>
+<span id="cb2-21"><a aria-label="21"></a>cps.describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 <style scoped="">
@@ -910,54 +915,54 @@ f_\theta(x) = \Er[y|x] - \theta \partial_x \log p(x) + f''(x) + f'(x) \partial_x
 </section>
 <section id="partial-linear-model" class="slide level2">
 <h2>Partial Linear Model</h2>
-<div id="7134851a" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="kw">def</span> partial_linear(y, d, X, yestimator, destimator, folds<span class="op">=</span><span class="dv">3</span>):</span>
-<span id="cb3-2"><a></a>    <span class="co">"""Estimate the partially linear model y = d*C + f(x) + e</span></span>
-<span id="cb3-3"><a></a></span>
-<span id="cb3-4"><a></a><span class="co">    Parameters</span></span>
-<span id="cb3-5"><a></a><span class="co">    ----------</span></span>
-<span id="cb3-6"><a></a><span class="co">    y : array_like</span></span>
-<span id="cb3-7"><a></a><span class="co">        vector of outcomes</span></span>
-<span id="cb3-8"><a></a><span class="co">    d : array_like</span></span>
-<span id="cb3-9"><a></a><span class="co">        vector or matrix of regressors of interest</span></span>
-<span id="cb3-10"><a></a><span class="co">    X : array_like</span></span>
-<span id="cb3-11"><a></a><span class="co">        matrix of controls</span></span>
-<span id="cb3-12"><a></a><span class="co">    mlestimate : Estimator object for partialling out X. Must have ‘fit’</span></span>
-<span id="cb3-13"><a></a><span class="co">        and ‘predict’ methods.</span></span>
-<span id="cb3-14"><a></a><span class="co">    folds : int</span></span>
-<span id="cb3-15"><a></a><span class="co">        Number of folds for cross-fitting</span></span>
-<span id="cb3-16"><a></a></span>
-<span id="cb3-17"><a></a><span class="co">    Returns</span></span>
-<span id="cb3-18"><a></a><span class="co">    -------</span></span>
-<span id="cb3-19"><a></a><span class="co">    ols : statsmodels regression results containing estimate of coefficient on d.</span></span>
-<span id="cb3-20"><a></a><span class="co">    yhat : cross-fitted predictions of y</span></span>
-<span id="cb3-21"><a></a><span class="co">    dhat : cross-fitted predictions of d</span></span>
-<span id="cb3-22"><a></a><span class="co">    """</span></span>
-<span id="cb3-23"><a></a></span>
-<span id="cb3-24"><a></a>    <span class="co"># we want predicted probabilities if y or d is discrete</span></span>
-<span id="cb3-25"><a></a>    ymethod <span class="op">=</span> <span class="st">"predict"</span> <span class="cf">if</span> <span class="va">False</span><span class="op">==</span><span class="bu">getattr</span>(yestimator, <span class="st">"predict_proba"</span>,<span class="va">False</span>) <span class="cf">else</span> <span class="st">"predict_proba"</span></span>
-<span id="cb3-26"><a></a>    dmethod <span class="op">=</span> <span class="st">"predict"</span> <span class="cf">if</span> <span class="va">False</span><span class="op">==</span><span class="bu">getattr</span>(destimator, <span class="st">"predict_proba"</span>,<span class="va">False</span>) <span class="cf">else</span> <span class="st">"predict_proba"</span></span>
-<span id="cb3-27"><a></a>    <span class="co"># get the predictions</span></span>
-<span id="cb3-28"><a></a>    yhat <span class="op">=</span> cross_val_predict(yestimator,X,y,cv<span class="op">=</span>folds,method<span class="op">=</span>ymethod)</span>
-<span id="cb3-29"><a></a>    dhat <span class="op">=</span> cross_val_predict(destimator,X,d,cv<span class="op">=</span>folds,method<span class="op">=</span>dmethod)</span>
-<span id="cb3-30"><a></a>    ey <span class="op">=</span> np.array(y <span class="op">-</span> yhat)</span>
-<span id="cb3-31"><a></a>    ed <span class="op">=</span> np.array(d <span class="op">-</span> dhat)</span>
-<span id="cb3-32"><a></a>    ols <span class="op">=</span> sm.regression.linear_model.OLS(ey,ed).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>)</span>
-<span id="cb3-33"><a></a></span>
-<span id="cb3-34"><a></a>    <span class="cf">return</span>(ols, yhat, dhat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="08e6090e" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="kw">def</span> partial_linear(y, d, X, yestimator, destimator, folds<span class="op">=</span><span class="dv">3</span>):</span>
+<span id="cb3-2"><a aria-label="2"></a>    <span class="co">"""Estimate the partially linear model y = d*C + f(x) + e</span></span>
+<span id="cb3-3"><a aria-label="3"></a></span>
+<span id="cb3-4"><a aria-label="4"></a><span class="co">    Parameters</span></span>
+<span id="cb3-5"><a aria-label="5"></a><span class="co">    ----------</span></span>
+<span id="cb3-6"><a aria-label="6"></a><span class="co">    y : array_like</span></span>
+<span id="cb3-7"><a aria-label="7"></a><span class="co">        vector of outcomes</span></span>
+<span id="cb3-8"><a aria-label="8"></a><span class="co">    d : array_like</span></span>
+<span id="cb3-9"><a aria-label="9"></a><span class="co">        vector or matrix of regressors of interest</span></span>
+<span id="cb3-10"><a aria-label="10"></a><span class="co">    X : array_like</span></span>
+<span id="cb3-11"><a aria-label="11"></a><span class="co">        matrix of controls</span></span>
+<span id="cb3-12"><a aria-label="12"></a><span class="co">    mlestimate : Estimator object for partialling out X. Must have ‘fit’</span></span>
+<span id="cb3-13"><a aria-label="13"></a><span class="co">        and ‘predict’ methods.</span></span>
+<span id="cb3-14"><a aria-label="14"></a><span class="co">    folds : int</span></span>
+<span id="cb3-15"><a aria-label="15"></a><span class="co">        Number of folds for cross-fitting</span></span>
+<span id="cb3-16"><a aria-label="16"></a></span>
+<span id="cb3-17"><a aria-label="17"></a><span class="co">    Returns</span></span>
+<span id="cb3-18"><a aria-label="18"></a><span class="co">    -------</span></span>
+<span id="cb3-19"><a aria-label="19"></a><span class="co">    ols : statsmodels regression results containing estimate of coefficient on d.</span></span>
+<span id="cb3-20"><a aria-label="20"></a><span class="co">    yhat : cross-fitted predictions of y</span></span>
+<span id="cb3-21"><a aria-label="21"></a><span class="co">    dhat : cross-fitted predictions of d</span></span>
+<span id="cb3-22"><a aria-label="22"></a><span class="co">    """</span></span>
+<span id="cb3-23"><a aria-label="23"></a></span>
+<span id="cb3-24"><a aria-label="24"></a>    <span class="co"># we want predicted probabilities if y or d is discrete</span></span>
+<span id="cb3-25"><a aria-label="25"></a>    ymethod <span class="op">=</span> <span class="st">"predict"</span> <span class="cf">if</span> <span class="va">False</span><span class="op">==</span><span class="bu">getattr</span>(yestimator, <span class="st">"predict_proba"</span>,<span class="va">False</span>) <span class="cf">else</span> <span class="st">"predict_proba"</span></span>
+<span id="cb3-26"><a aria-label="26"></a>    dmethod <span class="op">=</span> <span class="st">"predict"</span> <span class="cf">if</span> <span class="va">False</span><span class="op">==</span><span class="bu">getattr</span>(destimator, <span class="st">"predict_proba"</span>,<span class="va">False</span>) <span class="cf">else</span> <span class="st">"predict_proba"</span></span>
+<span id="cb3-27"><a aria-label="27"></a>    <span class="co"># get the predictions</span></span>
+<span id="cb3-28"><a aria-label="28"></a>    yhat <span class="op">=</span> cross_val_predict(yestimator,X,y,cv<span class="op">=</span>folds,method<span class="op">=</span>ymethod)</span>
+<span id="cb3-29"><a aria-label="29"></a>    dhat <span class="op">=</span> cross_val_predict(destimator,X,d,cv<span class="op">=</span>folds,method<span class="op">=</span>dmethod)</span>
+<span id="cb3-30"><a aria-label="30"></a>    ey <span class="op">=</span> np.array(y <span class="op">-</span> yhat)</span>
+<span id="cb3-31"><a aria-label="31"></a>    ed <span class="op">=</span> np.array(d <span class="op">-</span> dhat)</span>
+<span id="cb3-32"><a aria-label="32"></a>    ols <span class="op">=</span> sm.regression.linear_model.OLS(ey,ed).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>)</span>
+<span id="cb3-33"><a aria-label="33"></a></span>
+<span id="cb3-34"><a aria-label="34"></a>    <span class="cf">return</span>(ols, yhat, dhat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="unconditional-gap" class="slide level2">
 <h2>Unconditional Gap</h2>
-<div id="577542d3" class="cell" data-execution_count="4">
+<div id="2bf5cb8e" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>lm <span class="op">=</span> <span class="bu">list</span>()</span>
-<span id="cb4-2"><a></a>lm.append(smf.ols(formula<span class="op">=</span><span class="st">"log_earn ~ female"</span>, data<span class="op">=</span>cps,</span>
-<span id="cb4-3"><a></a>                  missing<span class="op">=</span><span class="st">"drop"</span>).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>))</span>
-<span id="cb4-4"><a></a>lm.append(smf.ols(formula<span class="op">=</span><span class="st">"log_earn ~ female + log_hourslw + log_uhours"</span>, data<span class="op">=</span>cps,</span>
-<span id="cb4-5"><a></a>                  missing<span class="op">=</span><span class="st">"drop"</span>).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>))</span>
-<span id="cb4-6"><a></a>summary_col(lm, stars<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a>lm <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb4-2"><a aria-label="2"></a>lm.append(smf.ols(formula<span class="op">=</span><span class="st">"log_earn ~ female"</span>, data<span class="op">=</span>cps,</span>
+<span id="cb4-3"><a aria-label="3"></a>                  missing<span class="op">=</span><span class="st">"drop"</span>).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>))</span>
+<span id="cb4-4"><a aria-label="4"></a>lm.append(smf.ols(formula<span class="op">=</span><span class="st">"log_earn ~ female + log_hourslw + log_uhours"</span>, data<span class="op">=</span>cps,</span>
+<span id="cb4-5"><a aria-label="5"></a>                  missing<span class="op">=</span><span class="st">"drop"</span>).fit(cov_type<span class="op">=</span><span class="st">'HC0'</span>))</span>
+<span id="cb4-6"><a aria-label="6"></a>summary_col(lm, stars<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <table class="simpletable caption-top">
@@ -1027,53 +1032,53 @@ Standard errors in parentheses.<br>
 </section>
 <section id="adding-controls" class="slide level2">
 <h2>Adding Controls</h2>
-<div id="e459e141" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">from</span> patsy <span class="im">import</span> dmatrices</span>
-<span id="cb5-2"><a></a>fmla  <span class="op">=</span> <span class="st">"log_earn + female ~ log_uhours + log_hourslw + I(age**2) + age + C(grade92) + C(race) + C(smsastat) + C(unionmme) + C(unioncov) + nevermarried + wasmarried + married"</span> <span class="co">#C(ind02) + C(occ2012)"</span></span>
-<span id="cb5-3"><a></a>yd, X <span class="op">=</span> dmatrices(fmla,cps)</span>
-<span id="cb5-4"><a></a>female <span class="op">=</span> yd[:,<span class="dv">1</span>]</span>
-<span id="cb5-5"><a></a>logearn <span class="op">=</span> yd[:,<span class="dv">2</span>]<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="dd1e3d26" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="im">from</span> patsy <span class="im">import</span> dmatrices</span>
+<span id="cb5-2"><a aria-label="2"></a>fmla  <span class="op">=</span> <span class="st">"log_earn + female ~ log_uhours + log_hourslw + I(age**2) + age + C(grade92) + C(race) + C(smsastat) + C(unionmme) + C(unioncov) + nevermarried + wasmarried + married"</span> <span class="co">#C(ind02) + C(occ2012)"</span></span>
+<span id="cb5-3"><a aria-label="3"></a>yd, X <span class="op">=</span> dmatrices(fmla,cps)</span>
+<span id="cb5-4"><a aria-label="4"></a>female <span class="op">=</span> yd[:,<span class="dv">1</span>]</span>
+<span id="cb5-5"><a aria-label="5"></a>logearn <span class="op">=</span> yd[:,<span class="dv">2</span>]<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="estimating-eta" class="slide level2">
 <h2>Estimating <span class="math inline">\(\eta\)</span></h2>
-<div id="2ec1c8a7" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>alphas <span class="op">=</span> np.exp(np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">12</span>, <span class="dv">20</span>))</span>
-<span id="cb6-2"><a></a>lassoy <span class="op">=</span> linear_model.LassoCV(cv<span class="op">=</span><span class="dv">4</span>, alphas<span class="op">=</span>alphas, max_iter<span class="op">=</span><span class="dv">5000</span>).fit(X,logearn)</span>
-<span id="cb6-3"><a></a>lassod <span class="op">=</span> linear_model.LassoCV(cv<span class="op">=</span><span class="dv">4</span>, alphas<span class="op">=</span>alphas, max_iter<span class="op">=</span><span class="dv">5000</span>).fit(X,female)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="4dd507f4" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a>alphas <span class="op">=</span> np.exp(np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">12</span>, <span class="dv">20</span>))</span>
+<span id="cb6-2"><a aria-label="2"></a>lassoy <span class="op">=</span> linear_model.LassoCV(cv<span class="op">=</span><span class="dv">4</span>, alphas<span class="op">=</span>alphas, max_iter<span class="op">=</span><span class="dv">5000</span>).fit(X,logearn)</span>
+<span id="cb6-3"><a aria-label="3"></a>lassod <span class="op">=</span> linear_model.LassoCV(cv<span class="op">=</span><span class="dv">4</span>, alphas<span class="op">=</span>alphas, max_iter<span class="op">=</span><span class="dv">5000</span>).fit(X,female)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="estimating-eta-1" class="slide level2">
 <h2>Estimating <span class="math inline">\(\eta\)</span></h2>
-<div id="c48a9e54" class="cell" data-execution_count="7">
+<div id="d43bb102" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">2</span>)</span>
-<span id="cb7-2"><a></a></span>
-<span id="cb7-3"><a></a><span class="kw">def</span> plotlassocv(l, ax) :</span>
-<span id="cb7-4"><a></a>    alphas <span class="op">=</span> l.alphas_</span>
-<span id="cb7-5"><a></a>    mse <span class="op">=</span> l.mse_path_.mean(axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb7-6"><a></a>    std_error <span class="op">=</span> l.mse_path_.std(axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb7-7"><a></a>    ax.plot(alphas,mse)</span>
-<span id="cb7-8"><a></a>    ax.fill_between(alphas, mse <span class="op">+</span> std_error, mse <span class="op">-</span> std_error, alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
-<span id="cb7-9"><a></a></span>
-<span id="cb7-10"><a></a>    ax.set_ylabel(<span class="st">'MSE +/- std error'</span>)</span>
-<span id="cb7-11"><a></a>    ax.set_xlabel(<span class="st">'alpha'</span>)</span>
-<span id="cb7-12"><a></a>    ax.set_xlim([alphas[<span class="dv">0</span>], alphas[<span class="op">-</span><span class="dv">1</span>]])</span>
-<span id="cb7-13"><a></a>    ax.set_xscale(<span class="st">"log"</span>)</span>
-<span id="cb7-14"><a></a>    <span class="cf">return</span>(ax)</span>
-<span id="cb7-15"><a></a></span>
-<span id="cb7-16"><a></a>ax[<span class="dv">0</span>] <span class="op">=</span> plotlassocv(lassoy,ax[<span class="dv">0</span>])</span>
-<span id="cb7-17"><a></a>ax[<span class="dv">0</span>].set_title(<span class="st">"MSE for log(earn)"</span>)</span>
-<span id="cb7-18"><a></a>ax[<span class="dv">1</span>] <span class="op">=</span> plotlassocv(lassod,ax[<span class="dv">1</span>])</span>
-<span id="cb7-19"><a></a>ax[<span class="dv">1</span>].set_title(<span class="st">"MSE for female"</span>)</span>
-<span id="cb7-20"><a></a>fig.tight_layout()</span>
-<span id="cb7-21"><a></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb7-2"><a aria-label="2"></a></span>
+<span id="cb7-3"><a aria-label="3"></a><span class="kw">def</span> plotlassocv(l, ax) :</span>
+<span id="cb7-4"><a aria-label="4"></a>    alphas <span class="op">=</span> l.alphas_</span>
+<span id="cb7-5"><a aria-label="5"></a>    mse <span class="op">=</span> l.mse_path_.mean(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-6"><a aria-label="6"></a>    std_error <span class="op">=</span> l.mse_path_.std(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-7"><a aria-label="7"></a>    ax.plot(alphas,mse)</span>
+<span id="cb7-8"><a aria-label="8"></a>    ax.fill_between(alphas, mse <span class="op">+</span> std_error, mse <span class="op">-</span> std_error, alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb7-9"><a aria-label="9"></a></span>
+<span id="cb7-10"><a aria-label="10"></a>    ax.set_ylabel(<span class="st">'MSE +/- std error'</span>)</span>
+<span id="cb7-11"><a aria-label="11"></a>    ax.set_xlabel(<span class="st">'alpha'</span>)</span>
+<span id="cb7-12"><a aria-label="12"></a>    ax.set_xlim([alphas[<span class="dv">0</span>], alphas[<span class="op">-</span><span class="dv">1</span>]])</span>
+<span id="cb7-13"><a aria-label="13"></a>    ax.set_xscale(<span class="st">"log"</span>)</span>
+<span id="cb7-14"><a aria-label="14"></a>    <span class="cf">return</span>(ax)</span>
+<span id="cb7-15"><a aria-label="15"></a></span>
+<span id="cb7-16"><a aria-label="16"></a>ax[<span class="dv">0</span>] <span class="op">=</span> plotlassocv(lassoy,ax[<span class="dv">0</span>])</span>
+<span id="cb7-17"><a aria-label="17"></a>ax[<span class="dv">0</span>].set_title(<span class="st">"MSE for log(earn)"</span>)</span>
+<span id="cb7-18"><a aria-label="18"></a>ax[<span class="dv">1</span>] <span class="op">=</span> plotlassocv(lassod,ax[<span class="dv">1</span>])</span>
+<span id="cb7-19"><a aria-label="19"></a>ax[<span class="dv">1</span>].set_title(<span class="st">"MSE for female"</span>)</span>
+<span id="cb7-20"><a aria-label="20"></a>fig.tight_layout()</span>
+<span id="cb7-21"><a aria-label="21"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="doubleml_files/figure-revealjs/cell-8-output-1.png" width="950" height="468"></p>
+<p><img data-src="doubleml_files/figure-revealjs/cell-8-output-1.png" width="952" height="469"></p>
 </figure>
 </div>
 </div>
@@ -1081,26 +1086,26 @@ Standard errors in parentheses.<br>
 </section>
 <section id="estimating-eta-2" class="slide level2">
 <h2>Estimating <span class="math inline">\(\eta\)</span></h2>
-<div id="00bdf3dd" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="kw">def</span> pickalpha(lassocv) :</span>
-<span id="cb8-2"><a></a>    <span class="co">#imin = np.argmin(lassocv.mse_path_.mean(axis=1))</span></span>
-<span id="cb8-3"><a></a>    <span class="co">#msemin = lassocv.mse_path_.mean(axis=1)[imin]</span></span>
-<span id="cb8-4"><a></a>    <span class="co">#se = lassocv.mse_path_.std(axis=1)[imin]</span></span>
-<span id="cb8-5"><a></a>    <span class="co">#alpha= min([alpha for (alpha, mse) in zip(lassocv.alphas_, lassocv.mse_path_.mean(axis=1)) if mse&lt;msemin+se])</span></span>
-<span id="cb8-6"><a></a>    alpha <span class="op">=</span> lassocv.alpha_</span>
-<span id="cb8-7"><a></a>    <span class="cf">return</span>(alpha)</span>
-<span id="cb8-8"><a></a></span>
-<span id="cb8-9"><a></a>alphay <span class="op">=</span> pickalpha(lassoy)</span>
-<span id="cb8-10"><a></a>alphad <span class="op">=</span> pickalpha(lassod)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="b49ef374" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a><span class="kw">def</span> pickalpha(lassocv) :</span>
+<span id="cb8-2"><a aria-label="2"></a>    <span class="co">#imin = np.argmin(lassocv.mse_path_.mean(axis=1))</span></span>
+<span id="cb8-3"><a aria-label="3"></a>    <span class="co">#msemin = lassocv.mse_path_.mean(axis=1)[imin]</span></span>
+<span id="cb8-4"><a aria-label="4"></a>    <span class="co">#se = lassocv.mse_path_.std(axis=1)[imin]</span></span>
+<span id="cb8-5"><a aria-label="5"></a>    <span class="co">#alpha= min([alpha for (alpha, mse) in zip(lassocv.alphas_, lassocv.mse_path_.mean(axis=1)) if mse&lt;msemin+se])</span></span>
+<span id="cb8-6"><a aria-label="6"></a>    alpha <span class="op">=</span> lassocv.alpha_</span>
+<span id="cb8-7"><a aria-label="7"></a>    <span class="cf">return</span>(alpha)</span>
+<span id="cb8-8"><a aria-label="8"></a></span>
+<span id="cb8-9"><a aria-label="9"></a>alphay <span class="op">=</span> pickalpha(lassoy)</span>
+<span id="cb8-10"><a aria-label="10"></a>alphad <span class="op">=</span> pickalpha(lassod)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="estimate-theta" class="slide level2">
 <h2>Estimate <span class="math inline">\(\theta\)</span></h2>
-<div id="4ec6f92d" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a>pl_lasso <span class="op">=</span> partial_linear(logearn, female, X,</span>
-<span id="cb9-2"><a></a>                          linear_model.Lasso(alpha<span class="op">=</span>alphay),</span>
-<span id="cb9-3"><a></a>                          linear_model.Lasso(alpha<span class="op">=</span>alphad))</span>
-<span id="cb9-4"><a></a>pl_lasso[<span class="dv">0</span>].summary(slim<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="017e7912" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a>pl_lasso <span class="op">=</span> partial_linear(logearn, female, X,</span>
+<span id="cb9-2"><a aria-label="2"></a>                          linear_model.Lasso(alpha<span class="op">=</span>alphay),</span>
+<span id="cb9-3"><a aria-label="3"></a>                          linear_model.Lasso(alpha<span class="op">=</span>alphad))</span>
+<span id="cb9-4"><a aria-label="4"></a>pl_lasso[<span class="dv">0</span>].summary(slim<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <table class="simpletable caption-top">
 <caption>OLS Regression Results</caption>
@@ -1109,21 +1114,25 @@ Standard errors in parentheses.<br>
 <th data-quarto-table-cell-role="th">Dep. Variable:</th>
 <td>y</td>
 <th data-quarto-table-cell-role="th">F-statistic:</th>
+<td>318.0</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">Model:</th>
 <td>OLS</td>
 <th data-quarto-table-cell-role="th">Prob (F-statistic):</th>
+<td>2.85e-70</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">No. Observations:</th>
 <td>12696</td>
 <th data-quarto-table-cell-role="th"></th>
+<td></td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">Covariance Type:</th>
 <td>HC0</td>
 <th data-quarto-table-cell-role="th"></th>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -1157,38 +1166,38 @@ Standard errors in parentheses.<br>
 </section>
 <section id="examining-predictions" class="slide level2">
 <h2>Examining Predictions</h2>
-<div id="1e762456" class="cell" data-execution_count="10">
+<div id="06521290" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb10-2"><a></a><span class="co"># Visualize predictions</span></span>
-<span id="cb10-3"><a></a><span class="kw">def</span> preddf(pl):</span>
-<span id="cb10-4"><a></a>    df <span class="op">=</span> pd.DataFrame({<span class="st">"logearn"</span>:logearn,</span>
-<span id="cb10-5"><a></a>                       <span class="st">"predicted"</span>:pl[<span class="dv">1</span>],</span>
-<span id="cb10-6"><a></a>                       <span class="st">"female"</span>:female,</span>
-<span id="cb10-7"><a></a>                       <span class="st">"P(female|x)"</span>:pl[<span class="dv">2</span>]})</span>
-<span id="cb10-8"><a></a>    <span class="cf">return</span>(df)</span>
-<span id="cb10-9"><a></a></span>
-<span id="cb10-10"><a></a><span class="kw">def</span> plotpredictions(df) :</span>
-<span id="cb10-11"><a></a>    fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">1</span>)</span>
-<span id="cb10-12"><a></a>    plt.figure()</span>
-<span id="cb10-13"><a></a>    sns.scatterplot(x <span class="op">=</span> df.predicted, y <span class="op">=</span> df.logearn<span class="op">-</span>df.predicted, hue<span class="op">=</span>df.female, ax<span class="op">=</span>ax[<span class="dv">0</span>])</span>
-<span id="cb10-14"><a></a>    ax[<span class="dv">0</span>].set_title(<span class="st">"Prediction Errors for Log Earnings"</span>)</span>
-<span id="cb10-15"><a></a></span>
-<span id="cb10-16"><a></a>    sns.histplot(df[<span class="st">"P(female|x)"</span>][df.female<span class="op">==</span><span class="dv">0</span>], kde <span class="op">=</span> <span class="va">False</span>,</span>
-<span id="cb10-17"><a></a>                 label <span class="op">=</span> <span class="st">"Male"</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>])</span>
-<span id="cb10-18"><a></a>    sns.histplot(df[<span class="st">"P(female|x)"</span>][df.female<span class="op">==</span><span class="dv">1</span>], kde <span class="op">=</span> <span class="va">False</span>,</span>
-<span id="cb10-19"><a></a>                 label <span class="op">=</span> <span class="st">"Female"</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>])</span>
-<span id="cb10-20"><a></a>    ax[<span class="dv">1</span>].set_title(<span class="st">'P(female|x)'</span>)</span>
-<span id="cb10-21"><a></a>    <span class="cf">return</span>(fig)</span>
-<span id="cb10-22"><a></a></span>
-<span id="cb10-23"><a></a>fig<span class="op">=</span>plotpredictions(preddf(pl_lasso))</span>
-<span id="cb10-24"><a></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb10-2"><a aria-label="2"></a><span class="co"># Visualize predictions</span></span>
+<span id="cb10-3"><a aria-label="3"></a><span class="kw">def</span> preddf(pl):</span>
+<span id="cb10-4"><a aria-label="4"></a>    df <span class="op">=</span> pd.DataFrame({<span class="st">"logearn"</span>:logearn,</span>
+<span id="cb10-5"><a aria-label="5"></a>                       <span class="st">"predicted"</span>:pl[<span class="dv">1</span>],</span>
+<span id="cb10-6"><a aria-label="6"></a>                       <span class="st">"female"</span>:female,</span>
+<span id="cb10-7"><a aria-label="7"></a>                       <span class="st">"P(female|x)"</span>:pl[<span class="dv">2</span>]})</span>
+<span id="cb10-8"><a aria-label="8"></a>    <span class="cf">return</span>(df)</span>
+<span id="cb10-9"><a aria-label="9"></a></span>
+<span id="cb10-10"><a aria-label="10"></a><span class="kw">def</span> plotpredictions(df) :</span>
+<span id="cb10-11"><a aria-label="11"></a>    fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">1</span>)</span>
+<span id="cb10-12"><a aria-label="12"></a>    plt.figure()</span>
+<span id="cb10-13"><a aria-label="13"></a>    sns.scatterplot(x <span class="op">=</span> df.predicted, y <span class="op">=</span> df.logearn<span class="op">-</span>df.predicted, hue<span class="op">=</span>df.female, ax<span class="op">=</span>ax[<span class="dv">0</span>])</span>
+<span id="cb10-14"><a aria-label="14"></a>    ax[<span class="dv">0</span>].set_title(<span class="st">"Prediction Errors for Log Earnings"</span>)</span>
+<span id="cb10-15"><a aria-label="15"></a></span>
+<span id="cb10-16"><a aria-label="16"></a>    sns.histplot(df[<span class="st">"P(female|x)"</span>][df.female<span class="op">==</span><span class="dv">0</span>], kde <span class="op">=</span> <span class="va">False</span>,</span>
+<span id="cb10-17"><a aria-label="17"></a>                 label <span class="op">=</span> <span class="st">"Male"</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>])</span>
+<span id="cb10-18"><a aria-label="18"></a>    sns.histplot(df[<span class="st">"P(female|x)"</span>][df.female<span class="op">==</span><span class="dv">1</span>], kde <span class="op">=</span> <span class="va">False</span>,</span>
+<span id="cb10-19"><a aria-label="19"></a>                 label <span class="op">=</span> <span class="st">"Female"</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>])</span>
+<span id="cb10-20"><a aria-label="20"></a>    ax[<span class="dv">1</span>].set_title(<span class="st">'P(female|x)'</span>)</span>
+<span id="cb10-21"><a aria-label="21"></a>    <span class="cf">return</span>(fig)</span>
+<span id="cb10-22"><a aria-label="22"></a></span>
+<span id="cb10-23"><a aria-label="23"></a>fig<span class="op">=</span>plotpredictions(preddf(pl_lasso))</span>
+<span id="cb10-24"><a aria-label="24"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="doubleml_files/figure-revealjs/cell-11-output-1.png" width="819" height="450"></p>
+<p><img data-src="doubleml_files/figure-revealjs/cell-11-output-1.png" width="820" height="451"></p>
 </figure>
 </div>
 </div>
@@ -1206,30 +1215,30 @@ Standard errors in parentheses.<br>
 </section>
 <section id="using-doubleml" class="slide level2">
 <h2>Using <code>doubleml</code></h2>
-<div id="b4bcbc42" class="cell" data-execution_count="11">
+<div id="a3ba850d" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="im">import</span> doubleml</span>
-<span id="cb12-2"><a></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> PolynomialFeatures</span>
-<span id="cb12-3"><a></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LassoCV, LogisticRegressionCV</span>
-<span id="cb12-4"><a></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb12-5"><a></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
-<span id="cb12-6"><a></a></span>
-<span id="cb12-7"><a></a>dml_data <span class="op">=</span> doubleml.DoubleMLData.from_arrays(X,logearn,female)</span>
-<span id="cb12-8"><a></a><span class="co"># Initialize learners</span></span>
-<span id="cb12-9"><a></a>Cs <span class="op">=</span> <span class="fl">0.0001</span><span class="op">*</span>np.logspace(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">10</span>)</span>
-<span id="cb12-10"><a></a>lasso <span class="op">=</span> make_pipeline(StandardScaler(), LassoCV(cv<span class="op">=</span><span class="dv">5</span>, max_iter<span class="op">=</span><span class="dv">10000</span>))</span>
-<span id="cb12-11"><a></a>lasso_class <span class="op">=</span> make_pipeline(StandardScaler(),</span>
-<span id="cb12-12"><a></a>                            LogisticRegressionCV(cv<span class="op">=</span><span class="dv">5</span>, penalty<span class="op">=</span><span class="st">'l1'</span>, solver<span class="op">=</span><span class="st">'liblinear'</span>,</span>
-<span id="cb12-13"><a></a>                                                 Cs <span class="op">=</span> Cs, max_iter<span class="op">=</span><span class="dv">1000</span>))</span>
-<span id="cb12-14"><a></a></span>
-<span id="cb12-15"><a></a>np.random.seed(<span class="dv">123</span>)</span>
-<span id="cb12-16"><a></a>dml_plr_lasso <span class="op">=</span> doubleml.DoubleMLPLR(dml_data,</span>
-<span id="cb12-17"><a></a>                                     ml_l <span class="op">=</span> lasso,</span>
-<span id="cb12-18"><a></a>                                     ml_m <span class="op">=</span> lasso_class,</span>
-<span id="cb12-19"><a></a>                                     n_folds <span class="op">=</span> <span class="dv">3</span>)</span>
-<span id="cb12-20"><a></a>dml_plr_lasso.fit(store_predictions<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb12-21"><a></a><span class="bu">print</span>(dml_plr_lasso.summary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a><span class="im">import</span> doubleml</span>
+<span id="cb12-2"><a aria-label="2"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> PolynomialFeatures</span>
+<span id="cb12-3"><a aria-label="3"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LassoCV, LogisticRegressionCV</span>
+<span id="cb12-4"><a aria-label="4"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb12-5"><a aria-label="5"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
+<span id="cb12-6"><a aria-label="6"></a></span>
+<span id="cb12-7"><a aria-label="7"></a>dml_data <span class="op">=</span> doubleml.DoubleMLData.from_arrays(X,logearn,female)</span>
+<span id="cb12-8"><a aria-label="8"></a><span class="co"># Initialize learners</span></span>
+<span id="cb12-9"><a aria-label="9"></a>Cs <span class="op">=</span> <span class="fl">0.0001</span><span class="op">*</span>np.logspace(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">10</span>)</span>
+<span id="cb12-10"><a aria-label="10"></a>lasso <span class="op">=</span> make_pipeline(StandardScaler(), LassoCV(cv<span class="op">=</span><span class="dv">5</span>, max_iter<span class="op">=</span><span class="dv">10000</span>))</span>
+<span id="cb12-11"><a aria-label="11"></a>lasso_class <span class="op">=</span> make_pipeline(StandardScaler(),</span>
+<span id="cb12-12"><a aria-label="12"></a>                            LogisticRegressionCV(cv<span class="op">=</span><span class="dv">5</span>, penalty<span class="op">=</span><span class="st">'l1'</span>, solver<span class="op">=</span><span class="st">'liblinear'</span>,</span>
+<span id="cb12-13"><a aria-label="13"></a>                                                 Cs <span class="op">=</span> Cs, max_iter<span class="op">=</span><span class="dv">1000</span>))</span>
+<span id="cb12-14"><a aria-label="14"></a></span>
+<span id="cb12-15"><a aria-label="15"></a>np.random.seed(<span class="dv">123</span>)</span>
+<span id="cb12-16"><a aria-label="16"></a>dml_plr_lasso <span class="op">=</span> doubleml.DoubleMLPLR(dml_data,</span>
+<span id="cb12-17"><a aria-label="17"></a>                                     ml_l <span class="op">=</span> lasso,</span>
+<span id="cb12-18"><a aria-label="18"></a>                                     ml_m <span class="op">=</span> lasso_class,</span>
+<span id="cb12-19"><a aria-label="19"></a>                                     n_folds <span class="op">=</span> <span class="dv">3</span>)</span>
+<span id="cb12-20"><a aria-label="20"></a>dml_plr_lasso.fit(store_predictions<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-21"><a aria-label="21"></a><span class="bu">print</span>(dml_plr_lasso.summary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>       coef   std err          t         P&gt;|t|     2.5 %    97.5 %
@@ -1239,22 +1248,22 @@ d -0.184128  0.010433 -17.647772  1.058513e-69 -0.204577 -0.163678</code></pre>
 </section>
 <section id="visualizing-predictions-lasso-logistic-lasso" class="slide level2">
 <h2>Visualizing Predictions: Lasso &amp; Logistic Lasso</h2>
-<div id="5a60ef9d" class="cell" data-execution_count="12">
+<div id="e368cbbd" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="kw">def</span> dmlpreddf(dml_model):</span>
-<span id="cb14-2"><a></a>    df<span class="op">=</span>pd.DataFrame({<span class="st">"logearn"</span>:logearn,</span>
-<span id="cb14-3"><a></a>                     <span class="st">"predicted"</span>:dml_model.predictions[<span class="st">'ml_l'</span>].flatten(),</span>
-<span id="cb14-4"><a></a>                     <span class="st">"female"</span>:female,</span>
-<span id="cb14-5"><a></a>                     <span class="st">"P(female|x)"</span>:dml_model.predictions[<span class="st">'ml_m'</span>].flatten()})</span>
-<span id="cb14-6"><a></a>    <span class="cf">return</span>(df)</span>
-<span id="cb14-7"><a></a></span>
-<span id="cb14-8"><a></a>plotpredictions(dmlpreddf(dml_plr_lasso)).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a><span class="kw">def</span> dmlpreddf(dml_model):</span>
+<span id="cb14-2"><a aria-label="2"></a>    df<span class="op">=</span>pd.DataFrame({<span class="st">"logearn"</span>:logearn,</span>
+<span id="cb14-3"><a aria-label="3"></a>                     <span class="st">"predicted"</span>:dml_model.predictions[<span class="st">'ml_l'</span>].flatten(),</span>
+<span id="cb14-4"><a aria-label="4"></a>                     <span class="st">"female"</span>:female,</span>
+<span id="cb14-5"><a aria-label="5"></a>                     <span class="st">"P(female|x)"</span>:dml_model.predictions[<span class="st">'ml_m'</span>].flatten()})</span>
+<span id="cb14-6"><a aria-label="6"></a>    <span class="cf">return</span>(df)</span>
+<span id="cb14-7"><a aria-label="7"></a></span>
+<span id="cb14-8"><a aria-label="8"></a>plotpredictions(dmlpreddf(dml_plr_lasso)).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="doubleml_files/figure-revealjs/cell-13-output-1.png" width="819" height="450"></p>
+<p><img data-src="doubleml_files/figure-revealjs/cell-13-output-1.png" width="820" height="451"></p>
 </figure>
 </div>
 </div>
@@ -1265,15 +1274,15 @@ d -0.184128  0.010433 -17.647772  1.058513e-69 -0.204577 -0.163678</code></pre>
 </section>
 <section id="with-gradient-boosted-trees" class="slide level2">
 <h2>With Gradient Boosted Trees</h2>
-<div id="7b899d97" class="cell" data-execution_count="13">
+<div id="7229dd07" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="im">from</span> lightgbm <span class="im">import</span> LGBMClassifier, LGBMRegressor</span>
-<span id="cb16-2"><a></a>ylearner <span class="op">=</span> LGBMRegressor(force_col_wise<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb16-3"><a></a>dlearner <span class="op">=</span> LGBMClassifier(force_col_wise<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb16-4"><a></a>dml_plr_gbt <span class="op">=</span> doubleml.DoubleMLPLR(dml_data, ylearner, dlearner)</span>
-<span id="cb16-5"><a></a>dml_plr_gbt.fit(store_predictions<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb16-6"><a></a><span class="bu">print</span>(dml_plr_gbt.summary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a><span class="im">from</span> lightgbm <span class="im">import</span> LGBMClassifier, LGBMRegressor</span>
+<span id="cb16-2"><a aria-label="2"></a>ylearner <span class="op">=</span> LGBMRegressor(force_col_wise<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-3"><a aria-label="3"></a>dlearner <span class="op">=</span> LGBMClassifier(force_col_wise<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-4"><a aria-label="4"></a>dml_plr_gbt <span class="op">=</span> doubleml.DoubleMLPLR(dml_data, ylearner, dlearner)</span>
+<span id="cb16-5"><a aria-label="5"></a>dml_plr_gbt.fit(store_predictions<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-6"><a aria-label="6"></a><span class="bu">print</span>(dml_plr_gbt.summary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[LightGBM] [Info] Total Bins 299
@@ -1287,10 +1296,8 @@ d -0.184128  0.010433 -17.647772  1.058513e-69 -0.204577 -0.163678</code></pre>
 [LightGBM] [Info] Start training from score 6.871366
 [LightGBM] [Info] Total Bins 295
 [LightGBM] [Info] Number of data points in the train set: 10157, number of used features: 31
-[LightGBM] [Info] Start training from score 6.873900</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[LightGBM] [Info] Total Bins 294
+[LightGBM] [Info] Start training from score 6.873900
+[LightGBM] [Info] Total Bins 294
 [LightGBM] [Info] Number of data points in the train set: 10157, number of used features: 30
 [LightGBM] [Info] Start training from score 6.866147
 [LightGBM] [Info] Number of positive: 5021, number of negative: 5135
@@ -1325,15 +1332,15 @@ d -0.166006  0.010406 -15.952984  2.716020e-57 -0.186401 -0.145611</code></pre>
 </section>
 <section id="visualizing-predictions-trees" class="slide level2">
 <h2>Visualizing Predictions: Trees</h2>
-<div id="7efed10d" class="cell" data-execution_count="14">
+<div id="33f65375" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a>plotpredictions(dmlpreddf(dml_plr_gbt)).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-label="1"></a>plotpredictions(dmlpreddf(dml_plr_gbt)).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="doubleml_files/figure-revealjs/cell-15-output-1.png" width="827" height="450"></p>
+<p><img data-src="doubleml_files/figure-revealjs/cell-15-output-1.png" width="828" height="451"></p>
 </figure>
 </div>
 </div>
@@ -1358,17 +1365,17 @@ D &amp; = m_0(X) + V
 </section>
 <section id="interactive-regression-model---lasso" class="slide level2">
 <h2>Interactive Regression Model - Lasso</h2>
-<div id="0fd848d1" class="cell" data-execution_count="15">
+<div id="fa4c66be" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a>np.random.seed(<span class="dv">123</span>)</span>
-<span id="cb21-2"><a></a>dml_irm_lasso <span class="op">=</span> doubleml.DoubleMLIRM(dml_data,</span>
-<span id="cb21-3"><a></a>                                     ml_g <span class="op">=</span> lasso,</span>
-<span id="cb21-4"><a></a>                                     ml_m <span class="op">=</span> lasso_class,</span>
-<span id="cb21-5"><a></a>                                     trimming_threshold <span class="op">=</span> <span class="fl">0.01</span>,</span>
-<span id="cb21-6"><a></a>                                     n_folds <span class="op">=</span> <span class="dv">3</span>)</span>
-<span id="cb21-7"><a></a>dml_irm_lasso.fit()</span>
-<span id="cb21-8"><a></a>dml_irm_lasso.summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a aria-label="1"></a>np.random.seed(<span class="dv">123</span>)</span>
+<span id="cb20-2"><a aria-label="2"></a>dml_irm_lasso <span class="op">=</span> doubleml.DoubleMLIRM(dml_data,</span>
+<span id="cb20-3"><a aria-label="3"></a>                                     ml_g <span class="op">=</span> lasso,</span>
+<span id="cb20-4"><a aria-label="4"></a>                                     ml_m <span class="op">=</span> lasso_class,</span>
+<span id="cb20-5"><a aria-label="5"></a>                                     trimming_threshold <span class="op">=</span> <span class="fl">0.01</span>,</span>
+<span id="cb20-6"><a aria-label="6"></a>                                     n_folds <span class="op">=</span> <span class="dv">3</span>)</span>
+<span id="cb20-7"><a aria-label="7"></a>dml_irm_lasso.fit()</span>
+<span id="cb20-8"><a aria-label="8"></a>dml_irm_lasso.summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="15">
 <div>
@@ -1417,8 +1424,8 @@ D &amp; = m_0(X) + V
 </section>
 <section id="irm-lasso-results" class="slide level2">
 <h2>IRM Lasso: Results</h2>
-<div id="13f3c21f" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a></a>dml_irm_lasso.summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fde79261" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a aria-label="1"></a>dml_irm_lasso.summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <div>
 <style scoped="">
@@ -1463,8 +1470,8 @@ D &amp; = m_0(X) + V
 </div>
 </div>
 </div>
-<div id="ee831a07" class="cell" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a>dml_irm_lasso.gate(groups<span class="op">=</span>pd.DataFrame(X[:,X.design_info.<span class="bu">slice</span>(<span class="st">'married'</span>)])).summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="d8c3b000" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a>dml_irm_lasso.gate(groups<span class="op">=</span>pd.DataFrame(X[:,X.design_info.<span class="bu">slice</span>(<span class="st">'married'</span>)])).summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <div>
 <style scoped="">
@@ -1509,8 +1516,8 @@ D &amp; = m_0(X) + V
 </div>
 </div>
 </div>
-<div id="ae70a7f4" class="cell" data-execution_count="18">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a></a>dml_irm_lasso.gate(groups<span class="op">=</span>pd.DataFrame(X[:,X.design_info.<span class="bu">slice</span>(<span class="st">'nevermarried'</span>)])).summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="f209b015" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a>dml_irm_lasso.gate(groups<span class="op">=</span>pd.DataFrame(X[:,X.design_info.<span class="bu">slice</span>(<span class="st">'nevermarried'</span>)])).summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <div>
 <style scoped="">
@@ -1558,16 +1565,16 @@ D &amp; = m_0(X) + V
 </section>
 <section id="interactive-regression-model---trees" class="slide level2">
 <h2>Interactive Regression Model - Trees</h2>
-<div id="f2180328" class="cell" data-execution_count="19">
+<div id="c9621ab2" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a></a>np.random.seed(<span class="dv">123</span>)</span>
-<span id="cb25-2"><a></a>dml_irm_gbt <span class="op">=</span> doubleml.DoubleMLIRM(dml_data,</span>
-<span id="cb25-3"><a></a>                                     ml_g <span class="op">=</span> ylearner,</span>
-<span id="cb25-4"><a></a>                                     ml_m <span class="op">=</span> dlearner,</span>
-<span id="cb25-5"><a></a>                                     trimming_threshold <span class="op">=</span> <span class="fl">0.01</span>,</span>
-<span id="cb25-6"><a></a>                                     n_folds <span class="op">=</span> <span class="dv">3</span>)</span>
-<span id="cb25-7"><a></a>dml_irm_gbt.fit()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a>np.random.seed(<span class="dv">123</span>)</span>
+<span id="cb24-2"><a aria-label="2"></a>dml_irm_gbt <span class="op">=</span> doubleml.DoubleMLIRM(dml_data,</span>
+<span id="cb24-3"><a aria-label="3"></a>                                     ml_g <span class="op">=</span> ylearner,</span>
+<span id="cb24-4"><a aria-label="4"></a>                                     ml_m <span class="op">=</span> dlearner,</span>
+<span id="cb24-5"><a aria-label="5"></a>                                     trimming_threshold <span class="op">=</span> <span class="fl">0.01</span>,</span>
+<span id="cb24-6"><a aria-label="6"></a>                                     n_folds <span class="op">=</span> <span class="dv">3</span>)</span>
+<span id="cb24-7"><a aria-label="7"></a>dml_irm_gbt.fit()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[LightGBM] [Info] Total Bins 257
@@ -1581,10 +1588,8 @@ D &amp; = m_0(X) + V
 [LightGBM] [Info] Start training from score 7.006350
 [LightGBM] [Info] Total Bins 278
 [LightGBM] [Info] Number of data points in the train set: 4179, number of used features: 29
-[LightGBM] [Info] Start training from score 6.727922</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[LightGBM] [Info] Total Bins 273
+[LightGBM] [Info] Start training from score 6.727922
+[LightGBM] [Info] Total Bins 273
 [LightGBM] [Info] Number of data points in the train set: 4179, number of used features: 30
 [LightGBM] [Info] Start training from score 6.724012
 [LightGBM] [Info] Total Bins 270
@@ -1607,14 +1612,14 @@ D &amp; = m_0(X) + V
 [LightGBM] [Info] Start training from score -0.025521</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="19">
-<pre><code>&lt;doubleml.irm.irm.DoubleMLIRM at 0x7fe15750b110&gt;</code></pre>
+<pre><code>&lt;doubleml.irm.irm.DoubleMLIRM at 0x7fbd666ec910&gt;</code></pre>
 </div>
 </div>
 </section>
 <section id="irm-trees-results" class="slide level2">
 <h2>IRM Trees: Results</h2>
-<div id="41796a43" class="cell" data-execution_count="20">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a></a>dml_irm_gbt.summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="0feb792e" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a aria-label="1"></a>dml_irm_gbt.summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 <div>
 <style scoped="">
@@ -1659,8 +1664,8 @@ D &amp; = m_0(X) + V
 </div>
 </div>
 </div>
-<div id="d27f87e3" class="cell" data-execution_count="21">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a></a>dml_irm_gbt.gate(groups<span class="op">=</span>pd.DataFrame(X[:,X.design_info.<span class="bu">slice</span>(<span class="st">'married'</span>)])).summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="2730feea" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a aria-label="1"></a>dml_irm_gbt.gate(groups<span class="op">=</span>pd.DataFrame(X[:,X.design_info.<span class="bu">slice</span>(<span class="st">'married'</span>)])).summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
 <div>
 <style scoped="">
@@ -1705,8 +1710,8 @@ D &amp; = m_0(X) + V
 </div>
 </div>
 </div>
-<div id="7c79151d" class="cell" data-execution_count="22">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a></a>dml_irm_gbt.gate(groups<span class="op">=</span>pd.DataFrame(X[:,X.design_info.<span class="bu">slice</span>(<span class="st">'nevermarried'</span>)])).summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="13722f8d" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a aria-label="1"></a>dml_irm_gbt.gate(groups<span class="op">=</span>pd.DataFrame(X[:,X.design_info.<span class="bu">slice</span>(<span class="st">'nevermarried'</span>)])).summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <div>
 <style scoped="">
@@ -1766,15 +1771,15 @@ D &amp; = m_0(X) + V
 <h2>References</h2>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-belloni2014" class="csl-entry" role="listitem">
 Belloni, Alexandre, Victor Chernozhukov, and Christian Hansen. 2014. <span>“Inference on Treatment Effects After Selection Among High-Dimensional Controls†.”</span> <em>The Review of Economic Studies</em> 81 (2): 608–50. <a href="https://doi.org/10.1093/restud/rdt044">https://doi.org/10.1093/restud/rdt044</a>.
 </div>
+<div id="ref-chernozhukov2018" class="csl-entry" role="listitem">
+Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, et al. 2018. <span>“Double/Debiased Machine Learning for Treatment and Structural Parameters.”</span> <em>The Econometrics Journal</em> 21 (1): C1–68. <a href="https://doi.org/10.1111/ectj.12097">https://doi.org/10.1111/ectj.12097</a>.
+</div>
 <div id="ref-chernozhukov2017" class="csl-entry" role="listitem">
 Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, and Whitney Newey. 2017. <span>“Double/Debiased/Neyman Machine Learning of Treatment Effects.”</span> <em>American Economic Review</em> 107 (5): 261–65. <a href="https://doi.org/10.1257/aer.p20171038">https://doi.org/10.1257/aer.p20171038</a>.
-</div>
-<div id="ref-chernozhukov2018" class="csl-entry" role="listitem">
-Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins. 2018. <span>“Double/Debiased Machine Learning for Treatment and Structural Parameters.”</span> <em>The Econometrics Journal</em> 21 (1): C1–68. <a href="https://doi.org/10.1111/ectj.12097">https://doi.org/10.1111/ectj.12097</a>.
 </div>
 <div id="ref-chernozhukov2015" class="csl-entry" role="listitem">
 Chernozhukov, Victor, Christian Hansen, and Martin Spindler. 2015. <span>“Valid Post-Selection and Post-Regularization Inference: An Elementary, General Approach.”</span> <em>Annual Review of Economics</em> 7 (1): 649–88. <a href="https://doi.org/10.1146/annurev-economics-012315-015826">https://doi.org/10.1146/annurev-economics-012315-015826</a>.
@@ -1824,7 +1829,7 @@ Oliver Hines, Karla Diaz-Ordaz, Oliver Dukes, and Stijn Vansteelandt. 2022. <spa
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"\u003ci class=\"fas fa-gear\">\u003c/i>","content":"\u003cul class=\"slide-menu-items\">\n\u003cli class=\"slide-tool-item active\" data-item=\"0\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\">\u003ckbd>f\u003c/kbd> Fullscreen\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"1\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\">\u003ckbd>s\u003c/kbd> Speaker View\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"2\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\">\u003ckbd>o\u003c/kbd> Slide Overview\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"3\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\">\u003ckbd>e\u003c/kbd> PDF Export Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"4\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\">\u003ckbd>r\u003c/kbd> Scroll View Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"5\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\">\u003ckbd>b\u003c/kbd> Toggle Chalkboard\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"6\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\">\u003ckbd>c\u003c/kbd> Toggle Notes Canvas\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"7\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\">\u003ckbd>d\u003c/kbd> Download Drawings\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"8\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\">\u003ckbd>?\u003c/kbd> Keyboard Help\u003c/a>\u003c/li>\n\u003c/ul>"}],"openButton":true,"openButtonLabel":"Slide menu"},
 'chalkboard': {"buttons":true,"theme":"whiteboard","boardmarkerWidth":2,"chalkWidth":2,"chalkEffect":0},
 'smaller': false,
  
@@ -2083,7 +2088,8 @@ Oliver Hines, Karla Diaz-Ordaz, Oliver Dukes, and Stijn Vansteelandt. 2022. <spa
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
           // Inspect non-navigation links and adorn them if external
-         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          window.quartoDecorateExternalLinks = function (root) {
+         var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
           for (var i=0; i<links.length; i++) {
             const link = links[i];
             if (!isInternal(link.href)) {
@@ -2092,8 +2098,69 @@ Oliver Hines, Karla Diaz-Ordaz, Oliver Dukes, and Stijn Vansteelandt. 2022. <spa
               if (link.dataset.originalHref !== undefined) {
                 link.href = link.dataset.originalHref;
               }
+              if (!link.classList.contains('no-external-icon')) {
+              }
             }
           }
+          };
+          window.quartoDecorateExternalLinks(window.document);
+        // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+        // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+        const hideOnEscAndFocusOut = {
+          name: 'hideOnEscAndFocusOut',
+          defaultValue: true,
+          fn(instance) {
+            const dismiss = () => {
+              // A show scheduled by the trigger delay would otherwise reopen it
+              instance.clearDelayTimeouts();
+              instance.hide();
+            };
+            const onKeyDown = (event) => {
+              if (event.key !== 'Escape') {
+                return;
+              }
+              // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+              // except an open reveal.js slide menu, which Esc should close too.
+              // The menu handles keys only when its keyboard option is on.
+              const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+                window.Reveal.getConfig().menu?.keyboard !== false;
+              if (!menuHandlesEsc) {
+                event.stopPropagation();
+              }
+              if (instance.popper.contains(window.document.activeElement)) {
+                // Disabled while refocusing so the focus trigger does not reopen it
+                instance.disable();
+                instance.reference.focus();
+                instance.enable();
+              }
+              dismiss();
+            };
+            const onFocusOut = (event) => {
+              const target = event.relatedTarget;
+              if (target && !instance.reference.contains(target) &&
+                  !instance.popper.contains(target)) {
+                dismiss();
+              }
+            };
+            // On the trigger too: a click trigger (code-annotations: select) has no
+            // blur handling. Attached for the instance's lifetime so leaving the
+            // trigger also cancels a show still pending on the trigger delay.
+            instance.reference.addEventListener('focusout', onFocusOut);
+            return {
+              onShow() {
+                window.document.addEventListener('keydown', onKeyDown, true);
+                instance.popper.addEventListener('focusout', onFocusOut);
+              },
+              onHide() {
+                window.document.removeEventListener('keydown', onKeyDown, true);
+                instance.popper.removeEventListener('focusout', onFocusOut);
+              },
+              onDestroy() {
+                instance.reference.removeEventListener('focusout', onFocusOut);
+              },
+            };
+          },
+        };
         function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
           const config = {
             allowHTML: true,
@@ -2107,6 +2174,7 @@ Oliver Hines, Karla Diaz-Ordaz, Oliver Dukes, and Stijn Vansteelandt. 2022. <spa
             interactiveBorder: 10,
             theme: 'light-border',
             placement: 'bottom-start',
+            plugins: [hideOnEscAndFocusOut],
           };
           if (contentFn) {
             config.content = contentFn;
