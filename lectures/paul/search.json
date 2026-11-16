@@ -935,21 +935,21 @@
     "href": "matching.html#setting",
     "title": "Matching",
     "section": "Setting",
-    "text": "Setting\n\nPotential outcomes \\((Y(0), Y(1))\\)\nTreatment \\(D \\in \\{0,1\\}\\)\nObserve \\(Y = Y(D)\\)\nCovariates \\(X\\)\nAssume conditional independence \\((Y(0),Y(1)) \\perp D | X\\)\n\n\\[\n\\def\\Er{{\\mathrm{E}}}\n\\def\\En{{\\mathbb{En}}}\n\\def\\cov{{\\mathrm{Cov}}}\n\\def\\var{{\\mathrm{Var}}}\n\\def\\R{{\\mathbb{R}}}\n\\newcommand\\norm[1]{\\left\\lVert#1\\right\\rVert}\n\\def\\rank{{\\mathrm{rank}}}\n\\newcommand{\\inpr}{ \\overset{p^*_{\\scriptscriptstyle n}}{\\longrightarrow}}\n\\def\\inprob{{\\,{\\buildrel p \\over \\rightarrow}\\,}}\n\\def\\indist{\\,{\\buildrel d \\over \\rightarrow}\\,}\n\\DeclareMathOperator*{\\plim}{plim}\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\]"
+    "text": "Setting\n\nPotential outcomes \\((Y(0), Y(1))\\)\nTreatment \\(D \\in \\{0,1\\}\\)\nObserve \\(Y = Y(D)\\)\nCovariates \\(X\\)\nAssume conditional independence \\((Y(0),Y(1)) \\perp D | X\\)\nAssume overlap (positivity): \\(0 &lt; P(D=1|X) &lt; 1\\) almost surely\n\n\\[\n\\def\\Er{{\\mathrm{E}}}\n\\def\\En{{\\mathbb{En}}}\n\\def\\cov{{\\mathrm{Cov}}}\n\\def\\var{{\\mathrm{Var}}}\n\\def\\R{{\\mathbb{R}}}\n\\newcommand\\norm[1]{\\left\\lVert#1\\right\\rVert}\n\\def\\rank{{\\mathrm{rank}}}\n\\newcommand{\\inpr}{ \\overset{p^*_{\\scriptscriptstyle n}}{\\longrightarrow}}\n\\def\\inprob{{\\,{\\buildrel p \\over \\rightarrow}\\,}}\n\\def\\indist{\\,{\\buildrel d \\over \\rightarrow}\\,}\n\\DeclareMathOperator*{\\plim}{plim}\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\]"
   },
   {
     "objectID": "matching.html#why-not-regression",
     "href": "matching.html#why-not-regression",
     "title": "Matching",
     "section": "Why not regression?",
-    "text": "Why not regression?\n\nAverage treatment effect \\[\nATE = \\int \\Er[Y|D=1,X=x] - \\Er[Y|D=0,X=x] dP(x)\n\\]\nRegression gives the best linear approximation to \\(\\Er[Y|D,X]\\), so why not just estimate linear regression \\[\nY_i = \\hat{\\alpha} D_i + X_i'\\hat{\\beta} + \\hat{\\epsilon}_i\n\\] and, and then use \\(\\hat{\\alpha}\\) as an estimate of the ATE?"
+    "text": "Why not regression?\n\nAverage treatment effect \\[\nATE = \\int \\Er[Y|D=1,X=x] - \\Er[Y|D=0,X=x] dP(x)\n\\]\nRegression gives the best linear approximation to \\(\\Er[Y|D,X]\\), so why not just estimate a linear regression \\[\nY_i = \\hat{\\alpha} D_i + X_i'\\hat{\\beta} + \\hat{\\epsilon}_i\n\\] and then use \\(\\hat{\\alpha}\\) as an estimate of the ATE?"
   },
   {
     "objectID": "matching.html#why-not-regression-1",
     "href": "matching.html#why-not-regression-1",
     "title": "Matching",
     "section": "Why not regression?",
-    "text": "Why not regression?\n\nPartial out (Frish-Waugh-Lovell theorem) \\[\n\\begin{align*}\n\\hat{\\alpha} = & \\frac{\\frac{1}{n} \\sum_{i=1}^n Y_i (D_i - X_i'(X'X)^{-1}X'D)}\n  {\\frac{1}{n} \\sum_{i=1}^n (D_i - X_i'(X'X)^{-1}X'D)^2} \\\\\n  \\inprob & \\Er\\left[Y_i \\underbrace{\\frac{D_i - X_i'\\pi}{\\Er[(D_i - X_i'\\pi)^2]}}_{\\equiv \\omega(D_i,X_i)}\\right] \\\\\n  = & \\Er\\left[Y_{0,i} \\omega(D_i,X_i)\\right] + \\Er\\left[(Y_{1,i}-Y_{0,i}) \\omega(D_i,X_i)D_i\\right]\n\\end{align*}\n\\] where \\(\\pi = \\argmin_{\\tilde{\\pi}} \\Er[(D_i - X_i'\\tilde{\\pi})^2]\\)\nNote: \\(\\Er[\\omega(D,X)] = 0\\), \\(\\Er[D\\omega(D,X)] = 1\\)"
+    "text": "Why not regression?\n\nPartial out (Frisch-Waugh-Lovell theorem) \\[\n\\begin{align*}\n\\hat{\\alpha} = & \\frac{\\frac{1}{n} \\sum_{i=1}^n Y_i (D_i - X_i'(X'X)^{-1}X'D)}\n  {\\frac{1}{n} \\sum_{i=1}^n (D_i - X_i'(X'X)^{-1}X'D)^2} \\\\\n  \\inprob & \\Er\\left[Y_i \\underbrace{\\frac{D_i - X_i'\\pi}{\\Er[(D_i - X_i'\\pi)^2]}}_{\\equiv \\omega(D_i,X_i)}\\right] \\\\\n  = & \\Er\\left[Y_{0,i} \\omega(D_i,X_i)\\right] + \\Er\\left[(Y_{1,i}-Y_{0,i}) \\omega(D_i,X_i)D_i\\right]\n\\end{align*}\n\\] where \\(\\pi = \\argmin_{\\tilde{\\pi}} \\Er[(D_i - X_i'\\tilde{\\pi})^2]\\)\nNote: \\(\\Er[\\omega(D,X)] = 0\\), \\(\\Er[D\\omega(D,X)] = 1\\)\n\\(\\omega(D,X)\\) is only orthogonal to linear functions of \\(X\\), so \\(\\Er[Y_{0,i}\\omega(D_i,X_i)] \\neq 0\\) in general when \\(\\Er[Y(0)|X]\\) is nonlinear"
   },
   {
     "objectID": "matching.html#why-not-regression-2",
@@ -977,7 +977,7 @@
     "href": "matching.html#why-not-regression-5",
     "title": "Matching",
     "section": "Why not regression?",
-    "text": "Why not regression?\n\n\nplot\nimport matplotlib.cm as cm\nfig, axes = plt.subplots(2, 1, figsize=(6, 6))\n\n# Create a scatter plot for the first panel (left)\naxes[0].scatter(X[:,1], w, c=D, cmap=cm.Dark2)\naxes[0].set_xlabel(\"X\")\naxes[0].set_ylabel(\"ωD\")\naxes[0].set_title(\"Weights\")\n\naxes[1].scatter(X[:,1], y1-y0, label=\"TE\")\naxes[1].set_xlabel(\"X\")\naxes[1].set_ylabel(\"Y₁ - Y₀\")\naxes[1].set_title(\"Treatment effects\")\nsort_idx = np.argsort(X[:,1])\naxes[1].plot(X[sort_idx,1], Ey1x[sort_idx]-Ey0x[sort_idx], label=\"E[y1-y0|x]\")\n\n# Display the plot\nplt.tight_layout()  # Ensure proper layout spacing\nplt.show()"
+    "text": "Why not regression?\n\n\nplot\nimport matplotlib.cm as cm\nfig, axes = plt.subplots(2, 1, figsize=(6, 6))\n\n# Create a scatter plot for the first panel (left)\naxes[0].scatter(X[:,1], w, c=D, cmap=cm.Dark2)\naxes[0].set_xlabel(\"X\")\naxes[0].set_ylabel(\"ω(D, X)\")\naxes[0].set_title(\"Weights\")\n\naxes[1].scatter(X[:,1], y1-y0, label=\"TE\")\naxes[1].set_xlabel(\"X\")\naxes[1].set_ylabel(\"Y₁ - Y₀\")\naxes[1].set_title(\"Treatment effects\")\nsort_idx = np.argsort(X[:,1])\naxes[1].plot(X[sort_idx,1], Ey1x[sort_idx]-Ey0x[sort_idx], label=\"E[y1-y0|x]\")\n\n# Display the plot\nplt.tight_layout()  # Ensure proper layout spacing\nplt.show()"
   },
   {
     "objectID": "matching.html#matching-1",
@@ -991,14 +991,14 @@
     "href": "matching.html#plug-in-estimator",
     "title": "Matching",
     "section": "Plug-in estimator",
-    "text": "Plug-in estimator\n\nPlug in estimator: \\[\n\\widehat{ATE} = \\frac{1}{n} \\sum_{i=1}^n \\left(\\hat{E}[Y|D=1,X=X_i] - \\hat{E}[Y|D=0,X=X_i] \\right)\n\\] where \\(\\hat{E}[Y|D,X]\\) is some flexible estimator for \\(\\Er[Y|D,X]\\)\n\nif \\(X\\) is discrete, \\(\\hat{E}\\) can be conditional averages or equivalently, “saturated” regression\nif \\(X\\) continuous, \\(\\hat{E}\\) can be some nonparametric regression estimator\nOriginal approaches to this problem used nearest neighbor matching to estimate \\(\\hat{E}[Y|D,X]\\)\n\nDownside:\n\nDifficult statistical properties — choice of tuning parameters, strong assumptions needed, failure of bootstrap for nearest neighbors Abadie and Imbens (2008)"
+    "text": "Plug-in estimator\n\nPlug-in estimator: \\[\n\\widehat{ATE} = \\frac{1}{n} \\sum_{i=1}^n \\left(\\hat{E}[Y|D=1,X=X_i] - \\hat{E}[Y|D=0,X=X_i] \\right)\n\\] where \\(\\hat{E}[Y|D,X]\\) is some flexible estimator for \\(\\Er[Y|D,X]\\)\n\nif \\(X\\) is discrete, \\(\\hat{E}\\) can be conditional averages or equivalently, “saturated” regression\nif \\(X\\) is continuous, \\(\\hat{E}\\) can be some nonparametric regression estimator\nOriginal approaches to this problem used nearest neighbor matching to estimate \\(\\hat{E}[Y|D,X]\\)\n\nDownside:\n\nDifficult statistical properties — choice of tuning parameters, strong assumptions needed, failure of the bootstrap for nearest neighbors Abadie and Imbens (2008)"
   },
   {
     "objectID": "matching.html#propensity-score",
     "href": "matching.html#propensity-score",
     "title": "Matching",
     "section": "Propensity Score",
-    "text": "Propensity Score\n\nLet \\(p(X) = P(D=1|X=X)\\)\nNote: \\[\n\\begin{align*}\n\\Er[Y|X,D=1] - \\Er[Y|X,D=0] = & E\\left[\\frac{Y D}{p(X)}|X \\right] - E\\left[\\frac{Y(1-D)}{1-p(X)}|X \\right] \\\\\n= & E\\left[ Y \\frac{D - p(X)}{p(X)(1-p(X))} | X \\right]\n\\end{align*}\n\\]"
+    "text": "Propensity Score\n\nLet \\(p(X) = P(D=1|X)\\)\nNote: \\[\n\\begin{align*}\n\\Er[Y|X,D=1] - \\Er[Y|X,D=0] = & E\\left[\\frac{Y D}{p(X)}|X \\right] - E\\left[\\frac{Y(1-D)}{1-p(X)}|X \\right] \\\\\n= & E\\left[ Y \\frac{D - p(X)}{p(X)(1-p(X))} | X \\right]\n\\end{align*}\n\\]"
   },
   {
     "objectID": "matching.html#propensity-score-1",
@@ -1026,7 +1026,7 @@
     "href": "matching.html#doubly-robust-estimator-1",
     "title": "Matching",
     "section": "Doubly Robust Estimator",
-    "text": "Doubly Robust Estimator\n\nDoubly robust in that:\n\nConsistent as long as either \\(\\hat{p}(X) \\inprob p(X)\\) or \\(\\hat{E}[Y|D,X] \\inprob \\Er[Y|D,X]\\)\nInsensitive to small changes in \\(\\hat{p}(X)\\) or \\(\\hat{E}[Y|D,X]\\)\n\nAllows nicer statistical properties\n\nWeaker assumptions needed\nAsymptotic distribution is the same as if \\(p(X)\\) and \\(\\Er[Y|D,X]\\) were known"
+    "text": "Doubly Robust Estimator\n\nDoubly robust in that:\n\nConsistent as long as either \\(\\hat{p}(X) \\inprob p(X)\\) or \\(\\hat{E}[Y|D,X] \\inprob \\Er[Y|D,X]\\)\nInsensitive to small changes in \\(\\hat{p}(X)\\) or \\(\\hat{E}[Y|D,X]\\)\n\nAllows nicer statistical properties\n\nWeaker assumptions needed\nUses cross-fitting (sample splitting) so overfitting in \\(\\hat{p}(X)\\) or \\(\\hat{E}[Y|D,X]\\) does not bias the ATE\nAsymptotic distribution is the same as if \\(p(X)\\) and \\(\\Er[Y|D,X]\\) were known"
   },
   {
     "objectID": "matching.html#software",
@@ -1047,7 +1047,7 @@
     "href": "matching.html#example-simulation",
     "title": "Matching",
     "section": "Example: simulation",
-    "text": "Example: simulation\n\nInfeasible estimator: average of \\(Y(1) - Y(0)\\)\n\n\nse = np.sqrt(np.var(y1-y0)/len(y1))\nate = np.mean(y1-y0)\nprint(f\"Infeasible estimator with potential outcomes observed = {ate:.2} with 95% CI = [{ate-1.96*se:.2},{ate+1.96*se:.2}]\\n\")\n\nInfeasible estimator with potential outcomes observed = 0.12 with 95% CI = [0.058,0.18]\n\n\n\n\nInfeasible estimator: doubly robust with true \\(\\Er[Y(T)|X]\\) and \\(p(X)\\)\n\n\naipw = Ey1x - Ey0x + D*(y - Ey1x)/P - (1-D)*(y - Ey0x)/(1-P)\nse = np.sqrt(np.var(aipw)/len(aipw))\nprint(f\"Infeasible estimator with true E[y1-y0|x] = and p(x) {np.mean(aipw):.2} with 95% CI = [{np.mean(aipw)-1.96*se:.2},{np.mean(aipw)+1.96*se:.2}]\\n\")\n\nInfeasible estimator with true E[y1-y0|x] = and p(x) 0.15 with 95% CI = [0.057,0.24]"
+    "text": "Example: simulation\n\nInfeasible estimator: average of \\(Y(1) - Y(0)\\)\n\n\nse = np.sqrt(np.var(y1-y0)/len(y1))\nate = np.mean(y1-y0)\nprint(f\"Infeasible estimator with potential outcomes observed = {ate:.2} with 95% CI = [{ate-1.96*se:.2},{ate+1.96*se:.2}]\\n\")\n\nInfeasible estimator with potential outcomes observed = 0.12 with 95% CI = [0.058,0.18]"
   },
   {
     "objectID": "matching.html#example-simulation-1",
@@ -1145,28 +1145,28 @@
     "href": "matching.html#doubly-robust",
     "title": "Matching",
     "section": "Doubly Robust",
-    "text": "Doubly Robust\n\nfrom sklearn.ensemble import GradientBoostingRegressor, GradientBoostingClassifier\nfrom sklearn.linear_model import LassoCV, LogisticRegressionCV, ElasticNetCV\nfrom sklearn.preprocessing import PolynomialFeatures\n\ndef robustate(D,Y,X,psmodel=LogisticRegressionCV(scoring='neg_log_loss'),ymodel=LassoCV(), cluster=None):\n    pfit = psmodel.fit(X,D)\n    ps = pfit.predict_proba(X)[:,1]\n    ey1fit = ymodel.fit(X[D==1],Y[D==1])\n    ey0fit = sklearn.base.clone(ymodel).fit(X[D==0],Y[D==0])\n    ey1 = ey1fit.predict(X)\n    ey0 = ey0fit.predict(X)\n    ate_terms = ey1 - ey0 + D*(Y- ey1)/ps - (1-D)*(Y-ey0)/(1-ps)\n    ate = np.mean(ate_terms)\n    # check if cluster is None\n    if cluster is None :\n        ate_se = np.sqrt(np.var(ate_terms)/len(ate_terms))\n    else :\n        creg=smf.ols(\"y ~ 1\", pd.DataFrame({\"y\" : ate_terms})).fit(cov_type=\"cluster\", cov_kwds={'groups': cluster})\n        ate_se = np.sqrt(creg.cov_params().iloc[0,0])\n\n    return(ate, ate_se, ps, ey1,ey0)\n\nate,se,ps,ey1,ey0 = robustate(data_with_categ[D],data_with_categ[Y],data_with_categ[X],cluster=data_with_categ['schoolid'])\nprint(ate-1.96*se, ate, ate+1.96*se)\n\n0.3317146398974233 0.3832790165781085 0.4348433932587937\n\n\n1\nWe have glossed over some details needed for doubly robust estimation to have nice statistical properties. Those details matter and are not implemented correctly above. It is better to use doubleml instead."
+    "text": "Doubly Robust\n\nfrom sklearn.ensemble import GradientBoostingRegressor, GradientBoostingClassifier\nfrom sklearn.linear_model import LassoCV, LogisticRegressionCV, ElasticNetCV\nfrom sklearn.preprocessing import PolynomialFeatures\n\ndef robustate(D,Y,X,psmodel=LogisticRegressionCV(scoring='neg_log_loss'),ymodel=LassoCV(), cluster=None):\n    pfit = psmodel.fit(X,D)\n    ps = pfit.predict_proba(X)[:,1]\n    ey1fit = ymodel.fit(X[D==1],Y[D==1])\n    ey0fit = sklearn.base.clone(ymodel).fit(X[D==0],Y[D==0])\n    ey1 = ey1fit.predict(X)\n    ey0 = ey0fit.predict(X)\n    ate_terms = ey1 - ey0 + D*(Y- ey1)/ps - (1-D)*(Y-ey0)/(1-ps)\n    ate = np.mean(ate_terms)\n    # check if cluster is None\n    if cluster is None :\n        ate_se = np.sqrt(np.var(ate_terms)/len(ate_terms))\n    else :\n        creg=smf.ols(\"y ~ 1\", pd.DataFrame({\"y\" : ate_terms})).fit(cov_type=\"cluster\", cov_kwds={'groups': cluster})\n        ate_se = np.sqrt(creg.cov_params().iloc[0,0])\n\n    return(ate, ate_se, ps, ey1,ey0)\n\nate,se,ps,ey1,ey0 = robustate(data_with_categ[D],data_with_categ[Y],data_with_categ[X],cluster=data_with_categ['schoolid'])\nprint(ate-1.96*se, ate, ate+1.96*se)\n\n0.3317146398974233 0.3832790165781085 0.4348433932587937\n\n\n1\nWe have glossed over cross-fitting (sample splitting), which is needed for doubly robust estimation with flexible/ML nuisance estimators to have nice statistical properties. It is not implemented above; it is better to use doubleml instead."
   },
   {
     "objectID": "matching.html#doubly-robust-1",
     "href": "matching.html#doubly-robust-1",
     "title": "Matching",
     "section": "Doubly Robust",
-    "text": "Doubly Robust\n\nbetter to use the doubleml package\n\n\nimport doubleml as dml\n\nm = LassoCV()\ng = LogisticRegressionCV(scoring='neg_log_loss')\ndmldata = dml.DoubleMLData(data_with_categ, Y,D,X.to_list())\ndmlATE = dml.DoubleMLAPOS(dmldata, m, g, treatment_levels=[0, 1])\ndmlATE.fit()\ndmlATE.summary\ndmlATE.causal_contrast(0).summary\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n2.5 %\n97.5 %\n\n\n\n\n1 vs 0\n0.382427\n0.017134\n22.319628\n0.0\n0.348844\n0.416009"
+    "text": "Doubly Robust\n\nBetter to use the doubleml package\n\n\nimport doubleml as dml\n\ng = LassoCV()\nm = LogisticRegressionCV(scoring='neg_log_loss')\ndmldata = dml.DoubleMLClusterData(\n    data_with_categ, y_col=Y, d_cols=D, x_cols=X.to_list(), cluster_cols='schoolid'\n)\ndmlATE = dml.DoubleMLIRM(dmldata, g, m)\ndmlATE.fit()\ndmlATE.summary\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n2.5 %\n97.5 %\n\n\n\n\nintervention\n0.383696\n0.026513\n14.471938\n1.822628e-47\n0.331731\n0.435661"
   },
   {
     "objectID": "matching.html#sources-and-further-reading",
     "href": "matching.html#sources-and-further-reading",
     "title": "Matching",
     "section": "Sources and Further Reading",
-    "text": "Sources and Further Reading\n\nUseful additional reading is chapters 10-12 of Facure (2022) and chapter 14 of Huntington-Klein (2021).1\nChapters 5 and 10 of Chernozhukov et al. (2024)\nThe representation of the estimate from a linear model as a weighted average is based on Borusyak and Jaravel (2018)\nThe growth mindset example is take from Facure (2022)\n\nThese slides do not mention the importance of overlap/balance, but hopefully I emphasized it during lecture. Overlap is very important in practice. The reading, especially Huntington-Klein (2021), cover it pretty well."
+    "text": "Sources and Further Reading\n\nUseful additional reading is chapters 10-12 of Facure (2022) and chapter 14 of Huntington-Klein (2021).1\nChapters 5 and 10 of Chernozhukov et al. (2024)\nThe representation of the estimate from a linear model as a weighted average is based on Borusyak and Jaravel (2018)\nThe growth mindset example is taken from Facure (2022)\n\nOverlap and covariate balance are very important in practice. The readings, especially Huntington-Klein (2021), cover them pretty well."
   },
   {
     "objectID": "matching.html#references",
     "href": "matching.html#references",
     "title": "Matching",
     "section": "References",
-    "text": "References\n\n\n\n\nAbadie, Alberto, and Guido W. Imbens. 2008. “On the Failure of the Bootstrap for Matching Estimators.” Econometrica 76 (6): 1537–57. https://doi.org/https://doi.org/10.3982/ECTA6474.\n\n\nAthey, Susan, and Stefan Wager. 2019. Estimating Treatment Effects with Causal Forests: An Application.\n\n\nBorusyak, Kirill, and Xavier Jaravel. 2018. Revisiting Event Study Designs. https://scholar.harvard.edu/files/borusyak/files/borusyak_jaravel_event_studies.pdf.\n\n\nChernozhukov, V., C. Hansen, N. Kallus, M. Spindler, and V. Syrgkanis. 2024. Applied Causal Inference Powered by ML and AI. https://causalml-book.org/.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/.\n\n\nYeager, David S., Paul Hanselman, Gregory M. Walton, et al. 2019. “A National Experiment Reveals Where a Growth Mindset Improves Achievement.” Nature 573 (7774): 364–69. https://doi.org/10.1038/s41586-019-1466-y."
+    "text": "References\n\n\n\n\nAbadie, Alberto, and Guido W. Imbens. 2008. “On the Failure of the Bootstrap for Matching Estimators.” Econometrica 76 (6): 1537–57. https://doi.org/https://doi.org/10.3982/ECTA6474.\n\n\nAthey, Susan, and Stefan Wager. 2019. Estimating Treatment Effects with Causal Forests: An Application.\n\n\nBorusyak, Kirill, and Xavier Jaravel. 2018. Revisiting Event Study Designs. https://scholar.harvard.edu/files/borusyak/files/borusyak_jaravel_event_studies.pdf.\n\n\nBurnette, Jeni L., Joseph Billingsley, George C. Banks, et al. 2023. “A Systematic Review and Meta-Analysis of Growth Mindset Interventions: For Whom, How, and Why Might Such Interventions Work?” Psychological Bulletin 149 (3-4): 174–205. https://doi.org/10.1037/bul0000368.\n\n\nChernozhukov, V., C. Hansen, N. Kallus, M. Spindler, and V. Syrgkanis. 2024. Applied Causal Inference Powered by ML and AI. https://causalml-book.org/.\n\n\nFacure, Matheus. 2022. Causal Inference for the Brave and True. https://matheusfacure.github.io/python-causality-handbook/landing-page.html.\n\n\nHuntington-Klein, Nick. 2021. The Effect: An Introduction to Research Design and Causality. CRC Press. https://theeffectbook.net/.\n\n\nMacnamara, Brooke N., and Alexander P. Burgoyne. 2023. “Do Growth Mindset Interventions Impact Students’ Academic Achievement? A Systematic Review and Meta-Analysis with Recommendations for Best Practices.” Psychological Bulletin 149 (3-4): 133–73. https://doi.org/10.1037/bul0000352.\n\n\nSisk, Victoria F., Alexander P. Burgoyne, Jingze Sun, Jennifer L. Butler, and Brooke N. Macnamara. 2018. “To What Extent and Under Which Circumstances Are Growth Mind-Sets Important to Academic Achievement? Two Meta-Analyses.” Psychological Science 29 (4): 549–71. https://doi.org/10.1177/0956797617739704.\n\n\nTipton, Elizabeth, Christopher J. Bryan, Jared Murray, Michael McDaniel, Barbara Schneider, and David S. Yeager. 2023. “Why Meta-Analyses of Growth Mindset and Other Interventions Should Follow Best Practices for Examining Heterogeneity: Commentary on Macnamara and Burgoyne (2023) and Burnette Et Al. (2023).” Psychological Bulletin 149 (3-4): 229–41. https://doi.org/10.1037/bul0000384.\n\n\nYeager, David S., Paul Hanselman, Gregory M. Walton, et al. 2019. “A National Experiment Reveals Where a Growth Mindset Improves Achievement.” Nature 573 (7774): 364–69. https://doi.org/10.1038/s41586-019-1466-y."
   },
   {
     "objectID": "doubleml.html#introduction-1",
@@ -1929,7 +1929,7 @@
     "href": "regression.html#sources-and-futher-reading",
     "title": "Linear Regression",
     "section": "Sources and Futher Reading",
-    "text": "Sources and Futher Reading\n\nChapters 5, 6 , and 7 of Facure (2022)\nChernozhukov et al. (2024) chapters 1 and 2\nThe Effect: Chapter 13 - Regression Huntington-Klein (2021)\nReal-data versions of these examples"
+    "text": "Sources and Futher Reading\n\nChapters 5, 6 , and 7 of Facure (2022)\nChernozhukov et al. (2024) chapters 1 and 2\nThe Effect: Chapter 13 - Regression Huntington-Klein (2021)"
   },
   {
     "objectID": "regression.html#references",
@@ -2020,7 +2020,7 @@
     "href": "matching.html#example-checking-overlap",
     "title": "Matching",
     "section": "Example: Checking Overlap",
-    "text": "Example: Checking Overlap\n\nimport seaborn as sns\nimport matplotlib.pyplot as plt\nimport doubleml as dml\ng = Pipeline([('poly',PolynomialFeatures(degree=10)),\n              ('scale', StandardScaler()),\n              ('lasso',LassoCV(max_iter=10_000, n_jobs=-1, selection='random', tol=1e-2,\n                               alphas=10**np.linspace(-3,3,20)))])\nm = Pipeline([('rbf',RBFSampler(gamma=gamma, random_state=1, n_components=nc)),\n              ('logistic',LogisticRegressionCV(n_jobs=-1, scoring='neg_log_loss'))])\n\nm.fit(X,D)\n\ndef plotp(model,X,d):\n    fig,ax=plt.subplots()\n    p = model.predict_proba(X)\n    sns.histplot(p[d==0,1], kde = False,\n                 label = \"Untreated\", ax=ax)\n    sns.histplot(p[d==1,1], kde = False,\n                 label = \"Treated\", ax=ax)\n    ax.set_title('P(T|x)')\n    return(fig)\n\nfig=plotp(m, X, D)"
+    "text": "Example: Checking Overlap\n\nimport seaborn as sns\nimport matplotlib.pyplot as plt\nimport doubleml as dml\ng = Pipeline([('poly',PolynomialFeatures(degree=10)),\n              ('scale', StandardScaler()),\n              ('lasso',LassoCV(max_iter=10_000, n_jobs=-1, selection='random', tol=1e-2,\n                               alphas=10**np.linspace(-3,3,20)))])\nm = Pipeline([('rbf',RBFSampler(gamma=gamma, random_state=1, n_components=nc)),\n              ('logistic',LogisticRegressionCV(n_jobs=-1, scoring='neg_log_loss'))])\n\nm.fit(X,D)\n\ndef plotp(model,X,d):\n    fig,ax=plt.subplots()\n    p = model.predict_proba(X)\n    sns.histplot(p[d==0,1], kde = False,\n                 label = \"Untreated\", ax=ax)\n    sns.histplot(p[d==1,1], kde = False,\n                 label = \"Treated\", ax=ax)\n    ax.set_title('P(D|x)')\n    return(fig)\n\nfig=plotp(m, X, D)\n\n\n\nWe want the treated and untreated propensity score distributions to overlap and stay away from \\(0\\) and \\(1\\); values near \\(0\\) or \\(1\\) produce extreme IPW weights."
   },
   {
     "objectID": "matching.html#example-checking-overlap-output",
@@ -2034,7 +2034,7 @@
     "href": "matching.html#example-results",
     "title": "Matching",
     "section": "Example: Results",
-    "text": "Example: Results\n\ndmldata = dml.DoubleMLData.from_arrays(X, y, D)\ndmlATE = dml.DoubleMLAPOS(dmldata, g, m, treatment_levels=[0, 1])\ndmlATE.fit()\ndmlATE.summary\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n2.5 %\n97.5 %\n\n\n\n\n0\n-0.021294\n0.030488\n-0.698428\n0.484909\n-0.081050\n0.038462\n\n\n1\n0.120310\n0.042027\n2.862673\n0.004201\n0.037938\n0.202682\n\n\n\n\n\n\n\n\ndmlATE.causal_contrast(0).summary\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n2.5 %\n97.5 %\n\n\n\n\n1 vs 0\n0.141604\n0.052245\n2.710387\n0.00672\n0.039206\n0.244002\n\n\n\n\n\n\n\n\naipw = Ey1x - Ey0x + D*(y - Ey1x)/P - (1-D)*(y - Ey0x)/(1-P)\nse = np.sqrt(np.var(aipw)/len(aipw))\nprint(f\"Infeasible estimator with true E[y1-y0|x] = and p(x) {np.mean(aipw):.2} with 95% CI = [{np.mean(aipw)-1.96*se:.2},{np.mean(aipw)+1.96*se:.2}]\\n\")\n\nInfeasible estimator with true E[y1-y0|x] = and p(x) 0.15 with 95% CI = [0.057,0.24]"
+    "text": "Example: Results\n\ndmldata = dml.DoubleMLData.from_arrays(X, y, D)\ndmlATE = dml.DoubleMLAPOS(dmldata, g, m, treatment_levels=[0, 1])\ndmlATE.fit()\ndmlATE.summary\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n2.5 %\n97.5 %\n\n\n\n\n0\n-0.021168\n0.030473\n-0.694655\n0.487271\n-0.080893\n0.038557\n\n\n1\n0.124972\n0.041944\n2.979520\n0.002887\n0.042764\n0.207179\n\n\n\n\n\n\n\n\ndmlATE.causal_contrast(0).summary\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n2.5 %\n97.5 %\n\n\n\n\n1 vs 0\n0.14614\n0.052168\n2.801322\n0.005089\n0.043892\n0.248387\n\n\n\n\n\n\n\n\naipw = Ey1x - Ey0x + D*(y - Ey1x)/P - (1-D)*(y - Ey0x)/(1-P)\nse = np.sqrt(np.var(aipw)/len(aipw))\nprint(f\"Infeasible estimator with true E[y1-y0|x] and p(x) = {np.mean(aipw):.2} with 95% CI = [{np.mean(aipw)-1.96*se:.2},{np.mean(aipw)+1.96*se:.2}]\\n\")\n\nInfeasible estimator with true E[y1-y0|x] and p(x) = 0.15 with 95% CI = [0.057,0.24]"
   },
   {
     "objectID": "matching.html#visualizing-fit",
@@ -3540,5 +3540,19 @@
     "title": "Linear Regression",
     "section": "“Bad controls”, Mediators, and Colliders",
     "text": "“Bad controls”, Mediators, and Colliders\n\n\nFacure (2022) calls controlling for opened and agreement “selection bias,” but in economics, we would not call it that. We would refer to opened and agreement as bad controls because they mediate the outcome of interest. We would not want hold them constant because part of how email affects payments is by changing opened and agreement.\nSince at least Heckman (1976) and Heckman (1979) selection bias refers to when the expectation of an outcome conditional on observing it is not equal to the expectation in the population. As far as I know, calling conditioning on mediators “selection bias” was popularized by Hernán et al. (2004) in epidemiology and spread to other field.s If you want to avoid confusion, one coould call Heckman (1976) selection bias “self-selection bias” or “Heckman selection bias,” and call Hernán et al. (2004) selection bias “collider bias” or “mediator bias.”"
+  },
+  {
+    "objectID": "matching.html#summary-of-growth-mindset-results",
+    "href": "matching.html#summary-of-growth-mindset-results",
+    "title": "Matching",
+    "section": "Summary of Growth Mindset Results",
+    "text": "Summary of Growth Mindset Results\n\nUnadjusted difference in means (\\(\\approx 0.47\\)) overstates the effect due to positive selection into treatment (e.g., students with higher success expectations are more likely to be treated).\nAdjusting for covariates via multivariate OLS (\\(\\approx 0.40\\)), propensity score matching, IPW, and doubly robust / doubleml (\\(\\approx 0.38\\)) yields slightly smaller, consistent estimates.\nClustering standard errors by schoolid accounts for within-school correlation in both OLS and doubleml."
+  },
+  {
+    "objectID": "matching.html#do-growth-mindset-interventions-work",
+    "href": "matching.html#do-growth-mindset-interventions-work",
+    "title": "Matching",
+    "section": "Do Growth Mindset Interventions Work?",
+    "text": "Do Growth Mindset Interventions Work?\n\nNo broad consensus, though both sides agree the average effect across all students is very small (\\(d \\approx 0.04\\text{--}0.05\\)).\nSkeptical view: Meta-analyses by Sisk et al. (2018) and Macnamara and Burgoyne (2023) find weak overall effects that become statistically indistinguishable from zero after adjusting for publication bias, study quality, and researcher incentives.\nHeterogeneity / targeted view: Yeager et al. (2019) find modest gains among lower-achieving students (\\(d \\approx 0.11\\)), and Burnette et al. (2023) report positive effects for targeted/at-risk groups with high-fidelity implementation (\\(d \\approx 0.14\\) for achievement; \\(d \\approx 0.32\\) for mental health).\nMethodological debate: Tipton et al. (2023) argue that pooling heterogeneous studies into a single grand mean obscures real subgroup effects, whereas critics argue those subgroup effects do not survive strict bias adjustments."
   }
 ]
