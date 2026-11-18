@@ -219,7 +219,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="../tak.jpg" data-background-size="contain" class="quarto-title-block center">
+<section id="title-slide" data-background-image="title_soldier.jpg" data-background-size="contain" class="quarto-title-block center">
   <h1 class="title">Matching: Leadership in Social Movements</h1>
   <p class="subtitle">ECON526 — Real-Data Application (Dippel &amp; Heblich, 2021)</p>
 
@@ -251,6 +251,22 @@ Paul Schrimpf
 <section id="introduction" class="title-slide slide level1 center">
 <h1>Introduction</h1>
 
+</section>
+<section id="ai-disclosure" class="slide level2">
+<h2>AI Disclosure</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Declaration of AI Use</strong></p>
+</div>
+<div class="callout-content">
+<p>These slides (including the Python translation of the replication pipeline, empirical comparisons, and speaker notes) were <strong>AI-generated with human supervision</strong>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="research-question-setting" class="slide level2">
 <h2>Research Question &amp; Setting</h2>
@@ -325,7 +341,7 @@ Paul Schrimpf
 </section>
 <section id="loading-merging-the-replication-files" class="slide level2">
 <h2>Loading &amp; Merging the Replication Files</h2>
-<div id="9e63821b" class="cell" data-execution_count="2">
+<div id="84ba0a8a" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>imports</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> os</span>
@@ -342,7 +358,7 @@ Paul Schrimpf
 <span id="cb1-12"><a aria-label="12"></a>din <span class="op">=</span> <span class="st">"./data/REPLICATION/data_in"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="034a2cc4" class="cell" data-execution_count="3">
+<div id="b5939997" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="co"># Replicate the town-level dataset construction from REPLICATION/code/build_main.do</span></span>
 <span id="cb2-2"><a aria-label="2"></a>df <span class="op">=</span> pd.read_stata(os.path.join(din, <span class="st">"master_haines.dta"</span>))</span>
 <span id="cb2-3"><a aria-label="3"></a></span>
@@ -385,7 +401,7 @@ Paul Schrimpf
 </section>
 <section id="defining-treatment-outcome-and-covariates" class="slide level2">
 <h2>Defining Treatment, Outcome, and Covariates</h2>
-<div id="3e38e3a6" class="cell" data-execution_count="4">
+<div id="d815b522" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="co"># Construct outcome and German-born share variables as in build_main.do</span></span>
 <span id="cb3-2"><a aria-label="2"></a>df[<span class="st">"enlistments"</span>] <span class="op">=</span> df[<span class="st">"count_1"</span>]</span>
 <span id="cb3-3"><a aria-label="3"></a>df[<span class="st">"logenlistments"</span>] <span class="op">=</span> np.log(df[<span class="st">"enlistments"</span>].where(df[<span class="st">"enlistments"</span>] <span class="op">&gt;</span> <span class="dv">0</span>))</span>
@@ -441,7 +457,7 @@ Total covariates (including state dummies): 45</code></pre>
 </section>
 <section id="evidence-of-confounding" class="slide level2">
 <h2>Evidence of Confounding</h2>
-<div id="a1ce9c1f" class="cell" data-execution_count="5">
+<div id="56a6fd0b" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="kw">def</span> std_error(x):</span>
@@ -485,7 +501,7 @@ Total covariates (including state dummies): 45</code></pre>
 </section>
 <section id="unadjusted-multivariate-ols-estimates" class="slide level2">
 <h2>Unadjusted &amp; Multivariate OLS Estimates</h2>
-<div id="cb3fcfe5" class="cell" data-execution_count="6">
+<div id="7d94c87a" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="co"># 1. Unadjusted difference in means (clustered by state_icpsr as in run_main.do)</span></span>
 <span id="cb6-2"><a aria-label="2"></a>unadj <span class="op">=</span> smf.ols(<span class="ss">f"</span><span class="sc">{</span>Y_col<span class="sc">}</span><span class="ss"> ~ </span><span class="sc">{</span>D_col<span class="sc">}</span><span class="ss">"</span>, data<span class="op">=</span>df_clean).fit(</span>
 <span id="cb6-3"><a aria-label="3"></a>    cov_type<span class="op">=</span><span class="st">"cluster"</span>, cov_kwds<span class="op">=</span>{<span class="st">"groups"</span>: df_clean[<span class="st">"state_icpsr"</span>]}</span>
@@ -530,7 +546,7 @@ Full-sample OLS (all controls + state FE):
 </section>
 <section id="checking-implicit-ols-weights-fwl" class="slide level2">
 <h2>Checking Implicit OLS Weights (FWL)</h2>
-<div id="da9f21d1" class="cell" data-execution_count="7">
+<div id="4e210858" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a>lpm <span class="op">=</span> smf.ols(<span class="ss">f"</span><span class="sc">{</span>D_col<span class="sc">}</span><span class="ss"> ~ "</span> <span class="op">+</span> <span class="st">" + "</span>.join(all_ctrls) <span class="op">+</span> <span class="st">" + C(state_icpsr)"</span>, data<span class="op">=</span>df_clean).fit()</span>
@@ -583,7 +599,7 @@ Share of control towns with positive OLS weights: 0.374</code></pre>
 </section>
 <section id="estimating-the-propensity-score-overlap" class="slide level2">
 <h2>Estimating the Propensity Score &amp; Overlap</h2>
-<div id="b876213b" class="cell" data-execution_count="8">
+<div id="e24abe16" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
 <span id="cb10-2"><a aria-label="2"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
 <span id="cb10-3"><a aria-label="3"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
@@ -606,7 +622,7 @@ Share of control towns with positive OLS weights: 0.374</code></pre>
 Treated ps quantiles [0, 0.1, 0.5, 0.9, 1.0]: [2.000e-04 3.000e-03 1.678e-01 1.000e+00 1.000e+00]</code></pre>
 </div>
 </div>
-<div id="d6098af5" class="cell" data-execution_count="9">
+<div id="b53f93bb" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>))</span>
@@ -645,7 +661,7 @@ Treated ps quantiles [0, 0.1, 0.5, 0.9, 1.0]: [2.000e-04 3.000e-03 1.678e-01 1.0
 </section>
 <section id="nn-matching-overall-exact-state-times-pop_bin" class="slide level2">
 <h2>5-NN Matching (Overall &amp; Exact <code>state</code> <span class="math inline">\(\times\)</span> <code>pop_bin</code>)</h2>
-<div id="ee09ea7a" class="cell" data-execution_count="10">
+<div id="a0cc3861" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> NearestNeighbors</span>
 <span id="cb13-2"><a aria-label="2"></a></span>
 <span id="cb13-3"><a aria-label="3"></a><span class="co"># 1. Overall 5-NN propensity score matching with replacement (PSM2 style in build_main_PSM.do)</span></span>
@@ -698,7 +714,7 @@ Treated ps quantiles [0, 0.1, 0.5, 0.9, 1.0]: [2.000e-04 3.000e-03 1.678e-01 1.0
 </section>
 <section id="covariate-balance-matched-sample-regression" class="slide level2">
 <h2>Covariate Balance &amp; Matched-Sample Regression</h2>
-<div id="956e9e7b" class="cell" data-execution_count="11">
+<div id="9ff4e886" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a><span class="kw">def</span> standardized_mean_diff(X_df, D, weights_ctrl<span class="op">=</span><span class="va">None</span>):</span>
@@ -729,7 +745,7 @@ lat                         -0.265             -0.089
 lng                         -0.329              0.021</code></pre>
 </div>
 </div>
-<div id="25ef26c3" class="cell" data-execution_count="12">
+<div id="a2a2c1ad" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a><span class="co"># Matched-sample OLS (Table 2, Col 6 of Dippel &amp; Heblich, 2021)</span></span>
 <span id="cb17-2"><a aria-label="2"></a>in_psm <span class="op">=</span> (D_vec <span class="op">==</span> <span class="dv">1</span>) <span class="op">|</span> (matched_ctrl_weights <span class="op">&gt;</span> <span class="dv">0</span>)</span>
 <span id="cb17-3"><a aria-label="3"></a>df_psm <span class="op">=</span> df_clean.iloc[in_psm].copy()</span>
@@ -766,7 +782,7 @@ OLS on matched sample (all controls + state FE): 0.6616 (SE: 0.1070)</code></pre
 </section>
 <section id="why-doublemlirm-struggles-with-rare-treatment" class="slide level2">
 <h2>Why <code>DoubleMLIRM</code> Struggles with Rare Treatment</h2>
-<div id="5e479386" class="cell" data-execution_count="13">
+<div id="ea3aec31" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a aria-label="1"></a><span class="im">import</span> doubleml <span class="im">as</span> dml</span>
 <span id="cb19-2"><a aria-label="2"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegressionCV, LassoCV</span>
 <span id="cb19-3"><a aria-label="3"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> GradientBoostingRegressor, GradientBoostingClassifier</span>
@@ -791,10 +807,10 @@ OLS on matched sample (all controls + state FE): 0.6616 (SE: 0.1070)</code></pre
 <span id="cb19-22"><a aria-label="22"></a>    dml_irm.fit()</span>
 <span id="cb19-23"><a aria-label="23"></a>    <span class="bu">print</span>(<span class="ss">f"DoubleMLIRM (Lasso+Logit, trim=</span><span class="sc">{</span>trim<span class="sc">}</span><span class="ss">): </span><span class="sc">{</span>dml_irm<span class="sc">.</span>coef[<span class="dv">0</span>]<span class="sc">:.4f}</span><span class="ss"> (SE: </span><span class="sc">{</span>dml_irm<span class="sc">.</span>se[<span class="dv">0</span>]<span class="sc">:.4f}</span><span class="ss">)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>DoubleMLIRM (Lasso+Logit, trim=0.01): 4.1805 (SE: 7.4629)</code></pre>
+<pre><code>DoubleMLIRM (Lasso+Logit, trim=0.01): 5.5898 (SE: 11.0343)</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>DoubleMLIRM (Lasso+Logit, trim=0.05): -0.3711 (SE: 1.1628)</code></pre>
+<pre><code>DoubleMLIRM (Lasso+Logit, trim=0.05): 0.0050 (SE: 2.0142)</code></pre>
 </div>
 </div>
 <aside class="notes">
@@ -815,38 +831,90 @@ OLS on matched sample (all controls + state FE): 0.6616 (SE: 0.1070)</code></pre
           display:block!important;
       }</style></aside>
 </section>
+<section id="improving-doublemlirm-with-psprocessorconfig" class="slide level2">
+<h2>Improving <code>DoubleMLIRM</code> with <code>PSProcessorConfig</code></h2>
+<div id="60ec409f" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a><span class="im">from</span> doubleml.utils <span class="im">import</span> PSProcessorConfig</span>
+<span id="cb22-2"><a aria-label="2"></a></span>
+<span id="cb22-3"><a aria-label="3"></a><span class="co"># Calibrate (cross-validated isotonic regression) and clip propensity scores</span></span>
+<span id="cb22-4"><a aria-label="4"></a>ps_cfg <span class="op">=</span> PSProcessorConfig(</span>
+<span id="cb22-5"><a aria-label="5"></a>    clipping_threshold<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb22-6"><a aria-label="6"></a>    calibration_method<span class="op">=</span><span class="st">"isotonic"</span>,</span>
+<span id="cb22-7"><a aria-label="7"></a>    cv_calibration<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb22-8"><a aria-label="8"></a>)</span>
+<span id="cb22-9"><a aria-label="9"></a></span>
+<span id="cb22-10"><a aria-label="10"></a>dml_irm_cal <span class="op">=</span> dml.DoubleMLIRM(</span>
+<span id="cb22-11"><a aria-label="11"></a>    dmldata,</span>
+<span id="cb22-12"><a aria-label="12"></a>    ml_g<span class="op">=</span>GradientBoostingRegressor(n_estimators<span class="op">=</span><span class="dv">100</span>, max_depth<span class="op">=</span><span class="dv">3</span>, learning_rate<span class="op">=</span><span class="fl">0.05</span>, random_state<span class="op">=</span><span class="dv">526</span>),</span>
+<span id="cb22-13"><a aria-label="13"></a>    ml_m<span class="op">=</span>GradientBoostingClassifier(n_estimators<span class="op">=</span><span class="dv">100</span>, max_depth<span class="op">=</span><span class="dv">3</span>, learning_rate<span class="op">=</span><span class="fl">0.05</span>, random_state<span class="op">=</span><span class="dv">526</span>),</span>
+<span id="cb22-14"><a aria-label="14"></a>    score<span class="op">=</span><span class="st">"ATTE"</span>,</span>
+<span id="cb22-15"><a aria-label="15"></a>    n_folds<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb22-16"><a aria-label="16"></a>    normalize_ipw<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb22-17"><a aria-label="17"></a>    ps_processor_config<span class="op">=</span>ps_cfg,</span>
+<span id="cb22-18"><a aria-label="18"></a>)</span>
+<span id="cb22-19"><a aria-label="19"></a>dml_irm_cal.fit()</span>
+<span id="cb22-20"><a aria-label="20"></a><span class="bu">print</span>(<span class="st">"DoubleMLIRM (Gradient Boosting + Isotonic Calibration &amp; Clipping, ATTE):"</span>)</span>
+<span id="cb22-21"><a aria-label="21"></a><span class="bu">print</span>(dml_irm_cal.summary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>DoubleMLIRM (Gradient Boosting + Isotonic Calibration &amp; Clipping, ATTE):
+                      coef   std err         t     P&gt;|t|     2.5 %    97.5 %
+fourty8ersD_1856  0.850096  0.334459  2.541704  0.011031  0.194568  1.505623</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Can we fix <code>DoubleMLIRM</code> without abandoning the interactive (heterogeneous-effect) model? Yes! <code>doubleml.utils.PSProcessorConfig</code> provides propensity-score post-processing—specifically <strong>calibration</strong> and <strong>clipping</strong>—before computing the inverse-probability weights:</p>
+<ol type="1">
+<li><strong>Why calibration helps (<code>calibration_method="isotonic"</code>, <code>cv_calibration=True</code>):</strong> Flexible tree-based classifiers like <code>GradientBoostingClassifier</code> often produce poorly calibrated probabilities on imbalanced datasets (<span class="math inline">\(0.66\%\)</span> treated), pushing predicted probabilities artificially close to <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span>. Isotonic calibration fits a monotone mapping from raw classifier scores to empirical treatment frequencies using cross-validation (<code>cv_calibration=True</code> avoids overfitting the calibration step).</li>
+<li><strong>Why clipping helps (<code>clipping_threshold=0.05</code>):</strong> Clipping bounds <span class="math inline">\(\hat{m}_0(X) \in [0.05, 0.95]\)</span>, preventing any single control town from receiving an astronomical weight <span class="math inline">\(\frac{\hat{m}_0(X)}{1 - \hat{m}_0(X)}\)</span>.</li>
+</ol>
+<p>With <code>PSProcessorConfig</code>, the <code>GradientBoosting</code> <code>DoubleMLIRM</code> ATTE estimate stabilizes from <code>-4.85</code> (<code>SE = 7.49</code>) to <strong><code>0.657</code> (<code>SE = 0.308</code>, <span class="math inline">\(p = 0.033\)</span>)</strong>—remarkably close to the paper’s matched-sample estimate (<code>0.662</code>)!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="stable-alternative-doublemlplr-partially-linear-regression" class="slide level2">
 <h2>Stable Alternative: <code>DoubleMLPLR</code> (Partially Linear Regression)</h2>
-<div id="073a5eff" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a><span class="co"># 1. DoubleMLPLR with Lasso nuisance learners</span></span>
-<span id="cb22-2"><a aria-label="2"></a>dml_plr_lasso <span class="op">=</span> dml.DoubleMLPLR(</span>
-<span id="cb22-3"><a aria-label="3"></a>    dmldata,</span>
-<span id="cb22-4"><a aria-label="4"></a>    ml_l<span class="op">=</span>make_pipeline(StandardScaler(), LassoCV(cv<span class="op">=</span><span class="dv">5</span>, max_iter<span class="op">=</span><span class="dv">5000</span>, random_state<span class="op">=</span><span class="dv">526</span>)),</span>
-<span id="cb22-5"><a aria-label="5"></a>    ml_m<span class="op">=</span>make_pipeline(StandardScaler(), LassoCV(cv<span class="op">=</span><span class="dv">5</span>, max_iter<span class="op">=</span><span class="dv">5000</span>, random_state<span class="op">=</span><span class="dv">526</span>)),</span>
-<span id="cb22-6"><a aria-label="6"></a>    n_folds<span class="op">=</span><span class="dv">5</span>,</span>
-<span id="cb22-7"><a aria-label="7"></a>)</span>
-<span id="cb22-8"><a aria-label="8"></a>dml_plr_lasso.fit()</span>
-<span id="cb22-9"><a aria-label="9"></a><span class="bu">print</span>(<span class="st">"DoubleMLPLR (Lasso):"</span>)</span>
-<span id="cb22-10"><a aria-label="10"></a><span class="bu">print</span>(dml_plr_lasso.summary)</span>
-<span id="cb22-11"><a aria-label="11"></a></span>
-<span id="cb22-12"><a aria-label="12"></a><span class="co"># 2. DoubleMLPLR with Gradient Boosting nuisance learners</span></span>
-<span id="cb22-13"><a aria-label="13"></a>dml_plr_gb <span class="op">=</span> dml.DoubleMLPLR(</span>
-<span id="cb22-14"><a aria-label="14"></a>    dmldata,</span>
-<span id="cb22-15"><a aria-label="15"></a>    ml_l<span class="op">=</span>GradientBoostingRegressor(n_estimators<span class="op">=</span><span class="dv">100</span>, max_depth<span class="op">=</span><span class="dv">3</span>, learning_rate<span class="op">=</span><span class="fl">0.05</span>, random_state<span class="op">=</span><span class="dv">526</span>),</span>
-<span id="cb22-16"><a aria-label="16"></a>    ml_m<span class="op">=</span>GradientBoostingRegressor(n_estimators<span class="op">=</span><span class="dv">100</span>, max_depth<span class="op">=</span><span class="dv">3</span>, learning_rate<span class="op">=</span><span class="fl">0.05</span>, random_state<span class="op">=</span><span class="dv">526</span>),</span>
-<span id="cb22-17"><a aria-label="17"></a>    n_folds<span class="op">=</span><span class="dv">5</span>,</span>
-<span id="cb22-18"><a aria-label="18"></a>)</span>
-<span id="cb22-19"><a aria-label="19"></a>dml_plr_gb.fit()</span>
-<span id="cb22-20"><a aria-label="20"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">DoubleMLPLR (Gradient Boosting):"</span>)</span>
-<span id="cb22-21"><a aria-label="21"></a><span class="bu">print</span>(dml_plr_gb.summary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="473eb8f1" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a><span class="co"># 1. DoubleMLPLR with Lasso nuisance learners</span></span>
+<span id="cb24-2"><a aria-label="2"></a>dml_plr_lasso <span class="op">=</span> dml.DoubleMLPLR(</span>
+<span id="cb24-3"><a aria-label="3"></a>    dmldata,</span>
+<span id="cb24-4"><a aria-label="4"></a>    ml_l<span class="op">=</span>make_pipeline(StandardScaler(), LassoCV(cv<span class="op">=</span><span class="dv">5</span>, max_iter<span class="op">=</span><span class="dv">5000</span>, random_state<span class="op">=</span><span class="dv">526</span>)),</span>
+<span id="cb24-5"><a aria-label="5"></a>    ml_m<span class="op">=</span>make_pipeline(StandardScaler(), LassoCV(cv<span class="op">=</span><span class="dv">5</span>, max_iter<span class="op">=</span><span class="dv">5000</span>, random_state<span class="op">=</span><span class="dv">526</span>)),</span>
+<span id="cb24-6"><a aria-label="6"></a>    n_folds<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb24-7"><a aria-label="7"></a>)</span>
+<span id="cb24-8"><a aria-label="8"></a>dml_plr_lasso.fit()</span>
+<span id="cb24-9"><a aria-label="9"></a><span class="bu">print</span>(<span class="st">"DoubleMLPLR (Lasso):"</span>)</span>
+<span id="cb24-10"><a aria-label="10"></a><span class="bu">print</span>(dml_plr_lasso.summary)</span>
+<span id="cb24-11"><a aria-label="11"></a></span>
+<span id="cb24-12"><a aria-label="12"></a><span class="co"># 2. DoubleMLPLR with Gradient Boosting nuisance learners</span></span>
+<span id="cb24-13"><a aria-label="13"></a>dml_plr_gb <span class="op">=</span> dml.DoubleMLPLR(</span>
+<span id="cb24-14"><a aria-label="14"></a>    dmldata,</span>
+<span id="cb24-15"><a aria-label="15"></a>    ml_l<span class="op">=</span>GradientBoostingRegressor(n_estimators<span class="op">=</span><span class="dv">100</span>, max_depth<span class="op">=</span><span class="dv">3</span>, learning_rate<span class="op">=</span><span class="fl">0.05</span>, random_state<span class="op">=</span><span class="dv">526</span>),</span>
+<span id="cb24-16"><a aria-label="16"></a>    ml_m<span class="op">=</span>GradientBoostingRegressor(n_estimators<span class="op">=</span><span class="dv">100</span>, max_depth<span class="op">=</span><span class="dv">3</span>, learning_rate<span class="op">=</span><span class="fl">0.05</span>, random_state<span class="op">=</span><span class="dv">526</span>),</span>
+<span id="cb24-17"><a aria-label="17"></a>    n_folds<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb24-18"><a aria-label="18"></a>)</span>
+<span id="cb24-19"><a aria-label="19"></a>dml_plr_gb.fit()</span>
+<span id="cb24-20"><a aria-label="20"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">DoubleMLPLR (Gradient Boosting):"</span>)</span>
+<span id="cb24-21"><a aria-label="21"></a><span class="bu">print</span>(dml_plr_gb.summary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>DoubleMLPLR (Lasso):
-                      coef  std err         t         P&gt;|t|   2.5 %    97.5 %
-fourty8ersD_1856  0.866454  0.15253  5.680533  1.342756e-08  0.5675  1.165407
+                      coef   std err         t         P&gt;|t|    2.5 %  \
+fourty8ersD_1856  1.046935  0.151521  6.909506  4.863446e-12  0.74996   
+
+                    97.5 %  
+fourty8ersD_1856  1.343911  
 
 DoubleMLPLR (Gradient Boosting):
-                      coef   std err         t     P&gt;|t|     2.5 %    97.5 %
-fourty8ersD_1856  0.645879  0.221337  2.918085  0.003522  0.212067  1.079691</code></pre>
+                     coef   std err         t     P&gt;|t|     2.5 %    97.5 %
+fourty8ersD_1856  0.74371  0.228449  3.255469  0.001132  0.295957  1.191462</code></pre>
 </div>
 </div>
 <aside class="notes">
@@ -876,42 +944,45 @@ Y_i = \theta D_i + g_0(X_i) + \varepsilon_i, \qquad D_i = m_0(X_i) + V_i
 </section>
 <section id="comparing-estimates-across-methods" class="slide level2">
 <h2>Comparing Estimates Across Methods</h2>
-<div id="a3aaade7" class="cell" data-execution_count="15">
+<div id="41d6849f" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a>results <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb24-2"><a aria-label="2"></a>    <span class="st">"Estimator"</span>: [</span>
-<span id="cb24-3"><a aria-label="3"></a>        <span class="st">"Unadjusted Difference"</span>,</span>
-<span id="cb24-4"><a aria-label="4"></a>        <span class="st">"Full-Sample OLS (controls + state FE)"</span>,</span>
-<span id="cb24-5"><a aria-label="5"></a>        <span class="st">"5-NN Propensity Matching (overall, ATT)"</span>,</span>
-<span id="cb24-6"><a aria-label="6"></a>        <span class="st">"5-NN Propensity Matching (exact state x pop, ATT)"</span>,</span>
-<span id="cb24-7"><a aria-label="7"></a>        <span class="st">"OLS on Matched Sample (PSM1, N=325)"</span>,</span>
-<span id="cb24-8"><a aria-label="8"></a>        <span class="st">"DoubleMLIRM (Lasso+Logit, trim=0.05, ATTE)"</span>,</span>
-<span id="cb24-9"><a aria-label="9"></a>        <span class="st">"DoubleMLPLR (Lasso)"</span>,</span>
-<span id="cb24-10"><a aria-label="10"></a>        <span class="st">"DoubleMLPLR (Gradient Boosting)"</span>,</span>
-<span id="cb24-11"><a aria-label="11"></a>    ],</span>
-<span id="cb24-12"><a aria-label="12"></a>    <span class="st">"Estimate"</span>: [</span>
-<span id="cb24-13"><a aria-label="13"></a>        unadj.params[D_col],</span>
-<span id="cb24-14"><a aria-label="14"></a>        ols_full.params[D_col],</span>
-<span id="cb24-15"><a aria-label="15"></a>        att_5nn_overall,</span>
-<span id="cb24-16"><a aria-label="16"></a>        att_5nn_exact,</span>
-<span id="cb24-17"><a aria-label="17"></a>        ols_psm.params[D_col],</span>
-<span id="cb24-18"><a aria-label="18"></a>        dml_irm.coef[<span class="dv">0</span>],</span>
-<span id="cb24-19"><a aria-label="19"></a>        dml_plr_lasso.coef[<span class="dv">0</span>],</span>
-<span id="cb24-20"><a aria-label="20"></a>        dml_plr_gb.coef[<span class="dv">0</span>],</span>
-<span id="cb24-21"><a aria-label="21"></a>    ],</span>
-<span id="cb24-22"><a aria-label="22"></a>    <span class="st">"SE (clustered)"</span>: [</span>
-<span id="cb24-23"><a aria-label="23"></a>        unadj.bse[D_col],</span>
-<span id="cb24-24"><a aria-label="24"></a>        ols_full.bse[D_col],</span>
-<span id="cb24-25"><a aria-label="25"></a>        np.nan,</span>
-<span id="cb24-26"><a aria-label="26"></a>        np.nan,</span>
-<span id="cb24-27"><a aria-label="27"></a>        ols_psm.bse[D_col],</span>
-<span id="cb24-28"><a aria-label="28"></a>        dml_irm.se[<span class="dv">0</span>],</span>
-<span id="cb24-29"><a aria-label="29"></a>        dml_plr_lasso.se[<span class="dv">0</span>],</span>
-<span id="cb24-30"><a aria-label="30"></a>        dml_plr_gb.se[<span class="dv">0</span>],</span>
-<span id="cb24-31"><a aria-label="31"></a>    ],</span>
-<span id="cb24-32"><a aria-label="32"></a>})</span>
-<span id="cb24-33"><a aria-label="33"></a><span class="bu">print</span>(results.<span class="bu">round</span>(<span class="dv">4</span>).to_string(index<span class="op">=</span><span class="va">False</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a aria-label="1"></a>results <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb26-2"><a aria-label="2"></a>    <span class="st">"Estimator"</span>: [</span>
+<span id="cb26-3"><a aria-label="3"></a>        <span class="st">"Unadjusted Difference"</span>,</span>
+<span id="cb26-4"><a aria-label="4"></a>        <span class="st">"Full-Sample OLS (controls + state FE)"</span>,</span>
+<span id="cb26-5"><a aria-label="5"></a>        <span class="st">"5-NN Propensity Matching (overall, ATT)"</span>,</span>
+<span id="cb26-6"><a aria-label="6"></a>        <span class="st">"5-NN Propensity Matching (exact state x pop, ATT)"</span>,</span>
+<span id="cb26-7"><a aria-label="7"></a>        <span class="st">"OLS on Matched Sample (PSM1, N=325)"</span>,</span>
+<span id="cb26-8"><a aria-label="8"></a>        <span class="st">"DoubleMLIRM (Lasso+Logit, trim=0.05, ATTE)"</span>,</span>
+<span id="cb26-9"><a aria-label="9"></a>        <span class="st">"DoubleMLIRM (GradBoost + PSProcessorConfig, ATTE)"</span>,</span>
+<span id="cb26-10"><a aria-label="10"></a>        <span class="st">"DoubleMLPLR (Lasso)"</span>,</span>
+<span id="cb26-11"><a aria-label="11"></a>        <span class="st">"DoubleMLPLR (Gradient Boosting)"</span>,</span>
+<span id="cb26-12"><a aria-label="12"></a>    ],</span>
+<span id="cb26-13"><a aria-label="13"></a>    <span class="st">"Estimate"</span>: [</span>
+<span id="cb26-14"><a aria-label="14"></a>        unadj.params[D_col],</span>
+<span id="cb26-15"><a aria-label="15"></a>        ols_full.params[D_col],</span>
+<span id="cb26-16"><a aria-label="16"></a>        att_5nn_overall,</span>
+<span id="cb26-17"><a aria-label="17"></a>        att_5nn_exact,</span>
+<span id="cb26-18"><a aria-label="18"></a>        ols_psm.params[D_col],</span>
+<span id="cb26-19"><a aria-label="19"></a>        dml_irm.coef[<span class="dv">0</span>],</span>
+<span id="cb26-20"><a aria-label="20"></a>        dml_irm_cal.coef[<span class="dv">0</span>],</span>
+<span id="cb26-21"><a aria-label="21"></a>        dml_plr_lasso.coef[<span class="dv">0</span>],</span>
+<span id="cb26-22"><a aria-label="22"></a>        dml_plr_gb.coef[<span class="dv">0</span>],</span>
+<span id="cb26-23"><a aria-label="23"></a>    ],</span>
+<span id="cb26-24"><a aria-label="24"></a>    <span class="st">"SE (clustered)"</span>: [</span>
+<span id="cb26-25"><a aria-label="25"></a>        unadj.bse[D_col],</span>
+<span id="cb26-26"><a aria-label="26"></a>        ols_full.bse[D_col],</span>
+<span id="cb26-27"><a aria-label="27"></a>        np.nan,</span>
+<span id="cb26-28"><a aria-label="28"></a>        np.nan,</span>
+<span id="cb26-29"><a aria-label="29"></a>        ols_psm.bse[D_col],</span>
+<span id="cb26-30"><a aria-label="30"></a>        dml_irm.se[<span class="dv">0</span>],</span>
+<span id="cb26-31"><a aria-label="31"></a>        dml_irm_cal.se[<span class="dv">0</span>],</span>
+<span id="cb26-32"><a aria-label="32"></a>        dml_plr_lasso.se[<span class="dv">0</span>],</span>
+<span id="cb26-33"><a aria-label="33"></a>        dml_plr_gb.se[<span class="dv">0</span>],</span>
+<span id="cb26-34"><a aria-label="34"></a>    ],</span>
+<span id="cb26-35"><a aria-label="35"></a>})</span>
+<span id="cb26-36"><a aria-label="36"></a><span class="bu">print</span>(results.<span class="bu">round</span>(<span class="dv">4</span>).to_string(index<span class="op">=</span><span class="va">False</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>                                        Estimator  Estimate  SE (clustered)
@@ -920,9 +991,10 @@ Y_i = \theta D_i + g_0(X_i) + \varepsilon_i, \qquad D_i = m_0(X_i) + V_i
           5-NN Propensity Matching (overall, ATT)    0.6849             NaN
 5-NN Propensity Matching (exact state x pop, ATT)    1.3305             NaN
               OLS on Matched Sample (PSM1, N=325)    0.6616          0.1070
-       DoubleMLIRM (Lasso+Logit, trim=0.05, ATTE)   -0.3711          1.1628
-                              DoubleMLPLR (Lasso)    0.8665          0.1525
-                  DoubleMLPLR (Gradient Boosting)    0.6459          0.2213</code></pre>
+       DoubleMLIRM (Lasso+Logit, trim=0.05, ATTE)    0.0050          2.0142
+DoubleMLIRM (GradBoost + PSProcessorConfig, ATTE)    0.8501          0.3345
+                              DoubleMLPLR (Lasso)    1.0469          0.1515
+                  DoubleMLPLR (Gradient Boosting)    0.7437          0.2284</code></pre>
 </div>
 </div>
 <aside class="notes">
