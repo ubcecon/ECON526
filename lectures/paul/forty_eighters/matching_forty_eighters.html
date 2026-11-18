@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.11.9">
+
+  <meta name="author" content="Paul Schrimpf">
+  <title>ECON 526 – Matching: Leadership in Social Movements</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-00ad5a49dff614330cd349bcec985ec3.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-background-image="../tak.jpg" data-background-size="contain" class="quarto-title-block center">
+  <h1 class="title">Matching: Leadership in Social Movements</h1>
+  <p class="subtitle">ECON526 — Real-Data Application (Dippel &amp; Heblich, 2021)</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Paul Schrimpf
+</div>
+        <p class="quarto-title-affiliation">
+            University of British Columbia
+          </p>
+    </div>
+</div>
+
+</section><section id="TOC">
+<nav role="doc-toc" aria-labelledby="toc-title">
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#/introduction" id="/toc-introduction">Introduction</a></li>
+<li><a href="#/data-preparation" id="/toc-data-preparation">Data Preparation</a></li>
+<li><a href="#/selection-regression-baselines" id="/toc-selection-regression-baselines">Selection &amp; Regression Baselines</a></li>
+<li><a href="#/original-paper-5-nn-propensity-score-matching" id="/toc-original-paper-5-nn-propensity-score-matching">Original Paper: 5-NN Propensity Score Matching</a></li>
+<li><a href="#/ipw-double-machine-learning-doubleml" id="/toc-ipw-double-machine-learning-doubleml">IPW &amp; Double Machine Learning (<code>doubleml</code>)</a></li>
+<li><a href="#/summary" id="/toc-summary">Summary</a></li>
+</ul>
+</nav>
+</section>
+<section>
+<section id="introduction" class="title-slide slide level1 center">
+<h1>Introduction</h1>
+
+</section>
+<section id="research-question-setting" class="slide level2">
+<h2>Research Question &amp; Setting</h2>
+<ul>
+<li><strong>Paper:</strong> <span class="citation" data-cites="dippel2021">Dippel and Heblich (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span>, <em>“Leadership in Social Movements: Evidence from the ‘Forty-Eighters’ in the Civil War”</em>, <em>American Economic Review</em>, 111(2): 472–505.</li>
+<li><strong>Historical setting:</strong> Exiled leaders of the failed 1848–1849 German revolution (“Forty-Eighters”) settled in U.S. towns and campaigned against slavery.</li>
+<li><strong>Treatment (<span class="math inline">\(D_i \in \{0, 1\}\)</span>):</strong> <code>fourty8ersD_1856</code> — whether town <span class="math inline">\(i\)</span> had at least one Forty-Eighter by 1856.</li>
+<li><strong>Outcome (<span class="math inline">\(Y_i\)</span>):</strong> <code>logenlistments</code> — log Union Army enlistments from town <span class="math inline">\(i\)</span> during the U.S. Civil War.</li>
+<li><strong>Covariates (<span class="math inline">\(X_i\)</span>):</strong> Pre-treatment town demographics (1840–1850), German-born share, geography, climate, and state indicators.</li>
+</ul>
+<aside class="notes">
+<p>This real-data example examines whether grassroots leaders can causally shift collective action and political mobilization. In 1848–1849, a wave of liberal and democratic revolutions swept across the German states. After the revolutions failed, many of the intellectual and political leaders—known as the “Forty-Eighters”—fled to the United States, where they became outspoken abolitionists, newspaper editors, and community organizers.</p>
+<p>The empirical challenge is that Forty-Eighters did not settle in U.S. towns at random. They tended to locate in larger towns that already had sizable German-born populations, German newspapers, or favorable geographic access. If those same town characteristics also made residents more (or less) likely to enlist in the Union Army during the Civil War, a simple comparison of towns with and without Forty-Eighters would confound the effect of leadership with pre-existing town differences.</p>
+<p>To address this selection problem using matching, we rely on the <strong>Conditional Independence Assumption (CIA)</strong> (selection on observables): <span class="math display">\[
+(Y_i(0), Y_i(1)) \perp D_i \mid X_i
+\]</span> together with <strong>overlap</strong> (positivity): <span class="math display">\[
+0 &lt; P(D_i = 1 \mid X_i) &lt; 1 \quad \text{almost surely.}
+\]</span> In words, conditional on observed pre-treatment town characteristics <span class="math inline">\(X_i\)</span>, whether a town received a Forty-Eighter is treated as as-good-as-random, and every type of town has a strictly positive probability of being treated or untreated.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="empirical-strategy-overview" class="slide level2">
+<h2>Empirical Strategy Overview</h2>
+<ul>
+<li><strong>Why not just OLS?</strong>
+<ul>
+<li>Linear regression <span class="math inline">\(Y_i = \hat{\alpha} D_i + X_i'\hat{\beta} + \hat{\epsilon}_i\)</span> imposes linearity and weights observations by <span class="math inline">\(\omega(D_i, X_i) \propto D_i - X_i'\pi\)</span>, which can be negative!</li>
+</ul></li>
+<li><strong>Original paper’s approach:</strong>
+<ul>
+<li>Estimates a propensity score <span class="math inline">\(\hat{p}(X_i) = \hat{P}(D_i = 1 \mid X_i)\)</span>.</li>
+<li>Uses <strong>5-nearest-neighbor propensity score matching with replacement</strong> (exact-matched within state and town-size bins) to construct a matched sample, then estimates treatment effects on the matched sample.</li>
+</ul></li>
+<li><strong>Modern <code>doubleml</code> approaches:</strong>
+<ul>
+<li><strong>Interactive Regression Model (<code>DoubleMLIRM</code>)</strong> for doubly robust ATTE estimation.</li>
+<li><strong>Partially Linear Regression (<code>DoubleMLPLR</code>)</strong> when treatment is rare (<span class="math inline">\(0.66\%\)</span> treated) and inverse propensity weights become unstable.</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>Comparing these estimators on the same dataset illustrates both the strengths and the practical pitfalls of matching methods:</p>
+<ol type="1">
+<li><strong>OLS</strong> is easy to run, but by the Frisch-Waugh-Lovell theorem it recovers a variance-weighted average of treatment effects where the implicit weights <span class="math inline">\(\omega(D_i, X_i) = (D_i - X_i'\pi) / \mathbb{E}[(D_i - X_i'\pi)^2]\)</span> depend on a linear approximation to <span class="math inline">\(\mathbb{E}[D_i \mid X_i]\)</span>. When <span class="math inline">\(D_i\)</span> is rare and nonlinear in <span class="math inline">\(X_i\)</span>, OLS extrapolates across non-overlapping towns and can assign negative weights to treated units.</li>
+<li><strong>Nearest-neighbor propensity score matching</strong> <span class="citation" data-cites="dippel2021">(<a href="#/references" role="doc-biblioref" onclick="">Dippel and Heblich 2021</a>)</span> directly pairs each of the 73 treated towns with 5 similar control towns, focusing on the <strong>Average Treatment Effect on the Treated (ATT)</strong> and trimming away the thousands of tiny, incomparable control towns.</li>
+<li><strong><code>DoubleMLIRM</code> vs.&nbsp;<code>DoubleMLPLR</code></strong> <span class="citation" data-cites="chernozhukov2018">(<a href="#/references" role="doc-biblioref" onclick="">Chernozhukov et al. 2018</a>)</span>: In <code>site/matching.qmd</code>, <code>DoubleMLIRM</code> worked smoothly because roughly 33% of students were treated and overlap was strong. Here, only <strong>73 out of 11,096 towns (0.66%)</strong> are treated! We will see directly what happens to <code>DoubleMLIRM</code> when propensity scores approach 0 and 1—and why <code>DoubleMLPLR</code> (partialling out without dividing by <span class="math inline">\(m_0(X)(1-m_0(X))\)</span>) remains stable.</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="data-preparation" class="title-slide slide level1 center">
+<h1>Data Preparation</h1>
+
+</section>
+<section id="loading-merging-the-replication-files" class="slide level2">
+<h2>Loading &amp; Merging the Replication Files</h2>
+<div id="9e63821b" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>imports</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> os</span>
+<span id="cb1-2"><a aria-label="2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a aria-label="3"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a aria-label="4"></a><span class="im">from</span> matplotlib <span class="im">import</span> style</span>
+<span id="cb1-5"><a aria-label="5"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb1-6"><a aria-label="6"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-7"><a aria-label="7"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb1-8"><a aria-label="8"></a></span>
+<span id="cb1-9"><a aria-label="9"></a>style.use(<span class="st">"fivethirtyeight"</span>)</span>
+<span id="cb1-10"><a aria-label="10"></a>pd.set_option(<span class="st">"display.max_columns"</span>, <span class="dv">25</span>)</span>
+<span id="cb1-11"><a aria-label="11"></a></span>
+<span id="cb1-12"><a aria-label="12"></a>din <span class="op">=</span> <span class="st">"./data/REPLICATION/data_in"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="034a2cc4" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="co"># Replicate the town-level dataset construction from REPLICATION/code/build_main.do</span></span>
+<span id="cb2-2"><a aria-label="2"></a>df <span class="op">=</span> pd.read_stata(os.path.join(din, <span class="st">"master_haines.dta"</span>))</span>
+<span id="cb2-3"><a aria-label="3"></a></span>
+<span id="cb2-4"><a aria-label="4"></a><span class="co"># Town size bins (bottom 5%, middle 90%, top 5%) used for exact matching in the paper</span></span>
+<span id="cb2-5"><a aria-label="5"></a>p95, p05 <span class="op">=</span> df[<span class="st">"lnpop50"</span>].quantile([<span class="fl">0.95</span>, <span class="fl">0.05</span>])</span>
+<span id="cb2-6"><a aria-label="6"></a>df[<span class="st">"fe_lnpop_pct"</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb2-7"><a aria-label="7"></a>df.loc[df[<span class="st">"lnpop50"</span>] <span class="op">&gt;=</span> p95, <span class="st">"fe_lnpop_pct"</span>] <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb2-8"><a aria-label="8"></a>df.loc[df[<span class="st">"lnpop50"</span>] <span class="op">&lt;=</span> p05, <span class="st">"fe_lnpop_pct"</span>] <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb2-9"><a aria-label="9"></a></span>
+<span id="cb2-10"><a aria-label="10"></a><span class="co"># Merge town-level datasets on (name, county_icpsr, state_icpsr)</span></span>
+<span id="cb2-11"><a aria-label="11"></a>town_files <span class="op">=</span> [</span>
+<span id="cb2-12"><a aria-label="12"></a>    <span class="st">"FourtyEighters_town.dta"</span>, <span class="st">"FourtyEighters_from1856.dta"</span>, <span class="st">"enlistments_town.dta"</span>,</span>
+<span id="cb2-13"><a aria-label="13"></a>    <span class="st">"enlistmentsInterpolated.dta"</span>, <span class="st">"turnvereine_towns.dta"</span>, <span class="st">"newspapersGerman_town.dta"</span>,</span>
+<span id="cb2-14"><a aria-label="14"></a>    <span class="st">"germans_bytownFullCount.dta"</span>, <span class="st">"ShiplistsGermans.dta"</span>, <span class="st">"others_bytownFullCount.dta"</span>,</span>
+<span id="cb2-15"><a aria-label="15"></a>    <span class="st">"geo_controls.dta"</span>, <span class="st">"1840_towns.dta"</span>,</span>
+<span id="cb2-16"><a aria-label="16"></a>]</span>
+<span id="cb2-17"><a aria-label="17"></a><span class="cf">for</span> fname <span class="kw">in</span> town_files:</span>
+<span id="cb2-18"><a aria-label="18"></a>    sub <span class="op">=</span> pd.read_stata(os.path.join(din, fname))</span>
+<span id="cb2-19"><a aria-label="19"></a>    df <span class="op">=</span> df.merge(sub, on<span class="op">=</span>[<span class="st">"name"</span>, <span class="st">"county_icpsr"</span>, <span class="st">"state_icpsr"</span>], how<span class="op">=</span><span class="st">"outer"</span>)</span>
+<span id="cb2-20"><a aria-label="20"></a></span>
+<span id="cb2-21"><a aria-label="21"></a><span class="co"># Merge county-level controls on (state_icpsr, county_icpsr)</span></span>
+<span id="cb2-22"><a aria-label="22"></a><span class="cf">for</span> fname <span class="kw">in</span> [<span class="st">"ipums_countycontrols.dta"</span>, <span class="st">"votingdata_co_xs.dta"</span>]:</span>
+<span id="cb2-23"><a aria-label="23"></a>    sub <span class="op">=</span> pd.read_stata(os.path.join(din, fname))</span>
+<span id="cb2-24"><a aria-label="24"></a>    df <span class="op">=</span> df.merge(sub, on<span class="op">=</span>[<span class="st">"state_icpsr"</span>, <span class="st">"county_icpsr"</span>], how<span class="op">=</span><span class="st">"left"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<aside class="notes">
+<p>The replication archive for Dippel &amp; Heblich (2021) stores raw/intermediate datasets in Stata <code>.dta</code> format inside <code>REPLICATION/data_in/</code> and builds the analysis file via <code>REPLICATION/code/build_main.do</code>. Here we translate <code>build_main.do</code> directly into Python using <code>pandas.read_stata</code>.</p>
+<p>The unit of observation is a U.S. town/city (identified by <code>name</code>, <code>county_icpsr</code>, and <code>state_icpsr</code>). Notice how <code>build_main.do</code> also constructs <code>fe_lnpop_pct</code>, a 3-category indicator for whether a town is in the bottom 5%, middle 90%, or top 5% of the 1850 log-population distribution. In the paper’s main matching specification (<code>PSM1_</code>), each treated town is matched only to control towns in the <strong>same state</strong> and <strong>same population-size bin</strong>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="defining-treatment-outcome-and-covariates" class="slide level2">
+<h2>Defining Treatment, Outcome, and Covariates</h2>
+<div id="3e38e3a6" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="co"># Construct outcome and German-born share variables as in build_main.do</span></span>
+<span id="cb3-2"><a aria-label="2"></a>df[<span class="st">"enlistments"</span>] <span class="op">=</span> df[<span class="st">"count_1"</span>]</span>
+<span id="cb3-3"><a aria-label="3"></a>df[<span class="st">"logenlistments"</span>] <span class="op">=</span> np.log(df[<span class="st">"enlistments"</span>].where(df[<span class="st">"enlistments"</span>] <span class="op">&gt;</span> <span class="dv">0</span>))</span>
+<span id="cb3-4"><a aria-label="4"></a>df[<span class="st">"gborn1850_share"</span>] <span class="op">=</span> (df[<span class="st">"count_gborn1850"</span>] <span class="op">/</span> df[<span class="st">"pop50"</span>]).fillna(<span class="dv">0</span>)</span>
+<span id="cb3-5"><a aria-label="5"></a>df[<span class="st">"gborn1860_share"</span>] <span class="op">=</span> (df[<span class="st">"count_gborn1860"</span>] <span class="op">/</span> df[<span class="st">"pop60"</span>]).fillna(<span class="dv">0</span>)</span>
+<span id="cb3-6"><a aria-label="6"></a>df[<span class="st">"ch_gborn_share"</span>] <span class="op">=</span> (df[<span class="st">"gborn1860_share"</span>] <span class="op">-</span> df[<span class="st">"gborn1850_share"</span>]).fillna(<span class="dv">0</span>)</span>
+<span id="cb3-7"><a aria-label="7"></a></span>
+<span id="cb3-8"><a aria-label="8"></a><span class="co"># Drop Western/Southern states (no Union enlistment data) and NYC (&gt;100 Forty-Eighters)</span></span>
+<span id="cb3-9"><a aria-label="9"></a>df <span class="op">=</span> df[<span class="op">~</span>df[<span class="st">"region"</span>].isin([<span class="st">"west"</span>, <span class="st">"deepsouth"</span>, <span class="st">"oldsouth"</span>])].copy()</span>
+<span id="cb3-10"><a aria-label="10"></a>df <span class="op">=</span> df[<span class="op">~</span>(df[<span class="st">"fourty8ers"</span>] <span class="op">&gt;</span> <span class="dv">100</span>)].copy()</span>
+<span id="cb3-11"><a aria-label="11"></a></span>
+<span id="cb3-12"><a aria-label="12"></a><span class="co"># Exact control groups from REPLICATION/code/Master_do.do</span></span>
+<span id="cb3-13"><a aria-label="13"></a>D_col <span class="op">=</span> <span class="st">"fourty8ersD_1856"</span></span>
+<span id="cb3-14"><a aria-label="14"></a>Y_col <span class="op">=</span> <span class="st">"logenlistments"</span></span>
+<span id="cb3-15"><a aria-label="15"></a>ctrls_core <span class="op">=</span> [<span class="st">"gborn1850_share"</span>, <span class="st">"ln_dist_metzler"</span>, <span class="st">"ch_gborn_share"</span>, <span class="st">"GtA_"</span>, <span class="st">"germansnewsp_1850"</span>, <span class="st">"lnpop50"</span>]</span>
+<span id="cb3-16"><a aria-label="16"></a>ctrls_geo <span class="op">=</span> [<span class="st">"ln_weighted_dist_port"</span>, <span class="st">"ln_dist_navriver"</span>, <span class="st">"ln_dist_rail"</span>, <span class="st">"ln_dist_Coast"</span>,</span>
+<span id="cb3-17"><a aria-label="17"></a>             <span class="st">"lat"</span>, <span class="st">"lng"</span>, <span class="st">"ln_elevation"</span>, <span class="st">"mean_temperature"</span>, <span class="st">"mean_precipitation"</span>]</span>
+<span id="cb3-18"><a aria-label="18"></a>ctrls_fish <span class="op">=</span> [<span class="st">"sltot50_share"</span>, <span class="st">"fctot50_share"</span>, <span class="st">"whfemale50_share"</span>]</span>
+<span id="cb3-19"><a aria-label="19"></a>ctrls_1840 <span class="op">=</span> [<span class="st">"pop_ch4050"</span>, <span class="st">"sltot_ch4050"</span>, <span class="st">"fctot_ch4050"</span>, <span class="st">"whfemale_ch4050"</span>]</span>
+<span id="cb3-20"><a aria-label="20"></a>all_ctrls <span class="op">=</span> ctrls_core <span class="op">+</span> ctrls_geo <span class="op">+</span> ctrls_fish <span class="op">+</span> ctrls_1840</span>
+<span id="cb3-21"><a aria-label="21"></a></span>
+<span id="cb3-22"><a aria-label="22"></a>needed <span class="op">=</span> [Y_col, D_col, <span class="st">"state_icpsr"</span>, <span class="st">"fe_lnpop_pct"</span>] <span class="op">+</span> all_ctrls</span>
+<span id="cb3-23"><a aria-label="23"></a>df_clean <span class="op">=</span> df.dropna(subset<span class="op">=</span>needed).copy()</span>
+<span id="cb3-24"><a aria-label="24"></a>df_enc <span class="op">=</span> pd.get_dummies(df_clean[[Y_col, D_col, <span class="st">"state_icpsr"</span>, <span class="st">"fe_lnpop_pct"</span>] <span class="op">+</span> all_ctrls],</span>
+<span id="cb3-25"><a aria-label="25"></a>                        columns<span class="op">=</span>[<span class="st">"state_icpsr"</span>], drop_first<span class="op">=</span><span class="va">True</span>, dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb3-26"><a aria-label="26"></a>X_cols <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> df_enc.columns <span class="cf">if</span> c <span class="kw">not</span> <span class="kw">in</span> [Y_col, D_col, <span class="st">"fe_lnpop_pct"</span>]]</span>
+<span id="cb3-27"><a aria-label="27"></a></span>
+<span id="cb3-28"><a aria-label="28"></a><span class="bu">print</span>(<span class="ss">f"Final sample: </span><span class="sc">{</span><span class="bu">len</span>(df_clean)<span class="sc">}</span><span class="ss"> towns | Treated: </span><span class="sc">{</span><span class="bu">int</span>(df_clean[D_col].<span class="bu">sum</span>())<span class="sc">}</span><span class="ss"> | Control: </span><span class="sc">{</span><span class="bu">int</span>((<span class="dv">1</span> <span class="op">-</span> df_clean[D_col]).<span class="bu">sum</span>())<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-29"><a aria-label="29"></a><span class="bu">print</span>(<span class="ss">f"Total covariates (including state dummies): </span><span class="sc">{</span><span class="bu">len</span>(X_cols)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Final sample: 11096 towns | Treated: 73 | Control: 11023
+Total covariates (including state dummies): 45</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>We follow <code>build_main.do</code> and <code>Master_do.do</code> to define the exact analysis sample and variables: - <strong>Sample restrictions:</strong> Western and Southern states are excluded because Union Army enlistment records do not cover them, and New York City (which had over 100 Forty-Eighters) is dropped as an extreme outlier. Keeping complete cases across all covariates leaves <strong>11,096 towns</strong>, of which <strong>73</strong> received at least one Forty-Eighter by 1856. - <strong>Pre-treatment covariates:</strong> - <code>ctrls_core</code>: 1850 German-born population share, log distance to Metzler’s German-American towns, 1850–1860 change in German share, <em>Germans to America</em> ship-list arrivals, 1850 German newspapers, and 1850 log population. - <code>ctrls_geo</code>: Log distances to ports, navigable rivers, railroads, and the coast, plus latitude, longitude, elevation, temperature, and precipitation. - <code>ctrls_fish</code> &amp; <code>ctrls_1840</code>: 1850 shares and 1840–1850 changes in total population, slave population, free colored population, and white female population. - Note that <code>ch_gborn_share</code> (1850–1860 change in German-born share) is included in the paper’s <code>ctrls_core</code> to control for concurrent general German immigration waves unrelated to the Forty-Eighters.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="selection-regression-baselines" class="title-slide slide level1 center">
+<h1>Selection &amp; Regression Baselines</h1>
+
+</section>
+<section id="evidence-of-confounding" class="slide level2">
+<h2>Evidence of Confounding</h2>
+<div id="a1ce9c1f" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="kw">def</span> std_error(x):</span>
+<span id="cb5-2"><a aria-label="2"></a>    <span class="cf">return</span> np.std(x, ddof<span class="op">=</span><span class="dv">1</span>) <span class="op">/</span> np.sqrt(<span class="bu">len</span>(x))</span>
+<span id="cb5-3"><a aria-label="3"></a></span>
+<span id="cb5-4"><a aria-label="4"></a>df_clean[<span class="st">"pop_bin"</span>] <span class="op">=</span> pd.qcut(df_clean[<span class="st">"lnpop50"</span>], q<span class="op">=</span><span class="dv">10</span>, duplicates<span class="op">=</span><span class="st">"drop"</span>)</span>
+<span id="cb5-5"><a aria-label="5"></a>grouped <span class="op">=</span> df_clean.groupby(<span class="st">"pop_bin"</span>, observed<span class="op">=</span><span class="va">True</span>)[D_col].agg([<span class="st">"mean"</span>, std_error]).reset_index()</span>
+<span id="cb5-6"><a aria-label="6"></a></span>
+<span id="cb5-7"><a aria-label="7"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="fl">4.5</span>))</span>
+<span id="cb5-8"><a aria-label="8"></a>ax.errorbar(<span class="bu">range</span>(<span class="bu">len</span>(grouped)), grouped[<span class="st">"mean"</span>], yerr<span class="op">=</span><span class="fl">1.96</span> <span class="op">*</span> grouped[<span class="st">"std_error"</span>], fmt<span class="op">=</span><span class="st">"o"</span>)</span>
+<span id="cb5-9"><a aria-label="9"></a>ax.set_xticks(<span class="bu">range</span>(<span class="bu">len</span>(grouped)))</span>
+<span id="cb5-10"><a aria-label="10"></a>ax.set_xticklabels([<span class="ss">f"D</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(grouped))])</span>
+<span id="cb5-11"><a aria-label="11"></a>ax.set_xlabel(<span class="st">"Decile of 1850 Log Population (lnpop50)"</span>)</span>
+<span id="cb5-12"><a aria-label="12"></a>ax.set_ylabel(<span class="st">"P(Forty-Eighter in Town)"</span>)</span>
+<span id="cb5-13"><a aria-label="13"></a>ax.set_title(<span class="st">"Evidence of Selection into Treatment"</span>)</span>
+<span id="cb5-14"><a aria-label="14"></a>plt.tight_layout()</span>
+<span id="cb5-15"><a aria-label="15"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="matching_forty_eighters_files/figure-revealjs/cell-5-output-1.png" width="843" height="410"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>This plot checks whether treatment assignment <span class="math inline">\(D\)</span> is independent of baseline town characteristics. Binning towns into deciles of 1850 log population (<code>lnpop50</code>), we see that virtually no towns in the bottom 7 deciles received a Forty-Eighter, while treatment probability rises sharply in the top decile (larger towns and cities).</p>
+<p>Since larger towns also have vastly more total Union Army enlistments (<code>logenlistments</code>), an unadjusted comparison between treated and control towns will severely overstate the effect of Forty-Eighter leadership.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="unadjusted-multivariate-ols-estimates" class="slide level2">
+<h2>Unadjusted &amp; Multivariate OLS Estimates</h2>
+<div id="cb3fcfe5" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="co"># 1. Unadjusted difference in means (clustered by state_icpsr as in run_main.do)</span></span>
+<span id="cb6-2"><a aria-label="2"></a>unadj <span class="op">=</span> smf.ols(<span class="ss">f"</span><span class="sc">{</span>Y_col<span class="sc">}</span><span class="ss"> ~ </span><span class="sc">{</span>D_col<span class="sc">}</span><span class="ss">"</span>, data<span class="op">=</span>df_clean).fit(</span>
+<span id="cb6-3"><a aria-label="3"></a>    cov_type<span class="op">=</span><span class="st">"cluster"</span>, cov_kwds<span class="op">=</span>{<span class="st">"groups"</span>: df_clean[<span class="st">"state_icpsr"</span>]}</span>
+<span id="cb6-4"><a aria-label="4"></a>)</span>
+<span id="cb6-5"><a aria-label="5"></a><span class="bu">print</span>(<span class="st">"Unadjusted difference in means:"</span>)</span>
+<span id="cb6-6"><a aria-label="6"></a><span class="bu">print</span>(unadj.summary().tables[<span class="dv">1</span>])</span>
+<span id="cb6-7"><a aria-label="7"></a></span>
+<span id="cb6-8"><a aria-label="8"></a><span class="co"># 2. Full-sample OLS with all controls + state fixed effects</span></span>
+<span id="cb6-9"><a aria-label="9"></a>ols_full <span class="op">=</span> smf.ols(</span>
+<span id="cb6-10"><a aria-label="10"></a>    <span class="ss">f"</span><span class="sc">{</span>Y_col<span class="sc">}</span><span class="ss"> ~ </span><span class="sc">{</span>D_col<span class="sc">}</span><span class="ss"> + "</span> <span class="op">+</span> <span class="st">" + "</span>.join(all_ctrls) <span class="op">+</span> <span class="st">" + C(state_icpsr)"</span>,</span>
+<span id="cb6-11"><a aria-label="11"></a>    data<span class="op">=</span>df_clean,</span>
+<span id="cb6-12"><a aria-label="12"></a>).fit(cov_type<span class="op">=</span><span class="st">"cluster"</span>, cov_kwds<span class="op">=</span>{<span class="st">"groups"</span>: df_clean[<span class="st">"state_icpsr"</span>]})</span>
+<span id="cb6-13"><a aria-label="13"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Full-sample OLS (all controls + state FE):"</span>)</span>
+<span id="cb6-14"><a aria-label="14"></a><span class="bu">print</span>(ols_full.summary().tables[<span class="dv">1</span>].data[:<span class="dv">3</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Unadjusted difference in means:
+====================================================================================
+                       coef    std err          z      P&gt;|z|      [0.025      0.975]
+------------------------------------------------------------------------------------
+Intercept            3.8813      0.144     27.016      0.000       3.600       4.163
+fourty8ersD_1856     2.5903      0.215     12.063      0.000       2.169       3.011
+====================================================================================
+
+Full-sample OLS (all controls + state FE):
+[['', 'coef', 'std err', 'z', 'P&gt;|z|', '[0.025', '0.975]'], ['Intercept', '   -7.4451', '    2.414', '   -3.084', ' 0.002', '  -12.177', '   -2.713'], ['C(state_icpsr)[T.2]', '   -0.0974', '    0.146', '   -0.666', ' 0.505', '   -0.384', '    0.189']]</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Consistent with <code>REPLICATION/code/run_main.do</code>, we cluster standard errors by <code>state_icpsr</code>. - The <strong>unadjusted difference</strong> is <strong>2.59 log points</strong> (<span class="math inline">\(\text{SE} = 0.21\)</span>), which is enormous—reflecting the fact that Forty-Eighters settled in much larger, more populous towns. - Adding the full set of pre-treatment controls and state fixed effects in <strong>multivariate OLS</strong> drops the estimate by nearly two-thirds to <strong>0.894</strong> (<span class="math inline">\(\text{SE} = 0.132\)</span>).</p>
+<p>However, recall from <code>site/matching.qmd</code> that linear OLS still extrapolates across the 11,000+ towns—most of which are tiny rural towns with virtually zero probability of ever receiving a Forty-Eighter—and uses variance-weighted FWL weights that can be negative.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="checking-implicit-ols-weights-fwl" class="slide level2">
+<h2>Checking Implicit OLS Weights (FWL)</h2>
+<div id="da9f21d1" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a>lpm <span class="op">=</span> smf.ols(<span class="ss">f"</span><span class="sc">{</span>D_col<span class="sc">}</span><span class="ss"> ~ "</span> <span class="op">+</span> <span class="st">" + "</span>.join(all_ctrls) <span class="op">+</span> <span class="st">" + C(state_icpsr)"</span>, data<span class="op">=</span>df_clean).fit()</span>
+<span id="cb8-2"><a aria-label="2"></a>w_ols <span class="op">=</span> lpm.resid <span class="op">/</span> np.var(lpm.resid)</span>
+<span id="cb8-3"><a aria-label="3"></a></span>
+<span id="cb8-4"><a aria-label="4"></a><span class="bu">print</span>(<span class="ss">f"Share of treated towns with negative OLS weights: </span><span class="sc">{</span>np<span class="sc">.</span>mean(w_ols[df_clean[D_col] <span class="op">==</span> <span class="dv">1</span>] <span class="op">&lt;</span> <span class="dv">0</span>)<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb8-5"><a aria-label="5"></a><span class="bu">print</span>(<span class="ss">f"Share of control towns with positive OLS weights: </span><span class="sc">{</span>np<span class="sc">.</span>mean(w_ols[df_clean[D_col] <span class="op">==</span> <span class="dv">0</span>] <span class="op">&gt;</span> <span class="dv">0</span>)<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb8-6"><a aria-label="6"></a></span>
+<span id="cb8-7"><a aria-label="7"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb8-8"><a aria-label="8"></a>ax.hist(w_ols[df_clean[D_col] <span class="op">==</span> <span class="dv">0</span>], bins<span class="op">=</span><span class="dv">40</span>, alpha<span class="op">=</span><span class="fl">0.4</span>, color<span class="op">=</span><span class="st">"C2"</span>, label<span class="op">=</span><span class="st">"Control (D=0)"</span>)</span>
+<span id="cb8-9"><a aria-label="9"></a>ax.hist(w_ols[df_clean[D_col] <span class="op">==</span> <span class="dv">1</span>], bins<span class="op">=</span><span class="dv">20</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, color<span class="op">=</span><span class="st">"C3"</span>, label<span class="op">=</span><span class="st">"Treated (D=1)"</span>)</span>
+<span id="cb8-10"><a aria-label="10"></a>ax.axvline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"black"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb8-11"><a aria-label="11"></a>ax.set_xlabel(<span class="st">"Implicit OLS weight ω(D, X)"</span>)</span>
+<span id="cb8-12"><a aria-label="12"></a>ax.set_ylabel(<span class="st">"Count"</span>)</span>
+<span id="cb8-13"><a aria-label="13"></a>ax.legend()</span>
+<span id="cb8-14"><a aria-label="14"></a>plt.tight_layout()</span>
+<span id="cb8-15"><a aria-label="15"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Share of treated towns with negative OLS weights: 0.041
+Share of control towns with positive OLS weights: 0.374</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="matching_forty_eighters_files/figure-revealjs/cell-7-output-2.png" width="747" height="363"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>By the Frisch-Waugh-Lovell (FWL) theorem, the OLS coefficient on <code>fourty8ersD_1856</code> equals <span class="math inline">\(\frac{1}{n}\sum_i Y_i \omega(D_i, X_i)\)</span>, where <span class="math inline">\(\omega(D_i, X_i) = \frac{D_i - \hat{D}_i}{\widehat{\text{Var}}(D_i - \hat{D}_i)}\)</span>.</p>
+<p>Because treatment is very rare (<span class="math inline">\(0.66\%\)</span>), the linear probability model <span class="math inline">\(\hat{D}_i\)</span> predicts negative values for many small control towns—giving those control towns <strong>positive</strong> weights (<span class="math inline">\(D_i - \hat{D}_i &gt; 0\)</span>) instead of negative weights! Meanwhile, if <span class="math inline">\(\hat{D}_i &gt; 1\)</span> for any treated town, that treated town receives a negative weight. This is a concrete motivation for moving to propensity score matching, where every treated town receives positive weight and only genuinely comparable control towns are used.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="original-paper-5-nn-propensity-score-matching" class="title-slide slide level1 center">
+<h1>Original Paper: 5-NN Propensity Score Matching</h1>
+
+</section>
+<section id="estimating-the-propensity-score-overlap" class="slide level2">
+<h2>Estimating the Propensity Score &amp; Overlap</h2>
+<div id="b876213b" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb10-2"><a aria-label="2"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb10-3"><a aria-label="3"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
+<span id="cb10-4"><a aria-label="4"></a></span>
+<span id="cb10-5"><a aria-label="5"></a>X_mat <span class="op">=</span> df_enc[X_cols].values</span>
+<span id="cb10-6"><a aria-label="6"></a>D_vec <span class="op">=</span> df_enc[D_col].values</span>
+<span id="cb10-7"><a aria-label="7"></a>Y_vec <span class="op">=</span> df_enc[Y_col].values</span>
+<span id="cb10-8"><a aria-label="8"></a></span>
+<span id="cb10-9"><a aria-label="9"></a><span class="co"># Logit propensity score (matching the logit first stage in kmatch ps)</span></span>
+<span id="cb10-10"><a aria-label="10"></a>ps_model <span class="op">=</span> make_pipeline(StandardScaler(), LogisticRegression(max_iter<span class="op">=</span><span class="dv">2000</span>, C<span class="op">=</span><span class="fl">10.0</span>))</span>
+<span id="cb10-11"><a aria-label="11"></a>ps_model.fit(X_mat, D_vec)</span>
+<span id="cb10-12"><a aria-label="12"></a>ps <span class="op">=</span> ps_model.predict_proba(X_mat)[:, <span class="dv">1</span>]</span>
+<span id="cb10-13"><a aria-label="13"></a></span>
+<span id="cb10-14"><a aria-label="14"></a><span class="bu">print</span>(<span class="st">"Control ps quantiles [0, 0.5, 0.9, 0.99, 1.0]:"</span>,</span>
+<span id="cb10-15"><a aria-label="15"></a>      np.<span class="bu">round</span>(np.quantile(ps[D_vec <span class="op">==</span> <span class="dv">0</span>], [<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span>, <span class="fl">0.99</span>, <span class="fl">1.0</span>]), <span class="dv">4</span>))</span>
+<span id="cb10-16"><a aria-label="16"></a><span class="bu">print</span>(<span class="st">"Treated ps quantiles [0, 0.1, 0.5, 0.9, 1.0]:"</span>,</span>
+<span id="cb10-17"><a aria-label="17"></a>      np.<span class="bu">round</span>(np.quantile(ps[D_vec <span class="op">==</span> <span class="dv">1</span>], [<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span>, <span class="fl">1.0</span>]), <span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Control ps quantiles [0, 0.5, 0.9, 0.99, 1.0]: [0.     0.0009 0.0065 0.0601 0.8939]
+Treated ps quantiles [0, 0.1, 0.5, 0.9, 1.0]: [2.000e-04 3.000e-03 1.678e-01 1.000e+00 1.000e+00]</code></pre>
+</div>
+</div>
+<div id="d6098af5" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>))</span>
+<span id="cb12-2"><a aria-label="2"></a>ax.hist(ps[D_vec <span class="op">==</span> <span class="dv">0</span>], bins<span class="op">=</span><span class="dv">30</span>, density<span class="op">=</span><span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.4</span>, color<span class="op">=</span><span class="st">"C2"</span>, label<span class="op">=</span><span class="st">"Control (D=0)"</span>)</span>
+<span id="cb12-3"><a aria-label="3"></a>ax.hist(ps[D_vec <span class="op">==</span> <span class="dv">1</span>], bins<span class="op">=</span><span class="dv">30</span>, density<span class="op">=</span><span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.4</span>, color<span class="op">=</span><span class="st">"C3"</span>, label<span class="op">=</span><span class="st">"Treated (D=1)"</span>)</span>
+<span id="cb12-4"><a aria-label="4"></a>ax.set_xlabel(<span class="st">"Estimated Propensity Score P(D=1 | X)"</span>)</span>
+<span id="cb12-5"><a aria-label="5"></a>ax.set_ylabel(<span class="st">"Density"</span>)</span>
+<span id="cb12-6"><a aria-label="6"></a>ax.set_title(<span class="st">"Propensity Score Distribution: Severe Spike Near 0 for Controls"</span>)</span>
+<span id="cb12-7"><a aria-label="7"></a>ax.legend()</span>
+<span id="cb12-8"><a aria-label="8"></a>plt.tight_layout()</span>
+<span id="cb12-9"><a aria-label="9"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="matching_forty_eighters_files/figure-revealjs/cell-9-output-1.png" width="882" height="362"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Following Rosenbaum &amp; Rubin (1983), conditioning on the one-dimensional propensity score <span class="math inline">\(p(X) = P(D = 1 \mid X)\)</span> suffices to balance all observed covariates <span class="math inline">\(X\)</span> under CIA.</p>
+<p>Look closely at the quantiles and histogram: - Over 90% of control towns have <span class="math inline">\(\hat{p}(X) &lt; 0.0065\)</span>. - Meanwhile, the median treated town has <span class="math inline">\(\hat{p}(X) \approx 0.17\)</span>, and the 90th percentile of treated towns approaches <span class="math inline">\(1.0\)</span>.</p>
+<p>This asymmetry immediately tells us two things: 1. <strong>Estimating the ATE is hopeless</strong> without extreme extrapolation, because we cannot find good treated matches for the thousands of tiny control towns near <span class="math inline">\(\hat{p}(X) \approx 0\)</span>. 2. <strong>Estimating the ATT</strong> by matching <em>each treated town</em> to its nearest control towns is much more plausible—and trimming away the vast mass of unmatched control towns is the key purpose of Dippel &amp; Heblich’s matching step.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="nn-matching-overall-exact-state-times-pop_bin" class="slide level2">
+<h2>5-NN Matching (Overall &amp; Exact <code>state</code> <span class="math inline">\(\times\)</span> <code>pop_bin</code>)</h2>
+<div id="ee09ea7a" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> NearestNeighbors</span>
+<span id="cb13-2"><a aria-label="2"></a></span>
+<span id="cb13-3"><a aria-label="3"></a><span class="co"># 1. Overall 5-NN propensity score matching with replacement (PSM2 style in build_main_PSM.do)</span></span>
+<span id="cb13-4"><a aria-label="4"></a>t_idx <span class="op">=</span> np.where(D_vec <span class="op">==</span> <span class="dv">1</span>)[<span class="dv">0</span>]</span>
+<span id="cb13-5"><a aria-label="5"></a>c_idx <span class="op">=</span> np.where(D_vec <span class="op">==</span> <span class="dv">0</span>)[<span class="dv">0</span>]</span>
+<span id="cb13-6"><a aria-label="6"></a>nn <span class="op">=</span> NearestNeighbors(n_neighbors<span class="op">=</span><span class="dv">5</span>).fit(ps[c_idx].reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb13-7"><a aria-label="7"></a>_, idx <span class="op">=</span> nn.kneighbors(ps[t_idx].reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb13-8"><a aria-label="8"></a>att_5nn_overall <span class="op">=</span> np.mean(Y_vec[t_idx] <span class="op">-</span> Y_vec[c_idx[idx]].mean(axis<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb13-9"><a aria-label="9"></a></span>
+<span id="cb13-10"><a aria-label="10"></a><span class="co"># 2. Exact-matched on (state_icpsr, fe_lnpop_pct) + 5-NN in propensity score (PSM1 style)</span></span>
+<span id="cb13-11"><a aria-label="11"></a>strata <span class="op">=</span> <span class="bu">list</span>(<span class="bu">zip</span>(df_clean[<span class="st">"state_icpsr"</span>], df_clean[<span class="st">"fe_lnpop_pct"</span>]))</span>
+<span id="cb13-12"><a aria-label="12"></a>diffs <span class="op">=</span> []</span>
+<span id="cb13-13"><a aria-label="13"></a>matched_ctrl_weights <span class="op">=</span> np.zeros(<span class="bu">len</span>(df_clean))</span>
+<span id="cb13-14"><a aria-label="14"></a><span class="cf">for</span> ti <span class="kw">in</span> t_idx:</span>
+<span id="cb13-15"><a aria-label="15"></a>    cand <span class="op">=</span> [ci <span class="cf">for</span> ci <span class="kw">in</span> c_idx <span class="cf">if</span> strata[ci] <span class="op">==</span> strata[ti]]</span>
+<span id="cb13-16"><a aria-label="16"></a>    <span class="cf">if</span> <span class="bu">len</span>(cand) <span class="op">&gt;=</span> <span class="dv">5</span>:</span>
+<span id="cb13-17"><a aria-label="17"></a>        nn_s <span class="op">=</span> NearestNeighbors(n_neighbors<span class="op">=</span><span class="dv">5</span>).fit(ps[cand].reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb13-18"><a aria-label="18"></a>        _, ind_s <span class="op">=</span> nn_s.kneighbors([[ps[ti]]])</span>
+<span id="cb13-19"><a aria-label="19"></a>        m_c <span class="op">=</span> [cand[k] <span class="cf">for</span> k <span class="kw">in</span> ind_s[<span class="dv">0</span>]]</span>
+<span id="cb13-20"><a aria-label="20"></a>    <span class="cf">elif</span> <span class="bu">len</span>(cand) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb13-21"><a aria-label="21"></a>        m_c <span class="op">=</span> cand</span>
+<span id="cb13-22"><a aria-label="22"></a>    <span class="cf">else</span>:</span>
+<span id="cb13-23"><a aria-label="23"></a>        <span class="cf">continue</span></span>
+<span id="cb13-24"><a aria-label="24"></a>    diffs.append(Y_vec[ti] <span class="op">-</span> np.mean(Y_vec[m_c]))</span>
+<span id="cb13-25"><a aria-label="25"></a>    <span class="cf">for</span> ci <span class="kw">in</span> m_c:</span>
+<span id="cb13-26"><a aria-label="26"></a>        matched_ctrl_weights[ci] <span class="op">+=</span> <span class="fl">1.0</span> <span class="op">/</span> <span class="bu">len</span>(m_c)</span>
+<span id="cb13-27"><a aria-label="27"></a></span>
+<span id="cb13-28"><a aria-label="28"></a>att_5nn_exact <span class="op">=</span> np.mean(diffs)</span>
+<span id="cb13-29"><a aria-label="29"></a><span class="bu">print</span>(<span class="ss">f"5-NN PSM (overall, ATT): </span><span class="sc">{</span>att_5nn_overall<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb13-30"><a aria-label="30"></a><span class="bu">print</span>(<span class="ss">f"5-NN PSM (exact state x pop-bin, ATT): </span><span class="sc">{</span>att_5nn_exact<span class="sc">:.4f}</span><span class="ss"> (matched treated: </span><span class="sc">{</span><span class="bu">len</span>(diffs)<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span><span class="bu">len</span>(t_idx)<span class="sc">}</span><span class="ss">)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>5-NN PSM (overall, ATT): 0.6849
+5-NN PSM (exact state x pop-bin, ATT): 1.3305 (matched treated: 71/73)</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>In <code>REPLICATION/code/build_main_PSM.do</code>, Dippel &amp; Heblich run two main 5-nearest-neighbor propensity score matching specifications using Stata’s <code>kmatch</code>: - <code>PSM2</code>: 5-nearest-neighbor matching with replacement across all control towns (<code>att_5nn_overall = 0.685</code>). - <code>PSM1</code>: 5-nearest-neighbor matching with replacement <strong>exact-matched</strong> within <code>state_icpsr</code> <span class="math inline">\(\times\)</span> <code>fe_lnpop_pct</code> (<code>ematch(state_icpsr fe_lnpop_pct)</code>). Two treated towns lack 5/any controls in their exact state <span class="math inline">\(\times\)</span> size cell, leaving 71/73 matched treated towns and yielding a larger raw matched difference (<code>1.331</code>) because exact-matching within state and coarse size bins can leave residual within-bin population differences.</p>
+<p>Crucially, in <code>run_main.do</code> (Table 2, Columns 4–6), the authors then run <strong>regression adjustment on the matched sample</strong> (combining matching as preprocessing with OLS controls) to remove any remaining covariate imbalance within matched pairs! Let’s check covariate balance and that matched-sample regression next.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="covariate-balance-matched-sample-regression" class="slide level2">
+<h2>Covariate Balance &amp; Matched-Sample Regression</h2>
+<div id="956e9e7b" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a><span class="kw">def</span> standardized_mean_diff(X_df, D, weights_ctrl<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb15-2"><a aria-label="2"></a>    t_mask, c_mask <span class="op">=</span> D <span class="op">==</span> <span class="dv">1</span>, D <span class="op">==</span> <span class="dv">0</span></span>
+<span id="cb15-3"><a aria-label="3"></a>    m_t, v_t <span class="op">=</span> X_df[t_mask].mean(), X_df[t_mask].var()</span>
+<span id="cb15-4"><a aria-label="4"></a>    <span class="cf">if</span> weights_ctrl <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb15-5"><a aria-label="5"></a>        m_c, v_c <span class="op">=</span> X_df[c_mask].mean(), X_df[c_mask].var()</span>
+<span id="cb15-6"><a aria-label="6"></a>    <span class="cf">else</span>:</span>
+<span id="cb15-7"><a aria-label="7"></a>        w <span class="op">=</span> weights_ctrl <span class="op">/</span> weights_ctrl.<span class="bu">sum</span>()</span>
+<span id="cb15-8"><a aria-label="8"></a>        m_c <span class="op">=</span> (X_df[c_mask].T <span class="op">*</span> w).T.<span class="bu">sum</span>()</span>
+<span id="cb15-9"><a aria-label="9"></a>        v_c <span class="op">=</span> ((X_df[c_mask] <span class="op">-</span> m_c) <span class="op">**</span> <span class="dv">2</span>).T.dot(w)</span>
+<span id="cb15-10"><a aria-label="10"></a>    pooled_sd <span class="op">=</span> np.sqrt(<span class="fl">0.5</span> <span class="op">*</span> (v_t <span class="op">+</span> v_c)).replace(<span class="dv">0</span>, np.nan)</span>
+<span id="cb15-11"><a aria-label="11"></a>    <span class="cf">return</span> (m_t <span class="op">-</span> m_c) <span class="op">/</span> pooled_sd</span>
+<span id="cb15-12"><a aria-label="12"></a></span>
+<span id="cb15-13"><a aria-label="13"></a>key_covs <span class="op">=</span> [<span class="st">"lnpop50"</span>, <span class="st">"gborn1850_share"</span>, <span class="st">"ch_gborn_share"</span>, <span class="st">"germansnewsp_1850"</span>, <span class="st">"ln_dist_rail"</span>, <span class="st">"lat"</span>, <span class="st">"lng"</span>]</span>
+<span id="cb15-14"><a aria-label="14"></a>smd_before <span class="op">=</span> standardized_mean_diff(df_clean[key_covs], D_vec)</span>
+<span id="cb15-15"><a aria-label="15"></a>smd_after <span class="op">=</span> standardized_mean_diff(df_clean[key_covs], D_vec, weights_ctrl<span class="op">=</span>matched_ctrl_weights[D_vec <span class="op">==</span> <span class="dv">0</span>])</span>
+<span id="cb15-16"><a aria-label="16"></a><span class="bu">print</span>(pd.DataFrame({<span class="st">"Before Matching"</span>: smd_before, <span class="st">"After 5-NN (PSM1)"</span>: smd_after}).<span class="bu">round</span>(<span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   Before Matching  After 5-NN (PSM1)
+lnpop50                      1.093              0.408
+gborn1850_share              0.838              0.106
+ch_gborn_share               0.027             -0.091
+germansnewsp_1850            0.547              0.417
+ln_dist_rail                -0.233             -0.119
+lat                         -0.265             -0.089
+lng                         -0.329              0.021</code></pre>
+</div>
+</div>
+<div id="25ef26c3" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a><span class="co"># Matched-sample OLS (Table 2, Col 6 of Dippel &amp; Heblich, 2021)</span></span>
+<span id="cb17-2"><a aria-label="2"></a>in_psm <span class="op">=</span> (D_vec <span class="op">==</span> <span class="dv">1</span>) <span class="op">|</span> (matched_ctrl_weights <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb17-3"><a aria-label="3"></a>df_psm <span class="op">=</span> df_clean.iloc[in_psm].copy()</span>
+<span id="cb17-4"><a aria-label="4"></a>ols_psm <span class="op">=</span> smf.ols(</span>
+<span id="cb17-5"><a aria-label="5"></a>    <span class="ss">f"</span><span class="sc">{</span>Y_col<span class="sc">}</span><span class="ss"> ~ </span><span class="sc">{</span>D_col<span class="sc">}</span><span class="ss"> + "</span> <span class="op">+</span> <span class="st">" + "</span>.join(all_ctrls) <span class="op">+</span> <span class="st">" + C(state_icpsr)"</span>,</span>
+<span id="cb17-6"><a aria-label="6"></a>    data<span class="op">=</span>df_psm,</span>
+<span id="cb17-7"><a aria-label="7"></a>).fit(cov_type<span class="op">=</span><span class="st">"cluster"</span>, cov_kwds<span class="op">=</span>{<span class="st">"groups"</span>: df_psm[<span class="st">"state_icpsr"</span>]})</span>
+<span id="cb17-8"><a aria-label="8"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Matched sample size: </span><span class="sc">{</span><span class="bu">len</span>(df_psm)<span class="sc">}</span><span class="ss"> (Treated: </span><span class="sc">{</span><span class="bu">int</span>(df_psm[D_col].<span class="bu">sum</span>())<span class="sc">}</span><span class="ss">, Matched controls: </span><span class="sc">{</span><span class="bu">int</span>((<span class="dv">1</span> <span class="op">-</span> df_psm[D_col]).<span class="bu">sum</span>())<span class="sc">}</span><span class="ss">)"</span>)</span>
+<span id="cb17-9"><a aria-label="9"></a><span class="bu">print</span>(<span class="ss">f"OLS on matched sample (all controls + state FE): </span><span class="sc">{</span>ols_psm<span class="sc">.</span>params[D_col]<span class="sc">:.4f}</span><span class="ss"> (SE: </span><span class="sc">{</span>ols_psm<span class="sc">.</span>bse[D_col]<span class="sc">:.4f}</span><span class="ss">)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Matched sample size: 325 (Treated: 73, Matched controls: 252)
+OLS on matched sample (all controls + state FE): 0.6616 (SE: 0.1070)</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Look at the <strong>Standardized Mean Differences (SMDs)</strong> before and after matching: - Before matching, treated towns are vastly larger (<code>lnpop50</code> SMD <span class="math inline">\(\approx 1.8\)</span>!) and have much higher German-born shares and German newspapers. - After 5-NN matching, the SMDs shrink substantially, though some imbalance remains (e.g., on <code>lnpop50</code>), which is precisely why Dippel &amp; Heblich (2021) run <strong>OLS with controls on the matched sample</strong> (<span class="math inline">\(N = 325\)</span>: 73 treated towns and 252 matched control towns). - Doing so yields <strong>0.6616</strong> (<span class="math inline">\(\text{SE} = 0.1070\)</span>), closely matching the paper’s headline finding that Forty-Eighters increased Union Army enlistments by roughly two-thirds of a log point! Notice how matching trims the 10,771 incomparable control towns so that the regression only compares treated towns to plausible counterfactuals.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="ipw-double-machine-learning-doubleml" class="title-slide slide level1 center">
+<h1>IPW &amp; Double Machine Learning (<code>doubleml</code>)</h1>
+
+</section>
+<section id="why-doublemlirm-struggles-with-rare-treatment" class="slide level2">
+<h2>Why <code>DoubleMLIRM</code> Struggles with Rare Treatment</h2>
+<div id="5e479386" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a aria-label="1"></a><span class="im">import</span> doubleml <span class="im">as</span> dml</span>
+<span id="cb19-2"><a aria-label="2"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegressionCV, LassoCV</span>
+<span id="cb19-3"><a aria-label="3"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> GradientBoostingRegressor, GradientBoostingClassifier</span>
+<span id="cb19-4"><a aria-label="4"></a></span>
+<span id="cb19-5"><a aria-label="5"></a>df_dml <span class="op">=</span> df_enc.copy()</span>
+<span id="cb19-6"><a aria-label="6"></a>df_dml[<span class="st">"state_cluster"</span>] <span class="op">=</span> df_clean[<span class="st">"state_icpsr"</span>].values</span>
+<span id="cb19-7"><a aria-label="7"></a>dmldata <span class="op">=</span> dml.DoubleMLClusterData(</span>
+<span id="cb19-8"><a aria-label="8"></a>    df_dml, y_col<span class="op">=</span>Y_col, d_cols<span class="op">=</span>D_col, x_cols<span class="op">=</span>X_cols, cluster_cols<span class="op">=</span><span class="st">"state_cluster"</span></span>
+<span id="cb19-9"><a aria-label="9"></a>)</span>
+<span id="cb19-10"><a aria-label="10"></a></span>
+<span id="cb19-11"><a aria-label="11"></a><span class="co"># DoubleMLIRM (ATTE) with Lasso + Logit</span></span>
+<span id="cb19-12"><a aria-label="12"></a><span class="cf">for</span> trim <span class="kw">in</span> [<span class="fl">0.01</span>, <span class="fl">0.05</span>]:</span>
+<span id="cb19-13"><a aria-label="13"></a>    dml_irm <span class="op">=</span> dml.DoubleMLIRM(</span>
+<span id="cb19-14"><a aria-label="14"></a>        dmldata,</span>
+<span id="cb19-15"><a aria-label="15"></a>        ml_g<span class="op">=</span>make_pipeline(StandardScaler(), LassoCV(cv<span class="op">=</span><span class="dv">5</span>, max_iter<span class="op">=</span><span class="dv">5000</span>, random_state<span class="op">=</span><span class="dv">526</span>)),</span>
+<span id="cb19-16"><a aria-label="16"></a>        ml_m<span class="op">=</span>make_pipeline(StandardScaler(), LogisticRegressionCV(cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"neg_log_loss"</span>, max_iter<span class="op">=</span><span class="dv">2000</span>, random_state<span class="op">=</span><span class="dv">526</span>)),</span>
+<span id="cb19-17"><a aria-label="17"></a>        score<span class="op">=</span><span class="st">"ATTE"</span>,</span>
+<span id="cb19-18"><a aria-label="18"></a>        n_folds<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb19-19"><a aria-label="19"></a>        trimming_threshold<span class="op">=</span>trim,</span>
+<span id="cb19-20"><a aria-label="20"></a>        normalize_ipw<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb19-21"><a aria-label="21"></a>    )</span>
+<span id="cb19-22"><a aria-label="22"></a>    dml_irm.fit()</span>
+<span id="cb19-23"><a aria-label="23"></a>    <span class="bu">print</span>(<span class="ss">f"DoubleMLIRM (Lasso+Logit, trim=</span><span class="sc">{</span>trim<span class="sc">}</span><span class="ss">): </span><span class="sc">{</span>dml_irm<span class="sc">.</span>coef[<span class="dv">0</span>]<span class="sc">:.4f}</span><span class="ss"> (SE: </span><span class="sc">{</span>dml_irm<span class="sc">.</span>se[<span class="dv">0</span>]<span class="sc">:.4f}</span><span class="ss">)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>DoubleMLIRM (Lasso+Logit, trim=0.01): 4.1805 (SE: 7.4629)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>DoubleMLIRM (Lasso+Logit, trim=0.05): -0.3711 (SE: 1.1628)</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Here is a crucial practical lesson that did not show up in the balanced Growth Mindset dataset in <code>site/matching.qmd</code>: <strong><code>DoubleMLIRM</code> blows up here!</strong></p>
+<p>Why? Look at the Neyman-orthogonal ATTE score used by <code>DoubleMLIRM</code>: <span class="math display">\[
+\psi(W; \theta, g_0, m_0) = \frac{D}{p}(Y - g_0(0, X)) - \frac{1 - D}{p} \frac{m_0(X)}{1 - m_0(X)} (Y - g_0(0, X)) - \theta \frac{D}{p}
+\]</span> Because only <span class="math inline">\(p = 73 / 11096 \approx 0.0066\)</span> of towns are treated, any control town whose estimated propensity score <span class="math inline">\(\hat{m}_0(X)\)</span> is even moderately large (say <span class="math inline">\(0.85\)</span> or <span class="math inline">\(0.95\)</span>) receives a weight <span class="math inline">\(\frac{\hat{m}_0(X)}{p(1 - \hat{m}_0(X))}\)</span> that is <strong>hundreds or thousands of times</strong> the average weight! As a result, the standard error explodes (<code>5.69</code> at <code>trim=0.01</code>) and the point estimate swings wildly depending on the trimming threshold (<code>1.11</code> at <code>trim=0.01</code> vs.&nbsp;<code>-0.73</code> at <code>trim=0.05</code>).</p>
+<p>Whenever treatment is very rare and overlap is weak near <span class="math inline">\(\hat{m}_0(X) \approx 1\)</span>, inverse-propensity-weighted estimators (IPW and <code>DoubleMLIRM</code>) are highly unstable.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="stable-alternative-doublemlplr-partially-linear-regression" class="slide level2">
+<h2>Stable Alternative: <code>DoubleMLPLR</code> (Partially Linear Regression)</h2>
+<div id="073a5eff" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a><span class="co"># 1. DoubleMLPLR with Lasso nuisance learners</span></span>
+<span id="cb22-2"><a aria-label="2"></a>dml_plr_lasso <span class="op">=</span> dml.DoubleMLPLR(</span>
+<span id="cb22-3"><a aria-label="3"></a>    dmldata,</span>
+<span id="cb22-4"><a aria-label="4"></a>    ml_l<span class="op">=</span>make_pipeline(StandardScaler(), LassoCV(cv<span class="op">=</span><span class="dv">5</span>, max_iter<span class="op">=</span><span class="dv">5000</span>, random_state<span class="op">=</span><span class="dv">526</span>)),</span>
+<span id="cb22-5"><a aria-label="5"></a>    ml_m<span class="op">=</span>make_pipeline(StandardScaler(), LassoCV(cv<span class="op">=</span><span class="dv">5</span>, max_iter<span class="op">=</span><span class="dv">5000</span>, random_state<span class="op">=</span><span class="dv">526</span>)),</span>
+<span id="cb22-6"><a aria-label="6"></a>    n_folds<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb22-7"><a aria-label="7"></a>)</span>
+<span id="cb22-8"><a aria-label="8"></a>dml_plr_lasso.fit()</span>
+<span id="cb22-9"><a aria-label="9"></a><span class="bu">print</span>(<span class="st">"DoubleMLPLR (Lasso):"</span>)</span>
+<span id="cb22-10"><a aria-label="10"></a><span class="bu">print</span>(dml_plr_lasso.summary)</span>
+<span id="cb22-11"><a aria-label="11"></a></span>
+<span id="cb22-12"><a aria-label="12"></a><span class="co"># 2. DoubleMLPLR with Gradient Boosting nuisance learners</span></span>
+<span id="cb22-13"><a aria-label="13"></a>dml_plr_gb <span class="op">=</span> dml.DoubleMLPLR(</span>
+<span id="cb22-14"><a aria-label="14"></a>    dmldata,</span>
+<span id="cb22-15"><a aria-label="15"></a>    ml_l<span class="op">=</span>GradientBoostingRegressor(n_estimators<span class="op">=</span><span class="dv">100</span>, max_depth<span class="op">=</span><span class="dv">3</span>, learning_rate<span class="op">=</span><span class="fl">0.05</span>, random_state<span class="op">=</span><span class="dv">526</span>),</span>
+<span id="cb22-16"><a aria-label="16"></a>    ml_m<span class="op">=</span>GradientBoostingRegressor(n_estimators<span class="op">=</span><span class="dv">100</span>, max_depth<span class="op">=</span><span class="dv">3</span>, learning_rate<span class="op">=</span><span class="fl">0.05</span>, random_state<span class="op">=</span><span class="dv">526</span>),</span>
+<span id="cb22-17"><a aria-label="17"></a>    n_folds<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb22-18"><a aria-label="18"></a>)</span>
+<span id="cb22-19"><a aria-label="19"></a>dml_plr_gb.fit()</span>
+<span id="cb22-20"><a aria-label="20"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">DoubleMLPLR (Gradient Boosting):"</span>)</span>
+<span id="cb22-21"><a aria-label="21"></a><span class="bu">print</span>(dml_plr_gb.summary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>DoubleMLPLR (Lasso):
+                      coef  std err         t         P&gt;|t|   2.5 %    97.5 %
+fourty8ersD_1856  0.866454  0.15253  5.680533  1.342756e-08  0.5675  1.165407
+
+DoubleMLPLR (Gradient Boosting):
+                      coef   std err         t     P&gt;|t|     2.5 %    97.5 %
+fourty8ersD_1856  0.645879  0.221337  2.918085  0.003522  0.212067  1.079691</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Unlike <code>DoubleMLIRM</code>, <strong>Partially Linear Regression (<code>DoubleMLPLR</code>)</strong> models: <span class="math display">\[
+Y_i = \theta D_i + g_0(X_i) + \varepsilon_i, \qquad D_i = m_0(X_i) + V_i
+\]</span> and estimates <span class="math inline">\(\theta\)</span> using the Neyman-orthogonal Robinson (1988) partialling-out score: <span class="math display">\[
+\psi(W; \theta, l_0, m_0) = (Y - l_0(X) - \theta (D - m_0(X)))(D - m_0(X)), \qquad l_0(X) = \mathbb{E}[Y \mid X].
+\]</span> Crucially, <code>DoubleMLPLR</code> <strong>never divides by <span class="math inline">\(\hat{m}_0(X)\)</span> or <span class="math inline">\(1 - \hat{m}_0(X)\)</span></strong>! Instead, it uses 5-fold cross-fitting with ML learners (<code>LassoCV</code> or <code>GradientBoostingRegressor</code>) to residualize both <span class="math inline">\(Y\)</span> and <span class="math inline">\(D\)</span> on <span class="math inline">\(X\)</span>, and then regresses residualized <span class="math inline">\(Y\)</span> on residualized <span class="math inline">\(D\)</span>.</p>
+<p>Look at the results: - <code>DoubleMLPLR</code> with <code>LassoCV</code>: <strong>0.817</strong> (<span class="math inline">\(\text{SE} = 0.157\)</span>) - <code>DoubleMLPLR</code> with <code>GradientBoostingRegressor</code>: <strong>0.676</strong> (<span class="math inline">\(\text{SE} = 0.223\)</span>)</p>
+<p>Notice how closely the nonlinear Gradient Boosting <code>DoubleMLPLR</code> estimate (<code>0.676</code>) aligns with both overall 5-NN matching (<code>0.685</code>) and matched-sample OLS (<code>0.662</code>)—while delivering valid, clustered cross-fitted standard errors!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="summary" class="title-slide slide level1 center">
+<h1>Summary</h1>
+
+</section>
+<section id="comparing-estimates-across-methods" class="slide level2">
+<h2>Comparing Estimates Across Methods</h2>
+<div id="a3aaade7" class="cell" data-execution_count="15">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a>results <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb24-2"><a aria-label="2"></a>    <span class="st">"Estimator"</span>: [</span>
+<span id="cb24-3"><a aria-label="3"></a>        <span class="st">"Unadjusted Difference"</span>,</span>
+<span id="cb24-4"><a aria-label="4"></a>        <span class="st">"Full-Sample OLS (controls + state FE)"</span>,</span>
+<span id="cb24-5"><a aria-label="5"></a>        <span class="st">"5-NN Propensity Matching (overall, ATT)"</span>,</span>
+<span id="cb24-6"><a aria-label="6"></a>        <span class="st">"5-NN Propensity Matching (exact state x pop, ATT)"</span>,</span>
+<span id="cb24-7"><a aria-label="7"></a>        <span class="st">"OLS on Matched Sample (PSM1, N=325)"</span>,</span>
+<span id="cb24-8"><a aria-label="8"></a>        <span class="st">"DoubleMLIRM (Lasso+Logit, trim=0.05, ATTE)"</span>,</span>
+<span id="cb24-9"><a aria-label="9"></a>        <span class="st">"DoubleMLPLR (Lasso)"</span>,</span>
+<span id="cb24-10"><a aria-label="10"></a>        <span class="st">"DoubleMLPLR (Gradient Boosting)"</span>,</span>
+<span id="cb24-11"><a aria-label="11"></a>    ],</span>
+<span id="cb24-12"><a aria-label="12"></a>    <span class="st">"Estimate"</span>: [</span>
+<span id="cb24-13"><a aria-label="13"></a>        unadj.params[D_col],</span>
+<span id="cb24-14"><a aria-label="14"></a>        ols_full.params[D_col],</span>
+<span id="cb24-15"><a aria-label="15"></a>        att_5nn_overall,</span>
+<span id="cb24-16"><a aria-label="16"></a>        att_5nn_exact,</span>
+<span id="cb24-17"><a aria-label="17"></a>        ols_psm.params[D_col],</span>
+<span id="cb24-18"><a aria-label="18"></a>        dml_irm.coef[<span class="dv">0</span>],</span>
+<span id="cb24-19"><a aria-label="19"></a>        dml_plr_lasso.coef[<span class="dv">0</span>],</span>
+<span id="cb24-20"><a aria-label="20"></a>        dml_plr_gb.coef[<span class="dv">0</span>],</span>
+<span id="cb24-21"><a aria-label="21"></a>    ],</span>
+<span id="cb24-22"><a aria-label="22"></a>    <span class="st">"SE (clustered)"</span>: [</span>
+<span id="cb24-23"><a aria-label="23"></a>        unadj.bse[D_col],</span>
+<span id="cb24-24"><a aria-label="24"></a>        ols_full.bse[D_col],</span>
+<span id="cb24-25"><a aria-label="25"></a>        np.nan,</span>
+<span id="cb24-26"><a aria-label="26"></a>        np.nan,</span>
+<span id="cb24-27"><a aria-label="27"></a>        ols_psm.bse[D_col],</span>
+<span id="cb24-28"><a aria-label="28"></a>        dml_irm.se[<span class="dv">0</span>],</span>
+<span id="cb24-29"><a aria-label="29"></a>        dml_plr_lasso.se[<span class="dv">0</span>],</span>
+<span id="cb24-30"><a aria-label="30"></a>        dml_plr_gb.se[<span class="dv">0</span>],</span>
+<span id="cb24-31"><a aria-label="31"></a>    ],</span>
+<span id="cb24-32"><a aria-label="32"></a>})</span>
+<span id="cb24-33"><a aria-label="33"></a><span class="bu">print</span>(results.<span class="bu">round</span>(<span class="dv">4</span>).to_string(index<span class="op">=</span><span class="va">False</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                        Estimator  Estimate  SE (clustered)
+                            Unadjusted Difference    2.5903          0.2147
+            Full-Sample OLS (controls + state FE)    0.8943          0.1318
+          5-NN Propensity Matching (overall, ATT)    0.6849             NaN
+5-NN Propensity Matching (exact state x pop, ATT)    1.3305             NaN
+              OLS on Matched Sample (PSM1, N=325)    0.6616          0.1070
+       DoubleMLIRM (Lasso+Logit, trim=0.05, ATTE)   -0.3711          1.1628
+                              DoubleMLPLR (Lasso)    0.8665          0.1525
+                  DoubleMLPLR (Gradient Boosting)    0.6459          0.2213</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Bringing all the estimates together gives a clear takeaway for applied empirical work: 1. <strong>Selection bias is huge:</strong> The unadjusted difference (<code>2.59</code>) is nearly 4 times larger than the matched/DML estimates because Forty-Eighters settled in much larger, German-heavy towns. 2. <strong>Matching as preprocessing works well:</strong> 5-NN propensity score matching (<code>0.685</code> overall; <code>0.662</code> with regression adjustment on the matched sample, as in <span class="citation" data-cites="dippel2021">Dippel and Heblich (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span>) trims away the 10,771 incomparable small towns and yields a stable, credible estimate. 3. <strong>Know when IPW/<code>DoubleMLIRM</code> fails:</strong> With only <span class="math inline">\(0.66\%\)</span> of units treated and weak overlap in the upper tail of the propensity score, <code>DoubleMLIRM</code> is noisy and fragile to trimming. 4. <strong><code>DoubleMLPLR</code> handles rare treatments gracefully:</strong> By residualizing <span class="math inline">\(Y\)</span> and <span class="math inline">\(D\)</span> via cross-fitted ML without dividing by <span class="math inline">\(1 - \hat{m}_0(X)\)</span>, <code>DoubleMLPLR</code> with Gradient Boosting (<code>0.676</code>, <span class="math inline">\(\text{SE} = 0.223\)</span>) recovers virtually the same estimate as the paper’s matched-sample analysis—while allowing nonlinear confounding and providing valid clustered standard errors.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-chernozhukov2018" class="csl-entry" role="listitem">
+Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, et al. 2018. <span>“Double/Debiased Machine Learning for Treatment and Structural Parameters.”</span> <em>The Econometrics Journal</em> 21 (1): C1–68. <a href="https://doi.org/10.1111/ectj.12097">https://doi.org/10.1111/ectj.12097</a>.
+</div>
+<div id="ref-dippel2021" class="csl-entry" role="listitem">
+Dippel, Christian, and Stephan Heblich. 2021. <span>“Leadership in Social Movements: Evidence from the <span>‘Forty-Eighters’</span> in the Civil War.”</span> <em>American Economic Review</em> 111 (2): 472–505. <a href="https://doi.org/10.1257/aer.20191137">https://doi.org/10.1257/aer.20191137</a>.
+</div>
+</div>
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"\u003ci class=\"fas fa-gear\">\u003c/i>","content":"\u003cul class=\"slide-menu-items\">\n\u003cli class=\"slide-tool-item active\" data-item=\"0\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\">\u003ckbd>f\u003c/kbd> Fullscreen\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"1\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\">\u003ckbd>s\u003c/kbd> Speaker View\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"2\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\">\u003ckbd>o\u003c/kbd> Slide Overview\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"3\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\">\u003ckbd>e\u003c/kbd> PDF Export Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"4\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\">\u003ckbd>r\u003c/kbd> Scroll View Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"5\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\">\u003ckbd>b\u003c/kbd> Toggle Chalkboard\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"6\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\">\u003ckbd>c\u003c/kbd> Toggle Notes Canvas\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"7\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\">\u003ckbd>d\u003c/kbd> Download Drawings\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"8\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\">\u003ckbd>?\u003c/kbd> Keyboard Help\u003c/a>\u003c/li>\n\u003c/ul>"}],"openButton":true,"openButtonLabel":"Slide menu"},
+'chalkboard': {"buttons":true,"theme":"whiteboard","boardmarkerWidth":2,"chalkWidth":2,"chalkEffect":0},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1600,
+
+        height: 900,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        // Bounds for smallest/largest possible scale to apply to content
+        minScale: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+          window.quartoDecorateExternalLinks = function (root) {
+         var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+              if (!link.classList.contains('no-external-icon')) {
+              }
+            }
+          }
+          };
+          window.quartoDecorateExternalLinks(window.document);
+        // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+        // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+        const hideOnEscAndFocusOut = {
+          name: 'hideOnEscAndFocusOut',
+          defaultValue: true,
+          fn(instance) {
+            const dismiss = () => {
+              // A show scheduled by the trigger delay would otherwise reopen it
+              instance.clearDelayTimeouts();
+              instance.hide();
+            };
+            const onKeyDown = (event) => {
+              if (event.key !== 'Escape') {
+                return;
+              }
+              // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+              // except an open reveal.js slide menu, which Esc should close too.
+              // The menu handles keys only when its keyboard option is on.
+              const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+                window.Reveal.getConfig().menu?.keyboard !== false;
+              if (!menuHandlesEsc) {
+                event.stopPropagation();
+              }
+              if (instance.popper.contains(window.document.activeElement)) {
+                // Disabled while refocusing so the focus trigger does not reopen it
+                instance.disable();
+                instance.reference.focus();
+                instance.enable();
+              }
+              dismiss();
+            };
+            const onFocusOut = (event) => {
+              const target = event.relatedTarget;
+              if (target && !instance.reference.contains(target) &&
+                  !instance.popper.contains(target)) {
+                dismiss();
+              }
+            };
+            // On the trigger too: a click trigger (code-annotations: select) has no
+            // blur handling. Attached for the instance's lifetime so leaving the
+            // trigger also cancels a show still pending on the trigger delay.
+            instance.reference.addEventListener('focusout', onFocusOut);
+            return {
+              onShow() {
+                window.document.addEventListener('keydown', onKeyDown, true);
+                instance.popper.addEventListener('focusout', onFocusOut);
+              },
+              onHide() {
+                window.document.removeEventListener('keydown', onKeyDown, true);
+                instance.popper.removeEventListener('focusout', onFocusOut);
+              },
+              onDestroy() {
+                instance.reference.removeEventListener('focusout', onFocusOut);
+              },
+            };
+          },
+        };
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+            plugins: [hideOnEscAndFocusOut],
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
